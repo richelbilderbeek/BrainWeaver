@@ -46,9 +46,10 @@ struct FileFactory
   boost::shared_ptr<pvdb::File> DeepCopy(const boost::shared_ptr<const pvdb::File>& file) const noexcept;
   #endif
 
+  int GetNumberOfTests() const noexcept { return 5; }
+
   std::vector<boost::shared_ptr<pvdb::File>> GetTests() const noexcept;
 
-  int GetNumberOfTests() const noexcept { return 6; }
 
   private:
   #ifndef NDEBUG

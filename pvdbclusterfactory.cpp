@@ -30,6 +30,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "pvdbcluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
+#include "testtimer.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 
@@ -141,3 +142,20 @@ std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > ribi::pvdb::ClusterFactory:
   return v;
 }
 
+
+#ifndef NDEBUG
+void ribi::pvdb::ClusterFactory::Test() noexcept
+{
+  {
+    static bool is_tested = false;
+    if (is_tested) return;
+    is_tested = true;
+  }
+  const TestTimer test_timer(__func__,__FILE__,1.0);
+  ClusterFactory f;
+  TRACE(f.GetNumberOfTests());
+  TRACE(f.GetTests().size());
+  assert(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
+  assert(!"Green");
+}
+#endif

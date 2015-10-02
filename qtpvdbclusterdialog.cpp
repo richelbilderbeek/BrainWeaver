@@ -457,9 +457,9 @@ void ribi::pvdb::QtPvdbClusterDialog::Test() noexcept
     file->SetCluster(cluster);
 
     const int index_1 = 1;
-    assert(index_1 < static_cast<int>(ConceptFactory().GetTests().size()));
+    assert(index_1 < ConceptFactory().GetNumberOfTests());
     const int index_2 = 2;
-    assert(index_2 < static_cast<int>(ConceptFactory().GetTests().size()));
+    assert(index_2 < ConceptFactory().GetNumberOfTests());
 
     const boost::shared_ptr<Concept> concept_d(ConceptFactory().Create("Concept F"));
     const boost::shared_ptr<Concept> concept_e(ConceptFactory().GetTests().at(index_1));

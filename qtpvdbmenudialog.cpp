@@ -152,7 +152,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_examples_clicked() noexcept
 {
   using namespace cmap;
   const int index = 2;
-  assert(index < static_cast<int>(ConceptFactory().GetTests().size()));
+  assert(index < ConceptFactory().GetNumberOfTests());
   const boost::shared_ptr<Concept> concept = ConceptFactory().GetTests().at(index);
   boost::shared_ptr<QtRateExamplesDialogNewName> d(new QtRateExamplesDialogNewName(concept));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); } //For testing
@@ -161,7 +161,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_examples_clicked() noexcept
 void ribi::pvdb::QtPvdbMenuDialog::on_button_rating_clicked() noexcept
 {
   const int test = 4;
-  assert(test < static_cast<int>(pvdb::FileFactory().GetTests().size()));
+  assert(test < FileFactory().GetNumberOfTests());
   const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().GetTests().at(test);
   assert(file);
   QtPvdbRatingDialog d(file);

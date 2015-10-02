@@ -274,8 +274,8 @@ std::string ribi::pvdb::File::GetTestFileName()
 std::vector<boost::shared_ptr<ribi::pvdb::File> > ribi::pvdb::File::GetTests()
 {
   std::vector<boost::shared_ptr<pvdb::File> > v;
-  const int n_clusters = static_cast<int>(pvdb::ClusterFactory().GetTests().size());
-  const int n_concept_maps = static_cast<int>(cmap::ConceptMapFactory().GetAllTests().size());
+  const int n_clusters{ClusterFactory().GetNumberOfTests()};
+  const int n_concept_maps{cmap::ConceptMapFactory().GetNumberOfAllTests()};
   for (int cluster_index=0; cluster_index!=n_clusters; ++cluster_index)
   {
     for (int concept_map_index=0; concept_map_index!=n_concept_maps; ++concept_map_index)

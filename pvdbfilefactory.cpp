@@ -175,6 +175,11 @@ void ribi::pvdb::FileFactory::Test() noexcept
     is_tested = true;
   }
   FileFactory f;
+  if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
+  {
+    TRACE(f.GetNumberOfTests());
+    TRACE(f.GetTests().size());
+  }
   assert(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
   assert(!"Green");
 }

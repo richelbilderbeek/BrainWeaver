@@ -47,10 +47,13 @@ struct ClusterFactory
   boost::shared_ptr<Cluster> DeepCopy(const boost::shared_ptr<const pvdb::Cluster> cluster) const noexcept;
   #endif
 
+  int GetNumberOfTests() const noexcept { return 6; }
+
   ///Obtain a single test, a combination of testing node indices
   boost::shared_ptr<Cluster> GetTest(const std::vector<int>& test_node_indices) const noexcept;
 
-  std::vector<boost::shared_ptr<Cluster> > GetTests() const noexcept;
+  std::vector<boost::shared_ptr<Cluster>> GetTests() const noexcept;
+
 
   private:
 
