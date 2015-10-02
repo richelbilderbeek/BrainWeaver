@@ -161,18 +161,18 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Test() noexcept
     is_tested = true;
   }
   {
-    pvdb::FileFactory::GetTests();
+    FileFactory().GetTests();
   }
   const TestTimer test_timer{__func__,__FILE__,0.1};
   const int test_depth = 1;
 
   if (test_depth > 1)
   {
-    const std::vector<boost::shared_ptr<pvdb::File> > v = pvdb::FileFactory::GetTests();
+    const auto v = FileFactory().GetTests();
     const int sz = boost::numeric_cast<int>(v.size());
     for (int i=0; i!=sz; ++i)
     {
-      const boost::shared_ptr<pvdb::File> file = v[i];
+      const auto file = v[i];
       assert(file);
       assert( (file->GetConceptMap() || !file->GetConceptMap() )
         && "A file may or may not have an initialized concept map");

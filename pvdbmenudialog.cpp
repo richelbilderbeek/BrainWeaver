@@ -59,7 +59,7 @@ ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
     "The Brainweaver Team",
     "Brainweaver",
     "tool to create and assess concept maps",
-    "the 18th of May 2014",
+    "the 2nd of October 2015",
     "2012-2015",
     "http://www.richelbilderbeek.nl/ProjectBrainweaver.htm",
     GetVersion(),
@@ -73,7 +73,6 @@ ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
   a.AddLibrary("Geometry version: " + Geometry().GetVersion());
   a.AddLibrary("Plane version: " + Plane::GetVersion());
   a.AddLibrary("ribi::Regex version: " + ribi::Regex::GetVersion());
-
   a.AddLibrary("Trace version: " + Trace::GetVersion());
   return a;
 }
@@ -103,7 +102,7 @@ boost::shared_ptr<const ribi::Program> ribi::pvdb::MenuDialog::GetProgram() cons
 
 std::string ribi::pvdb::MenuDialog::GetVersion() const noexcept
 {
-  return "0.50";
+  return "0.51";
 }
 
 std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexcept
@@ -156,6 +155,7 @@ std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexc
     "2014-04-19: Version 0.47: hotfix",
     "2014-05-04: Version 0.48: edges connected to center node have center node again",
     "2014-05-11: Version 0.49: wordwrap in tally relevancies dialog",
-    "2014-05-18: Version 0.50: edges connected to center node have no label, that cannot be edited"
+    "2014-05-18: Version 0.50: edges connected to center node have no label, that cannot be edited",
+    "2015-10-02: Version 0.51: moved to own GitHub",
   };
 }

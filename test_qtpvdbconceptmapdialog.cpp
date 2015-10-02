@@ -76,7 +76,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
 
     using namespace cmap;
     const std::string question = "TESTQUESTION";
-    const boost::shared_ptr<pvdb::File> file(new pvdb::File);
+    const boost::shared_ptr<File> file(new File);
     file->SetQuestion(question);
     assert(!file->GetCluster());
     assert(!file->GetConceptMap());
@@ -97,14 +97,14 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
   {
     using namespace cmap;
     const std::string question = "TESTQUESTION";
-    const boost::shared_ptr<pvdb::File> file(new pvdb::File);
+    const boost::shared_ptr<File> file(new File);
     assert(file);
     file->SetQuestion(question);
     assert(file->GetQuestion() == question);
     assert(!file->GetCluster());
     assert(!file->GetConceptMap());
     const boost::shared_ptr<Concept> concept_a(ConceptFactory().Create("Concept A"));
-    const boost::shared_ptr<Cluster> cluster(ClusterFactory::Create( { concept_a } ));
+    const boost::shared_ptr<Cluster> cluster(ClusterFactory().Create( { concept_a } ));
     const boost::shared_ptr<ConceptMap> concept_map(QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
     assert(concept_map);
     file->SetCluster(cluster);
@@ -124,11 +124,11 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
   }
   {
     const std::string question = "TESTQUESTION";
-    const boost::shared_ptr<pvdb::File> file(new pvdb::File);
+    const boost::shared_ptr<File> file(new File);
     file->SetQuestion(question);
     assert(file->GetQuestion() == question);
 
-    const boost::shared_ptr<pvdb::Cluster> cluster = pvdb::ClusterFactory::GetTest( {0,1,2} );
+    const boost::shared_ptr<pvdb::Cluster> cluster = pvdb::ClusterFactory().GetTest( {0,1,2} );
     file->SetCluster(cluster);
     assert(cluster->Get().size() == 3);
 
@@ -151,11 +151,11 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
   {
     using namespace cmap;
     const std::string question = "TESTQUESTION";
-    const boost::shared_ptr<pvdb::File> file(new pvdb::File);
+    const boost::shared_ptr<File> file(new File);
     file->SetQuestion(question);
     assert(!file->GetCluster());
     assert(!file->GetConceptMap());
-    const boost::shared_ptr<pvdb::Cluster> cluster = pvdb::ClusterFactory::GetTest( { 0,1,2 } );
+    const boost::shared_ptr<pvdb::Cluster> cluster = ClusterFactory().GetTest( { 0,1,2 } );
     file->SetCluster(cluster);
 
     assert( file->GetCluster());
@@ -272,7 +272,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
 
     using namespace cmap;
     const std::string question = "TESTQUESTION";
-    const boost::shared_ptr<pvdb::File> file(new pvdb::File);
+    const boost::shared_ptr<File> file(new File);
     file->SetQuestion(question);
     assert(file->GetQuestion() == question);
     assert(!file->GetCluster());
@@ -327,10 +327,10 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     //assert(concept_map != concept_map_out
     //  && "QtConceptMapDialog repositions the nodes");
     //Save the repositioned nodes
-    file->Save(pvdb::File::GetTestFileName());
+    file->Save(File::GetTestFileName());
 
     //Load the repositioned nodes
-    const boost::shared_ptr<pvdb::File> file_again = pvdb::File::Load(pvdb::File::GetTestFileName());
+    const boost::shared_ptr<File> file_again = File::Load(File::GetTestFileName());
 
     assert(ConceptMap::HasSameContent(*file->GetConceptMap(),*file_again->GetConceptMap()));
     assert(*file->GetConceptMap() == *file_again->GetConceptMap()
@@ -348,7 +348,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     //assert(*file->GetConceptMap() == *file_again->GetConceptMap()
     //  && "QtPvdbConceptMapDialog must not reposition concept maps");
 
-    std::remove(pvdb::File::GetTestFileName().c_str());
+    std::remove(File::GetTestFileName().c_str());
   }
 
   if (test_depth > 1)
