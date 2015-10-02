@@ -51,20 +51,21 @@ void ribi::pvdb::Cluster::Test() noexcept
   }
   {
     TestHelperFunctions();
+    ClusterFactory();
   }
   const TestTimer test_timer(__func__,__FILE__,1.0);
   //Test operator== and operator!=
   {
-    const std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > tmp_tests_1 = ribi::pvdb::ClusterFactory().GetTests();
+    const auto tmp_tests_1 = ClusterFactory().GetTests();
     const int sz = static_cast<int>(tmp_tests_1.size());
     for (int i=0; i!=sz; ++i)
     {
-      const std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > tmp_tests_a = ribi::pvdb::ClusterFactory().GetTests(); //For crosscompiler
-      const boost::shared_ptr<const ribi::pvdb::Cluster> a = tmp_tests_a.at(i);
+      const auto tmp_tests_a = ClusterFactory().GetTests(); //For crosscompiler
+      const boost::shared_ptr<const Cluster> a = tmp_tests_a.at(i);
       if (!a) continue;
       assert(a);
-      const std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > tmp_tests_b = ribi::pvdb::ClusterFactory().GetTests(); //For crosscompiler
-      const boost::shared_ptr<ribi::pvdb::Cluster> b = tmp_tests_b.at(i);
+      const auto tmp_tests_b = ClusterFactory().GetTests(); //For crosscompiler
+      const boost::shared_ptr<Cluster> b = tmp_tests_b.at(i);
       if (!b) continue;
       assert(a); assert(b);
       assert(operator==(*a,*a));
@@ -73,12 +74,12 @@ void ribi::pvdb::Cluster::Test() noexcept
       assert(operator==(*b,*b));
       for (int j=0; j!=sz; ++j)
       {
-        const std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > tmp_tests_c = ribi::pvdb::ClusterFactory().GetTests(); //For crosscompiler
-        const std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > tmp_tests_d = ribi::pvdb::ClusterFactory().GetTests(); //For crosscompiler
-        const boost::shared_ptr<const ribi::pvdb::Cluster> c = tmp_tests_c.at(j);
+        const auto tmp_tests_c = ClusterFactory().GetTests(); //For crosscompiler
+        const auto tmp_tests_d = ClusterFactory().GetTests(); //For crosscompiler
+        const boost::shared_ptr<const Cluster> c = tmp_tests_c.at(j);
         if (!c) continue;
         assert(c);
-        const boost::shared_ptr<ribi::pvdb::Cluster> d = tmp_tests_d.at(j);
+        const boost::shared_ptr<Cluster> d = tmp_tests_d.at(j);
         if (!d) continue;
         assert(c); assert(d);
         assert(operator==(*c,*c));
@@ -109,10 +110,10 @@ void ribi::pvdb::Cluster::Test() noexcept
     std::for_each(v.begin(),v.end(),
       [](const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& concepts)
       {
-        const boost::shared_ptr<ribi::pvdb::Cluster> c(new ribi::pvdb::Cluster(concepts));
+        const boost::shared_ptr<Cluster> c(new Cluster(concepts));
         assert(c);
         const std::string s = ToXml(c);
-        const boost::shared_ptr<ribi::pvdb::Cluster> d = FromXml(s);
+        const boost::shared_ptr<Cluster> d = FromXml(s);
         assert(d);
         assert(c != d);
         assert(operator==(*c,*d));
