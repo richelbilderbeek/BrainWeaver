@@ -37,11 +37,11 @@ include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
 include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
-include(../../Tools/ToolStyleSheetSetter/ToolStyleSheetSetterDesktop.pri)
+include(../StyleSheetSetter/ToolStyleSheetSetterDesktop.pri)
 include(../TestConceptMap/ToolTestConceptMapDesktop.pri)
-include(../../Tools/ToolTestQtArrowItems/ToolTestQtArrowItemsDesktop.pri)
-include(../../Tools/ToolTestQtRoundedEditRectItem/ToolTestQtRoundedEditRectItemDesktop.pri)
-include(../../Tools/ToolTestQtRoundedRectItem/ToolTestQtRoundedRectItemDesktop.pri)
+include(../TestArrowItems/ToolTestQtArrowItemsDesktop.pri)
+include(../TestRoundedEditRectItem/ToolTestQtRoundedEditRectItemDesktop.pri)
+include(../TestRoundedRectItem/ToolTestQtRoundedRectItemDesktop.pri)
 
 #Desktop
 include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
