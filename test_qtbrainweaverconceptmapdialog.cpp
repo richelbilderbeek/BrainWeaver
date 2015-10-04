@@ -262,7 +262,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     //  == concept_map->GetNodes().size() ); //+0 because focus question is node[0]
     //assert(concept_map_out->GetEdges().size()
     //  == concept_map->GetEdges().size());
-    //assert(ConceptMap::HasSameContent(concept_map,concept_map_out));
+    //assert(cmap::HasSameContent(concept_map,concept_map_out));
   }
 
   //If this dialog is fed with a file without a cluster, but with concept map
@@ -323,7 +323,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     //  == concept_map->GetNodes().size() ); //+0 because focus question is node[0]
     //assert(concept_map_out->GetEdges().size()
     //  == concept_map->GetEdges().size());
-    //assert(ConceptMap::HasSameContent(concept_map,concept_map_out));
+    //assert(cmap::HasSameContent(concept_map,concept_map_out));
     //assert(concept_map != concept_map_out
     //  && "QtConceptMapDialog repositions the nodes");
     //Save the repositioned nodes
@@ -332,7 +332,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     //Load the repositioned nodes
     const boost::shared_ptr<File> file_again = File::Load(File::GetTestFileName());
 
-    assert(ConceptMap::HasSameContent(*file->GetConceptMap(),*file_again->GetConceptMap())
+    assert(cmap::HasSameContent(*file->GetConceptMap(),*file_again->GetConceptMap())
       && "Save and load must yield identical concept map contents"
     );
 
@@ -357,7 +357,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
 
     //Let another dialog keep the node positions in the same place
     const QtPvdbConceptMapDialog d_again(file_again);
-    assert(ConceptMap::HasSameContent(*file->GetConceptMap(),*file_again->GetConceptMap()));
+    assert(cmap::HasSameContent(*file->GetConceptMap(),*file_again->GetConceptMap()));
     //Who cares about repositioning anyways?
     //assert(*file->GetConceptMap() == *file_again->GetConceptMap()
     //  && "QtPvdbConceptMapDialog must not reposition concept maps");
@@ -422,7 +422,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
       {
         using namespace cmap;
         const boost::shared_ptr<pvdb::File> file = pvdb::File::Load(pvdb::File::GetTestFileName());
-        assert(ConceptMap::HasSameContent(*file->GetConceptMap(),*v[i]));
+        assert(cmap::HasSameContent(*file->GetConceptMap(),*v[i]));
         std::remove(pvdb::File::GetTestFileName().c_str());
       }
     }

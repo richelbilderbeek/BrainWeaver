@@ -187,7 +187,8 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Test() noexcept
           || (!file->GetConceptMap() && !d.GetWidget()->GetConceptMap()));
       assert(
            !file->GetConceptMap()
-        || ribi::cmap::ConceptMap::HasSameContent(
+
+        || ribi::cmap::HasSameContent(
              *file->GetConceptMap(),
              *d.GetWidget()->GetConceptMap()
            )
