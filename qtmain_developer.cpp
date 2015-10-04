@@ -17,17 +17,17 @@
 #include <pvdbfilefactory.h>
 #endif
 
-#include "pvdbfile.h"
-#include "pvdbhelper.h"
-#include "qtpvdbclusterdialog.h"
+#include "brainweaverfile.h"
+#include "brainweaverhelper.h"
+#include "qtbrainweaverclusterdialog.h"
 #include "qtconceptmapcompetency.h"
-#include "qtpvdbclusterwidget.h"
-#include "qtpvdbconceptmapdialog.h"
+#include "qtbrainweaverclusterwidget.h"
+#include "qtbrainweaverconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaprateexamplesdialognewname.h"
 #include "qtconceptmap.h"
-#include "qtpvdbmenudialog.h"
+#include "qtbrainweavermenudialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 

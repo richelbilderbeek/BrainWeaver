@@ -3,24 +3,24 @@ INCLUDEPATH += \
 
 
 SOURCES += \
-    pvdbcluster.cpp \
-    pvdbclusterfactory.cpp \
-    pvdbfile.cpp \
-    pvdbfilefactory.cpp \
-    pvdbhelper.cpp \
-    pvdbmenudialog.cpp \
-    test_pvdbcluster.cpp \
-    pvdbregex.cpp
+    brainweavercluster.cpp \
+    brainweaverclusterfactory.cpp \
+    brainweaverfile.cpp \
+    brainweaverfilefactory.cpp \
+    brainweaverhelper.cpp \
+    brainweavermenudialog.cpp \
+    brainweaverregex.cpp \
+    test_brainweavercluster.cpp
 
 HEADERS  += \
-    pvdbcluster.h \
-    pvdbclusterfactory.h \
-    pvdbfile.h \
-    pvdbfilefactory.h \
-    pvdbfwd.h \
-    pvdbhelper.h \
-    pvdbmenudialog.h \
-    pvdbregex.h
+    brainweaverclusterfactory.h \
+    brainweaverfile.h \
+    brainweaverfilefactory.h \
+    brainweaverfwd.h \
+    brainweaverhelper.h \
+    brainweavermenudialog.h \
+    brainweaverregex.h \
+    brainweavercluster.h
 
 RESOURCES += \
     Brainweaver.qrc

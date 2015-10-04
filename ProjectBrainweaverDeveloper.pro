@@ -20,6 +20,7 @@ include(../RibiClasses/CppPlane/CppPlane.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
+include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
 include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
 
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
