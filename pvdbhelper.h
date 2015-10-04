@@ -109,7 +109,8 @@ double GetDistance(const double x1, const double y1, const double x2, const doub
 ///From http://www.richelbilderbeek.nl/CppGetRegexMatches.htm
 std::vector<std::string> GetRegexMatches(
   const std::string& s,
-  const QRegExp& r);
+  const QRegExp& r
+);
 
 ///SafeFileToVector calls FileToVector and
 ///removes an empty trailing line that can be created under

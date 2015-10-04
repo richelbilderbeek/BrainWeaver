@@ -112,11 +112,11 @@ void ribi::pvdb::Cluster::Test() noexcept
       {
         const boost::shared_ptr<Cluster> c(new Cluster(concepts));
         assert(c);
-        const std::string s = ToXml(c);
-        const boost::shared_ptr<Cluster> d = FromXml(s);
+        const std::string s = ToXml(*c);
+        const auto d = FromXml(s);
         assert(d);
         assert(c != d);
-        assert(operator==(*c,*d));
+        assert(*c == *d);
       }
     );
   }

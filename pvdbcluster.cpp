@@ -60,7 +60,7 @@ bool ribi::pvdb::Cluster::Empty() const
   return m_v.empty();
 }
 
-const boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::string &s)
+boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::string &s)
 {
   assert(s.size() >= 19);
   assert(s.substr(0,9) == "<cluster>");
@@ -91,17 +91,17 @@ const boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const 
   return cluster;
 }
 
-const std::vector<boost::shared_ptr<const ribi::cmap::Concept> > ribi::pvdb::Cluster::Get() const
+std::vector<boost::shared_ptr<const ribi::cmap::Concept> > ribi::pvdb::Cluster::Get() const
 {
   return std::vector<boost::shared_ptr<const ribi::cmap::Concept> >(m_v.begin(),m_v.end());
 }
 
-std::string ribi::pvdb::Cluster::ToXml(const boost::shared_ptr<const pvdb::Cluster>& cluster) noexcept
+std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
 {
   std::stringstream s;
   s << "<cluster>";
   {
-    const std::vector<boost::shared_ptr<const ribi::cmap::Concept> >& v = cluster->Get();
+    const std::vector<boost::shared_ptr<const ribi::cmap::Concept>>& v = cluster.Get();
     std::for_each(v.begin(), v.end(),
       [&s](const boost::shared_ptr<const ribi::cmap::Concept>& concept)
       {

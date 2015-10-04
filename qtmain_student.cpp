@@ -13,10 +13,6 @@
 #include "qtconceptmapcompetency.h"
 #include "qtpvdbclusterwidget.h"
 #include "qtpvdbconceptmapdialog.h"
-//#include "qtpvdbconcepteditdialog.h"
-//#include "qtpvdbconceptmapeditwidget.h"
-//#include "qtpvdbrateexamplesdialog.h"
-//#include "qtpvdbconceptmapratewidget.h"
 #include "qtpvdbstudentmenudialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
@@ -64,7 +60,6 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
 
-  //QtPvdbMenuDialog::Test();
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
 

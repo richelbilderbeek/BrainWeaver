@@ -50,7 +50,7 @@ class QtPvdbCreateAssessmentCompleteDialog : public ribi::QtHideAndShowDialog
   std::string GetQuestion() const noexcept;
 
   ///Must the parent go back to the menu?
-  bool GoBackToMenu() const { return m_back_to_menu; }
+  bool GoBackToMenu() const noexcept { return m_back_to_menu; }
 
   ///Save file to disk
   void Save(const std::string& filename) const;

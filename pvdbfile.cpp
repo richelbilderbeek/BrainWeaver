@@ -228,12 +228,13 @@ boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::FromXml(const std::string 
     const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<question>.*</question>)"));
     if (v.empty())
     {
-      TRACE(s);
-      TRACE("Sometimes, this happens at the first startup and ");
+      std::clog << "Warning: no question supplied" << std::endl;
+      f->m_question = "";
     }
-    assert(!v.empty() && "Ignore and restart"); //TODO RJCB: fix this startup error
-    assert(v.size() == 1 && "Ignore and restart"); //TODO RJCB: fix this startup error
-    f->m_question = ribi::xml::StripXmlTag(v[0]);
+    else
+    {
+      f->m_question = ribi::xml::StripXmlTag(v[0]);
+    }
   }
   //m_student_name
   {
@@ -384,7 +385,8 @@ void ribi::pvdb::File::Save(const std::string &filename) const
   }
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == m_filename_extension
-    && "File must have correct file extension name");
+    && "File must have correct file extension name"
+  );
   {
     std::ofstream f(filename.c_str());
     const std::string s = ToXml(*this);
@@ -521,7 +523,19 @@ void ribi::pvdb::File::Test() noexcept
     assert(operator==(*firstfile,*second_file));
     //Modify f, to test operator!=
     firstfile->SetStudentName( firstfile->GetStudentName() + " (modified)");
-    assert(!operator==(*firstfile,*second_file));
+    assert(*firstfile != *second_file);
+  }
+  //Fix bug: file 5 has this content and crashes
+  {
+    const std::string tempfilename{fileio::FileIo().GetTempFileName(".txt")};
+    const std::string file5content{
+      "<file><about>ProjectVanDenBogaart</about><assessor_name></assessor_name><student_name></student_name><version>0.3</version></file>"
+    };
+    {
+      std::ofstream file(tempfilename);
+      file << file5content;
+    }
+    const auto file = File::Load(tempfilename);
   }
   {
 
@@ -581,7 +595,7 @@ std::string ribi::pvdb::File::ToXml(const File& file)
   s << "<file>";
   s << "<about>" << file.GetAbout() << "</about>";
   s << "<assessor_name>" << file.GetAssessorName() << "</assessor_name>";
-  if (file.GetCluster()   ) s << Cluster::ToXml(file.GetCluster());
+  if (file.GetCluster()) s << Cluster::ToXml(*file.GetCluster());
   if (file.GetConceptMap()) s << cmap::ConceptMap::ToXml(file.GetConceptMap());
   s << "<question>" << file.GetQuestion() << "</question>";
   s << "<student_name>" << file.GetStudentName() << "</student_name>";
@@ -662,4 +676,9 @@ bool ribi::pvdb::operator==(const pvdb::File& lhs, const pvdb::File& rhs)
      )
   && lhs.GetStudentName() == rhs.GetStudentName()
   && lhs.GetVersion() == rhs.GetVersion();
+}
+
+bool ribi::pvdb::operator!=(const pvdb::File& lhs, const pvdb::File& rhs)
+{
+  return !(lhs == rhs);
 }

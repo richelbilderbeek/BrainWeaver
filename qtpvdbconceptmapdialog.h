@@ -55,7 +55,7 @@ class QtPvdbConceptMapDialog : public ::ribi::QtHideAndShowDialog
   cmap::QtConceptMap * GetWidget();
 
   ///Does the user need to go back to the student menu?
-  bool GoBackToMenu() const { return m_back_to_menu; }
+  bool GoBackToMenu() const noexcept { return m_back_to_menu; }
 
   ///Save to m_file
   void Save() const;
@@ -89,7 +89,7 @@ private:
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
 
-  static const boost::shared_ptr<ribi::cmap::ConceptMap> CreateFromCluster(
+  static boost::shared_ptr<ribi::cmap::ConceptMap> CreateFromCluster(
     const std::string& question,
     const boost::shared_ptr<Cluster>& cluster);
 

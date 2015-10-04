@@ -58,7 +58,7 @@ FORMS    += \
     qtpvdbmenudialog.ui \
     qtpvdbprintconceptmapdialog.ui \
     qtpvdbprintratingdialog.ui \
-   qtpvdbrateconceptmapdialog.ui \
+    qtpvdbrateconceptmapdialog.ui \
     qtpvdbratingdialog.ui \
     qtpvdbstudentmenudialog.ui \
     qtpvdbstudentstartcompletedialog.ui \

@@ -177,10 +177,10 @@ void ribi::pvdb::FileFactory::Test() noexcept
   FileFactory f;
   if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
   {
+    std::cerr << "Change FileFactory::GetNumberOfTests to return " << f.GetTests().size() << std::endl;
     TRACE(f.GetNumberOfTests());
     TRACE(f.GetTests().size());
   }
   assert(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
-  assert(!"Green");
 }
 #endif

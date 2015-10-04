@@ -1,45 +1,43 @@
 #Don't enable Effective C++ warnings when using Qwt
-include(../../DesktopApplication.pri)
-include(../../Libraries/Apfloat.pri)
-include(../../Libraries/Boost.pri)
-
-include(../../Libraries/GeneralConsole.pri)
-include(../../Libraries/GeneralDesktop.pri)
+include(../RibiLibraries/DesktopApplication.pri)
+include(../RibiLibraries/Apfloat.pri)
+include(../RibiLibraries/Boost.pri)
+include(../RibiLibraries/GeneralConsole.pri)
+include(../RibiLibraries/GeneralDesktop.pri)
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 #Specific, console
-include(../../Classes/CppConceptMap/CppConceptMap.pri)
-include(../../Classes/CppContainer/CppContainer.pri)
-include(../../Classes/CppCounter/CppCounter.pri)
-include(../../Classes/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
-include(../../Classes/CppGeometry/CppGeometry.pri)
-include(../../Classes/CppGrabber/CppGrabber.pri)
-include(../../Classes/CppPlane/CppPlane.pri)
-include(../../Classes/CppRibiRandom/CppRibiRandom.pri)
-include(../../Classes/CppRibiRegex/CppRibiRegex.pri)
-include(../../Classes/CppXml/CppXml.pri)
+include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
+include(../RibiClasses/CppContainer/CppContainer.pri)
+include(../RibiClasses/CppCounter/CppCounter.pri)
+include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
+include(../RibiClasses/CppGeometry/CppGeometry.pri)
+include(../RibiClasses/CppGrabber/CppGrabber.pri)
+include(../RibiClasses/CppPlane/CppPlane.pri)
+include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
+include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
+include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific, desktop
 
-include(../../Classes/CppQtArrowItem/CppQtArrowItem.pri)
-include(../../Classes/CppQtConceptMap/CppQtConceptMap.pri)
-include(../../Classes/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
-include(../../Classes/CppQtImage/CppQtImage.pri)
-include(../../Classes/CppQtKeyboardFriendlyGraphicsView/CppQtKeyboardFriendlyGraphicsView.pri)
-include(../../Classes/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
-include(../../Classes/CppQtPathArrowItem/CppQtPathArrowItem.pri)
-include(../../Classes/CppQtQuadBezierArrowItem/CppQtQuadBezierArrowItem.pri)
-include(../../Classes/CppQtRoundedEditRectItem/CppQtRoundedEditRectItem.pri)
-include(../../Classes/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
-include(../../Classes/CppQtScopedDisable/CppQtScopedDisable.pri)
-include(../../Tools/ToolStyleSheetSetter/ToolStyleSheetSetterDesktop.pri)
-include(../../Tools/ToolTestConceptMap/ToolTestConceptMapDesktop.pri)
-include(../../Tools/ToolTestQtArrowItems/ToolTestQtArrowItemsDesktop.pri)
-include(../../Tools/ToolTestQtRoundedRectItem/ToolTestQtRoundedRectItemDesktop.pri)
-include(../../Tools/ToolTestQtRoundedEditRectItem/ToolTestQtRoundedEditRectItemDesktop.pri)
+include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
+include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
+include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
+include(../RibiClasses/CppQtImage/CppQtImage.pri)
+include(../RibiClasses/CppQtKeyboardFriendlyGraphicsView/CppQtKeyboardFriendlyGraphicsView.pri)
+include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
+include(../RibiClasses/CppQtPathArrowItem/CppQtPathArrowItem.pri)
+include(../RibiClasses/CppQtQuadBezierArrowItem/CppQtQuadBezierArrowItem.pri)
+include(../RibiClasses/CppQtRoundedEditRectItem/CppQtRoundedEditRectItem.pri)
+include(../RibiClasses/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
+include(../RibiClasses/CppQtScopedDisable/CppQtScopedDisable.pri)
+include(../StyleSheetSetter/ToolStyleSheetSetterDesktop.pri)
+include(../TestConceptMap/ToolTestConceptMapDesktop.pri)
+include(../TestArrowItems/ToolTestQtArrowItemsDesktop.pri)
+include(../TestRoundedRectItem/ToolTestQtRoundedRectItemDesktop.pri)
+include(../TestRoundedEditRectItem/ToolTestQtRoundedEditRectItemDesktop.pri)
 
 include(ProjectBrainweaverDesktop.pri)
 
-SOURCES += \
-    qtmain_student.cpp
+SOURCES += qtmain_student.cpp

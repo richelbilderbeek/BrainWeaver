@@ -120,7 +120,7 @@ ribi::pvdb::QtPvdbConceptMapDialog::~QtPvdbConceptMapDialog() noexcept
   delete ui;
 }
 
-const boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
+boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
   const std::string& question,
   const boost::shared_ptr<pvdb::Cluster>& cluster)
 {

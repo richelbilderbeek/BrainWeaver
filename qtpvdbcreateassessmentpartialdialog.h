@@ -48,7 +48,7 @@ class QtPvdbCreateAssessmentPartialDialog : public QDialog
     QWidget* parent = 0);
   QtPvdbCreateAssessmentPartialDialog(const QtPvdbCreateAssessmentPartialDialog&) = delete;
   QtPvdbCreateAssessmentPartialDialog& operator=(const QtPvdbCreateAssessmentPartialDialog&) = delete;
-  ~QtPvdbCreateAssessmentPartialDialog();
+  ~QtPvdbCreateAssessmentPartialDialog() noexcept;
 
   private slots:
   void keyPressEvent(QKeyEvent* e);

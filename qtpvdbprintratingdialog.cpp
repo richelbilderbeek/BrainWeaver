@@ -220,12 +220,13 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   }
 
   //Copied from caller
-  pvdb::QtDisplay::DisplayRatedConcepts(m_file,this->GetTableConcepts());
+  assert(m_file);
+  pvdb::QtDisplay().DisplayRatedConcepts(*m_file,this->GetTableConcepts());
   {
     const int sz = static_cast<int>(m_file->GetConceptMap()->GetNodes().size());
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
   }
 
-  pvdb::QtDisplay::DisplayExamples(m_file,this->GetTableExamples());
-  pvdb::QtDisplay::DisplayValues(m_file,this->GetTableValues());
+  pvdb::QtDisplay().DisplayExamples(m_file,this->GetTableExamples());
+  pvdb::QtDisplay().DisplayValues(m_file,this->GetTableValues());
 }

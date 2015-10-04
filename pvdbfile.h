@@ -179,14 +179,17 @@ class File
   ///Convert a File from version 0.3
   static std::string ConvertFrom_0_3(const std::string& xml);
 
+  #ifndef NDEBUG
   ///Test this class
   static void Test() noexcept;
+  #endif
 
   ///Correct befriending, from http://richelbilderbeek.nl/CppChecked_delete.htm
   friend void boost::checked_delete<>(File* x);
 };
 
 bool operator==(const pvdb::File& lhs, const pvdb::File& rhs);
+bool operator!=(const pvdb::File& lhs, const pvdb::File& rhs);
 
 } //~namespace pvdb
 

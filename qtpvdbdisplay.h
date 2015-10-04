@@ -38,11 +38,18 @@ namespace pvdb {
 ///Functions for printing
 struct QtDisplay
 {
+  QtDisplay();
 
-  static void DisplayRatedConcepts(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table);
-  static void DisplayExamples(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table);
-  static void DisplayValues(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table);
+  void DisplayRatedConcepts(const pvdb::File& file,QTableWidget * const table) const;
+  void DisplayExamples(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table) const;
+  void DisplayValues(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table) const;
 
+  private:
+
+  #ifndef NDEBUG
+  ///Test this class
+  static void Test() noexcept;
+  #endif
 };
 
 } //~namespace pvdb

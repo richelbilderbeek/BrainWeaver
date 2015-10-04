@@ -77,9 +77,10 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
     }
   }
 
-  pvdb::QtDisplay::DisplayRatedConcepts(file,ui->table_concepts);
-  pvdb::QtDisplay::DisplayExamples(file,ui->table_examples);
-  pvdb::QtDisplay::DisplayValues(file,ui->table_values);
+  assert(file);
+  pvdb::QtDisplay().DisplayRatedConcepts(*file,ui->table_concepts);
+  pvdb::QtDisplay().DisplayExamples(file,ui->table_examples);
+  pvdb::QtDisplay().DisplayValues(file,ui->table_values);
 
   //Center the dialog
   {

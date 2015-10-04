@@ -40,19 +40,27 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "pvdbhelper.h"
 #include "conceptmapnode.h"
 #include "qtconceptmapcompetency.h"
+#include "testtimer.h"
 #pragma GCC diagnostic pop
 
-void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
-  const boost::shared_ptr<const pvdb::File> file,
-  QTableWidget * const table)
+ribi::pvdb::QtDisplay::QtDisplay()
 {
-  const int sz = static_cast<int>(file->GetConceptMap()->GetNodes().size());
+  #ifndef NDEBUG
+  Test();
+  #endif
+}
+
+void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
+  const pvdb::File& file,
+  QTableWidget * const table) const
+{
+  const int sz = static_cast<int>(file.GetConceptMap()->GetNodes().size());
   table->setRowCount(sz - 1); //-1 to skip focus question node at index 0
 
   for (int i=1; i!=sz; ++i)
   {
     const int row = i-1; //-1 to skip focus question node at index 0
-    const boost::shared_ptr<const ribi::cmap::Concept> concept = file->GetConceptMap()->GetNodes().at(i)->GetConcept();
+    const boost::shared_ptr<const ribi::cmap::Concept> concept = file.GetConceptMap()->GetNodes().at(i)->GetConcept();
     //Name
     {
       QTableWidgetItem * const item = new QTableWidgetItem;
@@ -101,7 +109,7 @@ void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
   //Examples' icons
 void ribi::pvdb::QtDisplay::DisplayExamples(
   const boost::shared_ptr<const pvdb::File> file,
-  QTableWidget * const table)
+  QTableWidget * const table) const
 {
   {
     const int n_rows = table->rowCount();
@@ -166,7 +174,7 @@ void ribi::pvdb::QtDisplay::DisplayExamples(
 
 void ribi::pvdb::QtDisplay::DisplayValues(
   const boost::shared_ptr<const pvdb::File> file,
-  QTableWidget * const table)
+  QTableWidget * const table) const
 {
   std::vector<boost::shared_ptr<const cmap::Node> > all_nodes = AddConst(file->GetConceptMap()->GetNodes());
   #ifndef NDEBUG
@@ -412,3 +420,17 @@ void ribi::pvdb::QtDisplay::DisplayValues(
     + table->columnWidth(1)
   );
 }
+
+
+#ifndef NDEBUG
+void ribi::pvdb::QtDisplay::Test() noexcept
+{
+  {
+    static bool is_tested{false};
+    if (is_tested) return;
+    is_tested = true;
+  }
+  const TestTimer test_timer(__func__,__FILE__,2.0);
+  QtDisplay();
+}
+#endif

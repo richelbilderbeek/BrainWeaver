@@ -49,17 +49,17 @@ class Cluster
   bool Empty() const;
 
   ///Obtain a Cluster from an XML std::string
-  static const boost::shared_ptr<pvdb::Cluster> FromXml(const std::string& s);
+  static boost::shared_ptr<pvdb::Cluster> FromXml(const std::string& s);
 
   ///Obtain the list of Concepts
-  const std::vector<boost::shared_ptr<const ribi::cmap::Concept> > Get() const;
-  const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& Get() { return m_v; }
+  std::vector<boost::shared_ptr<const ribi::cmap::Concept> > Get() const;
+  std::vector<boost::shared_ptr<ribi::cmap::Concept> >& Get() { return m_v; }
 
   ///Set the concepts
-  void SetConcepts(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& concepts);
+  void SetConcepts(const std::vector<boost::shared_ptr<ribi::cmap::Concept>>& concepts);
 
   ///Convert a Cluster from an XML std::string
-  static std::string ToXml(const boost::shared_ptr<const pvdb::Cluster>& c) noexcept;
+  static std::string ToXml(const Cluster& c) noexcept;
 
   private:
 

@@ -47,7 +47,8 @@ class QtPvdbClusterWidget : public QTreeWidget
 public:
   explicit QtPvdbClusterWidget(
     boost::shared_ptr<pvdb::Cluster> cluster,
-    QWidget* parent = 0);
+    QWidget* parent = 0
+  );
 
   ///Add a top-level item
   void Add(const std::string& text);
