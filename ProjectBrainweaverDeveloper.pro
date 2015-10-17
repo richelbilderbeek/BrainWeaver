@@ -3,7 +3,7 @@
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
-include(../RibiLibraries/Boost.pri)
+include(../RibiLibraries/BoostAll.pri)
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
@@ -21,6 +21,7 @@ include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
 include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
+include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
 include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
 
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
