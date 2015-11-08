@@ -37,7 +37,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QMessageBox>
 
-#include "conceptmapcenternode.h"
+
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
@@ -126,7 +126,7 @@ boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::QtPvdbConceptMapDialog::Cr
 {
   using namespace cmap;
 
-  std::vector<boost::shared_ptr<Node> > nodes {
+  std::vector<Node> nodes {
     cmap::ConceptMap::CreateNodes(question, {} )
   };
   std::vector<boost::shared_ptr<Edge> > edges;
@@ -137,7 +137,7 @@ boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::QtPvdbConceptMapDialog::Cr
   {
     const int x = 0;
     const int y = 0;
-    const boost::shared_ptr<Node> node = cmap::NodeFactory().Create(v[i],x,y);
+    const Node node = cmap::NodeFactory().Create(v[i],x,y);
     assert(node);
     nodes.push_back(node);
   }

@@ -43,7 +43,7 @@ class Cluster
   public:
 
   ///Add a Concept to the Cluster
-  void Add(const boost::shared_ptr<ribi::cmap::Concept>& concept);
+  void Add(const ribi::cmap::Concept& concept);
 
   ///See if the cluster is empty
   bool Empty() const;
@@ -52,11 +52,11 @@ class Cluster
   static boost::shared_ptr<pvdb::Cluster> FromXml(const std::string& s);
 
   ///Obtain the list of Concepts
-  std::vector<boost::shared_ptr<const ribi::cmap::Concept> > Get() const;
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> >& Get() { return m_v; }
+  const std::vector<ribi::cmap::Concept>& Get() const noexcept{ return m_v; }
+        std::vector<ribi::cmap::Concept>& Get()       noexcept{ return m_v; }
 
   ///Set the concepts
-  void SetConcepts(const std::vector<boost::shared_ptr<ribi::cmap::Concept>>& concepts);
+  void SetConcepts(const std::vector<ribi::cmap::Concept>& concepts);
 
   ///Convert a Cluster from an XML std::string
   static std::string ToXml(const Cluster& c) noexcept;
@@ -64,7 +64,7 @@ class Cluster
   private:
 
   ///A Cluster is a list of Concepts. The Concepts contain examples.
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> > m_v;
+  std::vector<ribi::cmap::Concept> m_v;
 
   ///Test this class
   static void Test() noexcept;
@@ -72,7 +72,7 @@ class Cluster
 
   ///Block constructor, except for ClusterFactory
   friend ClusterFactory;
-  Cluster(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& v);
+  Cluster(const std::vector<ribi::cmap::Concept>& v);
 
   ///Block destructor, except for the friend boost::checked_delete
   ~Cluster() {}

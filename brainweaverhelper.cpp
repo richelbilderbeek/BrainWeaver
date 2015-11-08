@@ -224,7 +224,7 @@ void ribi::pvdb::TestHelperFunctions()
   }
   //Wordwrap
   {
-    const auto v {
+    const auto v = {
       "",
       "1",
       "12",

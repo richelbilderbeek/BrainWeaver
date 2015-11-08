@@ -40,7 +40,7 @@ struct ClusterFactory
 {
   ClusterFactory();
 
-  boost::shared_ptr<Cluster> Create(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& v) const noexcept;
+  boost::shared_ptr<Cluster> Create(const std::vector<ribi::cmap::Concept>& v) const noexcept;
 
   #ifndef NDEBUG
   ///DeepCopy is only used for debugging

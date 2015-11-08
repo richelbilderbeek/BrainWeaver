@@ -224,7 +224,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
       using namespace cmap;
-      const boost::shared_ptr<Node> node = m_file->GetConceptMap()->GetNodes().at(node_index);
+      const Node node = m_file->GetConceptMap()->GetNodes().at(node_index);
       assert(node);
       QtConceptMapRatedConceptDialog * const widget
         = new QtConceptMapRatedConceptDialog(m_file->GetConceptMap(),node);

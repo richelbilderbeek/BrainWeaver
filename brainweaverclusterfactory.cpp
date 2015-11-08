@@ -41,10 +41,8 @@ ribi::pvdb::ClusterFactory::ClusterFactory()
   #endif
 }
 
-boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::Create(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& v) const noexcept
+boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
 {
-  assert(std::count_if(v.begin(),v.end(),[](const boost::shared_ptr<ribi::cmap::Concept>& p) { return !p; } ) == 0); //FIX 2012-01-02
-  //assert(std::all_of(v.begin(),v.end(),[](const boost::shared_ptr<ribi::cmap::Concept>& p) { return p; } ));
   const boost::shared_ptr<pvdb::Cluster> p(new pvdb::Cluster(v));
   assert(p);
   return p;
@@ -53,16 +51,13 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::Create(const 
 #ifndef NDEBUG
 boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::DeepCopy(const boost::shared_ptr<const pvdb::Cluster> cluster) const noexcept
 {
-  const std::vector<boost::shared_ptr<const ribi::cmap::Concept> > v = cluster->Get();
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> > w;
+  const std::vector<ribi::cmap::Concept> v = cluster->Get();
+  std::vector<ribi::cmap::Concept> w;
   std::transform(v.begin(),v.end(),std::back_inserter(w),
-    [](const boost::shared_ptr<const ribi::cmap::Concept>& c)
+    [](const ribi::cmap::Concept& c)
     {
-      assert(c);
-      const boost::shared_ptr<ribi::cmap::Concept> d = ribi::cmap::ConceptFactory().DeepCopy(c);
-      assert(d);
-      assert(c != d);
-      assert(*c == *d);
+      const ribi::cmap::Concept d(c);
+      assert(c == d);
       return d;
     }
   );
@@ -77,18 +72,16 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::DeepCopy(cons
 
 boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
 {
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> > concepts;
+  std::vector<ribi::cmap::Concept> concepts;
   std::transform(test_node_indices.begin(),test_node_indices.end(),std::back_inserter(concepts),
     [](const int index)
     {
-      const std::vector<boost::shared_ptr<ribi::cmap::Concept> > tmp = cmap::ConceptFactory().GetTests();
+      const std::vector<ribi::cmap::Concept> tmp = cmap::ConceptFactory().GetTests();
       assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
-      const boost::shared_ptr<cmap::Concept> concept = tmp.at(index);
-      assert(concept);
+      const cmap::Concept concept = tmp.at(index);
       return concept;
     }
   );
-  assert(std::count_if(concepts.begin(),concepts.end(),[](const boost::shared_ptr<ribi::cmap::Concept>& p) { return !p; } ) == 0);
   boost::shared_ptr<pvdb::Cluster> cluster(new Cluster(concepts));
   assert(cluster);
   return cluster;

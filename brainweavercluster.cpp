@@ -37,20 +37,18 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "xml.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::Cluster::Cluster(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& v)
+ribi::pvdb::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
   : m_v(v)
 {
   #ifndef NDEBUG
   Test();
-  assert(std::count_if(v.begin(),v.end(),[](const boost::shared_ptr<ribi::cmap::Concept>& p) { return !p; } ) == 0);
   #endif
 }
 
-void ribi::pvdb::Cluster::Add(const boost::shared_ptr<ribi::cmap::Concept> & concept)
+void ribi::pvdb::Cluster::Add(const ribi::cmap::Concept & concept)
 {
-  assert(concept);
-  assert(concept->GetRatingComplexity() >= -1);
-  assert(concept->GetRatingComplexity() <=  2);
+  assert(concept.GetRatingComplexity() >= -1);
+  assert(concept.GetRatingComplexity() <=  2);
   m_v.push_back(concept);
 
 }
@@ -66,7 +64,7 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::s
   assert(s.substr(0,9) == "<cluster>");
   assert(s.substr(s.size() - 10,10) == "</cluster>");
 
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> > concepts;
+  std::vector<ribi::cmap::Concept> concepts;
 
   //Obtain the <cluster> ... </cluster> string
   const std::vector<std::string> v
@@ -81,7 +79,7 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::s
     [&concepts](const std::string& s)
     {
       using namespace cmap;
-      const boost::shared_ptr<Concept> concept = ConceptFactory().FromXml(s);
+      const Concept concept = ConceptFactory().FromXml(s);
       concepts.push_back(concept);
     }
   );
@@ -91,21 +89,16 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::s
   return cluster;
 }
 
-std::vector<boost::shared_ptr<const ribi::cmap::Concept> > ribi::pvdb::Cluster::Get() const
-{
-  return std::vector<boost::shared_ptr<const ribi::cmap::Concept> >(m_v.begin(),m_v.end());
-}
-
 std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
 {
   std::stringstream s;
   s << "<cluster>";
   {
-    const std::vector<boost::shared_ptr<const ribi::cmap::Concept>>& v = cluster.Get();
+    const std::vector<ribi::cmap::Concept>& v = cluster.Get();
     std::for_each(v.begin(), v.end(),
-      [&s](const boost::shared_ptr<const ribi::cmap::Concept>& concept)
+      [&s](const ribi::cmap::Concept& concept)
       {
-        s << concept->ToXml();
+        s << concept.ToXml();
       }
     );
   }
@@ -121,23 +114,18 @@ std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
 
 bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs)
 {
-  const std::vector<boost::shared_ptr<const ribi::cmap::Concept> > lhs_concepts = lhs.Get(); //For cross-compiler
-  const std::vector<boost::shared_ptr<const ribi::cmap::Concept> > rhs_concepts = rhs.Get();
+  const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get(); //For cross-compiler
+  const std::vector<ribi::cmap::Concept> rhs_concepts = rhs.Get();
   if (lhs_concepts.size() != rhs_concepts.size()) return false;
   const int sz = static_cast< int>(lhs_concepts.size());
   for (int i=0; i!=sz; ++i)
   {
-    assert(lhs_concepts[i]);
-    assert(rhs_concepts[i]);
-    if (*lhs_concepts[i] != *rhs_concepts[i]) return false;
+    if (lhs_concepts[i] != rhs_concepts[i]) return false;
   }
   return true;
 }
 
-void ribi::pvdb::Cluster::SetConcepts(const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& concepts)
+void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)
 {
   m_v = concepts;
-  assert(std::count_if(m_v.begin(),m_v.end(),
-    [](boost::shared_ptr<cmap::Concept> concept) { return !concept; } )
-    == 0);
 }

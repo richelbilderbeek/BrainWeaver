@@ -35,7 +35,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 #include "qtbrainweaverconceptmapdialog.h"
 #include "conceptmapcenternodefactory.h"
-#include "conceptmapcenternode.h"
+
 #include "conceptmapcompetency.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconceptfactory.h"
@@ -464,9 +464,9 @@ void ribi::pvdb::QtPvdbClusterDialog::Test() noexcept
     const boost::shared_ptr<Concept> concept_d(ConceptFactory().Create("Concept F"));
     const boost::shared_ptr<Concept> concept_e(ConceptFactory().GetTests().at(index_1));
     const boost::shared_ptr<Concept> concept_f(ConceptFactory().GetTests().at(index_2));
-    const boost::shared_ptr<Node> node_a(CenterNodeFactory().CreateFromStrings(question));
-    const boost::shared_ptr<Node> node_b(NodeFactory().GetTest(index_1));
-    const boost::shared_ptr<Node> node_c(NodeFactory().GetTest(index_2));
+    const Node node_a(CenterNodeFactory().CreateFromStrings(question));
+    const Node node_b(NodeFactory().GetTest(index_1));
+    const Node node_c(NodeFactory().GetTest(index_2));
     const Nodes nodes = { node_a, node_b, node_c };
     const boost::shared_ptr<Edge> edge_a(EdgeFactory().Create(NodeFactory().Create(concept_d,1.2,3.4),nodes.at(0),false,nodes.at(1),true));
     const boost::shared_ptr<Edge> edge_b(EdgeFactory().Create(NodeFactory().Create(concept_e,2.3,4.5),nodes.at(1),false,nodes.at(2),true));

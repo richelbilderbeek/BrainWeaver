@@ -39,7 +39,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "counter.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
-#include "conceptmapcenternode.h"
+
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
@@ -616,12 +616,10 @@ boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::File::CreateConceptMap(
   using namespace cmap;
 
   //A single-node ConceptMap contains only the focal question
-  const boost::shared_ptr<cmap::CenterNode> focal_node {
+  const cmap::CenterNode focal_node {
     CenterNodeFactory().CreateFromStrings(text)
   };
-  assert(focal_node);
-  const std::vector<boost::shared_ptr<Node> > nodes = { focal_node };
-  assert(nodes.at(0));
+  const std::vector<Node> nodes = { focal_node };
   const boost::shared_ptr<ConceptMap> p = ConceptMapFactory().Create(nodes);
   assert(p);
   assert(p->IsValid());

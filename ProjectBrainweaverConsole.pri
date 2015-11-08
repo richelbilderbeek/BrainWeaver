@@ -1,5 +1,5 @@
 INCLUDEPATH += \
-  ../../Projects/ProjectBrainweaver
+  ../ProjectBrainweaver
 
 
 SOURCES += \

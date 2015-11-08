@@ -266,7 +266,7 @@ void ribi::pvdb::QtPvdbClusterWidget::BuildCluster()
 
   this->clear();
   assert(m_cluster);
-  const std::vector<boost::shared_ptr<ribi::cmap::Concept> >& v = m_cluster->Get();
+  const std::vector<ribi::cmap::Concept>& v = m_cluster->Get();
   std::for_each(v.begin(),v.end(),
     [this](const boost::shared_ptr<const ribi::cmap::Concept>& concept)
     {
@@ -362,7 +362,7 @@ void ribi::pvdb::QtPvdbClusterWidget::Test() noexcept
 
 void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster()
 {
-  std::vector<boost::shared_ptr<ribi::cmap::Concept> > concepts;
+  std::vector<ribi::cmap::Concept> concepts;
   const int n_top = this->topLevelItemCount();
   for (int i=0; i!=n_top; ++i)
   {
