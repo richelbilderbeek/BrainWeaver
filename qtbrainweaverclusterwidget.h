@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class QtPvdbClusterWidget : public QTreeWidget
 
 public:
   explicit QtPvdbClusterWidget(
-    boost::shared_ptr<pvdb::Cluster> cluster,
+    const Cluster& cluster,
     QWidget* parent = 0
   );
 
@@ -57,7 +57,7 @@ public:
   void DoRandomStuff();
 
   ///Get the cluster (after reading from the dialog)
-  const boost::shared_ptr<pvdb::Cluster> GetCluster();
+  Cluster GetCluster() const noexcept;
 
 protected:
   void dropEvent(QDropEvent *event);
@@ -72,7 +72,7 @@ private slots:
 
 private:
   ///The cluster
-  const boost::shared_ptr<pvdb::Cluster> m_cluster;
+  const Cluster m_cluster;
 
   ///Build the widget from the cluster
   void BuildCluster();

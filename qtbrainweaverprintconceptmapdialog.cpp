@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtconceptmapdisplaystrategy.h"
 #include "qtconceptmapratedconceptdialog.h"
 #include "qtbrainweaverfiledialog.h"
-#include "ui_qtpvdbprintconceptmapdialog.h"
+#include "ui_qtbrainweaverprintconceptmapdialog.h"
 #include "qtconceptmap.h"
 #pragma GCC diagnostic pop
 

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,9 +25,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
-#include "qtbrainweaverfwd.h"
+//#include "qtbrainweaverfwd.h"
+#include "brainweaverfile.h"
+#include "conceptmap.h"
 #pragma GCC diagnostic pop
 
 namespace Ui { class QtPvdbConceptMapDialog; }
@@ -84,14 +86,15 @@ private:
   bool m_back_to_menu;
 
   ///The file
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
 
-  static boost::shared_ptr<ribi::cmap::ConceptMap> CreateFromCluster(
+  static ribi::cmap::ConceptMap CreateFromCluster(
     const std::string& question,
-    const boost::shared_ptr<Cluster>& cluster);
+    const Cluster& cluster
+  );
 
   //static QtPvdbConceptMapEditWidget * CreateWidget(const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map);
   ///DON'T USE: puts a new ConceptMap in file

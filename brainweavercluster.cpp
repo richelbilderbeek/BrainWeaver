@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ bool ribi::pvdb::Cluster::Empty() const
   return m_v.empty();
 }
 
-boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::string &s)
+ribi::pvdb::Cluster ribi::pvdb::Cluster::FromXml(const std::string &s)
 {
   assert(s.size() >= 19);
   assert(s.substr(0,9) == "<cluster>");
@@ -78,14 +78,11 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::Cluster::FromXml(const std::s
   std::for_each(w.begin(),w.end(),
     [&concepts](const std::string& s)
     {
-      using namespace cmap;
-      const Concept concept = ConceptFactory().FromXml(s);
-      concepts.push_back(concept);
+      concepts.push_back(ribi::cmap::XmlToConcept(s));
     }
   );
 
-  const boost::shared_ptr<pvdb::Cluster> cluster(new Cluster(concepts));
-  assert(cluster);
+  pvdb::Cluster cluster(concepts);
   return cluster;
 }
 
@@ -98,7 +95,7 @@ std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
     std::for_each(v.begin(), v.end(),
       [&s](const ribi::cmap::Concept& concept)
       {
-        s << concept.ToXml();
+        s << ribi::cmap::ToXml(concept);
       }
     );
   }
@@ -112,7 +109,7 @@ std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
   return r;
 }
 
-bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs)
+bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs) noexcept
 {
   const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get(); //For cross-compiler
   const std::vector<ribi::cmap::Concept> rhs_concepts = rhs.Get();
@@ -123,6 +120,11 @@ bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cl
     if (lhs_concepts[i] != rhs_concepts[i]) return false;
   }
   return true;
+}
+
+bool ribi::pvdb::operator!=(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs) noexcept
+{
+  return !(lhs == rhs);
 }
 
 void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)

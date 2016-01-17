@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2013-2015 The Brainweaver Team
+Copyright (C) 2013-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
-
+#include "conceptmap.h"
 #include "brainweaverfwd.h"
+#include "brainweavercluster.h"
 #pragma GCC diagnostic pop
 
 namespace ribi {
@@ -47,24 +47,18 @@ class File
   File(
     const std::string& about,
     const std::string& assessor_name,
-    const boost::shared_ptr<pvdb::Cluster>& cluster,
-    const boost::shared_ptr<ribi::cmap::ConceptMap>& concept_map,
+    const Cluster& cluster,
+    const ribi::cmap::ConceptMap& concept_map,
     const std::string& question,
     const std::string& student_name,
     const std::string& version
   );
 
-  File(const File& other) = delete;
-  File& operator=(const File& other) = delete;
-
-  ///Create a concept map with a center node with text
-  static boost::shared_ptr<ribi::cmap::ConceptMap> CreateConceptMap(const std::string& text) noexcept;
-
   ///Convert the Cluster to a ConceptMap
   //void CreateConceptMapFromCluster();
 
   ///Convert XML to File
-  static boost::shared_ptr<pvdb::File> FromXml(const std::string& s);
+  static pvdb::File FromXml(const std::string& s);
 
   ///Obtain the string which indicates this file is a PvdB file
   const std::string& GetAbout() const { return m_about; }
@@ -73,12 +67,12 @@ class File
   const std::string& GetAssessorName() const { return m_assessor_name; }
 
   ///Get the student his/her clustering of concepts and examples
-  boost::shared_ptr<const Cluster> GetCluster() const { return m_cluster; }
-  boost::shared_ptr<      Cluster> GetCluster()       { return m_cluster; }
+  const Cluster& GetCluster() const { return m_cluster; }
+        Cluster& GetCluster()       { return m_cluster; }
 
   ///Get the concept map
-  boost::shared_ptr<const ribi::cmap::ConceptMap> GetConceptMap() const { return m_concept_map; }
-  boost::shared_ptr<      ribi::cmap::ConceptMap> GetConceptMap()       { return m_concept_map; }
+  const ribi::cmap::ConceptMap& GetConceptMap() const { return m_concept_map; }
+        ribi::cmap::ConceptMap& GetConceptMap()       { return m_concept_map; }
 
   ///Obtain the File filename extension
   static const std::string& GetFilenameExtension() { return m_filename_extension; }
@@ -96,13 +90,13 @@ class File
   static std::string GetTestFileName();
 
   ///Obtain multiple test files
-  static std::vector<boost::shared_ptr<pvdb::File> > GetTests();
+  static std::vector<pvdb::File> GetTests() noexcept;
 
   ///Obtain the version of this class
   const std::string& GetVersion() const { return m_version; }
 
   ///Load to File from disk
-  static boost::shared_ptr<pvdb::File> Load(const std::string& filename);
+  static File Load(const std::string& filename);
 
   ///Save a File
   ///File will have one line of XML
@@ -113,11 +107,11 @@ class File
 
   ///Write a new clustering of concepts and examples
   ///Can only be done exactly once
-  void SetCluster(const boost::shared_ptr<pvdb::Cluster>& cluster);
+  void SetCluster(const Cluster& cluster) noexcept;
 
   ///Write a new ConceptMap from a Cluster
   ///Can only be done exactly once
-  void SetConceptMap(const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map);
+  void SetConceptMap(const ribi::cmap::ConceptMap& concept_map);
 
   ///Set the question
   void SetQuestion(const std::string& question);
@@ -129,8 +123,6 @@ class File
   static std::string ToXml(const File& file);
 
   private:
-  ///Block destructor, except for the friend boost::checked_delete
-  ~File() {}
 
   ///The string which indicates this file is a PvdB file
   std::string m_about;
@@ -140,11 +132,10 @@ class File
 
   ///The clustering of items
   ///Initially will be nullptr
-  boost::shared_ptr<pvdb::Cluster> m_cluster;
+  pvdb::Cluster m_cluster;
 
   ///The concept map
-  ///Initially will be nullptr
-  boost::shared_ptr<ribi::cmap::ConceptMap> m_concept_map;
+  ribi::cmap::ConceptMap m_concept_map;
 
   ///The file extension of a a File
   static const std::string m_filename_extension;
@@ -165,34 +156,25 @@ class File
   static std::string DoXpressiveRegexReplace(
     const std::string& str,
     const std::string& regex_str,
-    const std::string& format_str);
+    const std::string& format_str
+  );
 
   ///Convert a file's content to a single std::string
   static std::string FileToStr(const std::string& filename);
-
-  ///Convert a File from version 0.1
-  static std::string ConvertFrom_0_1(const std::string& xml);
-
-  ///Convert a File from version 0.2
-  static std::string ConvertFrom_0_2(const std::string& xml);
-
-  ///Convert a File from version 0.3
-  static std::string ConvertFrom_0_3(const std::string& xml);
 
   #ifndef NDEBUG
   ///Test this class
   static void Test() noexcept;
   #endif
-
-  ///Correct befriending, from http://richelbilderbeek.nl/CppChecked_delete.htm
-  friend void boost::checked_delete<>(File* x);
 };
+
+///Create a concept map with a center node with text
+ribi::cmap::ConceptMap CreateConceptMap(const std::string& text) noexcept;
 
 bool operator==(const pvdb::File& lhs, const pvdb::File& rhs);
 bool operator!=(const pvdb::File& lhs, const pvdb::File& rhs);
 
 } //~namespace pvdb
-
 } //~namespace ribi
 
 #endif // BRAINWEAVERFILE_H

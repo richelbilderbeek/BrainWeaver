@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweavercreateassessmentmenudialog.h"
 #include "trace.h"
-#include "ui_qtpvdbstudentstartcompletedialog.h"
+#include "ui_qtbrainweaverstudentstartcompletedialog.h"
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbStudentStartCompleteDialog::QtPvdbStudentStartCompleteDialog(

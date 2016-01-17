@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2013-2015 The Brainweaver Team
+Copyright (C) 2013-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,19 +40,14 @@ struct ClusterFactory
 {
   ClusterFactory();
 
-  boost::shared_ptr<Cluster> Create(const std::vector<ribi::cmap::Concept>& v) const noexcept;
+  Cluster Create(const std::vector<ribi::cmap::Concept>& v) const noexcept;
 
-  #ifndef NDEBUG
-  ///DeepCopy is only used for debugging
-  boost::shared_ptr<Cluster> DeepCopy(const boost::shared_ptr<const pvdb::Cluster> cluster) const noexcept;
-  #endif
-
-  int GetNumberOfTests() const noexcept { return 6; }
+  int GetNumberOfTests() const noexcept { return 5; }
 
   ///Obtain a single test, a combination of testing node indices
-  boost::shared_ptr<Cluster> GetTest(const std::vector<int>& test_node_indices) const noexcept;
+  Cluster GetTest(const std::vector<int>& test_node_indices) const noexcept;
 
-  std::vector<boost::shared_ptr<Cluster>> GetTests() const noexcept;
+  std::vector<Cluster> GetTests() const noexcept;
 
 
   private:

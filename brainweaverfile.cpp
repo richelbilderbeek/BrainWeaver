@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2013-2015 The Brainweaver Team
+Copyright (C) 2013-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
 
+#include "add_custom_vertex.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
@@ -59,9 +60,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 const std::string ribi::pvdb::File::m_filename_extension = "cmp";
 
 ribi::pvdb::File::File()
-  : m_about("ProjectVanDenBogaart"),
+  : m_about("Brainweaver"),
     m_assessor_name(""),
-    m_cluster(),
+    m_cluster{},
     m_concept_map(), //nullptr
     m_question(""),
     m_student_name(""),
@@ -70,16 +71,13 @@ ribi::pvdb::File::File()
   #ifndef NDEBUG
   Test();
   #endif
-
-  assert(!m_cluster);
-  assert(!m_concept_map);
 }
 
 ribi::pvdb::File::File(
   const std::string& about,
   const std::string& assessor_name,
-  const boost::shared_ptr<pvdb::Cluster>& cluster,
-  const boost::shared_ptr<ribi::cmap::ConceptMap>& concept_map,
+  const Cluster& cluster,
+  const ribi::cmap::ConceptMap& concept_map,
   const std::string& question,
   const std::string& student_name,
   const std::string& version)
@@ -93,7 +91,6 @@ ribi::pvdb::File::File(
 {
   #ifndef NDEBUG
   Test();
-  //assert(!concept_map || this->GetQuestion() == concept_map->GetQuestion()); //BUG20131129
   #endif
 }
 
@@ -101,66 +98,6 @@ void ribi::pvdb::File::AutoSave() const
 {
   this->Save("autosave1." + m_filename_extension);
   this->Save("autosave2." + m_filename_extension);
-}
-
-std::string ribi::pvdb::File::ConvertFrom_0_1(const std::string& s)
-{
-  //Put <examples> around existing <example> tags
-  #ifndef NDEBUG
-  {
-    const std::string a = "a$b";
-    const std::string b = boost::algorithm::replace_all_copy(a,"$","");
-    assert(b == "ab");
-  }
-  #endif
-  const std::string a = boost::algorithm::replace_all_copy(s,"</name><example>","</name><examples><example>");
-  const std::string b = boost::algorithm::replace_all_copy(a,"</example></concept>","</example></examples></concept>");
-  const std::string c = boost::algorithm::replace_all_copy(b,"<example>","<e$xample><text>");
-  const std::string d = boost::algorithm::replace_all_copy(c,"</example>","</text><competency>uninitialized</competency></e$xample>");
-  const std::string e = boost::algorithm::replace_all_copy(d,"</examples></concept>","</examples><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept>");
-  //Add <examples> when no <example> tags are present
-  const std::string f = boost::algorithm::replace_all_copy(e,"</name></concept>","</name><examples></examples><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept>");
-  const std::string g = boost::algorithm::replace_all_copy(f,"$","");
-  assert(std::count(g.begin(),g.end(),'$') == 0);
-  const std::string h = boost::algorithm::replace_all_copy(f,"<version>0.1</version>","<version>0.2</version>");
-  //assert(std::count(h.begin(),h.end(),'$') == 0); //TODO RJCB: put back in
-  return h;
-}
-
-std::string ribi::pvdb::File::ConvertFrom_0_2(const std::string& s)
-{
-  const std::string a = boost::algorithm::replace_all_copy(s,"</about><cluster>","</about><assessor_name></assessor_name><cluster>");
-  const std::string b = boost::algorithm::replace_all_copy(a,"<version>0.2</version>","<version>0.3</version>");
-  //assert(std::count(b.begin(),b.end(),'$') == 0); //TODO RJCB: Put back in
-  return b;
-}
-
-std::string ribi::pvdb::File::ConvertFrom_0_3(const std::string& s)
-{
-  const std::string a
-    = boost::algorithm::replace_all_copy(s,"<about>ProjectVanDenBogaart</about>","<about>Brainweaver</about>");
-  const std::string b = boost::algorithm::replace_all_copy(a,"<version>0.3</version>","<version>0.4</version>");
-  //Copy the question from the concept map
-  const std::string question = DoXpressiveRegexReplace(
-    b,
-    "<concept_map><nodes><node><concept><name>(.*)</name></concept>",
-    "$1");
-  const std::string c = boost::algorithm::replace_all_copy(b,"</concept_map><student_name>"
-    , "</concept_map><question>" + question + "</question><student_name>");
-
-
-  const std::string d
-    = boost::algorithm::replace_all_copy(c,
-      "</competency></example>",
-      "</competency><is_complex>1</is_complex><is_concrete>1</is_concrete><is_specific>1</is_specific></example>");
-
-  const std::string e
-    = boost::algorithm::replace_all_copy(d,
-      "</examples><complexity>",
-      "</examples><concept_is_complex>1</concept_is_complex><complexity>");
-
-  //assert(std::count(e.begin(),e.end(),'$') == 0); //TODO RJCB: put back in
-  return e;
 }
 
 std::string ribi::pvdb::File::FileToStr(const std::string& filename)
@@ -177,25 +114,25 @@ std::string ribi::pvdb::File::FileToStr(const std::string& filename)
   return s;
 }
 
-boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::FromXml(const std::string &s)
+ribi::pvdb::File ribi::pvdb::File::FromXml(const std::string &s)
 {
   assert(s.size() >= 13);
   assert(s.substr(0,6) == "<file>");
   assert(s.substr(s.size() - 7,7) == "</file>");
 
-  boost::shared_ptr<pvdb::File> f(new File);
+  File f;
   //m_about_str
   {
     const std::vector<std::string> v
       = pvdb::GetRegexMatches(s,QRegExp("(<about>.*</about>)"));
     assert(v.size() == 1);
-    f->m_about = ribi::xml::StripXmlTag(v[0]);
+    f.m_about = ribi::xml::StripXmlTag(v[0]);
   }
   //m_assessor_name
   {
     const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<assessor_name>.*</assessor_name>)"));
     assert(v.size() == 1);
-    f->m_assessor_name = ribi::xml::StripXmlTag(v[0]);
+    f.m_assessor_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_cluster
   {
@@ -203,7 +140,7 @@ boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::FromXml(const std::string 
     if (!v.empty())
     {
       assert(v.size() == 1);
-      f->m_cluster = Cluster::FromXml(v[0]);
+      f.m_cluster = Cluster::FromXml(v[0]);
     }
     else
     {
@@ -216,7 +153,7 @@ boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::FromXml(const std::string 
     if (!v.empty())
     {
       assert(v.size() == 1);
-      f->m_concept_map = cmap::ConceptMapFactory().FromXml(v[0]);
+      f.m_concept_map = ribi::cmap::XmlToConceptMap(v[0]);
     }
     else
     {
@@ -229,24 +166,24 @@ boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::FromXml(const std::string 
     if (v.empty())
     {
       std::clog << "Warning: no question supplied" << std::endl;
-      f->m_question = "";
+      f.m_question = "";
     }
     else
     {
-      f->m_question = ribi::xml::StripXmlTag(v[0]);
+      f.m_question = ribi::xml::StripXmlTag(v[0]);
     }
   }
   //m_student_name
   {
     const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<student_name>.*</student_name>)"));
     assert(v.size() == 1);
-    f->m_student_name = ribi::xml::StripXmlTag(v[0]);
+    f.m_student_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_version
   {
     const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<version>.*</version>)"));
     assert(v.size() == 1);
-    f->m_version = ribi::xml::StripXmlTag(v[0]);
+    f.m_version = ribi::xml::StripXmlTag(v[0]);
   }
 
   //assert( (!f->GetConceptMap() || !f->GetConceptMap()->GetNodes().empty() ) //TODO RJCB: Put back in
@@ -272,9 +209,9 @@ std::string ribi::pvdb::File::GetTestFileName()
   return "test." + m_filename_extension;
 }
 
-std::vector<boost::shared_ptr<ribi::pvdb::File> > ribi::pvdb::File::GetTests()
+std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
 {
-  std::vector<boost::shared_ptr<pvdb::File> > v;
+  std::vector<File> v;
   const int n_clusters{ClusterFactory().GetNumberOfTests()};
   const int n_concept_maps{cmap::ConceptMapFactory().GetNumberOfAllTests()};
   for (int cluster_index=0; cluster_index!=n_clusters; ++cluster_index)
@@ -288,29 +225,22 @@ std::vector<boost::shared_ptr<ribi::pvdb::File> > ribi::pvdb::File::GetTests()
       const std::string version = "version";
       const auto cluster = pvdb::ClusterFactory().GetTests()[cluster_index];
       const auto concept_map = ribi::cmap::ConceptMapFactory().GetAllTests()[concept_map_index];
-      if (concept_map)
-      {
-        //assert(!concept_map->GetNodes().empty()); //TODO RJCB: put back in
-        //assert(concept_map->FindCenterNode()); //TODO RJCB: put back in
-        //assert(concept_map->FindCenterNode()->GetConcept()); //TODO RJCB: put back in
-        //question = concept_map->FindCenterNode()->GetConcept()->GetName(); //TODO RJCB: put back in
-      }
-      //assert(!concept_map || question == concept_map->GetQuestion()); //BUG20131129
-      boost::shared_ptr<pvdb::File> file(new File(
+      File file(
         about,
         assessor_name,
         cluster,
         concept_map,
         question,
         student_name,
-        version));
+        version
+      );
       v.push_back(file);
     }
   }
   return v;
 }
 
-boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::Load(const std::string &filename)
+ribi::pvdb::File ribi::pvdb::File::Load(const std::string &filename)
 {
   std::string xml;
   //Read XML from file
@@ -331,41 +261,9 @@ boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::File::Load(const std::string &fi
     assert(std::count(xml.begin(),xml.end(),'\r')==0);
     assert(std::count(xml.begin(),xml.end(),'\b')==0);
   }
-  //Backwards compatiblity with file format version 0.1
-  {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(xml,QRegExp("(<version>.*</version>)"));
-    assert(v.size() == 1);
-    const std::string version = ribi::xml::StripXmlTag(v[0]);
-    if (version == "0.1")
-    {
-      xml = ConvertFrom_0_1(xml);
-    }
-  }
-  //Backwards compatiblity with file format version 0.2
-  {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(xml,QRegExp("(<version>.*</version>)"));
-    assert(v.size() == 1);
-    const std::string version = ribi::xml::StripXmlTag(v[0]);
-    if (version == "0.2")
-    {
-      xml = ConvertFrom_0_2(xml);
-    }
-  }
-  //Backwards compatiblity with file format version 0.3
-  {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(xml,QRegExp("(<version>.*</version>)"));
-    assert(v.size() == 1);
-    const std::string version = ribi::xml::StripXmlTag(v[0]);
-    if (version == "0.3")
-    {
-      xml = ConvertFrom_0_3(xml);
-    }
-  }
-
   boost::algorithm::trim(xml);
 
-  const boost::shared_ptr<pvdb::File> file = ribi::pvdb::File::FromXml(xml);
-  assert(file);
+  File file = ribi::pvdb::File::FromXml(xml);
 
   //assert( (!file->GetConceptMap() || !file->GetConceptMap()->GetNodes().empty() ) //TODO RJCB: Put back in
   //  && "Either a file has no concept map or it has at least one node"); //TODO RJCB: Put back in
@@ -409,9 +307,8 @@ void ribi::pvdb::File::SetAssessorName(const std::string& assessor_name)
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetConceptMap(const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map)
+void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
 {
-  assert(!m_concept_map && "Can only set when there is no concept map present yet");
   m_concept_map = concept_map;
   //assert(m_concept_map->GetNodes().empty() //TODO: put back in
   //  && "In Brainweaver, every ConceptMap must have at least one node");
@@ -420,9 +317,8 @@ void ribi::pvdb::File::SetConceptMap(const boost::shared_ptr<ribi::cmap::Concept
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetCluster(const boost::shared_ptr<pvdb::Cluster>& cluster)
+void ribi::pvdb::File::SetCluster(const Cluster& cluster) noexcept
 {
-  assert(cluster);
   //Don't care: m_cluster will be overwritten more often,
   //because the TreeWidget has no Model/View architecture: the resulting
   //cluster is allocated new and calculated every save
@@ -460,7 +356,7 @@ void ribi::pvdb::File::Test() noexcept
     ribi::Regex();
     ribi::pvdb::Regex();
     ribi::cmap::Regex();
-    File::CreateConceptMap("Focal question?");
+    CreateConceptMap("Focal question?");
     ClusterFactory();
     ClusterFactory().GetTest( {0} );
   }
@@ -468,74 +364,54 @@ void ribi::pvdb::File::Test() noexcept
   const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
   //Test copy constructor
   {
-
-    const boost::shared_ptr<pvdb::File> f(new File);
-    f->SetAssessorName("debug assessor name");
-    f->SetStudentName("debug student name");
-    const boost::shared_ptr<pvdb::File> g = pvdb::FileFactory().DeepCopy(f);
-    assert(f != g);
-    assert(operator==(*f,*g));
+    File f;
+    f.SetAssessorName("debug assessor name");
+    f.SetStudentName("debug student name");
+    File g = f;
+    assert(f == g);
     //Modify g, to test operator!=
-    g->SetStudentName( f->GetStudentName() + " (modified)");
-    assert(!operator==(*f,*g));
-    g->SetStudentName( f->GetStudentName());
-    assert(operator==(*f,*g));
-    g->SetAssessorName( f->GetAssessorName() + " (modified)");
-    assert(!operator==(*f,*g));
-    g->SetAssessorName( f->GetAssessorName());
-    assert(operator==(*f,*g));
+    g.SetStudentName( f.GetStudentName() + " (modified)");
+    assert(f != g);
+    g.SetStudentName( f.GetStudentName());
+    assert(f == g);
+    g.SetAssessorName( f.GetAssessorName() + " (modified)");
+    assert(f != g);
+    g.SetAssessorName( f.GetAssessorName());
+    assert(f == g);
   }
   //Test Save/Load on empty File
   {
 
-    boost::shared_ptr<pvdb::File> firstfile(new File);
-    firstfile->Save(tmp_filename);
-    const boost::shared_ptr<pvdb::File> secondfile(File::Load(tmp_filename));
-    assert(firstfile->GetQuestion() == secondfile->GetQuestion());
-    assert(firstfile != secondfile);
-    assert(operator==(*firstfile,*secondfile));
+    File firstfile;
+    firstfile.Save(tmp_filename);
+    const File secondfile = File::Load(tmp_filename);
+    assert(firstfile == secondfile);
     //Modify f, to test operator!=
-    firstfile->SetStudentName( firstfile->GetStudentName() + " (modified)");
-    assert(!operator==(*firstfile,*secondfile));
+    firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
+    assert(firstfile != secondfile);
   }
   //Test Save/Load on file
   {
 
-    boost::shared_ptr<pvdb::File> firstfile(new pvdb::File);
-    firstfile->SetStudentName("Richel Bilderbeek");
+    File firstfile;
+    firstfile.SetStudentName("Richel Bilderbeek");
     const std::string question = "Focal question?";
     {
-      const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-        = File::CreateConceptMap(question);
-      assert(!concept_map->GetNodes().empty());
-      assert(concept_map->FindCenterNode()
-        && "The first node in a file's ConceptMap must be a CenterNode");
-
-      firstfile->SetConceptMap(concept_map);
+      const ribi::cmap::ConceptMap concept_map = CreateConceptMap(question);
+      assert(boost::num_vertices(concept_map) > 0);
+      assert(ribi::cmap::CountCenterNodes(concept_map) == 1);
+      firstfile.SetConceptMap(concept_map);
     }
-    firstfile->SetQuestion("Focal question?");
-    assert(firstfile->GetQuestion() == question);
-    firstfile->Save(tmp_filename.c_str());
-    assert(firstfile->GetQuestion() == question);
-    const boost::shared_ptr<pvdb::File> second_file(File::Load(tmp_filename));
-    assert(second_file);
-    assert(second_file->GetQuestion() == firstfile->GetQuestion());
-    assert(operator==(*firstfile,*second_file));
+    firstfile.SetQuestion("Focal question?");
+    assert(firstfile.GetQuestion() == question);
+    firstfile.Save(tmp_filename.c_str());
+    assert(firstfile.GetQuestion() == question);
+    const File second_file(File::Load(tmp_filename));
+    assert(second_file.GetQuestion() == firstfile.GetQuestion());
+    assert(firstfile == second_file);
     //Modify f, to test operator!=
-    firstfile->SetStudentName( firstfile->GetStudentName() + " (modified)");
-    assert(*firstfile != *second_file);
-  }
-  //Fix bug: file 5 has this content and crashes
-  {
-    const std::string tempfilename{fileio::FileIo().GetTempFileName(".txt")};
-    const std::string file5content{
-      "<file><about>ProjectVanDenBogaart</about><assessor_name></assessor_name><student_name></student_name><version>0.3</version></file>"
-    };
-    {
-      std::ofstream file(tempfilename);
-      file << file5content;
-    }
-    const auto file = File::Load(tempfilename);
+    firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
+    assert(firstfile != second_file);
   }
   {
 
@@ -595,8 +471,8 @@ std::string ribi::pvdb::File::ToXml(const File& file)
   s << "<file>";
   s << "<about>" << file.GetAbout() << "</about>";
   s << "<assessor_name>" << file.GetAssessorName() << "</assessor_name>";
-  if (file.GetCluster()) s << Cluster::ToXml(*file.GetCluster());
-  if (file.GetConceptMap()) s << cmap::ToXml(*file.GetConceptMap());
+  s << Cluster::ToXml(file.GetCluster());
+  s << ribi::cmap::ToXml(file.GetConceptMap());
   s << "<question>" << file.GetQuestion() << "</question>";
   s << "<student_name>" << file.GetStudentName() << "</student_name>";
   s << "<version>" << file.GetVersion() << "</version>";
@@ -610,22 +486,14 @@ std::string ribi::pvdb::File::ToXml(const File& file)
   return r;
 }
 
-boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::File::CreateConceptMap(
+ribi::cmap::ConceptMap ribi::pvdb::CreateConceptMap(
   const std::string& text) noexcept
 {
-  using namespace cmap;
-
-  //A single-node ConceptMap contains only the focal question
-  const cmap::CenterNode focal_node {
-    CenterNodeFactory().CreateFromStrings(text)
-  };
-  const std::vector<Node> nodes = { focal_node };
-  const boost::shared_ptr<ConceptMap> p = ConceptMapFactory().Create(nodes);
-  assert(p);
-  assert(p->IsValid());
-  assert(!p->GetNodes().empty());
-  assert(p->FindCenterNode() && "A Brainweaver ConceptMap must have a CenterNode");
-  return p;
+  ribi::cmap::ConceptMap g;
+  ribi::cmap::Node n(ribi::cmap::Concept(text),true);
+  add_custom_vertex(n, g);
+  assert(ribi::cmap::CountCenterNodes(g) == 1 && "A Brainweaver ConceptMap must have a CenterNode");
+  return g;
 }
 
 std::string ribi::pvdb::File::DoXpressiveRegexReplace(
@@ -658,20 +526,10 @@ std::string ribi::pvdb::File::DoXpressiveRegexReplace(
 
 bool ribi::pvdb::operator==(const pvdb::File& lhs, const pvdb::File& rhs)
 {
-  //assert(lhs.GetCluster());
-  //assert(lhs.GetConceptMap());
-  //assert(rhs.GetCluster());
-  //assert(rhs.GetConceptMap());
   return
      lhs.GetAssessorName() == rhs.GetAssessorName()
-  && (
-       (!lhs.GetCluster() && !rhs.GetCluster())
-      || operator==(*lhs.GetCluster(),*rhs.GetCluster())
-     )
-  && (
-       (!lhs.GetConceptMap() && !rhs.GetConceptMap())
-       || *lhs.GetConceptMap() == *rhs.GetConceptMap()
-     )
+  && lhs.GetCluster() == rhs.GetCluster()
+  && lhs.GetConceptMap() == rhs.GetConceptMap()
   && lhs.GetStudentName() == rhs.GetStudentName()
   && lhs.GetVersion() == rhs.GetVersion();
 }

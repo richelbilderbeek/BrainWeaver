@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,13 +43,15 @@ class QtPvdbRateConceptMapDialog : public ribi::QtHideAndShowDialog
 public:
   using ConceptMap = cmap::QtConceptMap;
   explicit QtPvdbRateConceptMapDialog(
-    boost::shared_ptr<pvdb::File> file,
+    const File& file,
     QWidget* parent = 0);
   QtPvdbRateConceptMapDialog(const QtPvdbRateConceptMapDialog&) = delete;
   QtPvdbRateConceptMapDialog& operator=(const QtPvdbRateConceptMapDialog&) = delete;
   ~QtPvdbRateConceptMapDialog() noexcept;
 
   cmap::QtConceptMap * GetWidget();
+
+  pvdb::File GetFile() const noexcept { return m_file; }
 
   ///Respond to key press
   void keyPressEvent(QKeyEvent *);
@@ -64,7 +66,7 @@ private slots:
 
 private:
   Ui::QtPvdbRateConceptMapDialog *ui;
-  boost::shared_ptr<pvdb::File> m_file;
+  pvdb::File m_file;
   ConceptMap * const m_concept_map;
 
   ///The widget requested for a rating of the already supplied sub concept map,

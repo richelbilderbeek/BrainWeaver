@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -61,44 +61,36 @@ void ribi::pvdb::Cluster::Test() noexcept
     for (int i=0; i!=sz; ++i)
     {
       const auto tmp_tests_a = ClusterFactory().GetTests(); //For crosscompiler
-      const boost::shared_ptr<const Cluster> a = tmp_tests_a.at(i);
-      if (!a) continue;
-      assert(a);
+      const Cluster a = tmp_tests_a.at(i);
       const auto tmp_tests_b = ClusterFactory().GetTests(); //For crosscompiler
-      const boost::shared_ptr<Cluster> b = tmp_tests_b.at(i);
-      if (!b) continue;
-      assert(a); assert(b);
-      assert(operator==(*a,*a));
-      assert(operator==(*a,*b));
-      assert(operator==(*b,*a));
-      assert(operator==(*b,*b));
+      Cluster b = tmp_tests_b.at(i);
+      assert(a == a);
+      assert(a == b);
+      assert(b == a);
+      assert(b == b);
       for (int j=0; j!=sz; ++j)
       {
         const auto tmp_tests_c = ClusterFactory().GetTests(); //For crosscompiler
         const auto tmp_tests_d = ClusterFactory().GetTests(); //For crosscompiler
-        const boost::shared_ptr<const Cluster> c = tmp_tests_c.at(j);
-        if (!c) continue;
-        assert(c);
-        const boost::shared_ptr<Cluster> d = tmp_tests_d.at(j);
-        if (!d) continue;
-        assert(c); assert(d);
-        assert(operator==(*c,*c));
-        assert(operator==(*c,*d));
-        assert(operator==(*d,*c));
-        assert(operator==(*d,*d));
+        const Cluster c = tmp_tests_c.at(j);
+        Cluster d = tmp_tests_d.at(j);
+        assert(c == c);
+        assert(c == d);
+        assert(d == c);
+        assert(d == d);
         if (i==j)
         {
-          assert(operator==(*a,*c)); assert(operator==(*a,*d));
-          assert(operator==(*b,*c)); assert(operator==(*b,*d));
-          assert(operator==(*c,*a)); assert(operator==(*c,*b));
-          assert(operator==(*d,*a)); assert(operator==(*d,*b));
+          assert(a == c);
+          assert(a == d);
+          assert(b == c);
+          assert(b == d);
         }
         else
         {
-          assert(!operator==(*a,*c)); assert(!operator==(*a,*d));
-          assert(!operator==(*b,*c)); assert(!operator==(*b,*d));
-          assert(!operator==(*c,*a)); assert(!operator==(*c,*b));
-          assert(!operator==(*d,*a)); assert(!operator==(*d,*b));
+          assert(a != c);
+          assert(a != d);
+          assert(b != c);
+          assert(b != d);
         }
       }
     }
@@ -110,13 +102,10 @@ void ribi::pvdb::Cluster::Test() noexcept
     std::for_each(v.begin(),v.end(),
       [](const std::vector<ribi::cmap::Concept>& concepts)
       {
-        const boost::shared_ptr<Cluster> c(new Cluster(concepts));
-        assert(c);
-        const std::string s = ToXml(*c);
+        Cluster c(concepts);
+        const std::string s = ToXml(c);
         const auto d = FromXml(s);
-        assert(d);
-        assert(c != d);
-        assert(*c == *d);
+        assert(c == d);
       }
     );
   }

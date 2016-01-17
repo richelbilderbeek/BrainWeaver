@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -39,130 +39,59 @@ ribi::pvdb::FileFactory::FileFactory()
   #endif
 }
 
-boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::FileFactory::Create() const noexcept
+std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
 {
-  boost::shared_ptr<pvdb::File> file(new pvdb::File);
-  assert(file);
-  return file;
-}
-
-#ifndef NDEBUG
-boost::shared_ptr<ribi::pvdb::File> ribi::pvdb::FileFactory::DeepCopy(const boost::shared_ptr<const pvdb::File>& file) const noexcept
-{
-  assert(file);
-
-  boost::shared_ptr<pvdb::Cluster> cluster;
-  if (file->GetCluster())
-  {
-    cluster = pvdb::ClusterFactory().DeepCopy(file->GetCluster());
-    assert(cluster);
-    assert(operator==(*cluster,*file->GetCluster()));
-  }
-
-  boost::shared_ptr<ribi::cmap::ConceptMap> concept_map;
-  if (file->GetConceptMap())
-  {
-    concept_map = ribi::cmap::ConceptMapFactory().DeepCopy(file->GetConceptMap());
-    assert(concept_map);
-    assert(*concept_map == *file->GetConceptMap());
-  }
-
- //assert(!concept_map || file->GetQuestion() == concept_map->GetQuestion()); //BUG20131129
- const boost::shared_ptr<pvdb::File> p(
-    new File(
-      file->GetAbout(),
-      file->GetAssessorName(),
-      cluster,
-      concept_map,
-      file->GetQuestion(),
-      file->GetStudentName(),
-      file->GetVersion()));
-  assert(p);
-  assert(file != p && "It must be a DEEP copy");
-  assert(operator==(*file,*p) && "It must be a deep COPY");
-  return p;
-}
-#endif
-
-
-std::vector<boost::shared_ptr<ribi::pvdb::File> > ribi::pvdb::FileFactory::GetTests() const noexcept
-{
-  std::vector<boost::shared_ptr<pvdb::File> > v;
+  using ribi::cmap::ConceptMap;
+  using ribi::cmap::ConceptMapFactory;
+  std::vector<File > v;
   //[0]: empty file
   {
-    v.push_back(Create());
+    v.push_back(File());
   }
   //[1]: file with focal question
   {
-    boost::shared_ptr<pvdb::File> f = Create();
-    assert(f);
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(0);
-    if (!concept_map->GetNodes().empty())
-    {
-      assert(concept_map);
-      f->SetConceptMap(concept_map);
-      v.push_back(f);
-    }
+    File f;
+    const ConceptMap concept_map = ConceptMapFactory().Get0();
+    f.SetConceptMap(concept_map);
+    v.push_back(f);
   }
   //[2]: file with complex concept map
   {
-    boost::shared_ptr<pvdb::File> f = Create();
-    assert(f);
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(15);
-    assert(concept_map);
-    f->SetConceptMap(concept_map);
+    File f;
+    const ConceptMap concept_map = ConceptMapFactory().Get6();
+    f.SetConceptMap(concept_map);
     v.push_back(f);
   }
   //[3]: file with complex concept map and complex cluster
   {
-    boost::shared_ptr<pvdb::File> f = Create();
-    assert(f);
-    f->SetStudentName("ribi::pvdb::FileFactory::GetTests()[3] name");
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(15);
-    assert(concept_map);
-    f->SetConceptMap(concept_map);
-    const boost::shared_ptr<pvdb::Cluster> cluster
-      = ClusterFactory().GetTests().at(3);
-    assert(cluster);
-    f->SetCluster(cluster);
+    File f;
+    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[3] name");
+    const ConceptMap concept_map = ConceptMapFactory().Get6();
+    f.SetConceptMap(concept_map);
+    const Cluster cluster = ClusterFactory().GetTests().at(3);
+    f.SetCluster(cluster);
     v.push_back(f);
   }
   //[4]: file with rated complex concept map and complex cluster
   {
-    boost::shared_ptr<pvdb::File> f = Create();
-    assert(f);
-    f->SetStudentName("ribi::pvdb::FileFactory::GetTests()[4] name");
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(16);
-    assert(concept_map);
-    f->SetConceptMap(concept_map);
-    const boost::shared_ptr<pvdb::Cluster> cluster
-      = ClusterFactory().GetTests().at(3);
-    assert(cluster);
-    f->SetCluster(cluster);
+    File f;
+    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[4] name");
+    const ConceptMap concept_map = ConceptMapFactory().Get6();
+    f.SetConceptMap(concept_map);
+    const Cluster cluster = ClusterFactory().GetTests().at(3);
+    f.SetCluster(cluster);
     v.push_back(f);
   }
   //[5]: file with rated complex concept map and complex cluster, all multiple lines
   {
-    boost::shared_ptr<pvdb::File> f = Create();
-    assert(f);
-    f->SetStudentName("ribi::pvdb::FileFactory::GetTests()[5] name");
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(17);
-    assert(concept_map);
-    f->SetConceptMap(concept_map);
-    const boost::shared_ptr<pvdb::Cluster> cluster
-      = ClusterFactory().GetTests().at(3);
-    assert(cluster);
-    f->SetCluster(cluster);
+    File f;
+    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[5] name");
+    const ConceptMap concept_map = ConceptMapFactory().Get6();
+    f.SetConceptMap(concept_map);
+    const Cluster cluster = ClusterFactory().GetTests().at(3);
+    f.SetCluster(cluster);
     v.push_back(f);
   }
-
-  assert(std::count_if(v.begin(),v.end(),[](const boost::shared_ptr<pvdb::File>& p) { return !p; } ) == 0);
-  //assert(std::all_of(v.begin(),v.end(),[](const boost::shared_ptr<pvdb::File>& p) { return p; } ));
   return v;
 }
 

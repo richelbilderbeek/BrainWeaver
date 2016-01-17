@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
-
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
@@ -41,6 +39,7 @@ struct ClusterFactory;
 class Cluster
 {
   public:
+  Cluster(const std::vector<ribi::cmap::Concept>& v = {});
 
   ///Add a Concept to the Cluster
   void Add(const ribi::cmap::Concept& concept);
@@ -49,7 +48,7 @@ class Cluster
   bool Empty() const;
 
   ///Obtain a Cluster from an XML std::string
-  static boost::shared_ptr<pvdb::Cluster> FromXml(const std::string& s);
+  static pvdb::Cluster FromXml(const std::string& s);
 
   ///Obtain the list of Concepts
   const std::vector<ribi::cmap::Concept>& Get() const noexcept{ return m_v; }
@@ -62,24 +61,15 @@ class Cluster
   static std::string ToXml(const Cluster& c) noexcept;
 
   private:
-
   ///A Cluster is a list of Concepts. The Concepts contain examples.
   std::vector<ribi::cmap::Concept> m_v;
 
   ///Test this class
   static void Test() noexcept;
-
-
-  ///Block constructor, except for ClusterFactory
-  friend ClusterFactory;
-  Cluster(const std::vector<ribi::cmap::Concept>& v);
-
-  ///Block destructor, except for the friend boost::checked_delete
-  ~Cluster() {}
-  friend void boost::checked_delete<>(Cluster* x);
 };
 
-bool operator==(const pvdb::Cluster& lhs, const pvdb::Cluster& rhs);
+bool operator==(const pvdb::Cluster& lhs, const pvdb::Cluster& rhs) noexcept;
+bool operator!=(const pvdb::Cluster& lhs, const pvdb::Cluster& rhs) noexcept;
 
 } //~namespace pvdb
 } //~namespace ribi

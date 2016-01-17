@@ -39,11 +39,12 @@ include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
 include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
-include(../StyleSheetSetter/ToolStyleSheetSetterDesktop.pri)
-include(../TestConceptMap/ToolTestConceptMapDesktop.pri)
-include(../TestArrowItems/ToolTestQtArrowItemsDesktop.pri)
-include(../TestRoundedEditRectItem/ToolTestQtRoundedEditRectItemDesktop.pri)
-include(../TestRoundedRectItem/ToolTestQtRoundedRectItemDesktop.pri)
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
+include(../TestConceptMap/TestConceptMapDesktop.pri)
+include(../TestArrowItems/TestQtArrowItemsDesktop.pri)
+include(../TestRoundedEditRectItem/TestQtRoundedEditRectItemDesktop.pri)
+include(../TestRoundedRectItem/TestQtRoundedRectItemDesktop.pri)
 
 #Desktop
 include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)

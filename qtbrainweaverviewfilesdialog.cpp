@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "fileio.h"
 #include "brainweaverhelper.h"
 #include "qtbrainweaverfiledialog.h"
-#include "ui_qtpvdbviewfilesdialog.h"
+#include "ui_qtbrainweaverviewfilesdialog.h"
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbViewFilesDialog::QtPvdbViewFilesDialog(QWidget* parent) :

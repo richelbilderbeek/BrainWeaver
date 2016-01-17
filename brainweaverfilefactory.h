@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,15 +21,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef BRAINWEAVERFILEFACTORY_H
 #define BRAINWEAVERFILEFACTORY_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
-#pragma GCC diagnostic pop
+#include <vector>
 
 namespace ribi {
-
 namespace pvdb {
 
 struct File;
@@ -39,17 +33,9 @@ struct FileFactory
 {
   FileFactory();
 
-  boost::shared_ptr<pvdb::File> Create() const noexcept;
-
-  #ifndef NDEBUG
-  ///DeepCopy is only used for debugging
-  boost::shared_ptr<pvdb::File> DeepCopy(const boost::shared_ptr<const pvdb::File>& file) const noexcept;
-  #endif
-
   int GetNumberOfTests() const noexcept { return 5; }
 
-  std::vector<boost::shared_ptr<pvdb::File>> GetTests() const noexcept;
-
+  std::vector<File> GetTests() const noexcept;
 
   private:
   #ifndef NDEBUG

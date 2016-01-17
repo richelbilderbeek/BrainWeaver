@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -41,36 +41,13 @@ ribi::pvdb::ClusterFactory::ClusterFactory()
   #endif
 }
 
-boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
+ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
 {
-  const boost::shared_ptr<pvdb::Cluster> p(new pvdb::Cluster(v));
-  assert(p);
+  Cluster p(v);
   return p;
 }
 
-#ifndef NDEBUG
-boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::DeepCopy(const boost::shared_ptr<const pvdb::Cluster> cluster) const noexcept
-{
-  const std::vector<ribi::cmap::Concept> v = cluster->Get();
-  std::vector<ribi::cmap::Concept> w;
-  std::transform(v.begin(),v.end(),std::back_inserter(w),
-    [](const ribi::cmap::Concept& c)
-    {
-      const ribi::cmap::Concept d(c);
-      assert(c == d);
-      return d;
-    }
-  );
-
-  boost::shared_ptr<pvdb::Cluster> p(new Cluster(w));
-  assert(p);
-  assert(p != cluster);
-  assert(operator==(*p,*cluster));
-  return p;
-}
-#endif
-
-boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
+ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
   std::transform(test_node_indices.begin(),test_node_indices.end(),std::back_inserter(concepts),
@@ -82,47 +59,35 @@ boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTest(const
       return concept;
     }
   );
-  boost::shared_ptr<pvdb::Cluster> cluster(new Cluster(concepts));
-  assert(cluster);
+  Cluster cluster(concepts);
   return cluster;
 }
 
-std::vector<boost::shared_ptr<ribi::pvdb::Cluster> > ribi::pvdb::ClusterFactory::GetTests() const noexcept
+std::vector<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTests() const noexcept
 {
-  std::vector<boost::shared_ptr<pvdb::Cluster> > v(6);
+  std::vector<Cluster> v(6);
   {
-    const boost::shared_ptr<pvdb::Cluster> p = GetTest( {0} );
-    assert(p);
+    const Cluster p = GetTest( {0} );
     v[0] = p;
   }
   {
-    const boost::shared_ptr<pvdb::Cluster> p = GetTest( {1} );
-    assert(p);
+    const Cluster p = GetTest( {1} );
     v[1] = p;
   }
   {
-    const boost::shared_ptr<pvdb::Cluster> p = GetTest( {0,1} );
-    assert(p);
+    const Cluster p = GetTest( {0,1} );
     v[2] = p;
   }
   {
-    const boost::shared_ptr<pvdb::Cluster> p = GetTest( {0,1,2} );
-    assert(p);
+    const Cluster p = GetTest( {0,1,2} );
     v[3] = p;
   }
   {
-    const boost::shared_ptr<pvdb::Cluster> p = GetTest( {} );
-    assert(p);
+    const Cluster p = GetTest( {} );
     v[4] = p;
   }
-  {
-    //NULLPTR
-    const boost::shared_ptr<pvdb::Cluster> p;
-    assert(!p);
-    v[5] = p;
-  }
   /* DO NOT DO THIS FOR WINE
-  const std::vector<boost::shared_ptr<pvdb::Cluster> > v
+  const std::vector<Cluster > v
     =
     {
       GetTest( {0} ),

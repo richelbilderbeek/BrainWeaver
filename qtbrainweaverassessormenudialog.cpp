@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 
 
-#include "ui_qtpvdbassessormenudialog.h"
+#include "ui_qtbrainweaverassessormenudialog.h"
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbAssessorMenuDialog::QtPvdbAssessorMenuDialog(QWidget* parent)
@@ -89,9 +89,9 @@ void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_assess_result_clicked()
   {
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
-    const boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-    assert(file);
+    File file = pvdb::File::Load(filename);
     QtPvdbRateConceptMapDialog d(file);
     this->ShowChild(&d);
+    file = d.GetFile();
   }
 }

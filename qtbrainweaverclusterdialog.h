@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
-
+#include "brainweaverfile.h"
 #include "qtbrainweaverfwd.h"
 #pragma GCC diagnostic pop
 
@@ -44,7 +44,7 @@ class QtPvdbClusterDialog : public ribi::QtHideAndShowDialog
   Q_OBJECT
 
 public:
-  explicit QtPvdbClusterDialog(const boost::shared_ptr<pvdb::File> file, QWidget* parent = 0);
+  explicit QtPvdbClusterDialog(const File& file, QWidget* parent = 0);
   QtPvdbClusterDialog(const QtPvdbClusterDialog&) = delete;
   QtPvdbClusterDialog& operator=(const QtPvdbClusterDialog&) = delete;
   ~QtPvdbClusterDialog() noexcept;
@@ -85,14 +85,14 @@ private:
   bool m_back_to_menu;
 
   ///The file
-  const boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   ///The cluster widget
   QtPvdbClusterWidget * const m_widget;
 
   ///Add a Cluster to the file if it is not yet present,
   ///Create a QtPvdbClusterWidget from the file its cluster
-  static QtPvdbClusterWidget * BuildWidget(const boost::shared_ptr<pvdb::File> file);
+  static QtPvdbClusterWidget * BuildWidget(File file);
 
   //Start saving procedure, with request of filename
   void Save();

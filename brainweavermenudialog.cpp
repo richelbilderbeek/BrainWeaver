@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2015 The Brainweaver Team
+Copyright (C) 2012-2016 The Brainweaver Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,7 +36,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "geometry.h"
 #include "plane.h"
 #include "ribi_regex.h"
-#include "richelbilderbeekprogram.h"
 #include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
@@ -59,14 +58,14 @@ ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
     "The Brainweaver Team",
     "Brainweaver",
     "tool to create and assess concept maps",
-    "the 2nd of October 2015",
-    "2012-2015",
+    "January 17th of 2016",
+    "2012-2016",
     "http://www.richelbilderbeek.nl/ProjectBrainweaver.htm",
     GetVersion(),
     GetVersionHistory());
 
   a.AddLibrary("apfloat version: 2.4.1");
-  a.AddLibrary("ConceptMap version: " + ribi::cmap::ConceptMap::GetVersion());
+  //a.AddLibrary("ConceptMap version: " + ribi::cmap::ConceptMap::GetVersion());
   a.AddLibrary("Container version: " + ribi::Container().GetVersion());
   a.AddLibrary("FileIo version: " + ribi::fileio::FileIo().GetVersion());
   a.AddLibrary("fuzzy_equal_to version: " + fuzzy_equal_to::GetVersion());
@@ -91,18 +90,9 @@ ribi::Help ribi::pvdb::MenuDialog::GetHelp() const noexcept
   );
 }
 
-boost::shared_ptr<const ribi::Program> ribi::pvdb::MenuDialog::GetProgram() const noexcept
-{
-  const boost::shared_ptr<const Program> p {
-    new ProgramBrainweaver
-  };
-  assert(p);
-  return p;
-}
-
 std::string ribi::pvdb::MenuDialog::GetVersion() const noexcept
 {
-  return "0.51";
+  return "1.0";
 }
 
 std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexcept
@@ -157,5 +147,6 @@ std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexc
     "2014-05-11: Version 0.49: wordwrap in tally relevancies dialog",
     "2014-05-18: Version 0.50: edges connected to center node have no label, that cannot be edited",
     "2015-10-02: Version 0.51: moved to own GitHub",
+    "2016-01-17: Version 1.0: made most classes regular, removed signals, removed backwards compatibility",
   };
 }
