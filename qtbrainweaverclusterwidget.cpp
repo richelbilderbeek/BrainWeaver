@@ -67,14 +67,13 @@ struct QtPvdbTreeWidgetItem : public QTreeWidgetItem
 };
 
 ribi::pvdb::QtPvdbClusterWidget::QtPvdbClusterWidget(
-  boost::shared_ptr<pvdb::Cluster> cluster,
+  const Cluster& cluster,
   QWidget* parent)
   : QTreeWidget(parent),
-    m_cluster(cluster)
+    m_cluster{cluster}
 {
   #ifndef NDEBUG
   Test();
-  assert(m_cluster && "Must have a cluster to work on");
   #endif
 
   //Hide the header
@@ -230,7 +229,7 @@ void ribi::pvdb::QtPvdbClusterWidget::SetCorrectFlags() noexcept
   }
 }
 
-const boost::shared_ptr<ribi::pvdb::Cluster> ribi::pvdb::QtPvdbClusterWidget::GetCluster()
+ribi::pvdb::Cluster ribi::pvdb::QtPvdbClusterWidget::GetCluster() const noexcept
 {
   WriteToCluster();
   return m_cluster;
@@ -258,43 +257,40 @@ void ribi::pvdb::QtPvdbClusterWidget::keyPressEvent(QKeyEvent *event)
 
 void ribi::pvdb::QtPvdbClusterWidget::BuildCluster()
 {
-  assert(m_cluster);
   assert(this->isHeaderHidden());
   assert(this->alternatingRowColors());
   assert(this->dragDropMode() == QAbstractItemView::InternalMove);
   assert(this->isAnimated());
 
   this->clear();
-  assert(m_cluster);
-  const std::vector<ribi::cmap::Concept>& v = m_cluster->Get();
+  const std::vector<ribi::cmap::Concept>& v = m_cluster.Get();
   std::for_each(v.begin(),v.end(),
-    [this](const boost::shared_ptr<const ribi::cmap::Concept>& concept)
+    [this](const ribi::cmap::Concept& concept)
     {
-      assert(concept);
-      assert(concept->GetRatingComplexity() >= -1);
-      assert(concept->GetRatingComplexity() <=  2);
+      assert(concept.GetRatingComplexity() >= -1);
+      assert(concept.GetRatingComplexity() <=  2);
       QtPvdbTreeWidgetItem * const top
         = new QtPvdbTreeWidgetItem(
           cmap::Competency::uninitialized, //A concept is not classified in competencies
-          concept->GetIsComplex(),
-          concept->GetRatingComplexity(),
-          concept->GetRatingConcreteness(),
-          concept->GetRatingSpecificity()
+          concept.GetIsComplex(),
+          concept.GetRatingComplexity(),
+          concept.GetRatingConcreteness(),
+          concept.GetRatingSpecificity()
           );
-      top->setText(0,concept->GetName().c_str());
-      const std::vector<boost::shared_ptr<const cmap::Example> > examples = concept->GetExamples()->Get();
+      top->setText(0,concept.GetName().c_str());
+      const auto examples = concept.GetExamples().Get();
       std::for_each(examples.begin(),examples.end(),
-        [top,this](const boost::shared_ptr<const cmap::Example>& example)
+        [top,this](const ribi::cmap::Example& example)
         {
           QtPvdbTreeWidgetItem * const child_item
             = new QtPvdbTreeWidgetItem(
-              example->GetCompetency(),
-              example->GetIsComplex(),
+              example.GetCompetency(),
+              example.GetIsComplex(),
               -1, //An example is not rated for complexity   //FIX 2013-02-03
               -1, //An example is not rated for concreteness //FIX 2013-02-03
               -1  //An example is not rated for specifity    //FIX 2013-02-03
             );
-          child_item->setText(0,example->GetText().c_str());
+          child_item->setText(0,example.GetText().c_str());
           top->addChild(child_item);
           child_item->setFlags(
               Qt::ItemIsSelectable
@@ -335,32 +331,27 @@ void ribi::pvdb::QtPvdbClusterWidget::Test() noexcept
   }
   const TestTimer test_timer(__func__,__FILE__,1.0);
   {
-    for (const boost::shared_ptr<pvdb::Cluster>& c: pvdb::ClusterFactory().GetTests())
+    for (const Cluster& c: pvdb::ClusterFactory().GetTests())
     {
-      if (!c) continue;
-      assert(c);
       QtPvdbClusterWidget w(c);
-      assert(w.topLevelItemCount() == static_cast<int>(c->Get().size()));
-      const boost::shared_ptr<pvdb::Cluster> d = pvdb::ClusterFactory().DeepCopy(w.GetCluster());
-      assert(c != d);
-      assert(operator==(*c,*d));
+      assert(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
+      const Cluster d = w.GetCluster();
+      assert(c == d);
       QtPvdbTreeWidgetItem * const item = new QtPvdbTreeWidgetItem(
         cmap::Competency::misc,true,0,1,2);
       item->setText(0,QString("An extra line"));
       w.addTopLevelItem(item);
-      assert(w.topLevelItemCount() == static_cast<int>(c->Get().size()) + 1);
-      const boost::shared_ptr<pvdb::Cluster> e = w.GetCluster();
-      assert(c == e);
+      assert(w.topLevelItemCount() == static_cast<int>(c.Get().size()) + 1);
+      const Cluster e = w.GetCluster();
       assert(c != d);
-      assert(!operator==(*c,*d));
-      assert( operator==(*c,*e));
-      assert(!operator==(*d,*e));
+      assert(c == e);
+      assert(d != e);
     }
   }
 }
 #endif
 
-void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster()
+void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster() const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
   const int n_top = this->topLevelItemCount();
@@ -370,7 +361,7 @@ void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster()
     //QtPvdbTreeWidgetItem * const top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
     assert(top);
     const std::string name = top->text(0).toStdString();
-    std::vector<boost::shared_ptr<cmap::Example> > examples;
+    std::vector<ribi::cmap::Example> examples;
 
     const int n_child = top->childCount();
     for (int j=0; j!=n_child; ++j)
@@ -379,11 +370,9 @@ void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster()
         = dynamic_cast<QtPvdbTreeWidgetItem *>(top->child(j));
       const cmap::Competency competency = pvdb_item ? pvdb_item->m_competency : cmap::Competency::uninitialized;
       assert(GetDepth(top->child(j))==1);
-      boost::shared_ptr<cmap::Example> p(
-        ribi::cmap::ExampleFactory().Create(
-          top->child(j)->text(0).toStdString(),
-          competency
-        )
+      ribi::cmap::Example p(
+        top->child(j)->text(0).toStdString(),
+        competency
       );
       examples.push_back(p);
     }
@@ -392,20 +381,18 @@ void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster()
     using namespace cmap;
 
     concepts.push_back(
-      ConceptFactory().Create(
+      ribi::cmap::Concept(
         name,
-        cmap::ExamplesFactory().Create(examples),
+        Examples(examples),
         pvdb_top ? pvdb_top->m_is_complex : true,
         pvdb_top ? pvdb_top->m_rating_complexity : -1,
         pvdb_top ? pvdb_top->m_rating_concreteness : -1,
         pvdb_top ? pvdb_top->m_rating_specifity : -1
       )
     );
-    assert(concepts.back());
   }
 
-  m_cluster->SetConcepts(concepts);
-  assert(m_cluster);
-  assert(n_top == static_cast<int>(m_cluster->Get().size())
+  m_cluster.SetConcepts(concepts);
+  assert(n_top == static_cast<int>(m_cluster.Get().size())
     && "As much top-level items in a QtClusterWidget as Concepts in a Cluster");
 }

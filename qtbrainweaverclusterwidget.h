@@ -72,7 +72,8 @@ private slots:
 
 private:
   ///The cluster
-  const Cluster m_cluster;
+  ///Mutable because WriteToCluster updates it when GetCluster is called
+  mutable Cluster m_cluster;
 
   ///Build the widget from the cluster
   void BuildCluster();
@@ -84,7 +85,7 @@ private:
   static void Test() noexcept;
 
   ///Write the widget its data to the cluster
-  void WriteToCluster();
+  void WriteToCluster() const noexcept;
 
   void SetCorrectFlags() noexcept;
 };

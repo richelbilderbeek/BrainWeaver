@@ -28,6 +28,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <boost/lambda/lambda.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/numeric/conversion/cast.hpp>
+#include <boost/math/constants/constants.hpp>
 
 #include <QDesktopWidget>
 #include <QFileDialog>
@@ -37,7 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QMessageBox>
 
-
+#include "add_custom_and_selectable_vertex.h"
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
@@ -77,7 +78,7 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
 }
 
 ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
-  const boost::shared_ptr<pvdb::File> file,
+  const pvdb::File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbConceptMapDialog),
@@ -88,10 +89,9 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
   ui->setupUi(this);
   #ifndef NDEBUG
   Test();
-  assert(m_file);
-  assert(m_file->GetConceptMap());
+  assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   assert(m_widget);
-  assert(m_widget->GetConceptMap() == m_file->GetConceptMap());
+  assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
   assert(this->layout());
   #endif
 
@@ -120,95 +120,107 @@ ribi::pvdb::QtPvdbConceptMapDialog::~QtPvdbConceptMapDialog() noexcept
   delete ui;
 }
 
-boost::shared_ptr<ribi::cmap::ConceptMap> ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
+ribi::cmap::ConceptMap ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
   const std::string& question,
-  const boost::shared_ptr<pvdb::Cluster>& cluster)
+  const Cluster& cluster)
 {
-  using namespace cmap;
+  ribi::cmap::ConceptMap p;
 
-  std::vector<Node> nodes {
-    cmap::ConceptMap::CreateNodes(question, {} )
-  };
-  std::vector<boost::shared_ptr<Edge> > edges;
+  //Add center node
+  add_custom_and_selectable_vertex(
+    ribi::cmap::Node{
+      ribi::cmap::Concept(question),
+      true, //Center node
+      0.0,
+      0.0
+    },
+    false,
+    p
+  );
 
-  const std::vector<boost::shared_ptr<Concept> >& v = cluster->Get();
+
+  const std::vector<ribi::cmap::Concept> v = cluster.Get();
   const int n = boost::numeric_cast<int>(v.size());
+  const double delta_angle{2.0 * boost::math::constants::pi<double>() / static_cast<double>(n)};
   for (int i=0; i!=n; ++i)
   {
-    const int x = 0;
-    const int y = 0;
-    const Node node = cmap::NodeFactory().Create(v[i],x,y);
-    assert(node);
-    nodes.push_back(node);
+    const double angle{static_cast<double>(i) * delta_angle};
+    const int x = -std::cos(angle) * 200.0;
+    const int y =  std::sin(angle) * 200.0;
+    ribi::cmap::Node node(v[i],false,x,y);
+    add_custom_and_selectable_vertex(
+      node,false,p
+    );
   }
-  assert(v.size() + 1 == nodes.size()
+  assert(v.size() + 1 == boost::num_vertices(p)
     && "Assume the ConceptMap has as much nodes as the cluster has concepts + one focal question");
-  const boost::shared_ptr<ConceptMap> p {
-    ConceptMapFactory().Create(nodes,edges)
-  };
-  assert(p);
-  assert(p->IsValid());
   return p;
 }
 
-ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(const boost::shared_ptr<pvdb::File> file)
+ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb::File file)
 {
-  assert(file);
   const bool trace_verbose = false;
 
-  const bool had_cluster = file->GetCluster().get();
-  const bool had_concept_map = file->GetConceptMap().get();
+  const bool had_cluster = !file.GetCluster().Empty();
+  const bool had_concept_map = boost::num_vertices(file.GetConceptMap()) > 0;
 
   if (!had_cluster && !had_concept_map)
   {
     if (trace_verbose) { TRACE("User starts building a concept map from scratch"); }
-    boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
-      = File::CreateConceptMap(file->GetQuestion());
-    file->SetConceptMap(concept_map);
+    ribi::cmap::ConceptMap concept_map;
+    add_custom_and_selectable_vertex(
+      ribi::cmap::Node{
+        ribi::cmap::Concept(file.GetQuestion()),
+        true, //Center node
+        0.0,
+        0.0
+      },
+      false,
+      concept_map
+    );
+    file.SetConceptMap(concept_map);
   }
   else if ( had_cluster && !had_concept_map)
   {
     if (trace_verbose) { TRACE("User supplied a filled-in cluster"); }
-    assert(file->GetCluster());
-
-    boost::shared_ptr<ribi::cmap::ConceptMap> concept_map {
+    ribi::cmap::ConceptMap concept_map {
       QtPvdbConceptMapDialog::CreateFromCluster(
-        file->GetQuestion(),
-        file->GetCluster()
+        file.GetQuestion(),
+        file.GetCluster()
       )
     };
 
-    file->SetConceptMap(concept_map);
+    file.SetConceptMap(concept_map);
 
-    assert((file->GetCluster()->Get().size() + 1)
-      == (concept_map->GetNodes().size())
+    assert((file.GetCluster().Get().size() + 1)
+      == (boost::num_vertices(concept_map))
       && "As much cluster items as nodes + focus question");
   }
 
   if (!had_cluster && !had_concept_map)
   {
-    assert(!file->GetCluster());
-    assert( file->GetConceptMap()); //Created
+    assert(file.GetCluster().Empty());
+    assert(boost::num_vertices(file.GetConceptMap()) > 0); //Created
   }
   if ( had_cluster && !had_concept_map)
   {
-    assert( file->GetCluster());
-    assert( file->GetConceptMap()); //Created from concept map
+    assert(!file.GetCluster().Empty());
+    assert(boost::num_vertices(file.GetConceptMap()) > 0); //Created from concept map
   }
   if (!had_cluster &&  had_concept_map)
   {
-    assert(!file->GetCluster());
-    assert( file->GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(boost::num_vertices(file.GetConceptMap()) > 0);
   }
   if ( had_cluster &&  had_concept_map)
   {
-    assert( file->GetCluster());
-    assert( file->GetConceptMap());
+    assert(!file.GetCluster().Empty());
+    assert(boost::num_vertices(file.GetConceptMap()) > 0);
   }
 
   ribi::cmap::QtConceptMap * const cmap{new ribi::cmap::QtConceptMap};
   assert(cmap);
-  cmap->SetConceptMap(file->GetConceptMap());
+  cmap->SetConceptMap(file.GetConceptMap());
   return cmap;
 }
 
@@ -218,16 +230,16 @@ void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()
   #ifdef NOT_NOW_20141224
   //Do random stuff
   assert(m_file);
-  assert(m_file->GetConceptMap());
-  assert(!m_file->GetConceptMap()->GetNodes().empty());
-  assert(m_file->GetConceptMap()->FindCenterNode()
+  assert(m_file.GetConceptMap());
+  assert(!m_file.GetConceptMap()->GetNodes().empty());
+  assert(m_file.GetConceptMap()->FindCenterNode()
     && "A file's ConceptMap must have a CenterNode");
 
-  const int n_edges_before = boost::numeric_cast<int>(m_file->GetConceptMap()->GetEdges().size());
-  const int n_nodes_before = boost::numeric_cast<int>(m_file->GetConceptMap()->GetNodes().size());
+  const int n_edges_before = boost::numeric_cast<int>(m_file.GetConceptMap()->GetEdges().size());
+  const int n_nodes_before = boost::numeric_cast<int>(m_file.GetConceptMap()->GetNodes().size());
   this->GetWidget()->DoRandomStuff();
-  const int n_edges_after = boost::numeric_cast<int>(m_file->GetConceptMap()->GetEdges().size());
-  const int n_nodes_after = boost::numeric_cast<int>(m_file->GetConceptMap()->GetNodes().size());
+  const int n_edges_after = boost::numeric_cast<int>(m_file.GetConceptMap()->GetEdges().size());
+  const int n_nodes_after = boost::numeric_cast<int>(m_file.GetConceptMap()->GetNodes().size());
   assert(n_edges_after > n_edges_before);
   assert(n_nodes_after > n_nodes_before);
   #endif // NOT_NOW_20141224
@@ -290,7 +302,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::keyPressEvent(QKeyEvent* e)
 void ribi::pvdb::QtPvdbConceptMapDialog::on_button_print_clicked()
 {
   Save();
-  QtPvdbPrintConceptMapDialog d(this->m_file);
+  QtPvdbPrintConceptMapDialog d(m_file);
   this->ShowChild(&d);
 }
 
@@ -345,8 +357,8 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Save() const
 {
   //const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = GetWidget()->GetConceptMap();
   //assert(concept_map);
-  assert(m_file->GetConceptMap() == GetWidget()->GetConceptMap());
-  //m_file->SetConceptMap(concept_map);
+  assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
+  //m_file.SetConceptMap(concept_map);
 }
 
 void ribi::pvdb::QtPvdbConceptMapDialog::Save(const std::string& filename) const
@@ -355,12 +367,5 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Save(const std::string& filename) const
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save();
-  m_file->Save(filename);
+  m_file.Save(filename);
 }
-
-#ifndef NDEBUG
-void ribi::pvdb::QtPvdbConceptMapDialog::Shuffle()
-{
-  this->GetWidget()->Shuffle();
-}
-#endif

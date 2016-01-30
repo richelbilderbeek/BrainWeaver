@@ -25,10 +25,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
 
 #include "qtbrainweaverfwd.h"
 #include "qthideandshowdialog.h"
+#include "brainweaverfile.h"
 #pragma GCC diagnostic pop
 
 namespace Ui {
@@ -50,8 +51,9 @@ public:
   using ConceptMap = cmap::QtConceptMap;
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   explicit QtPvdbPrintConceptMapDialog(
-    const boost::shared_ptr<pvdb::File>& file,
-    QWidget *parent = 0);
+    const File& file,
+    QWidget *parent = 0
+  );
   QtPvdbPrintConceptMapDialog(const QtPvdbPrintConceptMapDialog&) = delete;
   QtPvdbPrintConceptMapDialog& operator=(const QtPvdbPrintConceptMapDialog&) = delete;
   ~QtPvdbPrintConceptMapDialog() noexcept;
@@ -69,7 +71,7 @@ private:
   Ui::QtPvdbPrintConceptMapDialog *ui;
 
   ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
-  const boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   ConceptMap * const m_widget;
 

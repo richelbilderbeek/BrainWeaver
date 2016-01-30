@@ -27,7 +27,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 //#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
-//#include "qtbrainweaverfwd.h"
+#include "qtconceptmap.h"
 #include "brainweaverfile.h"
 #include "conceptmap.h"
 #pragma GCC diagnostic pop
@@ -42,7 +42,7 @@ class QtPvdbConceptMapDialog : public ::ribi::QtHideAndShowDialog
   Q_OBJECT
     
   public:
-  explicit QtPvdbConceptMapDialog(const boost::shared_ptr<File> file, QWidget* parent = 0);
+  explicit QtPvdbConceptMapDialog(const File& file, QWidget* parent = 0);
   QtPvdbConceptMapDialog(const QtPvdbConceptMapDialog&) = delete;
   QtPvdbConceptMapDialog& operator=(const QtPvdbConceptMapDialog&) = delete;
   ~QtPvdbConceptMapDialog() noexcept;
@@ -53,7 +53,7 @@ class QtPvdbConceptMapDialog : public ::ribi::QtHideAndShowDialog
   #endif
 
   ///Obtain the widget
-  const cmap::QtConceptMap * GetWidget() const;
+  const ribi::cmap::QtConceptMap * GetWidget() const;
   cmap::QtConceptMap * GetWidget();
 
   ///Does the user need to go back to the student menu?
@@ -98,7 +98,7 @@ private:
 
   //static QtPvdbConceptMapEditWidget * CreateWidget(const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map);
   ///DON'T USE: puts a new ConceptMap in file
-  static ribi::cmap::QtConceptMap * CreateWidget(const boost::shared_ptr<pvdb::File> file);
+  static ribi::cmap::QtConceptMap * CreateWidget(pvdb::File file);
 
   //#define NOT_NOW_20141111
   #ifdef NOT_NOW_20141111

@@ -54,7 +54,7 @@ void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
   const pvdb::File& file,
   QTableWidget * const table) const
 {
-  const int sz = static_cast<int>(file.GetConceptMap()->GetNodes().size());
+  const int sz{static_cast<int>(boost::num_vertices(file.GetConceptMap()))};
   table->setRowCount(sz - 1); //-1 to skip focus question node at index 0
 
   for (int i=1; i!=sz; ++i)
