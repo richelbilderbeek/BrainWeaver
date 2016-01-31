@@ -41,7 +41,7 @@ class QtPvdbStudentMenuDialog : public ribi::QtHideAndShowDialog
   Q_OBJECT
     
   public:
-  explicit QtPvdbStudentMenuDialog(const boost::shared_ptr<pvdb::File> file, QWidget* parent = 0);
+  explicit QtPvdbStudentMenuDialog(const File file, QWidget* parent = 0);
   QtPvdbStudentMenuDialog(const QtPvdbStudentMenuDialog&) = delete;
   QtPvdbStudentMenuDialog& operator=(const QtPvdbStudentMenuDialog&) = delete;
   ~QtPvdbStudentMenuDialog() noexcept;
@@ -69,7 +69,7 @@ class QtPvdbStudentMenuDialog : public ribi::QtHideAndShowDialog
 
 private:
   Ui::QtPvdbStudentMenuDialog *ui;
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
 };
 

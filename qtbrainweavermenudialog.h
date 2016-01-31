@@ -26,7 +26,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include <boost/shared_ptr.hpp>
-
+#include "brainweaverfile.h"
 #include "qthideandshowdialog.h"
 
 #include "brainweaverfwd.h"
@@ -83,7 +83,7 @@ private:
   Ui::QtPvdbMenuDialog *ui;
 
   ///The file to work on
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   ///The mode at which the child dialogs are displayed
   bool m_show_child_dialogs_modal;

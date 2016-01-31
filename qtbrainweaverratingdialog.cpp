@@ -47,7 +47,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
-  const boost::shared_ptr<pvdb::File> file,
+  const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbRatingDialog),
@@ -56,18 +56,18 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
 {
   ui->setupUi(this);
   assert(file);
-  assert(file->GetConceptMap());
+  assert(file.GetConceptMap());
   //Student name
   {
-    const std::string s = "Naam student: " + file->GetStudentName();
+    const std::string s = "Naam student: " + file.GetStudentName();
     ui->label_student_name->setText(s.c_str());
   }
   //Assessor name
   {
     ui->label_assessor_name->setText("Naam assessor: ");
-    if (!file->GetAssessorName().empty())
+    if (!file.GetAssessorName().empty())
     {
-      ui->edit_name->setText(file->GetAssessorName().c_str());
+      ui->edit_name->setText(file.GetAssessorName().c_str());
       //ui->edit_name->setReadOnly(true); //TVDB request
       ui->button_print->setEnabled(true);
     }
@@ -136,7 +136,7 @@ void ribi::pvdb::QtPvdbRatingDialog::Save(const std::string& filename) const
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
 
-  m_file->Save(filename);
+  m_file.Save(filename);
   //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }
 
@@ -160,7 +160,7 @@ void ribi::pvdb::QtPvdbRatingDialog::on_edit_name_textEdited(const QString &arg1
 {
   if (arg1.size() > 1)
   {
-    m_file->SetAssessorName(arg1.toStdString());
+    m_file.SetAssessorName(arg1.toStdString());
     ui->button_print->setEnabled(true);
   }
   else

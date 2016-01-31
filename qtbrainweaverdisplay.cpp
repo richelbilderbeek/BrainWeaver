@@ -51,40 +51,45 @@ ribi::pvdb::QtDisplay::QtDisplay()
 }
 
 void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
-  const pvdb::File& file,
+  const File& file,
   QTableWidget * const table) const
 {
-  const int sz{static_cast<int>(boost::num_vertices(file.GetConceptMap()))};
+  const auto g = file.GetConceptMap();
+  const int sz{static_cast<int>(boost::num_vertices(g))};
   table->setRowCount(sz - 1); //-1 to skip focus question node at index 0
 
-  for (int i=1; i!=sz; ++i)
+  const auto vip = vertices(g);
+  auto iter = vip.first; ++iter; //Skip first, focus question
+  //auto end = vip.second;
+
+  for (int i=1; i!=sz; ++i, ++iter)
   {
     const int row = i-1; //-1 to skip focus question node at index 0
-    const boost::shared_ptr<const ribi::cmap::Concept> concept = file.GetConceptMap()->GetNodes().at(i)->GetConcept();
+    const ribi::cmap::Concept concept = ribi::cmap::GetNode(*iter,g).GetConcept();
     //Name
     {
       QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(concept->GetName().c_str());
+      item->setText(concept.GetName().c_str());
       table->setVerticalHeaderItem(row,item);
     }
     //Rating complexity
     {
       QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept->GetRatingComplexity()));
+      item->setText(QString::number(concept.GetRatingComplexity()));
       item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
       table->setItem(row,0,item);
     }
     //Rating concreteness
     {
       QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept->GetRatingConcreteness()));
+      item->setText(QString::number(concept.GetRatingConcreteness()));
       item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
       table->setItem(row,1,item);
     }
     //Rating specificity
     {
       QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept->GetRatingSpecificity()));
+      item->setText(QString::number(concept.GetRatingSpecificity()));
       item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
       table->setItem(row,2,item);
     }
@@ -106,9 +111,9 @@ void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
 
 }
 
-  //Examples' icons
+//Examples' icons
 void ribi::pvdb::QtDisplay::DisplayExamples(
-  const boost::shared_ptr<const pvdb::File> file,
+  const File& file,
   QTableWidget * const table) const
 {
   {
@@ -128,18 +133,18 @@ void ribi::pvdb::QtDisplay::DisplayExamples(
   {
     std::map<cmap::Competency,int> cnts;
 
-    for(const boost::shared_ptr<const cmap::Node> node: AddConst(file->GetConceptMap()->GetNodes()))
+    for(const ribi::cmap::Node node: ribi::cmap::GetNodes(file.GetConceptMap()))
     {
-      for (const boost::shared_ptr<const cmap::Example> example: node->GetConcept()->GetExamples()->Get())
+      for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
       {
-        const auto iter = cnts.find(example->GetCompetency());
+        const auto iter = cnts.find(example.GetCompetency());
         if (iter != cnts.end())
         {
           ++(*iter).second;
         }
         else
         {
-          const cmap::Competency competency = example->GetCompetency();
+          const cmap::Competency competency = example.GetCompetency();
           cnts.insert(std::make_pair(competency,1));
         }
       }
@@ -173,31 +178,35 @@ void ribi::pvdb::QtDisplay::DisplayExamples(
 }
 
 void ribi::pvdb::QtDisplay::DisplayValues(
-  const boost::shared_ptr<const pvdb::File> file,
+  const File& file,
   QTableWidget * const table) const
 {
-  std::vector<boost::shared_ptr<const cmap::Node> > all_nodes = AddConst(file->GetConceptMap()->GetNodes());
+  auto g = file.GetConceptMap();
   #ifndef NDEBUG
-  const int all_sz = static_cast<int>(all_nodes.size());
+  const int all_sz = static_cast<int>(boost::num_vertices(g));
   #endif
 
-  all_nodes.erase(all_nodes.begin());
+  //Remove the focal node
+  boost::clear_vertex(*vertices(g).first, g);
+  boost::remove_vertex(*vertices(g).first, g);
+  //all_nodes.erase(all_nodes.begin());
 
   #ifndef NDEBUG
-  const int sz = static_cast<int>(all_nodes.size());
+  const int sz = static_cast<int>(boost::num_vertices(g));
   assert(sz == all_sz - 1);
   #endif
 
-  const std::vector<boost::shared_ptr<const cmap::Node> > nodes = all_nodes;
+  std::vector<ribi::cmap::Node> all_nodes = ribi::cmap::GetNodes(g);
+  const std::vector<ribi::cmap::Node> nodes = all_nodes;
   const int n_nodes = static_cast<int>(nodes.size());  //Constant 'c'
   //Concreteness experimental: C_e at row = 1, col = 0
   //50.0 * sum_rated_concreteness / n_nodes
   {
     const int sum_rated_concreteness //Constant 'k_c'
       = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const boost::shared_ptr<const cmap::Node>& node)
+      [](int& init, const ribi::cmap::Node& node)
       {
-        return init + node->GetConcept()->GetRatingConcreteness();
+        return init + node.GetConcept().GetRatingConcreteness();
       }
     );
     std::string text = "N/A";
@@ -220,26 +229,29 @@ void ribi::pvdb::QtDisplay::DisplayValues(
   //Concreteness eStimated: C_s at row = 1, col = 1
   //C_s = 100.0 * n_examples / (n_examples + n_nodes + n_relations_not_to_focus)
   {
-    const std::vector<boost::shared_ptr<const cmap::Edge> > edges = AddConst(file->GetConceptMap()->GetEdges());
+    const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
     const int n_nodes_examples = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const boost::shared_ptr<const cmap::Node>& node)
+      [](int& init, const ribi::cmap::Node& node)
       {
-        return init + static_cast<int>(node->GetConcept()->GetExamples()->Get().size());
+        return init + static_cast<int>(node.GetConcept().GetExamples().Get().size());
       }
     );
     const int n_edges_examples = std::accumulate(edges.begin(),edges.end(),0,
-      [](int& init, const boost::shared_ptr<const cmap::Edge>& edge)
+      [](int& init, const ribi::cmap::Edge& edge)
       {
-        return init + static_cast<int>(edge->GetNode()->GetConcept()->GetExamples()->Get().size());
+        return init + static_cast<int>(edge.GetNode().GetConcept().GetExamples().Get().size());
       }
     );
+    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))}; //Constant 'r'
+    /*
     const int n_relations_not_to_focus //Constant 'r'
       = std::count_if(edges.begin(),edges.end(),
-      [](const boost::shared_ptr<const cmap::Edge>& edge)
+      [](const ribi::cmap::Edge& edge)
       {
-        return edge->GetFrom() != 0 && edge->GetTo() != 0; //Not connected to focus question
+        return edge.GetFrom() != 0 && edge.GetTo() != 0; //Not connected to focus question
       }
     );
+    */
     const int n_examples //Constant 'v'
       = n_nodes_examples + n_edges_examples;
     std::string text = "N/A";
@@ -264,9 +276,9 @@ void ribi::pvdb::QtDisplay::DisplayValues(
   {
     const int sum_rated_complexity //Constant 'k_i'
       = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const boost::shared_ptr<const cmap::Node>& node)
+      [](int& init, const ribi::cmap::Node& node)
       {
-        return init + node->GetConcept()->GetRatingComplexity();
+        return init + node.GetConcept().GetRatingComplexity();
       }
     );
     std::string text = "N/A";
@@ -289,14 +301,17 @@ void ribi::pvdb::QtDisplay::DisplayValues(
   //compleXity eStimated: X_s at row = 0, col = 1
   //x_s = ((2*n_relations_not_to_focus)/(n_nodes*(n_nodes-1))))^0.25*100%
   {
-    const std::vector<boost::shared_ptr<const cmap::Edge> > edges = AddConst(file->GetConceptMap()->GetEdges());
+    const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
+    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))}; //Constant 'r'
+    /*
     const int n_relations_not_to_focus //Constant 'r'
       = std::count_if(edges.begin(),edges.end(),
-      [](const boost::shared_ptr<const cmap::Edge>& edge)
+      [](const ribi::cmap::Edge& edge)
       {
-        return edge->GetFrom() != 0 && edge->GetTo() != 0; //Not connected to focus question
+        return edge.GetFrom() != 0 && edge.GetTo() != 0; //Not connected to focus question
       }
     );
+    */
     std::string text = "N/A";
     if (n_nodes > 1)
     {
@@ -322,9 +337,9 @@ void ribi::pvdb::QtDisplay::DisplayValues(
   {
     const int sum_rated_specificity //Constant 'k_s'
       = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const boost::shared_ptr<const cmap::Node>& node)
+      [](int& init, const ribi::cmap::Node& node)
       {
-        return init + node->GetConcept()->GetRatingSpecificity();
+        return init + node.GetConcept().GetRatingSpecificity();
       }
     );
     std::string text = "N/A";
@@ -351,11 +366,11 @@ void ribi::pvdb::QtDisplay::DisplayValues(
   {
     std::map<cmap::Competency,int> m;
     //Tally the competencies
-    for (const boost::shared_ptr<const cmap::Node>& node: nodes)
+    for (const ribi::cmap::Node& node: nodes)
     {
-      for (const boost::shared_ptr<const cmap::Example> example: node->GetConcept()->GetExamples()->Get())
+      for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
       {
-        const cmap::Competency competency = example->GetCompetency();
+        const cmap::Competency competency = example.GetCompetency();
         const auto iter = m.find(competency);
         if (iter != m.end())
         {

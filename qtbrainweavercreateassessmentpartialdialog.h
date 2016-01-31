@@ -25,9 +25,10 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
 #include <QDialog>
 #include "brainweaverfwd.h"
+#include "brainweaverfile.h"
 #pragma GCC diagnostic pop
 
 namespace Ui {
@@ -44,7 +45,7 @@ class QtPvdbCreateAssessmentPartialDialog : public QDialog
     
   public:
   explicit QtPvdbCreateAssessmentPartialDialog(
-    const boost::shared_ptr<pvdb::File> file,
+    const File file,
     QWidget* parent = 0);
   QtPvdbCreateAssessmentPartialDialog(const QtPvdbCreateAssessmentPartialDialog&) = delete;
   QtPvdbCreateAssessmentPartialDialog& operator=(const QtPvdbCreateAssessmentPartialDialog&) = delete;
@@ -58,7 +59,7 @@ class QtPvdbCreateAssessmentPartialDialog : public QDialog
 
   private:
   Ui::QtPvdbCreateAssessmentPartialDialog *ui;
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 };
 
 } //~namespace pvdb

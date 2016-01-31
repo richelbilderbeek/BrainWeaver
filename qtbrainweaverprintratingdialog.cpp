@@ -50,7 +50,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbPrintRatingDialog::QtPvdbPrintRatingDialog(
-  const boost::shared_ptr<pvdb::File>& file,
+  const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbPrintRatingDialog),
@@ -58,19 +58,19 @@ ribi::pvdb::QtPvdbPrintRatingDialog::QtPvdbPrintRatingDialog(
     m_widget(new cmap::QtConceptMap)
 {
   ui->setupUi(this);    
-  m_widget->SetConceptMap(file->GetConceptMap());
+  m_widget->SetConceptMap(file.GetConceptMap());
   assert(m_file);
   ui->label_focal_question->setText(
     ("FOCUSVRAAG: "
-    + m_file->GetQuestion()).c_str()
+    + m_file.GetQuestion()).c_str()
   );
   ui->label_student_name->setText(
     ("VAN: "
-      + m_file->GetStudentName()).c_str()
+      + m_file.GetStudentName()).c_str()
   );
   ui->label_assessor_name->setText(
     ("ASSESSOR: "
-      + m_file->GetAssessorName()).c_str()
+      + m_file.GetAssessorName()).c_str()
   );
 
   {
@@ -192,9 +192,9 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   //Concept map
   {
     //const boost::shared_ptr<ribi::cmap::ConceptMap> copy_concept_map
-    //  = m_file->GetConceptMap();
+    //  = m_file.GetConceptMap();
     //const boost::shared_ptr<ribi::cmap::ConceptMap> copy_concept_map
-    //  = ribi::cmap::ConceptMapFactory::DeepCopy(m_file->GetConceptMap()); //2013-05-31 REJECT DEEP COPIES
+    //  = ribi::cmap::ConceptMapFactory::DeepCopy(m_file.GetConceptMap()); //2013-05-31 REJECT DEEP COPIES
     //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -207,13 +207,13 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   {
     assert(ui->widget_concept_map_as_text->layout());
     std::string text;
-    const int n_nodes = static_cast<int>(m_file->GetConceptMap()->GetNodes().size());
+    const int n_nodes = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
-      const auto node = m_file->GetConceptMap()->GetNodes().at(node_index);
+      const auto node = m_GetNodes(file.GetConceptMap()).at(node_index);
       assert(node);
       cmap::QtConceptMapRatedConceptDialog * const widget
-        = new cmap::QtConceptMapRatedConceptDialog(m_file->GetConceptMap(),node);
+        = new cmap::QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
       assert(widget);
       ui->widget_concept_map_as_text->layout()->addWidget(widget);
     }
@@ -223,7 +223,7 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   assert(m_file);
   pvdb::QtDisplay().DisplayRatedConcepts(*m_file,this->GetTableConcepts());
   {
-    const int sz = static_cast<int>(m_file->GetConceptMap()->GetNodes().size());
+    const int sz = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
   }
 

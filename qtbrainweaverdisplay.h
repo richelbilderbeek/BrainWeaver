@@ -40,9 +40,9 @@ struct QtDisplay
 {
   QtDisplay();
 
-  void DisplayRatedConcepts(const pvdb::File& file,QTableWidget * const table) const;
-  void DisplayExamples(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table) const;
-  void DisplayValues(const boost::shared_ptr<const pvdb::File> file,QTableWidget * const table) const;
+  void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
+  void DisplayExamples(const File& file, QTableWidget * const table) const;
+  void DisplayValues(const File& file, QTableWidget * const table) const;
 
   private:
 

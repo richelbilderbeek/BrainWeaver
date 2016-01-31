@@ -186,9 +186,9 @@ ribi::pvdb::File ribi::pvdb::File::FromXml(const std::string &s)
     f.m_version = ribi::xml::StripXmlTag(v[0]);
   }
 
-  //assert( (!f->GetConceptMap() || !f->GetConceptMap()->GetNodes().empty() ) //TODO RJCB: Put back in
+  //assert( (!f->GetConceptMap() || !f->GetConceptMap().GetNodes().empty() ) //TODO RJCB: Put back in
   //  && "Either a file has no concept map or it has at least one node"); //TODO RJCB: Put back in
-  //assert( (!f->GetConceptMap() || f->GetConceptMap()->FindCenterNode() ) //TODO RJCB: Put back in
+  //assert( (!f->GetConceptMap() || f->GetConceptMap().FindCenterNode() ) //TODO RJCB: Put back in
   //  && "Either a file has no concept map or the first node in a file's ConceptMap is be a CenterNode"); //TODO RJCB: Put back in
 
   return f;
@@ -265,9 +265,9 @@ ribi::pvdb::File ribi::pvdb::File::Load(const std::string &filename)
 
   File file = ribi::pvdb::File::FromXml(xml);
 
-  //assert( (!file->GetConceptMap() || !file->GetConceptMap()->GetNodes().empty() ) //TODO RJCB: Put back in
+  //assert( (!file.GetConceptMap() || !GetNodes(file.GetConceptMap()).empty() ) //TODO RJCB: Put back in
   //  && "Either a file has no concept map or it has at least one node"); //TODO RJCB: Put back in
-  //assert( (!file->GetConceptMap() || file->GetConceptMap()->FindCenterNode()) //TODO RJCB: Put back in
+  //assert( (!file.GetConceptMap() || file.GetConceptMap().FindCenterNode()) //TODO RJCB: Put back in
   //  && "Either a file has no concept map or the file's ConceptMap has a CenterNode"); //TODO RJCB: Put back in
 
   return file;

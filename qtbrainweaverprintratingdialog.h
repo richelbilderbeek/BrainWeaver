@@ -50,7 +50,7 @@ class QtPvdbPrintRatingDialog : public ribi::QtHideAndShowDialog
 public:
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   explicit QtPvdbPrintRatingDialog(
-    const boost::shared_ptr<pvdb::File>& file,
+    const File& file,
     QWidget *parent = 0);
   QtPvdbPrintRatingDialog(const QtPvdbPrintRatingDialog&) = delete;
   QtPvdbPrintRatingDialog& operator=(const QtPvdbPrintRatingDialog&) = delete;
@@ -72,7 +72,7 @@ private:
   Ui::QtPvdbPrintRatingDialog *ui;
 
   ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
-  const boost::shared_ptr<pvdb::File> m_file;
+  const File m_file;
 
   cmap::QtConceptMap * const m_widget;
 };

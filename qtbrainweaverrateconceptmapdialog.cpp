@@ -50,7 +50,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbRateConceptMapDialog::QtPvdbRateConceptMapDialog(
-  boost::shared_ptr<pvdb::File> file,
+  File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
   ui(new Ui::QtPvdbRateConceptMapDialog),
@@ -58,12 +58,12 @@ ribi::pvdb::QtPvdbRateConceptMapDialog::QtPvdbRateConceptMapDialog(
   m_concept_map(new cmap::QtConceptMap)
 {
   ui->setupUi(this);
-  m_concept_map->SetConceptMap(file->GetConceptMap());
+  m_concept_map->SetConceptMap(file.GetConceptMap());
   #ifndef NDEBUG
   Test();
   assert(file);
   #endif
-  //boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = m_file->GetConceptMap();
+  //boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = m_file.GetConceptMap();
   //assert(concept_map);
 
   {
@@ -74,7 +74,7 @@ ribi::pvdb::QtPvdbRateConceptMapDialog::QtPvdbRateConceptMapDialog(
   }
 
   {
-    const std::string s = "Naam student: " + m_file->GetStudentName();
+    const std::string s = "Naam student: " + m_file.GetStudentName();
     ui->label_name->setText(s.c_str());
   }
 
@@ -125,7 +125,7 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtPvdbRateConceptMapDialog::on_button_next_clicked()
 {
-  assert(m_concept_map->GetConceptMap() == m_file->GetConceptMap());
+  assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
   QtPvdbRatingDialog d(m_file);
   ShowChild(&d);
   if (d.GetBackToMenu())
@@ -174,22 +174,22 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Test() noexcept
     {
       const auto file = v[i];
       assert(file);
-      assert( (file->GetConceptMap() || !file->GetConceptMap() )
+      assert( (file.GetConceptMap() || !file.GetConceptMap() )
         && "A file may or may not have an initialized concept map");
-      if (!file->GetConceptMap())
+      if (!file.GetConceptMap())
       {
         //Cannot rate a null concept map
         continue;
       }
       QtPvdbRateConceptMapDialog d(file);
       assert(d.GetWidget());
-      assert(( file->GetConceptMap() &&  d.GetWidget()->GetConceptMap())
-          || (!file->GetConceptMap() && !d.GetWidget()->GetConceptMap()));
+      assert(( file.GetConceptMap() &&  d.GetWidget()->GetConceptMap())
+          || (!file.GetConceptMap() && !d.GetWidget()->GetConceptMap()));
       assert(
-           !file->GetConceptMap()
+           !file.GetConceptMap()
 
         || ribi::cmap::HasSameContent(
-             *file->GetConceptMap(),
+             *file.GetConceptMap(),
              *d.GetWidget()->GetConceptMap()
            )
         );
@@ -234,12 +234,12 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Save(const std::string& filename)
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
-  assert(m_concept_map->GetConceptMap() == m_file->GetConceptMap());
+  assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
   //const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = GetWidget()->GetConceptMap();
   //assert(concept_map);
-  //m_file->SetConceptMap(concept_map);
-  //assert(IsEqual(*m_file->GetConceptMap(),*GetWidget()->GetConceptMap()));
-  m_file->Save(filename);
+  //m_file.SetConceptMap(concept_map);
+  //assert(IsEqual(*m_file.GetConceptMap(),*GetWidget()->GetConceptMap()));
+  m_file.Save(filename);
 }
 
 void ribi::pvdb::QtPvdbRateConceptMapDialog::on_button_save_clicked()

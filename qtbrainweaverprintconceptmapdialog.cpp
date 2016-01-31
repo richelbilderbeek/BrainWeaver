@@ -46,7 +46,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbPrintConceptMapDialog::QtPvdbPrintConceptMapDialog(
-  const boost::shared_ptr<pvdb::File>& file,
+  const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbPrintConceptMapDialog),
@@ -54,7 +54,7 @@ ribi::pvdb::QtPvdbPrintConceptMapDialog::QtPvdbPrintConceptMapDialog(
     m_widget(new cmap::QtConceptMap)
 {
   ui->setupUi(this);
-  m_widget->SetConceptMap(file->GetConceptMap());
+  m_widget->SetConceptMap(file.GetConceptMap());
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
@@ -67,7 +67,7 @@ ribi::pvdb::QtPvdbPrintConceptMapDialog::QtPvdbPrintConceptMapDialog(
 
   ui->label_student_name->setText(
     ("Concept map van "
-      + m_file->GetStudentName()).c_str()
+      + m_file.GetStudentName()).c_str()
   );
   {
     std::time_t my_time;
@@ -210,8 +210,8 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
     #ifdef NOT_HERE_20141224
     assert(m_widget->scene()->items().count()
       >= boost::numeric_cast<int>(
-        m_widget->GetConceptMap()->GetNodes().size()
-        + m_widget->GetConceptMap()->GetEdges().size()));
+        m_widget->GetConceptMap().GetNodes().size()
+        + m_widget->GetConceptMap().GetEdges().size()));
 
     #endif // NOT_HERE_20141224
   }
@@ -220,14 +220,14 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
 
     assert(ui->frame_concept_map_as_text->layout());
     std::string text;
-    const int n_nodes = static_cast<int>(m_file->GetConceptMap()->GetNodes().size());
+    const int n_nodes = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
       using namespace cmap;
-      const Node node = m_file->GetConceptMap()->GetNodes().at(node_index);
+      const Node node = m_GetNodes(file.GetConceptMap()).at(node_index);
       assert(node);
       QtConceptMapRatedConceptDialog * const widget
-        = new QtConceptMapRatedConceptDialog(m_file->GetConceptMap(),node);
+        = new QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
       assert(widget);
       widget->HideRating();
       ui->frame_concept_map_as_text->layout()->addWidget(widget);

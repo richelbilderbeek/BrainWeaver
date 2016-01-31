@@ -47,7 +47,7 @@ class QtPvdbRatingDialog : public ribi::QtHideAndShowDialog
   Q_OBJECT
 
   public:
-  explicit QtPvdbRatingDialog(const boost::shared_ptr<pvdb::File> file, QWidget* parent = 0);
+  explicit QtPvdbRatingDialog(const File file, QWidget* parent = 0);
   QtPvdbRatingDialog(const QtPvdbRatingDialog&) = delete;
   QtPvdbRatingDialog& operator=(const QtPvdbRatingDialog&) = delete;
   ~QtPvdbRatingDialog() noexcept;
@@ -65,7 +65,7 @@ class QtPvdbRatingDialog : public ribi::QtHideAndShowDialog
 private:
   Ui::QtPvdbRatingDialog *ui;
   bool m_back_to_menu;
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   void Save(const std::string& filename) const;
 };

@@ -78,7 +78,7 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
 }
 
 ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
-  const pvdb::File& file,
+  const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbConceptMapDialog),
@@ -231,15 +231,15 @@ void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()
   //Do random stuff
   assert(m_file);
   assert(m_file.GetConceptMap());
-  assert(!m_file.GetConceptMap()->GetNodes().empty());
-  assert(m_file.GetConceptMap()->FindCenterNode()
+  assert(!m_GetNodes(file.GetConceptMap()).empty());
+  assert(m_file.GetConceptMap().FindCenterNode()
     && "A file's ConceptMap must have a CenterNode");
 
-  const int n_edges_before = boost::numeric_cast<int>(m_file.GetConceptMap()->GetEdges().size());
-  const int n_nodes_before = boost::numeric_cast<int>(m_file.GetConceptMap()->GetNodes().size());
+  const int n_edges_before = boost::numeric_cast<int>(m_GetEdges(file.GetConceptMap()).size());
+  const int n_nodes_before = boost::numeric_cast<int>(m_GetNodes(file.GetConceptMap()).size());
   this->GetWidget()->DoRandomStuff();
-  const int n_edges_after = boost::numeric_cast<int>(m_file.GetConceptMap()->GetEdges().size());
-  const int n_nodes_after = boost::numeric_cast<int>(m_file.GetConceptMap()->GetNodes().size());
+  const int n_edges_after = boost::numeric_cast<int>(m_GetEdges(file.GetConceptMap()).size());
+  const int n_nodes_after = boost::numeric_cast<int>(m_GetNodes(file.GetConceptMap()).size());
   assert(n_edges_after > n_edges_before);
   assert(n_nodes_after > n_nodes_before);
   #endif // NOT_NOW_20141224
@@ -314,7 +314,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::OnConceptMapItemRequestsEdit(cmap::QtCo
     assert(this);
     assert(item);
     assert(item->GetNode());
-    cmap::QtConceptMapConceptEditDialog d(item->GetNode()->GetConcept());
+    cmap::QtConceptMapConceptEditDialog d(item->GetNode().GetConcept());
     this->ShowChild(&d);
   }
   //item->GetConcept()->m_signal_examples_changed(item->GetConcept().get()); //NEW 2013-01-08 21:40

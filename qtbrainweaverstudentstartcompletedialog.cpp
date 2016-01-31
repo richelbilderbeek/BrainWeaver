@@ -38,7 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbStudentStartCompleteDialog::QtPvdbStudentStartCompleteDialog(
-  const boost::shared_ptr<pvdb::File> file,
+  const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbStudentStartCompleteDialog),
@@ -65,14 +65,14 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
   assert(m_file);
-  assert((m_file->GetCluster() || !m_file->GetCluster())
+  assert((m_file.GetCluster() || !m_file.GetCluster())
     && "If the file has no cluster, the cluster dialog creates it,"
        "if and only if there is no concept map");
   QtPvdbClusterDialog d(m_file);
 
-  if (!m_file->GetConceptMap())
+  if (!m_file.GetConceptMap())
   {
-    assert(m_file->GetCluster()
+    assert(m_file.GetCluster()
       && "If the file has no cluster, the cluster dialog creates it,"
          "if and only if there is no concept map");
   }
@@ -116,6 +116,6 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::Save()
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
-  m_file->Save(filename);
+  m_file.Save(filename);
   { const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }

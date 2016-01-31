@@ -108,9 +108,9 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 3;
     assert(index < static_cast<int>(FileFactory().GetNumberOfTests()));
-    const boost::shared_ptr<pvdb::File> file(FileFactory().GetTests().at(index));
+    const File file(FileFactory().GetTests().at(index));
     assert(file);
-    assert(file->GetCluster());
+    assert(file.GetCluster());
     QtHideAndShowDialog* p(new QtPvdbClusterDialog(file));
     assert(p);
     v.push_back(p);
@@ -147,7 +147,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 4;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    const boost::shared_ptr<pvdb::File> file = FileFactory().GetTests().at(index);
+    const File file = FileFactory().GetTests().at(index);
     assert(file);
     QtHideAndShowDialog* p(new QtPvdbPrintConceptMapDialog(file));
     assert(p);
@@ -156,7 +156,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 4;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    const boost::shared_ptr<pvdb::File> file = FileFactory().GetTests().at(index);
+    const File file = FileFactory().GetTests().at(index);
     assert(file);
     QtHideAndShowDialog* p(new QtPvdbPrintConceptMapDialog(file));
     assert(p);

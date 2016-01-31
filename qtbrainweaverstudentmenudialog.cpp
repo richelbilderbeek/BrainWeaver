@@ -35,16 +35,16 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverstudentmenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbStudentMenuDialog::QtPvdbStudentMenuDialog(const boost::shared_ptr<pvdb::File> file, QWidget* parent)
+ribi::pvdb::QtPvdbStudentMenuDialog::QtPvdbStudentMenuDialog(const File file, QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtPvdbStudentMenuDialog),
     m_file(file)
 {
   ui->setupUi(this);
   assert(m_file);
-  if (!m_file->GetStudentName().empty())
+  if (!m_file.GetStudentName().empty())
   {
-    SetName(m_file->GetStudentName());
+    SetName(m_file.GetStudentName());
   }
   on_edit_name_textChanged(ui->edit_name->text());
 }
@@ -81,7 +81,7 @@ void ribi::pvdb::QtPvdbStudentMenuDialog::on_button_quit_clicked()
 
 void ribi::pvdb::QtPvdbStudentMenuDialog::on_button_start_clicked()
 {
-  m_file->SetStudentName(ui->edit_name->text().toStdString());
+  m_file.SetStudentName(ui->edit_name->text().toStdString());
   QtPvdbStudentStartCompleteDialog d(m_file);
   this->ShowChild(&d);
 }
@@ -126,12 +126,12 @@ void ribi::pvdb::QtPvdbStudentMenuDialog::on_button_save_clicked()
 
 void ribi::pvdb::QtPvdbStudentMenuDialog::Save(const std::string& filename) const
 {
-  m_file->SetStudentName(ui->edit_name->text().toStdString());
+  m_file.SetStudentName(ui->edit_name->text().toStdString());
 
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
-  m_file->Save(filename);
+  m_file.Save(filename);
   //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }
 

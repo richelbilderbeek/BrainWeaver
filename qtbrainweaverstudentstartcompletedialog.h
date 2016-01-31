@@ -41,7 +41,7 @@ class QtPvdbStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
   Q_OBJECT
     
   public:
-  explicit QtPvdbStudentStartCompleteDialog(const boost::shared_ptr<pvdb::File> file, QWidget* parent = 0);
+  explicit QtPvdbStudentStartCompleteDialog(const File file, QWidget* parent = 0);
   QtPvdbStudentStartCompleteDialog(const QtPvdbStudentStartCompleteDialog&) = delete;
   QtPvdbStudentStartCompleteDialog& operator=(const QtPvdbStudentStartCompleteDialog&) = delete;
   ~QtPvdbStudentStartCompleteDialog() noexcept;
@@ -61,7 +61,7 @@ class QtPvdbStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
   ///Does the dialog want to go back to the student menu?
   bool m_back_to_menu;
 
-  boost::shared_ptr<pvdb::File> m_file;
+  File m_file;
 
   ///Save to file
   void Save();

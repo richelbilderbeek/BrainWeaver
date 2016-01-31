@@ -93,10 +93,10 @@ void ribi::pvdb::QtPvdbCreateAssessmentCompleteDialog::Save(const std::string& f
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
   const std::string question = ui->edit->text().toStdString();
-  const boost::shared_ptr<pvdb::File> file(new pvdb::File);
-  file->SetQuestion(question);
-  assert(file->GetQuestion() == question);
-  file->Save(filename);
+  File file;
+  file.SetQuestion(question);
+  assert(file.GetQuestion() == question);
+  file.Save(filename);
 }
 
 void ribi::pvdb::QtPvdbCreateAssessmentCompleteDialog::SetQuestion(const std::string& question)

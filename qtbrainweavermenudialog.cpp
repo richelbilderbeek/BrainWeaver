@@ -111,7 +111,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_assessor_clicked() noexcept
 void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
 {
   //Obtain an empty file
-  const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().Create();
+  File file;
   //Use HeteromorphousTestConceptMap[17] to check for subconcept maps with many examples
   //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
   //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
@@ -119,11 +119,11 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
     const boost::shared_ptr<cmap::ConceptMap> concept_map
       = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
     assert(concept_map);
-    assert(!file->GetConceptMap() && "Can only set a concept map once");
-    file->SetConceptMap(concept_map);
+    assert(!file.GetConceptMap() && "Can only set a concept map once");
+    file.SetConceptMap(concept_map);
   }
   //Obtain a random sub-concept-map
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > concept_maps = file->GetConceptMap()->CreateSubs();
+  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > concept_maps = file.GetConceptMap().CreateSubs();
   //Display this random concept map
   const int index = std::rand() % concept_maps.size();
   const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = concept_maps[ index ];
@@ -137,13 +137,13 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_map_clicked() noexcept
 {
-  const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().Create();
+  const File file = pvdb::FileFactory().Create();
   //Use HeteromorphousTestConceptMap[17] to check for subconcept maps with many examples
   //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
   //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
   const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
     = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
-  file->SetConceptMap(concept_map);
+  file.SetConceptMap(concept_map);
   QtPvdbRateConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
@@ -162,7 +162,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rating_clicked() noexcept
 {
   const int test = 4;
   assert(test < FileFactory().GetNumberOfTests());
-  const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().GetTests().at(test);
+  const File file = pvdb::FileFactory().GetTests().at(test);
   assert(file);
   QtPvdbRatingDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
@@ -183,7 +183,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked() noexcept
     const std::string filename = v[0].toStdString();
     try
     {
-      const boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
+      const File file(pvdb::File::Load(filename));
       assert(file);
       QtPvdbStudentMenuDialog d(file);
       if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); } //For testing
@@ -198,26 +198,26 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked() noexcept
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_test_cluster_clicked() noexcept
 {
-  const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().Create();
-  assert(!file->GetCluster());
-  assert(!file->GetConceptMap());
+  const File file = pvdb::FileFactory().Create();
+  assert(!file.GetCluster());
+  assert(!file.GetConceptMap());
   {
     const std::string question = "qtvdbmenudialog.cpp 79?";
     boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(File::CreateConceptMap(question));
     assert(concept_map);
-    assert(!file->GetConceptMap() && "Can only set concept map once");
-    file->SetQuestion(question);
-    file->SetConceptMap(concept_map);
+    assert(!file.GetConceptMap() && "Can only set concept map once");
+    file.SetQuestion(question);
+    file.SetConceptMap(concept_map);
 
-    assert(!file->GetCluster());
-    assert( file->GetConceptMap());
+    assert(!file.GetCluster());
+    assert( file.GetConceptMap());
 
-    assert(file->GetQuestion() == question);
+    assert(file.GetQuestion() == question);
   }
   QtPvdbClusterDialog d(file);
 
-  assert(!file->GetCluster());
-  assert( file->GetConceptMap());
+  assert(!file.GetCluster());
+  assert( file.GetConceptMap());
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 
@@ -338,9 +338,9 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     //2) Load the assessor file (as a student)
     //3) Fill in a name
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName().empty());
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName().empty());
       QtPvdbStudentMenuDialog d(file);
       d.SetName(name);
       assert(d.GetName() == name);
@@ -350,31 +350,31 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     //5) Save
     #ifdef NOT_NOW_20141142
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
       QtPvdbConceptMapDialog d(file);
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(file->GetConceptMap()->GetNodes().size() == 1);
-      assert(file->GetConceptMap()->GetEdges().empty());
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(GetNodes(file.GetConceptMap()).size() == 1);
+      assert(GetEdges(file.GetConceptMap()).empty());
       d.DoRandomStuff();
-      assert(file->GetConceptMap()->GetNodes().size() > 1);
-      assert(!file->GetConceptMap()->GetEdges().empty());
+      assert(GetNodes(file.GetConceptMap()).size() > 1);
+      assert(!GetEdges(file.GetConceptMap()).empty());
       d.Save(filename);
     }
     //6) Test if clustering is disabled
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(file->GetConceptMap()->GetNodes().size() > 1);
-      assert(!file->GetConceptMap()->GetEdges().empty());
-      assert((file->GetCluster() || !file->GetCluster())
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(GetNodes(file.GetConceptMap()).size() > 1);
+      assert(!GetEdges(file.GetConceptMap()).empty());
+      assert((file.GetCluster() || !file.GetCluster())
         && "If the file has no cluster, the cluster dialog creates it,"
         && "if no concept map was present");
       QtPvdbClusterDialog d(file);
-      if (file->GetConceptMap() && !file->GetConceptMap())
+      if (file.GetConceptMap() && !file.GetConceptMap())
       {
         assert(d.GetWidget());
         assert(!d.GetWidget()->isEnabled()
@@ -405,9 +405,9 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     //2) Load the assessor file (as a student)
     //3) Fill in a name
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName().empty());
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName().empty());
       QtPvdbStudentMenuDialog d(file);
       d.SetName(name);
       assert(d.GetName() == name);
@@ -415,59 +415,59 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     }
     //4) Start with clustering
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert((file->GetCluster() || !file->GetCluster())
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert((file.GetCluster() || !file.GetCluster())
         && "If the file has no cluster, the cluster dialog creates it,"
            "if and only if there is no concept map");
       QtPvdbClusterDialog d(file);
-      if (!file->GetConceptMap())
+      if (!file.GetConceptMap())
       {
-        assert(file->GetCluster() && "the cluster dialog used an existing or created a cluster");
+        assert(file.GetCluster() && "the cluster dialog used an existing or created a cluster");
       }
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(!file->GetConceptMap());
-      if (file->GetCluster())
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(!file.GetConceptMap());
+      if (file.GetCluster())
       {
         assert(d.GetWidget());
         d.DoRandomStuff();
       }
-      assert(!file->GetConceptMap());
+      assert(!file.GetConceptMap());
       d.Save(filename);
     }
     //5) Start with concept map
     //6) Save
     #ifdef NOT_NOW_20141142
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(!file->GetConceptMap());
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(!file.GetConceptMap());
       QtPvdbConceptMapDialog d(file);
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(file->GetConceptMap());
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(file.GetConceptMap());
       d.DoRandomStuff();
-      assert(file->GetConceptMap()->GetNodes().size() > 1);
-      assert(!file->GetConceptMap()->GetEdges().empty());
+      assert(GetNodes(file.GetConceptMap()).size() > 1);
+      assert(!GetEdges(file.GetConceptMap()).empty());
       d.Save(filename);
     }
     //7) Test if clustering is disabled
     {
-      boost::shared_ptr<pvdb::File> file(pvdb::File::Load(filename));
-      assert(file->GetQuestion() == question);
-      assert(file->GetStudentName() == name);
-      assert(file->GetConceptMap()->GetNodes().size() > 1);
-      assert(!file->GetConceptMap()->GetEdges().empty());
-      assert((file->GetCluster() || !file->GetCluster())
+      File file(pvdb::File::Load(filename));
+      assert(file.GetQuestion() == question);
+      assert(file.GetStudentName() == name);
+      assert(GetNodes(file.GetConceptMap()).size() > 1);
+      assert(!GetEdges(file.GetConceptMap()).empty());
+      assert((file.GetCluster() || !file.GetCluster())
         && "If the file has no cluster, the cluster dialog creates it,"
            "if and only if there is no concept map");
       QtPvdbClusterDialog d(file);
-      if (!file->GetConceptMap())
+      if (!file.GetConceptMap())
       {
-        assert(file->GetCluster() && "the cluster dialog used an existing or created a cluster");
+        assert(file.GetCluster() && "the cluster dialog used an existing or created a cluster");
         assert(d.GetWidget());
         assert(!d.GetWidget()->isEnabled()
           && "Cluster widget should be disabled for a file with a filled in ConceptMap");
@@ -516,16 +516,16 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_create_test_files_clicked() noexcep
     }
   }
   //Obtain the artificial concept maps
-  const std::vector<boost::shared_ptr<pvdb::File> > v = pvdb::FileFactory().GetTests();
+  const std::vector<File > v = pvdb::FileFactory().GetTests();
   const int sz = boost::numeric_cast<int>(v.size());
   for(int i=0; i!=sz; ++i)
   {
-    boost::shared_ptr<pvdb::File> file = v[i];
+    File file = v[i];
     const std::string s
       = boost::lexical_cast<std::string>(i + 5)
       + "."
       + pvdb::File::GetFilenameExtension();
-    file->Save(s);
+    file.Save(s);
   }
 }
 
@@ -541,7 +541,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcep
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
-  const boost::shared_ptr<pvdb::File> file = pvdb::File::Load(filename);
+  const File file = pvdb::File::Load(filename);
   assert(file);
   QtPvdbPrintConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
@@ -552,7 +552,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
-  const boost::shared_ptr<pvdb::File> file = pvdb::File::Load(filename);
+  const File file = pvdb::File::Load(filename);
   assert(file);
   QtPvdbPrintRatingDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
@@ -584,7 +584,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptmap_clicked()
 {
   const int test = 4;
   assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
-  const boost::shared_ptr<pvdb::File> file = pvdb::FileFactory().GetTests().at(test);
+  const File file = pvdb::FileFactory().GetTests().at(test);
   assert(file);
   QtPvdbConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }

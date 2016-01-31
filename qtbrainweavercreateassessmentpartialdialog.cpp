@@ -32,7 +32,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::QtPvdbCreateAssessmentPartialDialog(
-  const boost::shared_ptr<pvdb::File> file, QWidget* parent)
+  const File file, QWidget* parent)
   : QDialog(parent),
     ui(new Ui::QtPvdbCreateAssessmentPartialDialog),
     m_file(file)
@@ -41,7 +41,7 @@ ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::QtPvdbCreateAssessmentPartialDi
   assert(!"TODO");
   /*
   {
-    const std::vector<std::string> v = m_file->GetQuestion();
+    const std::vector<std::string> v = m_file.GetQuestion();
     if (v.size() == 4)
     {
       ui->edit_1->setText(v[0].c_str());
