@@ -417,7 +417,7 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
       QtPvdbClusterDialog d(file);
       if (!boost::num_vertices(file.GetConceptMap()))
       {
-        assert(file.GetCluster() && "the cluster dialog used an existing or created a cluster");
+        assert(!file.GetCluster().Empty() && "the cluster dialog used an existing or created a cluster");
       }
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
@@ -556,7 +556,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked() noexcep
 
   const ribi::cmap::ConceptMap concept_map
     = cmap::QtRateConceptTallyDialog::CreateTestConceptMap();
-  boost::shared_ptr<pvdb::QtRateConceptTallyDialog> d(
+  boost::shared_ptr<cmap::QtRateConceptTallyDialog> d(
     new cmap::QtRateConceptTallyDialog(concept_map));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); }
 }

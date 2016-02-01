@@ -171,7 +171,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::resizeEvent(QResizeEvent *)
 void ribi::pvdb::QtPvdbPrintConceptMapDialog::fitConceptMap()
 {
   assert(m_widget);
-  assert(m_widget->GetConceptMap());
+  assert(boost::num_vertices(m_widget->GetConceptMap()) > 0);
   const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
   m_widget->setMinimumHeight(all_items_rect.height() + 2);
   m_widget->fitInView(all_items_rect);
@@ -183,7 +183,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
   //Concept map
   {
     assert(m_widget);
-    assert(m_widget->GetConceptMap());
+    assert(boost::num_vertices(m_widget->GetConceptMap()) > 0);
 
     //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -196,7 +196,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
     };
     #ifndef NDEBUG
     for (const ribi::cmap::QtNode * const qtnode:
-      const_cast<const cmap::QtConceptMap*>(m_widget)->GetQtNodes()
+      ribi::cmap::GetQtNodes(m_widget->GetScene())
     )
     {
       //All QtNodes' their rectangles should be within all_items_rect
@@ -220,12 +220,11 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
 
     assert(ui->frame_concept_map_as_text->layout());
     std::string text;
-    const int n_nodes = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
+    const int n_nodes = static_cast<int>(boost::num_vertices(m_file.GetConceptMap()));
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
       using namespace cmap;
-      const Node node = m_GetNodes(file.GetConceptMap()).at(node_index);
-      assert(node);
+      const Node node = GetNodes(m_file.GetConceptMap()).at(node_index);
       QtConceptMapRatedConceptDialog * const widget
         = new QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
       assert(widget);
@@ -233,5 +232,5 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
       ui->frame_concept_map_as_text->layout()->addWidget(widget);
     }
   }
-    fitConceptMap();
+  fitConceptMap();
 }

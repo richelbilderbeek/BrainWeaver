@@ -231,15 +231,15 @@ void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()
   //Do random stuff
   assert(m_file);
   assert(m_file.GetConceptMap());
-  assert(!m_GetNodes(file.GetConceptMap()).empty());
+  assert(!GetNodes(m_file.GetConceptMap()).empty());
   assert(m_file.GetConceptMap().FindCenterNode()
     && "A file's ConceptMap must have a CenterNode");
 
   const int n_edges_before = boost::numeric_cast<int>(m_GetEdges(file.GetConceptMap()).size());
-  const int n_nodes_before = boost::numeric_cast<int>(m_GetNodes(file.GetConceptMap()).size());
+  const int n_nodes_before = boost::numeric_cast<int>(GetNodes(m_file.GetConceptMap()).size());
   this->GetWidget()->DoRandomStuff();
   const int n_edges_after = boost::numeric_cast<int>(m_GetEdges(file.GetConceptMap()).size());
-  const int n_nodes_after = boost::numeric_cast<int>(m_GetNodes(file.GetConceptMap()).size());
+  const int n_nodes_after = boost::numeric_cast<int>(GetNodes(m_file.GetConceptMap()).size());
   assert(n_edges_after > n_edges_before);
   assert(n_nodes_after > n_nodes_before);
   #endif // NOT_NOW_20141224

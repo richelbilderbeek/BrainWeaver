@@ -325,13 +325,13 @@ void ribi::pvdb::QtPvdbClusterDialog::Test() noexcept
 
         if (!had_cluster && !had_concept_map)
         {
-          assert(file.GetCluster());
+          assert(!file.GetCluster().Empty());
           assert(!boost::num_vertices(file.GetConceptMap()));
           assert(d->ui->button_add->isEnabled());
         }
         if ( had_cluster && !had_concept_map)
         {
-          assert(file.GetCluster());
+          assert(!file.GetCluster().Empty());
           assert(!boost::num_vertices(file.GetConceptMap()));
           assert(d->ui->button_add->isEnabled());
         }

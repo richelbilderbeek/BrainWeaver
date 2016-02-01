@@ -207,10 +207,10 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   {
     assert(ui->widget_concept_map_as_text->layout());
     std::string text;
-    const int n_nodes = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
+    const int n_nodes = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
-      const auto node = m_GetNodes(file.GetConceptMap()).at(node_index);
+      const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
       assert(node);
       cmap::QtConceptMapRatedConceptDialog * const widget
         = new cmap::QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
@@ -223,7 +223,7 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   assert(m_file);
   pvdb::QtDisplay().DisplayRatedConcepts(*m_file,this->GetTableConcepts());
   {
-    const int sz = static_cast<int>(m_GetNodes(file.GetConceptMap()).size());
+    const int sz = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
   }
 

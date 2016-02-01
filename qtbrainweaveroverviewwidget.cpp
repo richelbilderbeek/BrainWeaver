@@ -29,30 +29,30 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QIcon>
 #include <QTimer>
 #include <QWidget>
-#include "qtbrainweaveroverviewwidget.h"
 
-#include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
+#include "brainweaverfile.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmapfactory.h"
-#include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmaprateconcepttallydialognewname.h"
-#include "qtbrainweaverprintconceptmapdialog.h"
-#include "qtbrainweaverprintratingdialog.h"
-#include "qttesteditconceptmapdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
-#include "qtconceptmaprateconceptdialognewname.h"
-#include "qtbrainweaverrateconceptmapdialog.h"
-#include "qtconceptmaprateexamplesdialognewname.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
 #include "qtbrainweavercreateassessmentmenudialog.h"
 #include "qtbrainweavercreateassessmentpartialdialog.h"
-#include "qtbrainweaverratingdialog.h"
 #include "qtbrainweavermenudialog.h"
+#include "qtbrainweaveroverviewwidget.h"
+#include "qtbrainweaverprintconceptmapdialog.h"
+#include "qtbrainweaverprintratingdialog.h"
+#include "qtbrainweaverrateconceptmapdialog.h"
+#include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
 #include "qtbrainweaverstudentstartcompletedialog.h"
+#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmaprateconceptdialognewname.h"
+#include "qtconceptmaprateconcepttallydialognewname.h"
+#include "qtconceptmaprateexamplesdialognewname.h"
+#include "qttesteditconceptmapdialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 
@@ -110,7 +110,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     assert(index < static_cast<int>(FileFactory().GetNumberOfTests()));
     const File file(FileFactory().GetTests().at(index));
     
-    assert(file.GetCluster());
+    assert(!file.GetCluster().Empty());
     QtHideAndShowDialog* p(new QtPvdbClusterDialog(file));
     assert(p);
     v.push_back(p);
@@ -163,20 +163,16 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     v.push_back(p);
   }
   {
-    const int index = 18;
-    assert(index < static_cast<int>(ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().size()));
     const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(index);
+      = ribi::cmap::ConceptMapFactory().GetTest(6);
     assert(boost::num_vertices(concept_map) > 0);
     QtHideAndShowDialog* p(new cmap::QtRateConceptDialog(concept_map));
     assert(p);
     v.push_back(p);
   }
   {
-    const int index = 18;
-    assert(index < static_cast<int>(ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().size()));
     const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(index);
+      = ribi::cmap::ConceptMapFactory().GetTest(6);
     assert(boost::num_vertices(concept_map) > 0);
     QtHideAndShowDialog* p(new cmap::QtRateConceptTallyDialog(concept_map));
     assert(p);
