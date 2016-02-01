@@ -71,7 +71,7 @@ private:
 
   ///The widget requested for a rating of the already supplied sub concept map,
   ///with the focal concept item as the central node
-  void OnRequestRateConceptDialog(const boost::shared_ptr<ribi::cmap::ConceptMap> sub_concept_map);
+  void OnRequestRateConceptDialog(const ribi::cmap::ConceptMap sub_concept_map);
 
   static void Test() noexcept;
 };

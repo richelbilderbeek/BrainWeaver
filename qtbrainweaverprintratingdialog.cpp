@@ -191,9 +191,9 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
 {
   //Concept map
   {
-    //const boost::shared_ptr<ribi::cmap::ConceptMap> copy_concept_map
+    //const ribi::cmap::ConceptMap copy_concept_map
     //  = m_file.GetConceptMap();
-    //const boost::shared_ptr<ribi::cmap::ConceptMap> copy_concept_map
+    //const ribi::cmap::ConceptMap copy_concept_map
     //  = ribi::cmap::ConceptMapFactory::DeepCopy(m_file.GetConceptMap()); //2013-05-31 REJECT DEEP COPIES
     //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

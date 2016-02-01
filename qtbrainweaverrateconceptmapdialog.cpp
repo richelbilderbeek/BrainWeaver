@@ -61,9 +61,9 @@ ribi::pvdb::QtPvdbRateConceptMapDialog::QtPvdbRateConceptMapDialog(
   m_concept_map->SetConceptMap(file.GetConceptMap());
   #ifndef NDEBUG
   Test();
-  assert(file);
+  
   #endif
-  //boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = m_file.GetConceptMap();
+  //ribi::cmap::ConceptMap concept_map = m_file.GetConceptMap();
   //assert(concept_map);
 
   {
@@ -134,7 +134,7 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::on_button_next_clicked()
   }
 }
 
-void ribi::pvdb::QtPvdbRateConceptMapDialog::OnRequestRateConceptDialog(const boost::shared_ptr<ribi::cmap::ConceptMap> sub_concept_map)
+void ribi::pvdb::QtPvdbRateConceptMapDialog::OnRequestRateConceptDialog(const ribi::cmap::ConceptMap sub_concept_map)
 {
   assert(sub_concept_map);
   #ifdef HIDE_PARENT_IDEA_5675869837643987593795
@@ -173,7 +173,7 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Test() noexcept
     for (int i=0; i!=sz; ++i)
     {
       const auto file = v[i];
-      assert(file);
+      
       assert( (file.GetConceptMap() || !file.GetConceptMap() )
         && "A file may or may not have an initialized concept map");
       if (!file.GetConceptMap())
@@ -235,7 +235,7 @@ void ribi::pvdb::QtPvdbRateConceptMapDialog::Save(const std::string& filename)
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
     && "File must have correct file extension name");
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
-  //const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = GetWidget()->GetConceptMap();
+  //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
   //assert(concept_map);
   //m_file.SetConceptMap(concept_map);
   //assert(IsEqual(*m_file.GetConceptMap(),*GetWidget()->GetConceptMap()));

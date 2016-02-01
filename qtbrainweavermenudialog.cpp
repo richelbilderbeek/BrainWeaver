@@ -116,17 +116,17 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
   //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
   //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
   {
-    const boost::shared_ptr<cmap::ConceptMap> concept_map
+    const ribi::cmap::ConceptMap concept_map
       = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
     assert(concept_map);
     assert(!file.GetConceptMap() && "Can only set a concept map once");
     file.SetConceptMap(concept_map);
   }
   //Obtain a random sub-concept-map
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > concept_maps = file.GetConceptMap().CreateSubs();
+  const std::vector<ribi::cmap::ConceptMap> concept_maps = file.GetConceptMap().CreateSubs();
   //Display this random concept map
   const int index = std::rand() % concept_maps.size();
-  const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = concept_maps[ index ];
+  const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
   assert( (!concept_map || concept_map->IsValid())
     && "Expect no or a valid concept map");
   //Create and show the dialog
@@ -141,7 +141,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_map_clicked() noexcept
   //Use HeteromorphousTestConceptMap[17] to check for subconcept maps with many examples
   //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
   //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
-  const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
+  const ribi::cmap::ConceptMap concept_map
     = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
   file.SetConceptMap(concept_map);
   QtPvdbRateConceptMapDialog d(file);
@@ -153,7 +153,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_examples_clicked() noexcept
   using namespace cmap;
   const int index = 2;
   assert(index < ConceptFactory().GetNumberOfTests());
-  const boost::shared_ptr<Concept> concept = ConceptFactory().GetTests().at(index);
+  const ribi::cmap::Concept concept = ConceptFactory().GetTests().at(index);
   boost::shared_ptr<QtRateExamplesDialogNewName> d(new QtRateExamplesDialogNewName(concept));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); } //For testing
 }
@@ -163,7 +163,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rating_clicked() noexcept
   const int test = 4;
   assert(test < FileFactory().GetNumberOfTests());
   const File file = pvdb::FileFactory().GetTests().at(test);
-  assert(file);
+
   QtPvdbRatingDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
@@ -184,7 +184,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked() noexcept
     try
     {
       const File file(pvdb::File::Load(filename));
-      assert(file);
+
       QtPvdbStudentMenuDialog d(file);
       if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); } //For testing
     }
@@ -203,7 +203,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_test_cluster_clicked() noexcept
   assert(!file.GetConceptMap());
   {
     const std::string question = "qtvdbmenudialog.cpp 79?";
-    boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(File::CreateConceptMap(question));
+    ribi::cmap::ConceptMap concept_map(File::CreateConceptMap(question));
     assert(concept_map);
     assert(!file.GetConceptMap() && "Can only set concept map once");
     file.SetQuestion(question);
@@ -542,7 +542,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcep
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
   const File file = pvdb::File::Load(filename);
-  assert(file);
+
   QtPvdbPrintConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
@@ -553,7 +553,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
   const File file = pvdb::File::Load(filename);
-  assert(file);
+
   QtPvdbPrintRatingDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
@@ -561,7 +561,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
 void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 {
 
-  const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map
+  const ribi::cmap::ConceptMap concept_map
     = cmap::QtRateConceptTallyDialogNewName::CreateTestConceptMap();
   boost::shared_ptr<cmap::QtRateConceptTallyDialogNewName> d(
     new cmap::QtRateConceptTallyDialogNewName(concept_map));
@@ -585,7 +585,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptmap_clicked()
   const int test = 4;
   assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
   const File file = pvdb::FileFactory().GetTests().at(test);
-  assert(file);
+
   QtPvdbConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }

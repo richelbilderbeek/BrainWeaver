@@ -96,7 +96,7 @@ private:
     const Cluster& cluster
   );
 
-  //static QtPvdbConceptMapEditWidget * CreateWidget(const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map);
+  //static QtPvdbConceptMapEditWidget * CreateWidget(const ribi::cmap::ConceptMap concept_map);
   ///DON'T USE: puts a new ConceptMap in file
   static ribi::cmap::QtConceptMap * CreateWidget(pvdb::File file);
 

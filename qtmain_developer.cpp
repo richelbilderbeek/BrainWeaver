@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
     assert(!file.GetConceptMap());
     {
       const std::string question = "qtvdbmenudialog.cpp 79?";
-      boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(ribi::pvdb::File::CreateConceptMap(question));
+      ribi::cmap::ConceptMap concept_map(ribi::pvdb::File::CreateConceptMap(question));
       assert(concept_map);
       assert(!file.GetConceptMap() && "Can only set concept map once");
       file.SetQuestion(question);

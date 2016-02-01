@@ -98,12 +98,12 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     using namespace cmap;
     const std::string question = "TESTQUESTION";
     const boost::shared_ptr<File> file(new File);
-    assert(file);
+    
     file.SetQuestion(question);
     assert(file.GetQuestion() == question);
     assert(!file.GetCluster());
     assert(!file.GetConceptMap());
-    const boost::shared_ptr<Concept> concept_a(ConceptFactory().Create("Concept A"));
+    const ribi::cmap::Concept concept_a(ConceptFactory().Create("Concept A"));
     const boost::shared_ptr<Cluster> cluster(ClusterFactory().Create( { concept_a } ));
     const boost::shared_ptr<ConceptMap> concept_map(QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
     assert(concept_map);
@@ -132,7 +132,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     file.SetCluster(cluster);
     assert(cluster->Get().size() == 3);
 
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(pvdb::QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
+    const ribi::cmap::ConceptMap concept_map(pvdb::QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
     assert(concept_map);
     file.SetConceptMap(concept_map);
     assert(file.GetConceptMap());
@@ -166,9 +166,9 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const int index_2 = 2;
     assert(index_2 < static_cast<int>(ConceptFactory().GetTests().size()));
 
-    const boost::shared_ptr<Concept> concept_d(ConceptFactory().Create("Concept F"));
-    const boost::shared_ptr<Concept> concept_e(ConceptFactory().GetTests().at(index_1));
-    const boost::shared_ptr<Concept> concept_f(ConceptFactory().GetTests().at(index_2));
+    const ribi::cmap::Concept concept_d(ConceptFactory().Create("Concept F"));
+    const ribi::cmap::Concept concept_e(ConceptFactory().GetTests().at(index_1));
+    const ribi::cmap::Concept concept_f(ConceptFactory().GetTests().at(index_2));
     const Node node_a(CenterNodeFactory().CreateFromStrings(question));
     const Node node_b(NodeFactory().GetTests().at(index_1));
     const Node node_c(NodeFactory().GetTests().at(index_2));
@@ -179,7 +179,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const boost::shared_ptr<Edge> edge_b(EdgeFactory().Create(NodeFactory().Create(concept_e,2.3,4.5),nodes.at(1),false,nodes.at(2),true));
     const boost::shared_ptr<Edge> edge_c(EdgeFactory().Create(NodeFactory().Create(concept_f,3.4,5.6),nodes.at(2),false,nodes.at(0),true));
 
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(
+    const ribi::cmap::ConceptMap concept_map(
       ribi::cmap::ConceptMapFactory().Create(
         nodes,
         { edge_a, edge_b, edge_c }
@@ -224,9 +224,9 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const int index_3 = 2;
     assert(index_3 < static_cast<int>(ConceptFactory().GetTests().size()));
 
-    const boost::shared_ptr<Concept> concept_d(ConceptFactory().GetTests().at(index_1));
-    const boost::shared_ptr<Concept> concept_e(ConceptFactory().GetTests().at(index_2));
-    const boost::shared_ptr<Concept> concept_f(ConceptFactory().GetTests().at(index_3));
+    const ribi::cmap::Concept concept_d(ConceptFactory().GetTests().at(index_1));
+    const ribi::cmap::Concept concept_e(ConceptFactory().GetTests().at(index_2));
+    const ribi::cmap::Concept concept_f(ConceptFactory().GetTests().at(index_3));
     const Node node_a(CenterNodeFactory().CreateFromStrings(question));
     const Node node_b(NodeFactory().GetTests().at(1));
     const Node node_c(NodeFactory().GetTests().at(1));
@@ -237,7 +237,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const boost::shared_ptr<Edge> edge_b(EdgeFactory().Create(NodeFactory().Create(concept_e,2.3,4.5),nodes.at(1),false,nodes.at(2),true));
     const boost::shared_ptr<Edge> edge_c(EdgeFactory().Create(NodeFactory().Create(concept_f,3.4,5.6),nodes.at(2),false,nodes.at(0),true));
 
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(
+    const ribi::cmap::ConceptMap concept_map(
       ribi::cmap::ConceptMapFactory().Create(
         nodes,
         { edge_a, edge_b, edge_c }
@@ -256,7 +256,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const QtPvdbConceptMapDialog d(file);
     assert(file.GetConceptMap());
     assert(d.GetWidget()->GetConceptMap() == concept_map);
-    //const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map_out
+    //const ribi::cmap::ConceptMap concept_map_out
     //  = d.GetWidget()->GetConceptMap();
     //assert(concept_map_out->GetNodes().size()
     //  == concept_map->GetNodes().size() ); //+0 because focus question is node[0]
@@ -285,9 +285,9 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const int index_3 = 2;
     assert(index_3 < ConceptFactory().GetNumberOfTests());
 
-    const boost::shared_ptr<Concept> concept_d(ConceptFactory().GetTest(index_1));
-    const boost::shared_ptr<Concept> concept_e(ConceptFactory().GetTest(index_2));
-    const boost::shared_ptr<Concept> concept_f(ConceptFactory().GetTest(index_3));
+    const ribi::cmap::Concept concept_d(ConceptFactory().GetTest(index_1));
+    const ribi::cmap::Concept concept_e(ConceptFactory().GetTest(index_2));
+    const ribi::cmap::Concept concept_f(ConceptFactory().GetTest(index_3));
     const Node node_a(CenterNodeFactory().CreateFromStrings(question));
     const Node node_b(NodeFactory().GetTests().at(1));
     const Node node_c(NodeFactory().GetTests().at(1));
@@ -298,7 +298,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const boost::shared_ptr<Edge> edge_b(EdgeFactory().Create(NodeFactory().Create(concept_e,2.3,4.5),nodes.at(1),false,nodes.at(2),true));
     const boost::shared_ptr<Edge> edge_c(EdgeFactory().Create(NodeFactory().Create(concept_f,3.4,5.6),nodes.at(2),false,nodes.at(0),true));
 
-    const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map(
+    const ribi::cmap::ConceptMap concept_map(
       ribi::cmap::ConceptMapFactory().Create(
         nodes,
         { edge_a, edge_b, edge_c }
@@ -316,7 +316,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const QtPvdbConceptMapDialog d(file);
     assert(file.GetConceptMap());
     assert(concept_map == d.GetWidget()->GetConceptMap());
-    //const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map_out
+    //const ribi::cmap::ConceptMap concept_map_out
     //  = d.GetWidget()->GetConceptMap();
 
     //assert(concept_map_out->GetNodes().size()

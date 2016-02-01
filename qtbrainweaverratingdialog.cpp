@@ -55,7 +55,7 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
     m_file(file)
 {
   ui->setupUi(this);
-  assert(file);
+  
   assert(file.GetConceptMap());
   //Student name
   {
@@ -77,7 +77,7 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
     }
   }
 
-  assert(file);
+  
   pvdb::QtDisplay().DisplayRatedConcepts(*file,ui->table_concepts);
   pvdb::QtDisplay().DisplayExamples(file,ui->table_examples);
   pvdb::QtDisplay().DisplayValues(file,ui->table_values);

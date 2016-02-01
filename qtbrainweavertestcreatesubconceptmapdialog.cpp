@@ -61,10 +61,10 @@ ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::~QtPvdbTestCreateSubConceptMapD
 void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnConceptMapChanged()
 {
   const int i = ui->box_index->value();
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > v = ribi::cmap::ConceptMapFactory().GetAllTests();
+  const std::vector<ribi::cmap::ConceptMap> v = ribi::cmap::ConceptMapFactory().GetAllTests();
   assert(i < boost::numeric_cast<int>(v.size()));
   assert(v[i]);
-  const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = v[i];
+  const ribi::cmap::ConceptMap concept_map = v[i];
   assert(concept_map);
 
   if(!ui->widget_concept_map->layout())
@@ -79,7 +79,7 @@ void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnConceptMapChanged()
   ui->widget_concept_map->layout()->addWidget(m_qtconceptmap.get());
 
   #ifdef RJCB_TODO //TODO RJCB
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > subs = concept_map->CreateSubs();
+  const std::vector<ribi::cmap::ConceptMap> subs = concept_map->CreateSubs();
   const int n_subs = boost::numeric_cast<int>(subs.size());
   assert(n_subs != 0);
   ui->box_index_sub->setMaximum(n_subs - 1); //-1: 0-based counting
@@ -91,13 +91,13 @@ void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnSubConceptMapChanged()
 {
   #ifdef TODO_RJCB //TODO RJCB: Put back in
   const int i = ui->box_index->value();
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > v = ribi::cmap::ConceptMapFactory::GetAllTests();
+  const std::vector<ribi::cmap::ConceptMap> v = ribi::cmap::ConceptMapFactory::GetAllTests();
   assert(i < boost::numeric_cast<int>(v.size()));
-  const boost::shared_ptr<ribi::cmap::ConceptMap> concept_map = v[i];
-  const std::vector<boost::shared_ptr<ribi::cmap::ConceptMap> > subs = concept_map->CreateSubs();
+  const ribi::cmap::ConceptMap concept_map = v[i];
+  const std::vector<ribi::cmap::ConceptMap> subs = concept_map->CreateSubs();
   const int j = ui->box_index_sub->value();
   assert(j < boost::numeric_cast<int>(subs.size()));
-  const boost::shared_ptr<ribi::cmap::ConceptMap> sub = subs[j];
+  const ribi::cmap::ConceptMap sub = subs[j];
 
   if(!ui->widget_sub_concept_map->layout())
   {
