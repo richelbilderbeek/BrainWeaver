@@ -356,7 +356,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::on_button_save_clicked()
 void ribi::pvdb::QtPvdbConceptMapDialog::Save() const
 {
   //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
-  //assert(concept_map);
+  //assert(boost::num_vertices(concept_map) > 0);
   assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
   //m_file.SetConceptMap(concept_map);
 }

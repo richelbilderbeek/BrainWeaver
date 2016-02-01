@@ -90,7 +90,7 @@ void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_assess_result_clicked()
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
     File file = pvdb::File::Load(filename);
-    QtPvdbRateConceptMapDialog d(file);
+    QtRateConceptMapDialog d(file);
     this->ShowChild(&d);
     file = d.GetFile();
   }

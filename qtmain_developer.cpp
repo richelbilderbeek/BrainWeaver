@@ -96,12 +96,12 @@ int main(int argc, char *argv[])
   #ifdef TODO_COEN
   {
     const boost::shared_ptr<ribi::pvdb::File> file = ribi::pvdb::FileFactory::Create();
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
     {
       const std::string question = "qtvdbmenudialog.cpp 79?";
       ribi::cmap::ConceptMap concept_map(ribi::pvdb::File::CreateConceptMap(question));
-      assert(concept_map);
+      assert(boost::num_vertices(concept_map) > 0);
       assert(!file.GetConceptMap() && "Can only set concept map once");
       file.SetQuestion(question);
       assert(file.GetQuestion() == question);

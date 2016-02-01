@@ -36,18 +36,18 @@ namespace Ui { class QtPvdbRateConceptMapDialog; }
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbRateConceptMapDialog : public ribi::QtHideAndShowDialog
+class QtRateConceptMapDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
   
 public:
   using ConceptMap = cmap::QtConceptMap;
-  explicit QtPvdbRateConceptMapDialog(
+  explicit QtRateConceptMapDialog(
     const File& file,
     QWidget* parent = 0);
-  QtPvdbRateConceptMapDialog(const QtPvdbRateConceptMapDialog&) = delete;
-  QtPvdbRateConceptMapDialog& operator=(const QtPvdbRateConceptMapDialog&) = delete;
-  ~QtPvdbRateConceptMapDialog() noexcept;
+  QtRateConceptMapDialog(const QtRateConceptMapDialog&) = delete;
+  QtRateConceptMapDialog& operator=(const QtRateConceptMapDialog&) = delete;
+  ~QtRateConceptMapDialog() noexcept;
 
   cmap::QtConceptMap * GetWidget();
 

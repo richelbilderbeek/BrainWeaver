@@ -78,10 +78,10 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const std::string question = "TESTQUESTION";
     const boost::shared_ptr<File> file(new File);
     file.SetQuestion(question);
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
     const boost::shared_ptr<ConceptMap> concept_map(File::CreateConceptMap(question));
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     assert(file.GetQuestion() == question);
     assert(file.GetConceptMap());
@@ -101,12 +101,12 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     
     file.SetQuestion(question);
     assert(file.GetQuestion() == question);
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
     const ribi::cmap::Concept concept_a(ConceptFactory().Create("Concept A"));
     const boost::shared_ptr<Cluster> cluster(ClusterFactory().Create( { concept_a } ));
     const boost::shared_ptr<ConceptMap> concept_map(QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetCluster(cluster);
     file.SetConceptMap(concept_map);
     //file.CreateConceptMapFromCluster();
@@ -133,7 +133,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     assert(cluster->Get().size() == 3);
 
     const ribi::cmap::ConceptMap concept_map(pvdb::QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     assert(file.GetConceptMap());
     assert(!GetNodes(file.GetConceptMap()).empty());
@@ -153,13 +153,13 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const std::string question = "TESTQUESTION";
     const boost::shared_ptr<File> file(new File);
     file.SetQuestion(question);
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
     const boost::shared_ptr<pvdb::Cluster> cluster = ClusterFactory().GetTest( { 0,1,2 } );
     file.SetCluster(cluster);
 
     assert( file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(!boost::num_vertices(file.GetConceptMap()));
 
     const int index_1 = 1;
     assert(index_1 < static_cast<int>(ConceptFactory().GetTests().size()));
@@ -185,7 +185,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
         { edge_a, edge_b, edge_c }
       )
     );
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
 
     assert( file.GetCluster());
@@ -214,8 +214,8 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const std::string question = "TESTQUESTION";
     const boost::shared_ptr<File> file(new File);
     file.SetQuestion(question);
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
 
     const int index_1 = 0;
     assert(index_1 < static_cast<int>(ConceptFactory().GetTests().size()));
@@ -243,10 +243,10 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
         { edge_a, edge_b, edge_c }
       )
     );
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
 
-    assert(!file.GetCluster());
+    assert(file.GetCluster().Empty());
     assert( file.GetConceptMap());
     assert(!GetNodes(file.GetConceptMap()).empty());
     assert(file.GetConceptMap().FindCenterNode()
@@ -275,8 +275,8 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
     const boost::shared_ptr<File> file(new File);
     file.SetQuestion(question);
     assert(file.GetQuestion() == question);
-    assert(!file.GetCluster());
-    assert(!file.GetConceptMap());
+    assert(file.GetCluster().Empty());
+    assert(!boost::num_vertices(file.GetConceptMap()));
 
     const int index_1 = 0;
     assert(index_1 < ConceptFactory().GetNumberOfTests());
@@ -304,9 +304,9 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
         { edge_a, edge_b, edge_c }
       )
     );
-    assert(concept_map);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
-    assert(!file.GetCluster());
+    assert(file.GetCluster().Empty());
     assert( file.GetConceptMap());
     assert(!GetNodes(file.GetConceptMap()).empty());
     assert(file.GetConceptMap().FindCenterNode()
@@ -378,7 +378,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
 
         if (!had_cluster && !had_concept_map)
         {
-          assert(!file.GetCluster());
+          assert(file.GetCluster().Empty());
           assert( file.GetConceptMap()); //Created
         }
         if ( had_cluster && !had_concept_map)
@@ -388,7 +388,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Test() noexcept
         }
         if (!had_cluster &&  had_concept_map)
         {
-          assert(!file.GetCluster());
+          assert(file.GetCluster().Empty());
           assert( file.GetConceptMap());
         }
         if ( had_cluster &&  had_concept_map)

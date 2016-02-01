@@ -32,49 +32,50 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QLayout>
 #include <QVBoxLayout>
 
+#include "add_custom_vertex.h"
+#include "brainweaverfilefactory.h"
+#include "brainweaverfile.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconcept.h"
-#include "conceptmapfactory.h"
-#include "fileio.h"
-#include "conceptmap.h"
-#include "counter.h"
-#include "qtconceptmaprateconcepttallydialognewname.h"
+#include "conceptmapconcept.h"
+#include "conceptmapexample.h"
 #include "conceptmapexamples.h"
-#include "qtbrainweaverfiledialog.h"
-#include "testtimer.h"
-#include "qtbrainweavertestcreatesubconceptmapdialog.h"
-#include "brainweaverfilefactory.h"
+#include "conceptmapexamples.h"
+#include "conceptmapfactory.h"
+#include "conceptmap.h"
+#include "conceptmapnode.h"
 #include "container.h"
+#include "counter.h"
+#include "fileio.h"
 #include "plane.h"
-#include "ribi_regex.h"
-#include "brainweaverfile.h"
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverclusterwidget.h"
-#include "conceptmapnode.h"
-#include "conceptmapconcept.h"
-#include "conceptmapexample.h"
-#include "qttestconceptmapmenudialog.h"
-#include "conceptmapexamples.h"
-#include "qtconceptmapconcepteditdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
-#include "qttesteditconceptmapdialog.h"
+#include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaveroverviewdialog.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
 #include "qtbrainweaverprintratingdialog.h"
-#include "qtconceptmaprateconceptdialognewname.h"
 #include "qtbrainweaverrateconceptmapdialog.h"
-#include "qtconceptmaprateexamplesdialognewname.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
+#include "qtbrainweavertestcreatesubconceptmapdialog.h"
 #include "qtbrainweaverviewfilesdialog.h"
+#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmaprateconceptdialognewname.h"
+#include "qtconceptmaprateconcepttallydialognewname.h"
+#include "qtconceptmaprateexamplesdialognewname.h"
 //#include "qtconceptmapviewtestsdialog.h"
 #include "qtstylesheetsettermaindialog.h"
+#include "qttestconceptmapmenudialog.h"
+#include "qttesteditconceptmapdialog.h"
 #include "qttestqtarrowitemsmenudialog.h"
 #include "qttestqtroundededitrectitemmenudialog.h"
 #include "qttestqtroundedrectitemmenudialog.h"
+#include "ribi_regex.h"
+#include "testtimer.h"
 #include "trace.h"
 #include "ui_qtbrainweavermenudialog.h"
 #pragma GCC diagnostic pop
@@ -117,34 +118,28 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
   //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
   {
     const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
-    assert(concept_map);
-    assert(!file.GetConceptMap() && "Can only set a concept map once");
+      = ribi::cmap::ConceptMapFactory().GetTest(6);
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
   }
   //Obtain a random sub-concept-map
-  const std::vector<ribi::cmap::ConceptMap> concept_maps = file.GetConceptMap().CreateSubs();
+  const std::vector<ribi::cmap::ConceptMap> concept_maps = CreateDirectNeighbourConceptMaps(file.GetConceptMap());
   //Display this random concept map
   const int index = std::rand() % concept_maps.size();
   const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
-  assert( (!concept_map || concept_map->IsValid())
-    && "Expect no or a valid concept map");
   //Create and show the dialog
-  boost::shared_ptr<cmap::QtRateConceptDialogNewName> d(
-    new cmap::QtRateConceptDialogNewName(concept_map));
+  boost::shared_ptr<pvdb::QtRateConceptMapDialog> d(
+    new pvdb::QtRateConceptMapDialog(file));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); } //For testing
 }
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_map_clicked() noexcept
 {
-  const File file = pvdb::FileFactory().Create();
-  //Use HeteromorphousTestConceptMap[17] to check for subconcept maps with many examples
-  //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
-  //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
+  File file;
   const ribi::cmap::ConceptMap concept_map
-    = ribi::cmap::ConceptMapFactory().GetHeteromorphousTestConceptMaps().at(19);
+    = ribi::cmap::ConceptMapFactory().GetTest(6);
   file.SetConceptMap(concept_map);
-  QtPvdbRateConceptMapDialog d(file);
+  QtRateConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 
@@ -198,26 +193,27 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked() noexcept
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_test_cluster_clicked() noexcept
 {
-  const File file = pvdb::FileFactory().Create();
-  assert(!file.GetCluster());
-  assert(!file.GetConceptMap());
+  File file;
+  assert(file.GetCluster().Empty());
+  assert(!boost::num_vertices(file.GetConceptMap()));
   {
     const std::string question = "qtvdbmenudialog.cpp 79?";
-    ribi::cmap::ConceptMap concept_map(File::CreateConceptMap(question));
-    assert(concept_map);
-    assert(!file.GetConceptMap() && "Can only set concept map once");
+    ribi::cmap::ConceptMap concept_map;
+    add_custom_vertex(
+      ribi::cmap::Node(ribi::cmap::Concept(question)),concept_map
+    );
+    assert(boost::num_vertices(concept_map) > 0);
     file.SetQuestion(question);
     file.SetConceptMap(concept_map);
 
-    assert(!file.GetCluster());
-    assert( file.GetConceptMap());
-
+    assert(file.GetCluster().Empty());
+    assert(boost::num_vertices(file.GetConceptMap()) > 0);
     assert(file.GetQuestion() == question);
   }
   QtPvdbClusterDialog d(file);
 
-  assert(!file.GetCluster());
-  assert( file.GetConceptMap());
+  assert(file.GetCluster().Empty());
+  assert(boost::num_vertices(file.GetConceptMap()) > 0);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 
@@ -418,23 +414,20 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
       File file(pvdb::File::Load(filename));
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
-      assert((file.GetCluster() || !file.GetCluster())
-        && "If the file has no cluster, the cluster dialog creates it,"
-           "if and only if there is no concept map");
       QtPvdbClusterDialog d(file);
-      if (!file.GetConceptMap())
+      if (!boost::num_vertices(file.GetConceptMap()))
       {
         assert(file.GetCluster() && "the cluster dialog used an existing or created a cluster");
       }
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
-      assert(!file.GetConceptMap());
-      if (file.GetCluster())
+      assert(!boost::num_vertices(file.GetConceptMap()));
+      if (!file.GetCluster().Empty())
       {
         assert(d.GetWidget());
         d.DoRandomStuff();
       }
-      assert(!file.GetConceptMap());
+      assert(!boost::num_vertices(file.GetConceptMap()));
       d.Save(filename);
     }
     //5) Start with concept map
@@ -444,7 +437,7 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
       File file(pvdb::File::Load(filename));
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
-      assert(!file.GetConceptMap());
+      assert(!boost::num_vertices(file.GetConceptMap()));
       QtPvdbConceptMapDialog d(file);
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
@@ -562,9 +555,9 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked() noexcep
 {
 
   const ribi::cmap::ConceptMap concept_map
-    = cmap::QtRateConceptTallyDialogNewName::CreateTestConceptMap();
-  boost::shared_ptr<cmap::QtRateConceptTallyDialogNewName> d(
-    new cmap::QtRateConceptTallyDialogNewName(concept_map));
+    = cmap::QtRateConceptTallyDialog::CreateTestConceptMap();
+  boost::shared_ptr<pvdb::QtRateConceptTallyDialog> d(
+    new cmap::QtRateConceptTallyDialog(concept_map));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); }
 }
 
