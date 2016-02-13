@@ -1,4 +1,4 @@
-include(ProjectBrainweaverConsole.pri)
+include(BrainweaverConsole.pri)
 
 SOURCES += \
     qtbrainweaveraboutdialog.cpp \

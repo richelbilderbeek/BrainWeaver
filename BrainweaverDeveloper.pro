@@ -48,6 +48,6 @@ include(../TestRoundedRectItem/TestQtRoundedRectItemDesktop.pri)
 
 #Desktop
 include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
-include(ProjectBrainweaverDesktop.pri)
+include(BrainweaverDesktop.pri)
 
 SOURCES += qtmain_developer.cpp
