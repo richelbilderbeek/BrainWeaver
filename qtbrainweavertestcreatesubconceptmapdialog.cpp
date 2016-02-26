@@ -63,7 +63,6 @@ void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnConceptMapChanged()
   const int i = ui->box_index->value();
   const std::vector<ribi::cmap::ConceptMap> v = ribi::cmap::ConceptMapFactory().GetAllTests();
   assert(i < boost::numeric_cast<int>(v.size()));
-  assert(v[i]);
   const ribi::cmap::ConceptMap concept_map = v[i];
   assert(boost::num_vertices(concept_map) > 0);
 

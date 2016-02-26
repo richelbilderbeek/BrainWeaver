@@ -25,9 +25,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
-
+#include "brainweaverfile.h"
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
@@ -50,7 +49,7 @@ class QtPvdbStudentMenuDialog : public ribi::QtHideAndShowDialog
   std::string GetName() const noexcept;
 
   ///Save to file
-  void Save(const std::string& filename) const;
+  void Save(const std::string& filename);
 
   ///Set the student his/her name
   void SetName(const std::string& name);

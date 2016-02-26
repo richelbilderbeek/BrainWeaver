@@ -41,7 +41,6 @@ ribi::pvdb::QtPvdbStudentMenuDialog::QtPvdbStudentMenuDialog(const File file, QW
     m_file(file)
 {
   ui->setupUi(this);
-  assert(m_file);
   if (!m_file.GetStudentName().empty())
   {
     SetName(m_file.GetStudentName());
@@ -124,7 +123,7 @@ void ribi::pvdb::QtPvdbStudentMenuDialog::on_button_save_clicked()
   Save(filename);
 }
 
-void ribi::pvdb::QtPvdbStudentMenuDialog::Save(const std::string& filename) const
+void ribi::pvdb::QtPvdbStudentMenuDialog::Save(const std::string& filename)
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
 

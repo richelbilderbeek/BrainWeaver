@@ -46,8 +46,6 @@ ribi::pvdb::QtPvdbStudentStartCompleteDialog::QtPvdbStudentStartCompleteDialog(
     m_file(file)
 {
   ui->setupUi(this);
-  assert(m_file);
-  assert(operator==(*file,*m_file));
 }
 
 ribi::pvdb::QtPvdbStudentStartCompleteDialog::~QtPvdbStudentStartCompleteDialog() noexcept
@@ -64,15 +62,11 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
-  assert(m_file);
-  assert((m_file.GetCluster() || !m_file.GetCluster())
-    && "If the file has no cluster, the cluster dialog creates it,"
-       "if and only if there is no concept map");
   QtPvdbClusterDialog d(m_file);
 
-  if (!m_file.GetConceptMap())
+  if (!boost::num_vertices(m_file.GetConceptMap()))
   {
-    assert(m_file.GetCluster()
+    assert(!m_file.GetCluster().Empty()
       && "If the file has no cluster, the cluster dialog creates it,"
          "if and only if there is no concept map");
   }
