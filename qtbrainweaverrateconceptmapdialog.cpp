@@ -50,7 +50,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
-  File file,
+  const File& file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
   ui(new Ui::QtPvdbRateConceptMapDialog),
@@ -136,7 +136,6 @@ void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
 
 void ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog(const ribi::cmap::ConceptMap sub_concept_map)
 {
-  assert(sub_concept_map);
   #ifdef HIDE_PARENT_IDEA_5675869837643987593795
   this->setEnabled(false);
   this->hide();
@@ -174,25 +173,13 @@ void ribi::pvdb::QtRateConceptMapDialog::Test() noexcept
     {
       const auto file = v[i];
       
-      assert( (file.GetConceptMap() || !file.GetConceptMap() )
-        && "A file may or may not have an initialized concept map");
-      if (!file.GetConceptMap())
+      if (!boost::num_vertices(file.GetConceptMap()))
       {
         //Cannot rate a null concept map
         continue;
       }
       QtRateConceptMapDialog d(file);
       assert(d.GetWidget());
-      assert(( file.GetConceptMap() &&  d.GetWidget()->GetConceptMap())
-          || (!file.GetConceptMap() && !d.GetWidget()->GetConceptMap()));
-      assert(
-           !file.GetConceptMap()
-
-        || ribi::cmap::HasSameContent(
-             *file.GetConceptMap(),
-             *d.GetWidget()->GetConceptMap()
-           )
-        );
     }
   }
 

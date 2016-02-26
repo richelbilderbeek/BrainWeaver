@@ -56,7 +56,7 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
 {
   ui->setupUi(this);
   
-  assert(file.GetConceptMap());
+  assert(boost::num_vertices(file.GetConceptMap()));
   //Student name
   {
     const std::string s = "Naam student: " + file.GetStudentName();
@@ -78,7 +78,7 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
   }
 
   
-  pvdb::QtDisplay().DisplayRatedConcepts(*file,ui->table_concepts);
+  pvdb::QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
   pvdb::QtDisplay().DisplayExamples(file,ui->table_examples);
   pvdb::QtDisplay().DisplayValues(file,ui->table_values);
 

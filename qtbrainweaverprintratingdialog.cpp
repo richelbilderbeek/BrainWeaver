@@ -59,7 +59,6 @@ ribi::pvdb::QtPvdbPrintRatingDialog::QtPvdbPrintRatingDialog(
 {
   ui->setupUi(this);    
   m_widget->SetConceptMap(file.GetConceptMap());
-  assert(m_file);
   ui->label_focal_question->setText(
     ("FOCUSVRAAG: "
     + m_file.GetQuestion()).c_str()
@@ -211,7 +210,6 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
       const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
-      assert(node);
       cmap::QtConceptMapRatedConceptDialog * const widget
         = new cmap::QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
       assert(widget);
@@ -220,8 +218,7 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
   }
 
   //Copied from caller
-  assert(m_file);
-  pvdb::QtDisplay().DisplayRatedConcepts(*m_file,this->GetTableConcepts());
+  pvdb::QtDisplay().DisplayRatedConcepts(m_file,this->GetTableConcepts());
   {
     const int sz = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
