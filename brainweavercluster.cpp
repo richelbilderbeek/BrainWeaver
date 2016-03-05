@@ -86,6 +86,11 @@ ribi::pvdb::Cluster ribi::pvdb::Cluster::FromXml(const std::string &s)
   return cluster;
 }
 
+void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)
+{
+  m_v = concepts;
+}
+
 std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
 {
   std::stringstream s;
@@ -111,13 +116,22 @@ std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
 
 bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs) noexcept
 {
-  const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get(); //For cross-compiler
+  const bool verbose{false};
+  const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get();
   const std::vector<ribi::cmap::Concept> rhs_concepts = rhs.Get();
-  if (lhs_concepts.size() != rhs_concepts.size()) return false;
+  if (lhs_concepts.size() != rhs_concepts.size())
+  {
+    if (verbose) { TRACE("Number of concepts differ"); }
+    return false;
+  }
   const int sz = static_cast< int>(lhs_concepts.size());
   for (int i=0; i!=sz; ++i)
   {
-    if (lhs_concepts[i] != rhs_concepts[i]) return false;
+    if (lhs_concepts[i] != rhs_concepts[i])
+    {
+      if (verbose) { TRACE("A concepts differs"); }
+      return false;
+    }
   }
   return true;
 }
@@ -127,7 +141,21 @@ bool ribi::pvdb::operator!=(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cl
   return !(lhs == rhs);
 }
 
-void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)
+std::ostream& ribi::pvdb::operator<<(std::ostream& os, const ribi::pvdb::Cluster& c) noexcept
 {
-  m_v = concepts;
+  const auto v = c.Get();
+  std::stringstream s;
+  std::copy(std::begin(v), std::end(v), std::ostream_iterator<ribi::cmap::Concept>(s,", "));
+  std::string t;
+  s << t;
+  if (!t.empty())
+  {
+    t.pop_back();
+    assert(!t.empty());
+    t.pop_back();
+  }
+  os << t;
+  return os;
 }
+
+

@@ -54,12 +54,6 @@ class File
     const std::string& version
   );
 
-  ///Convert the Cluster to a ConceptMap
-  //void CreateConceptMapFromCluster();
-
-  ///Convert XML to File
-  static pvdb::File FromXml(const std::string& s);
-
   ///Obtain the string which indicates this file is a PvdB file
   const std::string& GetAbout() const { return m_about; }
 
@@ -119,9 +113,6 @@ class File
   ///Set the student his/her name
   void SetStudentName(const std::string& student_name);
 
-  ///Convert File to XML
-  static std::string ToXml(const File& file);
-
   private:
 
   ///The string which indicates this file is a PvdB file
@@ -152,16 +143,6 @@ class File
   ///AutoSave, called after each setter
   void AutoSave() const;
 
-  ///Replace the regex_str in str with format_str
-  static std::string DoXpressiveRegexReplace(
-    const std::string& str,
-    const std::string& regex_str,
-    const std::string& format_str
-  );
-
-  ///Convert a file's content to a single std::string
-  static std::string FileToStr(const std::string& filename);
-
   #ifndef NDEBUG
   ///Test this class
   static void Test() noexcept;
@@ -171,8 +152,25 @@ class File
 ///Create a concept map with a center node with text
 ribi::cmap::ConceptMap CreateConceptMap(const std::string& text) noexcept;
 
-bool operator==(const pvdb::File& lhs, const pvdb::File& rhs);
-bool operator!=(const pvdb::File& lhs, const pvdb::File& rhs);
+///Replace the regex_str in str with format_str
+std::string DoXpressiveRegexReplace(
+  const std::string& str,
+  const std::string& regex_str,
+  const std::string& format_str
+) noexcept;
+
+///Convert a file's content to a single std::string
+std::string FileToStr(const std::string& filename) noexcept;
+
+///Convert File to XML
+std::string ToXml(const File& file) noexcept;
+
+///Convert XML to File
+File XmlToFile(const std::string& s);
+
+bool operator==(const File& lhs, const File& rhs) noexcept;
+bool operator!=(const File& lhs, const File& rhs) noexcept;
+std::ostream& operator<<(std::ostream& os, const File& f) noexcept;
 
 } //~namespace pvdb
 } //~namespace ribi

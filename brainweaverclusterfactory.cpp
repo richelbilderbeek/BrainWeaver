@@ -65,7 +65,7 @@ ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& 
 
 std::vector<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTests() const noexcept
 {
-  std::vector<Cluster> v(6);
+  std::vector<Cluster> v(5);
   {
     const Cluster p = GetTest( {0} );
     v[0] = p;

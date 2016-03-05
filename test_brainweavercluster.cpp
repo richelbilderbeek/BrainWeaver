@@ -87,6 +87,7 @@ void ribi::pvdb::Cluster::Test() noexcept
         }
         else
         {
+          assert(i!=j);
           assert(a != c);
           assert(a != d);
           assert(b != c);

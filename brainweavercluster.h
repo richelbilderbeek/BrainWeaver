@@ -69,8 +69,9 @@ class Cluster
   static void Test() noexcept;
 };
 
-bool operator==(const pvdb::Cluster& lhs, const pvdb::Cluster& rhs) noexcept;
-bool operator!=(const pvdb::Cluster& lhs, const pvdb::Cluster& rhs) noexcept;
+bool operator==(const Cluster& lhs, const Cluster& rhs) noexcept;
+bool operator!=(const Cluster& lhs, const Cluster& rhs) noexcept;
+std::ostream& operator<<(std::ostream& os, const Cluster& c) noexcept;
 
 } //~namespace pvdb
 } //~namespace ribi
