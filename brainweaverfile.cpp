@@ -61,11 +61,11 @@ const std::string ribi::pvdb::File::m_filename_extension = "cmp";
 
 ribi::pvdb::File::File()
   : m_about("Brainweaver"),
-    m_assessor_name(""),
+    m_assessor_name{},
     m_cluster{},
-    m_concept_map(), //nullptr
-    m_question(""),
-    m_student_name(""),
+    m_concept_map{},
+    m_question{},
+    m_student_name{},
     m_version("0.4")
 {
   #ifndef NDEBUG
@@ -146,7 +146,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
   return v;
 }
 
-ribi::pvdb::File ribi::pvdb::File::Load(const std::string &filename)
+ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename) noexcept
 {
   std::string xml;
   //Read XML from file
@@ -182,11 +182,6 @@ ribi::pvdb::File ribi::pvdb::File::Load(const std::string &filename)
 void ribi::pvdb::File::Save(const std::string &filename) const
 {
   //Check for correct extension
-  if (!(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == m_filename_extension))
-  {
-    TRACE(filename);
-  }
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == m_filename_extension
     && "File must have correct file extension name"
@@ -196,14 +191,6 @@ void ribi::pvdb::File::Save(const std::string &filename) const
     const std::string s = ToXml(*this);
     f << s;
   }
-  #ifndef NDEBUG
-  //Check if load results in the same File
-  {
-    const std::vector<std::string> v = pvdb::SafeFileToVector(filename);
-    if (v.empty()) { TRACE(v.size()); TRACE(filename); }
-    assert(!v.empty() && "File must not be empty");
-  }
-  #endif
 }
 
 void ribi::pvdb::File::SetAssessorName(const std::string& assessor_name)
@@ -290,7 +277,7 @@ void ribi::pvdb::File::Test() noexcept
 
     File firstfile;
     firstfile.Save(tmp_filename);
-    const File secondfile = File::Load(tmp_filename);
+    const File secondfile = LoadFile(tmp_filename);
     assert(firstfile == secondfile);
     //Modify f, to test operator!=
     firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
@@ -312,7 +299,7 @@ void ribi::pvdb::File::Test() noexcept
     assert(firstfile.GetQuestion() == question);
     firstfile.Save(tmp_filename.c_str());
     assert(firstfile.GetQuestion() == question);
-    const File second_file(File::Load(tmp_filename));
+    const File second_file = LoadFile(tmp_filename);
     assert(second_file.GetQuestion() == firstfile.GetQuestion());
     if (firstfile != second_file)
     {
@@ -364,7 +351,7 @@ void ribi::pvdb::File::Test() noexcept
           | QFile::ExeOther
           );
         assert(success);
-        ribi::pvdb::File::Load(filename);
+        ribi::pvdb::LoadFile(filename);
         std::remove(filename.c_str());
       }
     }

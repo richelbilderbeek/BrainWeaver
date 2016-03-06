@@ -89,9 +89,6 @@ class File
   ///Obtain the version of this class
   const std::string& GetVersion() const { return m_version; }
 
-  ///Load to File from disk
-  static File Load(const std::string& filename);
-
   ///Save a File
   ///File will have one line of XML
   void Save(const std::string& filename) const;
@@ -161,6 +158,9 @@ std::string DoXpressiveRegexReplace(
 
 ///Convert a file's content to a single std::string
 std::string FileToStr(const std::string& filename) noexcept;
+
+///Load a File from disk
+File LoadFile(const std::string& filename) noexcept;
 
 ///Convert File to XML
 std::string ToXml(const File& file) noexcept;

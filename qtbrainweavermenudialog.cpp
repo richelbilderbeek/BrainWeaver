@@ -178,8 +178,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked() noexcept
     const std::string filename = v[0].toStdString();
     try
     {
-      const File file(pvdb::File::Load(filename));
-
+      const File file = pvdb::LoadFile(filename);
       QtPvdbStudentMenuDialog d(file);
       if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); } //For testing
     }
@@ -334,7 +333,7 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     //2) Load the assessor file (as a student)
     //3) Fill in a name
     {
-      File file(pvdb::File::Load(filename));
+      File file(pvdb::LoadFile(filename));
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName().empty());
       QtPvdbStudentMenuDialog d(file);
@@ -401,7 +400,7 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     //2) Load the assessor file (as a student)
     //3) Fill in a name
     {
-      File file(pvdb::File::Load(filename));
+      File file(pvdb::LoadFile(filename));
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName().empty());
       QtPvdbStudentMenuDialog d(file);
@@ -411,7 +410,7 @@ void ribi::pvdb::QtPvdbMenuDialog::Test() noexcept
     }
     //4) Start with clustering
     {
-      File file(pvdb::File::Load(filename));
+      File file(pvdb::LoadFile(filename));
       assert(file.GetQuestion() == question);
       assert(file.GetStudentName() == name);
       QtPvdbClusterDialog d(file);
@@ -534,7 +533,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcep
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
-  const File file = pvdb::File::Load(filename);
+  const File file = pvdb::LoadFile(filename);
 
   QtPvdbPrintConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
@@ -545,7 +544,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
   assert(fileio::FileIo().IsRegularFile(filename));
-  const File file = pvdb::File::Load(filename);
+  const File file = pvdb::LoadFile(filename);
 
   QtPvdbPrintRatingDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
