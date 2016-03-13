@@ -311,51 +311,6 @@ void ribi::pvdb::File::Test() noexcept
     firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
     assert(firstfile != second_file);
   }
-  {
-
-    ///Continue loop until no file is found
-    for (int i=0; i!=100; ++i)
-    {
-      //Testing filenames start at 1
-      const std::string filename = boost::lexical_cast<std::string>(i) + ".cmp";
-      if (!fileio::FileIo().IsRegularFile(filename))
-      {
-        //Copy the file from Qt resources to local file
-        {
-          const std::string qtfilename = ":/files/" + filename;
-          QFile qtfile(qtfilename.c_str());
-          qtfile.copy(filename.c_str());
-          qtfile.close();
-        }
-        if (!fileio::FileIo().IsRegularFile(filename))
-        {
-          //TRACE("First filename not found: ");
-          //TRACE(filename);
-          continue;
-        }
-
-        QFile file(filename.c_str());
-
-        const bool success = file.setPermissions(
-            QFile::ReadOwner
-          | QFile::WriteOwner
-          | QFile::ExeOwner
-          | QFile::ReadUser
-          | QFile::WriteUser
-          | QFile::ExeUser
-          | QFile::ReadGroup
-          | QFile::WriteGroup
-          | QFile::ExeGroup
-          | QFile::ReadOther
-          | QFile::WriteOther
-          | QFile::ExeOther
-          );
-        assert(success);
-        ribi::pvdb::LoadFile(filename);
-        std::remove(filename.c_str());
-      }
-    }
-  }
   //ISSUE 184 HERE
 }
 #endif

@@ -27,3 +27,5 @@
 *.out
 *.app
 *.pro.user
+ui_*
+Makefile

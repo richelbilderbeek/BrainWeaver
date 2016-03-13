@@ -486,27 +486,6 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_test_arrowitems_clicked() noexcept
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_create_test_files_clicked() noexcept
 {
-  //Obtain the human student concept maps
-  {
-    for (int i=0; ; ++i)  //Break when no file is found
-    {
-      //Base 1 counting
-      const std::string filename = boost::lexical_cast<std::string>(i+1) + "." + pvdb::File::GetFilenameExtension();
-      //Copy the file from Qt resources to local file
-      {
-        const std::string qtfilename = ":/files/" + filename;
-        QFile qtfile(qtfilename.c_str());
-        qtfile.copy(filename.c_str());
-        qtfile.close();
-      }
-      if (!fileio::FileIo().IsRegularFile(filename))
-      {
-        break;
-      }
-
-      assert(fileio::FileIo().IsRegularFile(filename));
-    }
-  }
   //Obtain the artificial concept maps
   const std::vector<File > v = pvdb::FileFactory().GetTests();
   const int sz = boost::numeric_cast<int>(v.size());
