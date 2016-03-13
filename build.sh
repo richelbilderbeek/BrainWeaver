@@ -7,6 +7,7 @@ git clone https://github.com/richelbilderbeek/RibiClasses
 git clone https://github.com/richelbilderbeek/RibiLibraries
 git clone https://github.com/richelbilderbeek/StyleSheetSetter
 git clone https://github.com/richelbilderbeek/TestArrowItems
+git clone https://github.com/richelbilderbeek/TestConceptMap
 git clone https://github.com/richelbilderbeek/TestRoundedEditRectItem
 git clone https://github.com/richelbilderbeek/TestRoundedRectItem
 cd RibiLibraries; ./Apfloat.sh; cd ..
