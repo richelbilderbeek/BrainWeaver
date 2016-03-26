@@ -104,11 +104,6 @@ private:
   #ifdef NOT_NOW_20141111
   void OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item);
   #endif //NOT_NOW_20141111
-
-  #ifndef NDEBUG
-  ///Test this class
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb

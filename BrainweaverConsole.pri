@@ -10,7 +10,7 @@ SOURCES += \
     brainweaverhelper.cpp \
     brainweavermenudialog.cpp \
     brainweaverregex.cpp \
-    test_brainweavercluster.cpp
+    brainweavercluster_test.cpp
 
 HEADERS  += \
     brainweaverclusterfactory.h \

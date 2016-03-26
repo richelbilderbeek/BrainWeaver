@@ -62,9 +62,6 @@ private:
   boost::shared_ptr<cmap::QtConceptMap> m_qtconceptmap;
   boost::shared_ptr<cmap::QtConceptMap> m_qtconceptmap_sub;
 
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb

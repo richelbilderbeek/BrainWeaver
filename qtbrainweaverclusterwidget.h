@@ -81,9 +81,6 @@ private:
   ///Find out the depth of an item
   int GetDepth(const QTreeWidgetItem * const item) const;
 
-  ///Test this class
-  static void Test() noexcept;
-
   ///Write the widget its data to the cluster
   void WriteToCluster() const noexcept;
 

@@ -139,11 +139,6 @@ class File
 
   ///AutoSave, called after each setter
   void AutoSave() const;
-
-  #ifndef NDEBUG
-  ///Test this class
-  static void Test() noexcept;
-  #endif
 };
 
 ///Create a concept map with a center node with text

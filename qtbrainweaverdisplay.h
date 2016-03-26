@@ -43,13 +43,6 @@ struct QtDisplay
   void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
   void DisplayExamples(const File& file, QTableWidget * const table) const;
   void DisplayValues(const File& file, QTableWidget * const table) const;
-
-  private:
-
-  #ifndef NDEBUG
-  ///Test this class
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb

@@ -48,10 +48,6 @@ class QtPvdbMenuDialog : public ribi::QtHideAndShowDialog
   QtPvdbMenuDialog& operator=(const QtPvdbMenuDialog&) = delete;
   ~QtPvdbMenuDialog() noexcept;
 
-
-  ///Test this class and all other QDialogs
-  static void Test() noexcept;
-
 public slots:
   void on_button_about_clicked() noexcept;
   void on_button_assessor_clicked() noexcept;

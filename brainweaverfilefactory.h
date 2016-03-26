@@ -36,11 +36,6 @@ struct FileFactory
   int GetNumberOfTests() const noexcept { return 5; }
 
   std::vector<File> GetTests() const noexcept;
-
-  private:
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb

@@ -64,9 +64,6 @@ class Cluster
   private:
   ///A Cluster is a list of Concepts. The Concepts contain examples.
   std::vector<ribi::cmap::Concept> m_v;
-
-  ///Test this class
-  static void Test() noexcept;
 };
 
 bool operator==(const Cluster& lhs, const Cluster& rhs) noexcept;

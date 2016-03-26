@@ -35,11 +35,6 @@ namespace pvdb {
 struct Regex
 {
   Regex();
-
-  private:
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb

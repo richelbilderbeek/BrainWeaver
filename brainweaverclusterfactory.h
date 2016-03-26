@@ -48,13 +48,6 @@ struct ClusterFactory
   Cluster GetTest(const std::vector<int>& test_node_indices) const noexcept;
 
   std::vector<Cluster> GetTests() const noexcept;
-
-
-  private:
-
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace pvdb
