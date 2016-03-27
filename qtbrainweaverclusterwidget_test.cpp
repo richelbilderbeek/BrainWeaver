@@ -22,15 +22,43 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include "brainweaverregex.h"
+#include "qtbrainweaverclusterwidget.h"
+#include <boost/test/unit_test.hpp>
+#include <vector>
 
-#include <cassert>
-
-#include "ribi_regex.h"
+#include "conceptmapconceptfactory.h"
+#include "conceptmapconcept.h"
+#include "conceptmapexamplefactory.h"
+#include "conceptmapexample.h"
+#include "conceptmapexamplesfactory.h"
+#include "conceptmapexamples.h"
+#include "brainweaverclusterfactory.h"
+#include "brainweavercluster.h"
+#include "qtconceptmapcompetency.h"
 #include "testtimer.h"
+#include "qtbrainweaverclustertreewidgetitem.h"
 #include "trace.h"
 
-ribi::pvdb::Regex::Regex()
+BOOST_AUTO_TEST_CASE(ribi_pvdb_qtclusterwidget_test)
 {
-
+  using namespace ribi::cmap;
+  using namespace ribi::pvdb;
+  {
+    for (const Cluster& c: ClusterFactory().GetTests())
+    {
+      QtPvdbClusterWidget w(c);
+      BOOST_CHECK(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
+      const Cluster d = w.GetCluster();
+      BOOST_CHECK(c == d);
+      QtPvdbClusterTreeWidgetItem * const item = new QtPvdbClusterTreeWidgetItem(
+        Competency::misc,true,0,1,2);
+      item->setText(0,QString("An extra line"));
+      w.addTopLevelItem(item);
+      BOOST_CHECK(w.topLevelItemCount() == static_cast<int>(c.Get().size()) + 1);
+      const Cluster e = w.GetCluster();
+      BOOST_CHECK(c != d);
+      BOOST_CHECK(c == e);
+      BOOST_CHECK(d != e);
+    }
+  }
 }

@@ -1,27 +1,25 @@
 INCLUDEPATH += \
   ../Brainweaver
 
-
 SOURCES += \
-    brainweavercluster.cpp \
-    brainweaverclusterfactory.cpp \
-    brainweaverfile.cpp \
-    brainweaverfilefactory.cpp \
-    brainweaverhelper.cpp \
-    brainweavermenudialog.cpp \
-    brainweaverregex.cpp \
-    brainweavercluster_test.cpp
+    $$PWD/brainweavercluster.cpp \
+    $$PWD/brainweaverclusterfactory.cpp \
+    $$PWD/brainweaverfile.cpp \
+    $$PWD/brainweaverfilefactory.cpp \
+    $$PWD/brainweaverhelper.cpp \
+    $$PWD/brainweavermenudialog.cpp \
+    $$PWD/brainweaverregex.cpp
 
 HEADERS  += \
-    brainweaverclusterfactory.h \
-    brainweaverfile.h \
-    brainweaverfilefactory.h \
-    brainweaverfwd.h \
-    brainweaverhelper.h \
-    brainweavermenudialog.h \
-    brainweaverregex.h \
-    brainweavercluster.h
+    $$PWD/brainweaverclusterfactory.h \
+    $$PWD/brainweaverfile.h \
+    $$PWD/brainweaverfilefactory.h \
+    $$PWD/brainweaverfwd.h \
+    $$PWD/brainweaverhelper.h \
+    $$PWD/brainweavermenudialog.h \
+    $$PWD/brainweaverregex.h \
+    $$PWD/brainweavercluster.h
 
 RESOURCES += \
-    Brainweaver.qrc
+    $$PWD/Brainweaver.qrc
 

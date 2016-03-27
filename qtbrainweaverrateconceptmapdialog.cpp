@@ -59,10 +59,7 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
 {
   ui->setupUi(this);
   m_concept_map->SetConceptMap(file.GetConceptMap());
-  #ifndef NDEBUG
-  Test();
-  
-  #endif
+
   //ribi::cmap::ConceptMap concept_map = m_file.GetConceptMap();
   //assert(boost::num_vertices(concept_map) > 0);
 
@@ -150,41 +147,6 @@ void ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog(const ribi::
   d.exec();
   #endif
 }
-
-#ifndef NDEBUG
-void ribi::pvdb::QtRateConceptMapDialog::Test() noexcept
-{
-  {
-    static bool is_tested = false;
-    if (is_tested) return;
-    is_tested = true;
-  }
-  {
-    FileFactory().GetTests();
-  }
-  const TestTimer test_timer{__func__,__FILE__,0.1};
-  const int test_depth = 1;
-
-  if (test_depth > 1)
-  {
-    const auto v = FileFactory().GetTests();
-    const int sz = boost::numeric_cast<int>(v.size());
-    for (int i=0; i!=sz; ++i)
-    {
-      const auto file = v[i];
-      
-      if (!boost::num_vertices(file.GetConceptMap()))
-      {
-        //Cannot rate a null concept map
-        continue;
-      }
-      QtRateConceptMapDialog d(file);
-      assert(d.GetWidget());
-    }
-  }
-
-}
-#endif
 
 void ribi::pvdb::QtRateConceptMapDialog::Save()
 {

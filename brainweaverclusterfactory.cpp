@@ -36,9 +36,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 ribi::pvdb::ClusterFactory::ClusterFactory()
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
@@ -99,26 +97,3 @@ std::vector<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTests() const no
   */
   return v;
 }
-
-
-#ifndef NDEBUG
-void ribi::pvdb::ClusterFactory::Test() noexcept
-{
-  {
-    static bool is_tested = false;
-    if (is_tested) return;
-    is_tested = true;
-  }
-  {
-    Cluster cluster(ribi::cmap::ConceptFactory().GetTests());
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-  ClusterFactory f;
-  if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
-  {
-    TRACE(f.GetNumberOfTests());
-    TRACE(f.GetTests().size());
-  }
-  assert(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
-}
-#endif

@@ -34,37 +34,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapexamplesfactory.h"
 #include "conceptmapexamples.h"
 #include "brainweaverclusterfactory.h"
+#include "qtbrainweaverclustertreewidgetitem.h"
 #include "brainweavercluster.h"
 #include "qtconceptmapcompetency.h"
 #include "testtimer.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
-
-///QTreeWidgetItem with the only function of storing a cmap::Competency additionally
-struct QtPvdbTreeWidgetItem : public QTreeWidgetItem
-{
-  QtPvdbTreeWidgetItem(
-    const ribi::cmap::Competency competency,
-    const bool is_complex,
-    const int rating_complexity,
-    const int rating_concreteness,
-    const int rating_specifity)
-    : QTreeWidgetItem(0),
-      m_competency(competency),
-      m_is_complex(is_complex),
-      m_rating_complexity(rating_complexity),
-      m_rating_concreteness(rating_concreteness),
-      m_rating_specifity(rating_specifity)
-  {
-    assert(rating_complexity >= -1);
-    assert(rating_complexity <=  2);
-  }
-  const ribi::cmap::Competency m_competency;
-  const bool m_is_complex;
-  const int m_rating_complexity;
-  const int m_rating_concreteness;
-  const int m_rating_specifity;
-};
 
 ribi::pvdb::QtPvdbClusterWidget::QtPvdbClusterWidget(
   const Cluster& cluster,
@@ -72,10 +47,6 @@ ribi::pvdb::QtPvdbClusterWidget::QtPvdbClusterWidget(
   : QTreeWidget(parent),
     m_cluster{cluster}
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
-
   //Hide the header
   this->setHeaderHidden(true);
 
@@ -102,7 +73,7 @@ ribi::pvdb::QtPvdbClusterWidget::QtPvdbClusterWidget(
 
 void ribi::pvdb::QtPvdbClusterWidget::Add(const std::string& text)
 {
-  QtPvdbTreeWidgetItem * const item = new QtPvdbTreeWidgetItem(
+  QtPvdbClusterTreeWidgetItem * const item = new QtPvdbClusterTreeWidgetItem(
     cmap::Competency::uninitialized,true,-1,-1,-1);
   item->setText(0,text.c_str());
   this->addTopLevelItem(item);
@@ -111,10 +82,10 @@ void ribi::pvdb::QtPvdbClusterWidget::Add(const std::string& text)
 
 void ribi::pvdb::QtPvdbClusterWidget::DoRandomStuff()
 {
-  QtPvdbTreeWidgetItem * const top = new QtPvdbTreeWidgetItem(
+  QtPvdbClusterTreeWidgetItem * const top = new QtPvdbClusterTreeWidgetItem(
     cmap::Competency::misc,true,0,1,2);
   top->setText(0,"SOMETEXT");
-  QtPvdbTreeWidgetItem * const child_item = new QtPvdbTreeWidgetItem(
+  QtPvdbClusterTreeWidgetItem * const child_item = new QtPvdbClusterTreeWidgetItem(
     cmap::Competency::uninitialized,true,-1,0,2);
   child_item->setText(0,"SOMETEXT");
   top->addChild(child_item);
@@ -269,8 +240,8 @@ void ribi::pvdb::QtPvdbClusterWidget::BuildCluster()
     {
       assert(concept.GetRatingComplexity() >= -1);
       assert(concept.GetRatingComplexity() <=  2);
-      QtPvdbTreeWidgetItem * const top
-        = new QtPvdbTreeWidgetItem(
+      QtPvdbClusterTreeWidgetItem * const top
+        = new QtPvdbClusterTreeWidgetItem(
           cmap::Competency::uninitialized, //A concept is not classified in competencies
           concept.GetIsComplex(),
           concept.GetRatingComplexity(),
@@ -282,8 +253,8 @@ void ribi::pvdb::QtPvdbClusterWidget::BuildCluster()
       std::for_each(examples.begin(),examples.end(),
         [top,this](const ribi::cmap::Example& example)
         {
-          QtPvdbTreeWidgetItem * const child_item
-            = new QtPvdbTreeWidgetItem(
+          QtPvdbClusterTreeWidgetItem * const child_item
+            = new QtPvdbClusterTreeWidgetItem(
               example.GetCompetency(),
               example.GetIsComplex(),
               -1, //An example is not rated for complexity   //FIX 2013-02-03
@@ -321,36 +292,6 @@ void ribi::pvdb::QtPvdbClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int 
   }
 }
 
-#ifndef NDEBUG
-void ribi::pvdb::QtPvdbClusterWidget::Test() noexcept
-{
-  {
-    static bool is_tested = false;
-    if (is_tested) return;
-    is_tested = true;
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-  {
-    for (const Cluster& c: pvdb::ClusterFactory().GetTests())
-    {
-      QtPvdbClusterWidget w(c);
-      assert(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
-      const Cluster d = w.GetCluster();
-      assert(c == d);
-      QtPvdbTreeWidgetItem * const item = new QtPvdbTreeWidgetItem(
-        cmap::Competency::misc,true,0,1,2);
-      item->setText(0,QString("An extra line"));
-      w.addTopLevelItem(item);
-      assert(w.topLevelItemCount() == static_cast<int>(c.Get().size()) + 1);
-      const Cluster e = w.GetCluster();
-      assert(c != d);
-      assert(c == e);
-      assert(d != e);
-    }
-  }
-}
-#endif
-
 void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster() const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
@@ -366,8 +307,8 @@ void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster() const noexcept
     const int n_child = top->childCount();
     for (int j=0; j!=n_child; ++j)
     {
-      const QtPvdbTreeWidgetItem * const pvdb_item
-        = dynamic_cast<QtPvdbTreeWidgetItem *>(top->child(j));
+      const QtPvdbClusterTreeWidgetItem * const pvdb_item
+        = dynamic_cast<QtPvdbClusterTreeWidgetItem *>(top->child(j));
       const cmap::Competency competency = pvdb_item ? pvdb_item->m_competency : cmap::Competency::uninitialized;
       assert(GetDepth(top->child(j))==1);
       ribi::cmap::Example p(
@@ -377,7 +318,7 @@ void ribi::pvdb::QtPvdbClusterWidget::WriteToCluster() const noexcept
       examples.push_back(p);
     }
 
-    QtPvdbTreeWidgetItem * const pvdb_top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i)); //FIX 2012-12-30
+    QtPvdbClusterTreeWidgetItem * const pvdb_top = dynamic_cast<QtPvdbClusterTreeWidgetItem *>(this->topLevelItem(i)); //FIX 2012-12-30
     using namespace cmap;
 
     concepts.push_back(

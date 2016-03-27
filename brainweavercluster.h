@@ -48,9 +48,6 @@ class Cluster
   ///See if the cluster is empty
   bool Empty() const;
 
-  ///Obtain a Cluster from an XML std::string
-  static pvdb::Cluster FromXml(const std::string& s);
-
   ///Obtain the list of Concepts
   const std::vector<ribi::cmap::Concept>& Get() const noexcept{ return m_v; }
         std::vector<ribi::cmap::Concept>& Get()       noexcept{ return m_v; }
@@ -58,13 +55,16 @@ class Cluster
   ///Set the concepts
   void SetConcepts(const std::vector<ribi::cmap::Concept>& concepts);
 
-  ///Convert a Cluster from an XML std::string
-  static std::string ToXml(const Cluster& c) noexcept;
-
   private:
   ///A Cluster is a list of Concepts. The Concepts contain examples.
   std::vector<ribi::cmap::Concept> m_v;
 };
+
+///Convert XML to a Cluster
+Cluster XmlToCluster(const std::string& s);
+
+///Convert a Cluster from an XML std::string
+std::string ToXml(const Cluster& c) noexcept;
 
 bool operator==(const Cluster& lhs, const Cluster& rhs) noexcept;
 bool operator!=(const Cluster& lhs, const Cluster& rhs) noexcept;

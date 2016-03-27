@@ -34,9 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 ribi::pvdb::FileFactory::FileFactory()
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
@@ -94,22 +92,3 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   }
   return v;
 }
-
-#ifndef NDEBUG
-void ribi::pvdb::FileFactory::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  FileFactory f;
-  if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
-  {
-    std::cerr << "Change FileFactory::GetNumberOfTests to return " << f.GetTests().size() << std::endl;
-    TRACE(f.GetNumberOfTests());
-    TRACE(f.GetTests().size());
-  }
-  assert(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
-}
-#endif

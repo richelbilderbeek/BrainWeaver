@@ -40,9 +40,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::pvdb::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
   : m_v(v)
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 void ribi::pvdb::Cluster::Add(const ribi::cmap::Concept & concept)
@@ -58,7 +56,7 @@ bool ribi::pvdb::Cluster::Empty() const
   return m_v.empty();
 }
 
-ribi::pvdb::Cluster ribi::pvdb::Cluster::FromXml(const std::string &s)
+ribi::pvdb::Cluster ribi::pvdb::XmlToCluster(const std::string &s)
 {
   assert(s.size() >= 19);
   assert(s.substr(0,9) == "<cluster>");
@@ -91,7 +89,7 @@ void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& co
   m_v = concepts;
 }
 
-std::string ribi::pvdb::Cluster::ToXml(const pvdb::Cluster& cluster) noexcept
+std::string ribi::pvdb::ToXml(const pvdb::Cluster& cluster) noexcept
 {
   std::stringstream s;
   s << "<cluster>";
@@ -157,5 +155,3 @@ std::ostream& ribi::pvdb::operator<<(std::ostream& os, const ribi::pvdb::Cluster
   os << t;
   return os;
 }
-
-

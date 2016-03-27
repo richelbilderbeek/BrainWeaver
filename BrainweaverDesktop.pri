@@ -1,67 +1,68 @@
 include(BrainweaverConsole.pri)
 
 SOURCES += \
-    qtbrainweaveraboutdialog.cpp \
-    qtbrainweaverassessormenudialog.cpp \
-    qtbrainweaverclusterdialog.cpp \
-    qtbrainweaverclusterwidget.cpp \
-    qtbrainweaverconceptmapdialog.cpp \
-    qtbrainweavercreateassessmentcompletedialog.cpp \
-    qtbrainweavercreateassessmentmenudialog.cpp \
-    qtbrainweavercreateassessmentpartialdialog.cpp \
-    qtbrainweaverdisplay.cpp \
-    qtbrainweaverfiledialog.cpp \
-    qtbrainweavermenudialog.cpp \
-    qtbrainweaveroverviewdialog.cpp \
-    qtbrainweaveroverviewwidget.cpp \
-    qtbrainweaverprintconceptmapdialog.cpp \
-    qtbrainweaverprintratingdialog.cpp \
-    qtbrainweaverrateconceptmapdialog.cpp \
-    qtbrainweaverratingdialog.cpp \
-    qtbrainweaverstudentmenudialog.cpp \
-    qtbrainweaverstudentstartcompletedialog.cpp \
-    qtbrainweavertestcreatesubconceptmapdialog.cpp \
-    qtbrainweaverviewfilesdialog.cpp \
-    test_qtbrainweaverconceptmapdialog.cpp
+    $$PWD/qtbrainweaveraboutdialog.cpp \
+    $$PWD/qtbrainweaverassessormenudialog.cpp \
+    $$PWD/qtbrainweaverclusterdialog.cpp \
+    $$PWD/qtbrainweaverclusterwidget.cpp \
+    $$PWD/qtbrainweaverconceptmapdialog.cpp \
+    $$PWD/qtbrainweavercreateassessmentcompletedialog.cpp \
+    $$PWD/qtbrainweavercreateassessmentmenudialog.cpp \
+    $$PWD/qtbrainweavercreateassessmentpartialdialog.cpp \
+    $$PWD/qtbrainweaverdisplay.cpp \
+    $$PWD/qtbrainweaverfiledialog.cpp \
+    $$PWD/qtbrainweavermenudialog.cpp \
+    $$PWD/qtbrainweaveroverviewdialog.cpp \
+    $$PWD/qtbrainweaveroverviewwidget.cpp \
+    $$PWD/qtbrainweaverprintconceptmapdialog.cpp \
+    $$PWD/qtbrainweaverprintratingdialog.cpp \
+    $$PWD/qtbrainweaverrateconceptmapdialog.cpp \
+    $$PWD/qtbrainweaverratingdialog.cpp \
+    $$PWD/qtbrainweaverstudentmenudialog.cpp \
+    $$PWD/qtbrainweaverstudentstartcompletedialog.cpp \
+    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.cpp \
+    $$PWD/qtbrainweaverviewfilesdialog.cpp \
+    qtbrainweaverclustertreewidgetitem.cpp
 
 HEADERS  += \
-    qtbrainweaveraboutdialog.h \
-    qtbrainweaverassessormenudialog.h \
-    qtbrainweaverclusterdialog.h \
-    qtbrainweaverclusterwidget.h \
-    qtbrainweaverconceptmapdialog.h \
-    qtbrainweavercreateassessmentcompletedialog.h \
-    qtbrainweavercreateassessmentmenudialog.h \
-    qtbrainweavercreateassessmentpartialdialog.h \
-    qtbrainweaverdisplay.h \
-    qtbrainweaverfiledialog.h \
-    qtbrainweaverfwd.h \
-    qtbrainweavermenudialog.h \
-    qtbrainweaveroverviewdialog.h \
-    qtbrainweaveroverviewwidget.h \
-    qtbrainweaverprintconceptmapdialog.h \
-    qtbrainweaverprintratingdialog.h \
-    qtbrainweaverrateconceptmapdialog.h \
-    qtbrainweaverratingdialog.h \
-    qtbrainweaverstudentmenudialog.h \
-    qtbrainweaverstudentstartcompletedialog.h \
-    qtbrainweavertestcreatesubconceptmapdialog.h \
-    qtbrainweaverviewfilesdialog.h
+    $$PWD/qtbrainweaveraboutdialog.h \
+    $$PWD/qtbrainweaverassessormenudialog.h \
+    $$PWD/qtbrainweaverclusterdialog.h \
+    $$PWD/qtbrainweaverclusterwidget.h \
+    $$PWD/qtbrainweaverconceptmapdialog.h \
+    $$PWD/qtbrainweavercreateassessmentcompletedialog.h \
+    $$PWD/qtbrainweavercreateassessmentmenudialog.h \
+    $$PWD/qtbrainweavercreateassessmentpartialdialog.h \
+    $$PWD/qtbrainweaverdisplay.h \
+    $$PWD/qtbrainweaverfiledialog.h \
+    $$PWD/qtbrainweaverfwd.h \
+    $$PWD/qtbrainweavermenudialog.h \
+    $$PWD/qtbrainweaveroverviewdialog.h \
+    $$PWD/qtbrainweaveroverviewwidget.h \
+    $$PWD/qtbrainweaverprintconceptmapdialog.h \
+    $$PWD/qtbrainweaverprintratingdialog.h \
+    $$PWD/qtbrainweaverrateconceptmapdialog.h \
+    $$PWD/qtbrainweaverratingdialog.h \
+    $$PWD/qtbrainweaverstudentmenudialog.h \
+    $$PWD/qtbrainweaverstudentstartcompletedialog.h \
+    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.h \
+    $$PWD/qtbrainweaverviewfilesdialog.h \
+    qtbrainweaverclustertreewidgetitem.h
 
 FORMS    += \
-    qtbrainweaverassessormenudialog.ui \
-    qtbrainweaverclusterdialog.ui \
-    qtbrainweaverconceptmapdialog.ui \
-    qtbrainweavercreateassessmentcompletedialog.ui \
-    qtbrainweavercreateassessmentmenudialog.ui \
-    qtbrainweavercreateassessmentpartialdialog.ui \
-    qtbrainweavermenudialog.ui \
-    qtbrainweaverprintconceptmapdialog.ui \
-    qtbrainweaverprintratingdialog.ui \
-    qtbrainweaverrateconceptmapdialog.ui \
-    qtbrainweaverratingdialog.ui \
-    qtbrainweaverstudentmenudialog.ui \
-    qtbrainweaverstudentstartcompletedialog.ui \
-    qtbrainweavertestcreatesubconceptmapdialog.ui \
-    qtbrainweaverviewfilesdialog.ui
+    $$PWD/qtbrainweaverassessormenudialog.ui \
+    $$PWD/qtbrainweaverclusterdialog.ui \
+    $$PWD/qtbrainweaverconceptmapdialog.ui \
+    $$PWD/qtbrainweavercreateassessmentcompletedialog.ui \
+    $$PWD/qtbrainweavercreateassessmentmenudialog.ui \
+    $$PWD/qtbrainweavercreateassessmentpartialdialog.ui \
+    $$PWD/qtbrainweavermenudialog.ui \
+    $$PWD/qtbrainweaverprintconceptmapdialog.ui \
+    $$PWD/qtbrainweaverprintratingdialog.ui \
+    $$PWD/qtbrainweaverrateconceptmapdialog.ui \
+    $$PWD/qtbrainweaverratingdialog.ui \
+    $$PWD/qtbrainweaverstudentmenudialog.ui \
+    $$PWD/qtbrainweaverstudentstartcompletedialog.ui \
+    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.ui \
+    $$PWD/qtbrainweaverviewfilesdialog.ui
 

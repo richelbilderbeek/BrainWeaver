@@ -45,9 +45,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 ribi::pvdb::QtDisplay::QtDisplay()
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
@@ -435,17 +433,3 @@ void ribi::pvdb::QtDisplay::DisplayValues(
     + table->columnWidth(1)
   );
 }
-
-
-#ifndef NDEBUG
-void ribi::pvdb::QtDisplay::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  const TestTimer test_timer(__func__,__FILE__,2.0);
-  QtDisplay();
-}
-#endif

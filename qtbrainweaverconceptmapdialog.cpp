@@ -88,7 +88,6 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
 {
   ui->setupUi(this);
   #ifndef NDEBUG
-  Test();
   assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   assert(m_widget);
   assert(m_widget->GetConceptMap() == m_file.GetConceptMap());

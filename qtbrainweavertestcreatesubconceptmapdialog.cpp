@@ -40,9 +40,7 @@ ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::QtPvdbTestCreateSubConceptMapDi
   m_qtconceptmap_sub{}
 {
   ui->setupUi(this);
-  #ifndef NDEBUG
-  Test();
-  #endif
+
   const int n_tests = boost::numeric_cast<int>(cmap::ConceptMapFactory().GetAllTests().size());
   ui->box_index->setMaximum(n_tests - 1); //-1: 0-based counting
 
@@ -109,27 +107,3 @@ void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnSubConceptMapChanged()
   ui->widget_sub_concept_map->layout()->addWidget(m_sub_concept_map.get());
   #endif //TODO RJCB: Put back in
 }
-
-
-#ifndef NDEBUG
-void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::Test() noexcept
-{
-  {
-    static bool is_tested = false;
-    if (is_tested) return;
-    is_tested = true;
-  }
-  QtPvdbTestCreateSubConceptMapDialog d;
-  const int max = d.ui->box_index->maximum();
-  for (int i=0; i!=max; ++i)
-  {
-    d.ui->box_index->setValue(i);
-
-    const int max_sub = d.ui->box_index_sub->maximum();
-    for (int j=0; j!=max_sub; ++j)
-    {
-      d.ui->box_index_sub->setValue(j);
-    }
-  }
-}
-#endif

@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
   #ifndef NDEBUG
   std::clog << "DEBUG mode" << std::endl;
   ribi::pvdb::TestHelperFunctions();
-  //ribi::pvdb::QtPvdbMenuDialog::Test(); //Tests all
   #else
   std::clog << "RELEASE mode" << std::endl;
   assert(1==2 && "Assume debugging is really disabled");
@@ -89,7 +88,6 @@ int main(int argc, char *argv[])
   //Delete the test file
   std::remove(ribi::pvdb::File::GetTempFileName().c_str());
 
-  //QtPvdbMenuDialog::Test();
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
 

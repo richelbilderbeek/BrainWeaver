@@ -48,6 +48,12 @@ class QtPvdbMenuDialog : public ribi::QtHideAndShowDialog
   QtPvdbMenuDialog& operator=(const QtPvdbMenuDialog&) = delete;
   ~QtPvdbMenuDialog() noexcept;
 
+  bool GetShowChildDialogsModal() const noexcept { return m_show_child_dialogs_modal; }
+  void SetShowChildDialogsModal(const bool show_child_dialogs_modal) noexcept { m_show_child_dialogs_modal = show_child_dialogs_modal; }
+
+  const Ui::QtPvdbMenuDialog * GetUi() const noexcept { return ui; }
+        Ui::QtPvdbMenuDialog * GetUi()       noexcept { return ui; }
+
 public slots:
   void on_button_about_clicked() noexcept;
   void on_button_assessor_clicked() noexcept;

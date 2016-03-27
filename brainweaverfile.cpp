@@ -68,9 +68,7 @@ ribi::pvdb::File::File()
     m_student_name{},
     m_version("0.4")
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 ribi::pvdb::File::File(
@@ -89,9 +87,7 @@ ribi::pvdb::File::File(
     m_student_name(student_name),
     m_version(version)
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
+
 }
 
 void ribi::pvdb::File::AutoSave() const
@@ -235,86 +231,6 @@ void ribi::pvdb::File::SetStudentName(const std::string& student_name)
   this->AutoSave();
 }
 
-#ifndef NDEBUG
-void ribi::pvdb::File::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  {
-    Counter();
-    ribi::fileio::FileIo();
-    ribi::Regex();
-    ribi::pvdb::Regex();
-    ribi::cmap::Regex();
-    CreateConceptMap("Focal question?");
-    ClusterFactory();
-    ClusterFactory().GetTest( {0} );
-  }
-  const TestTimer test_timer(__func__,__FILE__,2.0);
-  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
-  //Test copy constructor
-  {
-    File f;
-    f.SetAssessorName("debug assessor name");
-    f.SetStudentName("debug student name");
-    File g = f;
-    assert(f == g);
-    //Modify g, to test operator!=
-    g.SetStudentName( f.GetStudentName() + " (modified)");
-    assert(f != g);
-    g.SetStudentName( f.GetStudentName());
-    assert(f == g);
-    g.SetAssessorName( f.GetAssessorName() + " (modified)");
-    assert(f != g);
-    g.SetAssessorName( f.GetAssessorName());
-    assert(f == g);
-  }
-  //Test Save/Load on empty File
-  {
-
-    File firstfile;
-    firstfile.Save(tmp_filename);
-    const File secondfile = LoadFile(tmp_filename);
-    assert(firstfile == secondfile);
-    //Modify f, to test operator!=
-    firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
-    assert(firstfile != secondfile);
-  }
-  //Test Save/Load on file
-  {
-
-    File firstfile;
-    firstfile.SetStudentName("Richel Bilderbeek");
-    const std::string question = "Focal question?";
-    {
-      const ribi::cmap::ConceptMap concept_map = CreateConceptMap(question);
-      assert(boost::num_vertices(concept_map) > 0);
-      assert(ribi::cmap::CountCenterNodes(concept_map) == 1);
-      firstfile.SetConceptMap(concept_map);
-    }
-    firstfile.SetQuestion("Focal question?");
-    assert(firstfile.GetQuestion() == question);
-    firstfile.Save(tmp_filename.c_str());
-    assert(firstfile.GetQuestion() == question);
-    const File second_file = LoadFile(tmp_filename);
-    assert(second_file.GetQuestion() == firstfile.GetQuestion());
-    if (firstfile != second_file)
-    {
-      TRACE(firstfile);
-      TRACE(second_file);
-    }
-    assert(firstfile == second_file);
-    //Modify f, to test operator!=
-    firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
-    assert(firstfile != second_file);
-  }
-  //ISSUE 184 HERE
-}
-#endif
-
 ribi::cmap::ConceptMap ribi::pvdb::CreateConceptMap(
   const std::string& text) noexcept
 {
@@ -377,7 +293,7 @@ std::string ribi::pvdb::ToXml(const File& file) noexcept
   s << "<file>";
   s << "<about>" << file.GetAbout() << "</about>";
   s << "<assessor_name>" << file.GetAssessorName() << "</assessor_name>";
-  s << Cluster::ToXml(file.GetCluster());
+  s << ToXml(file.GetCluster());
   s << ribi::cmap::ToXml(file.GetConceptMap());
   s << "<question>" << file.GetQuestion() << "</question>";
   s << "<student_name>" << file.GetStudentName() << "</student_name>";
@@ -424,7 +340,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     if (!v.empty())
     {
       assert(v.size() == 1);
-      cluster = Cluster::FromXml(v[0]);
+      cluster = XmlToCluster(v[0]);
     }
     else
     {

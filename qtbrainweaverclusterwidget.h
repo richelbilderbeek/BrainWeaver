@@ -40,6 +40,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace ribi {
 namespace pvdb {
 
+struct QtPvdbClusterTreeWidgetItem;
+
 class QtPvdbClusterWidget : public QTreeWidget
 {
   Q_OBJECT
@@ -49,6 +51,9 @@ public:
     const Cluster& cluster,
     QWidget* parent = 0
   );
+
+  ///Block: QtPvdbTreeWidgetItem must be added instead
+  void addTopLevelItem(QtPvdbClusterTreeWidgetItem *item) { addTopLevelItem(item); }
 
   ///Add a top-level item
   void Add(const std::string& text);

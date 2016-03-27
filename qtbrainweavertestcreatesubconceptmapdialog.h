@@ -49,6 +49,9 @@ public:
   QtPvdbTestCreateSubConceptMapDialog& operator=(const QtPvdbTestCreateSubConceptMapDialog&) = delete;
   ~QtPvdbTestCreateSubConceptMapDialog() noexcept;
 
+  const Ui::QtPvdbTestCreateSubConceptMapDialog * GetUi() const noexcept { return ui; }
+        Ui::QtPvdbTestCreateSubConceptMapDialog * GetUi()       noexcept { return ui; }
+
 private slots:
   ///The user changes to another concept map
   void OnConceptMapChanged();
