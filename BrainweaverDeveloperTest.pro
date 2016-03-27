@@ -1,5 +1,10 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
+# Most specific first
+include(BrainweaverConsoleTest.pri)
+include(BrainweaverDesktop.pri)
+include(BrainweaverDesktopTest.pri)
+
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
@@ -39,22 +44,17 @@ include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
 include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 include(../TestConceptMap/TestConceptMapDesktop.pri)
 include(../TestConceptMap/TestConceptMapDesktopTest.pri)
-
 include(../TestArrowItems/TestQtArrowItemsDesktop.pri)
 include(../TestArrowItems/TestQtArrowItemsDesktopTest.pri)
-
 include(../TestRoundedEditRectItem/TestQtRoundedEditRectItemDesktop.pri)
 include(../TestRoundedRectItem/TestQtRoundedRectItemDesktop.pri)
 
-#Desktop
-include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
-include(BrainweaverConsoleTest.pri)
-include(BrainweaverDesktop.pri)
-include(BrainweaverDesktopTest.pri)
+
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 SOURCES += qtmain_developer.cpp
 

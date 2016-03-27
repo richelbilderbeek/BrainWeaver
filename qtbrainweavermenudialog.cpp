@@ -303,7 +303,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked() noexcep
 {
 
   const ribi::cmap::ConceptMap concept_map
-    = cmap::QtRateConceptTallyDialog::CreateTestConceptMap();
+    = ribi::cmap::ConceptMapFactory().Get6();
   boost::shared_ptr<cmap::QtRateConceptTallyDialog> d(
     new cmap::QtRateConceptTallyDialog(concept_map));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); }
