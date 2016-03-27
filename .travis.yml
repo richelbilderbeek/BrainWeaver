@@ -15,9 +15,9 @@ addons:
     - boost-latest
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-4.8
-    - g++-4.8
     - libboost1.55-all-dev
+
+install: sudo apt-get install -qq g++-5
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
