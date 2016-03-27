@@ -19,7 +19,11 @@ if [ ! -d StyleSheetSetter ]; then
 fi
 
 if [ ! -d TestArrowItems ]; then
- git clone https://github.com/richelbilderbeek/TestArrowItems
+  git clone https://github.com/richelbilderbeek/TestArrowItems
+fi
+
+if [ ! -d TestConceptMap ]; then
+  git clone https://github.com/richelbilderbeek/TestConceptMap
 fi
 
 if [ ! -d TestRoundedEditRectItem ]; then
