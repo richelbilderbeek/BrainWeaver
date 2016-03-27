@@ -42,3 +42,6 @@ include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 include(BrainweaverDesktop.pri)
 
 SOURCES += qtmain_assessor.cpp
+
+# QResources give this error
+QMAKE_CXXFLAGS += -Wno-unused-variable

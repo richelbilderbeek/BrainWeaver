@@ -7,13 +7,13 @@
 #include <QVBoxLayout>
 #include <QFileDialog>
 
-#include "pvdbfile.h"
-#include "pvdbhelper.h"
-#include "qtpvdbclusterdialog.h"
+#include "brainweaverfile.h"
+#include "brainweaverhelper.h"
+#include "qtbrainweaverclusterdialog.h"
 #include "qtconceptmapcompetency.h"
-#include "qtpvdbclusterwidget.h"
-#include "qtpvdbconceptmapdialog.h"
-#include "qtpvdbstudentmenudialog.h"
+#include "qtbrainweaverclusterwidget.h"
+#include "qtbrainweaverconceptmapdialog.h"
+#include "qtbrainweaverstudentmenudialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 
@@ -71,8 +71,7 @@ int main(int argc, char *argv[])
   {
     try
     {
-      const boost::shared_ptr<ribi::pvdb::File> file(ribi::pvdb::File::Load(filename));
-      assert(file);
+      ribi::pvdb::File file = ribi::pvdb::LoadFile(filename);
       ribi::pvdb::QtPvdbStudentMenuDialog d(file);
       d.show();
       return a.exec();

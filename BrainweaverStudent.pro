@@ -1,3 +1,5 @@
+SOURCES += qtmain_student.cpp
+
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
@@ -42,4 +44,6 @@ include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 include(BrainweaverDesktop.pri)
 
-SOURCES += qtmain_student.cpp
+
+# QResources give this error
+QMAKE_CXXFLAGS += -Wno-unused-variable

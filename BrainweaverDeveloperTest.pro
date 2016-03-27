@@ -64,3 +64,6 @@ LIBS += -lboost_unit_test_framework
 # gcov
 QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 LIBS += -lgcov
+
+# QResources give this error
+QMAKE_CXXFLAGS += -Wno-unused-variable

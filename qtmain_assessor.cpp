@@ -6,14 +6,14 @@
 #include <QIcon>
 #include <QVBoxLayout>
 
-#include "pvdbfile.h"
-#include "pvdbhelper.h"
-#include "qtpvdbclusterdialog.h"
+#include "brainweaverfile.h"
+#include "brainweaverhelper.h"
+#include "qtbrainweaverclusterdialog.h"
 #include "qtconceptmapcompetency.h"
-#include "qtpvdbclusterwidget.h"
-#include "qtpvdbconceptmapdialog.h"
+#include "qtbrainweaverclusterwidget.h"
+#include "qtbrainweaverconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
-#include "qtpvdbassessormenudialog.h"
+#include "qtbrainweaverassessormenudialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 

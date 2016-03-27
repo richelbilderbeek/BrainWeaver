@@ -51,3 +51,6 @@ include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
 include(BrainweaverDesktop.pri)
 
 SOURCES += qtmain_developer.cpp
+
+# QResources give this error
+QMAKE_CXXFLAGS += -Wno-unused-variable
