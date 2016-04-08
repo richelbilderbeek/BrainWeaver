@@ -12,4 +12,5 @@ rm qrc_*.cpp
 rm moc_*.cpp
 rm object_script*.*
 rm *_plugin_import.cpp
+rm *.gcno
 

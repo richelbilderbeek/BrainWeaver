@@ -1,6 +1,4 @@
-#include "qtbrainweaverrateconceptmapdialog.h"
-#include <boost/test/unit_test.hpp>
-
+#include "qtbrainweaverrateconceptmapdialog_test.h"
 
 #include <boost/bind.hpp>
 #include <boost/lambda/lambda.hpp>
@@ -10,6 +8,7 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 
+#include "qtbrainweaverrateconceptmapdialog.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
 #include "brainweaverfilefactory.h"
@@ -24,9 +23,8 @@
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
-BOOST_AUTO_TEST_CASE(ribi_pvdb_qtrateconceptmapdialog_test)
+void ribi::pvdb::qtbrainweaverrateconceptmapdialog_test::all_tests()
 {
-  using namespace ribi::pvdb;
   const int test_depth = 1;
 
   if (test_depth > 1)
@@ -43,7 +41,7 @@ BOOST_AUTO_TEST_CASE(ribi_pvdb_qtrateconceptmapdialog_test)
         continue;
       }
       QtRateConceptMapDialog d(file);
-      BOOST_CHECK(d.GetWidget());
+      QVERIFY(d.GetWidget());
     }
   }
 

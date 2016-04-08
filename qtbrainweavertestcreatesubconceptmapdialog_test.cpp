@@ -1,16 +1,15 @@
-#include "qtbrainweavertestcreatesubconceptmapdialog.h"
-#include <boost/test/unit_test.hpp>
+#include "qtbrainweavertestcreatesubconceptmapdialog_test.h"
 
 #include <cassert>
 #include <boost/numeric/conversion/cast.hpp>
+#include "qtbrainweavertestcreatesubconceptmapdialog.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
 #include "qtconceptmap.h"
 #include "ui_qtbrainweavertestcreatesubconceptmapdialog.h"
 
-BOOST_AUTO_TEST_CASE(ribi_pvdb_QtPvdbTestCreateSubConceptMapDialog_test)
+void ribi::pvdb::qtbrainweavertestcreatesubconceptmapdialog_test::all_tests()
 {
-  using namespace ribi::pvdb;
   QtPvdbTestCreateSubConceptMapDialog d;
   const int max = d.GetUi()->box_index->maximum();
   for (int i=0; i!=max; ++i)

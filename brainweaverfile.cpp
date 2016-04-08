@@ -198,11 +198,24 @@ void ribi::pvdb::File::SetAssessorName(const std::string& assessor_name)
 
 void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
 {
+  if (boost::num_vertices(concept_map) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "cannot set an empty concept map"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
+  if (CountCenterNodes(concept_map) != 1)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "in Brainweaver, every concept map must have exactly one center node, "
+      << "supplied number of center nodes was " << CountCenterNodes(concept_map)
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   m_concept_map = concept_map;
-  //assert(m_concept_map->GetNodes().empty() //TODO: put back in
-  //  && "In Brainweaver, every ConceptMap must have at least one node");
-  //assert(m_concept_map->FindCenterNode() //TODO RJCB: to put back in
-  //  && "In Brainweaver, every ConceptMap must have a CenterNode"); //TODO RJCB: to put back in
   this->AutoSave();
 }
 

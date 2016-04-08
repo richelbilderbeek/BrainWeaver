@@ -34,65 +34,74 @@
 #include "xml.h"
 
 
-BOOST_AUTO_TEST_CASE(ribi_pvdb_file_test)
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_copy_constructor)
+{
+  using namespace ribi::pvdb;
+  File f;
+  f.SetAssessorName("debug assessor name");
+  f.SetStudentName("debug student name");
+  File g = f;
+  BOOST_CHECK(f == g);
+  //Modify g, to test operator!=
+  g.SetStudentName( f.GetStudentName() + " (modified)");
+  BOOST_CHECK(f != g);
+  g.SetStudentName( f.GetStudentName());
+  BOOST_CHECK(f == g);
+  g.SetAssessorName( f.GetAssessorName() + " (modified)");
+  BOOST_CHECK(f != g);
+  g.SetAssessorName( f.GetAssessorName());
+  BOOST_CHECK(f == g);
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
 {
   using namespace ribi::pvdb;
   const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
-  //Test copy constructor
-  {
-    File f;
-    f.SetAssessorName("debug assessor name");
-    f.SetStudentName("debug student name");
-    File g = f;
-    BOOST_CHECK(f == g);
-    //Modify g, to test operator!=
-    g.SetStudentName( f.GetStudentName() + " (modified)");
-    BOOST_CHECK(f != g);
-    g.SetStudentName( f.GetStudentName());
-    BOOST_CHECK(f == g);
-    g.SetAssessorName( f.GetAssessorName() + " (modified)");
-    BOOST_CHECK(f != g);
-    g.SetAssessorName( f.GetAssessorName());
-    BOOST_CHECK(f == g);
-  }
   //Test Save/Load on empty File
-  {
+  File firstfile;
+  firstfile.Save(tmp_filename);
+  const File secondfile = LoadFile(tmp_filename);
+  BOOST_CHECK(firstfile == secondfile);
+  //Modify f, to test operator!=
+  firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
+  BOOST_CHECK(firstfile != secondfile);
+  std::remove(tmp_filename.c_str());
+}
 
-    File firstfile;
-    firstfile.Save(tmp_filename);
-    const File secondfile = LoadFile(tmp_filename);
-    BOOST_CHECK(firstfile == secondfile);
-    //Modify f, to test operator!=
-    firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
-    BOOST_CHECK(firstfile != secondfile);
-  }
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
+{
   //Test Save/Load on file
+  using namespace ribi::pvdb;
+  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
+  File firstfile;
+  firstfile.SetStudentName("Richel Bilderbeek");
+  const std::string question = "Focal question?";
   {
-
-    File firstfile;
-    firstfile.SetStudentName("Richel Bilderbeek");
-    const std::string question = "Focal question?";
-    {
-      const ribi::cmap::ConceptMap concept_map = CreateConceptMap(question);
-      BOOST_CHECK(boost::num_vertices(concept_map) > 0);
-      BOOST_CHECK(ribi::cmap::CountCenterNodes(concept_map) == 1);
-      firstfile.SetConceptMap(concept_map);
-    }
-    firstfile.SetQuestion("Focal question?");
-    BOOST_CHECK(firstfile.GetQuestion() == question);
-    firstfile.Save(tmp_filename.c_str());
-    BOOST_CHECK(firstfile.GetQuestion() == question);
-    const File second_file = LoadFile(tmp_filename);
-    BOOST_CHECK(second_file.GetQuestion() == firstfile.GetQuestion());
-    if (firstfile != second_file)
-    {
-      TRACE(firstfile);
-      TRACE(second_file);
-    }
-    BOOST_CHECK(firstfile == second_file);
-    //Modify f, to test operator!=
-    firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
-    BOOST_CHECK(firstfile != second_file);
+    const ribi::cmap::ConceptMap concept_map = CreateConceptMap(question);
+    BOOST_CHECK(boost::num_vertices(concept_map) > 0);
+    BOOST_CHECK(ribi::cmap::CountCenterNodes(concept_map) == 1);
+    firstfile.SetConceptMap(concept_map);
   }
+  firstfile.SetQuestion("Focal question?");
+  BOOST_CHECK(firstfile.GetQuestion() == question);
+  firstfile.Save(tmp_filename.c_str());
+  BOOST_CHECK(firstfile.GetQuestion() == question);
+  const File second_file = LoadFile(tmp_filename);
+  BOOST_CHECK(second_file.GetQuestion() == firstfile.GetQuestion());
+  if (firstfile != second_file)
+  {
+    TRACE(firstfile);
+    TRACE(second_file);
+  }
+  BOOST_CHECK(firstfile == second_file);
+  //Modify f, to test operator!=
+  firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
+  BOOST_CHECK(firstfile != second_file);
+  std::remove(tmp_filename.c_str());
+}
+
+
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_issue_184)
+{
   //ISSUE 184 HERE
 }
