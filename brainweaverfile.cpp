@@ -142,7 +142,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
   return v;
 }
 
-ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename) noexcept
+ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename)
 {
   std::string xml;
   //Read XML from file
@@ -215,6 +215,17 @@ void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
     ;
     throw std::invalid_argument(msg.str());
   }
+  if (GetQuestion() != GetCenterNode(concept_map).GetName())
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "in Brainweaver, the question will be put on the center node of the concept map. "
+      << "However, these do not match."
+      << "Question: '" << GetQuestion() << ", "
+      << "text on center node: '" << GetCenterNode(concept_map).GetName()
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   m_concept_map = concept_map;
   this->AutoSave();
 }
@@ -249,8 +260,9 @@ ribi::cmap::ConceptMap ribi::pvdb::CreateConceptMap(
 {
   ribi::cmap::ConceptMap g;
   ribi::cmap::Node n(ribi::cmap::Concept(text),true);
+  assert(n.IsCenterNode());
   add_custom_vertex(n, g);
-  assert(ribi::cmap::CountCenterNodes(g) == 1 && "A Brainweaver ConceptMap must have a CenterNode");
+  assert(ribi::cmap::CountCenterNodes(g) == 1);
   return g;
 }
 
@@ -323,9 +335,18 @@ std::string ribi::pvdb::ToXml(const File& file) noexcept
 
 ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
 {
-  assert(s.size() >= 13);
-  assert(s.substr(0,6) == "<file>");
-  assert(s.substr(s.size() - 7,7) == "</file>");
+  if ( !(s.size() >= 13)
+    || s.substr(0,6) != "<file>"
+    || s.substr(s.size() - 7,7) != "</file>"
+  )
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "Cannot load XML different than '<file>[content]</file>', "
+      << "received: '" << s << "'"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
 
   std::string about;
   std::string assessor_name;

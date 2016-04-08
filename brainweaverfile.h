@@ -155,7 +155,7 @@ std::string DoXpressiveRegexReplace(
 std::string FileToStr(const std::string& filename) noexcept;
 
 ///Load a File from disk
-File LoadFile(const std::string& filename) noexcept;
+File LoadFile(const std::string& filename);
 
 ///Convert File to XML
 std::string ToXml(const File& file) noexcept;

@@ -105,6 +105,13 @@ ribi::pvdb::QtPvdbClusterDialog::~QtPvdbClusterDialog() noexcept
 
 ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(File file)
 {
+  //The user may have
+  // Cluster Concept map
+  //    N       N
+  //    Y       N
+  //    N       Y
+  //    Y       Y
+
   //Create a cluster a new cluster
   if (file.GetCluster().Get().empty() && CountCenterNodes(file.GetConceptMap()) == 0)
   {
@@ -119,7 +126,8 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(F
     return widget;
   }
   //Only where there is an existing concept map, and no existing cluster, will this return null
-  assert(!file.GetCluster().Get().empty() && CountCenterNodes(file.GetConceptMap()) > 0);
+  //???
+  //assert(file.GetCluster().Empty() && CountCenterNodes(file.GetConceptMap()) > 0);
   return nullptr;
 }
 

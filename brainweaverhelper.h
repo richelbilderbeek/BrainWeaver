@@ -121,11 +121,6 @@ std::vector<std::string> SafeFileToVector(const std::string& filename);
 //From http://www.richelbilderbeek.nl/CppSplitXml.htm
 std::vector<std::string> SplitXml(const std::string& s);
 
-#ifndef NDEBUG
-///Test the helper functions
-void TestHelperFunctions();
-#endif
-
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
 

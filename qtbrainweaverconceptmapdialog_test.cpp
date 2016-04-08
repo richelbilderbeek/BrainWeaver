@@ -24,77 +24,6 @@
 #include "testtimer.h"
 #include "trace.h"
 
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::file_rejects_empty_concept_map()
-{
-  File file;
-  ribi::cmap::ConceptMap empty_concept_map;
-  try
-  {
-    file.SetConceptMap(empty_concept_map);
-    QVERIFY(!"Should not get here");
-  }
-  catch (std::invalid_argument& e)
-  {
-    QVERIFY("Should get here");
-  }
-}
-
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::file_rejects_concept_map_without_center_node()
-{
-  File file;
-  ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question"), false);
-  assert(!n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
-  try
-  {
-    file.SetConceptMap(g);
-    QVERIFY(!"Should not get here");
-  }
-  catch (std::invalid_argument& e)
-  {
-    QVERIFY("Should get here");
-  }
-}
-
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::file_rejects_concept_map_with_two_center_nodes()
-{
-  File file;
-  ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question"), true);
-  assert(n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
-  add_custom_and_selectable_vertex(n,false,g);
-  try
-  {
-    file.SetConceptMap(g);
-    QVERIFY(!"Should not get here");
-  }
-  catch (std::invalid_argument& e)
-  {
-    QVERIFY("Should get here");
-  }
-}
-
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::file_accepts_concept_map_with_center_node()
-{
-  File file;
-  ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question"), true);
-  assert(n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
-  try
-  {
-    file.SetConceptMap(g);
-    QVERIFY("Should get here");
-  }
-  catch (std::invalid_argument& e)
-  {
-    QVERIFY(!"Should not get here");
-  }
-}
-
-
 void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
@@ -106,7 +35,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
 
   ribi::cmap::ConceptMap concept_map;
   add_custom_and_selectable_vertex(
-    ribi::cmap::Node(ribi::cmap::Concept(question)),false,concept_map);
+    ribi::cmap::Node(ribi::cmap::Concept(question), true),false,concept_map);
   QVERIFY(boost::num_vertices(concept_map) > 0);
   file.SetConceptMap(concept_map);
   QVERIFY(file.GetQuestion() == question);
