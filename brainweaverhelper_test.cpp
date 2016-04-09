@@ -1,6 +1,5 @@
 #include "brainweaverhelper.h"
 #include <boost/test/unit_test.hpp>
-#include <QRegExp>
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
 {
@@ -84,33 +83,6 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
     BOOST_CHECK(std::count(v.begin(),v.end(),expected_13));
     BOOST_CHECK(std::count(v.begin(),v.end(),expected_14));
     BOOST_CHECK(std::count(v.begin(),v.end(),expected_15));
-  }
-}
-
-BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetRegexMatches)
-{
-  using namespace ribi::pvdb;
-  {
-    const std::string s = "In the Netherlands, 1234 AB and 2345 BC are valid zip codes";
-    std::vector<std::string> expected;
-    expected.push_back("1234 AB");
-    expected.push_back("2345 BC");
-    {
-      const std::string r = "(\\d{4} [A-Z]{2})";
-      BOOST_CHECK(GetRegexMatches(s,QRegExp(r.c_str())) == expected);
-    }
-  }
-  {
-    const std::string s = "<concept><name>Concept with examples</name><example>Example 1</example><example>Example 2</example><example>Example 3</example></concept>";
-    BOOST_CHECK(std::count(s.begin(),s.end(),'\b') == 0);
-    std::vector<std::string> expected;
-    expected.push_back("<example>Example 1</example>");
-    expected.push_back("<example>Example 2</example>");
-    expected.push_back("<example>Example 3</example>");
-    {
-      const std::string r = "(<example>.*</example>)";
-      BOOST_CHECK(GetRegexMatches(s,QRegExp(r.c_str())) == expected);
-    }
   }
 }
 

@@ -33,6 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapexamples.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
+#include "brainweaverregex.h"
 #include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
@@ -61,18 +62,17 @@ ribi::pvdb::Cluster ribi::pvdb::XmlToCluster(const std::string &s)
   assert(s.size() >= 19);
   assert(s.substr(0,9) == "<cluster>");
   assert(s.substr(s.size() - 10,10) == "</cluster>");
-
+  const ribi::pvdb::Regex r;
   std::vector<ribi::cmap::Concept> concepts;
 
   //Obtain the <cluster> ... </cluster> string
-  const std::vector<std::string> v
-    = ribi::pvdb::GetRegexMatches(s,QRegExp("(<cluster>.*</cluster>)"));
+
+  const std::vector<std::string> v = r.GetRegexMatches(s, r.GetRegexCluster());
   assert(v.size() == 1);
   //Strip the <cluster> tags
   const std::string cluster_str = ribi::xml::StripXmlTag(v[0]);
   //Obtain the <concept> ... </concept> strings
-  const std::vector<std::string> w
-    = pvdb::GetRegexMatches(s,QRegExp("(<concept>.*</concept>)"));
+  const std::vector<std::string> w = r.GetRegexMatches(cluster_str, r.GetRegexConcept());
   std::for_each(w.begin(),w.end(),
     [&concepts](const std::string& s)
     {

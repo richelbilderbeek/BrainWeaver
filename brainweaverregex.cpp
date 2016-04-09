@@ -1,36 +1,65 @@
-//---------------------------------------------------------------------------
-/*
-Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2016 The Brainweaver Team
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program.If not, see <http://www.gnu.org/licenses/>.
-*/
-//---------------------------------------------------------------------------
-//From http://www.richelbilderbeek.nl/ProjectBrainweaver.htm
-//---------------------------------------------------------------------------
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "brainweaverregex.h"
 
-#include <cassert>
+#include <sstream>
+#include "conceptmapregex.h"
 
 #include "ribi_regex.h"
-#include "testtimer.h"
-#include "trace.h"
 
-ribi::pvdb::Regex::Regex()
+std::string ribi::pvdb::Regex::GetRegexAbout() noexcept
 {
+  return GetRegexOfSomething("about");
+  //return "(<about>.*?</about>)";
+}
 
+std::string ribi::pvdb::Regex::GetRegexAssessorName() noexcept
+{
+  return GetRegexOfSomething("assessor_name");
+  //return "(<assessor_name>.*?</assessor_name>)";
+}
+
+std::string ribi::pvdb::Regex::GetRegexCluster() noexcept
+{
+  return GetRegexOfSomething("cluster");
+  //return "(<cluster>.*?</cluster>)";
+}
+
+std::string ribi::pvdb::Regex::GetRegexConcept() noexcept
+{
+  return ribi::cmap::Regex().GetRegexConcept();
+}
+
+std::string ribi::pvdb::Regex::GetRegexConceptMap() noexcept
+{
+  return ribi::cmap::Regex().GetRegexConceptMap();
+}
+
+std::string ribi::pvdb::Regex::GetRegexQuestion() noexcept
+{
+  return GetRegexOfSomething("question");
+}
+
+std::string ribi::pvdb::Regex::GetRegexStudentName() noexcept
+{
+  return GetRegexOfSomething("student_name");
+}
+
+std::string ribi::pvdb::Regex::GetRegexVersion() noexcept
+{
+  return GetRegexOfSomething("version");
+}
+
+std::string ribi::pvdb::Regex::GetRegexOfSomething(const std::string& s) noexcept
+{
+  std::stringstream t;
+  t << "(<" << s << ">.*?</" << s << ">)";
+  return t.str();
+}
+
+std::vector<std::string>
+  ribi::pvdb::Regex::GetRegexMatches(
+  const std::string& s,
+  const std::string& regex_str
+)
+{
+  return ribi::Regex().GetRegexMatches(s,regex_str);
 }

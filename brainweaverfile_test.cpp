@@ -179,6 +179,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
 {
   //Test Save/Load on file
   using namespace ribi::pvdb;
+  const std::string filename{"test_ribi_pvdb_file_save_and_load_normal_file.cmp"};
   File first_file;
   first_file.SetStudentName("Richel Bilderbeek");
   const std::string question = "Focal question?";
@@ -190,12 +191,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
   first_file.SetConceptMap(concept_map);
   BOOST_CHECK_EQUAL(GetFirstNode(first_file.GetConceptMap()).GetName(), question);
 
-  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
-  first_file.Save(tmp_filename.c_str());
+  first_file.Save(filename.c_str());
 
   BOOST_CHECK_EQUAL(GetFirstNode(first_file.GetConceptMap()).GetName(), question);
 
-  const File second_file = LoadFile(tmp_filename);
+  const File second_file = LoadFile(filename);
   BOOST_REQUIRE_EQUAL(
     boost::num_vertices(first_file.GetConceptMap()),
     boost::num_vertices(second_file.GetConceptMap())
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
   //Modify f, to test operator!=
   first_file.SetStudentName( first_file.GetStudentName() + " (modified)");
   BOOST_CHECK_NE(first_file, second_file);
-  std::remove(tmp_filename.c_str());
+  std::remove(filename.c_str());
 }
 
 

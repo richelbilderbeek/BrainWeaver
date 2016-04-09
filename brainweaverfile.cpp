@@ -44,14 +44,16 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
+#include "file_to_vector.h"
 #include "graphviz_decode.h"
 #include "conceptmapnode.h"
+#include "brainweaverregex.h"
 #include "fileio.h"
 #include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
+#include "conceptmapregex.h"
 #include "brainweaverfilefactory.h"
 #include "brainweaverhelper.h"
-#include "brainweaverregex.h"
 #include "ribi_regex.h"
 #include "testtimer.h"
 #include "trace.h"
@@ -215,9 +217,10 @@ void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
     std::stringstream msg;
     msg << __func__ << ": "
       << "in Brainweaver, the question will be put on the center node of the concept map. "
-      << "However, these do not match."
-      << "Question: '" << GetQuestion() << ", "
+      << "However, these do not match. "
+      << "Question: '" << GetQuestion() << "', "
       << "text on center node: '" << GetCenterNode(concept_map).GetName()
+      << "' "
     ;
     throw std::invalid_argument(msg.str());
   }
@@ -316,7 +319,6 @@ std::string ribi::pvdb::ToXml(const File& file) noexcept
   assert(r.size() >= 13);
   assert(r.substr(0,6) == "<file>");
   assert(r.substr(r.size() - 7,7) == "</file>");
-
   return r;
 }
 
@@ -334,6 +336,8 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     ;
     throw std::invalid_argument(msg.str());
   }
+  const ribi::pvdb::Regex r;
+  //Make s one line, because regexes do not search beyond their own line
 
   std::string about;
   std::string assessor_name;
@@ -343,21 +347,22 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
   std::string student_name;
   std::string version;
   //m_about_str
+
   {
     const std::vector<std::string> v
-      = pvdb::GetRegexMatches(s,QRegExp("(<about>.*</about>)"));
+      = r.GetRegexMatches(s,r.GetRegexAbout());
     assert(v.size() == 1);
     about = ribi::xml::StripXmlTag(v[0]);
   }
   //m_assessor_name
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<assessor_name>.*</assessor_name>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexAssessorName());
     assert(v.size() == 1);
     assessor_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_cluster
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<cluster>.*</cluster>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexCluster());
     if (!v.empty())
     {
       assert(v.size() == 1);
@@ -370,12 +375,11 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
   }
   //m_concept_map
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<concept_map>.*</concept_map>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s, r.GetRegexConceptMap());
     if (!v.empty())
     {
       assert(v.size() == 1);
-      concept_map = ribi::cmap::XmlToConceptMap(v[0]);
-      //?DecodeConceptMap(concept_map);
+      concept_map = ribi::cmap::XmlToConceptMap(s);
     }
     else
     {
@@ -384,7 +388,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
   }
   //m_question
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<question>.*</question>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexQuestion());
     if (v.empty())
     {
       std::clog << "Warning: no question supplied" << std::endl;
@@ -398,21 +402,16 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
   }
   //m_student_name
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<student_name>.*</student_name>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexStudentName());
     assert(v.size() == 1);
     student_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_version
   {
-    const std::vector<std::string> v = pvdb::GetRegexMatches(s,QRegExp("(<version>.*</version>)"));
+    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexVersion());
     assert(v.size() == 1);
     version = ribi::xml::StripXmlTag(v[0]);
   }
-
-  //assert( (!f->GetConceptMap() || !f->GetConceptMap().GetNodes().empty() ) //TODO RJCB: Put back in
-  //  && "Either a file has no concept map or it has at least one node"); //TODO RJCB: Put back in
-  //assert( (!f->GetConceptMap() || f->GetConceptMap().FindCenterNode() ) //TODO RJCB: Put back in
-  //  && "Either a file has no concept map or the first node in a file's ConceptMap is be a CenterNode"); //TODO RJCB: Put back in
 
   return File(
     about,

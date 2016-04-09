@@ -107,7 +107,8 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disable
   QVERIFY(index_1 < ConceptFactory().GetNumberOfTests());
   const int index_2 = 2;
   QVERIFY(index_2 < ConceptFactory().GetNumberOfTests());
-  file.SetConceptMap(ribi::cmap::ConceptMapFactory().Get6());
+
+  file.SetConceptMap(CreateConceptMap(question));
   const QtPvdbClusterDialog d(file);
   QVERIFY(d.GetWidget());
   QVERIFY(!d.GetWidget()->isEnabled());
