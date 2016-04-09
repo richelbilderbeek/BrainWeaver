@@ -33,137 +33,81 @@
 #include "trace.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
-void ribi::pvdb::qtbrainweaverclusterdialog_test::all_tests()
+void ribi::pvdb::qtbrainweaverclusterdialog_test::enable_button_depending_on_file()
 {
-  using namespace ribi::cmap;
-  //Regular tests
-  {
-    const std::vector<File> v = File::GetTests();
-    std::for_each(v.begin(),v.end(),
-      [](const File& file)
+  const auto v = File::GetTests();
+  std::for_each(v.begin(),v.end(),
+    [](const File& file)
+    {
+      const bool had_cluster = !file.GetCluster().Empty();
+      const bool had_concept_map = boost::num_vertices(file.GetConceptMap());
+      QtPvdbClusterDialog d{file};
+
+      if (!had_cluster && !had_concept_map)
       {
-        const bool had_cluster = !file.GetCluster().Empty();
-        const bool had_concept_map = boost::num_vertices(file.GetConceptMap());
-        QtPvdbClusterDialog d{file};
-
-        if (!had_cluster && !had_concept_map)
-        {
-          QVERIFY(d.GetUi()->button_add->isEnabled());
-        }
-        if ( had_cluster && !had_concept_map)
-        {
-          QVERIFY(d.GetUi()->button_add->isEnabled());
-        }
-        if (!had_cluster &&  had_concept_map)
-        {
-          QVERIFY(!d.GetUi()->button_add->isEnabled());
-        }
-        if ( had_cluster &&  had_concept_map)
-        {
-          QVERIFY(!d.GetUi()->button_add->isEnabled());
-        }
-        //Test cluster copying, if there
-        if (!file.GetCluster().Empty())
-        {
-          QVERIFY(file.GetCluster().Empty() == d.GetWidget()->GetCluster().Empty());
-          const Cluster before = file.GetCluster();
-          QVERIFY(file.GetCluster() == before);
-          d.GetWidget()->Add("Modification!");
-          QVERIFY(d.GetWidget()->GetCluster() != before); //Widget updates the cluster
-        }
+        QVERIFY(d.GetUi()->button_add->isEnabled());
       }
-    );
-  }
-  #ifdef NOT_NOW_20160130
-  {
-    const std::vector<File > v = pvdb::File::GetTests();
-    std::for_each(v.begin(),v.end(),
-      [](const File & file)
+      if ( had_cluster && !had_concept_map)
       {
-        const bool had_cluster = file.GetCluster().get(); //.get() needed for crosscompiler
-        const bool had_concept_map = file.GetConceptMap().get(); //.get() needed for crosscompiler
-
-        boost::shared_ptr<QtPvdbClusterDialog> d(new QtPvdbClusterDialog(file));
-
-        if (!had_cluster && !had_concept_map)
-        {
-          QVERIFY(!file.GetCluster().Empty());
-          QVERIFY(!boost::num_vertices(file.GetConceptMap()));
-          QVERIFY(d->ui->button_add->isEnabled());
-        }
-        if ( had_cluster && !had_concept_map)
-        {
-          QVERIFY(!file.GetCluster().Empty());
-          QVERIFY(!boost::num_vertices(file.GetConceptMap()));
-          QVERIFY(d->ui->button_add->isEnabled());
-        }
-        if (!had_cluster &&  had_concept_map)
-        {
-          QVERIFY(file.GetCluster().Empty());
-          QVERIFY( file.GetConceptMap());
-          QVERIFY(!d->ui->button_add->isEnabled());
-        }
-        if ( had_cluster &&  had_concept_map)
-        {
-          QVERIFY( file.GetCluster());
-          QVERIFY( file.GetConceptMap());
-          QVERIFY(!d->ui->button_add->isEnabled());
-        }
-        if (file.GetCluster())
-        {
-
-          const Cluster before = pvdb::ClusterFactory().DeepCopy(file.GetCluster());
-          QVERIFY(before);
-          QVERIFY(before != file.GetCluster());
-          QVERIFY(operator==(*file.GetCluster(),*before));
-          d->ui->edit->setText("modification");
-          if (d->ui->button_add->isEnabled())
-          {
-            d->on_button_add_clicked();
-            QVERIFY(!operator==(*before,*d->GetWidget()->GetCluster()));
-          }
-        }
+        QVERIFY(d.GetUi()->button_add->isEnabled());
       }
-    );
-  }
-  #endif //NOT_NOW_20160130
-  //QtPvdbClusterDialog must be enabled if there is no concept map
+      if (!had_cluster &&  had_concept_map)
+      {
+        QVERIFY(!d.GetUi()->button_add->isEnabled());
+      }
+      if ( had_cluster &&  had_concept_map)
+      {
+        QVERIFY(!d.GetUi()->button_add->isEnabled());
+      }
+    }
+  );
+}
+
+void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
+{
+  try
   {
-    const std::string question = "TESTQUESTION";
+    using namespace ribi::cmap;
+    const std::string question = "question with spaces";
     File file;
     file.SetQuestion(question);
     QVERIFY(file.GetQuestion() == question);
 
     const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
-
     file.SetCluster(cluster);
+
 
     QVERIFY(!file.GetCluster().Empty());
     QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
 
     const QtPvdbClusterDialog d(file);
-    QVERIFY(d.GetWidget()->isEnabled()
-      && "QtClusterWidget is enabled only when there is no ConceptMap");
+    QVERIFY(d.GetWidget()->isEnabled());
   }
-
-  //QtPvdbClusterDialog must be disabled if there are more nodes in the concept map
+  catch (std::exception& e)
   {
-    const std::string question = "TESTQUESTION";
-    File file;
-    file.SetQuestion(question);
-
-    const Cluster cluster = ClusterFactory().GetTest( { 0,1,2 } );
-
-    file.SetCluster(cluster);
-
-    const int index_1 = 1;
-    QVERIFY(index_1 < ConceptFactory().GetNumberOfTests());
-    const int index_2 = 2;
-    QVERIFY(index_2 < ConceptFactory().GetNumberOfTests());
-    file.SetConceptMap(ribi::cmap::ConceptMapFactory().Get6());
-    const QtPvdbClusterDialog d(file);
-    QVERIFY(d.GetWidget());
-    QVERIFY(!d.GetWidget()->isEnabled()
-      && "QtClusterWidget is disabled when there is a filled ConceptMap");
+    std::cerr << e.what() << '\n';
+    QVERIFY(!"Should not get here")
   }
+}
+
+
+void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
+{
+  using namespace ribi::cmap;
+  const std::string question = "question with spaces";
+  File file;
+  file.SetQuestion(question);
+
+  const Cluster cluster = ClusterFactory().GetTest( { 0,1,2 } );
+
+  file.SetCluster(cluster);
+
+  const int index_1 = 1;
+  QVERIFY(index_1 < ConceptFactory().GetNumberOfTests());
+  const int index_2 = 2;
+  QVERIFY(index_2 < ConceptFactory().GetNumberOfTests());
+  file.SetConceptMap(ribi::cmap::ConceptMapFactory().Get6());
+  const QtPvdbClusterDialog d(file);
+  QVERIFY(d.GetWidget());
+  QVERIFY(!d.GetWidget()->isEnabled());
 }

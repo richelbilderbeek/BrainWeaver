@@ -43,34 +43,34 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_copy_constructor)
   f.SetAssessorName("debug assessor name");
   f.SetStudentName("debug student name");
   File g = f;
-  BOOST_CHECK(f == g);
+  BOOST_CHECK_EQUAL(f, g);
   //Modify g, to test operator!=
-  g.SetStudentName( f.GetStudentName() + " (modified)");
-  BOOST_CHECK(f != g);
+  g.SetStudentName( f.GetStudentName() + " (modified with spaces)");
+  BOOST_CHECK_NE(f, g);
   g.SetStudentName( f.GetStudentName());
-  BOOST_CHECK(f == g);
-  g.SetAssessorName( f.GetAssessorName() + " (modified)");
-  BOOST_CHECK(f != g);
+  BOOST_CHECK_EQUAL(f, g);
+  g.SetAssessorName( f.GetAssessorName() + " (modified with spaces)");
+  BOOST_CHECK_NE(f, g);
   g.SetAssessorName( f.GetAssessorName());
-  BOOST_CHECK(f == g);
+  BOOST_CHECK_EQUAL(f, g);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setquestion_and_getquestion_are_symmetric)
 {
   ribi::pvdb::File f;
-  const std::string question{"Question"};
-  BOOST_CHECK(f.GetQuestion() != question);
+  const std::string question{"Question with space"};
+  BOOST_CHECK_NE(f.GetQuestion(), question);
   f.SetQuestion(question);
-  BOOST_CHECK(f.GetQuestion() == question);
+  BOOST_CHECK_EQUAL(f.GetQuestion(), question);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setstudentname_and_getstudentname_are_symmetric)
 {
   ribi::pvdb::File f;
-  const std::string studentname{"Question"};
-  BOOST_CHECK(f.GetStudentName() != studentname);
+  const std::string studentname{"Student name"};
+  BOOST_CHECK_NE(f.GetStudentName(), studentname);
   f.SetStudentName(studentname);
-  BOOST_CHECK(f.GetStudentName() == studentname);
+  BOOST_CHECK_EQUAL(f.GetStudentName(), studentname);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_empty_concept_map)
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_without_center_node
 {
   ribi::pvdb::File file;
   ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question"), false);
+  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), false);
   assert(!n.IsCenterNode());
   add_custom_and_selectable_vertex(n,false,g);
   BOOST_CHECK_THROW(
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_two_center_nod
 {
   ribi::pvdb::File file;
   ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question"), true);
+  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), true);
   assert(n.IsCenterNode());
   add_custom_and_selectable_vertex(n,false,g);
   add_custom_and_selectable_vertex(n,false,g);
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_center_node_wi
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_accepts_concept_map_with_center_node)
 {
-  const std::string question{"question"};
+  const std::string question{"question with spaces"};
   ribi::pvdb::File file;
   file.SetQuestion(question);
   ribi::cmap::ConceptMap g;
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_CreateConceptMap)
 {
   const ribi::cmap::ConceptMap concept_map = ribi::pvdb::CreateConceptMap("some question");
   BOOST_CHECK(boost::num_vertices(concept_map) > 0);
-  BOOST_CHECK(ribi::cmap::CountCenterNodes(concept_map) == 1);
+  BOOST_CHECK_EQUAL(ribi::cmap::CountCenterNodes(concept_map), 1);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
@@ -148,13 +148,13 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
   using namespace ribi::pvdb;
   const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
   //Test Save/Load on empty File
-  File firstfile;
-  firstfile.Save(tmp_filename);
+  File first_file;
+  first_file.Save(tmp_filename);
   const File secondfile = LoadFile(tmp_filename);
-  BOOST_CHECK(firstfile == secondfile);
+  BOOST_CHECK_EQUAL(first_file, secondfile);
   //Modify f, to test operator!=
-  firstfile.SetStudentName(firstfile.GetStudentName() + " (modified)");
-  BOOST_CHECK(firstfile != secondfile);
+  first_file.SetStudentName(first_file.GetStudentName() + " (modified)");
+  BOOST_CHECK_NE(first_file, secondfile);
   std::remove(tmp_filename.c_str());
 }
 
@@ -179,29 +179,38 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
 {
   //Test Save/Load on file
   using namespace ribi::pvdb;
-  File firstfile;
-  firstfile.SetStudentName("Richel Bilderbeek");
+  File first_file;
+  first_file.SetStudentName("Richel Bilderbeek");
   const std::string question = "Focal question?";
-  firstfile.SetQuestion(question);
+  first_file.SetQuestion(question);
   const ribi::cmap::ConceptMap concept_map = CreateConceptMap(question);
 
-  firstfile.SetConceptMap(concept_map);
+  BOOST_CHECK_EQUAL(GetFirstNode(concept_map).GetName(), question);
+
+  first_file.SetConceptMap(concept_map);
+  BOOST_CHECK_EQUAL(GetFirstNode(first_file.GetConceptMap()).GetName(), question);
 
   const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
-  firstfile.Save(tmp_filename.c_str());
+  first_file.Save(tmp_filename.c_str());
+
+  BOOST_CHECK_EQUAL(GetFirstNode(first_file.GetConceptMap()).GetName(), question);
 
   const File second_file = LoadFile(tmp_filename);
+  BOOST_REQUIRE_EQUAL(
+    boost::num_vertices(first_file.GetConceptMap()),
+    boost::num_vertices(second_file.GetConceptMap())
+  );
 
-  BOOST_CHECK(second_file.GetQuestion() == firstfile.GetQuestion());
-  if (firstfile != second_file)
-  {
-    TRACE(firstfile);
-    TRACE(second_file);
-  }
-  BOOST_CHECK(firstfile == second_file);
+
+  BOOST_CHECK_EQUAL(second_file.GetQuestion(), first_file.GetQuestion());
+  BOOST_TEST_PASSPOINT();
+  BOOST_CHECK_EQUAL(GetFirstNode(second_file.GetConceptMap()).GetName(), question);
+  BOOST_TEST_PASSPOINT();
+  BOOST_CHECK_EQUAL(first_file, second_file);
+  BOOST_TEST_PASSPOINT();
   //Modify f, to test operator!=
-  firstfile.SetStudentName( firstfile.GetStudentName() + " (modified)");
-  BOOST_CHECK(firstfile != second_file);
+  first_file.SetStudentName( first_file.GetStudentName() + " (modified)");
+  BOOST_CHECK_NE(first_file, second_file);
   std::remove(tmp_filename.c_str());
 }
 

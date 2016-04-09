@@ -44,6 +44,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
+#include "graphviz_decode.h"
 #include "conceptmapnode.h"
 #include "fileio.h"
 #include "brainweaverclusterfactory.h"
@@ -166,12 +167,6 @@ ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename)
   boost::algorithm::trim(xml);
 
   File file = ribi::pvdb::XmlToFile(xml);
-
-  //assert( (!file.GetConceptMap() || !GetNodes(file.GetConceptMap()).empty() ) //TODO RJCB: Put back in
-  //  && "Either a file has no concept map or it has at least one node"); //TODO RJCB: Put back in
-  //assert( (!file.GetConceptMap() || file.GetConceptMap().FindCenterNode()) //TODO RJCB: Put back in
-  //  && "Either a file has no concept map or the file's ConceptMap has a CenterNode"); //TODO RJCB: Put back in
-
   return file;
 }
 
@@ -232,11 +227,6 @@ void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
 
 void ribi::pvdb::File::SetCluster(const Cluster& cluster) noexcept
 {
-  //Don't care: m_cluster will be overwritten more often,
-  //because the TreeWidget has no Model/View architecture: the resulting
-  //cluster is allocated new and calculated every save
-  //assert(!m_cluster);
-
   m_cluster = cluster;
   this->AutoSave();
 }
@@ -311,9 +301,6 @@ std::string ribi::pvdb::FileToStr(const std::string& filename) noexcept
 
 std::string ribi::pvdb::ToXml(const File& file) noexcept
 {
-  //assert(file.m_cluster);
-  //assert(file.m_concept_map);
-
   std::stringstream s;
   s << "<file>";
   s << "<about>" << file.GetAbout() << "</about>";
@@ -388,6 +375,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     {
       assert(v.size() == 1);
       concept_map = ribi::cmap::XmlToConceptMap(v[0]);
+      //?DecodeConceptMap(concept_map);
     }
     else
     {
@@ -405,6 +393,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     else
     {
       question = ribi::xml::StripXmlTag(v[0]);
+      question = graphviz_decode(question);
     }
   }
   //m_student_name
