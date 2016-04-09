@@ -33,13 +33,11 @@ struct FileFactory
 {
   FileFactory();
 
-  int GetNumberOfTests() const noexcept { return 5; }
-
+  int GetNumberOfTests() const noexcept { return 6; }
   std::vector<File> GetTests() const noexcept;
 };
 
 } //~namespace pvdb
-
 } //~namespace ribi
 
 #endif // BRAINWEAVERFILEFACTORY_H

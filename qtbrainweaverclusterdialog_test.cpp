@@ -76,17 +76,18 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled
     const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
     file.SetCluster(cluster);
 
-
     QVERIFY(!file.GetCluster().Empty());
     QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
 
     const QtPvdbClusterDialog d(file);
-    QVERIFY(d.GetWidget()->isEnabled());
+    const auto w = d.GetWidget();
+    QVERIFY(w);
+    QVERIFY(w && w->isEnabled());
   }
   catch (std::exception& e)
   {
     std::cerr << e.what() << '\n';
-    QVERIFY(!"Should not get here")
+    QVERIFY(!"Should not get here");
   }
 }
 

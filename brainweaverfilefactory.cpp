@@ -49,7 +49,9 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   //[1]: file with focal question
   {
     File f;
-    const ConceptMap concept_map = ConceptMapFactory().Get0();
+    const ConceptMap concept_map = ConceptMapFactory().Get1();
+    assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+    f.SetQuestion(GetFirstNode(concept_map).GetName());
     f.SetConceptMap(concept_map);
     v.push_back(f);
   }
@@ -57,6 +59,8 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   {
     File f;
     const ConceptMap concept_map = ConceptMapFactory().Get6();
+    assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+    f.SetQuestion(GetFirstNode(concept_map).GetName());
     f.SetConceptMap(concept_map);
     v.push_back(f);
   }
@@ -65,6 +69,8 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
     File f;
     f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[3] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
+    assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+    f.SetQuestion(GetFirstNode(concept_map).GetName());
     f.SetConceptMap(concept_map);
     const Cluster cluster = ClusterFactory().GetTests().at(3);
     f.SetCluster(cluster);
@@ -75,6 +81,8 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
     File f;
     f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[4] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
+    assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+    f.SetQuestion(GetFirstNode(concept_map).GetName());
     f.SetConceptMap(concept_map);
     const Cluster cluster = ClusterFactory().GetTests().at(3);
     f.SetCluster(cluster);
@@ -85,6 +93,8 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
     File f;
     f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[5] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
+    assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+    f.SetQuestion(GetFirstNode(concept_map).GetName());
     f.SetConceptMap(concept_map);
     const Cluster cluster = ClusterFactory().GetTests().at(3);
     f.SetCluster(cluster);

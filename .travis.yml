@@ -28,6 +28,10 @@ before_script:
 script: 
   - ./download_other_githubs.sh
   - ./build_other_githubs.sh
+  - ./build_console_test.sh
+  - ./BrainweaverConsoleTest
   - ./build_desktop_test.sh
+  - ./BrainweaverDesktopTest
+  - ./get_code_cov.sh
   - codecov
   - ./build_desktop.sh

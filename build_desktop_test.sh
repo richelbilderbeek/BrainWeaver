@@ -1,4 +1,3 @@
 #!/bin/bash
-qmake BrainweaverDeveloperTest.pro
+qmake BrainweaverDesktopTest.pro
 make
-./BrainweaverDeveloperTest
