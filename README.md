@@ -12,6 +12,16 @@ Brainweaver, tool for teacher education, as described in [1].
 
 Brainweaver is in active development.
 
+## Build status of builds that Brainweaver relies on
+
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial) [BoostGraphTutorial](https://github.com/richelbilderbeek/BoostGraphTutorial)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/RibiClasses.svg?branch=master)](https://travis-ci.org/richelbilderbeek/RibiClasses) [RibiClasses](https://github.com/richelbilderbeek/RibiClasses)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/StyleSheetSetter.svg?branch=master)](https://travis-ci.org/richelbilderbeek/StyleSheetSetter) [StyleSheetSetter](https://github.com/richelbilderbeek/StyleSheetSetter)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/TestArrowItems.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestArrowItems) [TestArrowItems](https://github.com/richelbilderbeek/TestArrowItems)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/TestConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestConceptMap) [TestConceptMap](https://github.com/richelbilderbeek/TestConceptMap)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/TestRoundedRectItem.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestRoundedRectItem) [TestRoundedRectItem](https://github.com/richelbilderbeek/TestRoundedRectItem)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/TestRoundedEditRectItem.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestRoundedEditRectItem) [TestRoundedEditRectItem](https://github.com/richelbilderbeek/TestRoundedEditRectItem)
+
 ## Building
 
 Building `Brainweaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
