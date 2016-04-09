@@ -281,7 +281,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcep
 {
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  assert(fileio::FileIo().IsRegularFile(filename));
+  assert(is_regular_file(filename));
   const File file = pvdb::LoadFile(filename);
 
   QtPvdbPrintConceptMapDialog d(file);
@@ -292,7 +292,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
 {
   on_button_create_test_files_clicked();
   const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  assert(fileio::FileIo().IsRegularFile(filename));
+  assert(is_regular_file(filename));
   const File file = pvdb::LoadFile(filename);
 
   QtPvdbPrintRatingDialog d(file);

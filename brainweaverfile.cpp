@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2013-2016 The Brainweaver Team
+Copyright (C) 2013-2016 Richel Bilderbeek
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -290,7 +290,7 @@ std::string ribi::pvdb::DoXpressiveRegexReplace(
 
 std::string ribi::pvdb::FileToStr(const std::string& filename) noexcept
 {
-  assert(fileio::FileIo().IsRegularFile(filename.c_str()));
+  assert(is_regular_file(filename.c_str()));
   std::string s;
   std::ifstream in(filename.c_str());
   while (!in.eof())
@@ -379,7 +379,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     if (!v.empty())
     {
       assert(v.size() == 1);
-      concept_map = ribi::cmap::XmlToConceptMap(s);
+      concept_map = ribi::cmap::XmlToConceptMap(v[0]);
     }
     else
     {

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Brainweaver, tool to create and assess concept maps
-Copyright (C) 2012-2016 The Brainweaver Team
+Copyright (C) 2012-2016 Richel Bilderbeek
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -46,16 +46,16 @@ int ribi::pvdb::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv
   if (argc == 1)
   {
     std::cout << GetHelp() << '\n';
-    return 1;
+    return 0;
   }
-  assert(!"TODO");
-  return 1;
+  std::cout << "This application has no console version\n";
+  return 0;
 }
 
 ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
 {
   About a(
-    "The Brainweaver Team",
+    "Richel Bilderbeek",
     "Brainweaver",
     "tool to create and assess concept maps",
     "January 17th of 2016",

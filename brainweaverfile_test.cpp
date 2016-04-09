@@ -160,14 +160,14 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_nonexisting_file)
 {
-  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
+  const std::string tmp_filename = ribi::get_temp_filename(".txt");
   assert(!is_regular_file(tmp_filename));
   BOOST_CHECK_THROW(ribi::pvdb::LoadFile(tmp_filename), std::invalid_argument)
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
 {
-  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
+  const std::string tmp_filename = ribi::get_temp_filename(".txt");
   { std::ofstream f(tmp_filename); f << "gibberish"; }
   assert(is_regular_file(tmp_filename));
   BOOST_CHECK_THROW(ribi::pvdb::LoadFile(tmp_filename), std::invalid_argument)

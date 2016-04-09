@@ -65,7 +65,7 @@ void ribi::pvdb::QtPvdbViewFilesDialog::on_button_left_clicked()
   if (filenames.isEmpty()) return;
   assert(filenames.size() == 1);
   const std::string filename = filenames[0].toStdString();
-  assert(fileio::FileIo().IsRegularFile(filename));
+  assert(is_regular_file(filename));
   assert(!pvdb::SafeFileToVector(filename).empty());
 
   const std::vector<std::string> v = pvdb::XmlToPretty(pvdb::SafeFileToVector(filename)[0]);
@@ -97,7 +97,7 @@ void ribi::pvdb::QtPvdbViewFilesDialog::on_button_right_clicked()
   if (filenames.isEmpty()) return;
   assert(filenames.size() == 1);
   const std::string filename = filenames[0].toStdString();
-  assert(fileio::FileIo().IsRegularFile(filename));
+  assert(is_regular_file(filename));
   assert(!ribi::fileio::FileIo().FileToVector(filename).empty());
   const std::vector<std::string> v = pvdb::XmlToPretty(ribi::fileio::FileIo().FileToVector(filename)[0]);
   std::string text;
