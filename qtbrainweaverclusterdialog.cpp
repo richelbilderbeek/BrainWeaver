@@ -112,14 +112,15 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(F
   //    N       Y
   //    Y       Y
 
-  //Create a cluster a new cluster
+  //Create a new cluster
   if (file.GetCluster().Get().empty() && CountCenterNodes(file.GetConceptMap()) == 0)
   {
     const Cluster cluster = pvdb::ClusterFactory().Create( {} );
-     file.SetCluster(cluster);
+    file.SetCluster(cluster);
   }
+
   //Read an existing cluster
-  if (file.GetCluster().Get().empty())
+  if (!file.GetCluster().Get().empty())
   {
     QtPvdbClusterWidget * const widget = new QtPvdbClusterWidget(file.GetCluster());
     assert(widget);
