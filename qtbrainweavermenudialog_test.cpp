@@ -56,50 +56,55 @@
 #include "trace.h"
 #include "ui_qtbrainweavermenudialog.h"
 
-void ribi::pvdb::qtbrainweavermenudialog_test::all_tests()
+void ribi::pvdb::qtbrainweavermenudialog_test::press_all_buttons()
 {
-  //Press all buttons
-  {
-    QtPvdbMenuDialog d;
-    d.SetShowChildDialogsModal(false);
-    Ui::QtPvdbMenuDialog * const ui = d.GetUi();
-    const std::vector<QPushButton*> buttons
-      =
-      {
-        //Duplication of tests, the ones I am most interested in now
-
-        //Normal alphabetical order of tests
-        ui->button_about,
-        ui->button_assessor,
-        ui->button_create_test_files,
-        ui->button_modify_stylesheet,
-        ui->button_overview,
-        ui->button_print_concept_map,
-        ui->button_print_rating,
-        ui->button_rate_concept,
-        ui->button_rate_concept_auto,
-        ui->button_rate_concept_map,
-        ui->button_rate_examples,
-        ui->button_rating,
-        ui->button_student,
-        ui->button_test_arrowitems,
-        ui->button_test_cluster,
-        ui->button_test_conceptmap,
-        ui->button_test_create_sub_concept_map,
-        ui->button_test_conceptmaps,
-        ui->button_test_qtroundededitrectitem,
-        ui->button_view_files
-      };
-    const std::size_t n_buttons = buttons.size();
-    for (std::size_t i = 0; i!=n_buttons; ++i)
+  QtPvdbMenuDialog d;
+  d.show();
+  d.SetShowChildDialogsModal(false);
+  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
+  const std::vector<QPushButton*> buttons
+    =
     {
-      QVERIFY(i < buttons.size());
-      QPushButton * const button = buttons[i];
-      QVERIFY(button);
-      if (button->isEnabled()) button->click();
-    }
+      //Duplication of tests, the ones I am most interested in now
 
+      //Normal alphabetical order of tests
+      ui->button_about,
+      ui->button_assessor,
+      ui->button_create_test_files,
+      ui->button_modify_stylesheet,
+      ui->button_overview,
+      ui->button_print_concept_map,
+      ui->button_print_rating,
+      ui->button_rate_concept,
+      ui->button_rate_concept_auto,
+      ui->button_rate_concept_map,
+      ui->button_rate_examples,
+      ui->button_rating,
+      ui->button_student,
+      ui->button_test_arrowitems,
+      ui->button_test_cluster,
+      ui->button_test_conceptmap,
+      ui->button_test_create_sub_concept_map,
+      ui->button_test_conceptmaps,
+      ui->button_test_qtroundededitrectitem,
+      ui->button_view_files
+    };
+  const std::size_t n_buttons = buttons.size();
+  for (std::size_t i = 0; i!=n_buttons; ++i)
+  {
+    QVERIFY(i < buttons.size());
+    QPushButton * const button = buttons[i];
+    QVERIFY(button);
+    if (button->isEnabled()) button->click();
   }
+}
+
+void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
+{
+  QtPvdbMenuDialog d;
+  d.show();
+  d.SetShowChildDialogsModal(false);
+  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
   //THE MULTI DIALOG TESTS HERE
   //MULTI DIALOG TEST #1
   //1) Create an assessor question file
@@ -168,6 +173,15 @@ void ribi::pvdb::qtbrainweavermenudialog_test::all_tests()
     #endif // NOT_NOW_20141142
     std::remove(File::GetTestFileName().c_str());
   }
+}
+
+void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
+{
+  if (!"Fix issue #20") return;
+  QtPvdbMenuDialog d;
+  d.show();
+  d.SetShowChildDialogsModal(false);
+  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
   //Long test #2
   //1) Create an assessor question file
   //2) Load the assessor file (as a student)
@@ -257,5 +271,4 @@ void ribi::pvdb::qtbrainweavermenudialog_test::all_tests()
     #endif // NOT_NOW_20141142
     std::remove(File::GetTestFileName().c_str());
   }
-
 }

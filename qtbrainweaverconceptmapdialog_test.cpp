@@ -27,23 +27,32 @@
 void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
-  const std::string question = "TESTQUESTION";
-  File file;
-  file.SetQuestion(question);
-  QVERIFY(file.GetCluster().Empty());
-  QVERIFY(!boost::num_vertices(file.GetConceptMap()));
+  try
+  {
+    const std::string question = "TESTQUESTION";
+    File file;
+    file.SetQuestion(question);
+    QVERIFY(file.GetCluster().Empty());
+    QVERIFY(!boost::num_vertices(file.GetConceptMap()));
 
-  ribi::cmap::ConceptMap concept_map;
-  add_custom_and_selectable_vertex(
-    ribi::cmap::Node(ribi::cmap::Concept(question), true),false,concept_map);
-  QVERIFY(boost::num_vertices(concept_map) > 0);
-  file.SetConceptMap(concept_map);
-  QVERIFY(file.GetQuestion() == question);
-  QVERIFY(boost::num_vertices(file.GetConceptMap()));
-  QVERIFY(!GetNodes(file.GetConceptMap()).empty());
-  QVERIFY(HasCenterNode(file.GetConceptMap()));
-  const QtPvdbConceptMapDialog d(file);
-  QVERIFY(boost::num_vertices(d.GetWidget()->GetConceptMap()) == 1);
+    ribi::cmap::ConceptMap concept_map;
+    add_custom_and_selectable_vertex(
+      ribi::cmap::Node(ribi::cmap::Concept(question), true),false,concept_map);
+    QVERIFY(boost::num_vertices(concept_map) > 0);
+    file.SetConceptMap(concept_map);
+    QVERIFY(file.GetQuestion() == question);
+    QVERIFY(boost::num_vertices(file.GetConceptMap()));
+    QVERIFY(!GetNodes(file.GetConceptMap()).empty());
+    QVERIFY(HasCenterNode(file.GetConceptMap()));
+    const QtPvdbConceptMapDialog d(file);
+    assert(d.GetWidget());
+    QVERIFY(boost::num_vertices(d.GetWidget()->GetConceptMap()) == 1);
+  }
+  catch (std::exception& e)
+  {
+    qDebug() << e.what();
+    QVERIFY(!"Should not get here");
+  }
 }
 
 void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()

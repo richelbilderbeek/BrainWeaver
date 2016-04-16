@@ -52,8 +52,7 @@ public:
     QWidget* parent = 0
   );
 
-  ///Block: QtPvdbTreeWidgetItem must be added instead
-  void addTopLevelItem(QtPvdbClusterTreeWidgetItem *item) { addTopLevelItem(item); }
+  void addTopLevelItem(QTreeWidgetItem *item);
 
   ///Add a top-level item
   void Add(const std::string& text);
@@ -71,9 +70,6 @@ protected:
 
 private slots:
   void RemoveEmptyItem(QTreeWidgetItem*,int);
-
-  ///Block: QtPvdbTreeWidgetItem must be added instead
-  void addTopLevelItem(QTreeWidgetItem *item) { QTreeWidget::addTopLevelItem(item); }
 
 private:
   ///The cluster

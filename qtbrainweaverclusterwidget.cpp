@@ -80,6 +80,20 @@ void ribi::pvdb::QtPvdbClusterWidget::Add(const std::string& text)
   SetCorrectFlags();
 }
 
+void ribi::pvdb::QtPvdbClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
+{
+  if (!dynamic_cast<QtPvdbClusterTreeWidgetItem*>(item))
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "must add items of type 'QtPvdbClusterTreeWidgetItem'"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
+  QTreeWidget::addTopLevelItem(item);
+}
+
+
 void ribi::pvdb::QtPvdbClusterWidget::DoRandomStuff()
 {
   QtPvdbClusterTreeWidgetItem * const top = new QtPvdbClusterTreeWidgetItem(

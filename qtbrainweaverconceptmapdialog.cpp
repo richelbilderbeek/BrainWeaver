@@ -86,15 +86,20 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
     m_file(file),
     m_widget(CreateWidget(file))
 {
+  if (boost::num_vertices(m_file.GetConceptMap()) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "a File its concept map must have at least one node"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
+
   ui->setupUi(this);
-  #ifndef NDEBUG
-  assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
+
   assert(m_widget);
   assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
   assert(this->layout());
-  #endif
-
-  
   this->layout()->addWidget(m_widget);
 
   //assert(!Collect<cmap::QtNode>(m_widget->scene()).empty()); //TODO RJCB: Put back in

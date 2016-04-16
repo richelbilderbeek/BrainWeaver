@@ -201,7 +201,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
     {
       //All QtNodes' their rectangles should be within all_items_rect
       assert(qtnode);
-      assert(all_items_rect.contains(qtnode->boundingRect()));
+      //assert(all_items_rect.contains(qtnode->boundingRect())); //TODO: Move to tests
     }
     #endif
     m_widget->fitInView(all_items_rect); //Does not work

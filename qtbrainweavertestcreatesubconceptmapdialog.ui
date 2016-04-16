@@ -24,7 +24,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="box_index"/>
+      <widget class="QSpinBox" name="box_index">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -48,7 +52,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="box_index_sub"/>
+      <widget class="QSpinBox" name="box_index_sub">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

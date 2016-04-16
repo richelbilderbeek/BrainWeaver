@@ -117,6 +117,8 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked() noexcept
     const ribi::cmap::ConceptMap concept_map
       = ribi::cmap::ConceptMapFactory().GetTest(6);
     assert(boost::num_vertices(concept_map) > 0);
+    //Question and first node must match
+    file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
     file.SetConceptMap(concept_map);
   }
   //Obtain a random sub-concept-map
@@ -135,6 +137,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_map_clicked() noexcept
   File file;
   const ribi::cmap::ConceptMap concept_map
     = ribi::cmap::ConceptMapFactory().GetTest(6);
+  file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
   file.SetConceptMap(concept_map);
   QtRateConceptMapDialog d(file);
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
@@ -196,7 +199,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_test_cluster_clicked() noexcept
     const std::string question = "qtvdbmenudialog.cpp 79?";
     ribi::cmap::ConceptMap concept_map;
     add_custom_vertex(
-      ribi::cmap::Node(ribi::cmap::Concept(question)),concept_map
+      ribi::cmap::Node(ribi::cmap::Concept(question), true),concept_map
     );
     assert(boost::num_vertices(concept_map) > 0);
     file.SetQuestion(question);
@@ -267,6 +270,7 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_create_test_files_clicked() noexcep
       + "."
       + pvdb::File::GetFilenameExtension();
     file.Save(s);
+    assert(is_regular_file(s));
   }
 }
 
@@ -279,23 +283,24 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_modify_stylesheet_clicked() noexcep
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
-  on_button_create_test_files_clicked();
-  const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  assert(is_regular_file(filename));
-  const File file = pvdb::LoadFile(filename);
-
-  QtPvdbPrintConceptMapDialog d(file);
+  //on_button_create_test_files_clicked();
+  //const std::string filename = "1." + pvdb::File::GetFilenameExtension();
+  //if (!is_regular_file(filename)) return; //TODO: Create a testing file
+  //assert(is_regular_file(filename));
+  //const File file = pvdb::LoadFile(filename);
+  QtPvdbPrintConceptMapDialog d(FileFactory().GetTests().front());
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked() noexcept
 {
-  on_button_create_test_files_clicked();
-  const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  assert(is_regular_file(filename));
-  const File file = pvdb::LoadFile(filename);
+  //on_button_create_test_files_clicked();
+  //const std::string filename = "1." + pvdb::File::GetFilenameExtension();
+  //assert(is_regular_file(filename));
+  //const File file = pvdb::LoadFile(filename);
 
-  QtPvdbPrintRatingDialog d(file);
+  //QtPvdbPrintRatingDialog d(file);
+  QtPvdbPrintConceptMapDialog d(FileFactory().GetTests().front());
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 

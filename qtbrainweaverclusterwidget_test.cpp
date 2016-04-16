@@ -17,23 +17,18 @@
 
 void ribi::pvdb::qtbrainweaverclusterwidget_test::all_tests()
 {
-  using namespace ribi::cmap;
+  for (const Cluster& c: ClusterFactory().GetTests())
   {
-    for (const Cluster& c: ClusterFactory().GetTests())
-    {
-      QtPvdbClusterWidget w(c);
-      QVERIFY(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
-      const Cluster d = w.GetCluster();
-      QVERIFY(c == d);
-      QtPvdbClusterTreeWidgetItem * const item = new QtPvdbClusterTreeWidgetItem(
-        Competency::misc,true,0,1,2);
-      item->setText(0,QString("An extra line"));
-      w.addTopLevelItem(item);
-      QVERIFY(w.topLevelItemCount() == static_cast<int>(c.Get().size()) + 1);
-      const Cluster e = w.GetCluster();
-      QVERIFY(c != d);
-      QVERIFY(c == e);
-      QVERIFY(d != e);
-    }
+    QtPvdbClusterWidget w(c);
+    QVERIFY(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
+    const Cluster d = w.GetCluster();
+    QVERIFY(c == d);
+    QtPvdbClusterTreeWidgetItem * const item = new QtPvdbClusterTreeWidgetItem(
+      ribi::cmap::Competency::misc,true,0,1,2);
+    item->setText(0,QString("An extra line"));
+    w.addTopLevelItem(item);
+    QVERIFY(w.topLevelItemCount() == static_cast<int>(c.Get().size()) + 1);
+    const Cluster e = w.GetCluster();
+    QVERIFY(d != e);
   }
 }

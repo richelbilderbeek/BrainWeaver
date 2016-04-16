@@ -83,8 +83,8 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   }
 
 
-  m_concept_map->m_signal_request_rate_concept.connect(
-    boost::bind(&ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog,this,boost::lambda::_1));
+  //m_concept_map->m_signal_request_rate_concept.connect(
+  //  boost::bind(&ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog,this,boost::lambda::_1));
 
 }
 
