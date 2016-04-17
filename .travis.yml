@@ -17,7 +17,9 @@ addons:
     packages:
     - libboost1.55-all-dev
 
-install: sudo apt-get install -qq g++-5
+install: 
+  - sudo apt-get install -qq g++-5
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -34,4 +36,5 @@ script:
   - ./BrainweaverDesktopTest
   - ./get_code_cov.sh
   - codecov
+  - ./clean.sh
   - ./build_desktop.sh
