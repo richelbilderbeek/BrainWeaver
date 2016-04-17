@@ -1,6 +1,7 @@
 #include "qtbrainweaverclusterdialog_test.h"
 
 #include <fstream>
+#include <iostream>
 #include <boost/algorithm/string/trim_all.hpp>
 #include <boost/shared_ptr.hpp>
 

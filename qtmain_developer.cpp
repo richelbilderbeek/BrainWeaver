@@ -1,35 +1,6 @@
-#define TODO_WINAND
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <iostream>
-
-#include <boost/lexical_cast.hpp>
-
+#include <string>
 #include <QApplication>
-#include <QIcon>
-#include <QVBoxLayout>
-
-#ifdef TODO_COEN
-#include <pvdbfile.h>
-#include <pvdbfilefactory.h>
-#endif
-
-#include "brainweaverfile.h"
-#include "brainweaverhelper.h"
-#include "qtbrainweaverclusterdialog.h"
-#include "qtconceptmapcompetency.h"
-#include "qtbrainweaverclusterwidget.h"
-#include "qtbrainweaverconceptmapdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmap.h"
-#include "qtconceptmaprateexamplesdialognewname.h"
-#include "qtconceptmap.h"
 #include "qtbrainweavermenudialog.h"
-#include "trace.h"
-#pragma GCC diagnostic pop
 
 const std::string CreateStyleSheet()
 {
@@ -74,102 +45,9 @@ const std::string CreateStyleSheet()
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-
-  START_TRACE();
-  //Perform tests
-  #ifndef NDEBUG
-  std::clog << "DEBUG mode" << std::endl;
-  ribi::pvdb::TestHelperFunctions();
-  #else
-  std::clog << "RELEASE mode" << std::endl;
-  assert(1==2 && "Assume debugging is really disabled");
-  #endif
-
-  //Delete the test file
-  std::remove(ribi::pvdb::File::GetTempFileName().c_str());
-
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
-
-  #ifdef TODO_COEN
-  {
-    const boost::shared_ptr<ribi::pvdb::File> file = ribi::pvdb::FileFactory::Create();
-    assert(file.GetCluster().Empty());
-    assert(!boost::num_vertices(file.GetConceptMap()));
-    {
-      const std::string question = "qtvdbmenudialog.cpp 79?";
-      ribi::cmap::ConceptMap concept_map(ribi::pvdb::File::CreateConceptMap(question));
-      assert(boost::num_vertices(concept_map) > 0);
-      assert(!file.GetConceptMap() && "Can only set concept map once");
-      file.SetQuestion(question);
-      assert(file.GetQuestion() == question);
-    }
-    ribi::pvdb::QtPvdbClusterDialog d(file);
-      d.exec();
-  }
-  assert(1==2);
-  #endif
-
   ribi::pvdb::QtPvdbMenuDialog d;
-  if (argc != 1)
-  {
-    const std::vector<boost::function<void(ribi::pvdb::QtPvdbMenuDialog *)> > v
-      =
-      {
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_about_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_assessor_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_create_test_files_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_modify_stylesheet_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_overview_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_print_rating_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_map_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_rate_examples_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_rating_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_student_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_test_arrowitems_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_test_cluster_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptedit_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptitem_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptmap_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_test_create_sub_concept_map_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_edge_item_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_node_item_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_qtconceptmapdisplaywidget_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_qtconceptmapeditwidget_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_qtconceptmapratewidget_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_test_qtroundededitrectitem_clicked,
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_test_qtroundedtextrectitem_clicked,
-        &ribi::pvdb::QtPvdbMenuDialog::on_button_view_files_clicked
-        //&ribi::pvdb::QtPvdbMenuDialog::on_button_view_test_concept_maps_clicked
-      };
-    try
-    {
-      const int i = boost::lexical_cast<int>(argv[1]);
-      v.at(i)(&d);
-    }
-    catch (boost::bad_lexical_cast&)
-    {
-      std::cerr << "Incorrect argument: please supply a number from 0 to " << v.size() << std::endl;
-    }
-    catch (std::out_of_range&)
-    {
-      std::cerr << "Incorrect argument: please supply a number from 0 to " << v.size() << std::endl;
-    }
-  }
-  //assert(1==2);
   d.show();
   return a.exec();
 }
-
-///DO NEVER FORGET
-/// - Do not use std::all_of, because cross-compiler has trouble with it
-/// - Do not change a QGraphicItem (that is: call a paint event) outside of the paint event
-///   (this was the case by signals that caused a repaint)
-///   -> trick: check for QGraphicsRectItem::paintingActive()
-/// - Use the default operator== for pointer comparison of smart pointers
-/// - Only overload operator==(const T&,const T&), instead for some smart pointer shortcuts
-/// - If a class connects its signals to some other class with a different lifetime,
-///   disconnect these signals in its destructor
