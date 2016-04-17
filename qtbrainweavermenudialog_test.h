@@ -11,7 +11,6 @@ class qtbrainweavermenudialog_test : public QObject
     Q_OBJECT
 
 private slots:
-  void all_tests();
   void press_all_buttons();
   void scenario_1();
   void scenario_2();
