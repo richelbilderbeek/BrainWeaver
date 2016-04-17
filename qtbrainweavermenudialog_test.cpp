@@ -177,7 +177,7 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
 
 void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
 {
-  if (!"Fix issue #20") return;
+  if ("Fix issue #20") return;
   QtPvdbMenuDialog d;
   d.show();
   d.SetShowChildDialogsModal(false);
@@ -190,9 +190,9 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
   //5) Start with concept map
   //6) Save
   {
-    const std::string question = "DEBUG_QUESTION";
+    const std::string question = "scenario 2 question";
     const std::string filename = File::GetTestFileName();
-    const std::string name = "DEBUG_NAME";
+    const std::string name = "scenario 2 name";
     //1) Create an assessor question file
     {
       QtPvdbCreateAssessmentCompleteDialog d;
