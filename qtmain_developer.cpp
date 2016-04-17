@@ -1,5 +1,6 @@
 #include <string>
 #include <QApplication>
+#include <QIcon>
 #include "qtbrainweavermenudialog.h"
 
 const std::string CreateStyleSheet()
