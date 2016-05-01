@@ -75,10 +75,9 @@ private:
 
   ConceptMap * const m_widget;
 
-  const std::vector<QWidget *> CollectWidgets() const;
+  std::vector<QWidget *> CollectWidgets() const;
 
-
-
+  friend class qtbrainweaverprintconceptmapdialog_test;
 };
 
 } //~namespace pvdb

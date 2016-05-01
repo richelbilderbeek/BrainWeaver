@@ -37,9 +37,19 @@ ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::QtPvdbTestCreateSubConceptMapDi
   QtHideAndShowDialog(parent),
   ui(new Ui::QtPvdbTestCreateSubConceptMapDialog),
   m_qtconceptmap{},
-  m_qtconceptmap_sub{}
+  m_qtconceptmap_sub{new ribi::cmap::QtConceptMap}
 {
   ui->setupUi(this);
+
+  assert(ui->widget_sub_concept_map);
+  assert(!ui->widget_sub_concept_map->layout());
+  {
+    QLayout * const my_layout = new QVBoxLayout;
+    ui->widget_sub_concept_map->setLayout(my_layout);
+  }
+  assert(ui->widget_sub_concept_map->layout());
+  ui->widget_sub_concept_map->layout()->addWidget(m_qtconceptmap_sub.get());
+
 
   const int n_tests = boost::numeric_cast<int>(cmap::ConceptMapFactory().GetAllTests().size());
   ui->box_index->setMaximum(n_tests - 1); //-1: 0-based counting
@@ -75,35 +85,27 @@ void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnConceptMapChanged()
   m_qtconceptmap->SetConceptMap(concept_map);
   ui->widget_concept_map->layout()->addWidget(m_qtconceptmap.get());
 
-  #ifdef RJCB_TODO //TODO RJCB
-  const std::vector<ribi::cmap::ConceptMap> subs = concept_map->CreateSubs();
+  const std::vector<ribi::cmap::ConceptMap> subs = ribi::cmap::CreateDirectNeighbourConceptMaps(concept_map);
   const int n_subs = boost::numeric_cast<int>(subs.size());
   assert(n_subs != 0);
   ui->box_index_sub->setMaximum(n_subs - 1); //-1: 0-based counting
   ui->box_index_sub->setValue(0);
-  #endif
 }
 
 void ribi::pvdb::QtPvdbTestCreateSubConceptMapDialog::OnSubConceptMapChanged()
 {
-  #ifdef TODO_RJCB //TODO RJCB: Put back in
   const int i = ui->box_index->value();
-  const std::vector<ribi::cmap::ConceptMap> v = ribi::cmap::ConceptMapFactory::GetAllTests();
+  const auto v = ribi::cmap::ConceptMapFactory().GetAllTests();
   assert(i < boost::numeric_cast<int>(v.size()));
   const ribi::cmap::ConceptMap concept_map = v[i];
-  const std::vector<ribi::cmap::ConceptMap> subs = concept_map->CreateSubs();
+  const std::vector<ribi::cmap::ConceptMap> subs = ribi::cmap::CreateDirectNeighbourConceptMaps(concept_map);
   const int j = ui->box_index_sub->value();
   assert(j < boost::numeric_cast<int>(subs.size()));
   const ribi::cmap::ConceptMap sub = subs[j];
 
-  if(!ui->widget_sub_concept_map->layout())
-  {
-    QLayout * const my_layout = new QVBoxLayout;
-    ui->widget_sub_concept_map->setLayout(my_layout);
-  }
 
   assert(ui->widget_sub_concept_map->layout());
-  m_sub_concept_map.reset(new cmap::QtDisplayConceptMap(sub));
-  ui->widget_sub_concept_map->layout()->addWidget(m_sub_concept_map.get());
-  #endif //TODO RJCB: Put back in
+  m_qtconceptmap_sub->scene()->clear();
+  m_qtconceptmap_sub->SetConceptMap(sub);
+  m_qtconceptmap_sub->update();
 }

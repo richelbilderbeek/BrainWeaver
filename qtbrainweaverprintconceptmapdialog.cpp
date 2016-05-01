@@ -88,7 +88,7 @@ ribi::pvdb::QtPvdbPrintConceptMapDialog::~QtPvdbPrintConceptMapDialog() noexcept
   delete ui;
 }
 
-const std::vector<QWidget *> ribi::pvdb::QtPvdbPrintConceptMapDialog::CollectWidgets() const
+std::vector<QWidget *> ribi::pvdb::QtPvdbPrintConceptMapDialog::CollectWidgets() const
 {
   std::vector<QWidget *> v;
   v.push_back(ui->frame_top);
