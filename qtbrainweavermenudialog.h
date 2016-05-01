@@ -48,9 +48,6 @@ class QtPvdbMenuDialog : public ribi::QtHideAndShowDialog
   QtPvdbMenuDialog& operator=(const QtPvdbMenuDialog&) = delete;
   ~QtPvdbMenuDialog() noexcept;
 
-  bool GetShowChildDialogsModal() const noexcept { return m_show_child_dialogs_modal; }
-  void SetShowChildDialogsModal(const bool show_child_dialogs_modal) noexcept { m_show_child_dialogs_modal = show_child_dialogs_modal; }
-
   const Ui::QtPvdbMenuDialog * GetUi() const noexcept { return ui; }
         Ui::QtPvdbMenuDialog * GetUi()       noexcept { return ui; }
 
@@ -86,8 +83,7 @@ private:
   ///The file to work on
   File m_file;
 
-  ///The mode at which the child dialogs are displayed
-  bool m_show_child_dialogs_modal;
+  friend class qtbrainweavermenudialog_test;
 };
 
 } //~namespace pvdb

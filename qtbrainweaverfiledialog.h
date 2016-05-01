@@ -33,10 +33,10 @@ struct QtFileDialog
 {
   enum class FileType { cmp, pdf };
   ///Create a QFileDialog to open Brainweaver files with
-  static const boost::shared_ptr<QFileDialog> GetOpenFileDialog();
+  static boost::shared_ptr<QFileDialog> GetOpenFileDialog();
 
   ///Create a QFileDialog to save Brainweaver files with
-  static const boost::shared_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
+  static boost::shared_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
 };
 
 } //~namespace pvdb

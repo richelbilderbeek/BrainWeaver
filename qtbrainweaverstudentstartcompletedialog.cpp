@@ -63,13 +63,6 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
   QtPvdbClusterDialog d(m_file);
-
-  if (!boost::num_vertices(m_file.GetConceptMap()))
-  {
-    assert(!m_file.GetCluster().Empty()
-      && "If the file has no cluster, the cluster dialog creates it,"
-         "if and only if there is no concept map");
-  }
   this->ShowChild(&d);
   if (d.GoBackToMenu())
   {

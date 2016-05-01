@@ -33,7 +33,7 @@ namespace ribi {
 
 namespace pvdb {
 
-const boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
+boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
 {
   boost::shared_ptr<QFileDialog> d(new QFileDialog);
 
@@ -61,7 +61,7 @@ const boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
   return d;
 }
 
-const boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type)
+boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type)
 {
   boost::shared_ptr<QFileDialog> d(new QFileDialog);
 

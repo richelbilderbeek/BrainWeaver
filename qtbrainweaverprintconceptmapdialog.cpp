@@ -196,16 +196,6 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
       m_widget->scene()->itemsBoundingRect() //Does not work
       //m_widget->scene()->sceneRect() //Does not work
     };
-    #ifndef NDEBUG
-    for (const ribi::cmap::QtNode * const qtnode:
-      ribi::cmap::GetQtNodes(m_widget->GetScene())
-    )
-    {
-      //All QtNodes' their rectangles should be within all_items_rect
-      assert(qtnode);
-      //assert(all_items_rect.contains(qtnode->boundingRect())); //TODO: Move to tests
-    }
-    #endif
     m_widget->fitInView(all_items_rect); //Does not work
     //m_widget->ensureVisible(all_items_rect,0,0); //Does not work
 
