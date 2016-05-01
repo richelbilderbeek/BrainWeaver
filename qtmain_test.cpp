@@ -5,7 +5,6 @@
 #include "qtbrainweaverclusterwidget_test.h"
 #include "qtbrainweavermenudialog_test.h"
 #include "qtbrainweaverrateconceptmapdialog_test.h"
-#include "qtbrainweavertestcreatesubconceptmapdialog_test.h"
 #include "qtbrainweaverprintconceptmapdialog_test.h"
 #include <QtTest/QtTest>
 
@@ -13,8 +12,6 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   int error = 0;
-  { ribi::pvdb::qtbrainweavertestcreatesubconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  return 0;
   { ribi::pvdb::qtbrainweaverprintconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::pvdb::qtbrainweaverconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::pvdb::qtbrainweaverclusterdialog_test t; error |= QTest::qExec(&t, argc, argv); }

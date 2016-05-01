@@ -61,7 +61,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
-#include "qtbrainweavertestcreatesubconceptmapdialog.h"
 #include "qtbrainweaverviewfilesdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmaprateconceptdialognewname.h"
@@ -307,12 +306,6 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_rate_concept_auto_clicked() noexcep
   boost::shared_ptr<cmap::QtRateConceptTallyDialog> d(
     new cmap::QtRateConceptTallyDialog(concept_map));
   if (m_show_child_dialogs_modal) { this->ShowChild(d.get()); } else { d->close(); }
-}
-
-void ribi::pvdb::QtPvdbMenuDialog::on_button_test_create_sub_concept_map_clicked() noexcept
-{
-  QtPvdbTestCreateSubConceptMapDialog d;
-  if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_test_conceptmaps_clicked()

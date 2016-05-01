@@ -20,9 +20,8 @@ SOURCES += \
     $$PWD/qtbrainweaverratingdialog.cpp \
     $$PWD/qtbrainweaverstudentmenudialog.cpp \
     $$PWD/qtbrainweaverstudentstartcompletedialog.cpp \
-    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.cpp \
     $$PWD/qtbrainweaverviewfilesdialog.cpp \
-    qtbrainweaverclustertreewidgetitem.cpp
+    $$PWD/qtbrainweaverclustertreewidgetitem.cpp
 
 HEADERS  += \
     $$PWD/qtbrainweaveraboutdialog.h \
@@ -45,9 +44,8 @@ HEADERS  += \
     $$PWD/qtbrainweaverratingdialog.h \
     $$PWD/qtbrainweaverstudentmenudialog.h \
     $$PWD/qtbrainweaverstudentstartcompletedialog.h \
-    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.h \
     $$PWD/qtbrainweaverviewfilesdialog.h \
-    qtbrainweaverclustertreewidgetitem.h
+    $$PWD/qtbrainweaverclustertreewidgetitem.h
 
 FORMS    += \
     $$PWD/qtbrainweaverassessormenudialog.ui \
@@ -63,6 +61,5 @@ FORMS    += \
     $$PWD/qtbrainweaverratingdialog.ui \
     $$PWD/qtbrainweaverstudentmenudialog.ui \
     $$PWD/qtbrainweaverstudentstartcompletedialog.ui \
-    $$PWD/qtbrainweavertestcreatesubconceptmapdialog.ui \
     $$PWD/qtbrainweaverviewfilesdialog.ui
 

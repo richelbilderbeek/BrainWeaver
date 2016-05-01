@@ -4,8 +4,7 @@ SOURCES += \
     $$PWD/qtbrainweaverclusterwidget_test.cpp \
     $$PWD/qtbrainweavermenudialog_test.cpp \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.cpp \
-    $$PWD/qtbrainweavertestcreatesubconceptmapdialog_test.cpp \
-    qtbrainweaverprintconceptmapdialog_test.cpp
+    $$PWD/qtbrainweaverprintconceptmapdialog_test.cpp
 
 HEADERS += \
     $$PWD/qtbrainweaverclusterdialog_test.h \
@@ -13,5 +12,4 @@ HEADERS += \
     $$PWD/qtbrainweaverconceptmapdialog_test.h \
     $$PWD/qtbrainweavermenudialog_test.h \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.h \
-    $$PWD/qtbrainweavertestcreatesubconceptmapdialog_test.h \
-    qtbrainweaverprintconceptmapdialog_test.h
+    $$PWD/qtbrainweaverprintconceptmapdialog_test.h

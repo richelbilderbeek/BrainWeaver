@@ -38,7 +38,6 @@
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
-#include "qtbrainweavertestcreatesubconceptmapdialog.h"
 #include "qtbrainweaverviewfilesdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmaprateconceptdialognewname.h"
