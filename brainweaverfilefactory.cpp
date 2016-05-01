@@ -100,5 +100,6 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
     f.SetCluster(cluster);
     v.push_back(f);
   }
+  assert(GetNumberOfTests() == static_cast<int>(v.size()));
   return v;
 }

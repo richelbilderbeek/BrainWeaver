@@ -51,7 +51,7 @@ ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& 
   std::transform(test_node_indices.begin(),test_node_indices.end(),std::back_inserter(concepts),
     [](const int index)
     {
-      const std::vector<ribi::cmap::Concept> tmp = cmap::ConceptFactory().GetTests();
+      const auto tmp = cmap::ConceptFactory().GetTests();
       assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
       const cmap::Concept concept = tmp.at(index);
       return concept;

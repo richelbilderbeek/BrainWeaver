@@ -224,12 +224,6 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
       QVERIFY(file.GetQuestion() == question);
       QVERIFY(file.GetStudentName() == name);
       QVERIFY(!boost::num_vertices(file.GetConceptMap()));
-      if (!file.GetCluster().Empty())
-      {
-        QVERIFY(d.GetWidget());
-        d.DoRandomStuff();
-      }
-      QVERIFY(!boost::num_vertices(file.GetConceptMap()));
       d.Save(filename);
     }
     //5) Start with concept map

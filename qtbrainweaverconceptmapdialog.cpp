@@ -102,8 +102,6 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
   assert(this->layout());
   this->layout()->addWidget(m_widget);
 
-  //assert(!Collect<cmap::QtNode>(m_widget->scene()).empty()); //TODO RJCB: Put back in
-
   //Center the dialog
   {
     const QRect screen = QApplication::desktop()->screenGeometry();

@@ -132,12 +132,6 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(F
   return nullptr;
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::DoRandomStuff()
-{
-  //TODO?
-}
-
-
 const ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::GetWidget() const
 {
   return m_widget;

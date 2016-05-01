@@ -283,11 +283,6 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_modify_stylesheet_clicked() noexcep
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
-  //on_button_create_test_files_clicked();
-  //const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  //if (!is_regular_file(filename)) return; //TODO: Create a testing file
-  //assert(is_regular_file(filename));
-  //const File file = pvdb::LoadFile(filename);
   QtPvdbPrintConceptMapDialog d(FileFactory().GetTests().front());
   if (m_show_child_dialogs_modal) { this->ShowChild(&d); } else { d.close(); }
 }

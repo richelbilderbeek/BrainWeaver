@@ -157,7 +157,7 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::Print()
         y = 0;
       }
       widget->render(&painter,QPoint(0,y));
-      y+=h;
+      y += h;
     }
   }
   painter.end();
@@ -165,13 +165,13 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::Print()
 
 void ribi::pvdb::QtPvdbPrintConceptMapDialog::resizeEvent(QResizeEvent *)
 {
-    fitConceptMap();
+  fitConceptMap();
 }
 
 void ribi::pvdb::QtPvdbPrintConceptMapDialog::fitConceptMap()
 {
   assert(m_widget);
-  assert(boost::num_vertices(m_widget->GetConceptMap()) > 0);
+  if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
   const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
   m_widget->setMinimumHeight(all_items_rect.height() + 2);
   m_widget->fitInView(all_items_rect);
@@ -180,6 +180,8 @@ void ribi::pvdb::QtPvdbPrintConceptMapDialog::fitConceptMap()
 
 void ribi::pvdb::QtPvdbPrintConceptMapDialog::showEvent(QShowEvent *)
 {
+  if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
+
   //Concept map
   {
     assert(m_widget);

@@ -49,9 +49,6 @@ public:
   QtPvdbClusterDialog& operator=(const QtPvdbClusterDialog&) = delete;
   ~QtPvdbClusterDialog() noexcept;
 
-  ///Do some random stuff, e.g. adding some concepts with examples
-  void DoRandomStuff();
-
   const Ui::QtPvdbClusterDialog * GetUi() const noexcept { return ui; }
         Ui::QtPvdbClusterDialog * GetUi()       noexcept { return ui; }
 
