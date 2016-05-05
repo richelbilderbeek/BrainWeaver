@@ -10,10 +10,14 @@ class qtbrainweavermenudialog_test : public QObject
 {
     Q_OBJECT
 
+public slots:
+  void choose_file();
+
 private slots:
   void scenario_1();
   void scenario_2();
   void press_all_buttons();
+
 };
 
 } //~namespace pvdb

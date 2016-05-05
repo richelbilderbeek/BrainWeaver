@@ -56,21 +56,26 @@
 #include "trace.h"
 #include "ui_qtbrainweavermenudialog.h"
 
+
+
+void ribi::pvdb::qtbrainweavermenudialog_test::choose_file()
+{
+  std::system("xdotool windowactivate --sync \"$(xdotool search --name \"Kies een assessment bestand\" | head -n 1)\" key ctrl+a; xdotool windowactivate --sync \"$(xdotool search --name \"Kies een assessment bestand\" | head -n 1)\" key KP_Delete; xdotool type --window \"$(xdotool search --name \"Kies een assessment bestand\" | head -n 1)\" --delay 1 test.cmp; xdotool windowactivate --sync \"$(xdotool search --name \"Kies een assessment bestand\" | head -n 1)\" key KP_Enter");
+}
+
 void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
 {
   QtPvdbMenuDialog d;
   d.show();
   QTest::qWaitForWindowActive(&d);
+
+  QTimer::singleShot(1000, Qt::TimerType::CoarseTimer, this, SLOT(choose_file()));
   QTest::mouseClick(d.ui->button_student, Qt::LeftButton);
   QTest::qWait(1000);
-  QFileDialog * const file_dialog{dynamic_cast<QFileDialog*>(qApp->activeModalWidget())};
-  assert(file_dialog != nullptr);
-  QTest::keyClicks(file_dialog, "test.cmp", Qt::NoModifier, 100);
-  QTest::keyClick(file_dialog, Qt::Key_Enter, Qt::NoModifier, 100);
-  assert(1==2);
 
-  return;
-  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
+  //Enter student name
+
+  assert(1 == 2);
   //THE MULTI DIALOG TESTS HERE
   //MULTI DIALOG TEST #1
   //1) Create an assessor question file
