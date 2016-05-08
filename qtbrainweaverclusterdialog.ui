@@ -105,6 +105,9 @@
      <property name="text">
       <string>Maak een lijst en groepeer de items door te slepen. Met F2 kunt u een geselecteerd item bewerken.</string>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>

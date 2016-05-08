@@ -1,6 +1,5 @@
 #!/bin/bash
-# Let the assessor create a test concept map
-
+# Let the assessor create a test concept map with name 'scenario1.cmp'
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
