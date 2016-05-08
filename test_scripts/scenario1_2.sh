@@ -7,6 +7,7 @@
 # Variables
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1.cmp"
+mycmp_result="scenario1_result.cmp"
 
 ####################################
 # Check executable
@@ -18,11 +19,26 @@ then
 fi
 
 ####################################
-# Delete saving file
+# Input file must be present
 ####################################
 if [ ! -e $mycmp ]
 then
   echo "File "$mycmp" not found, line "$LINENO
+  exit 1
+fi
+
+####################################
+# Delete result file
+####################################
+if [ -e $mycmp_result ]
+then
+  echo "File "$mycmp_result" found, deleting it"
+  rm $mycmp_result
+fi
+
+if [ -e $mycmp_result ]
+then
+  echo "File "$mycmp_result" could not be deleted"
   exit 1
 fi
 
@@ -83,7 +99,7 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a sleep 0.1
+xdotool windowactivate $id key alt+a sleep 0.2
 
 
 
@@ -118,8 +134,32 @@ xdotool windowactivate $id type "not too long"
 # Add 
 xdotool windowactivate $id key Tab Return
 
+# Save
+xdotool windowactivate $id key alt+s sleep 0.2
 
+####################################
+# 'Sla de clustering op'
+####################################
+id=`get_dialog_id "Sla de clustering op"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
 
+xdotool windowactivate $id type $mycmp_result 
+xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.2
 
-
-
+####################################
+# Check newly saved file
+####################################
+if [ ! -e $mycmp_result ]
+then
+  echo "File "$mycmp_result" not found, line "$LINENO
+  exit 1
+fi
+# Show that the cluster has changed
+echo "Before: "
+egrep "<cluster>.*</cluster>" $mycmp -o
+echo "After: "
+egrep "<cluster>.*</cluster>" $mycmp_result -o
