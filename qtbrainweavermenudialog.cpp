@@ -189,26 +189,9 @@ void ribi::pvdb::QtMenuDialog::on_button_student_clicked() noexcept
 void ribi::pvdb::QtMenuDialog::on_button_test_cluster_clicked() noexcept
 {
   File file;
-  assert(file.GetCluster().Empty());
-  assert(!boost::num_vertices(file.GetConceptMap()));
-  {
-    const std::string question = "qtvdbmenudialog.cpp 79?";
-    ribi::cmap::ConceptMap concept_map;
-    add_custom_vertex(
-      ribi::cmap::Node(ribi::cmap::Concept(question), true),concept_map
-    );
-    assert(boost::num_vertices(concept_map) > 0);
-    file.SetQuestion(question);
-    file.SetConceptMap(concept_map);
-
-    assert(file.GetCluster().Empty());
-    assert(boost::num_vertices(file.GetConceptMap()) > 0);
-    assert(file.GetQuestion() == question);
-  }
+  const std::string question = "A good question to test the clustering dialog is ...";
+  file.SetQuestion(question);
   QtClusterDialog d(file);
-
-  assert(file.GetCluster().Empty());
-  assert(boost::num_vertices(file.GetConceptMap()) > 0);
   ShowChild(&d);
 }
 
