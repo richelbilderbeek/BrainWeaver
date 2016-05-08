@@ -53,8 +53,8 @@ public:
         Ui::QtClusterDialog * GetUi()       noexcept { return ui; }
 
   ///Obtain the widget
-  QtPvdbClusterWidget * GetWidget();
-  const QtPvdbClusterWidget * GetWidget() const;
+  QtClusterWidget * GetWidget();
+  const QtClusterWidget * GetWidget() const;
 
   ///Does the dialog want to go back to the student menu?
   bool GoBackToMenu() const { return m_back_to_menu; }
@@ -87,11 +87,11 @@ private:
   File m_file;
 
   ///The cluster widget
-  QtPvdbClusterWidget * const m_widget;
+  QtClusterWidget * const m_widget;
 
   ///Add a Cluster to the file if it is not yet present,
-  ///Create a QtPvdbClusterWidget from the file its cluster
-  static QtPvdbClusterWidget * BuildWidget(File file);
+  ///Create a QtClusterWidget from the file its cluster
+  static QtClusterWidget * BuildWidget(File file);
 
   //Start saving procedure, with request of filename
   void Save();

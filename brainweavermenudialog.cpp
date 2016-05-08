@@ -101,7 +101,7 @@ std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexc
     "2012-06-17: Version 0.01: concept version of ProjectVanDenBogaart, using 'IronHide' style",
     "2012-10-18: Version 0.02: able to crosscompile to windows, few dialogs present",
     "2012-10-19: Version 0.03: added use of QtHideAndShowDialog, most dialogs present",
-    "2012-10-24: Version 0.04: added QtPvdbClusterWidget",
+    "2012-10-24: Version 0.04: added QtClusterWidget",
     "2012-10-28: Version 0.05: added Cluster and ConceptMap, added AutoSave, ClusterWidget and Cluster work okay, file I/O working okay",
     "2012-11-10: Version 0.06: added first working QtConceptMap",
     "2012-11-13: Version 0.07: added edges and helpers to QtConceptMap",

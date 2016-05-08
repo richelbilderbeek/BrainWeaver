@@ -32,8 +32,8 @@ namespace pvdb {
 
 struct QtPvdbArrow;
 struct QtClusterDialog;
-struct QtPvdbClusterWidget;
-struct QtPvdbConceptMapDialog;
+struct QtClusterWidget;
+struct QtConceptMapDialog;
 struct QtPvdbRateExamplesDialog;
 struct QtPvdbStudentMenuDialog;
 

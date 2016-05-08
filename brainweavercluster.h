@@ -36,7 +36,7 @@ namespace pvdb {
 
 struct ClusterFactory;
 
-///The data behind a QtPvdbClusterWidget
+///The data behind a QtClusterWidget
 class Cluster
 {
   public:

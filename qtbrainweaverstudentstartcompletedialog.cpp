@@ -73,7 +73,7 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_cli
 
 void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_construct_clicked()
 {
-  QtPvdbConceptMapDialog d(m_file);
+  QtConceptMapDialog d(m_file);
   this->ShowChild(&d);
   if (d.GoBackToMenu())
   {

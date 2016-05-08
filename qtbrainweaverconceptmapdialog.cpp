@@ -78,11 +78,11 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
   return v;
 }
 
-ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
+ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbConceptMapDialog),
+    ui(new Ui::QtConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
     m_widget{new ribi::cmap::QtConceptMap(this)}
@@ -116,17 +116,17 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
   #ifdef NOT_NOW_20141111
   m_widget->m_signal_conceptmapitem_requests_edit.connect(
     boost::bind(
-      &ribi::pvdb::QtPvdbConceptMapDialog::OnConceptMapItemRequestsEdit,
+      &ribi::pvdb::QtConceptMapDialog::OnConceptMapItemRequestsEdit,
       this,boost::lambda::_1));
   #endif
 }
 
-ribi::pvdb::QtPvdbConceptMapDialog::~QtPvdbConceptMapDialog() noexcept
+ribi::pvdb::QtConceptMapDialog::~QtConceptMapDialog() noexcept
 {
   delete ui;
 }
 
-ribi::cmap::ConceptMap ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
+ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
   const std::string& question,
   const Cluster& cluster)
 {
@@ -164,7 +164,7 @@ ribi::cmap::ConceptMap ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
 }
 
 /*
-ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb::File file)
+ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::CreateWidget(pvdb::File file)
 {
   const bool trace_verbose = false;
 
@@ -191,7 +191,7 @@ ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb
   {
     if (trace_verbose) { TRACE("User supplied a filled-in cluster"); }
     ribi::cmap::ConceptMap concept_map {
-      QtPvdbConceptMapDialog::CreateFromCluster(
+      QtConceptMapDialog::CreateFromCluster(
         file.GetQuestion(),
         file.GetCluster()
       )
@@ -233,7 +233,7 @@ ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb
 */
 
 #ifndef NDEBUG
-void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()
+void ribi::pvdb::QtConceptMapDialog::DoRandomStuff()
 {
   #ifdef NOT_NOW_20141224
   //Do random stuff
@@ -254,24 +254,24 @@ void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()
 }
 #endif
 
-const ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::GetWidget() const
+const ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget() const
 {
   assert(m_widget);
   return m_widget;
 }
 
-ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::GetWidget()
+ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
   //[1] Scott Meyers. Effective C++ (3rd edition). ISBN: 0-321-33487-6.
   //    Item 3, paragraph 'Avoid duplication in const and non-const member functions'
   return const_cast<cmap::QtConceptMap*>(
-    const_cast<const QtPvdbConceptMapDialog*>(this)->GetWidget()); //?Why Dialog
+    const_cast<const QtConceptMapDialog*>(this)->GetWidget()); //?Why Dialog
 
 }
 
-void ribi::pvdb::QtPvdbConceptMapDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
@@ -307,7 +307,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::keyPressEvent(QKeyEvent* e)
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtPvdbConceptMapDialog::on_button_print_clicked()
+void ribi::pvdb::QtConceptMapDialog::on_button_print_clicked()
 {
   Save();
   QtPvdbPrintConceptMapDialog d(m_file);
@@ -315,7 +315,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::on_button_print_clicked()
 }
 
 #ifdef NOT_NOW_20141111
-void ribi::pvdb::QtPvdbConceptMapDialog::OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item)
+void ribi::pvdb::QtConceptMapDialog::OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item)
 {
   assert(item);
   {
@@ -331,11 +331,11 @@ void ribi::pvdb::QtPvdbConceptMapDialog::OnConceptMapItemRequestsEdit(cmap::QtCo
 }
 #endif // NOT_NOW_20141111
 
-void ribi::pvdb::QtPvdbConceptMapDialog::on_button_save_clicked()
+void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
   const QtScopedDisable<cmap::QtConceptMap> scoped_disable1(GetWidget());
-  const QtScopedDisable<QtPvdbConceptMapDialog> scoped_disable2(this);
+  const QtScopedDisable<QtConceptMapDialog> scoped_disable2(this);
   this->hide();
 
   const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
@@ -361,7 +361,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::on_button_save_clicked()
   //close(); //2013-04-19 Request by client
 }
 
-void ribi::pvdb::QtPvdbConceptMapDialog::Save() const
+void ribi::pvdb::QtConceptMapDialog::Save() const
 {
   //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
   //assert(boost::num_vertices(concept_map) > 0);
@@ -369,7 +369,7 @@ void ribi::pvdb::QtPvdbConceptMapDialog::Save() const
   //m_file.SetConceptMap(concept_map);
 }
 
-void ribi::pvdb::QtPvdbConceptMapDialog::Save(const std::string& filename) const
+void ribi::pvdb::QtConceptMapDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()

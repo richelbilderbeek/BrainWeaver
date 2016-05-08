@@ -40,14 +40,14 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace ribi {
 namespace pvdb {
 
-struct QtPvdbClusterTreeWidgetItem;
+struct QtClusterTreeWidgetItem;
 
-class QtPvdbClusterWidget : public QTreeWidget
+class QtClusterWidget : public QTreeWidget
 {
   Q_OBJECT
 
 public:
-  explicit QtPvdbClusterWidget(
+  explicit QtClusterWidget(
     const Cluster& cluster,
     QWidget* parent = 0
   );

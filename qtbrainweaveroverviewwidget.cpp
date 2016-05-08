@@ -125,7 +125,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 2;
     assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtPvdbConceptMapDialog(FileFactory().GetTests().at(index)));
+    QtHideAndShowDialog* p(new QtConceptMapDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }

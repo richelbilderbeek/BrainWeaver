@@ -44,7 +44,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
     QVERIFY(boost::num_vertices(file.GetConceptMap()));
     QVERIFY(!GetNodes(file.GetConceptMap()).empty());
     QVERIFY(HasCenterNode(file.GetConceptMap()));
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     assert(d.GetWidget());
     QVERIFY(boost::num_vertices(d.GetWidget()->GetConceptMap()) == 1);
   }
@@ -73,7 +73,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     QVERIFY(!boost::num_vertices(file.GetConceptMap()));
     const ribi::cmap::Concept concept_a(ConceptFactory().Create("Concept A"));
     Cluster cluster( { concept_a } );
-    const boost::shared_ptr<ConceptMap> concept_map(QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
+    const boost::shared_ptr<ConceptMap> concept_map(QtConceptMapDialog::CreateFromCluster(question,cluster));
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetCluster(cluster);
     file.SetConceptMap(concept_map);
@@ -83,7 +83,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     QVERIFY(file.GetConceptMap().FindCenterNode()
       && "A file's ConceptMap must have a CenterNode");
 
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     QVERIFY(file.GetConceptMap());
 
     QVERIFY(d.GetWidget()->GetConceptMap().GetNodes().size()
@@ -100,7 +100,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     file.SetCluster(cluster);
     QVERIFY(cluster->Get().size() == 3);
 
-    const ribi::cmap::ConceptMap concept_map(pvdb::QtPvdbConceptMapDialog::CreateFromCluster(question,cluster));
+    const ribi::cmap::ConceptMap concept_map(pvdb::QtConceptMapDialog::CreateFromCluster(question,cluster));
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     QVERIFY(file.GetConceptMap());
@@ -108,7 +108,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     QVERIFY(file.GetConceptMap().FindCenterNode()
       && "A file's ConceptMap must have a CenterNode");
 
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     QVERIFY(file.GetConceptMap());
     QVERIFY(d.GetWidget()->GetConceptMap().GetNodes().size()
       == cluster->Get().size() + 1); //+1 because of focus question
@@ -166,7 +166,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
 
     QVERIFY(file.GetQuestion() == question);
 
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     QVERIFY(file.GetConceptMap());
     QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
     QVERIFY(d.GetWidget()->GetConceptMap().GetNodes().size()
@@ -221,7 +221,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
       && "A file's ConceptMap must have a CenterNode");
 
     QVERIFY(file.GetQuestion() == question);
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     QVERIFY(file.GetConceptMap());
     QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
     //const ribi::cmap::ConceptMap concept_map_out
@@ -281,7 +281,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
       && "A file its ConceptMap must have a CenterNode");
 
     //Let the dialog position the nodes
-    const QtPvdbConceptMapDialog d(file);
+    const QtConceptMapDialog d(file);
     QVERIFY(file.GetConceptMap());
     QVERIFY(concept_map == d.GetWidget()->GetConceptMap());
     //const ribi::cmap::ConceptMap concept_map_out
@@ -324,11 +324,11 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
       && "A file's ConceptMap must have a CenterNode");
 
     //Let another dialog keep the node positions in the same place
-    const QtPvdbConceptMapDialog d_again(file_again);
+    const QtConceptMapDialog d_again(file_again);
     QVERIFY(cmap::HasSameContent(*file.GetConceptMap(),*file_again->GetConceptMap()));
     //Who cares about repositioning anyways?
     //QVERIFY(*file.GetConceptMap() == *file_again->GetConceptMap()
-    //  && "QtPvdbConceptMapDialog must not reposition concept maps");
+    //  && "QtConceptMapDialog must not reposition concept maps");
 
     std::remove(File::GetTestFileName().c_str());
   }
@@ -342,7 +342,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
       {
         const bool had_cluster = file.GetCluster().get();
         const bool had_concept_map = file.GetConceptMap().get();
-        const boost::shared_ptr<QtPvdbConceptMapDialog> dialog(new QtPvdbConceptMapDialog(file));
+        const boost::shared_ptr<QtConceptMapDialog> dialog(new QtConceptMapDialog(file));
 
         if (!had_cluster && !had_concept_map)
         {
@@ -381,7 +381,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
         const File file(new pvdb::File);
         QVERIFY(v[i]);
         file.SetConceptMap(v[i]);
-        QtPvdbConceptMapDialog d(file);
+        QtConceptMapDialog d(file);
         QVERIFY(file.GetConceptMap());
         d.Shuffle();
         d.Save(pvdb::File::GetTestFileName());

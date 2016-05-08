@@ -32,20 +32,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmap.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbConceptMapDialog; }
+namespace Ui { class QtConceptMapDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbConceptMapDialog : public ::ribi::QtHideAndShowDialog
+class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
   public:
-  explicit QtPvdbConceptMapDialog(const File& file, QWidget* parent = 0);
-  QtPvdbConceptMapDialog(const QtPvdbConceptMapDialog&) = delete;
-  QtPvdbConceptMapDialog& operator=(const QtPvdbConceptMapDialog&) = delete;
-  ~QtPvdbConceptMapDialog() noexcept;
+  explicit QtConceptMapDialog(const File& file, QWidget* parent = 0);
+  QtConceptMapDialog(const QtConceptMapDialog&) = delete;
+  QtConceptMapDialog& operator=(const QtConceptMapDialog&) = delete;
+  ~QtConceptMapDialog() noexcept;
 
   #ifndef NDEBUG
   ///Do random stuff, for example, add a node and an edge (used for debugging)
@@ -80,7 +80,7 @@ class QtPvdbConceptMapDialog : public ::ribi::QtHideAndShowDialog
   //void on_button_test_clicked();
 
 private:
-  Ui::QtPvdbConceptMapDialog *ui;
+  Ui::QtConceptMapDialog *ui;
 
   ///Must we go back to the student menu?
   bool m_back_to_menu;
@@ -95,10 +95,6 @@ private:
     const std::string& question,
     const Cluster& cluster
   );
-
-  //static QtPvdbConceptMapEditWidget * CreateWidget(const ribi::cmap::ConceptMap concept_map);
-  ///DON'T USE: puts a new ConceptMap in file
-  //static ribi::cmap::QtConceptMap * CreateWidget(pvdb::File file);
 
   //#define NOT_NOW_20141111
   #ifdef NOT_NOW_20141111

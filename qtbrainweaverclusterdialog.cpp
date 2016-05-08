@@ -102,7 +102,7 @@ ribi::pvdb::QtClusterDialog::~QtClusterDialog() noexcept
   delete ui;
 }
 
-ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File file)
+ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File file)
 {
   // A concept map is already made, cluster has been left empty, thus return null
   if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
@@ -111,23 +111,23 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File 
   }
 
   //Read an existing cluster
-  QtPvdbClusterWidget * const widget = new QtPvdbClusterWidget(file.GetCluster());
+  QtClusterWidget * const widget = new QtClusterWidget(file.GetCluster());
   assert(widget);
   return widget;
 }
 
-const ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget() const
+const ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget() const
 {
   return m_widget;
 }
 
-ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget()
+ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
   //[1] Scott Meyers. Effective C++ (3rd edition). ISBN: 0-321-33487-6.
   //    Item 3, paragraph 'Avoid duplication in const and non-const member functions'
-  return const_cast<QtPvdbClusterWidget*>(
+  return const_cast<QtClusterWidget*>(
     const_cast<const QtClusterDialog*>(this)->GetWidget());
 }
 
@@ -227,7 +227,7 @@ void ribi::pvdb::QtClusterDialog::on_button_next_clicked()
     assert(m_file.GetCluster() == GetWidget()->GetCluster());
   }
 
-  QtPvdbConceptMapDialog d(m_file);
+  QtConceptMapDialog d(m_file);
   this->ShowChild(&d);
 
   //By now, the concept map must have been (1) created (2) already present

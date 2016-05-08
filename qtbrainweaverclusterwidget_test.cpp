@@ -19,11 +19,11 @@ void ribi::pvdb::qtbrainweaverclusterwidget_test::all_tests()
 {
   for (const Cluster& c: ClusterFactory().GetTests())
   {
-    QtPvdbClusterWidget w(c);
+    QtClusterWidget w(c);
     QVERIFY(w.topLevelItemCount() == static_cast<int>(c.Get().size()));
     const Cluster d = w.GetCluster();
     QVERIFY(c == d);
-    QtPvdbClusterTreeWidgetItem * const item = new QtPvdbClusterTreeWidgetItem(
+    QtClusterTreeWidgetItem * const item = new QtClusterTreeWidgetItem(
       ribi::cmap::Competency::misc,true,0,1,2);
     item->setText(0,QString("An extra line"));
     w.addTopLevelItem(item);

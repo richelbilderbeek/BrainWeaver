@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <sstream>
 
-ribi::pvdb::QtPvdbClusterTreeWidgetItem::QtPvdbClusterTreeWidgetItem(
+ribi::pvdb::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
   const ribi::cmap::Competency competency,
   const bool is_complex,
   const int rating_complexity,

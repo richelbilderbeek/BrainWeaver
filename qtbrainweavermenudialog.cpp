@@ -295,7 +295,7 @@ void ribi::pvdb::QtMenuDialog::on_button_test_conceptmap_clicked()
   assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
   const File file = pvdb::FileFactory().GetTests().at(test);
 
-  QtPvdbConceptMapDialog d(file);
+  QtConceptMapDialog d(file);
   ShowChild(&d);
 }
 
