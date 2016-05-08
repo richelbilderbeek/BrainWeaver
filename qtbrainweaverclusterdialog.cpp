@@ -112,24 +112,16 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(F
   //    N       Y
   //    Y       Y
 
-  //Create a new cluster
-  if (file.GetCluster().Get().empty() && CountCenterNodes(file.GetConceptMap()) == 0)
+  // A concept map is already made, cluster has been left empty, thus return null
+  if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
   {
-    const Cluster cluster = pvdb::ClusterFactory().Create( {} );
-    file.SetCluster(cluster);
+    return nullptr;
   }
 
   //Read an existing cluster
-  if (!file.GetCluster().Get().empty())
-  {
-    QtPvdbClusterWidget * const widget = new QtPvdbClusterWidget(file.GetCluster());
-    assert(widget);
-    return widget;
-  }
-  //Only where there is an existing concept map, and no existing cluster, will this return null
-  //???
-  //assert(file.GetCluster().Empty() && CountCenterNodes(file.GetConceptMap()) > 0);
-  return nullptr;
+  QtPvdbClusterWidget * const widget = new QtPvdbClusterWidget(file.GetCluster());
+  assert(widget);
+  return widget;
 }
 
 const ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::GetWidget() const

@@ -70,7 +70,7 @@ then
 fi
 xdotool windowactivate $id type "John Doe"
 # &Begin
-xdotool windowactivate $id key alt+b sleep 0.1
+xdotool windowactivate $id key alt+b sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
