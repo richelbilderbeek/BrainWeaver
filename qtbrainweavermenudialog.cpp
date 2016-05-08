@@ -278,7 +278,7 @@ void ribi::pvdb::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 
   const ribi::cmap::ConceptMap concept_map
     = ribi::cmap::ConceptMapFactory().Get6();
-  boost::shared_ptr<cmap::QtRateConceptTallyDialog> d(
+  boost::shared_ptr<ribi::cmap::QtRateConceptTallyDialog> d(
     new cmap::QtRateConceptTallyDialog(concept_map));
   ShowChild(d.get());
 }
