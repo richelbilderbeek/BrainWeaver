@@ -74,7 +74,6 @@ private slots:
 
   void on_button_add_clicked();
   void on_button_next_clicked();
-  void on_edit_textChanged(const QString &arg1);
 
   void on_button_save_clicked();
 

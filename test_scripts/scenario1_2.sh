@@ -83,7 +83,40 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a
+xdotool windowactivate $id key alt+a sleep 0.1
+
+
+
+####################################
+# 'Associeer- en cluster-scherm'
+# Add some associations
+####################################
+id=`get_dialog_id "Associeer- en cluster-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+# Text to add
+xdotool windowactivate $id type "hard to make up"
+# Add 
+xdotool windowactivate $id key Tab Return
+# Text to add
+xdotool windowactivate $id type "concise"
+# Add 
+xdotool windowactivate $id key Tab Return
+# Text to add
+xdotool windowactivate $id type "precise"
+# Add 
+xdotool windowactivate $id key Tab Return
+# Text to add
+xdotool windowactivate $id type "English"
+# Add 
+xdotool windowactivate $id key Tab Return
+# Text to add
+xdotool windowactivate $id type "not too long"
+# Add 
+xdotool windowactivate $id key Tab Return
 
 
 

@@ -86,7 +86,6 @@ ribi::pvdb::QtPvdbClusterDialog::QtPvdbClusterDialog(
   }
   //Enabled/disable controls
   const bool do_enable = CountCenterNodes(file.GetConceptMap()) == 0;
-  ui->button_add->setEnabled(do_enable);
   if (m_widget) m_widget->setEnabled(do_enable);
   ui->edit->setEnabled(do_enable);
 
@@ -105,13 +104,6 @@ ribi::pvdb::QtPvdbClusterDialog::~QtPvdbClusterDialog() noexcept
 
 ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(File file)
 {
-  //The user may have
-  // Cluster Concept map
-  //    N       N
-  //    Y       N
-  //    N       Y
-  //    Y       Y
-
   // A concept map is already made, cluster has been left empty, thus return null
   if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
   {
@@ -256,12 +248,6 @@ void ribi::pvdb::QtPvdbClusterDialog::on_button_next_clicked()
     ui->button_add->setEnabled(false);
     ui->edit->setEnabled(false);
   }
-}
-
-void ribi::pvdb::QtPvdbClusterDialog::on_edit_textChanged(const QString &arg1)
-{
-  assert(ui->edit->text() == arg1);
-  ui->button_add->setEnabled(boost::num_vertices(m_file.GetConceptMap()) && arg1.size() > 0);
 }
 
 void ribi::pvdb::QtPvdbClusterDialog::Save()
