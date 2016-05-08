@@ -98,7 +98,7 @@ private:
 
   //static QtPvdbConceptMapEditWidget * CreateWidget(const ribi::cmap::ConceptMap concept_map);
   ///DON'T USE: puts a new ConceptMap in file
-  static ribi::cmap::QtConceptMap * CreateWidget(pvdb::File file);
+  //static ribi::cmap::QtConceptMap * CreateWidget(pvdb::File file);
 
   //#define NOT_NOW_20141111
   #ifdef NOT_NOW_20141111

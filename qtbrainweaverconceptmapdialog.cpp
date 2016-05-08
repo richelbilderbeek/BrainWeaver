@@ -42,6 +42,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
+#include "conceptmapcenternodefactory.h"
 #include "conceptmap.h"
 #include "conceptmapedge.h"
 #include "brainweaverfile.h"
@@ -84,20 +85,23 @@ ribi::pvdb::QtPvdbConceptMapDialog::QtPvdbConceptMapDialog(
     ui(new Ui::QtPvdbConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
-    m_widget(CreateWidget(file))
+    m_widget{new ribi::cmap::QtConceptMap(this)}
 {
   if (boost::num_vertices(m_file.GetConceptMap()) == 0)
   {
-    std::stringstream msg;
-    msg << __func__ << ": "
-      << "a File its concept map must have at least one node"
-    ;
-    throw std::invalid_argument(msg.str());
+    //Add the first central node
+    using ribi::cmap::CenterNodeFactory;
+    using ribi::cmap::Concept;
+    const auto cn = CenterNodeFactory().Create(Concept(m_file.GetQuestion()));
+    add_custom_and_selectable_vertex(cn, false, m_file.GetConceptMap());
+    assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   }
+  assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
+  assert(m_widget);
+  m_widget->SetConceptMap(m_file.GetConceptMap());
 
   ui->setupUi(this);
 
-  assert(m_widget);
   assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
   assert(this->layout());
   this->layout()->addWidget(m_widget);
@@ -159,6 +163,7 @@ ribi::cmap::ConceptMap ribi::pvdb::QtPvdbConceptMapDialog::CreateFromCluster(
   return p;
 }
 
+/*
 ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb::File file)
 {
   const bool trace_verbose = false;
@@ -225,6 +230,7 @@ ribi::cmap::QtConceptMap * ribi::pvdb::QtPvdbConceptMapDialog::CreateWidget(pvdb
   cmap->SetConceptMap(file.GetConceptMap());
   return cmap;
 }
+*/
 
 #ifndef NDEBUG
 void ribi::pvdb::QtPvdbConceptMapDialog::DoRandomStuff()

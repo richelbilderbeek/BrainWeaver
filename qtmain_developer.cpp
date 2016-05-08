@@ -45,10 +45,23 @@ const std::string CreateStyleSheet()
 
 int main(int argc, char *argv[])
 {
-  QApplication a(argc, argv);
-  a.setStyleSheet(CreateStyleSheet().c_str());
-  a.setWindowIcon(QIcon(":/images/R.png"));
-  ribi::pvdb::QtMenuDialog d;
-  d.show();
-  return a.exec();
+  try
+  {
+    QApplication a(argc, argv);
+    a.setStyleSheet(CreateStyleSheet().c_str());
+    a.setWindowIcon(QIcon(":/images/R.png"));
+    ribi::pvdb::QtMenuDialog d;
+    d.show();
+    return a.exec();
+  }
+  catch (std::exception& e)
+  {
+    std::cout << e.what() << '\n';
+    return 1;
+  }
+  catch (...)
+  {
+    std::cout << "Unknown exception thrown" << '\n';
+    return 1;
+  }
 }

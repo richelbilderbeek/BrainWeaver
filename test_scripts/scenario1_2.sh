@@ -163,3 +163,15 @@ echo "Before: "
 egrep "<cluster>.*</cluster>" $mycmp -o
 echo "After: "
 egrep "<cluster>.*</cluster>" $mycmp_result -o
+
+####################################
+# 'Associeer- en cluster-scherm'
+# Start concept map
+####################################
+id=`get_dialog_id "Associeer- en cluster-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+xdotool windowactivate $id sleep 0.1 key alt+b
