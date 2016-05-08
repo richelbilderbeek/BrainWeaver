@@ -33,12 +33,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace ribi {
 namespace pvdb {
 
-struct QtPvdbAboutDialog
+struct QtAboutDialog : public ::ribi::QtAboutDialog
 {
-  QtPvdbAboutDialog() {}
-
-  ///Obtain the QtAboutDialog for this project
-  boost::shared_ptr<QtAboutDialog> Get() const;
+  QtAboutDialog();
 };
 
 } //~namespace pvdb

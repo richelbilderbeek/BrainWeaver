@@ -39,7 +39,31 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtscopeddisable.h"
 #pragma GCC diagnostic pop
 
-boost::shared_ptr<ribi::QtAboutDialog> ribi::pvdb::QtPvdbAboutDialog::Get() const
+ribi::About GetAbout()
+{
+  ribi::About about = ribi::pvdb::MenuDialog().GetAbout();
+  about.AddLibrary("QtArrowItem version: " + ribi::QtArrowItem::GetVersion());
+  about.AddLibrary("QtHideAndShowDialog version: " + ribi::QtHideAndShowDialog::GetVersion());
+  about.AddLibrary("QtKeyboardFriendlyGraphicsView version: " + ribi::QtKeyboardFriendlyGraphicsView::GetVersion());
+  about.AddLibrary("QtQuadBezierArrowItem version: " + ribi::QtQuadBezierArrowItem::GetVersion());
+  about.AddLibrary("QtScopedDisable version: " + QtScopedDisable<int>::GetVersion());
+  about.AddLibrary("Artwork from LibreOffice");
+  return about;
+}
+
+ribi::pvdb::QtAboutDialog::QtAboutDialog()
+  : ::ribi::QtAboutDialog(GetAbout())
+{
+  //Add Loom image
+  assert(layout());
+  QLabel * const label = new QLabel(this);
+  label->setPixmap(QPixmap(":/images/PicLoomAbout.png"));
+  layout()->addWidget(label);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+}
+
+/*
+boost::shared_ptr<ribi::QtAboutDialog> ribi::pvdb::QtAboutDialog::Get() const
 {
   About about = pvdb::MenuDialog().GetAbout();
   about.AddLibrary("QtArrowItem version: " + QtArrowItem::GetVersion());
@@ -56,6 +80,8 @@ boost::shared_ptr<ribi::QtAboutDialog> ribi::pvdb::QtPvdbAboutDialog::Get() cons
   QLabel * const label = new QLabel(d.get());
   label->setPixmap(QPixmap(":/images/PicLoomAbout.png"));
   d->layout()->addWidget(label);
+  d->setWindowFlags(d->windowFlags() & ~Qt::WindowContextHelpButtonHint);
   return d;
 }
 
+*/

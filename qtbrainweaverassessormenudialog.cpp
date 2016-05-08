@@ -66,7 +66,9 @@ void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_create_assessment_clicked()
 
 void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_about_clicked()
 {
-  const auto d(QtPvdbAboutDialog().Get());
+  ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
+  assert(d);
+  //const auto d(QtAboutDialog().Get());
   this->hide();
   d->exec();
   this->show();

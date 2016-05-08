@@ -222,7 +222,9 @@ void ribi::pvdb::QtPvdbMenuDialog::on_button_overview_clicked() noexcept
 
 void ribi::pvdb::QtPvdbMenuDialog::on_button_about_clicked() noexcept
 {
-  const auto d = QtPvdbAboutDialog().Get();
+  ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
+  assert(d);
+  //const auto d(QtAboutDialog().Get());
   this->hide();
   d->exec();
   this->show();
