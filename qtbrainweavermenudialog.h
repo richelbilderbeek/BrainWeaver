@@ -25,31 +25,29 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
 #include "brainweaverfile.h"
 #include "qthideandshowdialog.h"
-
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbMenuDialog; }
+namespace Ui { class QtMenuDialog; }
 
 namespace ribi {
 
 namespace pvdb {
 
-class QtPvdbMenuDialog : public ribi::QtHideAndShowDialog
+class QtMenuDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
   public:
-  explicit QtPvdbMenuDialog(QWidget* parent = 0);
-  QtPvdbMenuDialog(const QtPvdbMenuDialog&) = delete;
-  QtPvdbMenuDialog& operator=(const QtPvdbMenuDialog&) = delete;
-  ~QtPvdbMenuDialog() noexcept;
+  explicit QtMenuDialog(QWidget* parent = 0);
+  QtMenuDialog(const QtMenuDialog&) = delete;
+  QtMenuDialog& operator=(const QtMenuDialog&) = delete;
+  ~QtMenuDialog() noexcept;
 
-  const Ui::QtPvdbMenuDialog * GetUi() const noexcept { return ui; }
-        Ui::QtPvdbMenuDialog * GetUi()       noexcept { return ui; }
+  const Ui::QtMenuDialog * GetUi() const noexcept { return ui; }
+        Ui::QtMenuDialog * GetUi()       noexcept { return ui; }
 
 public slots:
   void on_button_about_clicked() noexcept;
@@ -78,7 +76,7 @@ private slots:
   void on_button_test_qtroundedrectitem_clicked();
 
 private:
-  Ui::QtPvdbMenuDialog *ui;
+  Ui::QtMenuDialog *ui;
 
   ///The file to work on
   File m_file;

@@ -31,7 +31,7 @@ namespace ribi {
 namespace pvdb {
 
 struct QtPvdbArrow;
-struct QtPvdbClusterDialog;
+struct QtClusterDialog;
 struct QtPvdbClusterWidget;
 struct QtPvdbConceptMapDialog;
 struct QtPvdbRateExamplesDialog;

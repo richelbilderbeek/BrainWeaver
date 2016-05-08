@@ -32,20 +32,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 
-namespace Ui { class QtPvdbAssessorMenuDialog; }
+namespace Ui { class QtAssessorMenuDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbAssessorMenuDialog : public ribi::QtHideAndShowDialog
+class QtAssessorMenuDialog : public ribi::QtHideAndShowDialog
 {
     Q_OBJECT
     
 public:
-  explicit QtPvdbAssessorMenuDialog(QWidget* parent = 0);
-  QtPvdbAssessorMenuDialog(const QtPvdbAssessorMenuDialog&) = delete;
-  QtPvdbAssessorMenuDialog& operator=(const QtPvdbAssessorMenuDialog&) = delete;
-  ~QtPvdbAssessorMenuDialog() noexcept;
+  explicit QtAssessorMenuDialog(QWidget* parent = 0);
+  QtAssessorMenuDialog(const QtAssessorMenuDialog&) = delete;
+  QtAssessorMenuDialog& operator=(const QtAssessorMenuDialog&) = delete;
+  ~QtAssessorMenuDialog() noexcept;
 
 private slots:
   void keyPressEvent(QKeyEvent *);
@@ -58,7 +58,7 @@ private slots:
   void on_button_assess_result_clicked();
 
 private:
-  Ui::QtPvdbAssessorMenuDialog *ui;
+  Ui::QtAssessorMenuDialog *ui;
 };
 
 } //~namespace pvdb

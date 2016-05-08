@@ -65,7 +65,7 @@ void ribi::pvdb::qtbrainweavermenudialog_test::choose_file()
 
 void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
 {
-  QtPvdbMenuDialog d;
+  QtMenuDialog d;
   d.show();
   QTest::qWaitForWindowActive(&d);
 
@@ -133,7 +133,7 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
       QVERIFY((file.GetCluster() || !file.GetCluster())
         && "If the file has no cluster, the cluster dialog creates it,"
         && "if no concept map was present");
-      QtPvdbClusterDialog d(file);
+      QtClusterDialog d(file);
       if (file.GetConceptMap() && !file.GetConceptMap())
       {
         QVERIFY(d.GetWidget());
@@ -149,9 +149,9 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_1()
 void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
 {
   if ("Fix issue #20") return;
-  QtPvdbMenuDialog d;
+  QtMenuDialog d;
   d.show();
-  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
+  Ui::QtMenuDialog * const ui = d.GetUi();
   //Long test #2
   //1) Create an assessor question file
   //2) Load the assessor file (as a student)
@@ -186,7 +186,7 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
       File file(LoadFile(filename));
       QVERIFY(file.GetQuestion() == question);
       QVERIFY(file.GetStudentName() == name);
-      QtPvdbClusterDialog d(file);
+      QtClusterDialog d(file);
       if (!boost::num_vertices(file.GetConceptMap()))
       {
         QVERIFY(!file.GetCluster().Empty() && "the cluster dialog used an existing or created a cluster");
@@ -223,7 +223,7 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
       QVERIFY((file.GetCluster() || !file.GetCluster())
         && "If the file has no cluster, the cluster dialog creates it,"
            "if and only if there is no concept map");
-      QtPvdbClusterDialog d(file);
+      QtClusterDialog d(file);
       if (!file.GetConceptMap())
       {
         QVERIFY(file.GetCluster() && "the cluster dialog used an existing or created a cluster");
@@ -240,9 +240,9 @@ void ribi::pvdb::qtbrainweavermenudialog_test::scenario_2()
 
 void ribi::pvdb::qtbrainweavermenudialog_test::press_all_buttons()
 {
-  QtPvdbMenuDialog d;
+  QtMenuDialog d;
   d.show();
-  Ui::QtPvdbMenuDialog * const ui = d.GetUi();
+  Ui::QtMenuDialog * const ui = d.GetUi();
   const std::vector<QPushButton*> buttons
     =
     {

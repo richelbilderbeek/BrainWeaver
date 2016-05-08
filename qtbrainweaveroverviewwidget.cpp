@@ -101,7 +101,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   using namespace cmap;
   std::vector<QtHideAndShowDialog* > v;
   {
-    QtHideAndShowDialog* p(new QtPvdbAssessorMenuDialog);
+    QtHideAndShowDialog* p(new QtAssessorMenuDialog);
     assert(p);
     v.push_back(p);
   }
@@ -111,7 +111,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     const File file(FileFactory().GetTests().at(index));
     
     assert(!file.GetCluster().Empty());
-    QtHideAndShowDialog* p(new QtPvdbClusterDialog(file));
+    QtHideAndShowDialog* p(new QtClusterDialog(file));
     assert(p);
     v.push_back(p);
   }
@@ -140,7 +140,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbMenuDialog);
+    QtHideAndShowDialog* p(new QtMenuDialog);
     assert(p);
     v.push_back(p);
   }

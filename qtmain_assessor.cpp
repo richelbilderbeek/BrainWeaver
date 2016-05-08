@@ -60,11 +60,10 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
 
-  //QtPvdbMenuDialog::Test();
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
 
-  ribi::pvdb::QtPvdbAssessorMenuDialog d;
+  ribi::pvdb::QtAssessorMenuDialog d;
   d.show();
   return a.exec();
 }

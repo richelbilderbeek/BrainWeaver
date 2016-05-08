@@ -40,31 +40,31 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverassessormenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbAssessorMenuDialog::QtPvdbAssessorMenuDialog(QWidget* parent)
+ribi::pvdb::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbAssessorMenuDialog)
+    ui(new Ui::QtAssessorMenuDialog)
 {
   ui->setupUi(this);
 }
 
-ribi::pvdb::QtPvdbAssessorMenuDialog::~QtPvdbAssessorMenuDialog() noexcept
+ribi::pvdb::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_create_assessment_clicked()
+void ribi::pvdb::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
   QtPvdbCreateAssessmentMenuDialog d;
   this->ShowChild(&d);
 }
 
 
-void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_about_clicked()
+void ribi::pvdb::QtAssessorMenuDialog::on_button_about_clicked()
 {
   ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
   assert(d);
@@ -74,12 +74,12 @@ void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_about_clicked()
   this->show();
 }
 
-void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_quit_clicked()
+void ribi::pvdb::QtAssessorMenuDialog::on_button_quit_clicked()
 {
   close();
 }
 
-void ribi::pvdb::QtPvdbAssessorMenuDialog::on_button_assess_result_clicked()
+void ribi::pvdb::QtAssessorMenuDialog::on_button_assess_result_clicked()
 {
   //Load assessent file
   const auto d = pvdb::QtFileDialog::GetOpenFileDialog();

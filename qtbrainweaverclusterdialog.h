@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbClusterDialog; }
+namespace Ui { class QtClusterDialog; }
 
 namespace ribi {
 namespace pvdb {
@@ -39,18 +39,18 @@ namespace pvdb {
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
 ///because the widget needs something to work on
-class QtPvdbClusterDialog : public ribi::QtHideAndShowDialog
+class QtClusterDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtPvdbClusterDialog(const File& file, QWidget* parent = 0);
-  QtPvdbClusterDialog(const QtPvdbClusterDialog&) = delete;
-  QtPvdbClusterDialog& operator=(const QtPvdbClusterDialog&) = delete;
-  ~QtPvdbClusterDialog() noexcept;
+  explicit QtClusterDialog(const File& file, QWidget* parent = 0);
+  QtClusterDialog(const QtClusterDialog&) = delete;
+  QtClusterDialog& operator=(const QtClusterDialog&) = delete;
+  ~QtClusterDialog() noexcept;
 
-  const Ui::QtPvdbClusterDialog * GetUi() const noexcept { return ui; }
-        Ui::QtPvdbClusterDialog * GetUi()       noexcept { return ui; }
+  const Ui::QtClusterDialog * GetUi() const noexcept { return ui; }
+        Ui::QtClusterDialog * GetUi()       noexcept { return ui; }
 
   ///Obtain the widget
   QtPvdbClusterWidget * GetWidget();
@@ -78,7 +78,7 @@ private slots:
   void on_button_save_clicked();
 
 private:
-  Ui::QtPvdbClusterDialog *ui;
+  Ui::QtClusterDialog *ui;
 
   ///Does the dialog want to go back to the student menu?
   bool m_back_to_menu;

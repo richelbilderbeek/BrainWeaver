@@ -58,11 +58,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverclusterdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbClusterDialog::QtPvdbClusterDialog(
+ribi::pvdb::QtClusterDialog::QtClusterDialog(
   const File& file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbClusterDialog),
+    ui(new Ui::QtClusterDialog),
     m_back_to_menu(false),
     m_file(file),
     m_widget(BuildWidget(file))
@@ -94,7 +94,7 @@ ribi::pvdb::QtPvdbClusterDialog::QtPvdbClusterDialog(
 }
 
 
-ribi::pvdb::QtPvdbClusterDialog::~QtPvdbClusterDialog() noexcept
+ribi::pvdb::QtClusterDialog::~QtClusterDialog() noexcept
 {
   ///WARNING: assume ui->widget is not available anymore
   //const Cluster cluster = GetWidget()->GetCluster();
@@ -102,7 +102,7 @@ ribi::pvdb::QtPvdbClusterDialog::~QtPvdbClusterDialog() noexcept
   delete ui;
 }
 
-ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(File file)
+ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File file)
 {
   // A concept map is already made, cluster has been left empty, thus return null
   if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
@@ -116,22 +116,22 @@ ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::BuildWidget(F
   return widget;
 }
 
-const ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::GetWidget() const
+const ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget() const
 {
   return m_widget;
 }
 
-ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtPvdbClusterDialog::GetWidget()
+ribi::pvdb::QtPvdbClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
   //[1] Scott Meyers. Effective C++ (3rd edition). ISBN: 0-321-33487-6.
   //    Item 3, paragraph 'Avoid duplication in const and non-const member functions'
   return const_cast<QtPvdbClusterWidget*>(
-    const_cast<const QtPvdbClusterDialog*>(this)->GetWidget());
+    const_cast<const QtClusterDialog*>(this)->GetWidget());
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtClusterDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
@@ -192,7 +192,7 @@ void ribi::pvdb::QtPvdbClusterDialog::keyPressEvent(QKeyEvent* e)
   #endif
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::on_button_add_clicked()
+void ribi::pvdb::QtClusterDialog::on_button_add_clicked()
 {
   assert(m_widget && "This button can only be clicked when there is a widget");
 
@@ -216,7 +216,7 @@ void ribi::pvdb::QtPvdbClusterDialog::on_button_add_clicked()
   #endif
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::on_button_next_clicked()
+void ribi::pvdb::QtClusterDialog::on_button_next_clicked()
 {
   if (GetWidget() && GetWidget()->isEnabled()) //Save concept map, when user is all
   {
@@ -250,7 +250,7 @@ void ribi::pvdb::QtPvdbClusterDialog::on_button_next_clicked()
   }
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::Save()
+void ribi::pvdb::QtClusterDialog::Save()
 {
   const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de clustering op");
@@ -272,7 +272,7 @@ void ribi::pvdb::QtPvdbClusterDialog::Save()
   //close(); //2013-04-19 Request by client
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::Save(const std::string& filename)
+void ribi::pvdb::QtClusterDialog::Save(const std::string& filename)
 {
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
@@ -287,7 +287,7 @@ void ribi::pvdb::QtPvdbClusterDialog::Save(const std::string& filename)
   m_file.Save(filename);
 }
 
-void ribi::pvdb::QtPvdbClusterDialog::on_button_save_clicked()
+void ribi::pvdb::QtClusterDialog::on_button_save_clicked()
 {
   Save();
 }

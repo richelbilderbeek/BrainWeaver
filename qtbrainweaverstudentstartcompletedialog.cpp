@@ -62,7 +62,7 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
-  QtPvdbClusterDialog d(m_file);
+  QtClusterDialog d(m_file);
   this->ShowChild(&d);
   if (d.GoBackToMenu())
   {

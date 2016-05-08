@@ -42,7 +42,7 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::enable_button_depending_on_fil
     {
       const bool had_cluster = !file.GetCluster().Empty();
       const bool had_concept_map = boost::num_vertices(file.GetConceptMap());
-      QtPvdbClusterDialog d{file};
+      QtClusterDialog d{file};
 
       if (!had_cluster && !had_concept_map)
       {
@@ -80,7 +80,7 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled
     QVERIFY(!file.GetCluster().Empty());
     QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
 
-    const QtPvdbClusterDialog d(file);
+    const QtClusterDialog d(file);
     const auto w = d.GetWidget();
     QVERIFY(w);
     QVERIFY(w && w->isEnabled());
@@ -110,7 +110,7 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disable
   QVERIFY(index_2 < ConceptFactory().GetNumberOfTests());
 
   file.SetConceptMap(CreateConceptMap(question));
-  const QtPvdbClusterDialog d(file);
+  const QtClusterDialog d(file);
   QVERIFY(d.GetWidget());
   QVERIFY(!d.GetWidget()->isEnabled());
 }
