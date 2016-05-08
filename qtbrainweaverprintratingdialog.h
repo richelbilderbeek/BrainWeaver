@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace Ui {
-  class QtPvdbPrintRatingDialog;
+  class QtPrintRatingDialog;
 }
 
 struct QTableWidget;
@@ -41,19 +41,19 @@ namespace pvdb {
 
 ///View the current rating, optimized for printers
 ///This dialog will not be visible for humans at all in release
-///QtPvdbRatingDialog is optimized for humans
-class QtPvdbPrintRatingDialog : public ribi::QtHideAndShowDialog
+///QtRatingDialog is optimized for humans
+class QtPrintRatingDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
   
 public:
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
-  explicit QtPvdbPrintRatingDialog(
+  explicit QtPrintRatingDialog(
     const File& file,
     QWidget *parent = 0);
-  QtPvdbPrintRatingDialog(const QtPvdbPrintRatingDialog&) = delete;
-  QtPvdbPrintRatingDialog& operator=(const QtPvdbPrintRatingDialog&) = delete;
-  ~QtPvdbPrintRatingDialog() noexcept;
+  QtPrintRatingDialog(const QtPrintRatingDialog&) = delete;
+  QtPrintRatingDialog& operator=(const QtPrintRatingDialog&) = delete;
+  ~QtPrintRatingDialog() noexcept;
 
   QTableWidget * GetTableConcepts();
   QTableWidget * GetTableExamples();
@@ -68,7 +68,7 @@ private slots:
   void on_button_print_clicked();
   const std::vector<QWidget *> CollectWidgets() const;
 private:
-  Ui::QtPvdbPrintRatingDialog *ui;
+  Ui::QtPrintRatingDialog *ui;
 
   ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   const File m_file;

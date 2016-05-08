@@ -30,20 +30,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbStudentMenuDialog; }
+namespace Ui { class QtStudentMenuDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbStudentMenuDialog : public ribi::QtHideAndShowDialog
+class QtStudentMenuDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
   public:
-  explicit QtPvdbStudentMenuDialog(const File file, QWidget* parent = 0);
-  QtPvdbStudentMenuDialog(const QtPvdbStudentMenuDialog&) = delete;
-  QtPvdbStudentMenuDialog& operator=(const QtPvdbStudentMenuDialog&) = delete;
-  ~QtPvdbStudentMenuDialog() noexcept;
+  explicit QtStudentMenuDialog(const File file, QWidget* parent = 0);
+  QtStudentMenuDialog(const QtStudentMenuDialog&) = delete;
+  QtStudentMenuDialog& operator=(const QtStudentMenuDialog&) = delete;
+  ~QtStudentMenuDialog() noexcept;
 
   ///Get the student his/her name
   std::string GetName() const noexcept;
@@ -67,7 +67,7 @@ class QtPvdbStudentMenuDialog : public ribi::QtHideAndShowDialog
   void on_button_save_clicked();
 
 private:
-  Ui::QtPvdbStudentMenuDialog *ui;
+  Ui::QtStudentMenuDialog *ui;
   File m_file;
 
 };

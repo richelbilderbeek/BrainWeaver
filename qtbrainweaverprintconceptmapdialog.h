@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace Ui {
-  class QtPvdbPrintConceptMapDialog;
+  class QtPrintConceptMapDialog;
 }
 
 namespace ribi {
@@ -42,21 +42,21 @@ namespace pvdb {
 
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
-///QtPvdbPrintConceptMapDialog is optimized for printers
-class QtPvdbPrintConceptMapDialog : public ribi::QtHideAndShowDialog
+///QtPrintConceptMapDialog is optimized for printers
+class QtPrintConceptMapDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
   
 public:
   using ConceptMap = cmap::QtConceptMap;
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
-  explicit QtPvdbPrintConceptMapDialog(
+  explicit QtPrintConceptMapDialog(
     const File& file,
     QWidget *parent = 0
   );
-  QtPvdbPrintConceptMapDialog(const QtPvdbPrintConceptMapDialog&) = delete;
-  QtPvdbPrintConceptMapDialog& operator=(const QtPvdbPrintConceptMapDialog&) = delete;
-  ~QtPvdbPrintConceptMapDialog() noexcept;
+  QtPrintConceptMapDialog(const QtPrintConceptMapDialog&) = delete;
+  QtPrintConceptMapDialog& operator=(const QtPrintConceptMapDialog&) = delete;
+  ~QtPrintConceptMapDialog() noexcept;
   void Print();
 
 protected:
@@ -68,7 +68,7 @@ private slots:
   void on_button_print_clicked();
   void fitConceptMap();
 private:
-  Ui::QtPvdbPrintConceptMapDialog *ui;
+  Ui::QtPrintConceptMapDialog *ui;
 
   ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   File m_file;

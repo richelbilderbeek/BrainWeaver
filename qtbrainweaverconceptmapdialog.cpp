@@ -310,7 +310,7 @@ void ribi::pvdb::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 void ribi::pvdb::QtConceptMapDialog::on_button_print_clicked()
 {
   Save();
-  QtPvdbPrintConceptMapDialog d(m_file);
+  QtPrintConceptMapDialog d(m_file);
   this->ShowChild(&d);
 }
 

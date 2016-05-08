@@ -9,7 +9,7 @@ void ribi::pvdb::qtbrainweaverprintconceptmapdialog_test::default_construct()
 {
   const auto files = FileFactory().GetTests();
   for (const auto file: files) {
-    QtPvdbPrintConceptMapDialog d(file);
+    QtPrintConceptMapDialog d(file);
     d.show();
     QTest::qWait(1000);
     const QRectF all_items_rect {

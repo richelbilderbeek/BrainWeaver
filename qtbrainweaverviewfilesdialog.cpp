@@ -34,28 +34,28 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverviewfilesdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbViewFilesDialog::QtPvdbViewFilesDialog(QWidget* parent) :
+ribi::pvdb::QtViewFilesDialog::QtViewFilesDialog(QWidget* parent) :
   QtHideAndShowDialog(parent),
-  ui(new Ui::QtPvdbViewFilesDialog)
+  ui(new Ui::QtViewFilesDialog)
 {
   ui->setupUi(this);
 }
 
-ribi::pvdb::QtPvdbViewFilesDialog::~QtPvdbViewFilesDialog() noexcept
+ribi::pvdb::QtViewFilesDialog::~QtViewFilesDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbViewFilesDialog::OnTimerLeft()
+void ribi::pvdb::QtViewFilesDialog::OnTimerLeft()
 {
 }
 
-void ribi::pvdb::QtPvdbViewFilesDialog::OnTimerRight()
+void ribi::pvdb::QtViewFilesDialog::OnTimerRight()
 {
 
 }
 
-void ribi::pvdb::QtPvdbViewFilesDialog::on_button_left_clicked()
+void ribi::pvdb::QtViewFilesDialog::on_button_left_clicked()
 {
   const auto d = pvdb::QtFileDialog::GetOpenFileDialog();
   d->setWindowTitle("Select a file to view");
@@ -81,13 +81,13 @@ void ribi::pvdb::QtPvdbViewFilesDialog::on_button_left_clicked()
   ui->text_left->setPlainText(text.c_str());
 }
 
-void ribi::pvdb::QtPvdbViewFilesDialog::keyPressEvent(QKeyEvent* event)
+void ribi::pvdb::QtViewFilesDialog::keyPressEvent(QKeyEvent* event)
 {
   if (event->key()  == Qt::Key_Escape) { close(); return; }
   QDialog::keyPressEvent(event);
 }
 
-void ribi::pvdb::QtPvdbViewFilesDialog::on_button_right_clicked()
+void ribi::pvdb::QtViewFilesDialog::on_button_right_clicked()
 {
   const auto d = pvdb::QtFileDialog::GetOpenFileDialog();
   d->setWindowTitle("Select a file to view");

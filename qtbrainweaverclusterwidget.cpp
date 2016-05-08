@@ -132,7 +132,7 @@ void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
     {
       assert(i < this->topLevelItemCount());
       QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-      //QtPvdbTreeWidgetItem * const top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i));  //BUG 2012-12-30
+      //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i));  //BUG 2012-12-30
       assert(top);
       const int n_child = top->childCount();
       for (int j=0; j!=n_child; ++j)
@@ -143,7 +143,7 @@ void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
         {
           //Move top->child(j) to top
           QTreeWidgetItem * const clone = top->child(j)->clone(); //FIX
-          //QtPvdbTreeWidgetItem * const clone = dynamic_cast<QtPvdbTreeWidgetItem *>(top->child(j)->clone()); //BUG 2012-12-29
+          //QtTreeWidgetItem * const clone = dynamic_cast<QtTreeWidgetItem *>(top->child(j)->clone()); //BUG 2012-12-29
           assert(clone);
           this->addTopLevelItem(clone);
           top->removeChild(top->child(j));
@@ -163,7 +163,7 @@ void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
     for (int i=0; i!=n_top; ++i)
     {
       QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-      //QtPvdbTreeWidgetItem * const top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+      //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
       assert(top);
 
       const int n_child = top->childCount();
@@ -187,7 +187,7 @@ void ribi::pvdb::QtClusterWidget::SetCorrectFlags() noexcept
   for (int i=0; i!=n_top; ++i)
   {
     QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-    //QtPvdbTreeWidgetItem * const top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+    //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
     assert(top);
 
     //Let all top items auto-expand
@@ -314,7 +314,7 @@ void ribi::pvdb::QtClusterWidget::WriteToCluster() const noexcept
   for (int i=0; i!=n_top; ++i)
   {
     QTreeWidgetItem * const top = this->topLevelItem(i); //FIX 2012-12-30
-    //QtPvdbTreeWidgetItem * const top = dynamic_cast<QtPvdbTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+    //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
     assert(top);
     const std::string name = top->text(0).toStdString();
     std::vector<ribi::cmap::Example> examples;

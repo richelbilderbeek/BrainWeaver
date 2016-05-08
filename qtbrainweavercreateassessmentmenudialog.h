@@ -30,20 +30,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbCreateAssessmentMenuDialog; }
+namespace Ui { class QtCreateAssessmentMenuDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbCreateAssessmentMenuDialog : public ribi::QtHideAndShowDialog
+class QtCreateAssessmentMenuDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
 public:
-  explicit QtPvdbCreateAssessmentMenuDialog(QWidget* parent = 0);
-  QtPvdbCreateAssessmentMenuDialog(const QtPvdbCreateAssessmentMenuDialog&) = delete;
-  QtPvdbCreateAssessmentMenuDialog& operator=(const QtPvdbCreateAssessmentMenuDialog&) = delete;
-  ~QtPvdbCreateAssessmentMenuDialog() noexcept;
+  explicit QtCreateAssessmentMenuDialog(QWidget* parent = 0);
+  QtCreateAssessmentMenuDialog(const QtCreateAssessmentMenuDialog&) = delete;
+  QtCreateAssessmentMenuDialog& operator=(const QtCreateAssessmentMenuDialog&) = delete;
+  ~QtCreateAssessmentMenuDialog() noexcept;
 
   ///Must the parent go back to the menu?
   bool GoBackToMenu() const noexcept { return m_back_to_menu; }
@@ -58,7 +58,7 @@ private slots:
 signals:
 
 private:
-  Ui::QtPvdbCreateAssessmentMenuDialog *ui;
+  Ui::QtCreateAssessmentMenuDialog *ui;
 
   ///Must the parent go back to the menu?
   bool m_back_to_menu;

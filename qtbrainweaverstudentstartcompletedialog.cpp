@@ -37,30 +37,30 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbStudentStartCompleteDialog::QtPvdbStudentStartCompleteDialog(
+ribi::pvdb::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbStudentStartCompleteDialog),
+    ui(new Ui::QtStudentStartCompleteDialog),
     m_back_to_menu(false),
     m_file(file)
 {
   ui->setupUi(this);
 }
 
-ribi::pvdb::QtPvdbStudentStartCompleteDialog::~QtPvdbStudentStartCompleteDialog() noexcept
+ribi::pvdb::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_clicked()
+void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
   QtClusterDialog d(m_file);
   this->ShowChild(&d);
@@ -71,7 +71,7 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_associate_cli
   }
 }
 
-void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_construct_clicked()
+void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
 {
   QtConceptMapDialog d(m_file);
   this->ShowChild(&d);
@@ -82,7 +82,7 @@ void ribi::pvdb::QtPvdbStudentStartCompleteDialog::on_button_start_construct_cli
   }
 }
 
-void ribi::pvdb::QtPvdbStudentStartCompleteDialog::Save()
+void ribi::pvdb::QtStudentStartCompleteDialog::Save()
 {
   const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");

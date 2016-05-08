@@ -31,20 +31,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qthideandshowdialog.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbCreateAssessmentCompleteDialog; }
+namespace Ui { class QtCreateAssessmentCompleteDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbCreateAssessmentCompleteDialog : public ribi::QtHideAndShowDialog
+class QtCreateAssessmentCompleteDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
   public:
-  explicit QtPvdbCreateAssessmentCompleteDialog(QWidget* parent = 0);
-  QtPvdbCreateAssessmentCompleteDialog(const QtPvdbCreateAssessmentCompleteDialog&) = delete;
-  QtPvdbCreateAssessmentCompleteDialog& operator=(const QtPvdbCreateAssessmentCompleteDialog&) = delete;
-  ~QtPvdbCreateAssessmentCompleteDialog() noexcept;
+  explicit QtCreateAssessmentCompleteDialog(QWidget* parent = 0);
+  QtCreateAssessmentCompleteDialog(const QtCreateAssessmentCompleteDialog&) = delete;
+  QtCreateAssessmentCompleteDialog& operator=(const QtCreateAssessmentCompleteDialog&) = delete;
+  ~QtCreateAssessmentCompleteDialog() noexcept;
 
   ///Get the filled in concept map focal question
   std::string GetQuestion() const noexcept;
@@ -67,7 +67,7 @@ private slots:
   void on_edit_textChanged(const QString &arg1);
 
 private:
-  Ui::QtPvdbCreateAssessmentCompleteDialog *ui;
+  Ui::QtCreateAssessmentCompleteDialog *ui;
 
   ///Must the parent go back to the menu?
   bool m_back_to_menu;

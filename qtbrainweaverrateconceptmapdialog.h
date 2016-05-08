@@ -30,7 +30,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfile.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbRateConceptMapDialog; }
+namespace Ui { class QtRateConceptMapDialog; }
 
 namespace ribi {
 namespace pvdb {
@@ -64,7 +64,7 @@ private slots:
   void on_button_save_clicked();
 
 private:
-  Ui::QtPvdbRateConceptMapDialog *ui;
+  Ui::QtRateConceptMapDialog *ui;
   pvdb::File m_file;
   ConceptMap * const m_concept_map;
 

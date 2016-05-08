@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     try
     {
       ribi::pvdb::File file = ribi::pvdb::LoadFile(filename);
-      ribi::pvdb::QtPvdbStudentMenuDialog d(file);
+      ribi::pvdb::QtStudentMenuDialog d(file);
       d.show();
       return a.exec();
     }

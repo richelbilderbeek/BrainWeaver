@@ -46,11 +46,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverratingdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
+ribi::pvdb::QtRatingDialog::QtRatingDialog(
   const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbRatingDialog),
+    ui(new Ui::QtRatingDialog),
     m_back_to_menu(false),
     m_file(file)
 {
@@ -90,17 +90,17 @@ ribi::pvdb::QtPvdbRatingDialog::QtPvdbRatingDialog(
   }
 }
 
-ribi::pvdb::QtPvdbRatingDialog::~QtPvdbRatingDialog() noexcept
+ribi::pvdb::QtRatingDialog::~QtRatingDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbRatingDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape) { close(); }
 }
 
-void ribi::pvdb::QtPvdbRatingDialog::on_button_save_clicked()
+void ribi::pvdb::QtRatingDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
   this->hide();
@@ -130,7 +130,7 @@ void ribi::pvdb::QtPvdbRatingDialog::on_button_save_clicked()
   close();
 }
 
-void ribi::pvdb::QtPvdbRatingDialog::Save(const std::string& filename) const
+void ribi::pvdb::QtRatingDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
@@ -142,9 +142,9 @@ void ribi::pvdb::QtPvdbRatingDialog::Save(const std::string& filename) const
 
 
 
-void ribi::pvdb::QtPvdbRatingDialog::on_button_print_clicked()
+void ribi::pvdb::QtRatingDialog::on_button_print_clicked()
 {
-  QtPvdbPrintRatingDialog d(this->m_file);
+  QtPrintRatingDialog d(this->m_file);
 
   //Center the dialog
   {
@@ -156,7 +156,7 @@ void ribi::pvdb::QtPvdbRatingDialog::on_button_print_clicked()
   this->ShowChild(&d);
 }
 
-void ribi::pvdb::QtPvdbRatingDialog::on_edit_name_textEdited(const QString &arg1)
+void ribi::pvdb::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
 {
   if (arg1.size() > 1)
   {

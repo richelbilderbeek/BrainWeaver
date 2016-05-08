@@ -32,20 +32,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbViewFilesDialog; }
+namespace Ui { class QtViewFilesDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbViewFilesDialog : public ribi::QtHideAndShowDialog
+class QtViewFilesDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
   
 public:
-  explicit QtPvdbViewFilesDialog(QWidget* parent = 0);
-  QtPvdbViewFilesDialog(const QtPvdbViewFilesDialog&) = delete;
-  QtPvdbViewFilesDialog& operator=(const QtPvdbViewFilesDialog&) = delete;
-  ~QtPvdbViewFilesDialog() noexcept;
+  explicit QtViewFilesDialog(QWidget* parent = 0);
+  QtViewFilesDialog(const QtViewFilesDialog&) = delete;
+  QtViewFilesDialog& operator=(const QtViewFilesDialog&) = delete;
+  ~QtViewFilesDialog() noexcept;
   
 private slots:
   void on_button_left_clicked();
@@ -56,7 +56,7 @@ private slots:
   void on_button_right_clicked();
 
 private:
-  Ui::QtPvdbViewFilesDialog *ui;
+  Ui::QtViewFilesDialog *ui;
 };
 
 } //~namespace pvdb

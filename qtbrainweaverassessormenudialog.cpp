@@ -59,7 +59,7 @@ void ribi::pvdb::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
-  QtPvdbCreateAssessmentMenuDialog d;
+  QtCreateAssessmentMenuDialog d;
   this->ShowChild(&d);
 }
 

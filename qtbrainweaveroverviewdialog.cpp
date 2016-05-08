@@ -29,17 +29,17 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbOverviewDialog::QtPvdbOverviewDialog(QWidget* parent)
+ribi::pvdb::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
   : QtHideAndShowDialog(parent)
 {
   
   QLayout * const layout = new QVBoxLayout(this);
   this->setLayout(layout);
-  QtPvdbOverviewWidget * const widget = new QtPvdbOverviewWidget;
+  QtOverviewWidget * const widget = new QtOverviewWidget;
   layout->addWidget(widget);
 }
 
-void ribi::pvdb::QtPvdbOverviewDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
 {
   assert(e);
   if (e->key()  == Qt::Key_Escape) { close(); return; }

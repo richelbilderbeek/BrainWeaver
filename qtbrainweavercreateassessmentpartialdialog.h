@@ -32,24 +32,24 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace Ui {
-  class QtPvdbCreateAssessmentPartialDialog;
+  class QtCreateAssessmentPartialDialog;
 }
 
 namespace ribi {
 
 namespace pvdb {
 
-class QtPvdbCreateAssessmentPartialDialog : public QDialog
+class QtCreateAssessmentPartialDialog : public QDialog
 {
     Q_OBJECT
     
   public:
-  explicit QtPvdbCreateAssessmentPartialDialog(
+  explicit QtCreateAssessmentPartialDialog(
     const File file,
     QWidget* parent = 0);
-  QtPvdbCreateAssessmentPartialDialog(const QtPvdbCreateAssessmentPartialDialog&) = delete;
-  QtPvdbCreateAssessmentPartialDialog& operator=(const QtPvdbCreateAssessmentPartialDialog&) = delete;
-  ~QtPvdbCreateAssessmentPartialDialog() noexcept;
+  QtCreateAssessmentPartialDialog(const QtCreateAssessmentPartialDialog&) = delete;
+  QtCreateAssessmentPartialDialog& operator=(const QtCreateAssessmentPartialDialog&) = delete;
+  ~QtCreateAssessmentPartialDialog() noexcept;
 
   private slots:
   void keyPressEvent(QKeyEvent* e);
@@ -58,7 +58,7 @@ class QtPvdbCreateAssessmentPartialDialog : public QDialog
   void AnyEditChanged();
 
   private:
-  Ui::QtPvdbCreateAssessmentPartialDialog *ui;
+  Ui::QtCreateAssessmentPartialDialog *ui;
   File m_file;
 };
 

@@ -32,7 +32,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbRatingDialog; }
+namespace Ui { class QtRatingDialog; }
 
 struct QTableWidget;
 
@@ -40,16 +40,16 @@ namespace ribi {
 namespace pvdb {
 
 ///View the current rating, optimized for humans
-///QtPvdbPrintRatingDialog is optimized for printers
-class QtPvdbRatingDialog : public ribi::QtHideAndShowDialog
+///QtPrintRatingDialog is optimized for printers
+class QtRatingDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
 
   public:
-  explicit QtPvdbRatingDialog(const File file, QWidget* parent = 0);
-  QtPvdbRatingDialog(const QtPvdbRatingDialog&) = delete;
-  QtPvdbRatingDialog& operator=(const QtPvdbRatingDialog&) = delete;
-  ~QtPvdbRatingDialog() noexcept;
+  explicit QtRatingDialog(const File file, QWidget* parent = 0);
+  QtRatingDialog(const QtRatingDialog&) = delete;
+  QtRatingDialog& operator=(const QtRatingDialog&) = delete;
+  ~QtRatingDialog() noexcept;
 
   bool GetBackToMenu() const { return m_back_to_menu; }
 
@@ -62,7 +62,7 @@ class QtPvdbRatingDialog : public ribi::QtHideAndShowDialog
   void on_edit_name_textEdited(const QString &arg1);
 
 private:
-  Ui::QtPvdbRatingDialog *ui;
+  Ui::QtRatingDialog *ui;
   bool m_back_to_menu;
   File m_file;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QtPvdbCreateAssessmentMenuDialog</class>
- <widget class="QDialog" name="QtPvdbCreateAssessmentMenuDialog">
+ <class>QtCreateAssessmentMenuDialog</class>
+ <widget class="QDialog" name="QtCreateAssessmentMenuDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -37,13 +37,13 @@ struct QtHideAndShowDialog;
 
 namespace pvdb {
 
-class QtPvdbOverviewWidget : public QGraphicsView
+class QtOverviewWidget : public QGraphicsView
 {
   Q_OBJECT
 
 public:
 
-  explicit QtPvdbOverviewWidget(QWidget* parent = 0);
+  explicit QtOverviewWidget(QWidget* parent = 0);
     
 public slots:
 

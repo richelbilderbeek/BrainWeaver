@@ -56,7 +56,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbOverviewWidget::QtPvdbOverviewWidget(QWidget* parent)
+ribi::pvdb::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
   : QGraphicsView(new QGraphicsScene,parent),
     m_dialogs(GetAllDialogs())
 {
@@ -96,7 +96,7 @@ ribi::pvdb::QtPvdbOverviewWidget::QtPvdbOverviewWidget(QWidget* parent)
 }
 
 
-const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget::GetAllDialogs()
+const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtOverviewWidget::GetAllDialogs()
 {
   using namespace cmap;
   std::vector<QtHideAndShowDialog* > v;
@@ -130,12 +130,12 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbCreateAssessmentCompleteDialog);
+    QtHideAndShowDialog* p(new QtCreateAssessmentCompleteDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbCreateAssessmentMenuDialog);
+    QtHideAndShowDialog* p(new QtCreateAssessmentMenuDialog);
     assert(p);
     v.push_back(p);
   }
@@ -149,7 +149,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
     const File file = FileFactory().GetTests().at(index);
     
-    QtHideAndShowDialog* p(new QtPvdbPrintConceptMapDialog(file));
+    QtHideAndShowDialog* p(new QtPrintConceptMapDialog(file));
     assert(p);
     v.push_back(p);
   }
@@ -158,7 +158,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
     const File file = FileFactory().GetTests().at(index);
     
-    QtHideAndShowDialog* p(new QtPvdbPrintConceptMapDialog(file));
+    QtHideAndShowDialog* p(new QtPrintConceptMapDialog(file));
     assert(p);
     v.push_back(p);
   }
@@ -195,13 +195,13 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 4;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtPvdbRatingDialog(FileFactory().GetTests().at(index)));
+    QtHideAndShowDialog* p(new QtRatingDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }
   {
     #ifdef REALLY_DEMONSTRATE_INFINITE_RECURSION_7236834589746034
-    QtHideAndShowDialog*(new QtPvdbOverviewDialog);
+    QtHideAndShowDialog*(new QtOverviewDialog);
     assert(p);
     v.push_back(p);
     #endif
@@ -209,45 +209,45 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   {
     const int index = 2;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtPvdbStudentMenuDialog(FileFactory().GetTests().at(index)));
+    QtHideAndShowDialog* p(new QtStudentMenuDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }
   {
     const int index = 2;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtPvdbStudentStartCompleteDialog(FileFactory().GetTests().at(index)));
+    QtHideAndShowDialog* p(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }
   #ifdef PVDB_ALSO_SHOW_TEST_DIALOGS
   {
-    QtHideAndShowDialog* p(new QtPvdbTestConceptItemDialog);
+    QtHideAndShowDialog* p(new QtTestConceptItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbTestNodeItemDialog);
+    QtHideAndShowDialog* p(new QtTestNodeItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbTestEdgeItemDialog);
+    QtHideAndShowDialog* p(new QtTestEdgeItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbTestConceptMapEditWidgetDialog);
+    QtHideAndShowDialog* p(new QtTestConceptMapEditWidgetDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbTestConceptMapRateWidgetDialog);
+    QtHideAndShowDialog* p(new QtTestConceptMapRateWidgetDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtPvdbViewTestsDialog);
+    QtHideAndShowDialog* p(new QtViewTestsDialog);
     assert(p);
     v.push_back(p);
   }
@@ -258,7 +258,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtPvdbOverviewWidget:
   return v;
 }
 
-void ribi::pvdb::QtPvdbOverviewWidget::mouseDoubleClickEvent(QMouseEvent *)
+void ribi::pvdb::QtOverviewWidget::mouseDoubleClickEvent(QMouseEvent *)
 {
   QImage image(scene()->sceneRect().size().toSize(), QImage::Format_ARGB32); // Create the image with the exact size of the shrunk scene
   image.fill(Qt::transparent);                                               // Start all pixels transparent

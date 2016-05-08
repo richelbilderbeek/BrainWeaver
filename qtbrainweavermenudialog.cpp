@@ -157,7 +157,7 @@ void ribi::pvdb::QtMenuDialog::on_button_rating_clicked() noexcept
   assert(test < FileFactory().GetNumberOfTests());
   const File file = pvdb::FileFactory().GetTests().at(test);
 
-  QtPvdbRatingDialog d(file);
+  QtRatingDialog d(file);
   ShowChild(&d);
 }
 
@@ -175,7 +175,7 @@ void ribi::pvdb::QtMenuDialog::on_button_student_clicked() noexcept
     try
     {
       const File file = pvdb::LoadFile(filename);
-      QtPvdbStudentMenuDialog d(file);
+      QtStudentMenuDialog d(file);
       ShowChild(&d);
     }
     catch (...)
@@ -199,7 +199,7 @@ void ribi::pvdb::QtMenuDialog::on_button_overview_clicked() noexcept
 {
   const QString old_title = this->windowTitle();
   this->setWindowTitle("Loading, please wait...");
-  QtPvdbOverviewDialog d;
+  QtOverviewDialog d;
   ShowChild(&d);
 }
 
@@ -215,7 +215,7 @@ void ribi::pvdb::QtMenuDialog::on_button_about_clicked() noexcept
 
 void ribi::pvdb::QtMenuDialog::on_button_view_files_clicked() noexcept
 {
-  QtPvdbViewFilesDialog d;
+  QtViewFilesDialog d;
   ShowChild(&d);
 }
 
@@ -257,7 +257,7 @@ void ribi::pvdb::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 
 void ribi::pvdb::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
-  QtPvdbPrintConceptMapDialog d(FileFactory().GetTests().front());
+  QtPrintConceptMapDialog d(FileFactory().GetTests().front());
   ShowChild(&d);
 }
 
@@ -268,8 +268,8 @@ void ribi::pvdb::QtMenuDialog::on_button_print_rating_clicked() noexcept
   //assert(is_regular_file(filename));
   //const File file = pvdb::LoadFile(filename);
 
-  //QtPvdbPrintRatingDialog d(file);
-  QtPvdbPrintConceptMapDialog d(FileFactory().GetTests().front());
+  //QtPrintRatingDialog d(file);
+  QtPrintConceptMapDialog d(FileFactory().GetTests().front());
   ShowChild(&d);
 }
 

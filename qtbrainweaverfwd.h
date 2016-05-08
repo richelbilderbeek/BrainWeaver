@@ -30,12 +30,12 @@ struct QTimer;
 namespace ribi {
 namespace pvdb {
 
-struct QtPvdbArrow;
+struct QtArrow;
 struct QtClusterDialog;
 struct QtClusterWidget;
 struct QtConceptMapDialog;
-struct QtPvdbRateExamplesDialog;
-struct QtPvdbStudentMenuDialog;
+struct QtRateExamplesDialog;
+struct QtStudentMenuDialog;
 
 } //~namespace pvdb
 

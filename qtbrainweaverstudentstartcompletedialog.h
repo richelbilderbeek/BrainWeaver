@@ -30,20 +30,20 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
-namespace Ui { class QtPvdbStudentStartCompleteDialog; }
+namespace Ui { class QtStudentStartCompleteDialog; }
 
 namespace ribi {
 namespace pvdb {
 
-class QtPvdbStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
+class QtStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
 {
   Q_OBJECT
     
   public:
-  explicit QtPvdbStudentStartCompleteDialog(const File file, QWidget* parent = 0);
-  QtPvdbStudentStartCompleteDialog(const QtPvdbStudentStartCompleteDialog&) = delete;
-  QtPvdbStudentStartCompleteDialog& operator=(const QtPvdbStudentStartCompleteDialog&) = delete;
-  ~QtPvdbStudentStartCompleteDialog() noexcept;
+  explicit QtStudentStartCompleteDialog(const File file, QWidget* parent = 0);
+  QtStudentStartCompleteDialog(const QtStudentStartCompleteDialog&) = delete;
+  QtStudentStartCompleteDialog& operator=(const QtStudentStartCompleteDialog&) = delete;
+  ~QtStudentStartCompleteDialog() noexcept;
 
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const { return m_back_to_menu; }
@@ -55,7 +55,7 @@ class QtPvdbStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
   void on_button_start_construct_clicked();
 
   private:
-  Ui::QtPvdbStudentStartCompleteDialog *ui;
+  Ui::QtStudentStartCompleteDialog *ui;
 
   ///Does the dialog want to go back to the student menu?
   bool m_back_to_menu;

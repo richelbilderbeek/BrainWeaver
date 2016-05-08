@@ -49,11 +49,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverprintratingdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbPrintRatingDialog::QtPvdbPrintRatingDialog(
+ribi::pvdb::QtPrintRatingDialog::QtPrintRatingDialog(
   const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbPrintRatingDialog),
+    ui(new Ui::QtPrintRatingDialog),
     m_file(file),
     m_widget(new cmap::QtConceptMap)
 {
@@ -92,12 +92,12 @@ ribi::pvdb::QtPvdbPrintRatingDialog::QtPvdbPrintRatingDialog(
   }
 }
 
-ribi::pvdb::QtPvdbPrintRatingDialog::~QtPvdbPrintRatingDialog() noexcept
+ribi::pvdb::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
 {
   delete ui;
 }
 
-const std::vector<QWidget *> ribi::pvdb::QtPvdbPrintRatingDialog::CollectWidgets() const
+const std::vector<QWidget *> ribi::pvdb::QtPrintRatingDialog::CollectWidgets() const
 {
   std::vector<QWidget *> v { ui->frame_header, ui->frame_concept_map, ui->label_concept_map_as_text };
   {
@@ -114,32 +114,32 @@ const std::vector<QWidget *> ribi::pvdb::QtPvdbPrintRatingDialog::CollectWidgets
   return v;
 }
 
-QTableWidget * ribi::pvdb::QtPvdbPrintRatingDialog::GetTableConcepts()
+QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableConcepts()
 {
   return ui->table_concepts;
 }
 
-QTableWidget * ribi::pvdb::QtPvdbPrintRatingDialog::GetTableExamples()
+QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableExamples()
 {
   return ui->table_examples;
 }
 
-QTableWidget * ribi::pvdb::QtPvdbPrintRatingDialog::GetTableValues()
+QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableValues()
 {
   return ui->table_values;
 }
 
-void ribi::pvdb::QtPvdbPrintRatingDialog::keyPressEvent(QKeyEvent * event)
+void ribi::pvdb::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
 {
   if (event->key() == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtPvdbPrintRatingDialog::on_button_print_clicked()
+void ribi::pvdb::QtPrintRatingDialog::on_button_print_clicked()
 {
   Print();
 }
 
-void ribi::pvdb::QtPvdbPrintRatingDialog::Print()
+void ribi::pvdb::QtPrintRatingDialog::Print()
 {
   //Start save dialog
   const boost::shared_ptr<QFileDialog> print_dialog(
@@ -186,7 +186,7 @@ void ribi::pvdb::QtPvdbPrintRatingDialog::Print()
 
 }
 
-void ribi::pvdb::QtPvdbPrintRatingDialog::showEvent(QShowEvent *)
+void ribi::pvdb::QtPrintRatingDialog::showEvent(QShowEvent *)
 {
   //Concept map
   {

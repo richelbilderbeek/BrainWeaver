@@ -34,9 +34,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace ribi {
 namespace pvdb {
 
-struct QtPvdbOverviewDialog : public ribi::QtHideAndShowDialog
+struct QtOverviewDialog : public ribi::QtHideAndShowDialog
 {
-  explicit QtPvdbOverviewDialog(QWidget* parent = 0);
+  explicit QtOverviewDialog(QWidget* parent = 0);
 
 protected:
   void keyPressEvent(QKeyEvent *);

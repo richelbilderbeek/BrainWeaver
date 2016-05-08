@@ -53,7 +53,7 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
-  ui(new Ui::QtPvdbRateConceptMapDialog),
+  ui(new Ui::QtRateConceptMapDialog),
   m_file(file),
   m_concept_map(new cmap::QtConceptMap)
 {
@@ -123,7 +123,7 @@ void ribi::pvdb::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
 {
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
-  QtPvdbRatingDialog d(m_file);
+  QtRatingDialog d(m_file);
   ShowChild(&d);
   if (d.GetBackToMenu())
   {
@@ -137,7 +137,7 @@ void ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog(const ribi::
   this->setEnabled(false);
   this->hide();
   this->m_widget->setEnabled(false);
-  QtPvdbRateConceptDialog d(sub_concept_map); //Item may be changed
+  QtRateConceptDialog d(sub_concept_map); //Item may be changed
   this->ShowChild(&d);
   this->setEnabled(true);
   this->show();

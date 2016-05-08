@@ -36,28 +36,28 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfile.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbCreateAssessmentMenuDialog::QtPvdbCreateAssessmentMenuDialog(QWidget* parent)
+ribi::pvdb::QtCreateAssessmentMenuDialog::QtCreateAssessmentMenuDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtPvdbCreateAssessmentMenuDialog),
+    ui(new Ui::QtCreateAssessmentMenuDialog),
     m_back_to_menu{false},
     m_question{}
 {
   ui->setupUi(this);
 }
 
-ribi::pvdb::QtPvdbCreateAssessmentMenuDialog::~QtPvdbCreateAssessmentMenuDialog() noexcept
+ribi::pvdb::QtCreateAssessmentMenuDialog::~QtCreateAssessmentMenuDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbCreateAssessmentMenuDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtCreateAssessmentMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) close();
 }
 
-void ribi::pvdb::QtPvdbCreateAssessmentMenuDialog::on_button_create_assessment_complete_clicked()
+void ribi::pvdb::QtCreateAssessmentMenuDialog::on_button_create_assessment_complete_clicked()
 {
-  QtPvdbCreateAssessmentCompleteDialog d;
+  QtCreateAssessmentCompleteDialog d;
   d.SetQuestion(m_question);
   this->ShowChild(&d);
   m_question = d.GetQuestion();

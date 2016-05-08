@@ -31,10 +31,10 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweavercreateassessmentpartialdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::QtPvdbCreateAssessmentPartialDialog(
+ribi::pvdb::QtCreateAssessmentPartialDialog::QtCreateAssessmentPartialDialog(
   const File file, QWidget* parent)
   : QDialog(parent),
-    ui(new Ui::QtPvdbCreateAssessmentPartialDialog),
+    ui(new Ui::QtCreateAssessmentPartialDialog),
     m_file(file)
 {
   ui->setupUi(this);
@@ -64,7 +64,7 @@ ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::QtPvdbCreateAssessmentPartialDi
   QObject::connect(ui->edit_complete,SIGNAL(textChanged(QString)),this,SLOT(AnyEditChanged()));
 }
 
-void ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::AnyEditChanged()
+void ribi::pvdb::QtCreateAssessmentPartialDialog::AnyEditChanged()
 {
   /*
   m_file.SetQuestions(
@@ -78,16 +78,16 @@ void ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::AnyEditChanged()
   */
 }
 
-ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::~QtPvdbCreateAssessmentPartialDialog()
+ribi::pvdb::QtCreateAssessmentPartialDialog::~QtCreateAssessmentPartialDialog()
 {
   delete ui;
 }
 
-void ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::keyPressEvent(QKeyEvent* e)
+void ribi::pvdb::QtCreateAssessmentPartialDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) close();
 }
 
-void ribi::pvdb::QtPvdbCreateAssessmentPartialDialog::on_button_save_clicked()
+void ribi::pvdb::QtCreateAssessmentPartialDialog::on_button_save_clicked()
 {
 }
