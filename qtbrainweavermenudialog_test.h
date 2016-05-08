@@ -11,7 +11,7 @@ class qtbrainweavermenudialog_test : public QObject
     Q_OBJECT
 
 private slots:
-  void press_all_buttons();
+  void default_construction();
 
 };
 
