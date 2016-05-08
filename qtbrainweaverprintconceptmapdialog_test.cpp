@@ -11,7 +11,6 @@ void ribi::pvdb::qtbrainweaverprintconceptmapdialog_test::default_construct()
   for (const auto file: files) {
     QtPvdbPrintConceptMapDialog d(file);
     d.show();
-    QTest::qWaitForWindowActive(&d, 1000);
     QTest::qWait(1000);
     const QRectF all_items_rect {
       d.m_widget->scene()->itemsBoundingRect() //Does not work
