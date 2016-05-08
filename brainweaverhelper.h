@@ -98,6 +98,35 @@ const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
   return result;
 }
 
+///Obtain all possible selections of a std::vector, preserving the ordering of its elements
+///Examples:
+/// {     } -> { {}                                              }
+/// {1    } -> { {}, {1}                                         }
+/// {1,2  } -> { {}, {1}, {2},      {1,2}                        }
+/// {1,2,3} -> { {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3} }
+//From http://www.richelbilderbeek.nl/CppGetCombinations.htm
+template <class T, std::size_t N>
+const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
+{
+  std::vector<std::vector<T>> result;
+  const int n_combinations = (1 << N);
+  result.reserve(n_combinations);
+
+  for (int i=0; i!=n_combinations; ++i)
+  {
+    std::vector<T> w;
+    for (int j=0; j!=N; ++j)
+    {
+      if ((1 << j) & i)
+      {
+        w.push_back(v[j]);
+      }
+    }
+    result.push_back(w);
+  }
+  return result;
+}
+
 ///Obtain the Pythagorian distance from two delta's
 //From www.richelbilderbeek.nl/CppGetDistance.htm
 double GetDistance(const double delta_x, const double delta_y);
