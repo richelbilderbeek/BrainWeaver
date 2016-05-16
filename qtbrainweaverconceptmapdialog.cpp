@@ -87,6 +87,12 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
     m_file(file),
     m_widget{new ribi::cmap::QtConceptMap(this)}
 {
+  if (!m_file.GetCluster().Empty() && boost::num_vertices(m_file.GetConceptMap()) == 0)
+  {
+    m_file.SetConceptMap(
+      CreateFromCluster(m_file.GetQuestion(), m_file.GetCluster())
+    );
+  }
   if (boost::num_vertices(m_file.GetConceptMap()) == 0)
   {
     //Add the first central node
@@ -98,6 +104,7 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
   }
   assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   assert(m_widget);
+
   m_widget->SetConceptMap(m_file.GetConceptMap());
 
   ui->setupUi(this);
@@ -112,13 +119,6 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move( screen.center() - this->rect().center() );
   }
-
-  #ifdef NOT_NOW_20141111
-  m_widget->m_signal_conceptmapitem_requests_edit.connect(
-    boost::bind(
-      &ribi::pvdb::QtConceptMapDialog::OnConceptMapItemRequestsEdit,
-      this,boost::lambda::_1));
-  #endif
 }
 
 ribi::pvdb::QtConceptMapDialog::~QtConceptMapDialog() noexcept
@@ -157,6 +157,7 @@ ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
     add_custom_and_selectable_vertex(
       node,false,p
     );
+
   }
   assert(v.size() + 1 == boost::num_vertices(p)
     && "Assume the ConceptMap has as much nodes as the cluster has concepts + one focal question");
