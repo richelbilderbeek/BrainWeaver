@@ -38,6 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QMessageBox>
 
+#include "add_custom_and_selectable_edge_between_vertices.h"
 #include "add_custom_and_selectable_vertex.h"
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
@@ -133,7 +134,7 @@ ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
   ribi::cmap::ConceptMap p;
 
   //Add center node
-  add_custom_and_selectable_vertex(
+  const auto vd_center = add_custom_and_selectable_vertex(
     ribi::cmap::Node{
       ribi::cmap::Concept(question),
       true, //Center node
@@ -154,10 +155,16 @@ ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
     const int x = -std::cos(angle) * 200.0;
     const int y =  std::sin(angle) * 200.0;
     ribi::cmap::Node node(v[i],false,x,y);
-    add_custom_and_selectable_vertex(
-      node,false,p
+    const auto vd_here = add_custom_and_selectable_vertex(
+      node, false, p
     );
-
+    add_custom_and_selectable_edge_between_vertices(
+      ribi::cmap::Edge(ribi::cmap::Node()),
+      false,
+      vd_center,
+      vd_here,
+      p
+    );
   }
   assert(v.size() + 1 == boost::num_vertices(p)
     && "Assume the ConceptMap has as much nodes as the cluster has concepts + one focal question");
