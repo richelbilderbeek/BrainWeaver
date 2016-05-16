@@ -151,9 +151,9 @@ ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
   const double delta_angle{2.0 * boost::math::constants::pi<double>() / static_cast<double>(n)};
   for (int i=0; i!=n; ++i)
   {
-    const double angle{static_cast<double>(i) * delta_angle};
-    const int x = -std::cos(angle) * 200.0;
-    const int y =  std::sin(angle) * 200.0;
+    const double angle{(static_cast<double>(i) * delta_angle) + 0.00001}; //Add noise
+    const int x =  std::sin(angle) * 200.0;
+    const int y = -std::cos(angle) * 200.0;
     ribi::cmap::Node node(v[i],false,x,y);
     const auto vd_here = add_custom_and_selectable_vertex(
       node, false, p
@@ -190,7 +190,7 @@ ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget()
 
 void ribi::pvdb::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key() == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
   if ((e->modifiers() & Qt::ControlModifier)
     && !(e->modifiers() & Qt::ShiftModifier)

@@ -8,6 +8,7 @@
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1.cmp"
 mycmp_result="scenario1_result.cmp"
+mypdf_result="scenario1_result.pdf"
 
 ####################################
 # Check executable
@@ -28,7 +29,7 @@ then
 fi
 
 ####################################
-# Delete result file
+# Delete .cmp result file
 ####################################
 if [ -e $mycmp_result ]
 then
@@ -41,6 +42,22 @@ then
   echo "File "$mycmp_result" could not be deleted"
   exit 1
 fi
+
+####################################
+# Delete .pdf result file
+####################################
+if [ -e $mypdf_result ]
+then
+  echo "File "$mypdf_result" found, deleting it"
+  rm $mypdf_result
+fi
+
+if [ -e $mypdf_result ]
+then
+  echo "File "$mypdf_result" could not be deleted"
+  exit 1
+fi
+
 
 ####################################
 # Start application
@@ -174,4 +191,162 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.2 key alt+b
+xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.2
+
+####################################
+# 'Construeer een concept map-scherm'
+# Save concept map
+####################################
+id=`get_dialog_id "Construeer een concept map-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
+
+# Type filename
+xdotool windowactivate $id type $mycmp_result
+# OK
+xdotool windowactivate $id key Escape sleep 0.1 key alt+o sleep 0.2
+# Export
+xdotool windowactivate $id key alt+e sleep 0.3
+
+####################################
+# 'Preview van PDF'
+# Save exported PDF
+####################################
+id=`get_dialog_id "Preview van PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Save ('&Opslaan')
+xdotool windowactivate $id key alt+o sleep 0.2
+
+####################################
+# 'Exporteer document naar PDF'
+# Exported PDF
+####################################
+id=`get_dialog_id "Exporteer document naar PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Save ('&Opslaan')
+xdotool windowactivate $id type $mypdf_result
+# OK
+xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.1
+
+####################################
+#
+#
+#         Close everything
+#
+#
+####################################
+
+
+####################################
+# 'Preview van PDF'
+# Close
+####################################
+id=`get_dialog_id "Preview van PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+####################################
+# 'Construeer een concept map-scherm'
+# Close
+####################################
+id=`get_dialog_id "Construeer een concept map-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+####################################
+# 'Associeer- en cluster-scherm'
+# Close
+####################################
+id=`get_dialog_id "Associeer- en cluster-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+####################################
+# 'Mijn persoonlijke werktheorie, programma voor de student'
+# Close
+####################################
+id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+####################################
+# 'Mijn persoonlijke werktheorie, programma voor de student'
+# Close
+####################################
+id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+
+####################################
+# Main menu
+# Close
+####################################
+id=`get_dialog_id "Menu voor de ontwikkelaar"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+
+
+
+
+####################################
+# Check results
+####################################
+
+
+if [ ! -e $mycmp_result ]
+then
+  echo "File "$mycmp_result" could not be found"
+  exit 1
+fi
+
+if [ ! -e $mypdf_result ]
+then
+  echo "File "$mypdf_result" could not be found"
+  exit 1
+fi
