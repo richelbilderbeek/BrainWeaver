@@ -25,7 +25,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-//#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
 #include "qtconceptmap.h"
 #include "brainweaverfile.h"
@@ -47,14 +46,9 @@ class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
   QtConceptMapDialog& operator=(const QtConceptMapDialog&) = delete;
   ~QtConceptMapDialog() noexcept;
 
-  #ifndef NDEBUG
-  ///Do random stuff, for example, add a node and an edge (used for debugging)
-  void DoRandomStuff();
-  #endif
-
   ///Obtain the widget
   const ribi::cmap::QtConceptMap * GetWidget() const;
-  cmap::QtConceptMap * GetWidget();
+  ribi::cmap::QtConceptMap * GetWidget();
 
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept { return m_back_to_menu; }
@@ -77,8 +71,6 @@ class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
   void on_button_save_clicked();
   void on_button_print_clicked();
 
-  //void on_button_test_clicked();
-
 private:
   Ui::QtConceptMapDialog *ui;
 
@@ -91,6 +83,7 @@ private:
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
 
+  ///Create a concept map from a cluster
   static ribi::cmap::ConceptMap CreateFromCluster(
     const std::string& question,
     const Cluster& cluster
