@@ -3,6 +3,21 @@
 #include <stdexcept>
 #include <sstream>
 
+QTreeWidgetItem * ribi::pvdb::QtClusterTreeWidgetItem::clone() const
+{
+  QtClusterTreeWidgetItem * const item {
+    new QtClusterTreeWidgetItem(
+      m_competency,
+      m_is_complex,
+      m_rating_complexity,
+      m_rating_concreteness,
+      m_rating_specifity
+    )
+  };
+  item->setText(0, this->text(0));
+  return item;
+}
+
 ribi::pvdb::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
   const ribi::cmap::Competency competency,
   const bool is_complex,

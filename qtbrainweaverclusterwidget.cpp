@@ -28,6 +28,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include <vector>
 
+#include <QDebug>
 #include <QKeyEvent>
 
 #include "conceptmapconceptfactory.h"
@@ -225,12 +226,50 @@ void ribi::pvdb::QtClusterWidget::keyPressEvent(QKeyEvent *event)
       }
     break;
     case Qt::Key_Right:
-//      currentItem()->removeChild
-//      if(currentItem()->parent() == nullptr)
-//      {
-//        emit QTreeWidget::itemClicked(currentItem(), 0);
-//      }
+    {
+      auto cur_item = currentItem();
+      assert(dynamic_cast<QtClusterTreeWidgetItem*>(cur_item));
+      if (cur_item && GetDepth(cur_item) == 0)
+      {
+        assert(!cur_item->parent());
+
+        //Move to higher level
+        //const auto parent = cur_item->parent();
+        const auto clone = cur_item->clone();
+        assert(dynamic_cast<QtClusterTreeWidgetItem*>(clone));
+        auto above = itemAbove(cur_item);
+        if (above)
+        {
+          above->addChild(clone);
+          above->setSelected(false);
+        }
+        else
+        {
+          this->addTopLevelItem(clone);
+        }
+        delete cur_item;
+        clone->setSelected(true);
+        //assert(GetDepth(clone) == 1);
+      }
+    }
     break;
+//    case Qt::Key_Left:
+//    {
+//      auto cur_item = currentItem();
+//      if (cur_item && GetDepth(cur_item) == 1)
+//      {
+//        assert(cur_item->parent());
+//        const auto parent = cur_item->parent();
+//        const auto clone = cur_item->clone();
+//        auto above = itemAbove(cur_item);
+//        parent->removeChild(cur_item);
+//        above->addChild(clone);
+//        delete cur_item;
+//        clone->setSelected(true);
+//        //assert(GetDepth(clone) == 1);
+//      }
+//    }
+//    break;
 
 
   }

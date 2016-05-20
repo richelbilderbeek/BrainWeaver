@@ -165,7 +165,7 @@ then
 fi
 
 xdotool windowactivate $id type $mycmp_result 
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.3
 
 ####################################
 # Check newly saved file

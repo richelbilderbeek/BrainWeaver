@@ -10,6 +10,7 @@ namespace pvdb {
 ///QTreeWidgetItem with the only function of storing a cmap::Competency additionally
 struct QtClusterTreeWidgetItem : public QTreeWidgetItem
 {
+  QTreeWidgetItem *clone() const;
   QtClusterTreeWidgetItem(
     const ribi::cmap::Competency competency,
     const bool is_complex,
