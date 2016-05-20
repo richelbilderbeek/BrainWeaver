@@ -61,7 +61,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
-#include "qtbrainweaverviewfilesdialog.h"
+
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "qtconceptmaprateconcepttallydialognewname.h"
@@ -211,12 +211,6 @@ void ribi::pvdb::QtMenuDialog::on_button_about_clicked() noexcept
   this->hide();
   d->exec();
   this->show();
-}
-
-void ribi::pvdb::QtMenuDialog::on_button_view_files_clicked() noexcept
-{
-  QtViewFilesDialog d;
-  ShowChild(&d);
 }
 
 void ribi::pvdb::QtMenuDialog::on_button_test_qtroundededitrectitem_clicked() noexcept

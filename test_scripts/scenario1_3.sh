@@ -89,7 +89,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate $id key alt+o sleep 0.1
+xdotool windowactivate $id key alt+o sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -116,9 +116,7 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a sleep 0.2
-
-
+xdotool windowactivate $id key alt+a sleep 0.3
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -150,6 +148,8 @@ xdotool windowactivate $id key Tab Return
 xdotool windowactivate $id type "not too long"
 # Add 
 xdotool windowactivate $id key Tab Return
+
+exit
 
 # Save
 xdotool windowactivate $id key alt+s sleep 0.2

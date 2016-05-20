@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 //#include "brainweavermenudialog.h"
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
-#include "qtbrainweavercreateassessmentmenudialog.h"
+
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "trace.h"
@@ -59,7 +59,7 @@ void ribi::pvdb::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
-  QtCreateAssessmentMenuDialog d;
+  QtCreateAssessmentCompleteDialog d;
   this->ShowChild(&d);
 }
 

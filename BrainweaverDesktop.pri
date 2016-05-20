@@ -7,8 +7,6 @@ SOURCES += \
     $$PWD/qtbrainweaverclusterwidget.cpp \
     $$PWD/qtbrainweaverconceptmapdialog.cpp \
     $$PWD/qtbrainweavercreateassessmentcompletedialog.cpp \
-    $$PWD/qtbrainweavercreateassessmentmenudialog.cpp \
-    $$PWD/qtbrainweavercreateassessmentpartialdialog.cpp \
     $$PWD/qtbrainweaverdisplay.cpp \
     $$PWD/qtbrainweaverfiledialog.cpp \
     $$PWD/qtbrainweavermenudialog.cpp \
@@ -20,7 +18,6 @@ SOURCES += \
     $$PWD/qtbrainweaverratingdialog.cpp \
     $$PWD/qtbrainweaverstudentmenudialog.cpp \
     $$PWD/qtbrainweaverstudentstartcompletedialog.cpp \
-    $$PWD/qtbrainweaverviewfilesdialog.cpp \
     $$PWD/qtbrainweaverclustertreewidgetitem.cpp
 
 HEADERS  += \
@@ -30,8 +27,6 @@ HEADERS  += \
     $$PWD/qtbrainweaverclusterwidget.h \
     $$PWD/qtbrainweaverconceptmapdialog.h \
     $$PWD/qtbrainweavercreateassessmentcompletedialog.h \
-    $$PWD/qtbrainweavercreateassessmentmenudialog.h \
-    $$PWD/qtbrainweavercreateassessmentpartialdialog.h \
     $$PWD/qtbrainweaverdisplay.h \
     $$PWD/qtbrainweaverfiledialog.h \
     $$PWD/qtbrainweaverfwd.h \
@@ -44,7 +39,6 @@ HEADERS  += \
     $$PWD/qtbrainweaverratingdialog.h \
     $$PWD/qtbrainweaverstudentmenudialog.h \
     $$PWD/qtbrainweaverstudentstartcompletedialog.h \
-    $$PWD/qtbrainweaverviewfilesdialog.h \
     $$PWD/qtbrainweaverclustertreewidgetitem.h
 
 FORMS    += \
@@ -52,14 +46,11 @@ FORMS    += \
     $$PWD/qtbrainweaverclusterdialog.ui \
     $$PWD/qtbrainweaverconceptmapdialog.ui \
     $$PWD/qtbrainweavercreateassessmentcompletedialog.ui \
-    $$PWD/qtbrainweavercreateassessmentmenudialog.ui \
-    $$PWD/qtbrainweavercreateassessmentpartialdialog.ui \
     $$PWD/qtbrainweavermenudialog.ui \
     $$PWD/qtbrainweaverprintconceptmapdialog.ui \
     $$PWD/qtbrainweaverprintratingdialog.ui \
     $$PWD/qtbrainweaverrateconceptmapdialog.ui \
     $$PWD/qtbrainweaverratingdialog.ui \
     $$PWD/qtbrainweaverstudentmenudialog.ui \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.ui \
-    $$PWD/qtbrainweaverviewfilesdialog.ui
+    $$PWD/qtbrainweaverstudentstartcompletedialog.ui
 

@@ -32,7 +32,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
-#include "qtbrainweavercreateassessmentmenudialog.h"
+
 #include "trace.h"
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
 #pragma GCC diagnostic pop

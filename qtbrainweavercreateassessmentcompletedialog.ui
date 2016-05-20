@@ -31,7 +31,7 @@
    <item>
     <widget class="QLineEdit" name="edit">
      <property name="text">
-      <string>Als lerarenopleider wiskunde heb ik verstand van ...</string>
+      <string/>
      </property>
     </widget>
    </item>

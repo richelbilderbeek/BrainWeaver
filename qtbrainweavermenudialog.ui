@@ -59,13 +59,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="button_view_files">
-        <property name="text">
-         <string>&amp;D. File viewer</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="button_about">
         <property name="text">
          <string>&amp;E. About screen</string>
@@ -276,7 +269,6 @@
   <tabstop>button_rate_concept_auto</tabstop>
   <tabstop>button_rating</tabstop>
   <tabstop>button_print_rating</tabstop>
-  <tabstop>button_view_files</tabstop>
   <tabstop>button_about</tabstop>
   <tabstop>button_overview</tabstop>
   <tabstop>button_test_qtroundededitrectitem</tabstop>

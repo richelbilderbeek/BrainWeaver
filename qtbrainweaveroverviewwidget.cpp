@@ -38,8 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
-#include "qtbrainweavercreateassessmentmenudialog.h"
-#include "qtbrainweavercreateassessmentpartialdialog.h"
+
 #include "qtbrainweavermenudialog.h"
 #include "qtbrainweaveroverviewwidget.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
@@ -131,11 +130,6 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtOverviewWidget::Get
   }
   {
     QtHideAndShowDialog* p(new QtCreateAssessmentCompleteDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QtHideAndShowDialog* p(new QtCreateAssessmentMenuDialog);
     assert(p);
     v.push_back(p);
   }

@@ -60,18 +60,6 @@ fi
 xdotool windowactivate $id key alt+g sleep 0.2
 
 ####################################
-# 'Geef assessment vorm: wat voor assessment wilt u maken?', 
-# choose '&In een keer zijn/haar complete concept map contrueert?'
-####################################
-id=`get_dialog_id "Geef assessment vorm: wat voor assessment wilt u maken?"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-xdotool windowactivate $id key alt+i sleep 0.2
-
-####################################
 # 'Formuleer de focusvraag', 
 # type a focal question
 ####################################

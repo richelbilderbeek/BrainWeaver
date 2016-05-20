@@ -57,9 +57,6 @@ public:
   ///Add a top-level item
   void Add(const std::string& text);
 
-  ///Do something random
-  void DoRandomStuff();
-
   ///Get the cluster (after reading from the dialog)
   Cluster GetCluster() const noexcept;
 

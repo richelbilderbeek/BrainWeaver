@@ -28,6 +28,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include <vector>
 
+#include <QKeyEvent>
+
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconcept.h"
 #include "conceptmapexamplefactory.h"
@@ -95,31 +97,6 @@ void ribi::pvdb::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
 }
 
 
-void ribi::pvdb::QtClusterWidget::DoRandomStuff()
-{
-  QtClusterTreeWidgetItem * const top = new QtClusterTreeWidgetItem(
-    cmap::Competency::misc,true,0,1,2);
-  top->setText(0,"SOMETEXT");
-  QtClusterTreeWidgetItem * const child_item = new QtClusterTreeWidgetItem(
-    cmap::Competency::uninitialized,true,-1,0,2);
-  child_item->setText(0,"SOMETEXT");
-  top->addChild(child_item);
-  child_item->setFlags(
-      Qt::ItemIsSelectable
-    | Qt::ItemIsEnabled
-    | Qt::ItemIsEditable
-    | Qt::ItemIsDragEnabled);
-  this->addTopLevelItem(top);
-  top->setExpanded(true);
-  top->setFlags(
-        Qt::ItemIsSelectable
-      | Qt::ItemIsEnabled
-      | Qt::ItemIsEditable
-      | Qt::ItemIsDragEnabled
-      | Qt::ItemIsDropEnabled);
-}
-
-
 void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
 {
   QTreeWidget::dropEvent(event);
@@ -142,8 +119,7 @@ void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
         if (top->child(j)->childCount() > 0)
         {
           //Move top->child(j) to top
-          QTreeWidgetItem * const clone = top->child(j)->clone(); //FIX
-          //QtTreeWidgetItem * const clone = dynamic_cast<QtTreeWidgetItem *>(top->child(j)->clone()); //BUG 2012-12-29
+          QTreeWidgetItem * const clone = top->child(j)->clone();
           assert(clone);
           this->addTopLevelItem(clone);
           top->removeChild(top->child(j));
@@ -239,6 +215,25 @@ void ribi::pvdb::QtClusterWidget::keyPressEvent(QKeyEvent *event)
   //Without this seemingly useless member function,
   //the widget cannot be edited
   QTreeWidget::keyPressEvent(event);
+  switch (event->key())
+  {
+    case Qt::Key_Space:
+    case Qt::Key_Select:
+      if(currentItem())
+      {
+        emit QTreeWidget::itemClicked(currentItem(), 0);
+      }
+    break;
+    case Qt::Key_Right:
+//      currentItem()->removeChild
+//      if(currentItem()->parent() == nullptr)
+//      {
+//        emit QTreeWidget::itemClicked(currentItem(), 0);
+//      }
+    break;
+
+
+  }
 }
 
 void ribi::pvdb::QtClusterWidget::BuildCluster()
