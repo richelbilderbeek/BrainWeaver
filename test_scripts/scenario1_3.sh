@@ -133,7 +133,7 @@ xdotool windowactivate $id type "hard to make up"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "concise"
+xdotool windowactivate $id type "that one I spent a year on"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
@@ -141,7 +141,7 @@ xdotool windowactivate $id type "precise"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "English"
+xdotool windowactivate $id type "not vague"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
@@ -150,7 +150,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.1 key Down Right
+xdotool windowactivate $id key Shift+Tab sleep 0.1 key Down Right Down Right Alt+b
 
 exit
 
