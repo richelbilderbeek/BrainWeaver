@@ -150,7 +150,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.1 key Down Right Down Right Alt+b
+xdotool windowactivate $id key Shift+Tab sleep 0.1 key Down Right Down Right Alt+b sleep 0.2 key space Up Up
 
 exit
 
