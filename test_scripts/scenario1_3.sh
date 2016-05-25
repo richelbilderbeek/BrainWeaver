@@ -89,7 +89,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate $id key alt+o sleep 0.3
+xdotool windowactivate $id key alt+o sleep 0.5
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -103,7 +103,7 @@ then
 fi
 xdotool windowactivate $id type "John Doe"
 # &Begin
-xdotool windowactivate $id key alt+b sleep 0.2
+xdotool windowactivate $id key alt+b sleep 0.3
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -116,7 +116,7 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a sleep 0.3
+xdotool windowactivate $id key alt+a sleep 0.5
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -150,51 +150,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.1 key Down Right Down Right Alt+b sleep 0.2 key space Up Up
-
-exit
-
-# Save
-xdotool windowactivate $id key alt+s sleep 0.2
-
-####################################
-# 'Sla de clustering op'
-####################################
-id=`get_dialog_id "Sla de clustering op"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-
-xdotool windowactivate $id type $mycmp_result 
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.2
-
-####################################
-# Check newly saved file
-####################################
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" not found, line "$LINENO
-  exit 1
-fi
-# Show that the cluster has changed
-echo "Before: "
-egrep "<cluster>.*</cluster>" $mycmp -o
-echo "After: "
-egrep "<cluster>.*</cluster>" $mycmp_result -o
-
-####################################
-# 'Associeer- en cluster-scherm'
-# Start concept map
-####################################
-id=`get_dialog_id "Associeer- en cluster-scherm"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.3
+xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 1.0
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -207,7 +163,11 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
+# Move to an item with an example
+# xdotool windowactivate $id key space
+xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up
+
+exit 
 
 # Type filename
 xdotool windowactivate $id type $mycmp_result
