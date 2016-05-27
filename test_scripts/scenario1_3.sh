@@ -163,9 +163,9 @@ then
   exit 1
 fi
 
-# Move to an item with an example
+# Move to an item with an example and edit
 # xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up mousemove 600 400
+xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2
 
 
 
