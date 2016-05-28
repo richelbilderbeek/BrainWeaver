@@ -25,6 +25,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverconceptmapdialog.h"
 
 #include <cassert>
+#include <iostream>
 #include <boost/lambda/lambda.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/numeric/conversion/cast.hpp>
