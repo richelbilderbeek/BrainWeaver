@@ -39,6 +39,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapfactory.h"
 #include "qtconceptmapqtnode.h"
 #include "qtconceptmapdisplaystrategy.h"
+#include "get_my_custom_vertexes.h"
 #include "qtconceptmapratedconceptdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverprintconceptmapdialog.h"
@@ -198,27 +199,17 @@ void ribi::pvdb::QtPrintConceptMapDialog::showEvent(QShowEvent *)
     };
     m_widget->fitInView(all_items_rect); //Does not work
     //m_widget->ensureVisible(all_items_rect,0,0); //Does not work
-
-    #ifdef NOT_HERE_20141224
-    assert(m_widget->scene()->items().count()
-      >= boost::numeric_cast<int>(
-        m_widget->GetConceptMap().GetNodes().size()
-        + m_widget->GetConceptMap().GetEdges().size()));
-
-    #endif // NOT_HERE_20141224
   }
   //Concept map as text
   {
-
     assert(ui->frame_concept_map_as_text->layout());
-    std::string text;
-    const int n_nodes = static_cast<int>(boost::num_vertices(m_file.GetConceptMap()));
-    for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
+    const auto conceptmap = m_file.GetConceptMap();
+    const auto nodes = GetNodes(conceptmap);
+    for (const auto node: nodes)
     {
-      using namespace cmap;
-      const Node node = GetNodes(m_file.GetConceptMap()).at(node_index);
-      QtConceptMapRatedConceptDialog * const widget
-        = new QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
+      if (IsCenterNode(node)) continue;
+      ribi::cmap::QtConceptMapRatedConceptDialog * const widget
+        = new ribi::cmap::QtConceptMapRatedConceptDialog(conceptmap, node);
       assert(widget);
       widget->HideRating();
       ui->frame_concept_map_as_text->layout()->addWidget(widget);
