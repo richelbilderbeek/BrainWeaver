@@ -32,3 +32,4 @@ Makefile
 *.gcno
 test_scripts/autosave1.cmp
 test_scripts/autosave2.cmp
+test_scripts/scenario1_3_result.cmp

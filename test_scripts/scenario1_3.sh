@@ -7,8 +7,10 @@
 # Variables
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1.cmp"
-mycmp_result="scenario1_result.cmp"
-mypdf_result="scenario1_result.pdf"
+mycmp_result="scenario1_3_result.cmp"
+mypdf_result="scenario1_3_result.pdf"
+concept_addition=" in busy environments" 
+example_addition=" (and still thinking about it)" 
 
 ####################################
 # Check executable
@@ -165,18 +167,64 @@ fi
 
 # Move to an item with an example and edit
 # xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2
+xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2 sleep 0.3
 
+####################################
+# 'Concept/Relatie bewerken'
+# Edit concept
+####################################
+id=`get_dialog_id "Concept/Relatie bewerken"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
 
+# Add sometimes to concept
+xdotool windowactivate $id type "$concept_addition"
 
-exit 
+# Add example
+xdotool windowactivate $id key Tab F2 Right type "$example_addition"
+xdotool windowactivate $id sleep 0.5 key Return sleep 0.5 key alt+o
 
-# Type filename
+# Save
+xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.2
+
+####################################
+# 'Sla de concept map op'
+# Save concept map
+####################################
+id=`get_dialog_id "Sla de concept map op"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Type name
 xdotool windowactivate $id type $mycmp_result
-# OK
-xdotool windowactivate $id key Escape sleep 0.1 key alt+o sleep 0.2
-# Export
-xdotool windowactivate $id key alt+e sleep 0.3
+# Save
+xdotool windowactivate $id key alt+o sleep 0.2
+
+# Analyse save file
+if [ ! -e $mycmp_result ]
+then
+  echo "File "$mycmp_result" could not be found"
+  exit 1
+fi
+
+# Has concept addition been added
+result=`egrep --colour=always "$concept_addition" scenario1_3_result.cmp`
+
+if [ -z $result ]
+then
+  echo "Text '$concept_addition' not found in save file, line "$LINENO
+  exit 1
+fi
+
+egrep --colour=always "$example_addition" scenario1_3_result.cmp
+
+exit
 
 ####################################
 # 'Preview van PDF'
