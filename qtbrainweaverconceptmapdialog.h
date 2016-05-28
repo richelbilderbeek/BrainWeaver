@@ -53,16 +53,13 @@ class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept { return m_back_to_menu; }
 
-  ///Save to m_file
-  void Save() const;
+  [[deprecated("Replaced by UpdateFileWithConceptMapFromWidget, which correctly described the member function")]]
+  void Save() const = delete;
+  ///Update concept map into file
+  void UpdateFileWithConceptMapFromWidget();
 
   ///Save to disk
   void Save(const std::string& filename) const;
-
-  #ifndef NDEBUG
-  ///Shuffle to concepts (used for debugging)
-  void Shuffle();
-  #endif
 
   private slots:
 

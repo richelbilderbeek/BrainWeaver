@@ -9,8 +9,8 @@ myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1.cmp"
 mycmp_result="scenario1_3_result.cmp"
 mypdf_result="scenario1_3_result.pdf"
-concept_addition=" in busy environments" 
-example_addition=" (and still thinking about it)" 
+concept_addition="314"
+example_addition="1729"
 
 ####################################
 # Check executable
@@ -214,16 +214,19 @@ then
 fi
 
 # Has concept addition been added
-result=`egrep --colour=always "$concept_addition" scenario1_3_result.cmp`
-
-if [ -z $result ]
+if ! egrep -q "$concept_addition" $mycmp_result
 then
-  echo "Text '$concept_addition' not found in save file, line "$LINENO
+  echo "Text '$concept_addition' not found in save file '$mycmp_result', line "$LINENO
   exit 1
 fi
 
-egrep --colour=always "$example_addition" scenario1_3_result.cmp
+if ! egrep -q "$example_addition" $mycmp_result
+then
+  echo "Text '$example_addition' not found in save file '$mycmp_result', line "$LINENO
+  exit 1
+fi
 
+echo "DONE!"
 exit
 
 ####################################
