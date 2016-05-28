@@ -167,7 +167,7 @@ fi
 
 # Move to an item with an example and edit
 # xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2 sleep 0.3
+xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2 sleep 0.4
 
 ####################################
 # 'Concept/Relatie bewerken'
@@ -226,8 +226,18 @@ then
   exit 1
 fi
 
-echo "DONE!"
-exit
+####################################
+# 'Construeer een concept map-scherm'
+# Save concept map
+####################################
+id=`get_dialog_id "Construeer een concept map-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+# Export to PDF
+xdotool windowactivate $id sleep 0.2 key alt+e sleep 0.2
 
 ####################################
 # 'Preview van PDF'
@@ -345,10 +355,6 @@ then
 fi
 
 xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
-
-
-
 
 ####################################
 # Check results

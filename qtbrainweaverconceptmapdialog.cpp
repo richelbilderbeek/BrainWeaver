@@ -281,8 +281,6 @@ void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
 
 void ribi::pvdb::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
-  //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
-  //assert(boost::num_vertices(concept_map) > 0);
   m_file.SetConceptMap(GetWidget()->GetConceptMap());
   assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
 }
@@ -294,7 +292,7 @@ void ribi::pvdb::QtConceptMapDialog::Save(const std::string& filename) const
     && "File must have correct file extension name");
   if (m_file.GetConceptMap() != GetWidget()->GetConceptMap())
   {
-    std::clog << __func__ << ": warning: you sshould have called 'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n";
+    std::clog << __func__ << ": warning: you should have called 'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n";
     const_cast<QtConceptMapDialog*>(this)->UpdateFileWithConceptMapFromWidget();
   }
   m_file.Save(filename);
