@@ -232,23 +232,6 @@ void ribi::pvdb::QtConceptMapDialog::on_button_print_clicked()
   this->ShowChild(&d);
 }
 
-#ifdef NOT_NOW_20141111
-void ribi::pvdb::QtConceptMapDialog::OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item)
-{
-  assert(item);
-  {
-    assert(this);
-    assert(item);
-    assert(item->GetNode());
-    cmap::QtConceptMapConceptEditDialog d(item->GetNode().GetConcept());
-    this->ShowChild(&d);
-  }
-  //item->GetConcept()->m_signal_examples_changed(item->GetConcept().get()); //NEW 2013-01-08 21:40
-  item->m_signal_item_has_updated(item);
-  item->update();
-}
-#endif // NOT_NOW_20141111
-
 void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed

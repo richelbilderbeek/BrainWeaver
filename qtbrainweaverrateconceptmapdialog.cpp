@@ -60,9 +60,6 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   ui->setupUi(this);
   m_concept_map->SetConceptMap(file.GetConceptMap());
 
-  //ribi::cmap::ConceptMap concept_map = m_file.GetConceptMap();
-  //assert(boost::num_vertices(concept_map) > 0);
-
   {
     assert(!ui->widget->layout());
     QLayout * const layout = new QGridLayout;
@@ -83,9 +80,7 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   }
 
 
-  //m_concept_map->m_signal_request_rate_concept.connect(
-  //  boost::bind(&ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog,this,boost::lambda::_1));
-
+  this->m_concept_map->setFocus();
 }
 
 ribi::pvdb::QtRateConceptMapDialog::~QtRateConceptMapDialog() noexcept
