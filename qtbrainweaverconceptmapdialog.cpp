@@ -108,6 +108,7 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
   assert(m_widget);
 
   m_widget->SetConceptMap(m_file.GetConceptMap());
+  m_widget->SetMode(ribi::cmap::QtConceptMap::Mode::edit);
 
   ui->setupUi(this);
 

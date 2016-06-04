@@ -67,10 +67,6 @@ private:
   Ui::QtRateConceptMapDialog *ui;
   pvdb::File m_file;
   ConceptMap * const m_concept_map;
-
-  ///The widget requested for a rating of the already supplied sub concept map,
-  ///with the focal concept item as the central node
-  void OnRequestRateConceptDialog(const ribi::cmap::ConceptMap sub_concept_map);
 };
 
 } //~namespace pvdb

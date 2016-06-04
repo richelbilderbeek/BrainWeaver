@@ -167,7 +167,7 @@ fi
 
 # Move to an item with an example and edit
 # xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.1 key Up sleep 0.1 key Up F2 sleep 0.4
+xdotool windowactivate $id key space sleep 0.2 key Up Up F2 sleep 0.6
 
 ####################################
 # 'Concept/Relatie bewerken'

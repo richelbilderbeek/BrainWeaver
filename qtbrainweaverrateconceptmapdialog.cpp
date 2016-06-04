@@ -59,6 +59,7 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
 {
   ui->setupUi(this);
   m_concept_map->SetConceptMap(file.GetConceptMap());
+  m_concept_map->SetMode(ribi::cmap::QtConceptMap::Mode::rate);
 
   {
     assert(!ui->widget->layout());
@@ -98,20 +99,6 @@ void ribi::pvdb::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
-  if ( (e->modifiers() & Qt::ControlModifier)
-    && (e->modifiers() & Qt::ShiftModifier)
-    && e->key() == Qt::Key_T)
-  {
-    //Translate
-    this->setWindowTitle("Evaluate concept map");
-    ui->button_next->setText("Generate parameters");
-    ui->button_save->setText("Save assessment");
-    ui->label_keys->setText("F1: assess concept, F2: classify examples");
-    ui->label_name->setText("Name");
-    ui->label_todo->setText("Click on a concept to assess it");
-    return;
-  }
-
   QDialog::keyPressEvent(e);
 }
 
@@ -124,23 +111,6 @@ void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
   {
     close();
   }
-}
-
-void ribi::pvdb::QtRateConceptMapDialog::OnRequestRateConceptDialog(const ribi::cmap::ConceptMap sub_concept_map)
-{
-  #ifdef HIDE_PARENT_IDEA_5675869837643987593795
-  this->setEnabled(false);
-  this->hide();
-  this->m_widget->setEnabled(false);
-  QtRateConceptDialog d(sub_concept_map); //Item may be changed
-  this->ShowChild(&d);
-  this->setEnabled(true);
-  this->show();
-  this->m_widget->setEnabled(true);
-  #else
-  cmap::QtRateConceptDialog d(sub_concept_map); //Item may be changed
-  d.exec();
-  #endif
 }
 
 void ribi::pvdb::QtRateConceptMapDialog::Save()
