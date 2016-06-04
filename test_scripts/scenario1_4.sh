@@ -82,7 +82,6 @@ then
 fi
 xdotool windowactivate $id key space Up Up F1
 
-echo "Should rate concept now"
 exit
 
 ####################################
