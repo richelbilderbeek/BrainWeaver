@@ -110,6 +110,34 @@ then
   exit 1
 fi
 
+# Rate first concept its examples
+xdotool windowactivate $id sleep 0.2 key F2
+
+####################################
+# 'Evalueer voorbeelden'
+# Rate this first concept its examples
+####################################
+id=`get_dialog_id "Evalueer voorbeelden"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate first concept its examples
+xdotool windowactivate $id sleep 0.2 key Alt+b sleep 0.2 key Alt+o
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
 # Rate second concept
 xdotool windowactivate $id sleep 0.2 key Down F1 sleep 0.5
 
@@ -127,6 +155,34 @@ fi
 
 # Rate 1-2-0
 xdotool windowactivate $id sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down Tab sleep 0.2 key Down sleep 0.2 key Alt+o sleep 0.2
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept its examples
+xdotool windowactivate $id sleep 0.2 key F2
+
+####################################
+# 'Evalueer voorbeelden'
+# Rate this first concept its examples
+####################################
+id=`get_dialog_id "Evalueer voorbeelden"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept its examples
+xdotool windowactivate $id sleep 0.2 key Alt+r sleep 0.2 key Alt+o
 
 ####################################
 # 'Evalueer concept map', 
@@ -157,8 +213,6 @@ fi
 # Rate 2-0-1
 xdotool windowactivate $id sleep 0.2 key Down Down Down Tab sleep 0.2 key Down Tab sleep 0.2 key Down Down sleep 0.2 key Alt+o sleep 0.2
 
-
-
 ####################################
 # 'Evalueer concept map', 
 # Rate concept map
@@ -172,11 +226,6 @@ fi
 
 # Rate third concept
 xdotool windowactivate $id sleep 0.2 key alt+g
-
-
-exit
-
-
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
