@@ -80,22 +80,103 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key space Up Up F1
 
-exit
+# Rate first concept
+xdotool windowactivate $id sleep 0.2 key space Up Up F1 sleep 1.0
 
 ####################################
-# 'Sla het assessment invoer-bestand op', 
-# save as scenario_1
+# 'Evalueer concept'
+# Rate this first concept
 ####################################
-id=`get_dialog_id "Sla het assessment invoer-bestand op"`
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.2 type $mycmp
-xdotool windowactivate $id sleep 0.2 key alt+o sleep 0.2
+
+# Rate 0-1-2
+xdotool windowactivate $id sleep 0.2 key Down Tab sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down sleep 0.2 key Alt+o sleep 0.2
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept
+xdotool windowactivate $id sleep 0.2 key Down F1 sleep 0.5
+
+####################################
+# 'Evalueer concept'
+# Rate this second concept
+####################################
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate 1-2-0
+xdotool windowactivate $id sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down Tab sleep 0.2 key Down sleep 0.2 key Alt+o sleep 0.2
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key Left F1 sleep 0.5
+
+####################################
+# 'Evalueer concept'
+# Rate this third concept
+####################################
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate 2-0-1
+xdotool windowactivate $id sleep 0.2 key Down Down Down Tab sleep 0.2 key Down Tab sleep 0.2 key Down Down sleep 0.2 key Alt+o sleep 0.2
+
+
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key alt+g
+
+
+exit
+
+
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
