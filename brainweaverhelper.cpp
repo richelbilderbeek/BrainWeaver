@@ -32,6 +32,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QFile>
 #include <QRegExp>
 
+#include "conceptmaphelper.h"
 #include "testtimer.h"
 #include "fileio.h"
 #include "trace.h"
@@ -80,15 +81,21 @@ std::vector<std::string> ribi::pvdb::SplitXml(const std::string& s)
 std::string ribi::pvdb::Unwordwrap(
   const std::vector<std::string>& v) noexcept
 {
+  return ribi::cmap::Unwordwrap(v);
+  /*
+
   //Simply concatenate
   std::string t;
   for (const std::string& s: v) { t += s; }
   return t;
+  */
 }
 
 std::vector<std::string> ribi::pvdb::Wordwrap(
   const std::string& s_original, const std::size_t max_len) noexcept
 {
+  return ribi::cmap::Wordwrap(s_original, max_len);
+  /*
   if (max_len == 0)
   {
     throw std::logic_error("Cannot wordwrap for a max_len of zero");
@@ -208,6 +215,7 @@ std::vector<std::string> ribi::pvdb::Wordwrap(
   #endif
   assert(Unwordwrap(v) == s_original);
   return v;
+  */
 }
 
 std::vector<std::string> ribi::pvdb::XmlToPretty(const std::string& s)
