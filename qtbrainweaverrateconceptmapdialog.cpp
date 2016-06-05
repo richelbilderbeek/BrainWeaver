@@ -104,6 +104,7 @@ void ribi::pvdb::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
 {
+  m_file.SetConceptMap(m_concept_map->GetConceptMap());
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
   QtRatingDialog d(m_file);
   ShowChild(&d);
