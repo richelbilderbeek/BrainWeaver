@@ -73,6 +73,7 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
     }
     else
     {
+      ui->edit_name->setFocus();
       ui->button_print->setEnabled(false);
     }
   }
