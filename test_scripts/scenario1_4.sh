@@ -7,6 +7,7 @@
 # Variables
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1_3_result.cmp"
+mypdf="scenario1_4_result.pdf"
 
 ####################################
 # Check executable
@@ -23,6 +24,21 @@ fi
 if [ ! -e $mycmp ]
 then
   echo "File '$mycmp'could not be found, line "$LINENO
+  exit 1
+fi
+
+####################################
+# PDF file must be absent
+####################################
+if [ -e $mypdf ]
+then
+  echo "File '$mypdf'present, now deleted, line "$LINENO
+  rm $mypdf
+fi
+
+if [ -e $mypdf ]
+then
+  echo "File '$mypdf' could not be deleted, line "$LINENO
   exit 1
 fi
 
@@ -225,7 +241,107 @@ then
 fi
 
 # Rate third concept
-xdotool windowactivate $id sleep 0.2 key alt+g
+xdotool windowactivate $id sleep 0.2 key alt+g sleep 0.2
+
+####################################
+# 'De kentallen'
+# Summary statistics
+####################################
+id=`get_dialog_id "De kentallen"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Enter assessor name
+xdotool windowactivate $id sleep 0.2 type "Jane Doe" 
+# Export to PDF
+xdotool windowactivate $id sleep 0.2 key Alt+e sleep 0.2
+
+####################################
+# 'Preview van PDF'
+# Print preview
+####################################
+id=`get_dialog_id "Preview van PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Save PDF
+xdotool windowactivate $id sleep 0.2 key Alt+s sleep 0.2
+
+####################################
+# 'Exporteer document naar PDF'
+# Save PDF
+####################################
+id=`get_dialog_id "Exporteer document naar PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Type PDF filename
+xdotool windowactivate $id sleep 0.2 type $mypdf
+# OK
+xdotool windowactivate $id sleep 0.2 key Alt+o sleep 0.2
+
+### Checking
+
+if [ ! -e $mypdf ]
+then
+  echo "File '$mypdf' not found, line "$LINENO
+  exit 1
+fi
+
+### Quitting
+
+
+####################################
+# 'Preview van PDF'
+# Print preview
+####################################
+id=`get_dialog_id "Preview van PDF"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Quit
+xdotool windowactivate $id sleep 0.2 key Alt+F4 sleep 0.1
+
+
+####################################
+# 'De kentallen'
+# Quit from summary statistics
+####################################
+id=`get_dialog_id "De kentallen"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Enter assessor name
+xdotool windowactivate $id sleep 0.2 key Alt+F4
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key Alt+F4
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
@@ -239,15 +355,6 @@ fi
 xdotool windowactivate $id key alt+s sleep 0.2
 
 ####################################
-# Checking saved file
-####################################
-if [ ! -e $mycmp ]
-then
-  echo "File should have been created, line "$LINENO
-  exit 1
-fi
-
-####################################
 # Main menu, close
 ####################################
 id=`get_dialog_id "Menu voor de ontwikkelaar"`
@@ -259,4 +366,4 @@ fi
 xdotool windowactivate $id key alt+F4
 
 
-echo "File '"$mycmp"' is created successfully"
+echo "File '"$mypdf"' is created successfully"

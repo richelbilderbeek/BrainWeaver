@@ -87,7 +87,7 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
   {
     const QRect screen = QApplication::desktop()->screenGeometry();
     this->setGeometry(screen.adjusted(64,64,-64,-64));
-    this->move( screen.center() - this->rect().center() );
+    this->move(screen.center() - this->rect().center());
   }
 }
 
