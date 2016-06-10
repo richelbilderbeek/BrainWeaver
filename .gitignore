@@ -35,3 +35,6 @@ test_scripts/autosave2.cmp
 test_scripts/scenario1_3_result.cmp
 test_scripts/scenario1_3_result.pdf
 test_scripts/scenario1_4_result.pdf
+test_scripts/scenario1_2_result.*
+test_scripts/scenario2_result.*
+test_scripts/scenario2.cmp

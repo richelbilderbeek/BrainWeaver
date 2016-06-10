@@ -1,16 +1,13 @@
 #!/bin/bash
-# Let the student work on the concept map
+# Let the assessor create a test concept map with name 'scenario1.cmp'
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
 
 # Variables
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
-mycmp="scenario1.cmp"
-mycmp_result="scenario1_3_result.cmp"
-mypdf_result="scenario1_3_result.pdf"
-concept_addition="314"
-example_addition="1729"
+mycmp="scenario1_2_result.cmp"
+mypdf="scenario1_3_result.pdf"
 
 ####################################
 # Check executable
@@ -22,44 +19,28 @@ then
 fi
 
 ####################################
-# Input file must be present
+# File must be present
 ####################################
 if [ ! -e $mycmp ]
 then
-  echo "File "$mycmp" not found, line "$LINENO
+  echo "File '$mycmp'could not be found, line "$LINENO
   exit 1
 fi
 
 ####################################
-# Delete .cmp result file
+# PDF file must be absent
 ####################################
-if [ -e $mycmp_result ]
+if [ -e $mypdf ]
 then
-  echo "File "$mycmp_result" found, deleting it"
-  rm $mycmp_result
+  echo "File '$mypdf'present, now deleted, line "$LINENO
+  rm $mypdf
 fi
 
-if [ -e $mycmp_result ]
+if [ -e $mypdf ]
 then
-  echo "File "$mycmp_result" could not be deleted"
+  echo "File '$mypdf' could not be deleted, line "$LINENO
   exit 1
 fi
-
-####################################
-# Delete .pdf result file
-####################################
-if [ -e $mypdf_result ]
-then
-  echo "File "$mypdf_result" found, deleting it"
-  rm $mypdf_result
-fi
-
-if [ -e $mypdf_result ]
-then
-  echo "File "$mypdf_result" could not be deleted"
-  exit 1
-fi
-
 
 ####################################
 # Start application
@@ -68,7 +49,7 @@ $myexe &
 sleep 1
 
 ####################################
-# Main menu, choose '1. Student'
+# Main menu, choose '2. Assessor'
 ####################################
 id=`get_dialog_id "Menu voor de ontwikkelaar"`
 if [ -z $id ]
@@ -76,10 +57,22 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key alt+1 sleep 0.3
+xdotool windowactivate $id key alt+2 sleep 0.2
 
 ####################################
-# 'Kies een assessment bestand'
+# 'Mijn persoonlijke werktheorie', choose '&Geef assessment vorm'
+####################################
+id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de assessor"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+xdotool windowactivate $id key alt+e sleep 0.2
+
+####################################
+# 'Kies een assessment bestand', 
+# Open concept map
 ####################################
 id=`get_dialog_id "Kies een assessment bestand"`
 if [ -z $id ]
@@ -87,161 +80,188 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete
-# Type filename
+
+xdotool windowactivate $id sleep 0.2 key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete
 xdotool windowactivate $id type $mycmp
-# OK
-xdotool windowactivate $id key alt+o sleep 0.5
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.4
+
 
 ####################################
-# 'Mijn persoonlijke werktheorie, programma voor de student'
-# Type your name
+# 'Evalueer concept map', 
+# Rate concept map
 ####################################
-id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-xdotool windowactivate $id type "John Doe"
-# &Begin
-xdotool windowactivate $id key alt+b sleep 0.3
-
-####################################
-# 'Mijn persoonlijke werktheorie, programma voor de student'
-# Beginnen mey &Associeren
-####################################
-id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-# &Associate
-xdotool windowactivate $id key alt+a sleep 0.5
-
-####################################
-# 'Associeer- en cluster-scherm'
-# Add some associations
-####################################
-id=`get_dialog_id "Associeer- en cluster-scherm"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-# Text to add
-xdotool windowactivate $id type "hard to make up"
-# Add 
-xdotool windowactivate $id key Tab Return
-# Text to add
-xdotool windowactivate $id type "that one I spent a year on"
-# Add 
-xdotool windowactivate $id key Tab Return
-# Text to add
-xdotool windowactivate $id type "precise"
-# Add 
-xdotool windowactivate $id key Tab Return
-# Text to add
-xdotool windowactivate $id type "not vague"
-# Add 
-xdotool windowactivate $id key Tab Return
-# Text to add
-xdotool windowactivate $id type "not too long"
-# Add 
-xdotool windowactivate $id key Tab Return
-
-# Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 1.0
-
-####################################
-# 'Construeer een concept map-scherm'
-# Save concept map
-####################################
-id=`get_dialog_id "Construeer een concept map-scherm"`
+id=`get_dialog_id "Evalueer concept map"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-# Move to an item with an example and edit
-# xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.2 key Up Up F2 sleep 0.6
+# Rate first concept
+xdotool windowactivate $id sleep 0.2 key space Up Up F1 sleep 1.0
 
 ####################################
-# 'Concept/Relatie bewerken'
-# Edit concept
+# 'Evalueer concept'
+# Rate this first concept
 ####################################
-id=`get_dialog_id "Concept/Relatie bewerken"`
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-# Add sometimes to concept
-xdotool windowactivate $id type "$concept_addition"
-
-# Add example
-xdotool windowactivate $id key Tab F2 Right type "$example_addition"
-xdotool windowactivate $id sleep 0.5 key Return sleep 0.5 key alt+o
-
-# Save
-xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.2
+# Rate 0-1-2
+xdotool windowactivate $id sleep 0.2 key Down Tab sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down sleep 0.2 key Alt+o sleep 0.2
 
 ####################################
-# 'Sla de concept map op'
-# Save concept map
+# 'Evalueer concept map', 
+# Rate concept map
 ####################################
-id=`get_dialog_id "Sla de concept map op"`
+id=`get_dialog_id "Evalueer concept map"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-# Type name
-xdotool windowactivate $id type $mycmp_result
-# Save
-xdotool windowactivate $id key alt+o sleep 0.2
-
-# Analyse save file
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" could not be found"
-  exit 1
-fi
-
-# Has concept addition been added
-if ! egrep -q "$concept_addition" $mycmp_result
-then
-  echo "Text '$concept_addition' not found in save file '$mycmp_result', line "$LINENO
-  exit 1
-fi
-
-if ! egrep -q "$example_addition" $mycmp_result
-then
-  echo "Text '$example_addition' not found in save file '$mycmp_result', line "$LINENO
-  exit 1
-fi
+# Rate first concept its examples
+xdotool windowactivate $id sleep 0.2 key F2
 
 ####################################
-# 'Construeer een concept map-scherm'
-# Save concept map
+# 'Evalueer voorbeelden'
+# Rate this first concept its examples
 ####################################
-id=`get_dialog_id "Construeer een concept map-scherm"`
+id=`get_dialog_id "Evalueer voorbeelden"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
+
+# Rate first concept its examples
+xdotool windowactivate $id sleep 0.2 key Alt+b sleep 0.2 key Alt+o
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept
+xdotool windowactivate $id sleep 0.2 key Down F1 sleep 0.5
+
+####################################
+# 'Evalueer concept'
+# Rate this second concept
+####################################
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate 1-2-0
+xdotool windowactivate $id sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down Tab sleep 0.2 key Down sleep 0.2 key Alt+o sleep 0.2
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept its examples
+xdotool windowactivate $id sleep 0.2 key F2
+
+####################################
+# 'Evalueer voorbeelden'
+# Rate this first concept its examples
+####################################
+id=`get_dialog_id "Evalueer voorbeelden"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate second concept its examples
+xdotool windowactivate $id sleep 0.2 key Alt+r sleep 0.2 key Alt+o
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key Left F1 sleep 0.5
+
+####################################
+# 'Evalueer concept'
+# Rate this third concept
+####################################
+# Note: need $ to distiguish 'Evalueer concept map' from 'Evalueer concept'
+id=`get_dialog_id "Evalueer concept$"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate 2-0-1
+xdotool windowactivate $id sleep 0.2 key Down Down Down Tab sleep 0.2 key Down Tab sleep 0.2 key Down Down sleep 0.2 key Alt+o sleep 0.2
+
+####################################
+# 'Evalueer concept map', 
+# Rate concept map
+####################################
+id=`get_dialog_id "Evalueer concept map"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key alt+g sleep 0.2
+
+####################################
+# 'De kentallen'
+# Summary statistics
+####################################
+id=`get_dialog_id "De kentallen"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# Enter assessor name
+xdotool windowactivate $id sleep 0.2 type "Jane Doe" 
 # Export to PDF
-xdotool windowactivate $id sleep 0.2 key alt+e sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Alt+e sleep 0.2
 
 ####################################
 # 'Preview van PDF'
-# Save exported PDF
+# Print preview
 ####################################
 id=`get_dialog_id "Preview van PDF"`
 if [ -z $id ]
@@ -250,12 +270,12 @@ then
   exit 1
 fi
 
-# Save ('&Opslaan')
-xdotool windowactivate $id key alt+o sleep 0.2
+# Save PDF
+xdotool windowactivate $id sleep 0.2 key Alt+s sleep 0.2
 
 ####################################
 # 'Exporteer document naar PDF'
-# Exported PDF
+# Save PDF
 ####################################
 id=`get_dialog_id "Exporteer document naar PDF"`
 if [ -z $id ]
@@ -264,23 +284,25 @@ then
   exit 1
 fi
 
-# Save ('&Opslaan')
-xdotool windowactivate $id type $mypdf_result
+# Type PDF filename
+xdotool windowactivate $id sleep 0.2 type $mypdf
 # OK
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.1
+xdotool windowactivate $id sleep 0.2 key Alt+o sleep 0.2
 
-####################################
-#
-#
-#         Close everything
-#
-#
-####################################
+### Checking
+
+if [ ! -e $mypdf ]
+then
+  echo "File '$mypdf' not found, line "$LINENO
+  exit 1
+fi
+
+### Quitting
 
 
 ####################################
 # 'Preview van PDF'
-# Close
+# Print preview
 ####################################
 id=`get_dialog_id "Preview van PDF"`
 if [ -z $id ]
@@ -288,64 +310,52 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+# Quit
+xdotool windowactivate $id sleep 0.2 key Alt+F4 sleep 0.1
+
 
 ####################################
-# 'Construeer een concept map-scherm'
-# Close
+# 'De kentallen'
+# Quit from summary statistics
 ####################################
-id=`get_dialog_id "Construeer een concept map-scherm"`
+id=`get_dialog_id "De kentallen"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+# Enter assessor name
+xdotool windowactivate $id sleep 0.2 key Alt+F4
 
 ####################################
-# 'Associeer- en cluster-scherm'
-# Close
+# 'Evalueer concept map', 
+# Rate concept map
 ####################################
-id=`get_dialog_id "Associeer- en cluster-scherm"`
+id=`get_dialog_id "Evalueer concept map"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+# Rate third concept
+xdotool windowactivate $id sleep 0.2 key Alt+F4
 
 ####################################
-# 'Mijn persoonlijke werktheorie, programma voor de student'
-# Close
+# 'Mijn persoonlijke werktheorie', choose '&Stoppen'
 ####################################
-id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
+id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de assessor"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
-####################################
-# 'Mijn persoonlijke werktheorie, programma voor de student'
-# Close
-####################################
-id=`get_dialog_id "Mijn persoonlijke werktheorie, programma voor de student"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
+xdotool windowactivate $id key alt+s sleep 0.2
 
 ####################################
-# Main menu
-# Close
+# Main menu, close
 ####################################
 id=`get_dialog_id "Menu voor de ontwikkelaar"`
 if [ -z $id ]
@@ -353,22 +363,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
-####################################
-# Check results
-####################################
+xdotool windowactivate $id key alt+F4
 
 
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" could not be found"
-  exit 1
-fi
-
-if [ ! -e $mypdf_result ]
-then
-  echo "File "$mypdf_result" could not be found"
-  exit 1
-fi
+echo "File '"$mypdf"' is created successfully"

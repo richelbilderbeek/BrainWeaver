@@ -6,11 +6,9 @@
 
 # Variables
 myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
-mycmp="scenario1.cmp"
-mycmp_result="scenario1_2_result.cmp"
-mypdf_result="scenario1_2_result.pdf"
-concept_addition="314"
-example_addition="1729"
+mycmp="scenario2.cmp"
+mycmp_result="scenario2_result.cmp"
+mypdf_result="scenario2_result.pdf"
 
 ####################################
 # Check executable
@@ -76,7 +74,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key alt+1 sleep 0.3
+xdotool windowactivate $id key alt+1 sleep 0.2
 
 ####################################
 # 'Kies een assessment bestand'
@@ -91,7 +89,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate $id key alt+o sleep 0.5
+xdotool windowactivate $id key alt+o sleep 0.1
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -105,7 +103,7 @@ then
 fi
 xdotool windowactivate $id type "John Doe"
 # &Begin
-xdotool windowactivate $id key alt+b sleep 0.3
+xdotool windowactivate $id key alt+b sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -118,7 +116,9 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a sleep 0.5
+xdotool windowactivate $id key alt+a sleep 0.2
+
+
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -135,7 +135,7 @@ xdotool windowactivate $id type "hard to make up"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "that one I spent a year on"
+xdotool windowactivate $id type "concise"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
@@ -143,7 +143,7 @@ xdotool windowactivate $id type "precise"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "not vague"
+xdotool windowactivate $id type "English"
 # Add 
 xdotool windowactivate $id key Tab Return
 # Text to add
@@ -151,80 +151,47 @@ xdotool windowactivate $id type "not too long"
 # Add 
 xdotool windowactivate $id key Tab Return
 
-# Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 1.0
-
-####################################
-# 'Construeer een concept map-scherm'
-# Save concept map
-####################################
-id=`get_dialog_id "Construeer een concept map-scherm"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-
-# Move to an item with an example and edit
-# xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.2 key Up Up F2 sleep 0.6
-
-####################################
-# 'Concept/Relatie bewerken'
-# Edit concept
-####################################
-id=`get_dialog_id "Concept/Relatie bewerken"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-
-# Add sometimes to concept
-xdotool windowactivate $id type "$concept_addition"
-
-# Add example
-xdotool windowactivate $id key Tab F2 Right type "$example_addition"
-xdotool windowactivate $id sleep 0.5 key Return sleep 0.5 key alt+o
-
 # Save
-xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.2
+xdotool windowactivate $id key alt+s sleep 0.2
 
 ####################################
-# 'Sla de concept map op'
-# Save concept map
+# 'Sla de clustering op'
 ####################################
-id=`get_dialog_id "Sla de concept map op"`
+id=`get_dialog_id "Sla de clustering op"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO
   exit 1
 fi
 
-# Type name
-xdotool windowactivate $id type $mycmp_result
-# Save
-xdotool windowactivate $id key alt+o sleep 0.2
+xdotool windowactivate $id type $mycmp_result 
+xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.3
 
-# Analyse save file
+####################################
+# Check newly saved file
+####################################
 if [ ! -e $mycmp_result ]
 then
-  echo "File "$mycmp_result" could not be found"
+  echo "File "$mycmp_result" not found, line "$LINENO
   exit 1
 fi
+# Show that the cluster has changed
+echo "Before: "
+egrep "<cluster>.*</cluster>" $mycmp -o
+echo "After: "
+egrep "<cluster>.*</cluster>" $mycmp_result -o
 
-# Has concept addition been added
-if ! egrep -q "$concept_addition" $mycmp_result
+####################################
+# 'Associeer- en cluster-scherm'
+# Start concept map
+####################################
+id=`get_dialog_id "Associeer- en cluster-scherm"`
+if [ -z $id ]
 then
-  echo "Text '$concept_addition' not found in save file '$mycmp_result', line "$LINENO
+  echo "ID not found, line "$LINENO
   exit 1
 fi
-
-if ! egrep -q "$example_addition" $mycmp_result
-then
-  echo "Text '$example_addition' not found in save file '$mycmp_result', line "$LINENO
-  exit 1
-fi
+xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.3
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -236,8 +203,15 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-# Export to PDF
-xdotool windowactivate $id sleep 0.2 key alt+e sleep 0.2
+
+xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
+
+# Type filename
+xdotool windowactivate $id type $mycmp_result
+# OK
+xdotool windowactivate $id key Escape sleep 0.1 key alt+o sleep 0.2
+# Export
+xdotool windowactivate $id key alt+e sleep 0.3
 
 ####################################
 # 'Preview van PDF'
@@ -355,6 +329,10 @@ then
 fi
 
 xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+
+
+
+
 
 ####################################
 # Check results
