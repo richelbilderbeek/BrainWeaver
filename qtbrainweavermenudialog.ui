@@ -134,6 +134,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="button_demo_5">
+        <property name="toolTip">
+         <string>Demonstrate Issue #5</string>
+        </property>
+        <property name="text">
+         <string>&amp;S. Demo #5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -170,6 +180,13 @@
        <widget class="QPushButton" name="button_test_cluster">
         <property name="text">
          <string>&amp;4. QtClusterDialog</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_empty_qtconceptmap">
+        <property name="text">
+         <string>&amp;R. Empty QtConceptMap</string>
         </property>
        </widget>
       </item>

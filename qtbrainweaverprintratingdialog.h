@@ -58,6 +58,7 @@ public:
   QTableWidget * GetTableConcepts();
   QTableWidget * GetTableExamples();
   QTableWidget * GetTableValues();
+  QTableWidget * GetTableMiscValues();
   void Print();
 
 protected:

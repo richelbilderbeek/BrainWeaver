@@ -74,6 +74,10 @@ private slots:
 
   void on_button_test_qtroundedrectitem_clicked();
 
+  void on_button_empty_qtconceptmap_clicked();
+
+  void on_button_demo_5_clicked();
+
 private:
   Ui::QtMenuDialog *ui;
 

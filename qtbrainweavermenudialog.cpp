@@ -37,11 +37,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "brainweaverfile.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconcept.h"
-#include "conceptmapconcept.h"
 #include "conceptmapexample.h"
 #include "conceptmapexamples.h"
 #include "conceptmapexamples.h"
 #include "conceptmapfactory.h"
+#include "conceptmapcenternodefactory.h"
+#include "conceptmapnodefactory.h"
 #include "conceptmap.h"
 #include "conceptmapnode.h"
 #include "container.h"
@@ -301,5 +302,35 @@ void ribi::pvdb::QtMenuDialog::on_button_test_conceptmap_clicked()
 void ribi::pvdb::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
 {
   QtTestQtRoundedRectItemMenuDialog d;
+  ShowChild(&d);
+}
+
+void ribi::pvdb::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
+{
+  const int test{0};
+  assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
+  const File file = pvdb::FileFactory().GetTests().at(test);
+
+  QtConceptMapDialog d(file);
+  ShowChild(&d);
+}
+
+void ribi::pvdb::QtMenuDialog::on_button_demo_5_clicked()
+{
+  File file;
+  file.SetQuestion("X");
+  ribi::cmap::ConceptMap g;
+  const auto vd_c = ribi::cmap::AddVertex(ribi::cmap::CenterNodeFactory().Create(ribi::cmap::Concept("X")), g);
+  const auto vd_1 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("A")), g);
+  const auto vd_2 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("B")), g);
+  const auto vd_3 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("C")), g);
+  const auto vd_4 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("D")), g);
+  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_c, vd_1, g);
+  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_1, vd_2, g);
+  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_2, vd_3, g);
+  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_c, vd_4, g);
+  file.SetConceptMap(g);
+
+  QtRatingDialog d(file);
   ShowChild(&d);
 }

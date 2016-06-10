@@ -43,6 +43,7 @@ struct QtDisplay
   void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
   void DisplayExamples(const File& file, QTableWidget * const table) const;
   void DisplayValues(const File& file, QTableWidget * const table) const;
+  void DisplayMiscValues(const File& file, QTableWidget * const table) const;
 };
 
 } //~namespace pvdb

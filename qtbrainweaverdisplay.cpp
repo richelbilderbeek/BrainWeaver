@@ -34,6 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapconcept.h"
 #include "conceptmap.h"
 #include "conceptmapedge.h"
+#include "count_undirected_graph_levels.h"
 #include "conceptmapexample.h"
 #include "conceptmapexamples.h"
 #include "brainweaverfile.h"
@@ -174,6 +175,63 @@ void ribi::pvdb::QtDisplay::DisplayExamples(
     }
   }
 }
+
+
+void ribi::pvdb::QtDisplay::DisplayMiscValues(
+  const File& file,
+  QTableWidget * const table) const
+{
+  auto g = file.GetConceptMap();
+
+  //Number of nodes
+  {
+    const std::string text = boost::lexical_cast<std::string>(boost::num_vertices(g));
+    QTableWidgetItem * const item = new QTableWidgetItem;
+    item->setText(text.c_str());
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    table->setItem(0,0,item);
+  }
+  //Average number of connections per non-center node
+  {
+    std::vector<int> degrees;
+    const auto vip = vertices(g);
+    for (auto i = vip.first; i != vip.second; ++i)
+    {
+      if (ribi::cmap::GetNode(*i, g).IsCenterNode()) continue;
+      degrees.push_back(boost::degree(*i, g));
+    }
+    const int sum{std::accumulate(std::begin(degrees), std::end(degrees), 0)};
+    const double average_degree_per_concept{
+      static_cast<double>(sum) / static_cast<double>(degrees.size())
+    };
+    const std::string text = boost::lexical_cast<std::string>(average_degree_per_concept);
+    QTableWidgetItem * const item = new QTableWidgetItem;
+    item->setText(text.c_str());
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    table->setItem(0,1,item);
+  }
+  //Hierarchical levels
+  {
+    const auto vd = ribi::cmap::FindCenterNode(g);
+    const int n{count_undirected_graph_levels(vd, g)};
+    const std::string text{boost::lexical_cast<std::string>(n)};
+    QTableWidgetItem * const item = new QTableWidgetItem;
+    item->setText(text.c_str());
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    table->setItem(0,2,item);
+  }
+
+
+  //Fixing table
+  table->verticalHeader()->setMaximumWidth(300);
+  table->verticalHeader()->setMinimumWidth(300);
+  table->setColumnWidth(0,300);
+  table->setMaximumWidth(
+      table->verticalHeader()->width()
+    + table->columnWidth(0)
+  );
+}
+
 
 void ribi::pvdb::QtDisplay::DisplayValues(
   const File& file,

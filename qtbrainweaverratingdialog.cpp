@@ -82,6 +82,7 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
   pvdb::QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
   pvdb::QtDisplay().DisplayExamples(file,ui->table_examples);
   pvdb::QtDisplay().DisplayValues(file,ui->table_values);
+  pvdb::QtDisplay().DisplayMiscValues(file,ui->table_misc_values);
 
   //Center the dialog
   {

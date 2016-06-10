@@ -111,6 +111,7 @@ const std::vector<QWidget *> ribi::pvdb::QtPrintRatingDialog::CollectWidgets() c
   v.push_back(ui->frame_concepts);
   v.push_back(ui->frame_competencies);
   v.push_back(ui->frame_values);
+  v.push_back(ui->frame_misc_values);
   return v;
 }
 
@@ -122,6 +123,11 @@ QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableConcepts()
 QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableExamples()
 {
   return ui->table_examples;
+}
+
+QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableMiscValues()
+{
+  return ui->table_misc_values;
 }
 
 QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableValues()
@@ -226,4 +232,5 @@ void ribi::pvdb::QtPrintRatingDialog::showEvent(QShowEvent *)
 
   pvdb::QtDisplay().DisplayExamples(m_file,this->GetTableExamples());
   pvdb::QtDisplay().DisplayValues(m_file,this->GetTableValues());
+  pvdb::QtDisplay().DisplayMiscValues(m_file,this->GetTableMiscValues());
 }
