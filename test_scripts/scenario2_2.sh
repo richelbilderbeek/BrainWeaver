@@ -204,6 +204,11 @@ then
   exit 1
 fi
 
+xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e
+
+
+exit
+
 xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
 
 # Type filename
