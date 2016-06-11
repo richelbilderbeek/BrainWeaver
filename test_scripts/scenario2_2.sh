@@ -204,8 +204,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e
-
+xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e sleep 0.2 key Ctrl+z
 
 exit
 
