@@ -59,7 +59,7 @@ ribi::pvdb::QtAboutDialog::QtAboutDialog()
   QLabel * const label = new QLabel(this);
   label->setPixmap(QPixmap(":/images/PicLoomAbout.png"));
   layout()->addWidget(label);
-  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
 /*

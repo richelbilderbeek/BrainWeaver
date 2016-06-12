@@ -41,6 +41,8 @@ ribi::pvdb::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* p
     m_file(file)
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
   if (!m_file.GetStudentName().empty())
   {
     SetName(m_file.GetStudentName());

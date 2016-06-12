@@ -86,6 +86,7 @@ ribi::pvdb::QtMenuDialog::QtMenuDialog(QWidget* parent)
     m_file{}
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
 ribi::pvdb::QtMenuDialog::~QtMenuDialog() noexcept

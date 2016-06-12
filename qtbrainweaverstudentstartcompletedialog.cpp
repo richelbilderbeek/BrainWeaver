@@ -46,6 +46,7 @@ ribi::pvdb::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
     m_file(file)
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
 ribi::pvdb::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept

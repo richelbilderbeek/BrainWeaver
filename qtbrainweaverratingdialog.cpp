@@ -55,7 +55,8 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
     m_file(file)
 {
   ui->setupUi(this);
-  
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
   assert(boost::num_vertices(file.GetConceptMap()));
   //Student name
   {

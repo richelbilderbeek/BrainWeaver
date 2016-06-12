@@ -42,6 +42,7 @@ ribi::pvdb::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(Q
     m_back_to_menu(false)
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
 ribi::pvdb::QtCreateAssessmentCompleteDialog::~QtCreateAssessmentCompleteDialog() noexcept

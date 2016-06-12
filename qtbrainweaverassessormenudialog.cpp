@@ -45,6 +45,7 @@ ribi::pvdb::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
     ui(new Ui::QtAssessorMenuDialog)
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
 ribi::pvdb::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept

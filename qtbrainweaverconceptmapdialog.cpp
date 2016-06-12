@@ -111,6 +111,7 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
   m_widget->SetMode(ribi::cmap::QtConceptMap::Mode::edit);
 
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
   assert(this->layout());

@@ -68,6 +68,7 @@ ribi::pvdb::QtClusterDialog::QtClusterDialog(
     m_widget(BuildWidget(file))
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   //Add the cluster widget
   {

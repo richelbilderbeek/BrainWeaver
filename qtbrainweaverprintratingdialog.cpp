@@ -58,6 +58,8 @@ ribi::pvdb::QtPrintRatingDialog::QtPrintRatingDialog(
     m_widget(new cmap::QtConceptMap)
 {
   ui->setupUi(this);    
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
   m_widget->SetConceptMap(file.GetConceptMap());
   ui->label_focal_question->setText(
     ("FOCUSVRAAG: "

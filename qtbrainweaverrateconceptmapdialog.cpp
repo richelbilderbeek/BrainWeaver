@@ -58,6 +58,8 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   m_concept_map(new cmap::QtConceptMap)
 {
   ui->setupUi(this);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
   m_concept_map->SetConceptMap(file.GetConceptMap());
   m_concept_map->SetMode(ribi::cmap::QtConceptMap::Mode::rate);
 
