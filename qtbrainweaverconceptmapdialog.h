@@ -63,7 +63,6 @@ class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
 
   private slots:
 
-  ///CTRL-SHIFT-T: translate to English
   void keyPressEvent(QKeyEvent *);
   void on_button_save_clicked();
   void on_button_print_clicked();
