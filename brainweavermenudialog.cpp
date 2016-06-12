@@ -92,7 +92,7 @@ ribi::Help ribi::braw::MenuDialog::GetHelp() const noexcept
 
 std::string ribi::braw::MenuDialog::GetVersion() const noexcept
 {
-  return "1.1";
+  return "1.2";
 }
 
 std::vector<std::string> ribi::braw::MenuDialog::GetVersionHistory() const noexcept
@@ -148,6 +148,7 @@ std::vector<std::string> ribi::braw::MenuDialog::GetVersionHistory() const noexc
     "2014-05-18: Version 0.50: edges connected to center node have no label, that cannot be edited",
     "2015-10-02: Version 0.51: moved to own GitHub",
     "2016-01-17: Version 1.0: made most classes regular, removed signals, removed backwards compatibility",
-    "2016-06-12: Version 1.1: move to namespace braw",
+    "2016-06-05: Version 1.1: automated GUI testing",
+    "2016-06-12: Version 1.2: move to namespace braw",
   };
 }
