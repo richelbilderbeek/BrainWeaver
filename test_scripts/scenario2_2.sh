@@ -204,7 +204,11 @@ then
   exit 1
 fi
 
+# Create new edge by meyboard
 xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e sleep 0.2 key Ctrl+z
+
+# Create new edge by mouse
+xdotool mousemove 540 560 click 1 mousemove 450 360
 
 exit
 
