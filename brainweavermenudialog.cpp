@@ -40,7 +40,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "xml.h"
 #pragma GCC diagnostic pop
 
-int ribi::pvdb::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
+int ribi::braw::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
 {
   const int argc = static_cast<int>(argv.size());
   if (argc == 1)
@@ -52,13 +52,13 @@ int ribi::pvdb::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv
   return 0;
 }
 
-ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
+ribi::About ribi::braw::MenuDialog::GetAbout() const noexcept
 {
   About a(
     "Richel Bilderbeek",
     "Brainweaver",
     "tool to create and assess concept maps",
-    "January 17th of 2016",
+    "June 12th of 2016",
     "2012-2016",
     "http://www.richelbilderbeek.nl/ProjectBrainweaver.htm",
     GetVersion(),
@@ -76,7 +76,7 @@ ribi::About ribi::pvdb::MenuDialog::GetAbout() const noexcept
   return a;
 }
 
-ribi::Help ribi::pvdb::MenuDialog::GetHelp() const noexcept
+ribi::Help ribi::braw::MenuDialog::GetHelp() const noexcept
 {
   return Help(
     this->GetAbout().GetFileTitle(),
@@ -90,12 +90,12 @@ ribi::Help ribi::pvdb::MenuDialog::GetHelp() const noexcept
   );
 }
 
-std::string ribi::pvdb::MenuDialog::GetVersion() const noexcept
+std::string ribi::braw::MenuDialog::GetVersion() const noexcept
 {
-  return "1.0";
+  return "1.1";
 }
 
-std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexcept
+std::vector<std::string> ribi::braw::MenuDialog::GetVersionHistory() const noexcept
 {
   return {
     "2012-06-17: Version 0.01: concept version of ProjectVanDenBogaart, using 'IronHide' style",
@@ -148,5 +148,6 @@ std::vector<std::string> ribi::pvdb::MenuDialog::GetVersionHistory() const noexc
     "2014-05-18: Version 0.50: edges connected to center node have no label, that cannot be edited",
     "2015-10-02: Version 0.51: moved to own GitHub",
     "2016-01-17: Version 1.0: made most classes regular, removed signals, removed backwards compatibility",
+    "2016-06-12: Version 1.1: move to namespace braw",
   };
 }

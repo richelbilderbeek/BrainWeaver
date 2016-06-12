@@ -49,7 +49,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverprintratingdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPrintRatingDialog::QtPrintRatingDialog(
+ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
   const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
@@ -94,12 +94,12 @@ ribi::pvdb::QtPrintRatingDialog::QtPrintRatingDialog(
   }
 }
 
-ribi::pvdb::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
+ribi::braw::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
 {
   delete ui;
 }
 
-const std::vector<QWidget *> ribi::pvdb::QtPrintRatingDialog::CollectWidgets() const
+const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() const
 {
   std::vector<QWidget *> v { ui->frame_header, ui->frame_concept_map, ui->label_concept_map_as_text };
   {
@@ -117,42 +117,42 @@ const std::vector<QWidget *> ribi::pvdb::QtPrintRatingDialog::CollectWidgets() c
   return v;
 }
 
-QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableConcepts()
+QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableConcepts()
 {
   return ui->table_concepts;
 }
 
-QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableExamples()
+QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableExamples()
 {
   return ui->table_examples;
 }
 
-QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableMiscValues()
+QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableMiscValues()
 {
   return ui->table_misc_values;
 }
 
-QTableWidget * ribi::pvdb::QtPrintRatingDialog::GetTableValues()
+QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableValues()
 {
   return ui->table_values;
 }
 
-void ribi::pvdb::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
+void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
 {
   if (event->key() == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtPrintRatingDialog::on_button_print_clicked()
+void ribi::braw::QtPrintRatingDialog::on_button_print_clicked()
 {
   Print();
 }
 
-void ribi::pvdb::QtPrintRatingDialog::Print()
+void ribi::braw::QtPrintRatingDialog::Print()
 {
   //Start save dialog
   const boost::shared_ptr<QFileDialog> print_dialog(
-    pvdb::QtFileDialog::GetSaveFileDialog(
-      pvdb::QtFileDialog::FileType::pdf));
+    QtFileDialog::GetSaveFileDialog(
+      QtFileDialog::FileType::pdf));
   print_dialog->setWindowTitle("Exporteer document naar PDF");
   if (print_dialog->exec() != QDialog::Accepted
     || print_dialog->selectedFiles().empty() )
@@ -194,7 +194,7 @@ void ribi::pvdb::QtPrintRatingDialog::Print()
 
 }
 
-void ribi::pvdb::QtPrintRatingDialog::showEvent(QShowEvent *)
+void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
 {
   //Concept map
   {
@@ -226,13 +226,13 @@ void ribi::pvdb::QtPrintRatingDialog::showEvent(QShowEvent *)
   }
 
   //Copied from caller
-  pvdb::QtDisplay().DisplayRatedConcepts(m_file,this->GetTableConcepts());
+  QtDisplay().DisplayRatedConcepts(m_file,this->GetTableConcepts());
   {
     const int sz = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
   }
 
-  pvdb::QtDisplay().DisplayExamples(m_file,this->GetTableExamples());
-  pvdb::QtDisplay().DisplayValues(m_file,this->GetTableValues());
-  pvdb::QtDisplay().DisplayMiscValues(m_file,this->GetTableMiscValues());
+  QtDisplay().DisplayExamples(m_file,this->GetTableExamples());
+  QtDisplay().DisplayValues(m_file,this->GetTableValues());
+  QtDisplay().DisplayMiscValues(m_file,this->GetTableMiscValues());
 }

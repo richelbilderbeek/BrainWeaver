@@ -45,7 +45,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtClusterWidget::QtClusterWidget(
+ribi::braw::QtClusterWidget::QtClusterWidget(
   const Cluster& cluster,
   QWidget* parent)
   : QTreeWidget(parent),
@@ -75,7 +75,7 @@ ribi::pvdb::QtClusterWidget::QtClusterWidget(
   this->setWordWrap(true);
 }
 
-void ribi::pvdb::QtClusterWidget::Add(const std::string& text)
+void ribi::braw::QtClusterWidget::Add(const std::string& text)
 {
   QtClusterTreeWidgetItem * const item = new QtClusterTreeWidgetItem(
     cmap::Competency::uninitialized,true,-1,-1,-1);
@@ -84,7 +84,7 @@ void ribi::pvdb::QtClusterWidget::Add(const std::string& text)
   SetCorrectFlags();
 }
 
-void ribi::pvdb::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
+void ribi::braw::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
 {
   if (!dynamic_cast<QtClusterTreeWidgetItem*>(item))
   {
@@ -98,7 +98,7 @@ void ribi::pvdb::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
 }
 
 
-void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
+void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
 {
   QTreeWidget::dropEvent(event);
   //Fix the possibility of dropping a tree with depth three
@@ -158,7 +158,7 @@ void ribi::pvdb::QtClusterWidget::dropEvent(QDropEvent *event)
 }
 
 //Process all items
-void ribi::pvdb::QtClusterWidget::SetCorrectFlags() noexcept
+void ribi::braw::QtClusterWidget::SetCorrectFlags() noexcept
 {
   const int n_top = this->topLevelItemCount();
   for (int i=0; i!=n_top; ++i)
@@ -192,13 +192,13 @@ void ribi::pvdb::QtClusterWidget::SetCorrectFlags() noexcept
   }
 }
 
-ribi::pvdb::Cluster ribi::pvdb::QtClusterWidget::GetCluster() const noexcept
+ribi::braw::Cluster ribi::braw::QtClusterWidget::GetCluster() const noexcept
 {
   WriteToCluster();
   return m_cluster;
 }
 
-int ribi::pvdb::QtClusterWidget::GetDepth(const QTreeWidgetItem * const item) const
+int ribi::braw::QtClusterWidget::GetDepth(const QTreeWidgetItem * const item) const
 {
   assert(item);
   int depth = 0;
@@ -211,7 +211,7 @@ int ribi::pvdb::QtClusterWidget::GetDepth(const QTreeWidgetItem * const item) co
   return depth;
 }
 
-void ribi::pvdb::QtClusterWidget::keyPressEvent(QKeyEvent *event)
+void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
 {
   //Without this seemingly useless member function,
   //the widget cannot be edited
@@ -275,7 +275,7 @@ void ribi::pvdb::QtClusterWidget::keyPressEvent(QKeyEvent *event)
   }
 }
 
-void ribi::pvdb::QtClusterWidget::BuildCluster()
+void ribi::braw::QtClusterWidget::BuildCluster()
 {
   assert(this->isHeaderHidden());
   assert(this->alternatingRowColors());
@@ -331,7 +331,7 @@ void ribi::pvdb::QtClusterWidget::BuildCluster()
   );
 }
 
-void ribi::pvdb::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
+void ribi::braw::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
 {
 
   if (item->text(col).isEmpty())
@@ -341,7 +341,7 @@ void ribi::pvdb::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
   }
 }
 
-void ribi::pvdb::QtClusterWidget::WriteToCluster() const noexcept
+void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
   const int n_top = this->topLevelItemCount();
@@ -356,9 +356,9 @@ void ribi::pvdb::QtClusterWidget::WriteToCluster() const noexcept
     const int n_child = top->childCount();
     for (int j=0; j!=n_child; ++j)
     {
-      const QtClusterTreeWidgetItem * const pvdb_item
+      const QtClusterTreeWidgetItem * const braw_item
         = dynamic_cast<QtClusterTreeWidgetItem *>(top->child(j));
-      const cmap::Competency competency = pvdb_item ? pvdb_item->m_competency : cmap::Competency::uninitialized;
+      const cmap::Competency competency = braw_item ? braw_item->m_competency : cmap::Competency::uninitialized;
       assert(GetDepth(top->child(j))==1);
       ribi::cmap::Example p(
         top->child(j)->text(0).toStdString(),
@@ -367,17 +367,17 @@ void ribi::pvdb::QtClusterWidget::WriteToCluster() const noexcept
       examples.push_back(p);
     }
 
-    QtClusterTreeWidgetItem * const pvdb_top = dynamic_cast<QtClusterTreeWidgetItem *>(this->topLevelItem(i)); //FIX 2012-12-30
+    QtClusterTreeWidgetItem * const braw_top = dynamic_cast<QtClusterTreeWidgetItem *>(this->topLevelItem(i)); //FIX 2012-12-30
     using namespace cmap;
 
     concepts.push_back(
       ribi::cmap::Concept(
         name,
         Examples(examples),
-        pvdb_top ? pvdb_top->m_is_complex : true,
-        pvdb_top ? pvdb_top->m_rating_complexity : -1,
-        pvdb_top ? pvdb_top->m_rating_concreteness : -1,
-        pvdb_top ? pvdb_top->m_rating_specifity : -1
+        braw_top ? braw_top->m_is_complex : true,
+        braw_top ? braw_top->m_rating_complexity : -1,
+        braw_top ? braw_top->m_rating_concreteness : -1,
+        braw_top ? braw_top->m_rating_specifity : -1
       )
     );
   }

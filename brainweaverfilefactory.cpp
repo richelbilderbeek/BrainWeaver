@@ -32,12 +32,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::FileFactory::FileFactory()
+ribi::braw::FileFactory::FileFactory()
 {
 
 }
 
-std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
+std::vector<ribi::braw::File> ribi::braw::FileFactory::GetTests() const noexcept
 {
   using ribi::cmap::ConceptMap;
   using ribi::cmap::ConceptMapFactory;
@@ -67,7 +67,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   //[3]: file with complex concept map and complex cluster
   {
     File f;
-    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[3] name");
+    f.SetStudentName("ribi::braw::FileFactory::GetTests()[3] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
     assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
     f.SetQuestion(GetFirstNode(concept_map).GetName());
@@ -79,7 +79,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   //[4]: file with rated complex concept map and complex cluster
   {
     File f;
-    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[4] name");
+    f.SetStudentName("ribi::braw::FileFactory::GetTests()[4] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
     assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
     f.SetQuestion(GetFirstNode(concept_map).GetName());
@@ -91,7 +91,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::FileFactory::GetTests() const noexcept
   //[5]: file with rated complex concept map and complex cluster, all multiple lines
   {
     File f;
-    f.SetStudentName("ribi::pvdb::FileFactory::GetTests()[5] name");
+    f.SetStudentName("ribi::braw::FileFactory::GetTests()[5] name");
     const ConceptMap concept_map = ConceptMapFactory().Get6();
     assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
     f.SetQuestion(GetFirstNode(concept_map).GetName());

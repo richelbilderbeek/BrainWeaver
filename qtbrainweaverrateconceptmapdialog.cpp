@@ -49,7 +49,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
+ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
@@ -86,25 +86,25 @@ ribi::pvdb::QtRateConceptMapDialog::QtRateConceptMapDialog(
   this->m_concept_map->setFocus();
 }
 
-ribi::pvdb::QtRateConceptMapDialog::~QtRateConceptMapDialog() noexcept
+ribi::braw::QtRateConceptMapDialog::~QtRateConceptMapDialog() noexcept
 {
   delete ui;
 }
 
-ribi::cmap::QtConceptMap * ribi::pvdb::QtRateConceptMapDialog::GetWidget()
+ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 {
   assert(m_concept_map);
   return m_concept_map;
 }
 
-void ribi::pvdb::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
+void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 {
   m_file.SetConceptMap(m_concept_map->GetConceptMap());
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
@@ -116,11 +116,11 @@ void ribi::pvdb::QtRateConceptMapDialog::on_button_next_clicked()
   }
 }
 
-void ribi::pvdb::QtRateConceptMapDialog::Save()
+void ribi::braw::QtRateConceptMapDialog::Save()
 {
   this->hide(); //Obligatory, otherwise program will freeze
 
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected || d->selectedFiles().empty())
@@ -133,12 +133,12 @@ void ribi::pvdb::QtRateConceptMapDialog::Save()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
   //close(); //Do not close after saving
@@ -146,10 +146,10 @@ void ribi::pvdb::QtRateConceptMapDialog::Save()
 }
 
 
-void ribi::pvdb::QtRateConceptMapDialog::Save(const std::string& filename)
+void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
   //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
@@ -159,7 +159,7 @@ void ribi::pvdb::QtRateConceptMapDialog::Save(const std::string& filename)
   m_file.Save(filename);
 }
 
-void ribi::pvdb::QtRateConceptMapDialog::on_button_save_clicked()
+void ribi::braw::QtRateConceptMapDialog::on_button_save_clicked()
 {
   Save();
 }

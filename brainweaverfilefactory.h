@@ -24,11 +24,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 struct File;
 
-///Factory of pvdb::File
+///Factory of File
 struct FileFactory
 {
   FileFactory();
@@ -37,7 +37,7 @@ struct FileFactory
   std::vector<File> GetTests() const noexcept;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // BRAINWEAVERFILEFACTORY_H

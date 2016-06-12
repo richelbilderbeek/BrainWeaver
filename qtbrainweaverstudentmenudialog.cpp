@@ -35,7 +35,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverstudentmenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* parent)
+ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtStudentMenuDialog),
     m_file(file)
@@ -50,26 +50,26 @@ ribi::pvdb::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* p
   on_edit_name_textChanged(ui->edit_name->text());
 }
 
-ribi::pvdb::QtStudentMenuDialog::~QtStudentMenuDialog() noexcept
+ribi::braw::QtStudentMenuDialog::~QtStudentMenuDialog() noexcept
 {
   delete ui;
 }
 
-std::string ribi::pvdb::QtStudentMenuDialog::GetName() const noexcept
+std::string ribi::braw::QtStudentMenuDialog::GetName() const noexcept
 {
   return ui->edit_name->text().toStdString();
 }
 
-void ribi::pvdb::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtStudentMenuDialog::on_button_about_clicked()
+void ribi::braw::QtStudentMenuDialog::on_button_about_clicked()
 {
-  ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
+  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
   assert(d);
   //const auto d(QtAboutDialog().Get());
   this->hide();
@@ -77,19 +77,19 @@ void ribi::pvdb::QtStudentMenuDialog::on_button_about_clicked()
   this->show();
 }
 
-void ribi::pvdb::QtStudentMenuDialog::on_button_quit_clicked()
+void ribi::braw::QtStudentMenuDialog::on_button_quit_clicked()
 {
   close();
 }
 
-void ribi::pvdb::QtStudentMenuDialog::on_button_start_clicked()
+void ribi::braw::QtStudentMenuDialog::on_button_start_clicked()
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
   QtStudentStartCompleteDialog d(m_file);
   this->ShowChild(&d);
 }
 
-void ribi::pvdb::QtStudentMenuDialog::on_edit_name_textChanged(const QString &arg1)
+void ribi::braw::QtStudentMenuDialog::on_edit_name_textChanged(const QString &arg1)
 {
   //Enable start button when student has entered at least two characters
   assert(ui->edit_name->text() == arg1);
@@ -103,9 +103,9 @@ void ribi::pvdb::QtStudentMenuDialog::on_edit_name_textChanged(const QString &ar
   }
 }
 
-void ribi::pvdb::QtStudentMenuDialog::on_button_save_clicked()
+void ribi::braw::QtStudentMenuDialog::on_button_save_clicked()
 {
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -117,28 +117,28 @@ void ribi::pvdb::QtStudentMenuDialog::on_button_save_clicked()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
 }
 
-void ribi::pvdb::QtStudentMenuDialog::Save(const std::string& filename)
+void ribi::braw::QtStudentMenuDialog::Save(const std::string& filename)
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
 
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   m_file.Save(filename);
   //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }
 
-void ribi::pvdb::QtStudentMenuDialog::SetName(const std::string& name)
+void ribi::braw::QtStudentMenuDialog::SetName(const std::string& name)
 {
   ui->edit_name->setText(name.c_str());
 }

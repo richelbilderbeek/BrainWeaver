@@ -35,7 +35,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtAssessorMenuDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtAssessorMenuDialog : public ribi::QtHideAndShowDialog
 {
@@ -61,7 +61,7 @@ private:
   Ui::QtAssessorMenuDialog *ui;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

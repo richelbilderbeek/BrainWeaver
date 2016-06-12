@@ -46,7 +46,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtconceptmap.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
+ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
@@ -86,12 +86,12 @@ ribi::pvdb::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   }
 }
 
-ribi::pvdb::QtPrintConceptMapDialog::~QtPrintConceptMapDialog() noexcept
+ribi::braw::QtPrintConceptMapDialog::~QtPrintConceptMapDialog() noexcept
 {
   delete ui;
 }
 
-std::vector<QWidget *> ribi::pvdb::QtPrintConceptMapDialog::CollectWidgets() const
+std::vector<QWidget *> ribi::braw::QtPrintConceptMapDialog::CollectWidgets() const
 {
   std::vector<QWidget *> v;
   v.push_back(ui->frame_top);
@@ -108,22 +108,22 @@ std::vector<QWidget *> ribi::pvdb::QtPrintConceptMapDialog::CollectWidgets() con
 }
 
 
-void ribi::pvdb::QtPrintConceptMapDialog::keyPressEvent(QKeyEvent * event)
+void ribi::braw::QtPrintConceptMapDialog::keyPressEvent(QKeyEvent * event)
 {
   if (event->key() == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtPrintConceptMapDialog::on_button_print_clicked()
+void ribi::braw::QtPrintConceptMapDialog::on_button_print_clicked()
 {
   Print();
 }
 
-void ribi::pvdb::QtPrintConceptMapDialog::Print()
+void ribi::braw::QtPrintConceptMapDialog::Print()
 {
   //Start save dialog
   const boost::shared_ptr<QFileDialog> print_dialog(
-    pvdb::QtFileDialog::GetSaveFileDialog(
-      pvdb::QtFileDialog::FileType::pdf));
+    QtFileDialog::GetSaveFileDialog(
+      QtFileDialog::FileType::pdf));
   print_dialog->setWindowTitle("Exporteer document naar PDF");
   if (print_dialog->exec() != QDialog::Accepted
     || print_dialog->selectedFiles().empty() )
@@ -166,12 +166,12 @@ void ribi::pvdb::QtPrintConceptMapDialog::Print()
   painter.end();
 }
 
-void ribi::pvdb::QtPrintConceptMapDialog::resizeEvent(QResizeEvent *)
+void ribi::braw::QtPrintConceptMapDialog::resizeEvent(QResizeEvent *)
 {
   fitConceptMap();
 }
 
-void ribi::pvdb::QtPrintConceptMapDialog::fitConceptMap()
+void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
 {
   assert(m_widget);
   if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
@@ -181,7 +181,7 @@ void ribi::pvdb::QtPrintConceptMapDialog::fitConceptMap()
 
 }
 
-void ribi::pvdb::QtPrintConceptMapDialog::showEvent(QShowEvent *)
+void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
   if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
 

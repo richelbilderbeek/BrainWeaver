@@ -67,7 +67,7 @@ const std::vector<const T *> AddConst(
   return w;
 }
 
-namespace pvdb {
+namespace braw {
 
 ///Obtain all possible selections of a std::vector, preserving the ordering of its elements
 ///Examples:
@@ -155,7 +155,7 @@ std::vector<std::string> Wordwrap(const std::string& s, const std::size_t max_le
 //From http://www.richelbilderbeek.nl/CppXmlToPretty.htm
 std::vector<std::string> XmlToPretty(const std::string& s);
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

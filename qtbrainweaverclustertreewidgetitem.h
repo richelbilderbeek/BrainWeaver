@@ -5,7 +5,7 @@
 #include "conceptmapcompetency.h"
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///QTreeWidgetItem with the only function of storing a cmap::Competency additionally
 struct QtClusterTreeWidgetItem : public QTreeWidgetItem
@@ -25,7 +25,7 @@ struct QtClusterTreeWidgetItem : public QTreeWidgetItem
   const int m_rating_specifity;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCLUSTERTREEWIDGETITEM_H

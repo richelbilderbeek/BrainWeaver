@@ -28,12 +28,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 struct Cluster;
 struct File;
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setStyleSheet(CreateStyleSheet().c_str());
     a.setWindowIcon(QIcon(":/images/R.png"));
-    ribi::pvdb::QtMenuDialog d;
+    ribi::braw::QtMenuDialog d;
     d.show();
     return a.exec();
   }

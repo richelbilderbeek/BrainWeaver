@@ -5,50 +5,50 @@
 
 #include "ribi_regex.h"
 
-std::string ribi::pvdb::Regex::GetRegexAbout() noexcept
+std::string ribi::braw::Regex::GetRegexAbout() noexcept
 {
   return GetRegexOfSomething("about");
   //return "(<about>.*?</about>)";
 }
 
-std::string ribi::pvdb::Regex::GetRegexAssessorName() noexcept
+std::string ribi::braw::Regex::GetRegexAssessorName() noexcept
 {
   return GetRegexOfSomething("assessor_name");
   //return "(<assessor_name>.*?</assessor_name>)";
 }
 
-std::string ribi::pvdb::Regex::GetRegexCluster() noexcept
+std::string ribi::braw::Regex::GetRegexCluster() noexcept
 {
   return GetRegexOfSomething("cluster");
   //return "(<cluster>.*?</cluster>)";
 }
 
-std::string ribi::pvdb::Regex::GetRegexConcept() noexcept
+std::string ribi::braw::Regex::GetRegexConcept() noexcept
 {
   return ribi::cmap::Regex().GetRegexConcept();
 }
 
-std::string ribi::pvdb::Regex::GetRegexConceptMap() noexcept
+std::string ribi::braw::Regex::GetRegexConceptMap() noexcept
 {
   return ribi::cmap::Regex().GetRegexConceptMap();
 }
 
-std::string ribi::pvdb::Regex::GetRegexQuestion() noexcept
+std::string ribi::braw::Regex::GetRegexQuestion() noexcept
 {
   return GetRegexOfSomething("question");
 }
 
-std::string ribi::pvdb::Regex::GetRegexStudentName() noexcept
+std::string ribi::braw::Regex::GetRegexStudentName() noexcept
 {
   return GetRegexOfSomething("student_name");
 }
 
-std::string ribi::pvdb::Regex::GetRegexVersion() noexcept
+std::string ribi::braw::Regex::GetRegexVersion() noexcept
 {
   return GetRegexOfSomething("version");
 }
 
-std::string ribi::pvdb::Regex::GetRegexOfSomething(const std::string& s) noexcept
+std::string ribi::braw::Regex::GetRegexOfSomething(const std::string& s) noexcept
 {
   std::stringstream t;
   t << "(<" << s << ">.*?</" << s << ">)";
@@ -56,7 +56,7 @@ std::string ribi::pvdb::Regex::GetRegexOfSomething(const std::string& s) noexcep
 }
 
 std::vector<std::string>
-  ribi::pvdb::Regex::GetRegexMatches(
+  ribi::braw::Regex::GetRegexMatches(
   const std::string& s,
   const std::string& regex_str
 )

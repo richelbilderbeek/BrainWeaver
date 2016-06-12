@@ -40,7 +40,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverassessormenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
+ribi::braw::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtAssessorMenuDialog)
 {
@@ -48,26 +48,26 @@ ribi::pvdb::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::pvdb::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
+ribi::braw::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtAssessorMenuDialog::on_button_create_assessment_clicked()
+void ribi::braw::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
   QtCreateAssessmentCompleteDialog d;
   this->ShowChild(&d);
 }
 
 
-void ribi::pvdb::QtAssessorMenuDialog::on_button_about_clicked()
+void ribi::braw::QtAssessorMenuDialog::on_button_about_clicked()
 {
-  ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
+  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
   assert(d);
   //const auto d(QtAboutDialog().Get());
   this->hide();
@@ -75,15 +75,15 @@ void ribi::pvdb::QtAssessorMenuDialog::on_button_about_clicked()
   this->show();
 }
 
-void ribi::pvdb::QtAssessorMenuDialog::on_button_quit_clicked()
+void ribi::braw::QtAssessorMenuDialog::on_button_quit_clicked()
 {
   close();
 }
 
-void ribi::pvdb::QtAssessorMenuDialog::on_button_assess_result_clicked()
+void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
 {
   //Load assessent file
-  const auto d = pvdb::QtFileDialog::GetOpenFileDialog();
+  const auto d = QtFileDialog::GetOpenFileDialog();
   d->setWindowTitle("Kies een assessment bestand");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;

@@ -46,7 +46,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverratingdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtRatingDialog::QtRatingDialog(
+ribi::braw::QtRatingDialog::QtRatingDialog(
   const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
@@ -80,10 +80,10 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
   }
 
   
-  pvdb::QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
-  pvdb::QtDisplay().DisplayExamples(file,ui->table_examples);
-  pvdb::QtDisplay().DisplayValues(file,ui->table_values);
-  pvdb::QtDisplay().DisplayMiscValues(file,ui->table_misc_values);
+  QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
+  QtDisplay().DisplayExamples(file,ui->table_examples);
+  QtDisplay().DisplayValues(file,ui->table_values);
+  QtDisplay().DisplayMiscValues(file,ui->table_misc_values);
 
   //Center the dialog
   {
@@ -93,22 +93,22 @@ ribi::pvdb::QtRatingDialog::QtRatingDialog(
   }
 }
 
-ribi::pvdb::QtRatingDialog::~QtRatingDialog() noexcept
+ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtRatingDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape) { close(); }
 }
 
-void ribi::pvdb::QtRatingDialog::on_button_save_clicked()
+void ribi::braw::QtRatingDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
   this->hide();
 
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -121,22 +121,22 @@ void ribi::pvdb::QtRatingDialog::on_button_save_clicked()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
   this->m_back_to_menu = true;
   close();
 }
 
-void ribi::pvdb::QtRatingDialog::Save(const std::string& filename) const
+void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
 
   m_file.Save(filename);
@@ -145,7 +145,7 @@ void ribi::pvdb::QtRatingDialog::Save(const std::string& filename) const
 
 
 
-void ribi::pvdb::QtRatingDialog::on_button_print_clicked()
+void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {
   QtPrintRatingDialog d(this->m_file);
 
@@ -159,7 +159,7 @@ void ribi::pvdb::QtRatingDialog::on_button_print_clicked()
   this->ShowChild(&d);
 }
 
-void ribi::pvdb::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
+void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
 {
   if (arg1.size() > 1)
   {

@@ -38,7 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 struct QtClusterTreeWidgetItem;
 
@@ -85,7 +85,7 @@ private:
   void SetCorrectFlags() noexcept;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCLUSTERWIDGET_H

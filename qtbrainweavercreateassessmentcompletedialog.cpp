@@ -36,7 +36,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(QWidget* parent)
+ribi::braw::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtCreateAssessmentCompleteDialog),
     m_back_to_menu(false)
@@ -45,24 +45,24 @@ ribi::pvdb::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(Q
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::pvdb::QtCreateAssessmentCompleteDialog::~QtCreateAssessmentCompleteDialog() noexcept
+ribi::braw::QtCreateAssessmentCompleteDialog::~QtCreateAssessmentCompleteDialog() noexcept
 {
   delete ui;
 }
 
-std::string ribi::pvdb::QtCreateAssessmentCompleteDialog::GetQuestion() const noexcept
+std::string ribi::braw::QtCreateAssessmentCompleteDialog::GetQuestion() const noexcept
 {
   return ui->edit->text().toStdString();
 }
 
-void ribi::pvdb::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) close();
 }
 
-void ribi::pvdb::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
+void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
 {
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -75,12 +75,12 @@ void ribi::pvdb::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
 
@@ -88,10 +88,10 @@ void ribi::pvdb::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
   close();
 }
 
-void ribi::pvdb::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const
+void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   const std::string question = ui->edit->text().toStdString();
   File file;
@@ -100,12 +100,12 @@ void ribi::pvdb::QtCreateAssessmentCompleteDialog::Save(const std::string& filen
   file.Save(filename);
 }
 
-void ribi::pvdb::QtCreateAssessmentCompleteDialog::SetQuestion(const std::string& question)
+void ribi::braw::QtCreateAssessmentCompleteDialog::SetQuestion(const std::string& question)
 {
   ui->edit->setText(question.c_str());
 }
 
-void ribi::pvdb::QtCreateAssessmentCompleteDialog::on_edit_textChanged(const QString &arg1)
+void ribi::braw::QtCreateAssessmentCompleteDialog::on_edit_textChanged(const QString &arg1)
 {
   assert(ui->edit->text() == arg1);
   ui->button_save->setEnabled(!arg1.isEmpty());

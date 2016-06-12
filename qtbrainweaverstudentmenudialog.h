@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtStudentMenuDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtStudentMenuDialog : public ribi::QtHideAndShowDialog
 {
@@ -72,7 +72,7 @@ private:
 
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

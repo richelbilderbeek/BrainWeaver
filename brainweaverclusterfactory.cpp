@@ -34,18 +34,18 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::ClusterFactory::ClusterFactory()
+ribi::braw::ClusterFactory::ClusterFactory()
 {
 
 }
 
-ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
+ribi::braw::Cluster ribi::braw::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
 {
   Cluster p(v);
   return p;
 }
 
-ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
+ribi::braw::Cluster ribi::braw::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
   std::transform(test_node_indices.begin(),test_node_indices.end(),std::back_inserter(concepts),
@@ -61,7 +61,7 @@ ribi::pvdb::Cluster ribi::pvdb::ClusterFactory::GetTest(const std::vector<int>& 
   return cluster;
 }
 
-std::vector<ribi::pvdb::Cluster> ribi::pvdb::ClusterFactory::GetTests() const noexcept
+std::vector<ribi::braw::Cluster> ribi::braw::ClusterFactory::GetTests() const noexcept
 {
   std::vector<Cluster> v(5);
   {

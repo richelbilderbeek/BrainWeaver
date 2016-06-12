@@ -28,7 +28,7 @@ struct QRegExp;
 struct QTimer;
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 struct QtArrow;
 struct QtClusterDialog;
@@ -37,7 +37,7 @@ struct QtConceptMapDialog;
 struct QtRateExamplesDialog;
 struct QtStudentMenuDialog;
 
-} //~namespace pvdb
+} //~namespace braw
 
 struct QtArrowItem;
 struct QtQuadBezierArrowItem;

@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///The File used, also the main director of the program's flow
 class File
@@ -54,7 +54,7 @@ class File
     const std::string& version
   );
 
-  ///Obtain the string which indicates this file is a PvdB file
+  ///Obtain the string which indicates this file is a Brainweaver file
   const std::string& GetAbout() const { return m_about; }
 
   ///Get the assessor his/her name
@@ -84,7 +84,7 @@ class File
   static std::string GetTestFileName();
 
   ///Obtain multiple test files
-  static std::vector<pvdb::File> GetTests() noexcept;
+  static std::vector<File> GetTests() noexcept;
 
   ///Obtain the version of this class
   const std::string& GetVersion() const { return m_version; }
@@ -112,7 +112,7 @@ class File
 
   private:
 
-  ///The string which indicates this file is a PvdB file
+  ///The string which indicates this file is a Brainweaver file
   std::string m_about;
 
   ///The assessor his/her name
@@ -120,7 +120,7 @@ class File
 
   ///The clustering of items
   ///Initially will be nullptr
-  pvdb::Cluster m_cluster;
+  Cluster m_cluster;
 
   ///The concept map
   ribi::cmap::ConceptMap m_concept_map;
@@ -167,7 +167,7 @@ bool operator==(const File& lhs, const File& rhs) noexcept;
 bool operator!=(const File& lhs, const File& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const File& f) noexcept;
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // BRAINWEAVERFILE_H

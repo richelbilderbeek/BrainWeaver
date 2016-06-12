@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
 {
@@ -50,7 +50,7 @@ boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
   d->setOptions(QFileDialog::ReadOnly);
 
   const std::string namefile = "Brainweaver concept map (*."
-    + pvdb::File::GetFilenameExtension() + ")";
+    + File::GetFilenameExtension() + ")";
 
   d->setNameFilter(namefile.c_str());
 
@@ -82,7 +82,7 @@ boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType ty
   {
     case FileType::cmp:
       namefile = "Brainweaver concept map (*."
-      + pvdb::File::GetFilenameExtension() + ")";
+      + File::GetFilenameExtension() + ")";
     break;
     case FileType::pdf:
       namefile = "Portable document format (*.pdf)";
@@ -94,6 +94,6 @@ boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType ty
   return d;
 }
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi

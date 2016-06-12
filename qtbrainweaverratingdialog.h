@@ -37,7 +37,7 @@ namespace Ui { class QtRatingDialog; }
 struct QTableWidget;
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///View the current rating, optimized for humans
 ///QtPrintRatingDialog is optimized for printers
@@ -69,7 +69,7 @@ private:
   void Save(const std::string& filename) const;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

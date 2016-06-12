@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace ribi { namespace cmap { struct Concept; } }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///Factory for creating Cluster instances
 struct ClusterFactory
@@ -50,7 +50,7 @@ struct ClusterFactory
   std::vector<Cluster> GetTests() const noexcept;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // BRAINWEAVERCLUSTERFACTORY_H

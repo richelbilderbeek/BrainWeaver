@@ -38,13 +38,13 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "xml.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
+ribi::braw::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
   : m_v(v)
 {
 
 }
 
-void ribi::pvdb::Cluster::Add(const ribi::cmap::Concept & concept)
+void ribi::braw::Cluster::Add(const ribi::cmap::Concept & concept)
 {
   assert(concept.GetRatingComplexity() >= -1);
   assert(concept.GetRatingComplexity() <=  2);
@@ -52,17 +52,17 @@ void ribi::pvdb::Cluster::Add(const ribi::cmap::Concept & concept)
 
 }
 
-bool ribi::pvdb::Cluster::Empty() const
+bool ribi::braw::Cluster::Empty() const
 {
   return m_v.empty();
 }
 
-ribi::pvdb::Cluster ribi::pvdb::XmlToCluster(const std::string &s)
+ribi::braw::Cluster ribi::braw::XmlToCluster(const std::string &s)
 {
   assert(s.size() >= 19);
   assert(s.substr(0,9) == "<cluster>");
   assert(s.substr(s.size() - 10,10) == "</cluster>");
-  const ribi::pvdb::Regex r;
+  const ribi::braw::Regex r;
   std::vector<ribi::cmap::Concept> concepts;
 
   //Obtain the <cluster> ... </cluster> string
@@ -80,16 +80,16 @@ ribi::pvdb::Cluster ribi::pvdb::XmlToCluster(const std::string &s)
     }
   );
 
-  pvdb::Cluster cluster(concepts);
+  Cluster cluster(concepts);
   return cluster;
 }
 
-void ribi::pvdb::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)
+void ribi::braw::Cluster::SetConcepts(const std::vector<ribi::cmap::Concept>& concepts)
 {
   m_v = concepts;
 }
 
-std::string ribi::pvdb::ToXml(const pvdb::Cluster& cluster) noexcept
+std::string ribi::braw::ToXml(const Cluster& cluster) noexcept
 {
   std::stringstream s;
   s << "<cluster>";
@@ -112,7 +112,7 @@ std::string ribi::pvdb::ToXml(const pvdb::Cluster& cluster) noexcept
   return r;
 }
 
-bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs) noexcept
+bool ribi::braw::operator==(const ribi::braw::Cluster& lhs, const ribi::braw::Cluster& rhs) noexcept
 {
   const bool verbose{false};
   const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get();
@@ -134,12 +134,12 @@ bool ribi::pvdb::operator==(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cl
   return true;
 }
 
-bool ribi::pvdb::operator!=(const ribi::pvdb::Cluster& lhs, const ribi::pvdb::Cluster& rhs) noexcept
+bool ribi::braw::operator!=(const ribi::braw::Cluster& lhs, const ribi::braw::Cluster& rhs) noexcept
 {
   return !(lhs == rhs);
 }
 
-std::ostream& ribi::pvdb::operator<<(std::ostream& os, const ribi::pvdb::Cluster& c) noexcept
+std::ostream& ribi::braw::operator<<(std::ostream& os, const ribi::braw::Cluster& c) noexcept
 {
   const auto v = c.Get();
   std::stringstream s;

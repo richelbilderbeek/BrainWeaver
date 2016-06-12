@@ -24,7 +24,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "menudialog.h"
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///The GUI independent version of Project Van Den Bogaart its menu dialog
 struct MenuDialog : public ::ribi::MenuDialog
@@ -38,7 +38,7 @@ struct MenuDialog : public ::ribi::MenuDialog
   int ExecuteSpecific(const std::vector<std::string>& argv) noexcept;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // BRAINWEAVERMENUDIALOG_H

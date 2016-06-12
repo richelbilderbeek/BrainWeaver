@@ -34,7 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtConceptMapDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtConceptMapDialog : public ::ribi::QtHideAndShowDialog
 {
@@ -92,7 +92,7 @@ private:
   #endif //NOT_NOW_20141111
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCONCEPTMAPDIALOG_H

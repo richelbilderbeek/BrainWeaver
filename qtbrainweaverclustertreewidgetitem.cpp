@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <sstream>
 
-QTreeWidgetItem * ribi::pvdb::QtClusterTreeWidgetItem::clone() const
+QTreeWidgetItem * ribi::braw::QtClusterTreeWidgetItem::clone() const
 {
   QtClusterTreeWidgetItem * const item {
     new QtClusterTreeWidgetItem(
@@ -18,7 +18,7 @@ QTreeWidgetItem * ribi::pvdb::QtClusterTreeWidgetItem::clone() const
   return item;
 }
 
-ribi::pvdb::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
+ribi::braw::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
   const ribi::cmap::Competency competency,
   const bool is_complex,
   const int rating_complexity,

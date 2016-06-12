@@ -32,7 +32,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 struct ClusterFactory;
 
@@ -70,7 +70,7 @@ bool operator==(const Cluster& lhs, const Cluster& rhs) noexcept;
 bool operator!=(const Cluster& lhs, const Cluster& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const Cluster& c) noexcept;
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 

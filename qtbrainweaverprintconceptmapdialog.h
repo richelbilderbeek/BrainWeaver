@@ -38,7 +38,7 @@ namespace Ui {
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
@@ -80,7 +80,7 @@ private:
   friend class qtbrainweaverprintconceptmapdialog_test;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

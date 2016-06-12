@@ -35,7 +35,7 @@ namespace ribi {
 
 struct QtHideAndShowDialog;
 
-namespace pvdb {
+namespace braw {
 
 class QtOverviewWidget : public QGraphicsView
 {
@@ -61,7 +61,7 @@ private:
 
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

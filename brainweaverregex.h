@@ -5,7 +5,7 @@
 #include <vector>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class Regex
 {
@@ -30,7 +30,7 @@ private:
   static std::string GetRegexOfSomething(const std::string& s) noexcept;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 

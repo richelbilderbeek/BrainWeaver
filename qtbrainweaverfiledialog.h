@@ -27,7 +27,7 @@ struct QFileDialog;
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 struct QtFileDialog
 {
@@ -39,7 +39,7 @@ struct QtFileDialog
   static boost::shared_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

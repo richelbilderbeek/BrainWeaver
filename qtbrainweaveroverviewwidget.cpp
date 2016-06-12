@@ -55,7 +55,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
+ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
   : QGraphicsView(new QGraphicsScene,parent),
     m_dialogs(GetAllDialogs())
 {
@@ -95,7 +95,7 @@ ribi::pvdb::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 }
 
 
-const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtOverviewWidget::GetAllDialogs()
+const std::vector<ribi::QtHideAndShowDialog* > ribi::braw::QtOverviewWidget::GetAllDialogs()
 {
   using namespace cmap;
   std::vector<QtHideAndShowDialog* > v;
@@ -214,7 +214,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtOverviewWidget::Get
     assert(p);
     v.push_back(p);
   }
-  #ifdef PVDB_ALSO_SHOW_TEST_DIALOGS
+  #ifdef BRAW_ALSO_SHOW_TEST_DIALOGS
   {
     QtHideAndShowDialog* p(new QtTestConceptItemDialog);
     assert(p);
@@ -252,7 +252,7 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::pvdb::QtOverviewWidget::Get
   return v;
 }
 
-void ribi::pvdb::QtOverviewWidget::mouseDoubleClickEvent(QMouseEvent *)
+void ribi::braw::QtOverviewWidget::mouseDoubleClickEvent(QMouseEvent *)
 {
   QImage image(scene()->sceneRect().size().toSize(), QImage::Format_ARGB32); // Create the image with the exact size of the shrunk scene
   image.fill(Qt::transparent);                                               // Start all pixels transparent

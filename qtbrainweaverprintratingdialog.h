@@ -37,7 +37,7 @@ namespace Ui {
 struct QTableWidget;
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///View the current rating, optimized for printers
 ///This dialog will not be visible for humans at all in release
@@ -77,7 +77,7 @@ private:
   cmap::QtConceptMap * const m_widget;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

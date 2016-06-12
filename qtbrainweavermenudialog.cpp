@@ -80,7 +80,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweavermenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtMenuDialog::QtMenuDialog(QWidget* parent)
+ribi::braw::QtMenuDialog::QtMenuDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtMenuDialog),
     m_file{}
@@ -89,24 +89,24 @@ ribi::pvdb::QtMenuDialog::QtMenuDialog(QWidget* parent)
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::pvdb::QtMenuDialog::~QtMenuDialog() noexcept
+ribi::braw::QtMenuDialog::~QtMenuDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtMenuDialog::keyPressEvent(QKeyEvent* e) noexcept
+void ribi::braw::QtMenuDialog::keyPressEvent(QKeyEvent* e) noexcept
 {
   assert(e);
   if (e->key()  == Qt::Key_Escape) { close(); return; }
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_assessor_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_assessor_clicked() noexcept
 {
   QtAssessorMenuDialog d;
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_rate_concept_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 {
   //Obtain an empty file
   File file;
@@ -127,12 +127,12 @@ void ribi::pvdb::QtMenuDialog::on_button_rate_concept_clicked() noexcept
   const int index = std::rand() % concept_maps.size();
   const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
   //Create and show the dialog
-  boost::shared_ptr<pvdb::QtRateConceptMapDialog> d(
-    new pvdb::QtRateConceptMapDialog(file));
+  boost::shared_ptr<QtRateConceptMapDialog> d(
+    new QtRateConceptMapDialog(file));
   ShowChild(d.get());
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
 {
   File file;
   const ribi::cmap::ConceptMap concept_map
@@ -143,7 +143,7 @@ void ribi::pvdb::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_rate_examples_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
 {
   using namespace cmap;
   const int index = 2;
@@ -153,19 +153,19 @@ void ribi::pvdb::QtMenuDialog::on_button_rate_examples_clicked() noexcept
   ShowChild(d.get());
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_rating_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
 {
   const int test = 4;
   assert(test < FileFactory().GetNumberOfTests());
-  const File file = pvdb::FileFactory().GetTests().at(test);
+  const File file = FileFactory().GetTests().at(test);
 
   QtRatingDialog d(file);
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_student_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
 {
-  const auto d = pvdb::QtFileDialog::GetOpenFileDialog();
+  const auto d = QtFileDialog::GetOpenFileDialog();
   d->setWindowTitle("Kies een assessment bestand");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;
@@ -176,7 +176,7 @@ void ribi::pvdb::QtMenuDialog::on_button_student_clicked() noexcept
     const std::string filename = v[0].toStdString();
     try
     {
-      const File file = pvdb::LoadFile(filename);
+      const File file = LoadFile(filename);
       QtStudentMenuDialog d(file);
       ShowChild(&d);
     }
@@ -188,7 +188,7 @@ void ribi::pvdb::QtMenuDialog::on_button_student_clicked() noexcept
 
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_cluster_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
 {
   File file;
   const std::string question = "A good question to test the clustering dialog is ...";
@@ -202,7 +202,7 @@ void ribi::pvdb::QtMenuDialog::on_button_test_cluster_clicked() noexcept
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_overview_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 {
   const QString old_title = this->windowTitle();
   this->setWindowTitle("Loading, please wait...");
@@ -210,9 +210,9 @@ void ribi::pvdb::QtMenuDialog::on_button_overview_clicked() noexcept
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_about_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_about_clicked() noexcept
 {
-  ribi::pvdb::QtAboutDialog * const d = new ribi::pvdb::QtAboutDialog;
+  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
   assert(d);
   //const auto d(QtAboutDialog().Get());
   this->hide();
@@ -220,22 +220,22 @@ void ribi::pvdb::QtMenuDialog::on_button_about_clicked() noexcept
   this->show();
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_qtroundededitrectitem_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_test_qtroundededitrectitem_clicked() noexcept
 {
   QtTestQtRoundedEditRectItemMenuDialog d;
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_arrowitems_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_test_arrowitems_clicked() noexcept
 {
   QtTestQtArrowItemsMenuDialog d;
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_create_test_files_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_create_test_files_clicked() noexcept
 {
   //Obtain the artificial concept maps
-  const std::vector<File > v = pvdb::FileFactory().GetTests();
+  const std::vector<File > v = FileFactory().GetTests();
   const int sz = boost::numeric_cast<int>(v.size());
   for(int i=0; i!=sz; ++i)
   {
@@ -243,38 +243,32 @@ void ribi::pvdb::QtMenuDialog::on_button_create_test_files_clicked() noexcept
     const std::string s
       = boost::lexical_cast<std::string>(i + 5)
       + "."
-      + pvdb::File::GetFilenameExtension();
+      + File::GetFilenameExtension();
     file.Save(s);
     assert(is_regular_file(s));
   }
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
   QtStyleSheetSetterMainDialog d(qApp->styleSheet().toStdString());
   ShowChild(&d);
   qApp->setStyleSheet(d.GetStyleSheet().c_str());
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
   QtPrintConceptMapDialog d(FileFactory().GetTests().front());
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_print_rating_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 {
-  //on_button_create_test_files_clicked();
-  //const std::string filename = "1." + pvdb::File::GetFilenameExtension();
-  //assert(is_regular_file(filename));
-  //const File file = pvdb::LoadFile(filename);
-
-  //QtPrintRatingDialog d(file);
   QtPrintConceptMapDialog d(FileFactory().GetTests().front());
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
+void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 {
 
   const ribi::cmap::ConceptMap concept_map
@@ -284,39 +278,39 @@ void ribi::pvdb::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   ShowChild(d.get());
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_conceptmaps_clicked()
+void ribi::braw::QtMenuDialog::on_button_test_conceptmaps_clicked()
 {
   cmap::QtTestMenuDialog d;
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_conceptmap_clicked()
+void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
 {
   const int test = 4;
-  assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
-  const File file = pvdb::FileFactory().GetTests().at(test);
+  assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
+  const File file = FileFactory().GetTests().at(test);
 
   QtConceptMapDialog d(file);
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
+void ribi::braw::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
 {
   QtTestQtRoundedRectItemMenuDialog d;
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
+void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
 {
   const int test{0};
-  assert(test < static_cast<int>(pvdb::FileFactory().GetNumberOfTests()));
-  const File file = pvdb::FileFactory().GetTests().at(test);
+  assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
+  const File file = FileFactory().GetTests().at(test);
 
   QtConceptMapDialog d(file);
   ShowChild(&d);
 }
 
-void ribi::pvdb::QtMenuDialog::on_button_demo_5_clicked()
+void ribi::braw::QtMenuDialog::on_button_demo_5_clicked()
 {
   File file;
   file.SetQuestion("X");

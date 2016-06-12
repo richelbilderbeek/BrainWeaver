@@ -37,7 +37,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
+ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
@@ -49,19 +49,19 @@ ribi::pvdb::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::pvdb::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept
+ribi::braw::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::pvdb::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
+void ribi::braw::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
   QtClusterDialog d(m_file);
   this->ShowChild(&d);
@@ -72,7 +72,7 @@ void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_associate_clicked
   }
 }
 
-void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
+void ribi::braw::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
 {
   QtConceptMapDialog d(m_file);
   this->ShowChild(&d);
@@ -83,9 +83,9 @@ void ribi::pvdb::QtStudentStartCompleteDialog::on_button_start_construct_clicked
   }
 }
 
-void ribi::pvdb::QtStudentStartCompleteDialog::Save()
+void ribi::braw::QtStudentStartCompleteDialog::Save()
 {
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -97,12 +97,12 @@ void ribi::pvdb::QtStudentStartCompleteDialog::Save()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   m_file.Save(filename);
   { const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }

@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtStudentStartCompleteDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
 {
@@ -66,7 +66,7 @@ class QtStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
   void Save();
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

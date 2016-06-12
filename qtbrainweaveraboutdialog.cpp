@@ -41,7 +41,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 ribi::About GetAbout()
 {
-  ribi::About about = ribi::pvdb::MenuDialog().GetAbout();
+  ribi::About about = ribi::braw::MenuDialog().GetAbout();
   about.AddLibrary("QtArrowItem version: " + ribi::QtArrowItem::GetVersion());
   about.AddLibrary("QtHideAndShowDialog version: " + ribi::QtHideAndShowDialog::GetVersion());
   about.AddLibrary("QtKeyboardFriendlyGraphicsView version: " + ribi::QtKeyboardFriendlyGraphicsView::GetVersion());
@@ -51,7 +51,7 @@ ribi::About GetAbout()
   return about;
 }
 
-ribi::pvdb::QtAboutDialog::QtAboutDialog()
+ribi::braw::QtAboutDialog::QtAboutDialog()
   : ::ribi::QtAboutDialog(GetAbout())
 {
   //Add Loom image
@@ -63,9 +63,9 @@ ribi::pvdb::QtAboutDialog::QtAboutDialog()
 }
 
 /*
-boost::shared_ptr<ribi::QtAboutDialog> ribi::pvdb::QtAboutDialog::Get() const
+boost::shared_ptr<ribi::QtAboutDialog> ribi::braw::QtAboutDialog::Get() const
 {
-  About about = pvdb::MenuDialog().GetAbout();
+  About about = MenuDialog().GetAbout();
   about.AddLibrary("QtArrowItem version: " + QtArrowItem::GetVersion());
   about.AddLibrary("QtHideAndShowDialog version: " + QtHideAndShowDialog::GetVersion());
   about.AddLibrary("QtKeyboardFriendlyGraphicsView version: " + QtKeyboardFriendlyGraphicsView::GetVersion());

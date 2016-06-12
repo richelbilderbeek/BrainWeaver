@@ -34,7 +34,7 @@ namespace Ui { class QtMenuDialog; }
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 class QtMenuDialog : public ribi::QtHideAndShowDialog
 {
@@ -87,7 +87,7 @@ private:
   friend class qtbrainweavermenudialog_test;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

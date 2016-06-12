@@ -58,7 +58,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverclusterdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtClusterDialog::QtClusterDialog(
+ribi::braw::QtClusterDialog::QtClusterDialog(
   const File& file,
   QWidget* parent)
   : QtHideAndShowDialog(parent),
@@ -95,7 +95,7 @@ ribi::pvdb::QtClusterDialog::QtClusterDialog(
 }
 
 
-ribi::pvdb::QtClusterDialog::~QtClusterDialog() noexcept
+ribi::braw::QtClusterDialog::~QtClusterDialog() noexcept
 {
   ///WARNING: assume ui->widget is not available anymore
   //const Cluster cluster = GetWidget()->GetCluster();
@@ -103,7 +103,7 @@ ribi::pvdb::QtClusterDialog::~QtClusterDialog() noexcept
   delete ui;
 }
 
-ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File file)
+ribi::braw::QtClusterWidget * ribi::braw::QtClusterDialog::BuildWidget(File file)
 {
   // A concept map is already made, cluster has been left empty, thus return null
   if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
@@ -117,12 +117,12 @@ ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::BuildWidget(File file
   return widget;
 }
 
-const ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget() const
+const ribi::braw::QtClusterWidget * ribi::braw::QtClusterDialog::GetWidget() const
 {
   return m_widget;
 }
 
-ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget()
+ribi::braw::QtClusterWidget * ribi::braw::QtClusterDialog::GetWidget()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
@@ -132,7 +132,7 @@ ribi::pvdb::QtClusterWidget * ribi::pvdb::QtClusterDialog::GetWidget()
     const_cast<const QtClusterDialog*>(this)->GetWidget());
 }
 
-void ribi::pvdb::QtClusterDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtClusterDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
@@ -184,7 +184,7 @@ void ribi::pvdb::QtClusterDialog::keyPressEvent(QKeyEvent* e)
 
   #ifndef NDEBUG
   {
-    //Check that writing to pvdb::File works
+    //Check that writing to File works
     File file(m_file);
     const Cluster cluster = GetWidget()->GetCluster();
     file.SetCluster(cluster);
@@ -193,7 +193,7 @@ void ribi::pvdb::QtClusterDialog::keyPressEvent(QKeyEvent* e)
   #endif
 }
 
-void ribi::pvdb::QtClusterDialog::on_button_add_clicked()
+void ribi::braw::QtClusterDialog::on_button_add_clicked()
 {
   assert(m_widget && "This button can only be clicked when there is a widget");
 
@@ -208,7 +208,7 @@ void ribi::pvdb::QtClusterDialog::on_button_add_clicked()
   ui->edit->setFocus();
   #ifndef NDEBUG
   {
-    //Check that writing to pvdb::File works
+    //Check that writing to File works
     File file(m_file);
     const Cluster cluster = GetWidget()->GetCluster();
     file.SetCluster(cluster);
@@ -217,7 +217,7 @@ void ribi::pvdb::QtClusterDialog::on_button_add_clicked()
   #endif
 }
 
-void ribi::pvdb::QtClusterDialog::on_button_next_clicked()
+void ribi::braw::QtClusterDialog::on_button_next_clicked()
 {
   if (GetWidget() && GetWidget()->isEnabled()) //Save concept map, when user is all
   {
@@ -251,9 +251,9 @@ void ribi::pvdb::QtClusterDialog::on_button_next_clicked()
   }
 }
 
-void ribi::pvdb::QtClusterDialog::Save()
+void ribi::braw::QtClusterDialog::Save()
 {
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de clustering op");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;
@@ -261,22 +261,22 @@ void ribi::pvdb::QtClusterDialog::Save()
   const std::string filename_raw = d->selectedFiles()[0].toStdString();
 
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
   //close(); //2013-04-19 Request by client
 }
 
-void ribi::pvdb::QtClusterDialog::Save(const std::string& filename)
+void ribi::braw::QtClusterDialog::Save(const std::string& filename)
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   if (this->GetWidget())
   {
@@ -288,7 +288,7 @@ void ribi::pvdb::QtClusterDialog::Save(const std::string& filename)
   m_file.Save(filename);
 }
 
-void ribi::pvdb::QtClusterDialog::on_button_save_clicked()
+void ribi::braw::QtClusterDialog::on_button_save_clicked()
 {
   Save();
 }

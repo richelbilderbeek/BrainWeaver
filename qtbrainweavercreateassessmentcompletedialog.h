@@ -34,7 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtCreateAssessmentCompleteDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtCreateAssessmentCompleteDialog : public ribi::QtHideAndShowDialog
 {
@@ -73,7 +73,7 @@ private:
   bool m_back_to_menu;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCREATEASSESSMENTCOMPLETEDIALOG_H

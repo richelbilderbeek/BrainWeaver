@@ -33,7 +33,7 @@ struct QTableWidget;
 
 namespace ribi {
 
-namespace pvdb {
+namespace braw {
 
 ///Functions for printing
 struct QtDisplay
@@ -46,7 +46,7 @@ struct QtDisplay
   void DisplayMiscValues(const File& file, QTableWidget * const table) const;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 
 } //~namespace ribi
 

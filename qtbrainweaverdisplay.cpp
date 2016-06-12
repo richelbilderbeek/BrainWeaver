@@ -44,12 +44,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "testtimer.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtDisplay::QtDisplay()
+ribi::braw::QtDisplay::QtDisplay()
 {
 
 }
 
-void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
+void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const File& file,
   QTableWidget * const table) const
 {
@@ -111,7 +111,7 @@ void ribi::pvdb::QtDisplay::DisplayRatedConcepts(
 }
 
 //Examples' icons
-void ribi::pvdb::QtDisplay::DisplayExamples(
+void ribi::braw::QtDisplay::DisplayExamples(
   const File& file,
   QTableWidget * const table) const
 {
@@ -177,7 +177,7 @@ void ribi::pvdb::QtDisplay::DisplayExamples(
 }
 
 
-void ribi::pvdb::QtDisplay::DisplayMiscValues(
+void ribi::braw::QtDisplay::DisplayMiscValues(
   const File& file,
   QTableWidget * const table) const
 {
@@ -233,7 +233,7 @@ void ribi::pvdb::QtDisplay::DisplayMiscValues(
 }
 
 
-void ribi::pvdb::QtDisplay::DisplayValues(
+void ribi::braw::QtDisplay::DisplayValues(
   const File& file,
   QTableWidget * const table) const
 {

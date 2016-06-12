@@ -29,7 +29,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-ribi::pvdb::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
+ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
   : QtHideAndShowDialog(parent)
 {
   
@@ -39,7 +39,7 @@ ribi::pvdb::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
   layout->addWidget(widget);
 }
 
-void ribi::pvdb::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
 {
   assert(e);
   if (e->key()  == Qt::Key_Escape) { close(); return; }

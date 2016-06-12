@@ -60,9 +60,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "xml.h"
 #pragma GCC diagnostic pop
 
-const std::string ribi::pvdb::File::m_filename_extension = "cmp";
+const std::string ribi::braw::File::m_filename_extension = "cmp";
 
-ribi::pvdb::File::File()
+ribi::braw::File::File()
   : m_about("Brainweaver"),
     m_assessor_name{},
     m_cluster{},
@@ -74,7 +74,7 @@ ribi::pvdb::File::File()
 
 }
 
-ribi::pvdb::File::File(
+ribi::braw::File::File(
   const std::string& about,
   const std::string& assessor_name,
   const Cluster& cluster,
@@ -93,28 +93,28 @@ ribi::pvdb::File::File(
 
 }
 
-void ribi::pvdb::File::AutoSave() const
+void ribi::braw::File::AutoSave() const
 {
   this->Save("autosave1." + m_filename_extension);
   this->Save("autosave2." + m_filename_extension);
 }
 
-std::string ribi::pvdb::File::GetQuestion() const
+std::string ribi::braw::File::GetQuestion() const
 {
   return m_question;
 }
 
-std::string ribi::pvdb::File::GetTempFileName()
+std::string ribi::braw::File::GetTempFileName()
 {
   return "tmp." + m_filename_extension;
 }
 
-std::string ribi::pvdb::File::GetTestFileName()
+std::string ribi::braw::File::GetTestFileName()
 {
   return "test." + m_filename_extension;
 }
 
-std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
+std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
 {
   std::vector<File> v;
   const int n_clusters{ClusterFactory().GetNumberOfTests()};
@@ -128,7 +128,7 @@ std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
       std::string question = "question";
       const std::string student_name = "student_name";
       const std::string version = "version";
-      const auto cluster = pvdb::ClusterFactory().GetTests()[cluster_index];
+      const auto cluster = ClusterFactory().GetTests()[cluster_index];
       const auto concept_map = ribi::cmap::ConceptMapFactory().GetAllTests()[concept_map_index];
       File file(
         about,
@@ -145,12 +145,12 @@ std::vector<ribi::pvdb::File> ribi::pvdb::File::GetTests() noexcept
   return v;
 }
 
-ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename)
+ribi::braw::File ribi::braw::LoadFile(const std::string &filename)
 {
   std::string xml;
   //Read XML from file
   {
-    const std::vector<std::string> v = pvdb::SafeFileToVector(filename);
+    const std::vector<std::string> v = SafeFileToVector(filename);
     //FileToVector allowed an empty line after text, due to difference in line ending
     //SafeFileToVector should remove this line
 
@@ -168,11 +168,11 @@ ribi::pvdb::File ribi::pvdb::LoadFile(const std::string &filename)
   }
   boost::algorithm::trim(xml);
 
-  File file = ribi::pvdb::XmlToFile(xml);
+  File file = ribi::braw::XmlToFile(xml);
   return file;
 }
 
-void ribi::pvdb::File::Save(const std::string &filename) const
+void ribi::braw::File::Save(const std::string &filename) const
 {
   //Check for correct extension
   assert(filename.size() > 3
@@ -186,14 +186,14 @@ void ribi::pvdb::File::Save(const std::string &filename) const
   }
 }
 
-void ribi::pvdb::File::SetAssessorName(const std::string& assessor_name)
+void ribi::braw::File::SetAssessorName(const std::string& assessor_name)
 {
   assert(assessor_name.size() > 1);
   m_assessor_name = assessor_name;
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
+void ribi::braw::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
 {
   if (boost::num_vertices(concept_map) == 0)
   {
@@ -228,27 +228,27 @@ void ribi::pvdb::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetCluster(const Cluster& cluster) noexcept
+void ribi::braw::File::SetCluster(const Cluster& cluster) noexcept
 {
   m_cluster = cluster;
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetQuestion(const std::string& question)
+void ribi::braw::File::SetQuestion(const std::string& question)
 {
   assert(question.size() > 0);
   m_question = question;
   this->AutoSave();
 }
 
-void ribi::pvdb::File::SetStudentName(const std::string& student_name)
+void ribi::braw::File::SetStudentName(const std::string& student_name)
 {
   assert(student_name.size() > 1);
   m_student_name = student_name;
   this->AutoSave();
 }
 
-ribi::cmap::ConceptMap ribi::pvdb::CreateConceptMap(
+ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
   const std::string& text) noexcept
 {
   ribi::cmap::ConceptMap g;
@@ -259,7 +259,7 @@ ribi::cmap::ConceptMap ribi::pvdb::CreateConceptMap(
   return g;
 }
 
-std::string ribi::pvdb::DoXpressiveRegexReplace(
+std::string ribi::braw::DoXpressiveRegexReplace(
   const std::string& str,
   const std::string& regex_str,
   const std::string& format_str
@@ -288,7 +288,7 @@ std::string ribi::pvdb::DoXpressiveRegexReplace(
   }
 }
 
-std::string ribi::pvdb::FileToStr(const std::string& filename) noexcept
+std::string ribi::braw::FileToStr(const std::string& filename) noexcept
 {
   assert(is_regular_file(filename.c_str()));
   std::string s;
@@ -302,7 +302,7 @@ std::string ribi::pvdb::FileToStr(const std::string& filename) noexcept
   return s;
 }
 
-std::string ribi::pvdb::ToXml(const File& file) noexcept
+std::string ribi::braw::ToXml(const File& file) noexcept
 {
   std::stringstream s;
   s << "<file>";
@@ -322,7 +322,7 @@ std::string ribi::pvdb::ToXml(const File& file) noexcept
   return r;
 }
 
-ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
+ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
 {
   if ( !(s.size() >= 13)
     || s.substr(0,6) != "<file>"
@@ -336,7 +336,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
     ;
     throw std::invalid_argument(msg.str());
   }
-  const ribi::pvdb::Regex r;
+  const ribi::braw::Regex r;
   //Make s one line, because regexes do not search beyond their own line
 
   std::string about;
@@ -424,7 +424,7 @@ ribi::pvdb::File ribi::pvdb::XmlToFile(const std::string& s)
   );
 }
 
-bool ribi::pvdb::operator==(const pvdb::File& lhs, const pvdb::File& rhs) noexcept
+bool ribi::braw::operator==(const File& lhs, const File& rhs) noexcept
 {
   return
      lhs.GetAssessorName() == rhs.GetAssessorName()
@@ -434,12 +434,12 @@ bool ribi::pvdb::operator==(const pvdb::File& lhs, const pvdb::File& rhs) noexce
   && lhs.GetVersion() == rhs.GetVersion();
 }
 
-bool ribi::pvdb::operator!=(const pvdb::File& lhs, const pvdb::File& rhs) noexcept
+bool ribi::braw::operator!=(const File& lhs, const File& rhs) noexcept
 {
   return !(lhs == rhs);
 }
 
-std::ostream& ribi::pvdb::operator<<(std::ostream& os, const ribi::pvdb::File& f) noexcept
+std::ostream& ribi::braw::operator<<(std::ostream& os, const File& f) noexcept
 {
   os << ToXml(f);
   return os;

@@ -33,7 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtRateConceptMapDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class QtRateConceptMapDialog : public ribi::QtHideAndShowDialog
 {
@@ -50,7 +50,7 @@ public:
 
   cmap::QtConceptMap * GetWidget();
 
-  pvdb::File GetFile() const noexcept { return m_file; }
+  File GetFile() const noexcept { return m_file; }
 
   ///Respond to key press
   void keyPressEvent(QKeyEvent *);
@@ -65,11 +65,11 @@ private slots:
 
 private:
   Ui::QtRateConceptMapDialog *ui;
-  pvdb::File m_file;
+  File m_file;
   ConceptMap * const m_concept_map;
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERRATECONCEPTMAPDIALOG_H

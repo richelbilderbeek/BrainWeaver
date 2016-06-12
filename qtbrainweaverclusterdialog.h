@@ -34,7 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 namespace Ui { class QtClusterDialog; }
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
@@ -97,7 +97,7 @@ private:
   void Save();
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCLUSTERDIALOG_H

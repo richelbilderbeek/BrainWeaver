@@ -80,7 +80,7 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
   return v;
 }
 
-ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
+ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
   : QtHideAndShowDialog(parent),
@@ -125,12 +125,12 @@ ribi::pvdb::QtConceptMapDialog::QtConceptMapDialog(
   }
 }
 
-ribi::pvdb::QtConceptMapDialog::~QtConceptMapDialog() noexcept
+ribi::braw::QtConceptMapDialog::~QtConceptMapDialog() noexcept
 {
   delete ui;
 }
 
-ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
+ribi::cmap::ConceptMap ribi::braw::QtConceptMapDialog::CreateFromCluster(
   const std::string& question,
   const Cluster& cluster)
 {
@@ -174,13 +174,13 @@ ribi::cmap::ConceptMap ribi::pvdb::QtConceptMapDialog::CreateFromCluster(
   return p;
 }
 
-const ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget() const
+const ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget() const
 {
   assert(m_widget);
   return m_widget;
 }
 
-ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget()
+ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
@@ -191,7 +191,7 @@ ribi::cmap::QtConceptMap * ribi::pvdb::QtConceptMapDialog::GetWidget()
 
 }
 
-void ribi::pvdb::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape) { close(); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
@@ -227,21 +227,21 @@ void ribi::pvdb::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
   QDialog::keyPressEvent(e);
 }
 
-void ribi::pvdb::QtConceptMapDialog::on_button_print_clicked()
+void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
 {
   UpdateFileWithConceptMapFromWidget();
   QtPrintConceptMapDialog d(m_file);
   this->ShowChild(&d);
 }
 
-void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
+void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
   const QtScopedDisable<cmap::QtConceptMap> scoped_disable1(GetWidget());
   const QtScopedDisable<QtConceptMapDialog> scoped_disable2(this);
   this->hide();
 
-  const auto d = pvdb::QtFileDialog::GetSaveFileDialog(pvdb::QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -252,12 +252,12 @@ void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
   assert(d->selectedFiles().size() == 1);
   const std::string filename_raw = d->selectedFiles()[0].toStdString();
   const std::string filename
-    =  (filename_raw.size() < pvdb::File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != pvdb::File::GetFilenameExtension()
-     ? filename_raw + "." + pvdb::File::GetFilenameExtension()
+    =  (filename_raw.size() < File::GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
+     ? filename_raw + "." + File::GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
@@ -265,16 +265,16 @@ void ribi::pvdb::QtConceptMapDialog::on_button_save_clicked()
   //close(); //2013-04-19 Request by client
 }
 
-void ribi::pvdb::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
+void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
   m_file.SetConceptMap(GetWidget()->GetConceptMap());
   assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
 }
 
-void ribi::pvdb::QtConceptMapDialog::Save(const std::string& filename) const
+void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == pvdb::File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   if (m_file.GetConceptMap() != GetWidget()->GetConceptMap())
   {
