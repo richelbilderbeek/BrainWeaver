@@ -44,7 +44,9 @@ std::vector<ribi::braw::File> ribi::braw::FileFactory::GetTests() const noexcept
   std::vector<File > v;
   //[0]: empty file
   {
-    v.push_back(File());
+    File f;
+    f.SetQuestion("File::Test[0]");
+    v.push_back(f);
   }
   //[1]: file with focal question
   {
