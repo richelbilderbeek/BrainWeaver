@@ -152,7 +152,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Save
-xdotool windowactivate $id key alt+s sleep 0.2
+xdotool windowactivate $id key alt+s sleep 0.4
 
 ####################################
 # 'Sla de clustering op'
@@ -208,7 +208,13 @@ fi
 xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e sleep 0.2 key Ctrl+z sleep 0.2
 
 # Create new edge by mouse
-xdotool mousemove 540 560 click 1 mousemove 450 360
+xdotool mousemove 540 560 click 1 mousemove 450 360 sleep 0.5 click 1
+
+# Click on target node to select it
+xdotool sleep 0.5 click 1
+
+# Delete the target node
+xdotool key Delete
 
 exit
 
