@@ -152,7 +152,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Save
-xdotool windowactivate $id key alt+s sleep 0.4
+xdotool windowactivate $id key alt+s sleep 0.6
 
 ####################################
 # 'Sla de clustering op'
@@ -191,7 +191,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.3
+xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.4
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -214,7 +214,7 @@ xdotool mousemove 540 560 click 1 mousemove 450 360 sleep 0.5 click 1
 xdotool sleep 0.5 click 1
 
 # Delete the target node
-xdotool key Delete
+xdotool key Delete sleep 0.5 key Ctrl+z
 
 exit
 
