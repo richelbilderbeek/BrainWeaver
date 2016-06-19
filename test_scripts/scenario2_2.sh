@@ -216,6 +216,9 @@ xdotool sleep 0.5 click 1
 # Delete the target node and undo
 xdotool key Delete sleep 0.5 key Ctrl+z
 
+# Go to the node, and add head and tail arrow
+xdotool key Down Ctrl+h
+
 exit
 
 xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
