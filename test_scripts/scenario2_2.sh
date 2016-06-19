@@ -213,7 +213,7 @@ xdotool mousemove 540 560 click 1 mousemove 450 360 sleep 0.5 click 1
 # Click on target node to select it
 xdotool sleep 0.5 click 1
 
-# Delete the target node
+# Delete the target node and undo
 xdotool key Delete sleep 0.5 key Ctrl+z
 
 exit
