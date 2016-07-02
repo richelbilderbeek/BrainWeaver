@@ -23,7 +23,7 @@
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
-void ribi::pvdb::qtbrainweaverrateconceptmapdialog_test::all_tests()
+void ribi::braw::qtbrainweaverrateconceptmapdialog_test::all_tests()
 {
   const int test_depth = 1;
 

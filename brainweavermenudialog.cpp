@@ -133,7 +133,7 @@ std::vector<std::string> ribi::braw::MenuDialog::GetVersionHistory() const noexc
     "2013-08-06: Version 0.33: added icons and artwork",
     "2013-08-18: Version 0.34: fixed file dialog",
     "2013-08-30: Version 0.35: fixed segmentation faults, replaced print dialogs by save file dialogs",
-    "2013-09-07: Version 0.36: placed all classes in namespace ribi::pvdb, minor changes",
+    "2013-09-07: Version 0.36: placed all classes in namespace ribi::braw, minor changes",
     "2013-09-15: Version 0.37: minor changes, added wordwrap in concept names",
     "2013-09-21: Version 0.38: minor changes, added wordwrap in examples in concept map widgets",
     "2013-09-29: Version 0.39: minor changes, added wordwrap in examples in rate examples dialog",

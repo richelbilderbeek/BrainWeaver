@@ -15,7 +15,7 @@
 #include "qtbrainweaverclustertreewidgetitem.h"
 #include "trace.h"
 
-void ribi::pvdb::qtbrainweaverclusterwidget_test::all_tests()
+void ribi::braw::qtbrainweaverclusterwidget_test::all_tests()
 {
   for (const Cluster& c: ClusterFactory().GetTests())
   {

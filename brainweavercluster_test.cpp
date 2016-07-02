@@ -19,7 +19,7 @@
 BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_test)
 {
   using namespace ribi::cmap;
-  using namespace ribi::pvdb;
+  using namespace ribi::braw;
   //Test operator== and operator!=
   {
     const auto tmp_tests_1 = ClusterFactory().GetTests();

@@ -38,7 +38,7 @@
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_copy_constructor)
 {
-  using namespace ribi::pvdb;
+  using namespace ribi::braw;
   File f;
   f.SetAssessorName("debug assessor name");
   f.SetStudentName("debug student name");
@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_copy_constructor)
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setquestion_and_getquestion_are_symmetric)
 {
-  ribi::pvdb::File f;
+  ribi::braw::File f;
   const std::string question{"Question with space"};
   BOOST_CHECK_NE(f.GetQuestion(), question);
   f.SetQuestion(question);
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setquestion_and_getquestion_are_symmetr
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setstudentname_and_getstudentname_are_symmetric)
 {
-  ribi::pvdb::File f;
+  ribi::braw::File f;
   const std::string studentname{"Student name"};
   BOOST_CHECK_NE(f.GetStudentName(), studentname);
   f.SetStudentName(studentname);
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setstudentname_and_getstudentname_are_s
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_empty_concept_map)
 {
-  ribi::pvdb::File file;
+  ribi::braw::File file;
   ribi::cmap::ConceptMap g;
   BOOST_CHECK_THROW(
     file.SetConceptMap(g),
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_empty_concept_map)
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_without_center_nodes)
 {
-  ribi::pvdb::File file;
+  ribi::braw::File file;
   ribi::cmap::ConceptMap g;
   const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), false);
   assert(!n.IsCenterNode());
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_without_center_node
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_two_center_nodes)
 {
-  ribi::pvdb::File file;
+  ribi::braw::File file;
   ribi::cmap::ConceptMap g;
   const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), true);
   assert(n.IsCenterNode());
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_two_center_nod
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_center_node_with_text_different_than_question)
 {
-  ribi::pvdb::File file;
+  ribi::braw::File file;
   ribi::cmap::ConceptMap g;
   const std::string file_question{"File question"};
   const std::string text_on_center_node{"Text on center node"};
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_center_node_wi
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_accepts_concept_map_with_center_node)
 {
   const std::string question{"question with spaces"};
-  ribi::pvdb::File file;
+  ribi::braw::File file;
   file.SetQuestion(question);
   ribi::cmap::ConceptMap g;
   const auto node = ribi::cmap::Node(ribi::cmap::Concept(question), true);
@@ -138,15 +138,15 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_accepts_concept_map_with_center_node)
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_CreateConceptMap)
 {
-  const ribi::cmap::ConceptMap concept_map = ribi::pvdb::CreateConceptMap("some question");
+  const ribi::cmap::ConceptMap concept_map = ribi::braw::CreateConceptMap("some question");
   BOOST_CHECK(boost::num_vertices(concept_map) > 0);
   BOOST_CHECK_EQUAL(ribi::cmap::CountCenterNodes(concept_map), 1);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
 {
-  using namespace ribi::pvdb;
-  const std::string tmp_filename = ribi::pvdb::File::GetTempFileName();
+  using namespace ribi::braw;
+  const std::string tmp_filename = ribi::braw::File::GetTempFileName();
   //Test Save/Load on empty File
   File first_file;
   first_file.Save(tmp_filename);
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_nonexisting_file)
 {
   const std::string tmp_filename = ribi::get_temp_filename(".txt");
   assert(!is_regular_file(tmp_filename));
-  BOOST_CHECK_THROW(ribi::pvdb::LoadFile(tmp_filename), std::invalid_argument)
+  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument)
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
   const std::string tmp_filename = ribi::get_temp_filename(".txt");
   { std::ofstream f(tmp_filename); f << "gibberish"; }
   assert(is_regular_file(tmp_filename));
-  BOOST_CHECK_THROW(ribi::pvdb::LoadFile(tmp_filename), std::invalid_argument)
+  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument)
   std::remove(tmp_filename.c_str());
 }
 
@@ -178,7 +178,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
 {
   //Test Save/Load on file
-  using namespace ribi::pvdb;
+  using namespace ribi::braw;
   const std::string filename{"test_ribi_pvdb_file_save_and_load_normal_file.cmp"};
   File first_file;
   first_file.SetStudentName("Richel Bilderbeek");
@@ -212,10 +212,4 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
   first_file.SetStudentName( first_file.GetStudentName() + " (modified)");
   BOOST_CHECK_NE(first_file, second_file);
   std::remove(filename.c_str());
-}
-
-
-BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_issue_184)
-{
-  //ISSUE 184 HERE
 }

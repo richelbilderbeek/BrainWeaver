@@ -4,7 +4,7 @@
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_regex_GetRegexMatches)
 {
-  const ribi::pvdb::Regex r;
+  const ribi::braw::Regex r;
   {
     const std::string s{"what /n I /t care /r about"};
     const std::string tag{"about"};

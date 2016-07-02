@@ -4,7 +4,7 @@
 #include <QtTest/QtTest>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class qtbrainweaverclusterdialog_test : public QObject
 {
@@ -16,7 +16,7 @@ private slots:
   void cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map();
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCLUSTERDIALOG_TEST_H

@@ -34,7 +34,7 @@
 #include "trace.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
-void ribi::pvdb::qtbrainweaverclusterdialog_test::enable_button_depending_on_file()
+void ribi::braw::qtbrainweaverclusterdialog_test::enable_button_depending_on_file()
 {
   std::cout << __func__ << ": TODO" << '\n';
   return;
@@ -66,7 +66,7 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::enable_button_depending_on_fil
   );
 }
 
-void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
+void ribi::braw::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
 {
   try
   {
@@ -95,7 +95,7 @@ void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled
 }
 
 
-void ribi::pvdb::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
+void ribi::braw::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
 {
   using namespace ribi::cmap;
   const std::string question = "question with spaces";

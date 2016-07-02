@@ -12,8 +12,7 @@
 
 BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_factory_test)
 {
-  using namespace ribi::pvdb;
-  ClusterFactory f;
+  ribi::braw::ClusterFactory f;
   if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
   {
     TRACE(f.GetNumberOfTests());

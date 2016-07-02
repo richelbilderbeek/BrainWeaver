@@ -6,7 +6,7 @@
 #include "brainweaverfilefactory.h"
 #include "qtconceptmap.h"
 
-void ribi::pvdb::qtbrainweaverprintconceptmapdialog_test::default_construct()
+void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
 {
   std::cout << __func__ << ": TODO" << '\n';
   return;

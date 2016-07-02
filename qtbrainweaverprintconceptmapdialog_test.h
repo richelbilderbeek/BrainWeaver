@@ -4,7 +4,7 @@
 #include <QtTest/QtTest>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class qtbrainweaverprintconceptmapdialog_test : public QObject
 {
@@ -14,7 +14,7 @@ private slots:
   void default_construct();
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_TEST_H

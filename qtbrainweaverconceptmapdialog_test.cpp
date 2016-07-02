@@ -24,7 +24,7 @@
 #include "testtimer.h"
 #include "trace.h"
 
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
+void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
   try
@@ -55,7 +55,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
   }
 }
 
-void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
+void ribi::braw::qtbrainweaverconceptmapdialog_test::all_tests()
 {
   using namespace ribi::cmap;
   //If this dialog is fed with a file with a cluster and without a concept map (that is, one node (the focal question) only_
@@ -96,11 +96,11 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     file.SetQuestion(question);
     QVERIFY(file.GetQuestion() == question);
 
-    const boost::shared_ptr<pvdb::Cluster> cluster = pvdb::ClusterFactory().GetTest( {0,1,2} );
+    const boost::shared_ptr<braw::Cluster> cluster = braw::ClusterFactory().GetTest( {0,1,2} );
     file.SetCluster(cluster);
     QVERIFY(cluster->Get().size() == 3);
 
-    const ribi::cmap::ConceptMap concept_map(pvdb::QtConceptMapDialog::CreateFromCluster(question,cluster));
+    const ribi::cmap::ConceptMap concept_map(braw::QtConceptMapDialog::CreateFromCluster(question,cluster));
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     QVERIFY(file.GetConceptMap());
@@ -123,7 +123,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     file.SetQuestion(question);
     QVERIFY(file.GetCluster().Empty());
     QVERIFY(!boost::num_vertices(file.GetConceptMap()));
-    const boost::shared_ptr<pvdb::Cluster> cluster = ClusterFactory().GetTest( { 0,1,2 } );
+    const boost::shared_ptr<braw::Cluster> cluster = ClusterFactory().GetTest( { 0,1,2 } );
     file.SetCluster(cluster);
 
     QVERIFY( file.GetCluster());
@@ -336,7 +336,7 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
   if (test_depth > 1)
   {
 
-    std::vector<File> v = pvdb::File::GetTests();
+    std::vector<File> v = braw::File::GetTests();
     std::for_each(v.begin(),v.end(),
       [](const File& file)
       {
@@ -378,20 +378,20 @@ void ribi::pvdb::qtbrainweaverconceptmapdialog_test::all_tests()
     {
       //Put a concept maps in dialog, shuffle it, saving it
       {
-        const File file(new pvdb::File);
+        const File file(new braw::File);
         QVERIFY(v[i]);
         file.SetConceptMap(v[i]);
         QtConceptMapDialog d(file);
         QVERIFY(file.GetConceptMap());
         d.Shuffle();
-        d.Save(pvdb::File::GetTestFileName());
+        d.Save(braw::File::GetTestFileName());
       }
       //loading it, the resulting concept map must be homomorphous with the input map
       {
         using namespace cmap;
-        const File file = pvdb::File::Load(pvdb::File::GetTestFileName());
+        const File file = braw::File::Load(braw::File::GetTestFileName());
         QVERIFY(cmap::HasSameContent(*file.GetConceptMap(),*v[i]));
-        std::remove(pvdb::File::GetTestFileName().c_str());
+        std::remove(braw::File::GetTestFileName().c_str());
       }
     }
   }

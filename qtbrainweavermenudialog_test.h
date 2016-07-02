@@ -4,7 +4,7 @@
 #include <QtTest/QtTest>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class qtbrainweavermenudialog_test : public QObject
 {
@@ -15,7 +15,7 @@ private slots:
 
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERMENUDIALOG_TEST_H

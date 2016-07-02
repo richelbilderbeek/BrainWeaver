@@ -12,6 +12,6 @@
 
 BOOST_AUTO_TEST_CASE(ribi_pvdb_filefactory_test)
 {
-  ribi::pvdb::FileFactory f;
+  ribi::braw::FileFactory f;
   BOOST_CHECK_EQUAL(f.GetNumberOfTests(), static_cast<int>(f.GetTests().size()));
 }

@@ -3,7 +3,7 @@
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
 {
-  using namespace ribi::pvdb;
+  using namespace ribi::braw;
   //Assume the number of elements is correct
   BOOST_CHECK(GetCombinations(std::vector<int>( {         } ) ).size() ==  1);
   BOOST_CHECK(GetCombinations(std::vector<int>( {1        } ) ).size() ==  2);
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_Wordwrap)
 {
-  using namespace ribi::pvdb;
+  using namespace ribi::braw;
   {
     const auto v = {
       "",

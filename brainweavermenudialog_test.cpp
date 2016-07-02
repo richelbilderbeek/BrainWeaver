@@ -3,7 +3,7 @@
 
 BOOST_AUTO_TEST_CASE(test_ribi_brainweaver_menu)
 {
-  ribi::pvdb::MenuDialog d;
+  ribi::braw::MenuDialog d;
   BOOST_CHECK(d.Execute( {} ) ==  0);
   BOOST_CHECK(d.Execute( { "test" } ) == 0);
   BOOST_CHECK(d.Execute( { "test", "--about" } ) == 0);

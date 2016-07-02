@@ -1,8 +1,8 @@
 #include "qtbrainweavermenudialog_test.h"
 #include "qtbrainweavermenudialog.h"
 
-void ribi::pvdb::qtbrainweavermenudialog_test::default_construction()
+void ribi::braw::qtbrainweavermenudialog_test::default_construction()
 {
-  ribi::pvdb::QtMenuDialog d;
+  ribi::braw::QtMenuDialog d;
   d.show();
 }

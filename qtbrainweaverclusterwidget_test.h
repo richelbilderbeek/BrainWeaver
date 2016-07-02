@@ -4,7 +4,7 @@
 #include <QtTest/QtTest>
 
 namespace ribi {
-namespace pvdb {
+namespace braw {
 
 class qtbrainweaverclusterwidget_test : public QObject
 {
@@ -14,7 +14,7 @@ private slots:
   void all_tests();
 };
 
-} //~namespace pvdb
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERCLUSTERWIDGET_TEST_H
