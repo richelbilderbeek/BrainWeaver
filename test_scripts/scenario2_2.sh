@@ -89,7 +89,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate $id key alt+o sleep 0.1
+xdotool windowactivate --sync $id key alt+o sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -116,9 +116,7 @@ then
   exit 1
 fi
 # &Associate
-xdotool windowactivate $id key alt+a sleep 0.2
-
-
+xdotool windowactivate --sync $id key alt+a sleep 0.5
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -131,28 +129,29 @@ then
   exit 1
 fi
 # Text to add
-xdotool windowactivate $id type "hard to make up"
+xdotool windowactivate --sync $id type "hard to make up"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate --sync $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "concise"
+xdotool windowactivate --sync $id type "concise"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate --sync $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "precise"
+xdotool windowactivate --sync $id type "precise"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate --sync $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "English"
+xdotool windowactivate --sync $id type "English"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate --sync $id key Tab Return
 # Text to add
-xdotool windowactivate $id type "not too long"
+xdotool windowactivate --sync $id type "not too long"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.2
 
 # Save
-xdotool windowactivate $id key alt+s sleep 0.6
+xdotool windowactivate --sync $id key alt+s sleep 1
 
 ####################################
 # 'Sla de clustering op'

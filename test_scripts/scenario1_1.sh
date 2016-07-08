@@ -94,7 +94,7 @@ then
   exit 1
 fi
 xdotool windowactivate $id sleep 0.2 type $mycmp
-xdotool windowactivate $id sleep 0.2 key alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.2 key alt+o sleep 0.4
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
