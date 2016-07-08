@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
 
-  const std::string filter_str = std::string("*.") + ribi::pvdb::File::GetFilenameExtension();
+  const std::string filter_str = std::string("*.") + ribi::braw::File::GetFilenameExtension();
   const std::string filename
     = QFileDialog::getOpenFileName(0,"Kies een assessment bestand",QString(),
       filter_str.c_str()).toStdString();
@@ -71,8 +71,8 @@ int main(int argc, char *argv[])
   {
     try
     {
-      ribi::pvdb::File file = ribi::pvdb::LoadFile(filename);
-      ribi::pvdb::QtStudentMenuDialog d(file);
+      ribi::braw::File file = ribi::braw::LoadFile(filename);
+      ribi::braw::QtStudentMenuDialog d(file);
       d.show();
       return a.exec();
     }
