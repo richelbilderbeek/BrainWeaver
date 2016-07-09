@@ -22,11 +22,11 @@ fi
 ####################################
 # Input file must be present
 ####################################
-if [ ! -e $mycmp ]
-then
-  echo "File "$mycmp" not found, line "$LINENO
-  exit 1
-fi
+#if [ ! -e $mycmp ]
+#then
+#  echo "File "$mycmp" not found, line "$LINENO
+#  exit 1
+#fi
 
 ####################################
 # Delete .cmp result file
@@ -62,8 +62,8 @@ fi
 ####################################
 # Start application
 ####################################
-$myexe &
-sleep 1
+#$myexe &
+#sleep 1
 
 ####################################
 # Main menu, choose '1. Student'
@@ -74,7 +74,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key alt+1 sleep 0.2
+xdotool windowactivate $id key alt+1 sleep 0.4
 
 ####################################
 # 'Kies een assessment bestand'
@@ -89,7 +89,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate --sync $id key alt+o sleep 0.2
+xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.5
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -164,21 +164,22 @@ then
 fi
 
 xdotool windowactivate $id type $mycmp_result 
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.3
+xdotool windowactivate $id sleep 0.1 key Return sleep 0.3
 
 ####################################
 # Check newly saved file
 ####################################
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" not found, line "$LINENO
-  exit 1
-fi
+#if [ ! -e $mycmp_result ]
+#then
+#  echo "File "$mycmp_result" not found, line "$LINENO
+#  exit 1
+#fi
+
 # Show that the cluster has changed
-echo "Before: "
-egrep "<cluster>.*</cluster>" $mycmp -o
-echo "After: "
-egrep "<cluster>.*</cluster>" $mycmp_result -o
+#echo "Before: "
+#egrep "<cluster>.*</cluster>" $mycmp -o
+#echo "After: "
+#egrep "<cluster>.*</cluster>" $mycmp_result -o
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -225,7 +226,7 @@ xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
 # Type filename
 xdotool windowactivate $id type $mycmp_result
 # OK
-xdotool windowactivate $id key Escape sleep 0.1 key alt+o sleep 0.2
+xdotool windowactivate $id key Escape sleep 0.1 key Return sleep 0.2
 # Export
 xdotool windowactivate $id key alt+e sleep 0.3
 
@@ -241,7 +242,7 @@ then
 fi
 
 # Save ('&Opslaan')
-xdotool windowactivate $id key alt+o sleep 0.2
+xdotool windowactivate $id key Return sleep 0.2
 
 ####################################
 # 'Exporteer document naar PDF'
@@ -257,7 +258,7 @@ fi
 # Save ('&Opslaan')
 xdotool windowactivate $id type $mypdf_result
 # OK
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Return sleep 0.1
 
 ####################################
 #

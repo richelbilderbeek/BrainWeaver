@@ -92,7 +92,7 @@ xdotool windowactivate --sync $id key Delete key Delete key Delete key Delete ke
 xdotool windowactivate --sync $id type $mycmp
 # OK
 #xdotool windowactivate --sync $id sleep 0.2 key alt+o sleep 0.8
-xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.2
+xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.4
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'

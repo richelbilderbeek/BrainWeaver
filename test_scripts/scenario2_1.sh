@@ -34,8 +34,8 @@ fi
 ####################################
 # Start application
 ####################################
-$myexe &
-sleep 1
+#$myexe &
+#sleep 1
 
 ####################################
 # Main menu, choose '2. Assessor'
@@ -94,7 +94,7 @@ then
   exit 1
 fi
 xdotool windowactivate $id sleep 0.2 type $mycmp
-xdotool windowactivate $id sleep 0.2 key alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
