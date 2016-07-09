@@ -87,11 +87,12 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete
+xdotool windowactivate --sync $id key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete
 # Type filename
-xdotool windowactivate $id type $mycmp
+xdotool windowactivate --sync $id type $mycmp
 # OK
-xdotool windowactivate $id key alt+o sleep 0.5
+#xdotool windowactivate --sync $id sleep 0.2 key alt+o sleep 0.8
+xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
