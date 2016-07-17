@@ -191,7 +191,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.2 key alt+b sleep 0.4
+xdotool windowactivate $id sleep 0.3 key alt+b sleep 0.5
 
 ####################################
 # 'Construeer een concept map-scherm'

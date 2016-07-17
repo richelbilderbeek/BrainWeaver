@@ -112,7 +112,7 @@ xdotool windowactivate $id key alt+s sleep 0.2
 ####################################
 if [ ! -e $mycmp ]
 then
-  echo "File should have been created, line "$LINENO
+  echo "File may have been created in another folder, but not here, line "$LINENO
   exit 1
 fi
 
