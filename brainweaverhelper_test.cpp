@@ -1,7 +1,7 @@
 #include "brainweaverhelper.h"
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetCombinations)
 {
   using namespace ribi::braw;
   //Assume the number of elements is correct
@@ -86,7 +86,29 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_GetCombinations)
   }
 }
 
-BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_Wordwrap)
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetDistance)
+{
+  BOOST_CHECK(std::abs(ribi::braw::GetDistance(0.0, 0.0, 3.0, 4.0) - 5.0) < 0.01);
+  BOOST_CHECK(std::abs(ribi::braw::GetDistance(-3.0, -4.0) - 5.0) < 0.01);
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_SplitXml)
+{
+  const auto v = ribi::braw::SplitXml("<text>Hello world</text>");
+  const std::vector<std::string> expected = { "<text>", "Hello world", "</text>"};
+  BOOST_CHECK(v == expected);
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Unwordwrap)
+{
+  const std::vector<std::string> v = { "<text>", "Hello world", "</text>"};
+  const auto s = ribi::braw::Unwordwrap(v);
+  const std::string expected = "<text>Hello world</text>";
+  BOOST_CHECK(s == expected);
+}
+
+
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Wordwrap)
 {
   using namespace ribi::braw;
   {
@@ -186,4 +208,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_helper_Wordwrap)
       }
     }
   }
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_XmlToPretty)
+{
+  const auto v = ribi::braw::XmlToPretty("<text>Hello world</text>");
+  const std::vector<std::string> expected = { "<text>", "  Hello world", "</text>"};
+  BOOST_CHECK(v == expected);
 }
