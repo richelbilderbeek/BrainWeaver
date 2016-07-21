@@ -212,7 +212,8 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Wordwrap)
 
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_XmlToPretty)
 {
+  //TODO: Issue 70, https://github.com/richelbilderbeek/Brainweaver/issues/70
   const auto v = ribi::braw::XmlToPretty("<text>Hello world</text>");
-  const std::vector<std::string> expected = { "<text>", "  Hello world", "</text>"};
+  const std::vector<std::string> expected = { "<text>", "Hello world", "</text>"};
   BOOST_CHECK(v == expected);
 }
