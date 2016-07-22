@@ -1,4 +1,5 @@
 #include "brainweaverhelper.h"
+#include "xml.h"
 #include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetCombinations)
@@ -90,13 +91,6 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetDistance)
 {
   BOOST_CHECK(std::abs(ribi::braw::GetDistance(0.0, 0.0, 3.0, 4.0) - 5.0) < 0.01);
   BOOST_CHECK(std::abs(ribi::braw::GetDistance(-3.0, -4.0) - 5.0) < 0.01);
-}
-
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_SplitXml)
-{
-  const auto v = ribi::braw::SplitXml("<text>Hello world</text>");
-  const std::vector<std::string> expected = { "<text>", "Hello world", "</text>"};
-  BOOST_CHECK(v == expected);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Unwordwrap)
@@ -208,12 +202,4 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Wordwrap)
       }
     }
   }
-}
-
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_XmlToPretty)
-{
-  //TODO: Issue 70, https://github.com/richelbilderbeek/Brainweaver/issues/70
-  const auto v = ribi::braw::XmlToPretty("<text>Hello world</text>");
-  const std::vector<std::string> expected = { "<text>", "Hello world", "</text>"};
-  BOOST_CHECK(v == expected);
 }

@@ -38,46 +38,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #pragma GCC diagnostic pop
 
-double ribi::braw::GetDistance(const double delta_x, const double delta_y)
-{
-  return std::sqrt( (delta_x * delta_x) + (delta_y * delta_y) );
-}
-
-double ribi::braw::GetDistance(const double x1, const double y1, const double x2, const double y2)
-{
-  return GetDistance(x1-x2,y1-y2);
-}
-
-std::vector<std::string> ribi::braw::SafeFileToVector(const std::string& filename)
-{
-  std::vector<std::string> v = ribi::fileio::FileIo().FileToVector(filename);
-  if (!v.empty() && v.back().empty()) v.pop_back();
-  return v;
-}
-
-std::vector<std::string> ribi::braw::SplitXml(const std::string& s)
-{
-  std::vector<std::string> v;
-  std::string::const_iterator i = s.begin();
-  std::string::const_iterator j = s.begin();
-  const std::string::const_iterator end = s.end();
-  while (j!=end)
-  {
-    ++j;
-    if ((*j=='>' || *j == '<') && std::distance(i,j) > 1)
-    {
-      std::string t;
-      std::copy(
-        *i=='<' ? i   : i+1,
-        *j=='>' ? j+1 : j,
-        std::back_inserter(t));
-      v.push_back(t);
-      i = j;
-    }
-  }
-  return v;
-}
-
 std::string ribi::braw::Unwordwrap(
   const std::vector<std::string>& v) noexcept
 {
@@ -88,26 +48,4 @@ std::vector<std::string> ribi::braw::Wordwrap(
   const std::string& s_original, const std::size_t max_len) noexcept
 {
   return ribi::cmap::Wordwrap(s_original, max_len);
-}
-
-std::vector<std::string> ribi::braw::XmlToPretty(const std::string& s)
-{
-  std::vector<std::string> v = SplitXml(s);
-  int n = -2;
-  std::for_each(v.begin(),v.end(),
-    [&n](std::string& s)
-    {
-      assert(!s.empty());
-      if (s[0] == '<' && s[1] != '/')
-      {
-        n+=2;
-      }
-      s = std::string(n,' ') + s;
-      if (s[n+0] == '<' && s[n+1] == '/')
-      {
-        n-=2;
-      }
-    }
-  );
-  return v;
 }

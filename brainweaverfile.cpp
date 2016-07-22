@@ -47,6 +47,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "file_to_vector.h"
 #include "graphviz_decode.h"
 #include "conceptmapnode.h"
+#include "conceptmaphelper.h"
 #include "brainweaverregex.h"
 #include "fileio.h"
 #include "brainweaverclusterfactory.h"
@@ -150,7 +151,7 @@ ribi::braw::File ribi::braw::LoadFile(const std::string &filename)
   std::string xml;
   //Read XML from file
   {
-    const std::vector<std::string> v = SafeFileToVector(filename);
+    const std::vector<std::string> v = ribi::cmap::SafeFileToVector(filename);
     //FileToVector allowed an empty line after text, due to difference in line ending
     //SafeFileToVector should remove this line
 

@@ -127,33 +127,12 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
   return result;
 }
 
-///Obtain the Pythagorian distance from two delta's
-//From www.richelbilderbeek.nl/CppGetDistance.htm
-double GetDistance(const double delta_x, const double delta_y);
-
-///Obtain the Pythagorian distance from two coordinats
-//From www.richelbilderbeek.nl/CppGetDistance.htm
-double GetDistance(const double x1, const double y1, const double x2, const double y2);
-
-///SafeFileToVector calls FileToVector and
-///removes an empty trailing line that can be created under
-///the Windows operating system, due to different line endings
-std::vector<std::string> SafeFileToVector(const std::string& filename);
-
-///Split an XML std::string into its parts
-//From http://www.richelbilderbeek.nl/CppSplitXml.htm
-std::vector<std::string> SplitXml(const std::string& s);
-
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
 
 ///Wordwrap the text to obtain lines of max_len characters
 ///If the string _must_ be seperable by spaces; a word can have a maximum length of max_len
 std::vector<std::string> Wordwrap(const std::string& s, const std::size_t max_len) noexcept;
-
-///Pretty-print an XML std::string by indenting its elements
-//From http://www.richelbilderbeek.nl/CppXmlToPretty.htm
-std::vector<std::string> XmlToPretty(const std::string& s);
 
 } //~namespace braw
 
