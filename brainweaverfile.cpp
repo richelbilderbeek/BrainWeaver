@@ -148,6 +148,17 @@ std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
 
 ribi::braw::File ribi::braw::LoadFile(const std::string &filename)
 {
+  if(!ribi::is_regular_file(filename))
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "can only convert existing files, "
+      << "filename supplied: '"
+      << filename << "' was not found"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
+
   std::string xml;
   //Read XML from file
   {
