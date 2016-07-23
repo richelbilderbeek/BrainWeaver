@@ -87,12 +87,6 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetCombinations)
   }
 }
 
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_GetDistance)
-{
-  BOOST_CHECK(std::abs(ribi::braw::GetDistance(0.0, 0.0, 3.0, 4.0) - 5.0) < 0.01);
-  BOOST_CHECK(std::abs(ribi::braw::GetDistance(-3.0, -4.0) - 5.0) < 0.01);
-}
-
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Unwordwrap)
 {
   const std::vector<std::string> v = { "<text>", "Hello world", "</text>"};
