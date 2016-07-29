@@ -1,0 +1,20 @@
+#ifndef QTBRAINWEAVERABOUTDIALOG_TEST_H
+#define QTBRAINWEAVERABOUTDIALOG_TEST_H
+
+#include <QtTest/QtTest>
+
+namespace ribi {
+namespace braw {
+
+class qtbrainweaveraboutdialog_test : public QObject
+{
+    Q_OBJECT
+
+private slots:
+  void default_construction();
+};
+
+} //~namespace braw
+} //~namespace ribi
+
+#endif // QTBRAINWEAVERABOUTDIALOG_TEST_H

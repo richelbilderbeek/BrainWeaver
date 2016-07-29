@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "qtbrainweaveraboutdialog_test.h"
 #include "qtbrainweaverconceptmapdialog_test.h"
 #include "qtbrainweaverclusterdialog_test.h"
 #include "qtbrainweaverclusterwidget_test.h"
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   int error = 0;
+  { ribi::braw::qtbrainweaveraboutdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweavermenudialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverprintconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
