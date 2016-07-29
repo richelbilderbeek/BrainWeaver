@@ -59,3 +59,14 @@ ribi::braw::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
     throw std::invalid_argument(msg.str());
   }
 }
+
+bool ribi::braw::operator==(const QtClusterTreeWidgetItem& lhs, const QtClusterTreeWidgetItem& rhs) noexcept
+{
+  return lhs.m_competency == rhs.m_competency
+    && lhs.m_is_complex == rhs.m_is_complex
+    && lhs.m_rating_complexity == rhs.m_rating_complexity
+    && lhs.m_rating_concreteness == rhs.m_rating_concreteness
+    && lhs.m_rating_specifity == rhs.m_rating_specifity
+  ;
+
+}

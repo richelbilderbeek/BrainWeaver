@@ -54,10 +54,16 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
     m_back_to_menu(false),
     m_file(file)
 {
+  if (boost::num_vertices(file.GetConceptMap()) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": must have at least one node";
+    throw std::invalid_argument(msg.str());
+  }
+
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
-  assert(boost::num_vertices(file.GetConceptMap()));
   //Student name
   {
     const std::string s = "Naam student: " + file.GetStudentName();

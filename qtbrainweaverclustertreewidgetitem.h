@@ -25,6 +25,8 @@ struct QtClusterTreeWidgetItem : public QTreeWidgetItem
   const int m_rating_specifity;
 };
 
+bool operator==(const QtClusterTreeWidgetItem& lhs, const QtClusterTreeWidgetItem& rhs) noexcept;
+
 } //~namespace braw
 } //~namespace ribi
 

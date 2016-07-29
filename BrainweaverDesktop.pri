@@ -1,29 +1,10 @@
 include(BrainweaverConsole.pri)
 
-SOURCES += \
-    $$PWD/qtbrainweaveraboutdialog.cpp \
-    $$PWD/qtbrainweaverassessormenudialog.cpp \
-    $$PWD/qtbrainweaverclusterdialog.cpp \
-    $$PWD/qtbrainweaverclusterwidget.cpp \
-    $$PWD/qtbrainweaverconceptmapdialog.cpp \
-    $$PWD/qtbrainweavercreateassessmentcompletedialog.cpp \
-    $$PWD/qtbrainweaverdisplay.cpp \
-    $$PWD/qtbrainweaverfiledialog.cpp \
-    $$PWD/qtbrainweavermenudialog.cpp \
-    $$PWD/qtbrainweaveroverviewdialog.cpp \
-    $$PWD/qtbrainweaveroverviewwidget.cpp \
-    $$PWD/qtbrainweaverprintconceptmapdialog.cpp \
-    $$PWD/qtbrainweaverprintratingdialog.cpp \
-    $$PWD/qtbrainweaverrateconceptmapdialog.cpp \
-    $$PWD/qtbrainweaverratingdialog.cpp \
-    $$PWD/qtbrainweaverstudentmenudialog.cpp \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.cpp \
-    $$PWD/qtbrainweaverclustertreewidgetitem.cpp
-
 HEADERS  += \
     $$PWD/qtbrainweaveraboutdialog.h \
     $$PWD/qtbrainweaverassessormenudialog.h \
     $$PWD/qtbrainweaverclusterdialog.h \
+    $$PWD/qtbrainweaverclustertreewidgetitem.h \
     $$PWD/qtbrainweaverclusterwidget.h \
     $$PWD/qtbrainweaverconceptmapdialog.h \
     $$PWD/qtbrainweavercreateassessmentcompletedialog.h \
@@ -38,8 +19,29 @@ HEADERS  += \
     $$PWD/qtbrainweaverrateconceptmapdialog.h \
     $$PWD/qtbrainweaverratingdialog.h \
     $$PWD/qtbrainweaverstudentmenudialog.h \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.h \
-    $$PWD/qtbrainweaverclustertreewidgetitem.h
+    $$PWD/qtbrainweaverstudentstartcompletedialog.h
+
+
+SOURCES += \
+    $$PWD/qtbrainweaveraboutdialog.cpp \
+    $$PWD/qtbrainweaverassessormenudialog.cpp \
+    $$PWD/qtbrainweaverclusterdialog.cpp \
+    $$PWD/qtbrainweaverclustertreewidgetitem.cpp \
+    $$PWD/qtbrainweaverclusterwidget.cpp \
+    $$PWD/qtbrainweaverconceptmapdialog.cpp \
+    $$PWD/qtbrainweavercreateassessmentcompletedialog.cpp \
+    $$PWD/qtbrainweaverdisplay.cpp \
+    $$PWD/qtbrainweaverfiledialog.cpp \
+    $$PWD/qtbrainweavermenudialog.cpp \
+    $$PWD/qtbrainweaveroverviewdialog.cpp \
+    $$PWD/qtbrainweaveroverviewwidget.cpp \
+    $$PWD/qtbrainweaverprintconceptmapdialog.cpp \
+    $$PWD/qtbrainweaverprintratingdialog.cpp \
+    $$PWD/qtbrainweaverrateconceptmapdialog.cpp \
+    $$PWD/qtbrainweaverratingdialog.cpp \
+    $$PWD/qtbrainweaverstudentmenudialog.cpp \
+    $$PWD/qtbrainweaverstudentstartcompletedialog.cpp
+
 
 FORMS    += \
     $$PWD/qtbrainweaverassessormenudialog.ui \

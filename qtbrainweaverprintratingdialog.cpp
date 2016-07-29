@@ -57,6 +57,13 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     m_file(file),
     m_widget(new cmap::QtConceptMap)
 {
+  if (boost::num_vertices(file.GetConceptMap()) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": must have at least one node";
+    throw std::invalid_argument(msg.str());
+  }
+
   ui->setupUi(this);    
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
@@ -213,7 +220,7 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
   //Concept map as text
   {
     assert(ui->widget_concept_map_as_text->layout());
-    std::string text;
+    //std::string text;
     const int n_nodes = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {

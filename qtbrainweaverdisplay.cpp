@@ -55,12 +55,21 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
 {
   const auto g = file.GetConceptMap();
   const int sz{static_cast<int>(boost::num_vertices(g))};
+  if (sz == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": must have at least one node";
+    throw std::invalid_argument(msg.str());
+  }
   table->setRowCount(sz - 1); //-1 to skip focus question node at index 0
 
   const auto vip = vertices(g);
+  assert(boost::num_vertices(g) > 0); //Cannot skip first node with focus question if there are no nodes at all
   auto iter = vip.first; ++iter; //Skip first, focus question
+
   //auto end = vip.second;
 
+  assert(sz >= 1);
   for (int i=1; i!=sz; ++i, ++iter)
   {
     const int row = i-1; //-1 to skip focus question node at index 0
@@ -238,11 +247,19 @@ void ribi::braw::QtDisplay::DisplayValues(
   QTableWidget * const table) const
 {
   auto g = file.GetConceptMap();
+  if (boost::num_vertices(g) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": must have at least one node";
+    throw std::invalid_argument(msg.str());
+  }
+
   #ifndef NDEBUG
   const int all_sz = static_cast<int>(boost::num_vertices(g));
   #endif
 
   //Remove the focal node
+  assert(boost::num_vertices(g)); //Cannot clear non-existing vertices
   boost::clear_vertex(*vertices(g).first, g);
   boost::remove_vertex(*vertices(g).first, g);
   //all_nodes.erase(all_nodes.begin());
