@@ -217,7 +217,7 @@ xdotool sleep 0.5 click 1
 xdotool key Delete sleep 0.5 key Ctrl+z
 
 # Go to the node, and add head and tail arrow
-xdotool key Down Ctrl+h
+xdotool key Down Ctrl+h Ctrl+t
 
 exit
 
