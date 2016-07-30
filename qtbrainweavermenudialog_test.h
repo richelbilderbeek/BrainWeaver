@@ -12,6 +12,7 @@ class qtbrainweavermenudialog_test : public QObject
 
 private slots:
   void default_construction();
+  void press_all_keys();
 
 };
 

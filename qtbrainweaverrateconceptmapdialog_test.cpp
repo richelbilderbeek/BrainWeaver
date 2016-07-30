@@ -25,24 +25,19 @@
 
 void ribi::braw::qtbrainweaverrateconceptmapdialog_test::all_tests()
 {
-  const int test_depth = 1;
-
-  if (test_depth > 1)
+  const auto v = FileFactory().GetTests();
+  const int sz = boost::numeric_cast<int>(v.size());
+  for (int i=0; i!=sz; ++i)
   {
-    const auto v = FileFactory().GetTests();
-    const int sz = boost::numeric_cast<int>(v.size());
-    for (int i=0; i!=sz; ++i)
-    {
-      const auto file = v[i];
-      
-      if (!boost::num_vertices(file.GetConceptMap()))
-      {
-        //Cannot rate a null concept map
-        continue;
-      }
-      QtRateConceptMapDialog d(file);
-      QVERIFY(d.GetWidget());
-    }
-  }
+    const auto file = v[i];
 
+    if (!boost::num_vertices(file.GetConceptMap()))
+    {
+      //Cannot rate a null concept map
+      continue;
+    }
+    QtRateConceptMapDialog d(file);
+    d.show();
+    QVERIFY(d.GetWidget());
+  }
 }
