@@ -1,31 +1,13 @@
 #!/bin/bash
 # Let the assessor create a test concept map with name 'scenario1.cmp'
+# Assumes BrainweaverDeveloper is already running
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
 
 # Variables
-myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1_2_result.cmp"
 mypdf="scenario1_3_result.pdf"
-
-####################################
-# Check executable
-####################################
-if [ -e /$myexe ] # slash is obligatory?
-then
-  echo $mytestname": FAIL (executable '"$myexe"' not found)"
-  exit
-fi
-
-####################################
-# File must be present
-####################################
-if [ ! -e $mycmp ]
-then
-  echo "File '$mycmp'could not be found, line "$LINENO
-  exit 1
-fi
 
 ####################################
 # PDF file must be absent
@@ -35,18 +17,6 @@ then
   echo "File '$mypdf'present, now deleted, line "$LINENO
   rm $mypdf
 fi
-
-if [ -e $mypdf ]
-then
-  echo "File '$mypdf' could not be deleted, line "$LINENO
-  exit 1
-fi
-
-####################################
-# Start application
-####################################
-$myexe &
-sleep 1
 
 ####################################
 # Main menu, choose '2. Assessor'
@@ -257,7 +227,7 @@ fi
 # Enter assessor name
 xdotool windowactivate $id sleep 0.2 type "Jane Doe" 
 # Export to PDF
-xdotool windowactivate $id sleep 0.2 key Alt+e sleep 0.2
+xdotool windowactivate $id sleep 0.4 key Alt+e sleep 0.4
 
 ####################################
 # 'Preview van PDF'
@@ -287,18 +257,8 @@ fi
 # Type PDF filename
 xdotool windowactivate $id sleep 0.2 type $mypdf
 # OK
-xdotool windowactivate $id sleep 0.2 key Alt+o sleep 0.2
-
-### Checking
-
-if [ ! -e $mypdf ]
-then
-  echo "File '$mypdf' not found, line "$LINENO
-  exit 1
-fi
-
-### Quitting
-
+#xdotool windowactivate $id sleep 0.2 key Alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.4
 
 ####################################
 # 'Preview van PDF'
@@ -353,17 +313,3 @@ then
   exit 1
 fi
 xdotool windowactivate $id key alt+s sleep 0.2
-
-####################################
-# Main menu, close
-####################################
-id=`get_dialog_id "Menu voor de ontwikkelaar"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-xdotool windowactivate $id key alt+F4
-
-
-echo "File '"$mypdf"' is created successfully"

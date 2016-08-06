@@ -1,32 +1,14 @@
 #!/bin/bash
 # Let the student work on the concept map
+# Assumes BrainweaverDeveloper is already running
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
 
 # Variables
-myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario2.cmp"
 mycmp_result="scenario2_result.cmp"
 mypdf_result="scenario2_result.pdf"
-
-####################################
-# Check executable
-####################################
-if [ -e /$myexe ] # slash is obligatory?
-then
-  echo $mytestname": FAIL (executable '"$myexe"' not found)"
-  exit
-fi
-
-####################################
-# Input file must be present
-####################################
-#if [ ! -e $mycmp ]
-#then
-#  echo "File "$mycmp" not found, line "$LINENO
-#  exit 1
-#fi
 
 ####################################
 # Delete .cmp result file
@@ -57,13 +39,6 @@ then
   echo "File "$mypdf_result" could not be deleted"
   exit 1
 fi
-
-
-####################################
-# Start application
-####################################
-#$myexe &
-#sleep 1
 
 ####################################
 # Main menu, choose '1. Student'
@@ -167,21 +142,6 @@ xdotool windowactivate $id type $mycmp_result
 xdotool windowactivate $id sleep 0.1 key Return sleep 0.3
 
 ####################################
-# Check newly saved file
-####################################
-#if [ ! -e $mycmp_result ]
-#then
-#  echo "File "$mycmp_result" not found, line "$LINENO
-#  exit 1
-#fi
-
-# Show that the cluster has changed
-#echo "Before: "
-#egrep "<cluster>.*</cluster>" $mycmp -o
-#echo "After: "
-#egrep "<cluster>.*</cluster>" $mycmp_result -o
-
-####################################
 # 'Associeer- en cluster-scherm'
 # Start concept map
 ####################################
@@ -217,7 +177,24 @@ xdotool sleep 0.5 click 1
 xdotool key Delete sleep 0.5 key Ctrl+z
 
 # Go to the node, and add head and tail arrow
-xdotool key Down Ctrl+h Ctrl+t
+xdotool key Down Ctrl+h Ctrl+t sleep 0.5
+
+# Modify edge
+xdotool key F2
+
+####################################
+# 'Concept/Relatie bewerken'
+####################################
+id=`get_dialog_id "Concept/Relatie bewerken"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+# OK
+xdotool key Alt+o
+
 
 exit
 

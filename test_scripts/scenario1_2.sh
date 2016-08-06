@@ -1,34 +1,16 @@
 #!/bin/bash
 # Let the student work on the concept map
+# Assumes BrainweaverDeveloper is already running
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
 
 # Variables
-myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
 mycmp="scenario1.cmp"
 mycmp_result="scenario1_2_result.cmp"
 mypdf_result="scenario1_2_result.pdf"
 concept_addition="314"
 example_addition="1729"
-
-####################################
-# Check executable
-####################################
-if [ -e /$myexe ] # slash is obligatory?
-then
-  echo $mytestname": FAIL (executable '"$myexe"' not found)"
-  exit
-fi
-
-####################################
-# Input file must be present
-####################################
-if [ ! -e $mycmp ]
-then
-  echo "File "$mycmp" not found, line "$LINENO
-  exit 1
-fi
 
 ####################################
 # Delete .cmp result file
@@ -39,12 +21,6 @@ then
   rm $mycmp_result
 fi
 
-if [ -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" could not be deleted"
-  exit 1
-fi
-
 ####################################
 # Delete .pdf result file
 ####################################
@@ -53,19 +29,6 @@ then
   echo "File "$mypdf_result" found, deleting it"
   rm $mypdf_result
 fi
-
-if [ -e $mypdf_result ]
-then
-  echo "File "$mypdf_result" could not be deleted"
-  exit 1
-fi
-
-
-####################################
-# Start application
-####################################
-$myexe &
-sleep 1
 
 ####################################
 # Main menu, choose '1. Student'
@@ -205,27 +168,7 @@ fi
 # Type name
 xdotool windowactivate $id type $mycmp_result
 # Save
-xdotool windowactivate $id key alt+o sleep 0.2
-
-# Analyse save file
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" could not be found"
-  exit 1
-fi
-
-# Has concept addition been added
-if ! egrep -q "$concept_addition" $mycmp_result
-then
-  echo "Text '$concept_addition' not found in save file '$mycmp_result', line "$LINENO
-  exit 1
-fi
-
-if ! egrep -q "$example_addition" $mycmp_result
-then
-  echo "Text '$example_addition' not found in save file '$mycmp_result', line "$LINENO
-  exit 1
-fi
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.2
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -268,7 +211,8 @@ fi
 # Save ('&Opslaan')
 xdotool windowactivate $id type $mypdf_result
 # OK
-xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.1
+#xdotool windowactivate $id sleep 0.1 key alt+o sleep 0.1
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.2
 
 ####################################
 #
@@ -289,7 +233,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.2
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -302,7 +246,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.2 key alt+F4 sleep 0.2
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -342,34 +286,3 @@ then
 fi
 
 xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
-
-####################################
-# Main menu
-# Close
-####################################
-id=`get_dialog_id "Menu voor de ontwikkelaar"`
-if [ -z $id ]
-then
-  echo "ID not found, line "$LINENO
-  exit 1
-fi
-
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
-
-####################################
-# Check results
-####################################
-
-
-if [ ! -e $mycmp_result ]
-then
-  echo "File "$mycmp_result" could not be found"
-  exit 1
-fi
-
-if [ ! -e $mypdf_result ]
-then
-  echo "File "$mypdf_result" could not be found"
-  exit 1
-fi
