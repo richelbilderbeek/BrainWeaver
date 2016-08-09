@@ -180,7 +180,7 @@ xdotool key Delete sleep 0.5 key Ctrl+z
 xdotool key Down Ctrl+h Ctrl+t sleep 0.5
 
 # Modify edge
-xdotool key F2
+xdotool key F2 sleep 0.2
 
 ####################################
 # 'Concept/Relatie bewerken'
