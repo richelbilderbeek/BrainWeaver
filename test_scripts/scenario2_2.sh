@@ -195,10 +195,20 @@ fi
 # OK
 xdotool key Alt+o
 
+####################################
+# 'Construeer een concept map-scherm'
+# Save concept map
+####################################
+id=`get_dialog_id "Construeer een concept map-scherm"`
+if [ -z $id ]
+then
+  echo "ID not found, line "$LINENO
+  exit 1
+fi
+
+xdotool windowactivate $id sleep 0.3 key Delete
 
 exit
-
-xdotool windowactivate $id sleep 0.3 key alt+s sleep 0.2
 
 # Type filename
 xdotool windowactivate $id type $mycmp_result
