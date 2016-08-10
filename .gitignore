@@ -38,3 +38,11 @@ test_scripts/scenario1_4_result.pdf
 test_scripts/scenario1_2_result.*
 test_scripts/scenario2_result.*
 test_scripts/scenario2.cmp
+Makefile
+Makefile.*
+object_script*
+release/
+debug/
+*_plugin_import.cpp
+mocinclude.opt
+.qmake.stash
