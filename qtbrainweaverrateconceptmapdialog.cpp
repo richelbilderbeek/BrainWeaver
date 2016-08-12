@@ -61,7 +61,7 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   m_concept_map->SetConceptMap(file.GetConceptMap());
-  m_concept_map->SetMode(ribi::cmap::QtConceptMap::Mode::rate);
+  m_concept_map->SetMode(ribi::cmap::Mode::rate);
 
   {
     assert(!ui->widget->layout());
