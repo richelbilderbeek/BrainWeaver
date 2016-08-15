@@ -110,36 +110,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="button_create_test_files">
-        <property name="text">
-         <string>&amp;O. Create test files</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="button_modify_stylesheet">
         <property name="text">
          <string>&amp;P. Modify stylesheet</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="button_test_create_sub_concept_map">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Q. Create sub-concept map</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="button_demo_5">
-        <property name="toolTip">
-         <string>Demonstrate Issue #5</string>
-        </property>
-        <property name="text">
-         <string>&amp;S. Demo #5</string>
         </property>
        </widget>
       </item>
@@ -291,7 +264,6 @@
   <tabstop>button_test_qtroundededitrectitem</tabstop>
   <tabstop>button_test_arrowitems</tabstop>
   <tabstop>button_test_conceptmaps</tabstop>
-  <tabstop>button_create_test_files</tabstop>
   <tabstop>button_modify_stylesheet</tabstop>
  </tabstops>
  <resources>

@@ -314,6 +314,11 @@ std::string ribi::braw::FileToStr(const std::string& filename) noexcept
   return s;
 }
 
+std::string ribi::braw::GetRecoveryFilename() noexcept
+{
+  return "recovery.cmp";
+}
+
 std::string ribi::braw::ToXml(const File& file) noexcept
 {
   std::stringstream s;

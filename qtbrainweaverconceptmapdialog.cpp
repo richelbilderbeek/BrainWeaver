@@ -42,21 +42,21 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "add_custom_and_selectable_edge_between_vertices.h"
 #include "add_custom_and_selectable_vertex.h"
 #include "brainweavercluster.h"
-#include "conceptmapconcept.h"
-#include "conceptmapfactory.h"
-#include "conceptmapcenternodefactory.h"
-#include "conceptmap.h"
-#include "conceptmapedge.h"
 #include "brainweaverfile.h"
+#include "conceptmapcenternodefactory.h"
+#include "conceptmapconcept.h"
+#include "conceptmapedge.h"
+#include "conceptmapfactory.h"
+#include "conceptmap.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapnode.h"
+#include "qtbrainweaverfiledialog.h"
+#include "qtbrainweaverprintconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmap.h"
 #include "qtconceptmap.h"
 #include "qtconceptmapqtedge.h"
-#include "qtbrainweaverfiledialog.h"
 #include "qtconceptmapqtnode.h"
-#include "qtbrainweaverprintconceptmapdialog.h"
 #include "qtscopeddisable.h"
 #include "trace.h"
 #include "ui_qtbrainweaverconceptmapdialog.h"
@@ -127,10 +127,11 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
 ribi::braw::QtConceptMapDialog::~QtConceptMapDialog() noexcept
 {
+  m_file.Save(GetRecoveryFilename());
   delete ui;
 }
 
-ribi::cmap::ConceptMap ribi::braw::QtConceptMapDialog::CreateFromCluster(
+ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   const std::string& question,
   const Cluster& cluster)
 {

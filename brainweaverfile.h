@@ -154,6 +154,9 @@ std::string DoXpressiveRegexReplace(
 ///Convert a file's content to a single std::string
 std::string FileToStr(const std::string& filename) noexcept;
 
+///Get the name of the recovery filename
+std::string GetRecoveryFilename() noexcept;
+
 ///Load a File from disk
 File LoadFile(const std::string& filename);
 

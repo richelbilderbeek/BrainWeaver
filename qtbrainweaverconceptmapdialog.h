@@ -79,17 +79,17 @@ private:
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
 
-  ///Create a concept map from a cluster
-  static ribi::cmap::ConceptMap CreateFromCluster(
-    const std::string& question,
-    const Cluster& cluster
-  );
-
   //#define NOT_NOW_20141111
   #ifdef NOT_NOW_20141111
   void OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item);
   #endif //NOT_NOW_20141111
 };
+
+///Create a concept map from a cluster
+ribi::cmap::ConceptMap CreateFromCluster(
+  const std::string& question,
+  const Cluster& cluster
+);
 
 } //~namespace braw
 } //~namespace ribi

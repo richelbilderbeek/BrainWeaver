@@ -213,3 +213,17 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
   BOOST_CHECK_NE(first_file, second_file);
   std::remove(filename.c_str());
 }
+
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_all_testing_files)
+{
+  const std::vector<ribi::braw::File> files = ribi::braw::FileFactory().GetTests();
+  for(const auto& file: files)
+  {
+    const std::string filename = "test_ribi_pvdb_file_save_and_load_all_testing_files.cmp";
+    file.Save(filename);
+    assert(is_regular_file(filename));
+    const auto file_again = ribi::braw::LoadFile(filename);
+    BOOST_CHECK_EQUAL (file, file_again);
+    ribi::FileIo().DeleteFile(filename);
+  }
+}

@@ -26,6 +26,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/lexical_cast.hpp>
 
+#include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QKeyEvent>
@@ -82,8 +83,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 ribi::braw::QtMenuDialog::QtMenuDialog(QWidget* parent)
   : QtHideAndShowDialog(parent),
-    ui(new Ui::QtMenuDialog),
-    m_file{}
+    ui(new Ui::QtMenuDialog)
+    //m_file{}
 {
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
@@ -97,7 +98,7 @@ ribi::braw::QtMenuDialog::~QtMenuDialog() noexcept
 void ribi::braw::QtMenuDialog::keyPressEvent(QKeyEvent* e) noexcept
 {
   assert(e);
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key() == Qt::Key_Escape) { close(); return; }
 }
 
 void ribi::braw::QtMenuDialog::on_button_assessor_clicked() noexcept
@@ -125,7 +126,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
   const std::vector<ribi::cmap::ConceptMap> concept_maps = CreateDirectNeighbourConceptMaps(file.GetConceptMap());
   //Display this random concept map
   const int index = std::rand() % concept_maps.size();
-  const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
+  //const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
   //Create and show the dialog
   boost::shared_ptr<QtRateConceptMapDialog> d(
     new QtRateConceptMapDialog(file));
@@ -232,23 +233,6 @@ void ribi::braw::QtMenuDialog::on_button_test_arrowitems_clicked() noexcept
   ShowChild(&d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_create_test_files_clicked() noexcept
-{
-  //Obtain the artificial concept maps
-  const std::vector<File > v = FileFactory().GetTests();
-  const int sz = boost::numeric_cast<int>(v.size());
-  for(int i=0; i!=sz; ++i)
-  {
-    File file = v[i];
-    const std::string s
-      = boost::lexical_cast<std::string>(i + 5)
-      + "."
-      + File::GetFilenameExtension();
-    file.Save(s);
-    assert(is_regular_file(s));
-  }
-}
-
 void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
   QtStyleSheetSetterMainDialog d(qApp->styleSheet().toStdString());
@@ -290,8 +274,17 @@ void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
   assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
   const File file = FileFactory().GetTests().at(test);
 
-  QtConceptMapDialog d(file);
-  ShowChild(&d);
+  try
+  {
+    QtConceptMapDialog d(file);
+    ShowChild(&d);
+    FileIo().DeleteFile(GetRecoveryFilename());
+  }
+  catch (std::exception& )
+  {
+    //Keep recovery filename
+    qDebug() << "Crash detected, recovery file saved";
+  }
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
@@ -307,25 +300,5 @@ void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
   const File file = FileFactory().GetTests().at(test);
 
   QtConceptMapDialog d(file);
-  ShowChild(&d);
-}
-
-void ribi::braw::QtMenuDialog::on_button_demo_5_clicked()
-{
-  File file;
-  file.SetQuestion("X");
-  ribi::cmap::ConceptMap g;
-  const auto vd_c = ribi::cmap::AddVertex(ribi::cmap::CenterNodeFactory().Create(ribi::cmap::Concept("X")), g);
-  const auto vd_1 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("A")), g);
-  const auto vd_2 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("B")), g);
-  const auto vd_3 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("C")), g);
-  const auto vd_4 = ribi::cmap::AddVertex(ribi::cmap::Node(ribi::cmap::Concept("D")), g);
-  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_c, vd_1, g);
-  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_1, vd_2, g);
-  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_2, vd_3, g);
-  ribi::cmap::AddEdge(ribi::cmap::Edge(), vd_c, vd_4, g);
-  file.SetConceptMap(g);
-
-  QtRatingDialog d(file);
   ShowChild(&d);
 }

@@ -52,7 +52,6 @@ class QtMenuDialog : public ribi::QtHideAndShowDialog
 public slots:
   void on_button_about_clicked() noexcept;
   void on_button_assessor_clicked() noexcept;
-  void on_button_create_test_files_clicked() noexcept;
   void on_button_modify_stylesheet_clicked() noexcept;
   void on_button_overview_clicked() noexcept;
   void on_button_print_concept_map_clicked() noexcept;
@@ -76,13 +75,11 @@ private slots:
 
   void on_button_empty_qtconceptmap_clicked();
 
-  void on_button_demo_5_clicked();
-
 private:
   Ui::QtMenuDialog *ui;
 
   ///The file to work on
-  File m_file;
+  //File m_file;
 
   friend class qtbrainweavermenudialog_test;
 };
