@@ -22,6 +22,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Weffc++"
 #include "qtbrainweaveroverviewdialog.h"
 
+#include <cassert>
 #include <QKeyEvent>
 #include <QVBoxLayout>
 
