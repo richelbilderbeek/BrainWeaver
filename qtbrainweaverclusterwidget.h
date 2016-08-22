@@ -18,24 +18,14 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 //---------------------------------------------------------------------------
 //From http://www.richelbilderbeek.nl/ProjectBrainweaver.htm
 //---------------------------------------------------------------------------
- #ifndef QTBRAINWEAVERCLUSTERWIDGET_H
+#ifndef QTBRAINWEAVERCLUSTERWIDGET_H
 #define QTBRAINWEAVERCLUSTERWIDGET_H
 
 
-#include <map>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
-
 #include <QTreeWidget>
-
 #include "conceptmapcompetency.h"
 #include "brainweavercluster.h"
 #include "brainweaverfwd.h"
-#pragma GCC diagnostic pop
 
 namespace ribi {
 namespace braw {

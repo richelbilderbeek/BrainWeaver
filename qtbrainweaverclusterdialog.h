@@ -21,15 +21,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERCLUSTERDIALOG_H
 #define QTBRAINWEAVERCLUSTERDIALOG_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-//#include <boost/shared_ptr.hpp>
-#include "qthideandshowdialog.h"
+#include "qtbrainweaverdialog.h"
 #include "brainweaverfile.h"
 #include "qtbrainweaverfwd.h"
-#pragma GCC diagnostic pop
 
 namespace Ui { class QtClusterDialog; }
 
@@ -39,7 +33,7 @@ namespace braw {
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
 ///because the widget needs something to work on
-class QtClusterDialog : public ribi::QtHideAndShowDialog
+class QtClusterDialog : public QtDialog
 {
   Q_OBJECT
 

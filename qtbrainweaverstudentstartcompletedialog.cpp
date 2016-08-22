@@ -40,7 +40,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,
   QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtStudentStartCompleteDialog),
     m_back_to_menu(false),
     m_file(file)
@@ -56,30 +56,42 @@ ribi::braw::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexce
 
 void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
-  QtClusterDialog d(m_file);
-  this->ShowChild(&d);
-  if (d.GoBackToMenu())
+  QtClusterDialog * const d{
+    new QtClusterDialog(m_file)
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  if (d->GoBackToMenu())
   {
     m_back_to_menu = true;
-    close();
+    emit remove_me(this);
   }
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
 {
-  QtConceptMapDialog d(m_file);
-  this->ShowChild(&d);
-  if (d.GoBackToMenu())
+  QtConceptMapDialog * const d{
+    new QtConceptMapDialog(m_file)
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  if (d->GoBackToMenu())
   {
     m_back_to_menu = true;
-    close();
+    emit remove_me(this);
   }
 }
 

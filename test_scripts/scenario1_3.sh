@@ -55,7 +55,6 @@ xdotool windowactivate $id sleep 0.2 key Delete Delete Delete Delete Delete Dele
 xdotool windowactivate $id type $mycmp
 xdotool windowactivate $id sleep 0.2 key Return sleep 0.4
 
-
 ####################################
 # 'Evalueer concept map', 
 # Rate concept map
@@ -68,7 +67,7 @@ then
 fi
 
 # Rate first concept
-xdotool windowactivate $id sleep 0.2 key space Up Up F1 sleep 1.0
+xdotool windowactivate $id sleep 0.2 key Tab space Up Up F1 sleep 1.0
 
 ####################################
 # 'Evalueer concept'
@@ -97,7 +96,7 @@ then
 fi
 
 # Rate first concept its examples
-xdotool windowactivate $id sleep 0.2 key F2
+xdotool windowactivate $id sleep 0.2 key F2 sleep 0.2
 
 ####################################
 # 'Evalueer voorbeelden'
@@ -154,7 +153,7 @@ then
 fi
 
 # Rate second concept its examples
-xdotool windowactivate $id sleep 0.2 key F2
+xdotool windowactivate $id sleep 0.2 key F2 sleep 0.2
 
 ####################################
 # 'Evalueer voorbeelden'
@@ -211,7 +210,7 @@ then
 fi
 
 # Rate third concept
-xdotool windowactivate $id sleep 0.2 key alt+g sleep 0.2
+xdotool windowactivate $id sleep 0.2 key alt+g sleep 0.4
 
 ####################################
 # 'De kentallen'
@@ -272,7 +271,7 @@ then
 fi
 
 # Quit
-xdotool windowactivate $id sleep 0.2 key Alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.2 key Escape sleep 0.1
 
 
 ####################################
@@ -287,7 +286,7 @@ then
 fi
 
 # Enter assessor name
-xdotool windowactivate $id sleep 0.2 key Alt+F4
+xdotool windowactivate $id sleep 0.2 key Escape
 
 ####################################
 # 'Evalueer concept map', 
@@ -301,7 +300,7 @@ then
 fi
 
 # Rate third concept
-xdotool windowactivate $id sleep 0.2 key Alt+F4
+xdotool windowactivate $id sleep 0.2 key Escape
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'

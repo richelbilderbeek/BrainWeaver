@@ -22,15 +22,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #define QTBRAINWEAVERRATINGDIALOG_H
 
 #include <iosfwd>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include "qthideandshowdialog.h"
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
-#pragma GCC diagnostic pop
+#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtRatingDialog; }
 
@@ -41,7 +35,7 @@ namespace braw {
 
 ///View the current rating, optimized for humans
 ///QtPrintRatingDialog is optimized for printers
-class QtRatingDialog : public ribi::QtHideAndShowDialog
+class QtRatingDialog : public QtDialog
 {
   Q_OBJECT
 
@@ -56,10 +50,9 @@ class QtRatingDialog : public ribi::QtHideAndShowDialog
   private slots:
   void on_button_save_clicked();
   void keyPressEvent(QKeyEvent* e);
-
   void on_button_print_clicked();
-
   void on_edit_name_textEdited(const QString &arg1);
+  void showEvent(QShowEvent *);
 
 private:
   Ui::QtRatingDialog *ui;

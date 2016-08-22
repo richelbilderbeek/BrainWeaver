@@ -36,7 +36,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtStudentMenuDialog),
     m_file(file)
 {
@@ -62,7 +62,7 @@ std::string ribi::braw::QtStudentMenuDialog::GetName() const noexcept
 
 void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
   QDialog::keyPressEvent(e);
 }
@@ -79,14 +79,16 @@ void ribi::braw::QtStudentMenuDialog::on_button_about_clicked()
 
 void ribi::braw::QtStudentMenuDialog::on_button_quit_clicked()
 {
-  close();
+  emit remove_me(this);
 }
 
 void ribi::braw::QtStudentMenuDialog::on_button_start_clicked()
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
-  QtStudentStartCompleteDialog d(m_file);
-  this->ShowChild(&d);
+  QtStudentStartCompleteDialog * const d{
+    new QtStudentStartCompleteDialog(m_file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtStudentMenuDialog::on_edit_name_textChanged(const QString &arg1)

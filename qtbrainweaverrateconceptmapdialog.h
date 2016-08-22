@@ -21,21 +21,16 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERRATECONCEPTMAPDIALOG_H
 #define QTBRAINWEAVERRATECONCEPTMAPDIALOG_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include "qthideandshowdialog.h"
 #include "qtbrainweaverfwd.h"
 #include "brainweaverfile.h"
-#pragma GCC diagnostic pop
+#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtRateConceptMapDialog; }
 
 namespace ribi {
 namespace braw {
 
-class QtRateConceptMapDialog : public ribi::QtHideAndShowDialog
+class QtRateConceptMapDialog : public QtDialog
 {
   Q_OBJECT
   

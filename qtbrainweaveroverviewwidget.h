@@ -21,21 +21,15 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVEROVERVIEWWIDGET_H
 #define QTBRAINWEAVEROVERVIEWWIDGET_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <boost/shared_ptr.hpp>
+#include "qtbrainweaverdialog.h"
 #include <QGraphicsView>
 #include "brainweaverfwd.h"
-#pragma GCC diagnostic pop
 
 
 namespace ribi {
-
-struct QtHideAndShowDialog;
-
 namespace braw {
+
+struct QtDialog;
 
 class QtOverviewWidget : public QGraphicsView
 {
@@ -52,12 +46,12 @@ public slots:
 private:
 
   ///Create all dialogs
-  static const std::vector<QtHideAndShowDialog* > GetAllDialogs();
+  static std::vector<QDialog* > GetAllDialogs();
 
   ///NASTY BUG ALERT: It crashes Wine if m_dialogs is created as
-  ///const std::vector<boost::shared_ptr<QtHideAndShowDialog> > m_dialogs;
+  ///const std::vector<boost::shared_ptr<QDialog> > m_dialogs;
   ///No idea why...
-  const std::vector<QtHideAndShowDialog* > m_dialogs;
+  const std::vector<QDialog* > m_dialogs;
 
 };
 

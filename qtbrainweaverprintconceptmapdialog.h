@@ -21,29 +21,21 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_H
 #define QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-//#include <boost/shared_ptr.hpp>
-
+#include "qtbrainweaverdialog.h"
 #include "qtbrainweaverfwd.h"
-#include "qthideandshowdialog.h"
 #include "brainweaverfile.h"
-#pragma GCC diagnostic pop
 
 namespace Ui {
   class QtPrintConceptMapDialog;
 }
 
 namespace ribi {
-
 namespace braw {
 
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
 ///QtPrintConceptMapDialog is optimized for printers
-class QtPrintConceptMapDialog : public ribi::QtHideAndShowDialog
+class QtPrintConceptMapDialog : public QtDialog
 {
   Q_OBJECT
   

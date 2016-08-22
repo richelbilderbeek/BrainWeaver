@@ -52,7 +52,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,
   QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
   ui(new Ui::QtRateConceptMapDialog),
   m_file(file),
   m_concept_map(new cmap::QtConceptMap)
@@ -99,7 +99,7 @@ ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 
 void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
@@ -108,11 +108,17 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 {
   m_file.SetConceptMap(m_concept_map->GetConceptMap());
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
-  QtRatingDialog d(m_file);
-  ShowChild(&d);
-  if (d.GetBackToMenu())
+  QtRatingDialog * const d{
+    new QtRatingDialog(m_file)
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  if (d->GetBackToMenu())
   {
-    close();
+    emit remove_me(this);
   }
 }
 
@@ -141,7 +147,7 @@ void ribi::braw::QtRateConceptMapDialog::Save()
     && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
-  //close(); //Do not close after saving
+  //emit remove_me(this); //Do not close after saving
   this->show();
 }
 

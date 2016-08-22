@@ -13,8 +13,6 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction()
   QVERIFY(d.GetTableExamples());
   QVERIFY(d.GetTableMiscValues());
   QVERIFY(d.GetTableValues());
-  QVERIFY(!d.GetVersion().empty());
-  QVERIFY(!d.GetVersionHistory().empty());
 }
 
 void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_without_nodes()

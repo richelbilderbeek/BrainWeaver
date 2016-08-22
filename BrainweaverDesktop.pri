@@ -19,7 +19,9 @@ HEADERS  += \
     $$PWD/qtbrainweaverrateconceptmapdialog.h \
     $$PWD/qtbrainweaverratingdialog.h \
     $$PWD/qtbrainweaverstudentmenudialog.h \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.h
+    $$PWD/qtbrainweaverstudentstartcompletedialog.h \
+    $$PWD/qtbrainweaverdialog.h \
+    $$PWD/qtbrainweavermasterdialog.h
 
 
 SOURCES += \
@@ -40,7 +42,9 @@ SOURCES += \
     $$PWD/qtbrainweaverrateconceptmapdialog.cpp \
     $$PWD/qtbrainweaverratingdialog.cpp \
     $$PWD/qtbrainweaverstudentmenudialog.cpp \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.cpp
+    $$PWD/qtbrainweaverstudentstartcompletedialog.cpp \
+    $$PWD/qtbrainweaverdialog.cpp \
+    $$PWD/qtbrainweavermasterdialog.cpp
 
 
 FORMS    += \
@@ -54,5 +58,6 @@ FORMS    += \
     $$PWD/qtbrainweaverrateconceptmapdialog.ui \
     $$PWD/qtbrainweaverratingdialog.ui \
     $$PWD/qtbrainweaverstudentmenudialog.ui \
-    $$PWD/qtbrainweaverstudentstartcompletedialog.ui
+    $$PWD/qtbrainweaverstudentstartcompletedialog.ui \
+    $$PWD/qtbrainweavermasterdialog.ui
 

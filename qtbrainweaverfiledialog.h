@@ -21,22 +21,21 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERFILEDIALOG_H
 #define QTBRAINWEAVERFILEDIALOG_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 struct QFileDialog;
 
 namespace ribi {
-
 namespace braw {
 
 struct QtFileDialog
 {
   enum class FileType { cmp, pdf };
   ///Create a QFileDialog to open Brainweaver files with
-  static boost::shared_ptr<QFileDialog> GetOpenFileDialog();
+  static std::unique_ptr<QFileDialog> GetOpenFileDialog();
 
   ///Create a QFileDialog to save Brainweaver files with
-  static boost::shared_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
+  static std::unique_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
 };
 
 } //~namespace braw

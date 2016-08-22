@@ -9,8 +9,7 @@ void ribi::braw::qtbrainweaverratingdialog_test::default_construction()
   const File f = FileFactory().GetTests().back();
   ribi::braw::QtRatingDialog d(f);
   d.show();
-  QVERIFY(!d.GetVersion().empty());
-  QVERIFY(!d.GetVersionHistory().empty());
+  QVERIFY(d.GetBackToMenu() || !d.GetBackToMenu()); //Always true
 }
 
 void ribi::braw::qtbrainweaverratingdialog_test::default_construction_without_nodes()

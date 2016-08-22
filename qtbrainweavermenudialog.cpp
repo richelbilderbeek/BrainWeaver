@@ -82,7 +82,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::braw::QtMenuDialog::QtMenuDialog(QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtMenuDialog)
     //m_file{}
 {
@@ -98,13 +98,13 @@ ribi::braw::QtMenuDialog::~QtMenuDialog() noexcept
 void ribi::braw::QtMenuDialog::keyPressEvent(QKeyEvent* e) noexcept
 {
   assert(e);
-  if (e->key() == Qt::Key_Escape) { close(); return; }
+  if (e->key() == Qt::Key_Escape) { emit remove_me(this); return; }
 }
 
 void ribi::braw::QtMenuDialog::on_button_assessor_clicked() noexcept
 {
-  QtAssessorMenuDialog d;
-  ShowChild(&d);
+  QtAssessorMenuDialog * const d = new QtAssessorMenuDialog;
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
@@ -128,9 +128,10 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
   const int index = std::rand() % concept_maps.size();
   //const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
   //Create and show the dialog
-  boost::shared_ptr<QtRateConceptMapDialog> d(
-    new QtRateConceptMapDialog(file));
-  ShowChild(d.get());
+  QtRateConceptMapDialog * const d{
+    new QtRateConceptMapDialog(file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
@@ -140,8 +141,10 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
     = ribi::cmap::ConceptMapFactory().GetTest(6);
   file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
   file.SetConceptMap(concept_map);
-  QtRateConceptMapDialog d(file);
-  ShowChild(&d);
+  QtRateConceptMapDialog * const d{
+    new QtRateConceptMapDialog(file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
@@ -150,8 +153,10 @@ void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
   const int index = 2;
   assert(index < ConceptFactory().GetNumberOfTests());
   const ribi::cmap::Concept concept = ConceptFactory().GetTests().at(index);
-  boost::shared_ptr<QtRateExamplesDialogNewName> d(new QtRateExamplesDialogNewName(concept));
-  ShowChild(d.get());
+  QtRateExamplesDialogNewName * const d{
+    new QtRateExamplesDialogNewName(concept)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
@@ -160,8 +165,10 @@ void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
   assert(test < FileFactory().GetNumberOfTests());
   const File file = FileFactory().GetTests().at(test);
 
-  QtRatingDialog d(file);
-  ShowChild(&d);
+  QtRatingDialog * const d{
+    new QtRatingDialog(file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
@@ -178,8 +185,10 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
     try
     {
       const File file = LoadFile(filename);
-      QtStudentMenuDialog d(file);
-      ShowChild(&d);
+      QtStudentMenuDialog * const d{
+        new QtStudentMenuDialog(file)
+      };
+      emit add_me(d);
     }
     catch (...)
     {
@@ -199,57 +208,70 @@ void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
   cluster.Add(ribi::cmap::Concept("B"));
   cluster.Add(ribi::cmap::Concept("C"));
   file.SetCluster(cluster);
-  QtClusterDialog d(file);
-  ShowChild(&d);
+  QtClusterDialog * const d{
+    new QtClusterDialog(file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 {
-  const QString old_title = this->windowTitle();
   this->setWindowTitle("Loading, please wait...");
-  QtOverviewDialog d;
-  ShowChild(&d);
+  QtOverviewDialog * const d{
+    new QtOverviewDialog
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_about_clicked() noexcept
 {
   ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
-  assert(d);
-  //const auto d(QtAboutDialog().Get());
-  this->hide();
-  d->exec();
-  this->show();
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_qtroundededitrectitem_clicked() noexcept
 {
-  QtTestQtRoundedEditRectItemMenuDialog d;
-  ShowChild(&d);
+  QtTestQtRoundedEditRectItemMenuDialog * const d{
+    new QtTestQtRoundedEditRectItemMenuDialog
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_arrowitems_clicked() noexcept
 {
-  QtTestQtArrowItemsMenuDialog d;
-  ShowChild(&d);
+  QtTestQtArrowItemsMenuDialog * const d{
+    new QtTestQtArrowItemsMenuDialog
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
-  QtStyleSheetSetterMainDialog d(qApp->styleSheet().toStdString());
-  ShowChild(&d);
-  qApp->setStyleSheet(d.GetStyleSheet().c_str());
+  QtStyleSheetSetterMainDialog * const d{
+    new QtStyleSheetSetterMainDialog(qApp->styleSheet().toStdString())
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  qApp->setStyleSheet(d->GetStyleSheet().c_str());
 }
 
 void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
-  QtPrintConceptMapDialog d(FileFactory().GetTests().front());
-  ShowChild(&d);
+  QtPrintConceptMapDialog * const d{
+    new QtPrintConceptMapDialog(FileFactory().GetTests().front())
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 {
-  QtPrintConceptMapDialog d(FileFactory().GetTests().front());
-  ShowChild(&d);
+  QtPrintConceptMapDialog * const d{
+    new QtPrintConceptMapDialog(FileFactory().GetTests().front())
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
@@ -257,15 +279,18 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 
   const ribi::cmap::ConceptMap concept_map
     = ribi::cmap::ConceptMapFactory().Get6();
-  boost::shared_ptr<ribi::cmap::QtRateConceptTallyDialog> d(
-    new cmap::QtRateConceptTallyDialog(concept_map));
-  ShowChild(d.get());
+  ribi::cmap::QtRateConceptTallyDialog * const d{
+    new cmap::QtRateConceptTallyDialog(concept_map)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_conceptmaps_clicked()
 {
-  cmap::QtTestMenuDialog d;
-  ShowChild(&d);
+  ribi::cmap::QtTestMenuDialog * const d{
+    new ribi::cmap::QtTestMenuDialog
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
@@ -276,8 +301,10 @@ void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
 
   try
   {
-    QtConceptMapDialog d(file);
-    ShowChild(&d);
+    QtConceptMapDialog * const d{
+      new QtConceptMapDialog(file)
+    };
+    emit add_me(d);
     FileIo().DeleteFile(GetRecoveryFilename());
   }
   catch (std::exception& )
@@ -289,8 +316,10 @@ void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
 
 void ribi::braw::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
 {
-  QtTestQtRoundedRectItemMenuDialog d;
-  ShowChild(&d);
+  QtTestQtRoundedRectItemMenuDialog * const d{
+    new QtTestQtRoundedRectItemMenuDialog
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
@@ -299,6 +328,6 @@ void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
   assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
   const File file = FileFactory().GetTests().at(test);
 
-  QtConceptMapDialog d(file);
-  ShowChild(&d);
+  QtConceptMapDialog * const d{new QtConceptMapDialog(file)};
+  emit add_me(d);
 }

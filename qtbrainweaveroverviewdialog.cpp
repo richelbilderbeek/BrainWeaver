@@ -30,7 +30,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
-  : QtHideAndShowDialog(parent)
+  : QtDialog(parent)
 {
   
   QLayout * const layout = new QVBoxLayout(this);
@@ -42,6 +42,6 @@ ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
 void ribi::braw::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
 {
   assert(e);
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
   QDialog::keyPressEvent(e);
 }

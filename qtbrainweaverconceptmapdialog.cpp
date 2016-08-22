@@ -31,12 +31,13 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <boost/numeric/conversion/cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QGraphicsScene>
 #include <QKeyEvent>
-#include <QLayout>
 #include <QLabel>
+#include <QLayout>
 #include <QMessageBox>
 
 #include "add_custom_and_selectable_edge_between_vertices.h"
@@ -83,7 +84,7 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
@@ -108,6 +109,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   assert(m_widget);
 
   m_widget->SetConceptMap(m_file.GetConceptMap());
+
   m_widget->SetMode(ribi::cmap::Mode::edit);
 
   ui->setupUi(this);
@@ -194,42 +196,33 @@ ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget()
 
 void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape) { close(); return; }
+  if (e->key() == Qt::Key_Escape)
+  {
+    emit remove_me(this);
+    return;
+  }
+  if (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier))
+  {
+    emit remove_me(this);
+    return;
+  }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
-  if ((e->modifiers() & Qt::ControlModifier)
-    && !(e->modifiers() & Qt::ShiftModifier)
-    && e->key() == Qt::Key_Z)
-  {
-    QMessageBox box;
-    box.setText("TODO: Undo");
-    box.exec();
-    return;
-  }
-  if ( (e->modifiers() & Qt::ControlModifier)
-    && (e->modifiers() & Qt::ShiftModifier)
-    && e->key() == Qt::Key_Z)
-  {
-    QMessageBox box;
-    box.setText("TODO: Redo");
-    box.exec();
-    return;
-  }
   QDialog::keyPressEvent(e);
 }
 
 void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
 {
   UpdateFileWithConceptMapFromWidget();
-  QtPrintConceptMapDialog d(m_file);
-  this->ShowChild(&d);
+  QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
+  emit add_me(d);
 }
 
 void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
-  const QtScopedDisable<cmap::QtConceptMap> scoped_disable1(GetWidget());
-  const QtScopedDisable<QtConceptMapDialog> scoped_disable2(this);
-  this->hide();
+  //const QtScopedDisable<cmap::QtConceptMap> scoped_disable1(GetWidget());
+  //const QtScopedDisable<QtConceptMapDialog> scoped_disable2(this);
+  //this->hide();
 
   const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
@@ -252,7 +245,7 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
-  //close(); //2013-04-19 Request by client
+  //emit remove_me(this); //2013-04-19 Request by client
 }
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()

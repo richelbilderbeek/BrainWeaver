@@ -37,7 +37,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::braw::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtCreateAssessmentCompleteDialog),
     m_back_to_menu(false)
 {
@@ -57,7 +57,7 @@ std::string ribi::braw::QtCreateAssessmentCompleteDialog::GetQuestion() const no
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) close();
+  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
 }
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
@@ -85,7 +85,7 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
   Save(filename);
 
   m_back_to_menu = true;
-  close();
+  emit remove_me(this);
 }
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const

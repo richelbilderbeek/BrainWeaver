@@ -28,6 +28,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/lexical_cast.hpp>
 
+#include <QDebug>
 #include <QKeyEvent>
 #include <QFileDialog>
 #include <QDesktopWidget>
@@ -49,7 +50,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtRatingDialog::QtRatingDialog(
   const File file,
   QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtRatingDialog),
     m_back_to_menu(false),
     m_file(file)
@@ -80,7 +81,7 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
     }
     else
     {
-      ui->edit_name->setFocus();
+      ui->edit_name->setFocus(); //Needs to be done in showEvent
       ui->button_print->setEnabled(false);
     }
   }
@@ -97,6 +98,7 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move(screen.center() - this->rect().center());
   }
+
 }
 
 ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept
@@ -106,7 +108,7 @@ ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept
 
 void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape) { close(); }
+  if (e->key() == Qt::Key_Escape) { emit remove_me(this); }
 }
 
 void ribi::braw::QtRatingDialog::on_button_save_clicked()
@@ -136,7 +138,7 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
     && "File must have correct file extension name");
   Save(filename);
   this->m_back_to_menu = true;
-  close();
+  emit remove_me(this);
 }
 
 void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
@@ -153,16 +155,19 @@ void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 
 void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {
-  QtPrintRatingDialog d(this->m_file);
+  QtPrintRatingDialog * const d{
+    new QtPrintRatingDialog(this->m_file)
+  };
 
   //Center the dialog
+  if (!"this will work")
   {
     const QRect screen = QApplication::desktop()->screenGeometry();
-    d.setGeometry(screen.adjusted(64,64,-64,-64));
-    d.move( screen.center() - d.rect().center() );
+    d->setGeometry(screen.adjusted(64,64,-64,-64));
+    d->move( screen.center() - d->rect().center() );
   }
 
-  this->ShowChild(&d);
+  emit add_me(d);
 }
 
 void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
@@ -176,4 +181,9 @@ void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
   {
     ui->button_print->setEnabled(false);
   }
+}
+
+void ribi::braw::QtRatingDialog::showEvent(QShowEvent *)
+{
+  ui->edit_name->setFocus();
 }

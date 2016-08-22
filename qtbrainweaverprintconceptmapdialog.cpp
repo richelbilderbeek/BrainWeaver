@@ -49,7 +49,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   const File& file,
   QWidget *parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtPrintConceptMapDialog),
     m_file(file),
     m_widget(new cmap::QtConceptMap)
@@ -110,7 +110,7 @@ std::vector<QWidget *> ribi::braw::QtPrintConceptMapDialog::CollectWidgets() con
 
 void ribi::braw::QtPrintConceptMapDialog::keyPressEvent(QKeyEvent * event)
 {
-  if (event->key() == Qt::Key_Escape) { close(); return; }
+  if (event->key() == Qt::Key_Escape) { emit remove_me(this); return; }
 }
 
 void ribi::braw::QtPrintConceptMapDialog::on_button_print_clicked()

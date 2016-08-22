@@ -60,7 +60,7 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
     m_dialogs(GetAllDialogs())
 {
   assert(scene());
-  assert(std::count_if(m_dialogs.begin(),m_dialogs.end(),[](QtHideAndShowDialog* p) { return !p; } ) == 0);
+  assert(std::count_if(m_dialogs.begin(),m_dialogs.end(),[](QDialog* p) { return !p; } ) == 0);
   //assert(std::all_of(m_dialogs.begin(),m_dialogs.end(),[](QtHideAndShowDialog* p) { return p; } ));
   
 
@@ -95,12 +95,11 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 }
 
 
-const std::vector<ribi::QtHideAndShowDialog* > ribi::braw::QtOverviewWidget::GetAllDialogs()
+std::vector<QDialog* > ribi::braw::QtOverviewWidget::GetAllDialogs()
 {
-  using namespace cmap;
-  std::vector<QtHideAndShowDialog* > v;
+  std::vector<QDialog* > v;
   {
-    QtHideAndShowDialog* p(new QtAssessorMenuDialog);
+    QDialog* p(new QtAssessorMenuDialog);
     assert(p);
     v.push_back(p);
   }
@@ -110,40 +109,35 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::braw::QtOverviewWidget::Get
     const File file(FileFactory().GetTests().at(index));
     
     assert(!file.GetCluster().Empty());
-    QtHideAndShowDialog* p(new QtClusterDialog(file));
+    QDialog* p(new QtClusterDialog(file));
     assert(p);
     v.push_back(p);
   }
   {
     const int index = 2;
-    assert(index < static_cast<int>(ConceptFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtConceptMapConceptEditDialog(ConceptFactory().GetTests().at(index)));
+    assert(index < static_cast<int>(ribi::cmap::ConceptFactory().GetTests().size()));
+    QDialog * const p{
+      new ribi::cmap::QtConceptMapConceptEditDialog(
+        ribi::cmap::ConceptFactory().GetTests().at(index)
+      )
+    };
     assert(p);
     v.push_back(p);
   }
   {
     const int index = 2;
     assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtConceptMapDialog(FileFactory().GetTests().at(index)));
+    QDialog* p(new QtConceptMapDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtCreateAssessmentCompleteDialog);
+    QDialog* p(new QtCreateAssessmentCompleteDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtMenuDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 4;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    const File file = FileFactory().GetTests().at(index);
-    
-    QtHideAndShowDialog* p(new QtPrintConceptMapDialog(file));
+    QDialog* p(new QtMenuDialog);
     assert(p);
     v.push_back(p);
   }
@@ -152,103 +146,115 @@ const std::vector<ribi::QtHideAndShowDialog* > ribi::braw::QtOverviewWidget::Get
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
     const File file = FileFactory().GetTests().at(index);
     
-    QtHideAndShowDialog* p(new QtPrintConceptMapDialog(file));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetTest(6);
-    assert(boost::num_vertices(concept_map) > 0);
-    QtHideAndShowDialog* p(new cmap::QtRateConceptDialog(concept_map));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetTest(6);
-    assert(boost::num_vertices(concept_map) > 0);
-    QtHideAndShowDialog* p(new cmap::QtRateConceptTallyDialog(concept_map));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtRateConceptMapDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(ConceptFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtRateExamplesDialogNewName(ConceptFactory().GetTests().at(index)));
+    QDialog* p(new QtPrintConceptMapDialog(file));
     assert(p);
     v.push_back(p);
   }
   {
     const int index = 4;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtRatingDialog(FileFactory().GetTests().at(index)));
+    const File file = FileFactory().GetTests().at(index);
+    
+    QDialog* p(new QtPrintConceptMapDialog(file));
     assert(p);
     v.push_back(p);
   }
   {
-    #ifdef REALLY_DEMONSTRATE_INFINITE_RECURSION_7236834589746034
-    QtHideAndShowDialog*(new QtOverviewDialog);
+    const ribi::cmap::ConceptMap concept_map
+      = ribi::cmap::ConceptMapFactory().GetTest(6);
+    assert(boost::num_vertices(concept_map) > 0);
+    QDialog* p(new cmap::QtRateConceptDialog(concept_map));
     assert(p);
     v.push_back(p);
-    #endif
+  }
+  {
+    const ribi::cmap::ConceptMap concept_map
+      = ribi::cmap::ConceptMapFactory().GetTest(6);
+    assert(boost::num_vertices(concept_map) > 0);
+    QDialog* p(new cmap::QtRateConceptTallyDialog(concept_map));
+    assert(p);
+    v.push_back(p);
   }
   {
     const int index = 2;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtStudentMenuDialog(FileFactory().GetTests().at(index)));
+    QDialog* p(new QtRateConceptMapDialog(FileFactory().GetTests().at(index)));
+    assert(p);
+    v.push_back(p);
+  }
+  {
+    const int index = 2;
+    assert(index < static_cast<int>(ribi::cmap::ConceptFactory().GetTests().size()));
+    QDialog * const p{
+      new ribi::cmap::QtRateExamplesDialogNewName(
+        ribi::cmap::ConceptFactory().GetTests().at(index)
+      )
+    };
+    assert(p);
+    v.push_back(p);
+  }
+  {
+    const int index = 4;
+    assert(index < static_cast<int>(FileFactory().GetTests().size()));
+    QDialog* p(new QtRatingDialog(FileFactory().GetTests().at(index)));
+    assert(p);
+    v.push_back(p);
+  }
+  if (!"show infinite recursion")
+  {
+    QDialog * const p(new QtOverviewDialog);
     assert(p);
     v.push_back(p);
   }
   {
     const int index = 2;
     assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QtHideAndShowDialog* p(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(index)));
+    QDialog* p(new QtStudentMenuDialog(FileFactory().GetTests().at(index)));
+    assert(p);
+    v.push_back(p);
+  }
+  {
+    const int index = 2;
+    assert(index < static_cast<int>(FileFactory().GetTests().size()));
+    QDialog* p(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(index)));
     assert(p);
     v.push_back(p);
   }
   #ifdef BRAW_ALSO_SHOW_TEST_DIALOGS
   {
-    QtHideAndShowDialog* p(new QtTestConceptItemDialog);
+    QDialog* p(new QtTestConceptItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtTestNodeItemDialog);
+    QDialog* p(new QtTestNodeItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtTestEdgeItemDialog);
+    QDialog* p(new QtTestEdgeItemDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtTestConceptMapEditWidgetDialog);
+    QDialog* p(new QtTestConceptMapEditWidgetDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtTestConceptMapRateWidgetDialog);
+    QDialog* p(new QtTestConceptMapRateWidgetDialog);
     assert(p);
     v.push_back(p);
   }
   {
-    QtHideAndShowDialog* p(new QtViewTestsDialog);
+    QDialog* p(new QtViewTestsDialog);
     assert(p);
     v.push_back(p);
   }
   #endif
 
-  assert(std::count_if(v.begin(),v.end(),[](QtHideAndShowDialog* p) { return !p; } ) == 0);
-  //assert(std::all_of(v.begin(),v.end(),[](QtHideAndShowDialog* p) { return p; } )); //MAJ
+  assert(std::count_if(v.begin(),v.end(),[](QDialog* p) { return !p; } ) == 0);
+  //assert(std::all_of(v.begin(),v.end(),[](QDialog* p) { return p; } )); //MAJ
   return v;
 }
 

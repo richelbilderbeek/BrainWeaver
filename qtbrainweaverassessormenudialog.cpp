@@ -41,7 +41,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ribi::braw::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtAssessorMenuDialog)
 {
   ui->setupUi(this);
@@ -55,29 +55,32 @@ ribi::braw::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
 
 void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { close(); return; }
+  if (e->key() == Qt::Key_Escape || (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier)))
+  {
+    emit remove_me(this);
+    return;
+  }
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
-  QtCreateAssessmentCompleteDialog d;
-  this->ShowChild(&d);
+  QtCreateAssessmentCompleteDialog * const d = new QtCreateAssessmentCompleteDialog;
+  emit add_me(d);
 }
 
 
 void ribi::braw::QtAssessorMenuDialog::on_button_about_clicked()
 {
-  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
+  ribi::braw::QtAboutDialog * const d{
+    new ribi::braw::QtAboutDialog
+  };
   assert(d);
-  //const auto d(QtAboutDialog().Get());
-  this->hide();
-  d->exec();
-  this->show();
+  emit add_me(d);
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_quit_clicked()
 {
-  close();
+  emit remove_me(this);
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
@@ -93,8 +96,11 @@ void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
     File file = LoadFile(filename);
-    QtRateConceptMapDialog d(file);
-    this->ShowChild(&d);
-    file = d.GetFile();
+    QtRateConceptMapDialog * const d = new QtRateConceptMapDialog(file);
+    emit add_me(d);
+    //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+    //The former architecture showed d modally, thus at this point d would have
+    //a new file now. In this case, the file is read before modification
+    file = d->GetFile();
   }
 }

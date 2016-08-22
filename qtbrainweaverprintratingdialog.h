@@ -21,14 +21,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERPRINTRATINGDIALOG_H
 #define QTBRAINWEAVERPRINTRATINGDIALOG_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+#include "qtbrainweaverdialog.h"
 #include "qtbrainweaverfwd.h"
 #include "brainweaverfile.h"
-#include "qthideandshowdialog.h"
-#pragma GCC diagnostic pop
 
 namespace Ui {
   class QtPrintRatingDialog;
@@ -42,7 +37,7 @@ namespace braw {
 ///View the current rating, optimized for printers
 ///This dialog will not be visible for humans at all in release
 ///QtRatingDialog is optimized for humans
-class QtPrintRatingDialog : public ribi::QtHideAndShowDialog
+class QtPrintRatingDialog : public QtDialog
 {
   Q_OBJECT
   

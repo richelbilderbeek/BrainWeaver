@@ -21,21 +21,16 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #ifndef QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
 #define QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include "qthideandshowdialog.h"
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
-#pragma GCC diagnostic pop
+#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtStudentStartCompleteDialog; }
 
 namespace ribi {
 namespace braw {
 
-class QtStudentStartCompleteDialog : public ribi::QtHideAndShowDialog
+class QtStudentStartCompleteDialog : public QtDialog
 {
   Q_OBJECT
     

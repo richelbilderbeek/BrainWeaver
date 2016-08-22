@@ -33,9 +33,9 @@ namespace ribi {
 
 namespace braw {
 
-boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
+std::unique_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
 {
-  boost::shared_ptr<QFileDialog> d(new QFileDialog);
+  std::unique_ptr<QFileDialog> d(new QFileDialog);
 
   //enum ViewMode { Detail, List };
   d->setViewMode(QFileDialog::Detail);
@@ -61,9 +61,9 @@ boost::shared_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
   return d;
 }
 
-boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type)
+std::unique_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type)
 {
-  boost::shared_ptr<QFileDialog> d(new QFileDialog);
+  std::unique_ptr<QFileDialog> d(new QFileDialog);
 
   //enum ViewMode { Detail, List };
   d->setViewMode(QFileDialog::Detail);
@@ -95,5 +95,4 @@ boost::shared_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType ty
 }
 
 } //~namespace braw
-
 } //~namespace ribi

@@ -61,7 +61,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtClusterDialog::QtClusterDialog(
   const File& file,
   QWidget* parent)
-  : QtHideAndShowDialog(parent),
+  : QtDialog(parent),
     ui(new Ui::QtClusterDialog),
     m_back_to_menu(false),
     m_file(file),
@@ -136,7 +136,7 @@ void ribi::braw::QtClusterDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
-    close();
+    emit remove_me(this);
     return;
   }
   if (!m_widget)
@@ -214,14 +214,18 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
     assert(m_file.GetCluster() == GetWidget()->GetCluster());
   }
 
-  QtConceptMapDialog d(m_file);
-  this->ShowChild(&d);
+  QtConceptMapDialog * const d = new QtConceptMapDialog(m_file);
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
 
   //By now, the concept map must have been (1) created (2) already present
-  if (d.GoBackToMenu())
+  if (d->GoBackToMenu())
   {
     m_back_to_menu = true;
-    close();
+    emit remove_me(this);
   }
 
   //Same test as in constructor
@@ -256,7 +260,7 @@ void ribi::braw::QtClusterDialog::Save()
     && "File must have correct file extension name");
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
-  //close(); //2013-04-19 Request by client
+  //emit remove_me(this); //2013-04-19 Request by client
 }
 
 void ribi::braw::QtClusterDialog::Save(const std::string& filename)

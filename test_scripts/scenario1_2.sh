@@ -233,7 +233,8 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.2
+
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.2
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -246,7 +247,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.2 key alt+F4 sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Tab Escape sleep 0.2
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -259,7 +260,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -272,7 +273,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -285,4 +286,4 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.2

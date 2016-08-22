@@ -168,7 +168,10 @@ fi
 xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e sleep 0.2 key Ctrl+z sleep 0.2
 
 # Create new edge by mouse
-xdotool mousemove 540 560 click 1 mousemove 450 360 sleep 0.5 click 1
+
+xdotool mousemove 520 650 click 1 sleep 1 mousemove 450 450 sleep 1 click 1
+
+# OLD xdotool mousemove 540 560 click 1 mousemove 450 360 sleep 0.5 click 1
 
 # Click on target node to select it
 xdotool sleep 0.5 click 1

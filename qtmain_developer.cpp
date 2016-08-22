@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <QApplication>
+#include <QDebug>
 #include <QIcon>
 #include "qtbrainweavermenudialog.h"
+#include "qtbrainweavermasterdialog.h"
 
 const std::string CreateStyleSheet()
 {
@@ -44,14 +46,45 @@ const std::string CreateStyleSheet()
   return s;
 }
 
+//From https://rohieb.wordpress.com/2010/07/08/qt-throw-exceptions-from-signals-and-slots/
+//which is adapted fromhttp://stackoverflow.com/a/1578433/3364162
+class MyApplication : public QApplication
+{
+public:
+  MyApplication(int& argc, char ** argv)
+    : QApplication(argc, argv)
+  {
+
+  }
+
+  // reimplemented from QApplication so we can throw exceptions in slots
+  bool notify(QObject * receiver, QEvent * event) {
+    try
+    {
+      return QApplication::notify(receiver, event);
+    }
+    catch(std::exception& e)
+    {
+      qCritical() << "Exception thrown:" << e.what();
+    }
+    catch(...)
+    {
+      qCritical() << "Unknown exception thrown";
+    }
+    return false;
+  }
+};
+
+
 int main(int argc, char *argv[])
 {
   try
   {
-    QApplication a(argc, argv);
+    MyApplication a(argc, argv);
     a.setStyleSheet(CreateStyleSheet().c_str());
     a.setWindowIcon(QIcon(":/images/R.png"));
-    ribi::braw::QtMenuDialog d;
+    ribi::braw::QtMasterDialog d;
+    d.add_new(new ribi::braw::QtMenuDialog);
     d.show();
     return a.exec();
   }
