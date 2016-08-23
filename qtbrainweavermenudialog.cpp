@@ -305,7 +305,6 @@ void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
       new QtConceptMapDialog(file)
     };
     emit add_me(d);
-    FileIo().DeleteFile(GetRecoveryFilename());
   }
   catch (std::exception& )
   {

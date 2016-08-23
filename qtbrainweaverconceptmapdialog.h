@@ -48,8 +48,6 @@ class QtConceptMapDialog : public QtDialog
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept { return m_back_to_menu; }
 
-  [[deprecated("Replaced by UpdateFileWithConceptMapFromWidget, which correctly described the member function")]]
-  void Save() const = delete;
   ///Update concept map into file
   void UpdateFileWithConceptMapFromWidget();
 
@@ -59,6 +57,7 @@ class QtConceptMapDialog : public QtDialog
   private slots:
 
   void keyPressEvent(QKeyEvent *);
+  void on_autosave() noexcept;
   void on_button_save_clicked();
   void on_button_print_clicked();
 
@@ -73,11 +72,6 @@ private:
 
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
-
-  //#define NOT_NOW_20141111
-  #ifdef NOT_NOW_20141111
-  void OnConceptMapItemRequestsEdit(cmap::QtConceptMapElement* const item);
-  #endif //NOT_NOW_20141111
 };
 
 ///Create a concept map from a cluster

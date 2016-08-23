@@ -64,7 +64,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.5
+xdotool windowactivate --sync $id sleep 0.2 key Return sleep 1.0
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -105,22 +105,40 @@ then
 fi
 # Text to add
 xdotool windowactivate --sync $id type "hard to make up"
+xdotool sleep 0.1
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.1
+
 # Text to add
 xdotool windowactivate --sync $id type "concise"
+xdotool sleep 0.1
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.1
+
 # Text to add
 xdotool windowactivate --sync $id type "precise"
+xdotool sleep 0.1
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.1
+
 # Text to add
 xdotool windowactivate --sync $id type "English"
+xdotool sleep 0.1
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.1
+
 # Text to add
 xdotool windowactivate --sync $id type "not too long"
+xdotool sleep 0.1
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
 xdotool sleep 0.2

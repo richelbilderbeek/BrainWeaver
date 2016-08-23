@@ -210,7 +210,8 @@ then
 fi
 
 # CRASH
-xdotool windowactivate $id sleep 0.3 key F9
+echo "Going to crash the program in 3 seconds..."
+xdotool windowactivate $id sleep 3.0 key F9
 
 exit
 

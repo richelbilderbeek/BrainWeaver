@@ -39,6 +39,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QLayout>
 #include <QMessageBox>
+#include <QTimer>
 
 #include "add_custom_and_selectable_edge_between_vertices.h"
 #include "add_custom_and_selectable_vertex.h"
@@ -125,11 +126,18 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move( screen.center() - this->rect().center() );
   }
+
+  //Start autosave
+  {
+    QTimer * const timer{new QTimer(this)};
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(on_autosave()));
+    timer->setInterval(1000);
+    timer->start();
+  }
 }
 
 ribi::braw::QtConceptMapDialog::~QtConceptMapDialog() noexcept
 {
-  m_file.Save(GetRecoveryFilename());
   delete ui;
 }
 
@@ -215,6 +223,21 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   UpdateFileWithConceptMapFromWidget();
   QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
   emit add_me(d);
+}
+
+void ribi::braw::QtConceptMapDialog::on_autosave() noexcept
+{
+  if (!isVisible()) return;
+  try
+  {
+    UpdateFileWithConceptMapFromWidget();
+    m_file.AutoSave();
+    qDebug() << __func__ << ": successfull autosave";
+  }
+  catch (std::exception& e)
+  {
+    qCritical() << __func__ << ": exception thrown with description " << e.what();
+  }
 }
 
 void ribi::braw::QtConceptMapDialog::on_button_save_clicked()

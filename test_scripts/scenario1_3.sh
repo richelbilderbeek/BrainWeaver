@@ -226,7 +226,7 @@ fi
 # Enter assessor name
 xdotool windowactivate $id sleep 0.2 type "Jane Doe" 
 # Export to PDF
-xdotool windowactivate $id sleep 0.4 key Alt+e sleep 0.4
+xdotool windowactivate $id sleep 0.4 key Alt+e sleep 0.8
 
 ####################################
 # 'Preview van PDF'

@@ -54,8 +54,7 @@ xdotool windowactivate --sync $id key Delete key Delete key Delete key Delete ke
 # Type filename
 xdotool windowactivate --sync $id type $mycmp
 # OK
-#xdotool windowactivate --sync $id sleep 0.2 key alt+o sleep 0.8
-xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.4
+xdotool windowactivate --sync $id sleep 0.4 key Return sleep 0.6
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -116,7 +115,7 @@ xdotool windowactivate $id type "not too long"
 xdotool windowactivate $id key Tab Return
 
 # Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 1.0
+xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 2.0
 
 ####################################
 # 'Construeer een concept map-scherm'

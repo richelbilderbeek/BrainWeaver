@@ -33,6 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <boost/xpressive/xpressive.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
+#include <QDebug>
 #include <QFile>
 #include <QRegExp>
 
@@ -96,8 +97,10 @@ ribi::braw::File::File(
 
 void ribi::braw::File::AutoSave() const
 {
-  this->Save("autosave1." + m_filename_extension);
+  //Reversed order: first a save is attempted at 'autosave2'
+  //If that fails, 'autosave1' is still in a valid state
   this->Save("autosave2." + m_filename_extension);
+  this->Save("autosave1." + m_filename_extension);
 }
 
 std::string ribi::braw::File::GetQuestion() const
@@ -191,10 +194,15 @@ void ribi::braw::File::Save(const std::string &filename) const
     && filename.substr( filename.size() - 3, 3 ) == m_filename_extension
     && "File must have correct file extension name"
   );
+  try
   {
-    std::ofstream f(filename.c_str());
     const std::string s = ToXml(*this);
+    std::ofstream f(filename.c_str());
     f << s;
+  }
+  catch (std::exception& e)
+  {
+    qCritical() << __func__ << ": failed with exception " << e.what();
   }
 }
 
@@ -314,10 +322,10 @@ std::string ribi::braw::FileToStr(const std::string& filename) noexcept
   return s;
 }
 
-std::string ribi::braw::GetRecoveryFilename() noexcept
-{
-  return "recovery.cmp";
-}
+//std::string ribi::braw::GetRecoveryFilename() noexcept
+//{
+//  return "recovery.cmp";
+//}
 
 std::string ribi::braw::ToXml(const File& file) noexcept
 {

@@ -54,6 +54,9 @@ class File
     const std::string& version
   );
 
+  ///AutoSave
+  void AutoSave() const;
+
   ///Obtain the string which indicates this file is a Brainweaver file
   const std::string& GetAbout() const { return m_about; }
 
@@ -136,9 +139,6 @@ class File
 
   ///The version of this class
   std::string m_version;
-
-  ///AutoSave, called after each setter
-  void AutoSave() const;
 };
 
 ///Create a concept map with a center node with text
@@ -155,7 +155,7 @@ std::string DoXpressiveRegexReplace(
 std::string FileToStr(const std::string& filename) noexcept;
 
 ///Get the name of the recovery filename
-std::string GetRecoveryFilename() noexcept;
+//std::string GetRecoveryFilename() noexcept;
 
 ///Load a File from disk
 File LoadFile(const std::string& filename);
