@@ -38,3 +38,6 @@ script:
   - codecov
   - ./clean.sh
   - ./build_desktop.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

@@ -48,3 +48,7 @@ include(BrainweaverDesktop.pri)
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
 QMAKE_CXXFLAGS += -fext-numeric-literals
+
+# gcov
+QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+LIBS += -lgcov
