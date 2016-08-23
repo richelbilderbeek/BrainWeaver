@@ -1,31 +1,40 @@
 #include "qtbrainweavermenudialog_test.h"
+
+#include <QDebug>
 #include "qtbrainweavermenudialog.h"
+#include "qtbrainweavermasterdialog.h"
 
 void ribi::braw::qtbrainweavermenudialog_test::default_construction()
 {
-  ribi::braw::QtMenuDialog d;
+  ribi::braw::QtMasterDialog d;
+  d.add_new(new ribi::braw::QtMenuDialog);
   d.show();
+  //QTest::keyClick(&d,Qt::Key_Escape, Qt::NoModifier);
 }
 
 void ribi::braw::qtbrainweavermenudialog_test::press_all_keys()
 {
-  //Press A-Z
-  for (int k = static_cast<int>(Qt::Key_A); k <= static_cast<int>(Qt::Key_Z); ++k)
-  {
-    ribi::braw::QtMenuDialog d;
-    d.show();
-    QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::ControlModifier, 100);
-    QTest::keyClick(&d, Qt::Key::Key_F4, Qt::AltModifier, 100);
-    QTest::keyClick(&d, Qt::Key::Key_F4, Qt::AltModifier, 100);
-  }
-  //Press 0-9
+  //Press digit
   for (int k = static_cast<int>(Qt::Key_0); k <= static_cast<int>(Qt::Key_9); ++k)
   {
-    ribi::braw::QtMenuDialog d;
+    if (k == Qt::Key_1) continue;
+    ribi::braw::QtMasterDialog d;
+    d.add_new(new ribi::braw::QtMenuDialog);
     d.show();
-    QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::ControlModifier, 100);
-    QTest::keyClick(&d, Qt::Key::Key_F4, Qt::AltModifier, 100);
-    QTest::keyClick(&d, Qt::Key::Key_F4, Qt::AltModifier, 100);
+    QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::AltModifier, 100);
+    QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
+    QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
+  }
+  //Press characters
+  for (int k = static_cast<int>(Qt::Key_A); k <= static_cast<int>(Qt::Key_T); ++k)
+  {
+    if (k == Qt::Key_N) continue;
+    ribi::braw::QtMasterDialog d;
+    d.add_new(new ribi::braw::QtMenuDialog);
+    d.show();
+    QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::AltModifier, 100);
+    QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
+    QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
   }
 
 }

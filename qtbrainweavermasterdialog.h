@@ -20,7 +20,7 @@ private:
   Ui::QtMasterDialog *ui;
 
   void closeEvent(QCloseEvent * event);
-  //void keyPressEvent(QKeyEvent *);
+  void keyPressEvent(QKeyEvent *);
 
 public slots:
   ///Add a new dialog. Each dialog will call this

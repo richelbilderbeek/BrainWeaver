@@ -54,16 +54,14 @@ void ribi::braw::QtMasterDialog::closeEvent(QCloseEvent * event)
   event->setAccepted(!event->spontaneous());
 }
 
-/*
 void ribi::braw::QtMasterDialog::keyPressEvent(QKeyEvent * e)
 {
+  e->setAccepted(false);
   //Determine what to close: a current widget if present, else this dialog itself
-  QWidget * d = ui->stackedWidget->currentWidget();
-  if (!d) close();
-  d->keyPressEvent(e);
-
+  //QWidget * d = ui->stackedWidget->currentWidget();
+  //if (!d) close();
+  //d->keyPressEvent(e);
 }
-*/
 
 void ribi::braw::QtMasterDialog::remove(QDialog * const dialog)
 {
