@@ -74,6 +74,10 @@ qmake BrainweaverDeveloper.pro
 make
 ```
 
+## Manual
+
+See [the Brainweaver manual](Manual.md).
+
 ## Help
 
 ### Building fails!
