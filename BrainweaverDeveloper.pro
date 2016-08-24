@@ -41,10 +41,6 @@ include(../RibiClasses/CppXml/CppXml.pri)
 include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
-include(../TestConceptMap/TestConceptMapDesktop.pri)
-include(../TestArrowItems/TestQtArrowItemsDesktop.pri)
-include(../TestRoundedEditRectItem/TestQtRoundedEditRectItemDesktop.pri)
-include(../TestRoundedRectItem/TestQtRoundedRectItemDesktop.pri)
 
 #Desktop
 include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)

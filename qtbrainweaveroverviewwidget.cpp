@@ -51,7 +51,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "qtconceptmaprateconcepttallydialognewname.h"
 #include "qtconceptmaprateexamplesdialognewname.h"
-#include "qttesteditconceptmapdialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 

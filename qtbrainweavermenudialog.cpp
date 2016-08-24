@@ -63,18 +63,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
-
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmaprateconceptdialognewname.h"
 #include "qtconceptmaprateconcepttallydialognewname.h"
 #include "qtconceptmaprateexamplesdialognewname.h"
-//#include "qtconceptmapviewtestsdialog.h"
 #include "qtstylesheetsettermaindialog.h"
-#include "qttestconceptmapmenudialog.h"
-#include "qttesteditconceptmapdialog.h"
-#include "qttestqtarrowitemsmenudialog.h"
-#include "qttestqtroundededitrectitemmenudialog.h"
-#include "qttestqtroundedrectitemmenudialog.h"
 #include "ribi_regex.h"
 #include "testtimer.h"
 #include "trace.h"
@@ -84,7 +77,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::braw::QtMenuDialog::QtMenuDialog(QWidget* parent)
   : QtDialog(parent),
     ui(new Ui::QtMenuDialog)
-    //m_file{}
 {
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
@@ -110,24 +102,7 @@ void ribi::braw::QtMenuDialog::on_button_assessor_clicked() noexcept
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 {
   //Obtain an empty file
-  File file;
-  //Use HeteromorphousTestConceptMap[17] to check for subconcept maps with many examples
-  //Use HeteromorphousTestConceptMap[18] to check for subconcept maps with large texts
-  //Use HeteromorphousTestConceptMap[19] to check for connection to focus with ...
-  {
-    const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetTest(6);
-    assert(boost::num_vertices(concept_map) > 0);
-    //Question and first node must match
-    file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
-    file.SetConceptMap(concept_map);
-  }
-  //Obtain a random sub-concept-map
-  const std::vector<ribi::cmap::ConceptMap> concept_maps = CreateDirectNeighbourConceptMaps(file.GetConceptMap());
-  //Display this random concept map
-  const int index = std::rand() % concept_maps.size();
-  //const ribi::cmap::ConceptMap concept_map = concept_maps[ index ];
-  //Create and show the dialog
+  const File file = FileFactory().Get5();
   QtRateConceptMapDialog * const d{
     new QtRateConceptMapDialog(file)
   };
@@ -229,22 +204,6 @@ void ribi::braw::QtMenuDialog::on_button_about_clicked() noexcept
   emit add_me(d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_test_qtroundededitrectitem_clicked() noexcept
-{
-  QtTestQtRoundedEditRectItemMenuDialog * const d{
-    new QtTestQtRoundedEditRectItemMenuDialog
-  };
-  emit add_me(d);
-}
-
-void ribi::braw::QtMenuDialog::on_button_test_arrowitems_clicked() noexcept
-{
-  QtTestQtArrowItemsMenuDialog * const d{
-    new QtTestQtArrowItemsMenuDialog
-  };
-  emit add_me(d);
-}
-
 void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
   QtStyleSheetSetterMainDialog * const d{
@@ -284,14 +243,6 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   emit add_me(d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_test_conceptmaps_clicked()
-{
-  ribi::cmap::QtTestMenuDialog * const d{
-    new ribi::cmap::QtTestMenuDialog
-  };
-  emit add_me(d);
-}
-
 void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
 {
   const int test = 4;
@@ -312,14 +263,6 @@ void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
   }
 }
 
-void ribi::braw::QtMenuDialog::on_button_test_qtroundedrectitem_clicked()
-{
-  QtTestQtRoundedRectItemMenuDialog * const d{
-    new QtTestQtRoundedRectItemMenuDialog
-  };
-  emit add_me(d);
-}
-
 void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
 {
   const int test{0};
@@ -329,3 +272,4 @@ void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
   QtConceptMapDialog * const d{new QtConceptMapDialog(file)};
   emit add_me(d);
 }
+

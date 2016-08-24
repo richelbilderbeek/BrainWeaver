@@ -58,29 +58,20 @@ public slots:
   void on_button_rating_clicked() noexcept;
   void on_button_student_clicked() noexcept;
   void on_button_test_conceptmap_clicked();
-  void on_button_test_arrowitems_clicked() noexcept;
   void on_button_test_cluster_clicked() noexcept;
-  void on_button_test_conceptmaps_clicked();
-  void on_button_test_qtroundededitrectitem_clicked() noexcept;
 
 private slots:
   void keyPressEvent(QKeyEvent* e) noexcept;
-
-  void on_button_test_qtroundedrectitem_clicked();
 
   void on_button_empty_qtconceptmap_clicked();
 
 private:
   Ui::QtMenuDialog *ui;
 
-  ///The file to work on
-  //File m_file;
-
   friend class qtbrainweavermenudialog_test;
 };
 
 } //~namespace braw
-
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERMENUDIALOG_H
