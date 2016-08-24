@@ -130,7 +130,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   {
     QTimer * const timer{new QTimer(this)};
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(on_autosave()));
-    timer->setInterval(1000);
+    timer->setInterval(10000);
     timer->start();
   }
 }
