@@ -109,11 +109,10 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   assert(m_widget);
 
+  ui->setupUi(this);
   m_widget->SetConceptMap(m_file.GetConceptMap());
-
   m_widget->SetMode(ribi::cmap::Mode::edit);
 
-  ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
@@ -215,6 +214,7 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
     return;
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
+  m_widget->keyPressEvent(e);
   QDialog::keyPressEvent(e);
 }
 

@@ -45,8 +45,6 @@ include(../RibiClasses/CppXml/CppXml.pri)
 include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
 include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
-
-
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 SOURCES += qtmain_test.cpp

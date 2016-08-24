@@ -17,10 +17,11 @@
 #include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
 #include "brainweaverfile.h"
+#include "brainweaverfilefactory.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmapqtedge.h"
-
 #include "qtconceptmap.h"
+#include "qtconceptmaphelper.h"
 #include "qtconceptmapqtnode.h"
 #include "testtimer.h"
 #include "trace.h"
@@ -124,4 +125,48 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   const QtConceptMapDialog d(file);
 
   QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
+}
+
+void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head()
+{
+  //Added this for https://github.com/richelbilderbeek/Brainweaver/issues/88
+  //just to be sure that a QtConceptMap gets saved correctly
+  using namespace cmap;
+  File file = FileFactory().Get1();
+  QtConceptMapDialog d(file);
+  d.show();
+
+  //Normally I'd say:
+  //If you want to use 'd.GetQtConceptMap()' go work on the QtConceptMap tests
+  QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
+  QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
+  QTest::keyClick(&d, Qt::Key_E, Qt::ControlModifier, 100);
+  QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
+
+  const auto qtconceptmap = d.GetWidget();
+  const auto qtnodes = ribi::cmap::GetQtNodesNotOnEdge(qtconceptmap->GetScene());
+  const auto excepted_vertices = 3;
+  const auto measured_vertices = qtnodes.size();
+  QVERIFY(measured_vertices == excepted_vertices);
+  const auto qtedges = ribi::cmap::GetQtEdges(qtconceptmap->GetScene());
+  const auto excepted_edges = 1;
+  const auto measured_edges = qtedges.size();
+  QVERIFY(measured_edges == excepted_edges);
+  const QtEdge * const qtedge = qtedges[0];
+  assert(qtedge);
+  QVERIFY(qtedge->HasHeadArrow());
+  QVERIFY(qtedge->GetEdge().HasHeadArrow());
+  QVERIFY(!qtedge->HasTailArrow());
+  QVERIFY(!qtedge->GetEdge().HasTailArrow());
+
+  const std::string filename{"create_edge_with_arrow_head.cmp"};
+  d.UpdateFileWithConceptMapFromWidget();
+  d.Save(filename);
+
+  const std::string s = ToDot(LoadFile(filename).GetConceptMap());
+  QVERIFY(s.find("<has_head>1</has_head>") != std::string::npos);
+  QVERIFY(s.find("<has_tail>0</has_tail>") != std::string::npos);
+  const std::string t = ToXml(LoadFile(filename).GetConceptMap());
+  QVERIFY(t.find("<has_head>1</has_head>") != std::string::npos);
+  QVERIFY(t.find("<has_tail>0</has_tail>") != std::string::npos);
 }

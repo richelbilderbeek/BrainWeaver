@@ -29,6 +29,11 @@ private slots:
   ///If this dialog is fed with a file without a cluster, but with concept map
   ///it will read the concept map
   void dialog_will_prefer_to_read_an_existing_concept_map_over_creating_one();
+
+  ///Create a concept map of two nodes and one edge with an arrow head
+  ///The concept map should have saved that the arrow head is there
+  //For https://github.com/richelbilderbeek/Brainweaver/issues/88
+  void create_edge_with_arrow_head();
 };
 
 } //~namespace braw

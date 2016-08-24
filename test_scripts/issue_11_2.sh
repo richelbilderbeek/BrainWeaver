@@ -49,7 +49,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key alt+1 sleep 0.4
+xdotool windowactivate $id key alt+1 sleep 5.0
 
 ####################################
 # 'Kies een assessment bestand'
@@ -64,7 +64,7 @@ xdotool windowactivate $id key Delete key Delete key Delete key Delete key Delet
 # Type filename
 xdotool windowactivate $id type $mycmp
 # OK
-xdotool windowactivate --sync $id sleep 0.2 key Return sleep 0.5
+xdotool windowactivate --sync $id sleep 0.4 key Return sleep 0.6
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -103,24 +103,43 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
+
 # Text to add
 xdotool windowactivate --sync $id type "hard to make up"
+xdotool sleep 0.2
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.2
+
 # Text to add
 xdotool windowactivate --sync $id type "concise"
+xdotool sleep 0.2
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.2
+
 # Text to add
 xdotool windowactivate --sync $id type "precise"
+xdotool sleep 0.2
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.2
+
 # Text to add
 xdotool windowactivate --sync $id type "English"
+xdotool sleep 0.2
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
+xdotool sleep 0.2
+
 # Text to add
 xdotool windowactivate --sync $id type "not too long"
+xdotool sleep 0.2
+
 # Add 
 xdotool windowactivate --sync $id key Tab Return
 xdotool sleep 0.2
@@ -151,7 +170,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.4 key alt+b sleep 0.6
+xdotool windowactivate $id sleep 0.4 key alt+b sleep 0.8
 
 ####################################
 # 'Construeer een concept map-scherm'
