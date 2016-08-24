@@ -17,7 +17,6 @@ private slots:
   ///it will have n+1 concepts
   void create_from_cluster();
 
-
   ///If this dialog is fed with a file with a cluster and without a concept map
   /// (that is, one node (the focal question) only)
   ///it will create a concept map from the cluster

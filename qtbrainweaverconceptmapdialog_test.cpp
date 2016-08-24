@@ -114,11 +114,11 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
 void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_an_existing_concept_map_over_creating_one()
 {
   using namespace cmap;
-  File file;
+  ribi::braw::File file;
   const ribi::cmap::ConceptMap concept_map(
     ConceptMapFactory().Get6()
   );
-  const auto question = GetCenterNode(concept_map).GetConcept().GetName();
+  const auto question = ribi::cmap::GetCenterNode(concept_map).GetConcept().GetName();
   file.SetQuestion(question);
   file.SetConceptMap(concept_map);
   const QtConceptMapDialog d(file);

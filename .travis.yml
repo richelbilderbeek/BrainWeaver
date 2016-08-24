@@ -31,13 +31,12 @@ script:
   - ./download_other_githubs.sh
   - ./build_other_githubs.sh
   - ./build_console_test.sh
-  - ./BrainweaverConsoleTest
   - ./build_desktop_test.sh
+  - ./build_desktop.sh
+  - ./BrainweaverConsoleTest
   - ./BrainweaverDesktopTest
   - ./get_code_cov.sh
   - codecov
-  - ./clean.sh
-  - ./build_desktop.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

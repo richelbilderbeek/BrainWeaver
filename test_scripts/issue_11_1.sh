@@ -61,7 +61,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.3
+xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.8
 
 ####################################
 # 'Sla het assessment invoer-bestand op', 
@@ -74,7 +74,7 @@ then
   exit 1
 fi
 xdotool windowactivate $id sleep 0.2 type $mycmp
-xdotool windowactivate $id sleep 0.2 key Return sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Return sleep 0.4
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'
