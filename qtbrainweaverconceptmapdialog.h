@@ -33,7 +33,7 @@ namespace braw {
 
 class QtConceptMapDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
     
   public:
   explicit QtConceptMapDialog(const File& file, QWidget* parent = 0);

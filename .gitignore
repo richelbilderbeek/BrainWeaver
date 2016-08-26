@@ -49,3 +49,6 @@ mocinclude.opt
 *.tar.gz
 oclint-0.10.3/
 oclint.log
+qrc_*
+moc_*
+BrainweaverDesktopTest

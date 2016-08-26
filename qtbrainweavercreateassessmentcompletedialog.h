@@ -31,7 +31,7 @@ namespace braw {
 
 class QtCreateAssessmentCompleteDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
     
   public:
   explicit QtCreateAssessmentCompleteDialog(QWidget* parent = 0);

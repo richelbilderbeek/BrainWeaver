@@ -10,7 +10,7 @@ namespace braw {
 
 class QtMasterDialog : public QDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtMasterDialog(QWidget *parent = 0);

@@ -35,7 +35,7 @@ namespace braw {
 ///because the widget needs something to work on
 class QtClusterDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtClusterDialog(const File& file, QWidget* parent = 0);
@@ -82,13 +82,14 @@ private:
   ///The cluster widget
   QtClusterWidget * const m_widget;
 
-  ///Add a Cluster to the file if it is not yet present,
-  ///Create a QtClusterWidget from the file its cluster
-  static QtClusterWidget * BuildWidget(File file);
 
   //Start saving procedure, with request of filename
   void Save();
 };
+
+///Add a Cluster to the file if it is not yet present,
+///Create a QtClusterWidget from the file its cluster
+QtClusterWidget * BuildWidget(File file);
 
 } //~namespace braw
 } //~namespace ribi

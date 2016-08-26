@@ -375,19 +375,19 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
 
   {
     const std::vector<std::string> v
-      = r.GetRegexMatches(s,r.GetRegexAbout());
+      = ribi::Regex().GetRegexMatches(s,r.GetRegexAbout());
     assert(v.size() == 1);
     about = ribi::xml::StripXmlTag(v[0]);
   }
   //m_assessor_name
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexAssessorName());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexAssessorName());
     assert(v.size() == 1);
     assessor_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_cluster
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexCluster());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexCluster());
     if (!v.empty())
     {
       assert(v.size() == 1);
@@ -400,7 +400,7 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
   }
   //m_concept_map
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s, r.GetRegexConceptMap());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s, r.GetRegexConceptMap());
     if (!v.empty())
     {
       assert(v.size() == 1);
@@ -413,7 +413,7 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
   }
   //m_question
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexQuestion());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexQuestion());
     if (v.empty())
     {
       std::clog << "Warning: no question supplied" << std::endl;
@@ -427,13 +427,13 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
   }
   //m_student_name
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexStudentName());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexStudentName());
     assert(v.size() == 1);
     student_name = ribi::xml::StripXmlTag(v[0]);
   }
   //m_version
   {
-    const std::vector<std::string> v = r.GetRegexMatches(s,r.GetRegexVersion());
+    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexVersion());
     assert(v.size() == 1);
     version = ribi::xml::StripXmlTag(v[0]);
   }

@@ -32,7 +32,7 @@ namespace braw {
 
 class QtRateConceptMapDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
   
 public:
   using ConceptMap = cmap::QtConceptMap;

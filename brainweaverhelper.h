@@ -69,7 +69,8 @@ const std::vector<const T *> AddConst(
 
 namespace braw {
 
-///Obtain all possible selections of a std::vector, preserving the ordering of its elements
+///Obtain all possible selections of a std::vector,
+///  preserving the ordering of its elements
 ///Examples:
 /// {     } -> { {}                                              }
 /// {1    } -> { {}, {1}                                         }
@@ -81,7 +82,7 @@ const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
 {
   std::vector<std::vector<T> > result;
   const int sz = boost::numeric_cast<int>(v.size());
-  const int n_combinations = (1 << sz);
+  const int n_combinations{1 << sz};
 
   for (int i=0; i!=n_combinations; ++i)
   {
@@ -98,7 +99,8 @@ const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
   return result;
 }
 
-///Obtain all possible selections of a std::vector, preserving the ordering of its elements
+///Obtain all possible selections of a std::vector,
+///  preserving the ordering of its elements
 ///Examples:
 /// {     } -> { {}                                              }
 /// {1    } -> { {}, {1}                                         }
@@ -109,7 +111,7 @@ template <class T, std::size_t N>
 const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
 {
   std::vector<std::vector<T>> result;
-  const int n_combinations = (1 << N);
+  const int n_combinations{1 << N};
   result.reserve(n_combinations);
 
   for (int i=0; i!=n_combinations; ++i)
@@ -131,11 +133,13 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
 
 ///Wordwrap the text to obtain lines of max_len characters
-///If the string _must_ be seperable by spaces; a word can have a maximum length of max_len
-std::vector<std::string> Wordwrap(const std::string& s, const std::size_t max_len) noexcept;
+///If the string _must_ be seperable by spaces;
+///  a word can have a maximum length of max_len
+std::vector<std::string> Wordwrap(
+  const std::string& s, const std::size_t max_len
+) noexcept;
 
 } //~namespace braw
-
 } //~namespace ribi
 
 #endif // BRAINWEAVERHELPER_H

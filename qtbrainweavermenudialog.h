@@ -33,7 +33,7 @@ namespace braw {
 
 class QtMenuDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
     
   public:
   explicit QtMenuDialog(QWidget* parent = 0);

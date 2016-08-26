@@ -30,6 +30,8 @@ namespace braw {
 
 struct QtFileDialog
 {
+  QtFileDialog() {}
+
   enum class FileType { cmp, pdf };
   ///Create a QFileDialog to open Brainweaver files with
   static std::unique_ptr<QFileDialog> GetOpenFileDialog();

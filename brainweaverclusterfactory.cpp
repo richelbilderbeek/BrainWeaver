@@ -39,20 +39,29 @@ ribi::braw::ClusterFactory::ClusterFactory()
 
 }
 
-ribi::braw::Cluster ribi::braw::ClusterFactory::Create(const std::vector<ribi::cmap::Concept>& v) const noexcept
+ribi::braw::Cluster ribi::braw::ClusterFactory::Create(
+  const std::vector<ribi::cmap::Concept>& v
+) const noexcept
 {
   Cluster p(v);
   return p;
 }
 
-ribi::braw::Cluster ribi::braw::ClusterFactory::GetTest(const std::vector<int>& test_node_indices) const noexcept
+ribi::braw::Cluster ribi::braw::ClusterFactory::GetTest(
+  const std::vector<int>& test_node_indices
+) const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
-  std::transform(test_node_indices.begin(),test_node_indices.end(),std::back_inserter(concepts),
+  std::transform(
+    test_node_indices.begin(),
+    test_node_indices.end(),
+    std::back_inserter(concepts),
     [](const int index)
     {
       const auto tmp = cmap::ConceptFactory().GetTests();
-      assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
+      assert(
+        index < static_cast<int>(cmap::ConceptFactory().GetTests().size())
+      );
       const cmap::Concept concept = tmp.at(index);
       return concept;
     }
@@ -61,7 +70,8 @@ ribi::braw::Cluster ribi::braw::ClusterFactory::GetTest(const std::vector<int>& 
   return cluster;
 }
 
-std::vector<ribi::braw::Cluster> ribi::braw::ClusterFactory::GetTests() const noexcept
+std::vector<ribi::braw::Cluster>
+ribi::braw::ClusterFactory::GetTests() const noexcept
 {
   std::vector<Cluster> v(5);
   {

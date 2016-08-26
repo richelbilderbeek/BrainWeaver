@@ -109,8 +109,7 @@ void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
     for (int i=0; i!=n_top; ++i)
     {
       assert(i < this->topLevelItemCount());
-      QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-      //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i));  //BUG 2012-12-30
+      QTreeWidgetItem * const top = this->topLevelItem(i);
       assert(top);
       const int n_child = top->childCount();
       for (int j=0; j!=n_child; ++j)
@@ -139,8 +138,7 @@ void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
     const int n_top = this->topLevelItemCount();
     for (int i=0; i!=n_top; ++i)
     {
-      QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-      //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+      QTreeWidgetItem * const top = this->topLevelItem(i);
       assert(top);
 
       const int n_child = top->childCount();
@@ -163,8 +161,7 @@ void ribi::braw::QtClusterWidget::SetCorrectFlags() noexcept
   const int n_top = this->topLevelItemCount();
   for (int i=0; i!=n_top; ++i)
   {
-    QTreeWidgetItem * const top = this->topLevelItem(i); //FIX
-    //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+    QTreeWidgetItem * const top = this->topLevelItem(i);
     assert(top);
 
     //Let all top items auto-expand
@@ -225,33 +222,7 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
         emit QTreeWidget::itemClicked(currentItem(), 0);
       }
     break;
-    case Qt::Key_Right:
-    {
-      auto cur_item = currentItem();
-      assert(dynamic_cast<QtClusterTreeWidgetItem*>(cur_item));
-      if (cur_item && GetDepth(cur_item) == 0)
-      {
-        assert(!cur_item->parent());
-
-        //Move to higher level
-        //const auto parent = cur_item->parent();
-        const auto clone = cur_item->clone();
-        assert(dynamic_cast<QtClusterTreeWidgetItem*>(clone));
-        auto above = itemAbove(cur_item);
-        if (above)
-        {
-          above->addChild(clone);
-          above->setSelected(false);
-        }
-        else
-        {
-          this->addTopLevelItem(clone);
-        }
-        delete cur_item;
-        clone->setSelected(true);
-        //assert(GetDepth(clone) == 1);
-      }
-    }
+    case Qt::Key_Right: keyPressEventRight(event); break;
     break;
 //    case Qt::Key_Left:
 //    {
@@ -271,7 +242,35 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
 //    }
 //    break;
 
+    default: break;
+  }
+}
 
+void ribi::braw::QtClusterWidget::keyPressEventRight(QKeyEvent *)
+{
+  auto cur_item = currentItem();
+  assert(dynamic_cast<QtClusterTreeWidgetItem*>(cur_item));
+  if (cur_item && GetDepth(cur_item) == 0)
+  {
+    assert(!cur_item->parent());
+
+    //Move to higher level
+    //const auto parent = cur_item->parent();
+    const auto clone = cur_item->clone();
+    assert(dynamic_cast<QtClusterTreeWidgetItem*>(clone));
+    auto above = itemAbove(cur_item);
+    if (above)
+    {
+      above->addChild(clone);
+      above->setSelected(false);
+    }
+    else
+    {
+      this->addTopLevelItem(clone);
+    }
+    delete cur_item;
+    clone->setSelected(true);
+    //assert(GetDepth(clone) == 1);
   }
 }
 
@@ -291,7 +290,7 @@ void ribi::braw::QtClusterWidget::BuildCluster()
       assert(concept.GetRatingComplexity() <=  2);
       QtClusterTreeWidgetItem * const top
         = new QtClusterTreeWidgetItem(
-          cmap::Competency::uninitialized, //A concept is not classified in competencies
+          cmap::Competency::uninitialized,
           concept.GetIsComplex(),
           concept.GetRatingComplexity(),
           concept.GetRatingConcreteness(),
@@ -347,8 +346,7 @@ void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
   const int n_top = this->topLevelItemCount();
   for (int i=0; i!=n_top; ++i)
   {
-    QTreeWidgetItem * const top = this->topLevelItem(i); //FIX 2012-12-30
-    //QtTreeWidgetItem * const top = dynamic_cast<QtTreeWidgetItem *>(this->topLevelItem(i)); //BUG 2012-12-30
+    QTreeWidgetItem * const top = this->topLevelItem(i);
     assert(top);
     const std::string name = top->text(0).toStdString();
     std::vector<ribi::cmap::Example> examples;
@@ -358,7 +356,8 @@ void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
     {
       const QtClusterTreeWidgetItem * const braw_item
         = dynamic_cast<QtClusterTreeWidgetItem *>(top->child(j));
-      const cmap::Competency competency = braw_item ? braw_item->m_competency : cmap::Competency::uninitialized;
+      const cmap::Competency competency = braw_item
+        ? braw_item->m_competency : cmap::Competency::uninitialized;
       assert(GetDepth(top->child(j))==1);
       ribi::cmap::Example p(
         top->child(j)->text(0).toStdString(),
@@ -367,7 +366,8 @@ void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
       examples.push_back(p);
     }
 
-    QtClusterTreeWidgetItem * const braw_top = dynamic_cast<QtClusterTreeWidgetItem *>(this->topLevelItem(i)); //FIX 2012-12-30
+    QtClusterTreeWidgetItem * const braw_top
+      = dynamic_cast<QtClusterTreeWidgetItem *>(this->topLevelItem(i));
     using namespace cmap;
 
     concepts.push_back(

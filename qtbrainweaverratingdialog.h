@@ -37,7 +37,7 @@ namespace braw {
 ///QtPrintRatingDialog is optimized for printers
 class QtRatingDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
   public:
   explicit QtRatingDialog(const File file, QWidget* parent = 0);

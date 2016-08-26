@@ -94,7 +94,7 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 }
 
 
-std::vector<QDialog* > ribi::braw::QtOverviewWidget::GetAllDialogs()
+std::vector<QDialog* > ribi::braw::GetAllDialogs()
 {
   std::vector<QDialog* > v;
   {

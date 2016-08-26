@@ -10,25 +10,26 @@ namespace braw {
 class Regex
 {
 public:
-  static std::string GetRegexAbout() noexcept;
-  static std::string GetRegexAssessorName() noexcept;
-  static std::string GetRegexCluster() noexcept;
-  static std::string GetRegexConcept() noexcept;
-  static std::string GetRegexConceptMap() noexcept;
-  static std::string GetRegexQuestion() noexcept;
-  static std::string GetRegexStudentName() noexcept;
-  static std::string GetRegexVersion() noexcept;
-
-  ///Forwards to Ribi.Regex
-  static std::vector<std::string>
-    GetRegexMatches(
-    const std::string& s,
-    const std::string& regex_str
-  );
+  Regex() {}
+  std::string GetRegexAbout() const noexcept;
+  std::string GetRegexAssessorName() const noexcept;
+  std::string GetRegexCluster() const noexcept;
+  std::string GetRegexConcept() const noexcept;
+  std::string GetRegexConceptMap() const noexcept;
+  std::string GetRegexQuestion() const noexcept;
+  std::string GetRegexStudentName() const noexcept;
+  std::string GetRegexVersion() const noexcept;
 
 private:
-  static std::string GetRegexOfSomething(const std::string& s) noexcept;
+  std::string GetRegexOfSomething(const std::string& s) const noexcept;
 };
+
+///Forwards to Ribi.Regex
+//std::vector<std::string>
+//  GetRegexMatches(
+//  const std::string& s,
+//  const std::string& regex_str
+//);
 
 } //~namespace braw
 } //~namespace ribi

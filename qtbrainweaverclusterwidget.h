@@ -34,7 +34,7 @@ struct QtClusterTreeWidgetItem;
 
 class QtClusterWidget : public QTreeWidget
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtClusterWidget(
@@ -73,6 +73,8 @@ private:
   void WriteToCluster() const noexcept;
 
   void SetCorrectFlags() noexcept;
+
+  void keyPressEventRight(QKeyEvent *event);
 };
 
 } //~namespace braw

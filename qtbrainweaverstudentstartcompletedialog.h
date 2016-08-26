@@ -32,7 +32,7 @@ namespace braw {
 
 class QtStudentStartCompleteDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
     
   public:
   explicit QtStudentStartCompleteDialog(const File file, QWidget* parent = 0);

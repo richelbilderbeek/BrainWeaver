@@ -34,6 +34,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
 #include "brainweaverregex.h"
+#include "ribi_regex.h"
 #include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
@@ -67,12 +68,16 @@ ribi::braw::Cluster ribi::braw::XmlToCluster(const std::string &s)
 
   //Obtain the <cluster> ... </cluster> string
 
-  const std::vector<std::string> v = r.GetRegexMatches(s, r.GetRegexCluster());
+  const std::vector<std::string> v = ribi::Regex().GetRegexMatches(
+    s, r.GetRegexCluster()
+  );
   assert(v.size() == 1);
   //Strip the <cluster> tags
   const std::string cluster_str = ribi::xml::StripXmlTag(v[0]);
   //Obtain the <concept> ... </concept> strings
-  const std::vector<std::string> w = r.GetRegexMatches(cluster_str, r.GetRegexConcept());
+  const std::vector<std::string> w = ribi::Regex().GetRegexMatches(
+    cluster_str, r.GetRegexConcept()
+  );
   std::for_each(w.begin(),w.end(),
     [&concepts](const std::string& s)
     {
@@ -114,12 +119,10 @@ std::string ribi::braw::ToXml(const Cluster& cluster) noexcept
 
 bool ribi::braw::operator==(const ribi::braw::Cluster& lhs, const ribi::braw::Cluster& rhs) noexcept
 {
-  const bool verbose{false};
   const std::vector<ribi::cmap::Concept> lhs_concepts = lhs.Get();
   const std::vector<ribi::cmap::Concept> rhs_concepts = rhs.Get();
   if (lhs_concepts.size() != rhs_concepts.size())
   {
-    if (verbose) { TRACE("Number of concepts differ"); }
     return false;
   }
   const int sz = static_cast< int>(lhs_concepts.size());
@@ -127,7 +130,6 @@ bool ribi::braw::operator==(const ribi::braw::Cluster& lhs, const ribi::braw::Cl
   {
     if (lhs_concepts[i] != rhs_concepts[i])
     {
-      if (verbose) { TRACE("A concepts differs"); }
       return false;
     }
   }

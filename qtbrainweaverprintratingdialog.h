@@ -39,7 +39,7 @@ namespace braw {
 ///QtRatingDialog is optimized for humans
 class QtPrintRatingDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
   
 public:
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
@@ -66,7 +66,6 @@ private slots:
 private:
   Ui::QtPrintRatingDialog *ui;
 
-  ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   const File m_file;
 
   cmap::QtConceptMap * const m_widget;

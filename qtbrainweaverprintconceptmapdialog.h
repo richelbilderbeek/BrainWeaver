@@ -37,7 +37,7 @@ namespace braw {
 ///QtPrintConceptMapDialog is optimized for printers
 class QtPrintConceptMapDialog : public QtDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
   
 public:
   using ConceptMap = cmap::QtConceptMap;
@@ -62,7 +62,6 @@ private slots:
 private:
   Ui::QtPrintConceptMapDialog *ui;
 
-  ///m_file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   File m_file;
 
   ConceptMap * const m_widget;

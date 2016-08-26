@@ -60,7 +60,10 @@ ribi::braw::QtClusterTreeWidgetItem::QtClusterTreeWidgetItem(
   }
 }
 
-bool ribi::braw::operator==(const QtClusterTreeWidgetItem& lhs, const QtClusterTreeWidgetItem& rhs) noexcept
+bool ribi::braw::operator==(
+  const QtClusterTreeWidgetItem& lhs,
+  const QtClusterTreeWidgetItem& rhs
+) noexcept
 {
   return lhs.m_competency == rhs.m_competency
     && lhs.m_is_complex == rhs.m_is_complex

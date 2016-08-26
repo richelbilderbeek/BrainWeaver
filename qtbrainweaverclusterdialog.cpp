@@ -103,7 +103,7 @@ ribi::braw::QtClusterDialog::~QtClusterDialog() noexcept
   delete ui;
 }
 
-ribi::braw::QtClusterWidget * ribi::braw::QtClusterDialog::BuildWidget(File file)
+ribi::braw::QtClusterWidget * ribi::braw::BuildWidget(File file)
 {
   // A concept map is already made, cluster has been left empty, thus return null
   if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())

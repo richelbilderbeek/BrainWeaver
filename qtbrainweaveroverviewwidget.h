@@ -33,7 +33,7 @@ struct QtDialog;
 
 class QtOverviewWidget : public QGraphicsView
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
 
@@ -45,9 +45,6 @@ public slots:
 
 private:
 
-  ///Create all dialogs
-  static std::vector<QDialog* > GetAllDialogs();
-
   ///NASTY BUG ALERT: It crashes Wine if m_dialogs is created as
   ///const std::vector<boost::shared_ptr<QDialog> > m_dialogs;
   ///No idea why...
@@ -55,8 +52,10 @@ private:
 
 };
 
-} //~namespace braw
+///Create all dialogs
+std::vector<QDialog* > GetAllDialogs();
 
+} //~namespace braw
 } //~namespace ribi
 
 #endif // QTBRAINWEAVEROVERVIEWWIDGET_H
