@@ -36,8 +36,8 @@
 
 void ribi::braw::qtbrainweaverclusterdialog_test::enable_button_depending_on_file()
 {
-  std::cout << __func__ << ": TODO" << '\n';
-  return;
+  //Described at https://github.com/richelbilderbeek/Brainweaver/issues/94
+  #ifdef FIX_ISSUE_94
   const auto v = File::GetTests();
   std::for_each(v.begin(),v.end(),
     [](const File& file)
@@ -64,6 +64,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::enable_button_depending_on_fil
       }
     }
   );
+  #endif
 }
 
 void ribi::braw::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()

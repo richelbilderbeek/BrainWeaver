@@ -62,8 +62,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "xml.h"
 #pragma GCC diagnostic pop
 
-const std::string ribi::braw::File::m_filename_extension = "cmp";
-
 ribi::braw::File::File()
   : m_about("Brainweaver"),
     m_assessor_name{},
@@ -99,8 +97,13 @@ void ribi::braw::File::AutoSave() const
 {
   //Reversed order: first a save is attempted at 'autosave2'
   //If that fails, 'autosave1' is still in a valid state
-  this->Save("autosave2." + m_filename_extension);
-  this->Save("autosave1." + m_filename_extension);
+  this->Save("autosave2." + GetFilenameExtension());
+  this->Save("autosave1." + GetFilenameExtension());
+}
+
+std::string ribi::braw::GetFilenameExtension() noexcept
+{
+  return "cmp";
 }
 
 std::string ribi::braw::File::GetQuestion() const
@@ -108,15 +111,16 @@ std::string ribi::braw::File::GetQuestion() const
   return m_question;
 }
 
-std::string ribi::braw::File::GetTempFileName()
+std::string ribi::braw::GetTempFileName() noexcept
 {
-  return "tmp." + m_filename_extension;
+  return "tmp." + GetFilenameExtension();
 }
 
-std::string ribi::braw::File::GetTestFileName()
+std::string ribi::braw::GetTestFileName() noexcept
 {
-  return "test." + m_filename_extension;
+  return "test." + GetFilenameExtension();
 }
+
 
 std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
 {
@@ -191,7 +195,7 @@ void ribi::braw::File::Save(const std::string &filename) const
 {
   //Check for correct extension
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == m_filename_extension
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name"
   );
   try

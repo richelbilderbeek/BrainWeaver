@@ -71,20 +71,11 @@ class File
   const ribi::cmap::ConceptMap& GetConceptMap() const { return m_concept_map; }
         ribi::cmap::ConceptMap& GetConceptMap()       { return m_concept_map; }
 
-  ///Obtain the File filename extension
-  static const std::string& GetFilenameExtension() { return m_filename_extension; }
-
   ///Get the assessors' questions
   std::string GetQuestion() const;
 
   ///Get the student his/her name
   const std::string& GetStudentName() const { return m_student_name; }
-
-  ///Obtain a temporary filename
-  static std::string GetTempFileName();
-
-  ///Obtain a test filename
-  static std::string GetTestFileName();
 
   ///Obtain multiple test files
   static std::vector<File> GetTests() noexcept;
@@ -128,9 +119,6 @@ class File
   ///The concept map
   ribi::cmap::ConceptMap m_concept_map;
 
-  ///The file extension of a a File
-  static const std::string m_filename_extension;
-
   ///The question the student must answer
   std::string m_question;
 
@@ -169,6 +157,15 @@ File XmlToFile(const std::string& s);
 bool operator==(const File& lhs, const File& rhs) noexcept;
 bool operator!=(const File& lhs, const File& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const File& f) noexcept;
+
+///Obtain the File filename extension
+std::string GetFilenameExtension() noexcept;
+
+///Obtain a temporary filename
+std::string GetTempFileName() noexcept;
+
+///Obtain a test filename
+std::string GetTestFileName() noexcept;
 
 } //~namespace braw
 } //~namespace ribi

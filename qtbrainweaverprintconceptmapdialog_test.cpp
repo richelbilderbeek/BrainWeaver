@@ -9,6 +9,8 @@
 
 void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
 {
+  //Issue at https://github.com/richelbilderbeek/Brainweaver/issues/93
+  #ifdef FIX_ISSUE_93
   std::cout << __func__ << ": TODO" << '\n';
   return;
   const auto files = FileFactory().GetTests();
@@ -29,6 +31,7 @@ void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
       QVERIFY(all_items_rect.contains(qtnode->boundingRect()));
     }
   }
+  #endif //FIX_ISSUE_93
 }
 
 

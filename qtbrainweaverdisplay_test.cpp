@@ -47,7 +47,9 @@ void ribi::braw::qtbrainweaverdisplay_test::display_misc_values_without_center_n
   }
   catch (std::logic_error& e)
   {
-    const std::string expected_message = "FindCenterNode: Cannot find the one center node, as there are 0";
+    const std::string expected_message{
+      "FindCenterNode: Cannot find the one center node, as there are 0"
+    };
     QVERIFY(std::string(e.what()) == expected_message);
     QVERIFY("Should get here");
   }
@@ -76,7 +78,9 @@ void ribi::braw::qtbrainweaverdisplay_test::display_rated_concepts_without_cente
   }
   catch (std::invalid_argument& e)
   {
-    const std::string expected_message = "DisplayRatedConcepts: must have at least one node";
+    const std::string expected_message{
+      "DisplayRatedConcepts: must have at least one node"
+    };
     QVERIFY(std::string(e.what()) == expected_message);
     QVERIFY("Should get here");
   }

@@ -68,7 +68,9 @@ ribi::braw::QtClusterDialog::QtClusterDialog(
     m_widget(BuildWidget(file))
 {
   ui->setupUi(this);
-  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
+  //Remove help
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   //Add the cluster widget
   {
@@ -80,7 +82,10 @@ ribi::braw::QtClusterDialog::QtClusterDialog(
     }
     else
     {
-      QLabel * const label = new QLabel("Cannot start a new clustering when there is already a concept map created");
+      QLabel * const label = new QLabel(
+        "Cannot start a new clustering "
+        "when there is already a concept map created"
+      );
       layout->addWidget(label);
     }
     ui->widget_tree->setLayout(layout);
@@ -105,8 +110,11 @@ ribi::braw::QtClusterDialog::~QtClusterDialog() noexcept
 
 ribi::braw::QtClusterWidget * ribi::braw::BuildWidget(File file)
 {
-  // A concept map is already made, cluster has been left empty, thus return null
-  if (CountCenterNodes(file.GetConceptMap()) != 0 && file.GetCluster().Get().empty())
+  // A concept map is already made, cluster has been left empty,
+  // thus return null
+  if (CountCenterNodes(file.GetConceptMap()) != 0
+    && file.GetCluster().Get().empty()
+  )
   {
     return nullptr;
   }
@@ -251,12 +259,12 @@ void ribi::braw::QtClusterDialog::Save()
   const std::string filename_raw = d->selectedFiles()[0].toStdString();
 
   const std::string filename
-    =  (filename_raw.size() < File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
-     ? filename_raw + "." + File::GetFilenameExtension()
+    =  (filename_raw.size() < GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
+     ? filename_raw + "." + GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
@@ -266,7 +274,7 @@ void ribi::braw::QtClusterDialog::Save()
 void ribi::braw::QtClusterDialog::Save(const std::string& filename)
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   if (this->GetWidget())
   {

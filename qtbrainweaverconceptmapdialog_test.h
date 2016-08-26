@@ -8,7 +8,7 @@ namespace braw {
 
 class qtbrainweaverconceptmapdialog_test : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT //!OCLINT
 
 private slots:
   void a_file_its_conceptmap_must_have_a_center_node();

@@ -89,7 +89,8 @@ const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
     std::vector<T> w;
     for (int j=0; j!=sz; ++j)
     {
-      if ((1 << j) & i)
+      const bool is_ith{(1 << j) & i};
+      if (is_ith)
       {
         w.push_back(v[j]);
       }
@@ -119,7 +120,8 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
     std::vector<T> w;
     for (int j=0; j!=N; ++j)
     {
-      if ((1 << j) & i)
+      const bool is_ith{(1 << j) & i};
+      if (is_ith)
       {
         w.push_back(v[j]);
       }

@@ -35,8 +35,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverstudentmenudialog.h"
 #pragma GCC diagnostic pop
 
-ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(const File file, QWidget* parent)
-  : QtDialog(parent),
+ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(
+  const File file, QWidget* parent
+) : QtDialog(parent),
     ui(new Ui::QtStudentMenuDialog),
     m_file(file)
 {
@@ -63,7 +64,10 @@ std::string ribi::braw::QtStudentMenuDialog::GetName() const noexcept
 void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
-  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    on_button_save_clicked(); return;
+  }
   QDialog::keyPressEvent(e);
 }
 
@@ -119,12 +123,12 @@ void ribi::braw::QtStudentMenuDialog::on_button_save_clicked()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
-     ? filename_raw + "." + File::GetFilenameExtension()
+    =  (filename_raw.size() < GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
+     ? filename_raw + "." + GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
 }
@@ -134,7 +138,7 @@ void ribi::braw::QtStudentMenuDialog::Save(const std::string& filename)
   m_file.SetStudentName(ui->edit_name->text().toStdString());
 
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   m_file.Save(filename);
   //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }

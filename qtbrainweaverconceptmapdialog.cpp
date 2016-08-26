@@ -213,7 +213,10 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
     emit remove_me(this);
     return;
   }
-  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { on_button_save_clicked(); return; }
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    on_button_save_clicked(); return;
+  }
   m_widget->keyPressEvent(e);
   QDialog::keyPressEvent(e);
 }
@@ -258,12 +261,12 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
   assert(d->selectedFiles().size() == 1);
   const std::string filename_raw = d->selectedFiles()[0].toStdString();
   const std::string filename
-    =  (filename_raw.size() < File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
-     ? filename_raw + "." + File::GetFilenameExtension()
+    =  (filename_raw.size() < GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
+     ? filename_raw + "." + GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
@@ -280,11 +283,13 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   if (m_file.GetConceptMap() != GetWidget()->GetConceptMap())
   {
-    std::clog << __func__ << ": warning: you should have called 'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n";
+    std::clog << __func__ << ": warning: you should have called "
+      << "'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n"
+    ;
     const_cast<QtConceptMapDialog*>(this)->UpdateFileWithConceptMapFromWidget();
   }
   m_file.Save(filename);

@@ -8,7 +8,7 @@ namespace braw {
 
 class qtbrainweaverclustertreewidgetitem_test : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT //!OCLINT
 
 private slots:
   void default_construction();

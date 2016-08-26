@@ -139,12 +139,12 @@ void ribi::braw::QtRateConceptMapDialog::Save()
   assert(!filename_raw.empty());
 
   const std::string filename
-    =  (filename_raw.size() < File::GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != File::GetFilenameExtension()
-     ? filename_raw + "." + File::GetFilenameExtension()
+    =  (filename_raw.size() < GetFilenameExtension().size()
+      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
+     ? filename_raw + "." + GetFilenameExtension()
      : filename_raw);
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   Save(filename);
   //emit remove_me(this); //Do not close after saving
@@ -155,7 +155,7 @@ void ribi::braw::QtRateConceptMapDialog::Save()
 void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 {
   assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == File::GetFilenameExtension()
+    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
   //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();

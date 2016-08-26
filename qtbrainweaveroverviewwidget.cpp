@@ -60,8 +60,6 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 {
   assert(scene());
   assert(std::count_if(m_dialogs.begin(),m_dialogs.end(),[](QDialog* p) { return !p; } ) == 0);
-  //assert(std::all_of(m_dialogs.begin(),m_dialogs.end(),[](QtHideAndShowDialog* p) { return p; } ));
-  
 
   double y_sum = 0.0;
   double max_width = 0.0;
@@ -97,170 +95,44 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 std::vector<QDialog* > ribi::braw::GetAllDialogs()
 {
   std::vector<QDialog* > v;
-  {
-    QDialog* p(new QtAssessorMenuDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 3;
-    assert(index < static_cast<int>(FileFactory().GetNumberOfTests()));
-    const File file(FileFactory().GetTests().at(index));
-    
-    assert(!file.GetCluster().Empty());
-    QDialog* p(new QtClusterDialog(file));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(ribi::cmap::ConceptFactory().GetTests().size()));
-    QDialog * const p{
-      new ribi::cmap::QtConceptMapConceptEditDialog(
-        ribi::cmap::ConceptFactory().GetTests().at(index)
-      )
-    };
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(cmap::ConceptFactory().GetTests().size()));
-    QDialog* p(new QtConceptMapDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtCreateAssessmentCompleteDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtMenuDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 4;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    const File file = FileFactory().GetTests().at(index);
-    
-    QDialog* p(new QtPrintConceptMapDialog(file));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 4;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    const File file = FileFactory().GetTests().at(index);
-    
-    QDialog* p(new QtPrintConceptMapDialog(file));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetTest(6);
-    assert(boost::num_vertices(concept_map) > 0);
-    QDialog* p(new cmap::QtRateConceptDialog(concept_map));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const ribi::cmap::ConceptMap concept_map
-      = ribi::cmap::ConceptMapFactory().GetTest(6);
-    assert(boost::num_vertices(concept_map) > 0);
-    QDialog* p(new cmap::QtRateConceptTallyDialog(concept_map));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QDialog* p(new QtRateConceptMapDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(ribi::cmap::ConceptFactory().GetTests().size()));
-    QDialog * const p{
-      new ribi::cmap::QtRateExamplesDialogNewName(
-        ribi::cmap::ConceptFactory().GetTests().at(index)
-      )
-    };
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 4;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QDialog* p(new QtRatingDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  if (!"show infinite recursion")
-  {
-    QDialog * const p(new QtOverviewDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QDialog* p(new QtStudentMenuDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    const int index = 2;
-    assert(index < static_cast<int>(FileFactory().GetTests().size()));
-    QDialog* p(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(index)));
-    assert(p);
-    v.push_back(p);
-  }
-  #ifdef BRAW_ALSO_SHOW_TEST_DIALOGS
-  {
-    QDialog* p(new QtTestConceptItemDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtTestNodeItemDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtTestEdgeItemDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtTestConceptMapEditWidgetDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtTestConceptMapRateWidgetDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  {
-    QDialog* p(new QtViewTestsDialog);
-    assert(p);
-    v.push_back(p);
-  }
-  #endif
-
+  v.push_back(new QtAssessorMenuDialog);
+  v.push_back(new QtClusterDialog(FileFactory().Get3()));
+  v.push_back(
+    new ribi::cmap::QtConceptMapConceptEditDialog(
+      ribi::cmap::ConceptFactory().GetTest(2)
+    )
+  );
+  v.push_back(new QtConceptMapDialog(FileFactory().Get2()));
+  v.push_back(new QtCreateAssessmentCompleteDialog);
+  v.push_back(new QtMenuDialog);
+  v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5()));
+  v.push_back(
+    new cmap::QtRateConceptDialog(ribi::cmap::ConceptMapFactory().GetTest(6))
+  );
+  v.push_back(
+    new cmap::QtRateConceptTallyDialog(
+      ribi::cmap::ConceptMapFactory().Get6()
+    )
+  );
+  v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2)));
+  v.push_back(
+    new ribi::cmap::QtRateExamplesDialogNewName(
+      ribi::cmap::ConceptFactory().GetTests().at(2)
+    )
+  );
+  v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4)));
+  v.push_back(new QtStudentMenuDialog(FileFactory().GetTests().at(2)));
+  v.push_back(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(2)));
   assert(std::count_if(v.begin(),v.end(),[](QDialog* p) { return !p; } ) == 0);
-  //assert(std::all_of(v.begin(),v.end(),[](QDialog* p) { return p; } )); //MAJ
   return v;
 }
 
 void ribi::braw::QtOverviewWidget::mouseDoubleClickEvent(QMouseEvent *)
 {
-  QImage image(scene()->sceneRect().size().toSize(), QImage::Format_ARGB32); // Create the image with the exact size of the shrunk scene
-  image.fill(Qt::transparent);                                               // Start all pixels transparent
+  // Create the image with the exact size of the shrunk scene
+  QImage image(scene()->sceneRect().size().toSize(), QImage::Format_ARGB32);
+  // Start all pixels transparent
+  image.fill(Qt::transparent);
   QPainter painter(&image);
   scene()->render(&painter);
   image.save("file_name.png");

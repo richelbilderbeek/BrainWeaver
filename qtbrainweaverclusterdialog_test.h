@@ -8,7 +8,7 @@ namespace braw {
 
 class qtbrainweaverclusterdialog_test : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT //!OCLINT
 
 private slots:
   void enable_button_depending_on_file();

@@ -66,6 +66,10 @@ private:
   ///Build the widget from the cluster
   void BuildCluster();
 
+  ///Check that there are no items at depth three,
+  ///which should always be the case
+  bool HasNoItemsAtLevelThree() noexcept;
+
   ///Find out the depth of an item
   int GetDepth(const QTreeWidgetItem * const item) const;
 

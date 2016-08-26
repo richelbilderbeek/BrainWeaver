@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_CreateConceptMap)
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
 {
   using namespace ribi::braw;
-  const std::string tmp_filename = ribi::braw::File::GetTempFileName();
+  const std::string tmp_filename = ribi::braw::GetTempFileName();
   //Test Save/Load on empty File
   File first_file;
   first_file.Save(tmp_filename);

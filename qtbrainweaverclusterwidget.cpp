@@ -132,28 +132,31 @@ void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
     //End the while loop if no parents were moved
     if (done) break;
   }
-  #ifndef NDEBUG
-  //Check that there are no items at depth three
-  {
-    const int n_top = this->topLevelItemCount();
-    for (int i=0; i!=n_top; ++i)
-    {
-      QTreeWidgetItem * const top = this->topLevelItem(i);
-      assert(top);
+  assert(HasNoItemsAtLevelThree());
+  SetCorrectFlags();
+}
 
-      const int n_child = top->childCount();
-      for (int j=0; j!=n_child; ++j)
+
+bool ribi::braw::QtClusterWidget::HasNoItemsAtLevelThree() noexcept
+{
+  const int n_top = this->topLevelItemCount();
+  for (int i=0; i!=n_top; ++i)
+  {
+    QTreeWidgetItem * const top = this->topLevelItem(i);
+    assert(top);
+
+    const int n_child = top->childCount();
+    for (int j=0; j!=n_child; ++j)
+    {
+      if (top->child(j)->childCount() > 0)
       {
-        if (top->child(j)->childCount() > 0)
-        {
-          assert(!"Should not find a child item within a child item");
-        }
+        return false;
       }
     }
   }
-  #endif
-  SetCorrectFlags();
+  return true;
 }
+
 
 //Process all items
 void ribi::braw::QtClusterWidget::SetCorrectFlags() noexcept

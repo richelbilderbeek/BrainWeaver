@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
   a.setStyleSheet(CreateStyleSheet().c_str());
   a.setWindowIcon(QIcon(":/images/R.png"));
 
-  const std::string filter_str = std::string("*.") + ribi::braw::File::GetFilenameExtension();
+  const std::string filter_str = std::string("*.") + ribi::braw::GetFilenameExtension();
   const std::string filename
     = QFileDialog::getOpenFileName(0,"Kies een assessment bestand",QString(),
       filter_str.c_str()).toStdString();
@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
     catch (...)
     {
       //Gotta catch 'm all
+      std::cerr << "Unknown exception thrown\n";
     }
   }
   return 1;
