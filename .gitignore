@@ -46,3 +46,6 @@ debug/
 *_plugin_import.cpp
 mocinclude.opt
 .qmake.stash
+*.tar.gz
+oclint-0.10.3/
+oclint.log
