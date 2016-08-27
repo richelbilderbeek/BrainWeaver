@@ -102,6 +102,100 @@ void ribi::braw::File::AutoSave() const
   this->Save("autosave1." + GetFilenameExtension());
 }
 
+
+
+int ribi::braw::CalculateConcretenessExperimental(const File& file)
+{
+  //The first node removed
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+
+  assert(!nodes.empty());
+  const int sum_rated_concreteness //Constant 'k_c'
+    = std::accumulate(nodes.begin(),nodes.end(),0,
+    [](int& init, const ribi::cmap::Node& node)
+    {
+      return init + node.GetConcept().GetRatingConcreteness();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      50.0 * static_cast<double>(sum_rated_concreteness)
+      / static_cast<double>(nodes.size())
+    )
+  );
+}
+
+
+int ribi::braw::CalculateRichnessExperimental(const File& file)
+{
+
+  std::map<cmap::Competency,int> m = TallyCompetencies(file);
+
+  //The first node removed, as this is the focal question
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+
+  //Remove category 'misc'
+  #ifndef NDEBUG
+  const int debug_m_size_old = static_cast<int>(m.size());
+  const bool debug_will_resize = m.count(cmap::Competency::misc);
+  #endif
+  m.erase(cmap::Competency::misc);
+  #ifndef NDEBUG
+  const int debug_m_size_new = static_cast<int>(m.size());
+  assert( ( debug_will_resize && debug_m_size_old == debug_m_size_new + 1)
+       || (!debug_will_resize && debug_m_size_old == debug_m_size_new    )
+  );
+  #endif
+
+
+  const int a = static_cast<int>(m.size());
+  const int n_examples = std::accumulate(m.begin(),m.end(),0,
+    [](int& init,const std::pair<cmap::Competency,int>& p)
+    {
+      return init + p.second;
+    }
+  );
+  const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
+  const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
+  const int b = std::count_if(m.begin(),m.end(),
+    [my_min,my_max](const std::pair<cmap::Competency,int>& p)
+    {
+      return p.second >= my_min && p.second <= my_max;
+    }
+  );
+
+  return static_cast<int>(
+    std::round(
+      100.0 * ( static_cast<double>(a+b) / 12.0)
+    )
+  );
+}
+
+int ribi::braw::CalculateSpecificityExperimental(const File& file)
+{
+  //The first node removed, as this is the focal question
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+
+  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+  assert(!nodes.empty());
+
+  const int sum_rated_specificity //Constant 'k_s'
+    = std::accumulate(nodes.begin(),nodes.end(),0,
+    [](int& init, const ribi::cmap::Node& node)
+    {
+      return init + node.GetConcept().GetRatingSpecificity();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      static_cast<double>(50 * sum_rated_specificity)
+      / static_cast<double>(nodes.size())
+    )
+  );
+}
+
 std::string ribi::braw::ExtractFileAboutFromXml(const std::string& s)
 {
   const std::vector<std::string> v
@@ -357,6 +451,35 @@ void ribi::braw::File::SetStudentName(const std::string& student_name)
   assert(student_name.size() > 1);
   m_student_name = student_name;
   this->AutoSave();
+}
+
+std::map<ribi::cmap::Competency,int> ribi::braw::TallyCompetencies(const File& file)
+{
+
+  //The first node removed, as this is the focal question
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+
+  std::map<ribi::cmap::Competency,int> m;
+
+  //Tally the competencies
+  for (const ribi::cmap::Node& node: nodes)
+  {
+    for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
+    {
+      const cmap::Competency competency = example.GetCompetency();
+      const auto iter = m.find(competency);
+      if (iter != m.end())
+      {
+        ++(*iter).second; //Tally the known competency
+      }
+      else
+      {
+        m.insert(std::make_pair(competency,1)); //Tally the first of this competency
+      }
+    }
+  }
+  return m;
 }
 
 ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(

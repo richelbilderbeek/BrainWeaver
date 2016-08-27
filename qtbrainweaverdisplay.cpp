@@ -49,94 +49,6 @@ ribi::braw::QtDisplay::QtDisplay()
 
 }
 
-int ribi::braw::QtDisplay::CalculateRichnessExperimental(const File& file) const
-{
-  //The first node removed, as this is the focal question
-  const auto g = RemoveFirstNode(file.GetConceptMap());
-
-  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-
-  std::map<cmap::Competency,int> m;
-  //Tally the competencies
-  for (const ribi::cmap::Node& node: nodes)
-  {
-    for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
-    {
-      const cmap::Competency competency = example.GetCompetency();
-      const auto iter = m.find(competency);
-      if (iter != m.end())
-      {
-        ++(*iter).second; //Tally the known competency
-      }
-      else
-      {
-        m.insert(std::make_pair(competency,1)); //Tally the first of this competency
-      }
-    }
-  }
-  //Remove category 'misc'
-  #ifndef NDEBUG
-  const int debug_m_size_old = static_cast<int>(m.size());
-  const bool debug_will_resize = m.count(cmap::Competency::misc);
-  #endif
-  m.erase(cmap::Competency::misc);
-  #ifndef NDEBUG
-  const int debug_m_size_new = static_cast<int>(m.size());
-  assert( ( debug_will_resize && debug_m_size_old == debug_m_size_new + 1)
-       || (!debug_will_resize && debug_m_size_old == debug_m_size_new    )
-  );
-  #endif
-
-
-  const int a = static_cast<int>(m.size());
-  const int n_examples = std::accumulate(m.begin(),m.end(),0,
-    [](int& init,const std::pair<cmap::Competency,int>& p)
-    {
-      return init + p.second;
-    }
-  );
-  const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
-  const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
-  const int b = std::count_if(m.begin(),m.end(),
-    [my_min,my_max](const std::pair<cmap::Competency,int>& p)
-    {
-      return p.second >= my_min && p.second <= my_max;
-    }
-  );
-
-  return static_cast<int>(
-    std::round(
-      100.0 * ( static_cast<double>(a+b) / 12.0)
-    )
-  );
-}
-
-int ribi::braw::QtDisplay::CalculateSpecificityExperimental(const File& file) const
-{
-  //The first node removed, as this is the focal question
-  const auto g = RemoveFirstNode(file.GetConceptMap());
-
-  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-  assert(!nodes.empty());
-
-  const int sum_rated_specificity //Constant 'k_s'
-    = std::accumulate(nodes.begin(),nodes.end(),0,
-    [](int& init, const ribi::cmap::Node& node)
-    {
-      return init + node.GetConcept().GetRatingSpecificity();
-    }
-  );
-  return static_cast<int>(
-    std::round(
-      static_cast<double>(50 * sum_rated_specificity)
-      / static_cast<double>(nodes.size())
-    )
-  );
-}
-
-
-
-
 void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const File& file,
   QTableWidget * const table) const
@@ -336,31 +248,16 @@ void ribi::braw::QtDisplay::DisplayValues(
 
   //The first node removed
   const auto g = RemoveFirstNode(file.GetConceptMap());
+  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
 
-  std::vector<ribi::cmap::Node> all_nodes = ribi::cmap::GetNodes(g);
-  const std::vector<ribi::cmap::Node> nodes = all_nodes;
   const int n_nodes = static_cast<int>(nodes.size());  //Constant 'c'
   //Concreteness experimental: C_e at row = 1, col = 0
   //50.0 * sum_rated_concreteness / n_nodes
   {
-    const int sum_rated_concreteness //Constant 'k_c'
-      = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const ribi::cmap::Node& node)
-      {
-        return init + node.GetConcept().GetRatingConcreteness();
-      }
-    );
     std::string text = "N/A";
     if (n_nodes != 0)
     {
-      const int c_e
-        = static_cast<int>(
-          std::round(
-           50.0 * static_cast<double>(sum_rated_concreteness)
-            / static_cast<double>(n_nodes)
-          )
-        );
-      text = boost::lexical_cast<std::string>(c_e);
+      text = boost::lexical_cast<std::string>(CalculateConcretenessExperimental(file));
     }
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
@@ -437,16 +334,8 @@ void ribi::braw::QtDisplay::DisplayValues(
   //x_s = ((2*n_relations_not_to_focus)/(n_nodes*(n_nodes-1))))^0.25*100%
   {
     const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
+    ///This works, because focal node has already been deleted
     const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))}; //Constant 'r'
-    /*
-    const int n_relations_not_to_focus //Constant 'r'
-      = std::count_if(edges.begin(),edges.end(),
-      [](const ribi::cmap::Edge& edge)
-      {
-        return edge.GetFrom() != 0 && edge.GetTo() != 0; //Not connected to focus question
-      }
-    );
-    */
     std::string text = "N/A";
     if (n_nodes > 1)
     {

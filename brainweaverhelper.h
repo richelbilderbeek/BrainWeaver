@@ -38,7 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 namespace ribi {
 
-
+/*
 ///Help adding constness a bit
 template <class T>
 const std::vector<boost::shared_ptr<const T> > AddConst(
@@ -66,9 +66,11 @@ const std::vector<const T *> AddConst(
   #endif
   return w;
 }
+*/
 
 namespace braw {
 
+/*
 ///Obtain all possible selections of a std::vector,
 ///  preserving the ordering of its elements
 ///Examples:
@@ -130,6 +132,7 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
   }
   return result;
 }
+*/
 
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;

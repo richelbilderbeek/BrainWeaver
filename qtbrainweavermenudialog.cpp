@@ -157,20 +157,12 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
   {
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
-    try
-    {
-      const File file = LoadFile(filename);
-      QtStudentMenuDialog * const d{
-        new QtStudentMenuDialog(file)
-      };
-      emit add_me(d);
-    }
-    catch (...)
-    {
-      //Gotta catch 'm all
-    }
+    const File file = LoadFile(filename);
+    QtStudentMenuDialog * const d{
+      new QtStudentMenuDialog(file)
+    };
+    emit add_me(d);
   }
-
 }
 
 void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
