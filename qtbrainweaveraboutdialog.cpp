@@ -41,11 +41,21 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 ribi::About GetAbout()
 {
   ribi::About about = ribi::braw::MenuDialog().GetAbout();
-  about.AddLibrary("QtArrowItem version: " + ribi::QtArrowItem::GetVersion());
-  about.AddLibrary("QtHideAndShowDialog version: " + ribi::QtHideAndShowDialog::GetVersion());
-  about.AddLibrary("QtKeyboardFriendlyGraphicsView version: " + ribi::QtKeyboardFriendlyGraphicsView::GetVersion());
-  about.AddLibrary("QtQuadBezierArrowItem version: " + ribi::QtQuadBezierArrowItem::GetVersion());
-  about.AddLibrary("QtScopedDisable version: " + QtScopedDisable<int>::GetVersion());
+  about.AddLibrary("QtArrowItem version: "
+    + ribi::QtArrowItem::GetVersion()
+  );
+  about.AddLibrary("QtHideAndShowDialog version: "
+    + ribi::QtHideAndShowDialog::GetVersion()
+  );
+  about.AddLibrary("QtKeyboardFriendlyGraphicsView version: "
+    + ribi::QtKeyboardFriendlyGraphicsView::GetVersion()
+  );
+  about.AddLibrary("QtQuadBezierArrowItem version: "
+    + ribi::QtQuadBezierArrowItem::GetVersion()
+  );
+  about.AddLibrary("QtScopedDisable version: "
+    + QtScopedDisable<int>::GetVersion()
+  );
   about.AddLibrary("Artwork from LibreOffice");
   return about;
 }

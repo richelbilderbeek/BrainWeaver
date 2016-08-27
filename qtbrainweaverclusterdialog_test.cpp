@@ -34,7 +34,8 @@
 #include "trace.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
-void ribi::braw::qtbrainweaverclusterdialog_test::enable_button_depending_on_file()
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::enable_button_depending_on_file()
 {
   //Described at https://github.com/richelbilderbeek/Brainweaver/issues/94
   #ifdef FIX_ISSUE_94
@@ -67,36 +68,25 @@ void ribi::braw::qtbrainweaverclusterdialog_test::enable_button_depending_on_fil
   #endif
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
 {
-  try
-  {
-    using namespace ribi::cmap;
-    const std::string question = "question with spaces";
-    File file;
-    file.SetQuestion(question);
-    QVERIFY(file.GetQuestion() == question);
+  using namespace ribi::cmap;
+  File file = FileFactory().Get0();
 
-    const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
-    file.SetCluster(cluster);
+  const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
+  file.SetCluster(cluster);
 
-    QVERIFY(!file.GetCluster().Empty());
-    QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
+  QVERIFY(!file.GetCluster().Empty());
+  QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
 
-    const QtClusterDialog d(file);
-    const auto w = d.GetWidget();
-    QVERIFY(w);
-    QVERIFY(w && w->isEnabled());
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << e.what() << '\n';
-    QVERIFY(!"Should not get here");
-  }
+  const QtClusterDialog d(file);
+  const auto w = d.GetWidget();
+  QVERIFY(w && w->isEnabled());
 }
 
-
-void ribi::braw::qtbrainweaverclusterdialog_test::cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
+void ribi::braw::qtbrainweaverclusterdialog_test::
+  cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
 {
   using namespace ribi::cmap;
   const std::string question = "question with spaces";

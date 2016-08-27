@@ -65,7 +65,7 @@ std::unique_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type
   d->setOptions( QFileDialog::DontUseNativeDialog );
 
   std::string namefile;
-  switch (type)
+  switch (type) //!OCLINT Too few branches in switch statement is false: there are only two enum class values
   {
     case FileType::cmp:
       namefile = "Brainweaver concept map (*."
@@ -73,10 +73,6 @@ std::unique_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type
     break;
     case FileType::pdf:
       namefile = "Portable document format (*.pdf)";
-    break;
-    default:
-      assert(!"Should not get here"); //!OCLint
-      throw std::logic_error("QtFileDialog::GetSaveFileDialog: unknown type");
     break;
   }
 

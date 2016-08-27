@@ -66,12 +66,33 @@ private:
   ///Build the widget from the cluster
   void BuildCluster();
 
+  ///Crash if the invariants are violated
+  void CheckInvariants();
+
   ///Check that there are no items at depth three,
   ///which should always be the case
   bool HasNoItemsAtLevelThree() noexcept;
 
+  ///The flags for an item at the bottom level, which is level 2
+  Qt::ItemFlags GetBottomLevelFlags() const noexcept;
+
   ///Find out the depth of an item
   int GetDepth(const QTreeWidgetItem * const item) const;
+
+  ///The flags for an item at the top level, which is level 1
+  Qt::ItemFlags GetTopLevelFlags() const noexcept;
+
+  ///
+  void MoveJthChildToTop(
+    QTreeWidgetItem * const top,
+    const int j
+  ) noexcept;
+
+  ///Adds Concepts to concepts for a toplevelitem
+  void ProcessTopLevelItem(
+    QTreeWidgetItem * const top,
+    std::vector<ribi::cmap::Concept>& concepts
+  ) const;
 
   ///Write the widget its data to the cluster
   void WriteToCluster() const noexcept;

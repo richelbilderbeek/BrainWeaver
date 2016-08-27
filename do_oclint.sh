@@ -14,10 +14,12 @@ h_files=`ls *.h | egrep -v "^ui_.*\.h$"`
   -I../RibiClasses/CppContainer \
   -I../RibiClasses/CppCounter \
   -I../RibiClasses/CppFuzzy_equal_to \
+  -I../RibiClasses/CppGeometry \
   -I../RibiClasses/CppHelp \
   -I../RibiClasses/CppTestTimer \
   -I../RibiClasses/CppFileIo \
   -I../RibiClasses/CppMenuDialog \
+  -I../RibiClasses/CppPlane \
   -I../RibiClasses/CppQtAboutDialog \
   -I../RibiClasses/CppQtArrowItem \
   -I../RibiClasses/CppQtConceptMap \
@@ -31,11 +33,14 @@ h_files=`ls *.h | egrep -v "^ui_.*\.h$"`
   -I../RibiClasses/CppTrace \
   -I../RibiClasses/CppXml \
   -I../BoostGraphTutorial/BoostGraphTutorial \
+  -I../RibiLibraries/Apfloat \
   -I/usr/include/c++/5 \
   -I/usr/include/x86_64-linux-gnu/c++/5 \
   -I/usr/include/qt5 \
   -I/usr/include/qt5/QtCore \
   -I/usr/include/qt5/QtGui \
+  -I/usr/include/qt5/QtPrintSupport \
+  -I/usr/include/qt5/QtTest \
   -I/usr/include/qt5/QtWidgets
 
 cat oclint.log

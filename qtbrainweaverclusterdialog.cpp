@@ -156,24 +156,6 @@ void ribi::braw::QtClusterDialog::keyPressEvent(QKeyEvent* e)
     Save();
     return;
   }
-  if ((e->modifiers() & Qt::ControlModifier)
-    && !(e->modifiers() & Qt::ShiftModifier)
-    && e->key() == Qt::Key_Z)
-  {
-    QMessageBox box;
-    box.setText("TODO: Undo");
-    box.exec();
-    return;
-  }
-  if ( (e->modifiers() & Qt::ControlModifier)
-    && (e->modifiers() & Qt::ShiftModifier)
-    && e->key() == Qt::Key_Z)
-  {
-    QMessageBox box;
-    box.setText("TODO: Redo");
-    box.exec();
-    return;
-  }
   QDialog::keyPressEvent(e);
 
   #ifndef NDEBUG

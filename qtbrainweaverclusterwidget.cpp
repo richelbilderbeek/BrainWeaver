@@ -118,11 +118,7 @@ void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
         //Check if top->child(j) has children
         if (top->child(j)->childCount() > 0)
         {
-          //Move top->child(j) to top
-          QTreeWidgetItem * const clone = top->child(j)->clone();
-          assert(clone);
-          this->addTopLevelItem(clone);
-          top->removeChild(top->child(j));
+          MoveJthChildToTop(top, j);
           done = false;
           j = n_child - 1;
           i = n_top - 1;
@@ -157,6 +153,16 @@ bool ribi::braw::QtClusterWidget::HasNoItemsAtLevelThree() noexcept
   return true;
 }
 
+void ribi::braw::QtClusterWidget::MoveJthChildToTop(
+  QTreeWidgetItem * const top,
+  const int j
+) noexcept
+{
+  QTreeWidgetItem * const clone = top->child(j)->clone();
+  assert(clone);
+  this->addTopLevelItem(clone);
+  top->removeChild(top->child(j));
+}
 
 //Process all items
 void ribi::braw::QtClusterWidget::SetCorrectFlags() noexcept
@@ -226,7 +232,6 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
       }
     break;
     case Qt::Key_Right: keyPressEventRight(event); break;
-    break;
 //    case Qt::Key_Left:
 //    {
 //      auto cur_item = currentItem();
@@ -279,10 +284,7 @@ void ribi::braw::QtClusterWidget::keyPressEventRight(QKeyEvent *)
 
 void ribi::braw::QtClusterWidget::BuildCluster()
 {
-  assert(this->isHeaderHidden());
-  assert(this->alternatingRowColors());
-  assert(this->dragDropMode() == QAbstractItemView::InternalMove);
-  assert(this->isAnimated());
+  CheckInvariants();
 
   this->clear();
   const std::vector<ribi::cmap::Concept>& v = m_cluster.Get();
@@ -308,29 +310,47 @@ void ribi::braw::QtClusterWidget::BuildCluster()
             = new QtClusterTreeWidgetItem(
               example.GetCompetency(),
               example.GetIsComplex(),
-              -1, //An example is not rated for complexity   //FIX 2013-02-03
-              -1, //An example is not rated for concreteness //FIX 2013-02-03
-              -1  //An example is not rated for specifity    //FIX 2013-02-03
+              -1, //An example is not rated for complexity
+              -1, //An example is not rated for concreteness
+              -1  //An example is not rated for specifity
             );
           child_item->setText(0,example.GetText().c_str());
           top->addChild(child_item);
-          child_item->setFlags(
-              Qt::ItemIsSelectable
-            | Qt::ItemIsEnabled
-            | Qt::ItemIsEditable
-            | Qt::ItemIsDragEnabled);
+          child_item->setFlags(GetBottomLevelFlags());
         }
       );
       this->addTopLevelItem(top);
       top->setExpanded(true);
-      top->setFlags(
-            Qt::ItemIsSelectable
-          | Qt::ItemIsEnabled
-          | Qt::ItemIsEditable
-          | Qt::ItemIsDragEnabled
-          | Qt::ItemIsDropEnabled);
+      top->setFlags(GetTopLevelFlags());
     }
   );
+}
+
+void ribi::braw::QtClusterWidget::CheckInvariants()
+{
+  assert(this->isHeaderHidden());
+  assert(this->alternatingRowColors());
+  assert(this->dragDropMode() == QAbstractItemView::InternalMove);
+  assert(this->isAnimated());
+}
+
+Qt::ItemFlags ribi::braw::QtClusterWidget::GetBottomLevelFlags() const noexcept
+{
+  return Qt::ItemIsSelectable
+    | Qt::ItemIsEnabled
+    | Qt::ItemIsEditable
+    | Qt::ItemIsDragEnabled
+  ;
+}
+
+Qt::ItemFlags ribi::braw::QtClusterWidget::GetTopLevelFlags() const noexcept
+{
+  return Qt::ItemIsSelectable
+    | Qt::ItemIsEnabled
+    | Qt::ItemIsEditable
+    | Qt::ItemIsDragEnabled
+    | Qt::ItemIsDropEnabled
+  ;
 }
 
 void ribi::braw::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
@@ -343,6 +363,53 @@ void ribi::braw::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
   }
 }
 
+void ribi::braw::QtClusterWidget::ProcessTopLevelItem(
+  QTreeWidgetItem * const top,
+  std::vector<ribi::cmap::Concept>& concepts
+) const
+{
+  const std::string name = top->text(0).toStdString();
+  std::vector<ribi::cmap::Example> examples;
+
+  const int n_child = top->childCount();
+  for (int j=0; j!=n_child; ++j)
+  {
+    const QtClusterTreeWidgetItem * const braw_item
+      = dynamic_cast<QtClusterTreeWidgetItem *>(top->child(j));
+    const cmap::Competency competency = braw_item
+      ? braw_item->m_competency : cmap::Competency::uninitialized;
+    assert(GetDepth(top->child(j))==1);
+    ribi::cmap::Example p(
+      top->child(j)->text(0).toStdString(),
+      competency
+    );
+    examples.push_back(p);
+  }
+
+  QtClusterTreeWidgetItem * const braw_top
+    = dynamic_cast<QtClusterTreeWidgetItem *>(top);
+  using namespace cmap;
+
+  if (braw_top)
+  {
+    concepts.push_back(
+      ribi::cmap::Concept(
+        name, Examples(examples),
+        braw_top->m_is_complex,
+        braw_top->m_rating_complexity,
+        braw_top->m_rating_concreteness,
+        braw_top->m_rating_specifity
+      )
+    );
+  }
+  else
+  {
+    concepts.push_back(
+      ribi::cmap::Concept(name, Examples(examples), true, -1, -1, -1)
+    );
+  }
+}
+
 void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
 {
   std::vector<ribi::cmap::Concept> concepts;
@@ -351,38 +418,7 @@ void ribi::braw::QtClusterWidget::WriteToCluster() const noexcept
   {
     QTreeWidgetItem * const top = this->topLevelItem(i);
     assert(top);
-    const std::string name = top->text(0).toStdString();
-    std::vector<ribi::cmap::Example> examples;
-
-    const int n_child = top->childCount();
-    for (int j=0; j!=n_child; ++j)
-    {
-      const QtClusterTreeWidgetItem * const braw_item
-        = dynamic_cast<QtClusterTreeWidgetItem *>(top->child(j));
-      const cmap::Competency competency = braw_item
-        ? braw_item->m_competency : cmap::Competency::uninitialized;
-      assert(GetDepth(top->child(j))==1);
-      ribi::cmap::Example p(
-        top->child(j)->text(0).toStdString(),
-        competency
-      );
-      examples.push_back(p);
-    }
-
-    QtClusterTreeWidgetItem * const braw_top
-      = dynamic_cast<QtClusterTreeWidgetItem *>(this->topLevelItem(i));
-    using namespace cmap;
-
-    concepts.push_back(
-      ribi::cmap::Concept(
-        name,
-        Examples(examples),
-        braw_top ? braw_top->m_is_complex : true,
-        braw_top ? braw_top->m_rating_complexity : -1,
-        braw_top ? braw_top->m_rating_concreteness : -1,
-        braw_top ? braw_top->m_rating_specifity : -1
-      )
-    );
+    ProcessTopLevelItem(top, concepts);
   }
 
   m_cluster.SetConcepts(concepts);
