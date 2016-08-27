@@ -130,20 +130,6 @@ class File
 };
 
 
-//Concreteness Experimental: C_e, a percentage that will be shown at row = 1, col = 0
-//50.0 * sum_rated_concreteness / n_nodes
-int CalculateConcretenessExperimental(const File& file);
-
-///Richness Experimental, r_e, a percentage that will be shown at row = 3, col = 0
-///r_e = ((a + b) / 14) * 100%
-///a = number of different Competencies
-///b = number of Competencies between 1/12th and 1/4th of number of examples
-int CalculateRichnessExperimental(const File& file);
-
-///Experimental specificity: s_e, a percentage that will be shown at row = 2, col = 0
-///s_e = 50.0 * sum_rated_specificity / n_nodes
-int CalculateSpecificityExperimental(const File& file);
-
 ///Create a concept map with a center node with text
 ribi::cmap::ConceptMap CreateConceptMap(const std::string& text) noexcept;
 

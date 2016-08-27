@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include <boost/array.hpp>
 #include <boost/numeric/conversion/cast.hpp>
-//#include <boost/shared_ptr.hpp>
+#include "brainweaverfwd.h"
 #pragma GCC diagnostic pop
 
 //struct QRegExp;
@@ -70,7 +70,21 @@ const std::vector<const T *> AddConst(
 
 namespace braw {
 
-/*
+
+//Concreteness Experimental: C_e, a percentage that will be shown at row = 1, col = 0
+//50.0 * sum_rated_concreteness / n_nodes
+int CalculateConcretenessExperimental(const File& file);
+
+///Richness Experimental, r_e, a percentage that will be shown at row = 3, col = 0
+///r_e = ((a + b) / 14) * 100%
+///a = number of different Competencies
+///b = number of Competencies between 1/12th and 1/4th of number of examples
+int CalculateRichnessExperimental(const File& file);
+
+///Experimental specificity: s_e, a percentage that will be shown at row = 2, col = 0
+///s_e = 50.0 * sum_rated_specificity / n_nodes
+int CalculateSpecificityExperimental(const File& file);
+
 ///Obtain all possible selections of a std::vector,
 ///  preserving the ordering of its elements
 ///Examples:
@@ -132,7 +146,6 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
   }
   return result;
 }
-*/
 
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
