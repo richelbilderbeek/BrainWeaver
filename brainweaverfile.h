@@ -154,6 +154,23 @@ std::string ToXml(const File& file) noexcept;
 ///Convert XML to File
 File XmlToFile(const std::string& s);
 
+///Will throw if about is absent
+std::string ExtractFileAboutFromXml(const std::string& s);
+
+///Will throw if assessor name is absent
+std::string ExtractFileAssessorNameFromXml(const std::string& s);
+
+///Will return an empty cluster if absent
+ribi::braw::Cluster ExtractFileClusterFromXml(const std::string& s) noexcept;
+
+///If there is no concept map, will return an empty concept map
+ribi::cmap::ConceptMap ExtractFileConceptMapFromXml(const std::string& s) noexcept;
+
+///If there is no question, will return an empty string
+std::string ExtractFileQuestionFromXml(const std::string& s) noexcept;
+std::string ExtractFileStudentNameFromXml(const std::string& s);
+std::string ExtractFileVersionFromXml(const std::string& s);
+
 bool operator==(const File& lhs, const File& rhs) noexcept;
 bool operator!=(const File& lhs, const File& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const File& f) noexcept;

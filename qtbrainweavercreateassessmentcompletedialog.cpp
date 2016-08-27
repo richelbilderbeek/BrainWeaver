@@ -62,7 +62,7 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
 {
-  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected)

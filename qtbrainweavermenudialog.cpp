@@ -113,7 +113,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
 {
   File file;
   const ribi::cmap::ConceptMap concept_map
-    = ribi::cmap::ConceptMapFactory().GetTest(6);
+    = ribi::cmap::ConceptMapFactory().Get6();
   file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
   file.SetConceptMap(concept_map);
   QtRateConceptMapDialog * const d{
@@ -148,7 +148,7 @@ void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
 {
-  const auto d = QtFileDialog::GetOpenFileDialog();
+  const auto d = QtFileDialog().GetOpenFileDialog();
   d->setWindowTitle("Kies een assessment bestand");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;

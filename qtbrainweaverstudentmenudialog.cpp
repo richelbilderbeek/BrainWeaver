@@ -111,7 +111,7 @@ void ribi::braw::QtStudentMenuDialog::on_edit_name_textChanged(const QString &ar
 
 void ribi::braw::QtStudentMenuDialog::on_button_save_clicked()
 {
-  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
   const int status = d->exec();
   if (status == QDialog::Rejected)

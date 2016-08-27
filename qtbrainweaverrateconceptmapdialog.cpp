@@ -126,7 +126,7 @@ void ribi::braw::QtRateConceptMapDialog::Save()
 {
   this->hide(); //Obligatory, otherwise program will freeze
 
-  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected || d->selectedFiles().empty())

@@ -34,10 +34,10 @@ struct QtFileDialog
 
   enum class FileType { cmp, pdf };
   ///Create a QFileDialog to open Brainweaver files with
-  static std::unique_ptr<QFileDialog> GetOpenFileDialog();
+  std::unique_ptr<QFileDialog> GetOpenFileDialog() const;
 
   ///Create a QFileDialog to save Brainweaver files with
-  static std::unique_ptr<QFileDialog> GetSaveFileDialog(const FileType type);
+  std::unique_ptr<QFileDialog> GetSaveFileDialog(const FileType type) const;
 };
 
 } //~namespace braw

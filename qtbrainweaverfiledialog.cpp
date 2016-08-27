@@ -36,7 +36,8 @@ namespace ribi {
 
 namespace braw {
 
-std::unique_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
+std::unique_ptr<QFileDialog>
+QtFileDialog::GetOpenFileDialog() const
 {
   std::unique_ptr<QFileDialog> d(new QFileDialog);
 
@@ -53,7 +54,8 @@ std::unique_ptr<QFileDialog> QtFileDialog::GetOpenFileDialog()
   return d;
 }
 
-std::unique_ptr<QFileDialog> QtFileDialog::GetSaveFileDialog(const FileType type)
+std::unique_ptr<QFileDialog>
+QtFileDialog::GetSaveFileDialog(const FileType type) const
 {
   std::unique_ptr<QFileDialog> d(new QFileDialog);
 

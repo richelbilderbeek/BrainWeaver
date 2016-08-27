@@ -27,6 +27,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -101,6 +102,96 @@ void ribi::braw::File::AutoSave() const
   this->Save("autosave1." + GetFilenameExtension());
 }
 
+std::string ribi::braw::ExtractFileAboutFromXml(const std::string& s)
+{
+  const std::vector<std::string> v
+    = ribi::Regex().GetRegexMatches(s,ribi::braw::Regex().GetRegexAbout());
+  if (v.size() != 1)
+  {
+    throw std::invalid_argument("Must have one about tag");
+  }
+  return ribi::xml::StripXmlTag(v[0]);
+}
+
+std::string ribi::braw::ExtractFileAssessorNameFromXml(const std::string& s)
+{
+  const std::vector<std::string> v
+    = ribi::Regex().GetRegexMatches(s,ribi::braw::Regex().GetRegexAssessorName());
+  if (v.size() != 1)
+  {
+    throw std::invalid_argument("Must have one assessor_name tag");
+  }
+  return ribi::xml::StripXmlTag(v[0]);
+}
+
+ribi::braw::Cluster ribi::braw::ExtractFileClusterFromXml(const std::string& s) noexcept
+{
+  const std::vector<std::string> v
+    = ribi::Regex().GetRegexMatches(s,ribi::braw::Regex().GetRegexCluster());
+  if (v.empty())
+  {
+    return ribi::braw::Cluster();
+  }
+  assert(v.size() == 1);
+  return XmlToCluster(v[0]);
+}
+
+
+ribi::cmap::ConceptMap ribi::braw::ExtractFileConceptMapFromXml(const std::string& s) noexcept
+{
+  const std::vector<std::string> v
+    = ribi::Regex().GetRegexMatches(
+      s, ribi::braw::Regex().GetRegexConceptMap()
+    );
+
+  if (v.empty())
+  {
+    return ribi::cmap::ConceptMap();
+  }
+  assert(v.size() == 1);
+  return ribi::cmap::XmlToConceptMap(v[0]);
+}
+
+std::string ribi::braw::ExtractFileQuestionFromXml(const std::string& s) noexcept
+{
+  const std::vector<std::string> v
+    = ribi::Regex().GetRegexMatches(
+      s,
+      ribi::braw::Regex().GetRegexQuestion()
+    );
+  if (v.size() != 1)
+  {
+    return ""; //No question yet
+  }
+  return graphviz_decode(ribi::xml::StripXmlTag(v[0]));
+}
+
+std::string ribi::braw::ExtractFileStudentNameFromXml(const std::string& s)
+{
+  const std::vector<std::string> v = ribi::Regex().GetRegexMatches(
+    s,
+    ribi::braw::Regex().GetRegexStudentName()
+  );
+  if (v.size() != 1)
+  {
+    throw std::invalid_argument("Must have one student_name tag");
+  }
+  return ribi::xml::StripXmlTag(v[0]);
+}
+
+std::string ribi::braw::ExtractFileVersionFromXml(const std::string& s)
+{
+  const std::vector<std::string> v = ribi::Regex().GetRegexMatches(
+    s,
+    ribi::braw::Regex().GetRegexVersion()
+  );
+  if (v.size() != 1)
+  {
+    throw std::invalid_argument("Must have one version tag");
+  }
+  return ribi::xml::StripXmlTag(v[0]);
+}
+
 std::string ribi::braw::GetFilenameExtension() noexcept
 {
   return "cmp";
@@ -125,19 +216,15 @@ std::string ribi::braw::GetTestFileName() noexcept
 std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
 {
   std::vector<File> v;
-  const int n_clusters{ClusterFactory().GetNumberOfTests()};
-  const int n_concept_maps{cmap::ConceptMapFactory().GetNumberOfAllTests()};
-  for (int cluster_index=0; cluster_index!=n_clusters; ++cluster_index)
+  for (const auto cluster: ClusterFactory().GetTests())
   {
-    for (int concept_map_index=0; concept_map_index!=n_concept_maps; ++concept_map_index)
+    for (const auto concept_map: cmap::ConceptMapFactory().GetAllTests())
     {
       const std::string about = "about";
       const std::string assessor_name = "assessor_name";
       std::string question = "question";
       const std::string student_name = "student_name";
       const std::string version = "version";
-      const auto cluster = ClusterFactory().GetTests()[cluster_index];
-      const auto concept_map = ribi::cmap::ConceptMapFactory().GetAllTests()[concept_map_index];
       File file(
         about,
         assessor_name,
@@ -307,7 +394,6 @@ std::string ribi::braw::DoXpressiveRegexReplace(
     TRACE(regex_str);
     TRACE(format_str);
     TRACE(s);
-    assert(!"Should not get here");
     throw std::logic_error(s.c_str());
   }
 }
@@ -365,91 +451,15 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
     ;
     throw std::invalid_argument(msg.str());
   }
-  const ribi::braw::Regex r;
-  //Make s one line, because regexes do not search beyond their own line
-
-  std::string about;
-  std::string assessor_name;
-  Cluster cluster;
-  ribi::cmap::ConceptMap concept_map;
-  std::string question;
-  std::string student_name;
-  std::string version;
-  //m_about_str
-
-  {
-    const std::vector<std::string> v
-      = ribi::Regex().GetRegexMatches(s,r.GetRegexAbout());
-    assert(v.size() == 1);
-    about = ribi::xml::StripXmlTag(v[0]);
-  }
-  //m_assessor_name
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexAssessorName());
-    assert(v.size() == 1);
-    assessor_name = ribi::xml::StripXmlTag(v[0]);
-  }
-  //m_cluster
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexCluster());
-    if (!v.empty())
-    {
-      assert(v.size() == 1);
-      cluster = XmlToCluster(v[0]);
-    }
-    else
-    {
-      //No cluster yet
-    }
-  }
-  //m_concept_map
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s, r.GetRegexConceptMap());
-    if (!v.empty())
-    {
-      assert(v.size() == 1);
-      concept_map = ribi::cmap::XmlToConceptMap(v[0]);
-    }
-    else
-    {
-      //No concept map yet
-    }
-  }
-  //m_question
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexQuestion());
-    if (v.empty())
-    {
-      std::clog << "Warning: no question supplied" << std::endl;
-      question = "";
-    }
-    else
-    {
-      question = ribi::xml::StripXmlTag(v[0]);
-      question = graphviz_decode(question);
-    }
-  }
-  //m_student_name
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexStudentName());
-    assert(v.size() == 1);
-    student_name = ribi::xml::StripXmlTag(v[0]);
-  }
-  //m_version
-  {
-    const std::vector<std::string> v = ribi::Regex().GetRegexMatches(s,r.GetRegexVersion());
-    assert(v.size() == 1);
-    version = ribi::xml::StripXmlTag(v[0]);
-  }
 
   return File(
-    about,
-    assessor_name,
-    cluster,
-    concept_map,
-    question,
-    student_name,
-    version
+    ExtractFileAboutFromXml(s),
+    ExtractFileAssessorNameFromXml(s),
+    ExtractFileClusterFromXml(s),
+    ExtractFileConceptMapFromXml(s),
+    ExtractFileQuestionFromXml(s),
+    ExtractFileStudentNameFromXml(s),
+    ExtractFileVersionFromXml(s)
   );
 }
 

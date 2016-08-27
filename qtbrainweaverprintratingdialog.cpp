@@ -108,7 +108,9 @@ ribi::braw::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
 
 const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() const
 {
-  std::vector<QWidget *> v { ui->frame_header, ui->frame_concept_map, ui->label_concept_map_as_text };
+  std::vector<QWidget *> v = {
+    ui->frame_header, ui->frame_concept_map, ui->label_concept_map_as_text
+  };
   {
     //Add widgets in widget_concept_map_as_text
     const int n = ui->widget_concept_map_as_text->layout()->count();
@@ -157,9 +159,10 @@ void ribi::braw::QtPrintRatingDialog::on_button_print_clicked()
 void ribi::braw::QtPrintRatingDialog::Print()
 {
   //Start save dialog
-  const boost::shared_ptr<QFileDialog> print_dialog(
-    QtFileDialog::GetSaveFileDialog(
-      QtFileDialog::FileType::pdf));
+  const std::unique_ptr<QFileDialog> print_dialog(
+    QtFileDialog().GetSaveFileDialog(
+      QtFileDialog::FileType::pdf)
+  );
   print_dialog->setWindowTitle("Exporteer document naar PDF");
   if (print_dialog->exec() != QDialog::Accepted
     || print_dialog->selectedFiles().empty() )
@@ -205,11 +208,6 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
 {
   //Concept map
   {
-    //const ribi::cmap::ConceptMap copy_concept_map
-    //  = m_file.GetConceptMap();
-    //const ribi::cmap::ConceptMap copy_concept_map
-    //  = ribi::cmap::ConceptMapFactory::DeepCopy(m_file.GetConceptMap()); //2013-05-31 REJECT DEEP COPIES
-    //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setMaximumHeight(m_widget->scene()->itemsBoundingRect().height() + 2);
@@ -236,7 +234,8 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
   QtDisplay().DisplayRatedConcepts(m_file,this->GetTableConcepts());
   {
     const int sz = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
-    this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 ); //Standard row is 30 pixels high, header 25 pixels
+    //Standard row is 30 pixels high, header 25 pixels
+    this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 );
   }
 
   QtDisplay().DisplayExamples(m_file,this->GetTableExamples());

@@ -38,6 +38,21 @@ struct QtDisplay
   void DisplayExamples(const File& file, QTableWidget * const table) const;
   void DisplayValues(const File& file, QTableWidget * const table) const;
   void DisplayMiscValues(const File& file, QTableWidget * const table) const;
+
+  private:
+
+  ///Richness Experimental, r_e, a percentage that will be shown at row = 3, col = 0
+  ///r_e = ((a + b) / 14) * 100%
+  ///a = number of different Competencies
+  ///b = number of Competencies between 1/12th and 1/4th of number of examples
+  int CalculateRichnessExperimental(const File& file) const;
+
+  ///Experimental specificity: s_e, a percentage that will be shown at row = 2, col = 0
+  ///s_e = 50.0 * sum_rated_specificity / n_nodes
+  int CalculateSpecificityExperimental(const File& file) const;
+
+  ///Put number of nodes at cell (0,0) of table
+  void SetNumberOfNodes(const File& file, QTableWidget * const table) const;
 };
 
 } //~namespace braw

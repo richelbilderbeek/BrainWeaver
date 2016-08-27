@@ -121,8 +121,8 @@ void ribi::braw::QtPrintConceptMapDialog::on_button_print_clicked()
 void ribi::braw::QtPrintConceptMapDialog::Print()
 {
   //Start save dialog
-  const boost::shared_ptr<QFileDialog> print_dialog(
-    QtFileDialog::GetSaveFileDialog(
+  const std::unique_ptr<QFileDialog> print_dialog(
+    QtFileDialog().GetSaveFileDialog(
       QtFileDialog::FileType::pdf));
   print_dialog->setWindowTitle("Exporteer document naar PDF");
   if (print_dialog->exec() != QDialog::Accepted

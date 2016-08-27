@@ -233,7 +233,7 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
 
 void ribi::braw::QtClusterDialog::Save()
 {
-  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de clustering op");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;

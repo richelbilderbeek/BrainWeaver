@@ -86,7 +86,7 @@ void ribi::braw::QtAssessorMenuDialog::on_button_quit_clicked()
 void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
 {
   //Load assessent file
-  const auto d = QtFileDialog::GetOpenFileDialog();
+  const auto d = QtFileDialog().GetOpenFileDialog();
   d->setWindowTitle("Kies een assessment bestand");
   const int status = d->exec();
   if (status == QDialog::Rejected) return;

@@ -36,6 +36,9 @@ struct MenuDialog : public ::ribi::MenuDialog
 
   private:
   int ExecuteSpecific(const std::vector<std::string>& argv) noexcept;
+
+  std::vector<std::string> GetVersionHistory1() const noexcept;
+  std::vector<std::string> GetVersionHistory2() const noexcept;
 };
 
 } //~namespace braw

@@ -73,16 +73,16 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
   //Assessor name
   {
     ui->label_assessor_name->setText("Naam assessor: ");
-    if (!file.GetAssessorName().empty())
+    if (file.GetAssessorName().empty())
+    {
+      ui->edit_name->setFocus(); //Needs to be done in showEvent
+      ui->button_print->setEnabled(false);
+    }
+    else
     {
       ui->edit_name->setText(file.GetAssessorName().c_str());
       //ui->edit_name->setReadOnly(true); //TVDB request
       ui->button_print->setEnabled(true);
-    }
-    else
-    {
-      ui->edit_name->setFocus(); //Needs to be done in showEvent
-      ui->button_print->setEnabled(false);
     }
   }
 
@@ -116,7 +116,7 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
   //Temporarily disable to widget, otherwise saving cannot succeed
   this->hide();
 
-  const auto d = QtFileDialog::GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
   if (status == QDialog::Rejected)
@@ -158,15 +158,6 @@ void ribi::braw::QtRatingDialog::on_button_print_clicked()
   QtPrintRatingDialog * const d{
     new QtPrintRatingDialog(this->m_file)
   };
-
-  //Center the dialog
-  if (!"this will work")
-  {
-    const QRect screen = QApplication::desktop()->screenGeometry();
-    d->setGeometry(screen.adjusted(64,64,-64,-64));
-    d->move( screen.center() - d->rect().center() );
-  }
-
   emit add_me(d);
 }
 

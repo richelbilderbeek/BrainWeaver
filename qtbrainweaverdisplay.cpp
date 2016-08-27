@@ -49,6 +49,94 @@ ribi::braw::QtDisplay::QtDisplay()
 
 }
 
+int ribi::braw::QtDisplay::CalculateRichnessExperimental(const File& file) const
+{
+  //The first node removed, as this is the focal question
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+
+  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+
+  std::map<cmap::Competency,int> m;
+  //Tally the competencies
+  for (const ribi::cmap::Node& node: nodes)
+  {
+    for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
+    {
+      const cmap::Competency competency = example.GetCompetency();
+      const auto iter = m.find(competency);
+      if (iter != m.end())
+      {
+        ++(*iter).second; //Tally the known competency
+      }
+      else
+      {
+        m.insert(std::make_pair(competency,1)); //Tally the first of this competency
+      }
+    }
+  }
+  //Remove category 'misc'
+  #ifndef NDEBUG
+  const int debug_m_size_old = static_cast<int>(m.size());
+  const bool debug_will_resize = m.count(cmap::Competency::misc);
+  #endif
+  m.erase(cmap::Competency::misc);
+  #ifndef NDEBUG
+  const int debug_m_size_new = static_cast<int>(m.size());
+  assert( ( debug_will_resize && debug_m_size_old == debug_m_size_new + 1)
+       || (!debug_will_resize && debug_m_size_old == debug_m_size_new    )
+  );
+  #endif
+
+
+  const int a = static_cast<int>(m.size());
+  const int n_examples = std::accumulate(m.begin(),m.end(),0,
+    [](int& init,const std::pair<cmap::Competency,int>& p)
+    {
+      return init + p.second;
+    }
+  );
+  const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
+  const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
+  const int b = std::count_if(m.begin(),m.end(),
+    [my_min,my_max](const std::pair<cmap::Competency,int>& p)
+    {
+      return p.second >= my_min && p.second <= my_max;
+    }
+  );
+
+  return static_cast<int>(
+    std::round(
+      100.0 * ( static_cast<double>(a+b) / 12.0)
+    )
+  );
+}
+
+int ribi::braw::QtDisplay::CalculateSpecificityExperimental(const File& file) const
+{
+  //The first node removed, as this is the focal question
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+
+  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+  assert(!nodes.empty());
+
+  const int sum_rated_specificity //Constant 'k_s'
+    = std::accumulate(nodes.begin(),nodes.end(),0,
+    [](int& init, const ribi::cmap::Node& node)
+    {
+      return init + node.GetConcept().GetRatingSpecificity();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      static_cast<double>(50 * sum_rated_specificity)
+      / static_cast<double>(nodes.size())
+    )
+  );
+}
+
+
+
+
 void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const File& file,
   QTableWidget * const table) const
@@ -128,7 +216,8 @@ void ribi::braw::QtDisplay::DisplayExamples(
     const int n_rows = table->rowCount();
     for(int i=0; i!=n_rows; ++i)
     {
-      const cmap::Competency competency = static_cast<cmap::Competency>(i + 1); //Skip 0 == uninitialized
+      //Skip 0 == uninitialized
+      const cmap::Competency competency = static_cast<cmap::Competency>(i + 1);
       const std::string text = cmap::Competencies().ToStrDutch(competency);
       const QIcon icon = cmap::QtCompetency().CompetencyToIcon(competency);
       QTableWidgetItem * const item = new QTableWidgetItem;
@@ -190,16 +279,8 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
   const File& file,
   QTableWidget * const table) const
 {
+  SetNumberOfNodes(file, table);
   auto g = file.GetConceptMap();
-
-  //Number of nodes
-  {
-    const std::string text = boost::lexical_cast<std::string>(boost::num_vertices(g));
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(0,0,item);
-  }
   //Average number of connections per non-center node
   {
     std::vector<int> degrees;
@@ -246,28 +327,15 @@ void ribi::braw::QtDisplay::DisplayValues(
   const File& file,
   QTableWidget * const table) const
 {
-  auto g = file.GetConceptMap();
-  if (boost::num_vertices(g) == 0)
+  if (boost::num_vertices(file.GetConceptMap()) == 0)
   {
     std::stringstream msg;
     msg << __func__ << ": must have at least one node";
     throw std::invalid_argument(msg.str());
   }
 
-  #ifndef NDEBUG
-  const int all_sz = static_cast<int>(boost::num_vertices(g));
-  #endif
-
-  //Remove the focal node
-  assert(boost::num_vertices(g)); //Cannot clear non-existing vertices
-  boost::clear_vertex(*vertices(g).first, g);
-  boost::remove_vertex(*vertices(g).first, g);
-  //all_nodes.erase(all_nodes.begin());
-
-  #ifndef NDEBUG
-  const int sz = static_cast<int>(boost::num_vertices(g));
-  assert(sz == all_sz - 1);
-  #endif
+  //The first node removed
+  const auto g = RemoveFirstNode(file.GetConceptMap());
 
   std::vector<ribi::cmap::Node> all_nodes = ribi::cmap::GetNodes(g);
   const std::vector<ribi::cmap::Node> nodes = all_nodes;
@@ -315,16 +383,10 @@ void ribi::braw::QtDisplay::DisplayValues(
         return init + static_cast<int>(edge.GetNode().GetConcept().GetExamples().Get().size());
       }
     );
-    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))}; //Constant 'r'
-    /*
-    const int n_relations_not_to_focus //Constant 'r'
-      = std::count_if(edges.begin(),edges.end(),
-      [](const ribi::cmap::Edge& edge)
-      {
-        return edge.GetFrom() != 0 && edge.GetTo() != 0; //Not connected to focus question
-      }
-    );
-    */
+
+    //This works, because the focus is already removed
+    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))};
+
     const int n_examples //Constant 'v'
       = n_nodes_examples + n_edges_examples;
     std::string text = "N/A";
@@ -408,24 +470,10 @@ void ribi::braw::QtDisplay::DisplayValues(
   //Experimental specificity: s_e at row = 2, col = 0
   //s_e = 50.0 * sum_rated_specificity / n_nodes
   {
-    const int sum_rated_specificity //Constant 'k_s'
-      = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const ribi::cmap::Node& node)
-      {
-        return init + node.GetConcept().GetRatingSpecificity();
-      }
-    );
     std::string text = "N/A";
     if (n_nodes != 0)
     {
-      const int s_e
-        = static_cast<int>(
-          std::round(
-            static_cast<double>(50 * sum_rated_specificity)
-            / static_cast<double>(n_nodes)
-          )
-        );
-      text = boost::lexical_cast<std::string>(s_e);
+      text = boost::lexical_cast<std::string>(CalculateSpecificityExperimental(file));
     }
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
@@ -437,60 +485,7 @@ void ribi::braw::QtDisplay::DisplayValues(
   //a = number of different Competencies
   //b = number of Competencies between 1/12th and 1/4th of number of examples
   {
-    std::map<cmap::Competency,int> m;
-    //Tally the competencies
-    for (const ribi::cmap::Node& node: nodes)
-    {
-      for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
-      {
-        const cmap::Competency competency = example.GetCompetency();
-        const auto iter = m.find(competency);
-        if (iter != m.end())
-        {
-          ++(*iter).second; //Tally the known competency
-        }
-        else
-        {
-          m.insert(std::make_pair(competency,1)); //Tally the first of this competency
-        }
-      }
-    }
-    //Remove category 'misc'
-    #ifndef NDEBUG
-    const int debug_m_size_old = static_cast<int>(m.size());
-    const bool debug_will_resize = m.count(cmap::Competency::misc);
-    #endif
-    m.erase(cmap::Competency::misc);
-    #ifndef NDEBUG
-    const int debug_m_size_new = static_cast<int>(m.size());
-    assert( ( debug_will_resize && debug_m_size_old == debug_m_size_new + 1)
-         || (!debug_will_resize && debug_m_size_old == debug_m_size_new    )
-    );
-    #endif
-
-
-    const int a = static_cast<int>(m.size());
-    const int n_examples = std::accumulate(m.begin(),m.end(),0,
-      [](int& init,const std::pair<cmap::Competency,int>& p)
-      {
-        return init + p.second;
-      }
-    );
-    const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
-    const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
-    const int b = std::count_if(m.begin(),m.end(),
-      [my_min,my_max](const std::pair<cmap::Competency,int>& p)
-      {
-        return p.second >= my_min && p.second <= my_max;
-      }
-    );
-
-    const int r_e
-      = static_cast<int>(
-        std::round(
-          100.0 * ( static_cast<double>(a+b) / 12.0)
-        )
-      );
+    const int r_e = CalculateRichnessExperimental(file);
     std::string text = boost::lexical_cast<std::string>(r_e);
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
@@ -507,4 +502,17 @@ void ribi::braw::QtDisplay::DisplayValues(
     + table->columnWidth(0)
     + table->columnWidth(1)
   );
+}
+
+
+void ribi::braw::QtDisplay::SetNumberOfNodes(
+  const File& file,
+  QTableWidget * const table) const
+{
+  const auto g = file.GetConceptMap();
+  const std::string text = boost::lexical_cast<std::string>(boost::num_vertices(g));
+  QTableWidgetItem * const item = new QTableWidgetItem;
+  item->setText(text.c_str());
+  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  table->setItem(0,0,item);
 }
