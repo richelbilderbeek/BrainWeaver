@@ -82,12 +82,6 @@ private:
   ///The flags for an item at the top level, which is level 1
   Qt::ItemFlags GetTopLevelFlags() const noexcept;
 
-  ///
-  void MoveJthChildToTop(
-    QTreeWidgetItem * const top,
-    const int j
-  ) noexcept;
-
   ///Adds Concepts to concepts for a toplevelitem
   void ProcessTopLevelItem(
     QTreeWidgetItem * const top,
@@ -101,6 +95,13 @@ private:
 
   void keyPressEventRight(QKeyEvent *event);
 };
+
+///Move the ith child to top
+void MoveJthChildToTop(
+  QtClusterWidget * const widget,
+  QTreeWidgetItem * const top,
+  const int j
+) noexcept;
 
 } //~namespace braw
 } //~namespace ribi

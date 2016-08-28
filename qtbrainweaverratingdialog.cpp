@@ -41,7 +41,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtconceptmap.h"
 #include "qtbrainweaverdisplay.h"
 #include "qtbrainweaverfiledialog.h"
-#include "qtconceptmapdisplaystrategy.h"
 #include "brainweaverfile.h"
 #include "trace.h"
 #include "ui_qtbrainweaverratingdialog.h"

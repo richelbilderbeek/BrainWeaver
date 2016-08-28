@@ -38,7 +38,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmap.h"
 #include "conceptmapfactory.h"
 #include "qtconceptmapqtnode.h"
-#include "qtconceptmapdisplaystrategy.h"
 #include "get_my_custom_vertexes.h"
 #include "qtconceptmapratedconceptdialog.h"
 #include "qtbrainweaverfiledialog.h"

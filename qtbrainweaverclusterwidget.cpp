@@ -118,7 +118,7 @@ void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
         //Check if top->child(j) has children
         if (top->child(j)->childCount() > 0)
         {
-          MoveJthChildToTop(top, j);
+          MoveJthChildToTop(this, top, j);
           done = false;
           j = n_child - 1;
           i = n_top - 1;
@@ -153,14 +153,15 @@ bool ribi::braw::QtClusterWidget::HasNoItemsAtLevelThree() noexcept
   return true;
 }
 
-void ribi::braw::QtClusterWidget::MoveJthChildToTop(
+void ribi::braw::MoveJthChildToTop(
+  QtClusterWidget * const widget,
   QTreeWidgetItem * const top,
   const int j
 ) noexcept
 {
   QTreeWidgetItem * const clone = top->child(j)->clone();
   assert(clone);
-  this->addTopLevelItem(clone);
+  widget->addTopLevelItem(clone);
   top->removeChild(top->child(j));
 }
 
