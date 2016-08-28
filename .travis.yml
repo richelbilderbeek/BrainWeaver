@@ -20,6 +20,7 @@ addons:
 install: 
   - sudo apt-get install -qq g++-5
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - ./install_oclint.sh
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -37,6 +38,10 @@ script:
   - ./BrainweaverDesktopTest
   - ./get_code_cov.sh
   - codecov
+  - ./do_oclint.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+after_failure:
+  - cat oclint.log
