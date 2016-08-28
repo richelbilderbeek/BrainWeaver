@@ -70,19 +70,36 @@ const std::vector<const T *> AddConst(
 
 namespace braw {
 
+///compleXity eStimated: X_s, a percentage, that will be shown at row = 0, col = 1
+///x_s = ((2*n_relations_not_to_focus)/(n_nodes*(n_nodes-1))))^0.25*100%
+///Estimated, thus needs no assessor, nor ratings
+int CalculateComplexityEstimated(const File& file);
 
-//Concreteness Experimental: C_e, a percentage that will be shown at row = 1, col = 0
-//50.0 * sum_rated_concreteness / n_nodes
+///Complexity experimental value: X_e at row = 0, col = 0
+///50.0 * sum_rated_complexity / n_nodes
+///Experimental, thus relies on rating by assessor
+int CalculateComplexityExperimental(const File& file);
+
+///Concreteness eStimated: C_s at row = 1, col = 1
+///C_s = 100.0 * n_examples / (n_examples + n_nodes + n_relations_not_to_focus)
+///Estimated, thus needs no assessor, nor ratings
+int CalculateConcretenessEstimated(const File& file);
+
+///Concreteness Experimental: C_e, a percentage that will be shown at row = 1, col = 0
+///50.0 * sum_rated_concreteness / n_nodes
+///Experimental, thus relies on rating by assessor
 int CalculateConcretenessExperimental(const File& file);
 
 ///Richness Experimental, r_e, a percentage that will be shown at row = 3, col = 0
 ///r_e = ((a + b) / 14) * 100%
 ///a = number of different Competencies
 ///b = number of Competencies between 1/12th and 1/4th of number of examples
+///Experimental, thus relies on rating by assessor
 int CalculateRichnessExperimental(const File& file);
 
 ///Experimental specificity: s_e, a percentage that will be shown at row = 2, col = 0
 ///s_e = 50.0 * sum_rated_specificity / n_nodes
+///Experimental, thus relies on rating by assessor
 int CalculateSpecificityExperimental(const File& file);
 
 ///Obtain all possible selections of a std::vector,

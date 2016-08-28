@@ -41,12 +41,28 @@ struct QtDisplay
 
   private:
 
+  void DisplayRatedConceptName(
+    const ribi::cmap::Concept& concept,
+    QTableWidget * const table, const int row
+  ) const;
+  void DisplayRatedConceptRatingComplexity(
+    const ribi::cmap::Concept& concept,
+    QTableWidget * const table, const int row, const int col
+  ) const;
+  void DisplayRatedConceptRatingConcreteness(
+    const ribi::cmap::Concept& concept,
+    QTableWidget * const table, const int row, const int col
+  ) const;
+  void DisplayRatedConceptRatingSpecificity(
+    const ribi::cmap::Concept& concept,
+    QTableWidget * const table, const int row, const int col
+  ) const;
+
   ///Put number of nodes at cell (0,0) of table
   void SetNumberOfNodes(const File& file, QTableWidget * const table) const;
 };
 
 } //~namespace braw
-
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERDISPLAY_H

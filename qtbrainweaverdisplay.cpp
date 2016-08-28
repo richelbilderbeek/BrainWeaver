@@ -24,6 +24,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "qtbrainweaverdisplay.h"
 
+#include <tuple>
+
 #include <boost/lexical_cast.hpp>
 
 #include <QHeaderView>
@@ -36,6 +38,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapedge.h"
 #include "count_undirected_graph_levels.h"
 #include "conceptmapexample.h"
+#include "get_my_custom_vertexes.h"
 #include "conceptmapexamples.h"
 #include "brainweaverfile.h"
 #include "brainweaverhelper.h"
@@ -51,56 +54,30 @@ ribi::braw::QtDisplay::QtDisplay()
 
 void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const File& file,
-  QTableWidget * const table) const
+  QTableWidget * const table
+) const
 {
-  const auto g = file.GetConceptMap();
-  const int sz{static_cast<int>(boost::num_vertices(g))};
-  if (sz == 0)
+  if (!boost::num_vertices(file.GetConceptMap()))
   {
     std::stringstream msg;
     msg << __func__ << ": must have at least one node";
     throw std::invalid_argument(msg.str());
   }
-  table->setRowCount(sz - 1); //-1 to skip focus question node at index 0
 
-  const auto vip = vertices(g);
-  assert(boost::num_vertices(g) > 0); //Cannot skip first node with focus question if there are no nodes at all
-  auto iter = vip.first; ++iter; //Skip first, focus question
+  //The first node, the focal question, removed
+  const auto g = RemoveFirstNode(file.GetConceptMap());
 
-  //auto end = vip.second;
+  table->setRowCount(boost::num_vertices(file.GetConceptMap()));
 
-  assert(sz >= 1);
-  for (int i=1; i!=sz; ++i, ++iter)
+  int row = 0;
+  for (const ribi::cmap::Node& node: ribi::cmap::GetNodes(g))
   {
-    const int row = i-1; //-1 to skip focus question node at index 0
-    const ribi::cmap::Concept concept = ribi::cmap::GetNode(*iter,g).GetConcept();
-    //Name
-    {
-      QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(concept.GetName().c_str());
-      table->setVerticalHeaderItem(row,item);
-    }
-    //Rating complexity
-    {
-      QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept.GetRatingComplexity()));
-      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-      table->setItem(row,0,item);
-    }
-    //Rating concreteness
-    {
-      QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept.GetRatingConcreteness()));
-      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-      table->setItem(row,1,item);
-    }
-    //Rating specificity
-    {
-      QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setText(QString::number(concept.GetRatingSpecificity()));
-      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-      table->setItem(row,2,item);
-    }
+    const ribi::cmap::Concept& concept = node.GetConcept();
+    DisplayRatedConceptName(concept, table, row);
+    DisplayRatedConceptRatingComplexity(concept, table, row, 0);
+    DisplayRatedConceptRatingConcreteness(concept, table, row, 1);
+    DisplayRatedConceptRatingSpecificity(concept, table, row, 2);
+    ++row;
   }
 
   table->verticalHeader()->setMinimumWidth(300);
@@ -114,12 +91,58 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
     + table->columnWidth(1)
     + table->columnWidth(2)
   );
-
-
-
 }
 
-//Examples' icons
+void ribi::braw::QtDisplay::DisplayRatedConceptName(
+  const ribi::cmap::Concept& concept,
+  QTableWidget * const table,
+  const int row
+) const
+{
+  QTableWidgetItem * const item = new QTableWidgetItem;
+  item->setText(concept.GetName().c_str());
+  table->setVerticalHeaderItem(row,item);
+}
+
+void ribi::braw::QtDisplay::DisplayRatedConceptRatingComplexity(
+  const ribi::cmap::Concept& concept,
+  QTableWidget * const table,
+  const int row,
+  const int col
+) const
+{
+  QTableWidgetItem * const item = new QTableWidgetItem;
+  item->setText(QString::number(concept.GetRatingComplexity()));
+  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  table->setItem(row,col,item);
+}
+
+void ribi::braw::QtDisplay::DisplayRatedConceptRatingConcreteness(
+  const ribi::cmap::Concept& concept,
+  QTableWidget * const table,
+  const int row,
+  const int col
+) const
+{
+  QTableWidgetItem * const item = new QTableWidgetItem;
+  item->setText(QString::number(concept.GetRatingConcreteness()));
+  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  table->setItem(row,col,item);
+}
+
+void ribi::braw::QtDisplay::DisplayRatedConceptRatingSpecificity(
+  const ribi::cmap::Concept& concept,
+  QTableWidget * const table,
+  const int row,
+  const int col
+) const
+{
+  QTableWidgetItem * const item = new QTableWidgetItem;
+  item->setText(QString::number(concept.GetRatingSpecificity()));
+  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  table->setItem(row,col,item);
+}
+
 void ribi::braw::QtDisplay::DisplayExamples(
   const File& file,
   QTableWidget * const table) const
@@ -140,24 +163,8 @@ void ribi::braw::QtDisplay::DisplayExamples(
   }
   //Examples' competencies
   {
-    std::map<cmap::Competency,int> cnts;
+    std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
 
-    for(const ribi::cmap::Node node: ribi::cmap::GetNodes(file.GetConceptMap()))
-    {
-      for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
-      {
-        const auto iter = cnts.find(example.GetCompetency());
-        if (iter != cnts.end())
-        {
-          ++(*iter).second;
-        }
-        else
-        {
-          const cmap::Competency competency = example.GetCompetency();
-          cnts.insert(std::make_pair(competency,1));
-        }
-      }
-    }
     const int sum = std::accumulate(cnts.begin(),cnts.end(),0,
       [](int& init,const std::pair<cmap::Competency,int>& p)
       {
@@ -203,10 +210,10 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
       degrees.push_back(boost::degree(*i, g));
     }
     const int sum{std::accumulate(std::begin(degrees), std::end(degrees), 0)};
-    const double average_degree_per_concept{
+    const double adpc{ //average_degree_per_concept
       static_cast<double>(sum) / static_cast<double>(degrees.size())
     };
-    const std::string text = boost::lexical_cast<std::string>(average_degree_per_concept);
+    const std::string text = boost::lexical_cast<std::string>(adpc);
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -246,141 +253,33 @@ void ribi::braw::QtDisplay::DisplayValues(
     throw std::invalid_argument(msg.str());
   }
 
-  //The first node removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
-  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+  // function row column
+  using Cell = std::tuple<std::function<int(const File&)>, int, int>;
+  std::vector<Cell> v;
+  v.push_back(std::make_tuple(CalculateComplexityExperimental  , 0, 0));
+  v.push_back(std::make_tuple(CalculateComplexityEstimated     , 0, 1));
+  v.push_back(std::make_tuple(CalculateConcretenessExperimental, 1, 0));
+  v.push_back(std::make_tuple(CalculateConcretenessEstimated   , 1, 1));
+  v.push_back(std::make_tuple(CalculateSpecificityExperimental , 2, 0));
+  v.push_back(std::make_tuple(CalculateRichnessExperimental    , 3, 0));
 
-  const int n_nodes = static_cast<int>(nodes.size());  //Constant 'c'
-  //Concreteness experimental: C_e at row = 1, col = 0
-  //50.0 * sum_rated_concreteness / n_nodes
+  for (const auto t: v)
   {
-    std::string text = "N/A";
-    if (n_nodes != 0)
+    std::string text;
+    try
     {
-      text = boost::lexical_cast<std::string>(CalculateConcretenessExperimental(file));
+      text = boost::lexical_cast<std::string>(std::get<0>(t)(file));
+    }
+    catch (std::exception&)
+    {
+      text = "N/A";
     }
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(1,0,item);
+    table->setItem(std::get<1>(t),std::get<2>(t),item);
   }
-  //Concreteness eStimated: C_s at row = 1, col = 1
-  //C_s = 100.0 * n_examples / (n_examples + n_nodes + n_relations_not_to_focus)
-  {
-    const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
-    const int n_nodes_examples = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const ribi::cmap::Node& node)
-      {
-        return init + static_cast<int>(node.GetConcept().GetExamples().Get().size());
-      }
-    );
-    const int n_edges_examples = std::accumulate(edges.begin(),edges.end(),0,
-      [](int& init, const ribi::cmap::Edge& edge)
-      {
-        return init + static_cast<int>(edge.GetNode().GetConcept().GetExamples().Get().size());
-      }
-    );
 
-    //This works, because the focus is already removed
-    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))};
-
-    const int n_examples //Constant 'v'
-      = n_nodes_examples + n_edges_examples;
-    std::string text = "N/A";
-    if (n_examples + n_nodes + n_relations_not_to_focus != 0)
-    {
-      const double c_s
-        = static_cast<int>(
-          std::round(
-            100.0 * static_cast<double>(n_examples)
-            / static_cast<double>(n_examples + n_nodes + n_relations_not_to_focus)
-          )
-        );
-      text = boost::lexical_cast<std::string>(c_s);
-    }
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(1,1,item);
-  }
-  //Complexity experimental value: X_e at row = 0, col = 0
-  //50.0 * sum_rated_complexity / n_nodes
-  {
-    const int sum_rated_complexity //Constant 'k_i'
-      = std::accumulate(nodes.begin(),nodes.end(),0,
-      [](int& init, const ribi::cmap::Node& node)
-      {
-        return init + node.GetConcept().GetRatingComplexity();
-      }
-    );
-    std::string text = "N/A";
-    if (n_nodes != 0)
-    {
-      const int x_e
-        = static_cast<int>(
-          std::round(
-           50.0 * static_cast<double>(sum_rated_complexity)
-            / static_cast<double>(n_nodes)
-          )
-        );
-      text = boost::lexical_cast<std::string>(x_e);
-    }
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(0,0,item);
-  }
-  //compleXity eStimated: X_s at row = 0, col = 1
-  //x_s = ((2*n_relations_not_to_focus)/(n_nodes*(n_nodes-1))))^0.25*100%
-  {
-    const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
-    ///This works, because focal node has already been deleted
-    const int n_relations_not_to_focus{static_cast<int>(boost::num_edges(g))}; //Constant 'r'
-    std::string text = "N/A";
-    if (n_nodes > 1)
-    {
-      const int x_s
-        = static_cast<int>(
-            std::round(
-              100.0
-              * std::pow(
-                  static_cast<double>(n_relations_not_to_focus * 2)
-                / static_cast<double>(n_nodes * (n_nodes - 1) ),
-                0.25)
-            )
-          );
-       text = boost::lexical_cast<std::string>(x_s);
-     }
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(0,1,item);
-  }
-  //Experimental specificity: s_e at row = 2, col = 0
-  //s_e = 50.0 * sum_rated_specificity / n_nodes
-  {
-    std::string text = "N/A";
-    if (n_nodes != 0)
-    {
-      text = boost::lexical_cast<std::string>(CalculateSpecificityExperimental(file));
-    }
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(2,0,item);
-  }
-  //Richness Experimental: r_e at row = 3, col = 0
-  //r_e = ((a + b) / 14) * 100%
-  //a = number of different Competencies
-  //b = number of Competencies between 1/12th and 1/4th of number of examples
-  {
-    const int r_e = CalculateRichnessExperimental(file);
-    std::string text = boost::lexical_cast<std::string>(r_e);
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(3,0,item);
-  }
   table->verticalHeader()->setMaximumWidth(100);
   table->verticalHeader()->setMinimumWidth(100);
   table->setColumnWidth(0,200);
