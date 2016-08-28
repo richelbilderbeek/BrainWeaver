@@ -1,7 +1,8 @@
 sudo: required
 language: cpp
-dist: trusty
-compiler: gcc
+
+compiler:
+  - gcc
 
 # From https://gist.github.com/jreese/6207161#gistcomment-1462109
 before_install:
