@@ -44,15 +44,25 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_copy_constructor)
   f.SetStudentName("debug student name");
   File g = f;
   BOOST_CHECK_EQUAL(f, g);
+  BOOST_CHECK(f == g);
   //Modify g, to test operator!=
   g.SetStudentName( f.GetStudentName() + " (modified with spaces)");
   BOOST_CHECK_NE(f, g);
+  BOOST_CHECK(f != g); //operator!= was not tested according to codecov
   g.SetStudentName( f.GetStudentName());
   BOOST_CHECK_EQUAL(f, g);
   g.SetAssessorName( f.GetAssessorName() + " (modified with spaces)");
   BOOST_CHECK_NE(f, g);
   g.SetAssessorName( f.GetAssessorName());
   BOOST_CHECK_EQUAL(f, g);
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_stream_out_operator)
+{
+  ribi::braw::File f;
+  std::stringstream s;
+  s << f;
+  BOOST_CHECK(!s.str().empty());
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setquestion_and_getquestion_are_symmetric)
@@ -226,4 +236,20 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_all_testing_files)
     BOOST_CHECK_EQUAL (file, file_again);
     ribi::FileIo().DeleteFile(filename);
   }
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_TallyCompetencies)
+{
+  const ribi::braw::File f = ribi::braw::FileFactory().Get5();
+  const auto m = ribi::braw::TallyCompetencies(f);
+  BOOST_CHECK(!m.empty());
+  using Pair = std::pair<ribi::cmap::Competency,int>;
+  const int sum_score = std::accumulate(
+    std::begin(m), std::end(m), static_cast<int>(0),
+    [](int init, const Pair& p)
+    {
+      return init + p.second;
+    }
+  );
+  BOOST_CHECK(sum_score > 0);
 }

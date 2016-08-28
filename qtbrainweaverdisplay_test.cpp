@@ -14,10 +14,11 @@ void ribi::braw::qtbrainweaverdisplay_test::default_construction()
 
 void ribi::braw::qtbrainweaverdisplay_test::display_examples()
 {
-
-  File f;
+  File f = FileFactory().Get5();
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
+  widget->setColumnCount(2);
+  widget->setRowCount(7);
   widget->show();
   d.DisplayExamples(f, widget.get());
   QVERIFY("Should get here");
@@ -28,7 +29,7 @@ void ribi::braw::qtbrainweaverdisplay_test::display_misc_values()
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
   widget->show();
-  File f = FileFactory().GetTests().back();
+  File f = FileFactory().Get5();
   d.DisplayMiscValues(f, widget.get());
   QVERIFY("Should get here");
 }

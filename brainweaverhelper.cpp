@@ -33,6 +33,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <QRegExp>
 
 #include "brainweaverfile.h"
+#include "conceptmap.h"
 #include "conceptmaphelper.h"
 #include "testtimer.h"
 #include "fileio.h"
@@ -42,7 +43,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 int ribi::braw::CalculateComplexityEstimated(const File& file)
 {
   //The first node removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
 
   std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
   const int n_nodes{static_cast<int>(nodes.size())};
@@ -69,7 +70,7 @@ int ribi::braw::CalculateComplexityEstimated(const File& file)
 int ribi::braw::CalculateComplexityExperimental(const File& file)
 {
   //The first node removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
 
   std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
   const int n_nodes{static_cast<int>(nodes.size())};
@@ -98,7 +99,7 @@ int ribi::braw::CalculateComplexityExperimental(const File& file)
 int ribi::braw::CalculateConcretenessEstimated(const File& file)
 {
   //The first node removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
 
   std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
   const int n_nodes{static_cast<int>(nodes.size())};
@@ -127,7 +128,7 @@ int ribi::braw::CalculateConcretenessEstimated(const File& file)
 
   const int n_examples //Constant 'v'
     = n_nodes_examples + n_edges_examples;
-  if (n_examples + n_nodes + nrntf > 0)
+  if (n_examples + n_nodes + nrntf == 0)
   {
     throw std::invalid_argument("Cannot calculate the experimental complexity");
   }
@@ -143,7 +144,7 @@ int ribi::braw::CalculateConcretenessEstimated(const File& file)
 int ribi::braw::CalculateConcretenessExperimental(const File& file)
 {
   //The first node removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
   std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
 
   if (nodes.empty())
@@ -168,12 +169,7 @@ int ribi::braw::CalculateConcretenessExperimental(const File& file)
 
 int ribi::braw::CalculateRichnessExperimental(const File& file)
 {
-
   std::map<cmap::Competency,int> m = TallyCompetencies(file);
-
-  //The first node removed, as this is the focal question
-  //const auto g = RemoveFirstNode(file.GetConceptMap());
-  //const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
 
   //Remove category 'misc'
   #ifndef NDEBUG
@@ -215,7 +211,7 @@ int ribi::braw::CalculateRichnessExperimental(const File& file)
 int ribi::braw::CalculateSpecificityExperimental(const File& file)
 {
   //The first node removed, as this is the focal question
-  const auto g = RemoveFirstNode(file.GetConceptMap());
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
 
   const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
 

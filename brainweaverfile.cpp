@@ -365,7 +365,6 @@ void ribi::braw::File::SetStudentName(const std::string& student_name)
 
 std::map<ribi::cmap::Competency,int> ribi::braw::TallyCompetencies(const File& file)
 {
-
   //The first node removed, as this is the focal question
   const auto g = RemoveFirstNode(file.GetConceptMap());
   const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
@@ -409,6 +408,7 @@ std::string ribi::braw::DoXpressiveRegexReplace(
   const std::string& format_str
 ) noexcept
 {
+  assert(!"Am I used?");
   try
   {
     return boost::xpressive::regex_replace(
@@ -433,6 +433,7 @@ std::string ribi::braw::DoXpressiveRegexReplace(
 
 std::string ribi::braw::FileToStr(const std::string& filename) noexcept
 {
+  assert(!"Am I used?");
   assert(is_regular_file(filename.c_str()));
   std::string s;
   std::ifstream in(filename.c_str());
@@ -444,11 +445,6 @@ std::string ribi::braw::FileToStr(const std::string& filename) noexcept
   }
   return s;
 }
-
-//std::string ribi::braw::GetRecoveryFilename() noexcept
-//{
-//  return "recovery.cmp";
-//}
 
 std::string ribi::braw::ToXml(const File& file) noexcept
 {
