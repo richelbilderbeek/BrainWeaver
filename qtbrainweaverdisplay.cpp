@@ -101,6 +101,8 @@ void ribi::braw::QtDisplay::DisplayRatedConceptName(
 {
   QTableWidgetItem * const item = new QTableWidgetItem;
   item->setText(concept.GetName().c_str());
+  assert(row >= 0);
+  assert(row < table->rowCount());
   table->setVerticalHeaderItem(row,item);
 }
 
@@ -114,6 +116,9 @@ void ribi::braw::QtDisplay::DisplayRatedConceptRatingComplexity(
   QTableWidgetItem * const item = new QTableWidgetItem;
   item->setText(QString::number(concept.GetRatingComplexity()));
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  assert(row >= 0);
+  assert(row < table->rowCount());
+  assert(col < table->columnCount());
   table->setItem(row,col,item);
 }
 
@@ -127,6 +132,9 @@ void ribi::braw::QtDisplay::DisplayRatedConceptRatingConcreteness(
   QTableWidgetItem * const item = new QTableWidgetItem;
   item->setText(QString::number(concept.GetRatingConcreteness()));
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  assert(row >= 0);
+  assert(row < table->rowCount());
+  assert(col < table->columnCount());
   table->setItem(row,col,item);
 }
 
@@ -140,6 +148,9 @@ void ribi::braw::QtDisplay::DisplayRatedConceptRatingSpecificity(
   QTableWidgetItem * const item = new QTableWidgetItem;
   item->setText(QString::number(concept.GetRatingSpecificity()));
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  assert(row >= 0);
+  assert(row < table->rowCount());
+  assert(col < table->columnCount());
   table->setItem(row,col,item);
 }
 
@@ -179,14 +190,15 @@ void ribi::braw::QtDisplay::DisplayExamples(
         const int col = 0;
         const int row = static_cast<int>(p.first) - 1;
         if (row == -1) continue; //0 == uninitialized
-        assert(row >= 0);
-        assert(row < table->rowCount());
         QTableWidgetItem * const item  = new QTableWidgetItem;
         const double f = static_cast<double>(p.second) / static_cast<double>(sum);
         const int percentage = static_cast<int>(std::round(100.0 * f));
         const std::string text = boost::lexical_cast<std::string>(percentage);
         item->setText(text.c_str());
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        assert(row >= 0);
+        assert(row < table->rowCount());
+        assert(col < table->columnCount());
         table->setItem(row,col,item);
       }
     }
@@ -217,7 +229,7 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(0,1,item);
+    table->setItem(1,0,item);
   }
   //Hierarchical levels
   {
@@ -227,7 +239,9 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(0,2,item);
+    assert(2 < table->rowCount());
+    assert(0 < table->columnCount());
+    table->setItem(2,0,item);
   }
 
 
@@ -277,6 +291,10 @@ void ribi::braw::QtDisplay::DisplayValues(
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    assert(std::get<1>(t) >= 0);
+    assert(std::get<1>(t) < table->rowCount());
+    assert(std::get<2>(t) >= 0);
+    assert(std::get<2>(t) < table->columnCount());
     table->setItem(std::get<1>(t),std::get<2>(t),item);
   }
 
@@ -302,5 +320,7 @@ void ribi::braw::QtDisplay::SetNumberOfNodes(
   QTableWidgetItem * const item = new QTableWidgetItem;
   item->setText(text.c_str());
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  assert(0 < table->rowCount());
+  assert(0 < table->columnCount());
   table->setItem(0,0,item);
 }

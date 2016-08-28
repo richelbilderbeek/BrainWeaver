@@ -72,7 +72,14 @@ void ribi::braw::QtMasterDialog::remove(QDialog * const dialog)
   ui->stackedWidget->setCurrentIndex(new_index);
 
   //Update
-  this->setWindowTitle(ui->stackedWidget->currentWidget()->windowTitle());
+  if (new_index >= 0)
+  {
+    this->setWindowTitle(ui->stackedWidget->currentWidget()->windowTitle());
+  }
+  else
+  {
+    close();
+  }
   //this->setGeometry(ui->stackedWidget->currentWidget()->geometry());
 
 }

@@ -133,16 +133,6 @@ class File
 ///Create a concept map with a center node with text
 ribi::cmap::ConceptMap CreateConceptMap(const std::string& text) noexcept;
 
-///Replace the regex_str in str with format_str
-std::string DoXpressiveRegexReplace(
-  const std::string& str,
-  const std::string& regex_str,
-  const std::string& format_str
-) noexcept;
-
-///Convert a file's content to a single std::string
-std::string FileToStr(const std::string& filename) noexcept;
-
 ///Get the name of the recovery filename
 //std::string GetRecoveryFilename() noexcept;
 

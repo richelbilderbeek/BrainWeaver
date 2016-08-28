@@ -28,6 +28,8 @@ void ribi::braw::qtbrainweaverdisplay_test::display_misc_values()
 {
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
+  widget->setRowCount(4);
+  widget->setColumnCount(3);
   widget->show();
   File f = FileFactory().Get5();
   d.DisplayMiscValues(f, widget.get());
@@ -39,6 +41,8 @@ void ribi::braw::qtbrainweaverdisplay_test::display_misc_values_without_center_n
 
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
+  widget->setRowCount(4);
+  widget->setColumnCount(3);
   widget->show();
   try
   {
@@ -61,6 +65,8 @@ void ribi::braw::qtbrainweaverdisplay_test::display_rated_concepts()
   File f = FileFactory().GetTests().back();
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
+  widget->setRowCount(4);
+  widget->setColumnCount(3);
   widget->show();
   d.DisplayRatedConcepts(f, widget.get());
   QVERIFY("Should get here");
@@ -71,6 +77,8 @@ void ribi::braw::qtbrainweaverdisplay_test::display_rated_concepts_without_cente
   File f;
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
+  widget->setRowCount(4);
+  widget->setColumnCount(3);
   widget->show();
   try
   {
@@ -94,6 +102,8 @@ void ribi::braw::qtbrainweaverdisplay_test::display_values()
   const QtDisplay d;
   std::unique_ptr<QTableWidget> widget(new QTableWidget);
   widget->show();
+  widget->setRowCount(4);
+  widget->setColumnCount(3);
   d.DisplayValues(f, widget.get());
   QVERIFY("Should get here");
 }

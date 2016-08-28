@@ -402,50 +402,6 @@ ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
   return g;
 }
 
-std::string ribi::braw::DoXpressiveRegexReplace(
-  const std::string& str,
-  const std::string& regex_str,
-  const std::string& format_str
-) noexcept
-{
-  assert(!"Am I used?");
-  try
-  {
-    return boost::xpressive::regex_replace(
-      str,
-      boost::xpressive::sregex(boost::xpressive::sregex::compile(regex_str)),
-      format_str,
-      boost::xpressive::regex_constants::match_default
-        | boost::xpressive::regex_constants::format_all
-        | boost::xpressive::regex_constants::format_no_copy);
-  }
-  catch (boost::xpressive::regex_error& e)
-  {
-    const std::string s
-      = "boost::xpressive::regex_error: " + std::string(e.what());
-    TRACE(str);
-    TRACE(regex_str);
-    TRACE(format_str);
-    TRACE(s);
-    throw std::logic_error(s.c_str());
-  }
-}
-
-std::string ribi::braw::FileToStr(const std::string& filename) noexcept
-{
-  assert(!"Am I used?");
-  assert(is_regular_file(filename.c_str()));
-  std::string s;
-  std::ifstream in(filename.c_str());
-  while (!in.eof())
-  {
-    std::string t;
-    std::getline(in,t);
-    s+=t;
-  }
-  return s;
-}
-
 std::string ribi::braw::ToXml(const File& file) noexcept
 {
   std::stringstream s;
