@@ -93,6 +93,8 @@ int CalculateSpecificityExperimental(const File& file);
 /// {1,2  } -> { {}, {1}, {2},      {1,2}                        }
 /// {1,2,3} -> { {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3} }
 //From http://www.richelbilderbeek.nl/CppGetCombinations.htm
+//Use ConceptMapHelper instead
+/*
 template <class T>
 const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
 {
@@ -146,6 +148,7 @@ const std::vector<std::vector<T> > GetCombinations(const std::array<T,N>& v)
   }
   return result;
 }
+*/
 
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;

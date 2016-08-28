@@ -13,6 +13,7 @@
 #include "conceptmapexamples.h"
 #include "conceptmapexample.h"
 #include "conceptmapconceptfactory.h"
+#include "conceptmaphelper.h"
 #include "testtimer.h"
 #include "trace.h"
 
