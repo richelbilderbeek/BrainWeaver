@@ -26,7 +26,7 @@ void ribi::braw::qtbrainweavermenudialog_test::press_all_keys()
     QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
   }
   //Press characters
-  for (int k = static_cast<int>(Qt::Key_A); k <= static_cast<int>(Qt::Key_T); ++k)
+  for (int k = static_cast<int>(Qt::Key_A); k <= static_cast<int>(Qt::Key_H); ++k)
   {
     if (k == Qt::Key_N) continue;
     ribi::braw::QtMasterDialog d;

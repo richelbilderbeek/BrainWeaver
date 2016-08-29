@@ -34,6 +34,10 @@ private slots:
   ///The concept map should have saved that the arrow head is there
   //For https://github.com/richelbilderbeek/Brainweaver/issues/88
   void create_edge_with_arrow_head();
+
+  ///Select a node with examples, the examples must be visible
+  //For https://github.com/richelbilderbeek/Brainweaver/issues/96
+  void node_with_vignette_must_show_examples();
 };
 
 } //~namespace braw

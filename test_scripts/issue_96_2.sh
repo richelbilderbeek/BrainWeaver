@@ -127,10 +127,9 @@ then
   exit 1
 fi
 
+xdotool windowactivate $id key space sleep 0.2
+
 exit 
-# Move to an item with an example and edit
-# xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.2 key Up Up F2 sleep 1.0
 
 ####################################
 # 'Concept/Relatie bewerken'

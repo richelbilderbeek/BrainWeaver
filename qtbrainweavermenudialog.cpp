@@ -183,7 +183,6 @@ void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 {
-  this->setWindowTitle("Loading, please wait...");
   QtOverviewDialog * const d{
     new QtOverviewDialog
   };
@@ -237,22 +236,11 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
 {
-  const int test = 4;
-  assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
-  const File file = FileFactory().GetTests().at(test);
-
-  try
-  {
-    QtConceptMapDialog * const d{
-      new QtConceptMapDialog(file)
-    };
-    emit add_me(d);
-  }
-  catch (std::exception& )
-  {
-    //Keep recovery filename
-    qDebug() << "Crash detected, recovery file saved";
-  }
+  const File file = FileFactory().Get4();
+  QtConceptMapDialog * const d{
+    new QtConceptMapDialog(file)
+  };
+  emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()

@@ -64,6 +64,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverconceptmapdialog.h"
 #pragma GCC diagnostic pop
 
+/*
 ///Collect all QGraphicsItems with class T in an unorderly way
 template <class T>
 std::vector<T*> Collect(const QGraphicsScene* const scene)
@@ -81,6 +82,7 @@ std::vector<T*> Collect(const QGraphicsScene* const scene)
   assert(std::count(v.begin(),v.end(),nullptr)==0);
   return v;
 }
+*/
 
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
@@ -276,8 +278,12 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
+  GetWidget()->CheckInvariants();
+
   m_file.SetConceptMap(GetWidget()->GetConceptMap());
   assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
+
+  GetWidget()->CheckInvariants();
 }
 
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
