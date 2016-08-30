@@ -30,7 +30,7 @@ include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
-include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
+include(../ConceptMap/ConceptMap.pri)
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 SOURCES += main_test.cpp
