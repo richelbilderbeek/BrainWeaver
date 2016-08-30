@@ -6,6 +6,14 @@ if [ ! -d BoostGraphTutorial ]; then
  git clone https://github.com/richelbilderbeek/BoostGraphTutorial
 fi
 
+if [ ! -d ConceptMap ]; then
+ git clone https://github.com/richelbilderbeek/ConceptMap
+fi
+
+if [ ! -d QtConceptMap ]; then
+ git clone https://github.com/richelbilderbeek/QtConceptMap
+fi
+
 if [ ! -d RibiClasses ]; then
  git clone https://github.com/richelbilderbeek/RibiClasses
 fi

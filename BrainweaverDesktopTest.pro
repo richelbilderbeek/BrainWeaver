@@ -42,8 +42,8 @@ include(../RibiClasses/CppTrace/CppTrace.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
-include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
-include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
+include(../ConceptMap/ConceptMap.pri)
+include(../QtConceptMap/QtConceptMap.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 

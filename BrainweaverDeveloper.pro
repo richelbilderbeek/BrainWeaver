@@ -38,12 +38,12 @@ include(../RibiClasses/CppTrace/CppTrace.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
-include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
+include(../ConceptMap/ConceptMap.pri)
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 
 #Desktop
-include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
+include(../QtConceptMap/QtConceptMap.pri)
 include(BrainweaverDesktop.pri)
 
 SOURCES += qtmain_developer.cpp

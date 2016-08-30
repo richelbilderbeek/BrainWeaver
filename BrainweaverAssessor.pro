@@ -9,7 +9,7 @@ include(../RibiLibraries/GeneralDesktop.pri)
 greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 #Specific, console
-include(../RibiClasses/CppConceptMap/CppConceptMap.pri)
+include(../ConceptMap/ConceptMap.pri)
 include(../RibiClasses/CppContainer/CppContainer.pri)
 include(../RibiClasses/CppCounter/CppCounter.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
@@ -23,7 +23,7 @@ include(../RibiClasses/CppXml/CppXml.pri)
 #Specific, desktop
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
 include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
-include(../RibiClasses/CppQtConceptMap/CppQtConceptMap.pri)
+include(../QtConceptMap/QtConceptMap.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppQtKeyboardFriendlyGraphicsView/CppQtKeyboardFriendlyGraphicsView.pri)
 include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
