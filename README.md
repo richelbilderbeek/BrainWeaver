@@ -14,13 +14,11 @@ Brainweaver is in active development.
 
 ## Build status of builds that Brainweaver relies on
 
- * [![Build Status](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial) [BoostGraphTutorial](https://github.com/richelbilderbeek/BoostGraphTutorial)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/RibiClasses.svg?branch=master)](https://travis-ci.org/richelbilderbeek/RibiClasses) [RibiClasses](https://github.com/richelbilderbeek/RibiClasses)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/StyleSheetSetter.svg?branch=master)](https://travis-ci.org/richelbilderbeek/StyleSheetSetter) [StyleSheetSetter](https://github.com/richelbilderbeek/StyleSheetSetter)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/TestArrowItems.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestArrowItems) [TestArrowItems](https://github.com/richelbilderbeek/TestArrowItems)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/TestConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestConceptMap) [TestConceptMap](https://github.com/richelbilderbeek/TestConceptMap)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/TestRoundedRectItem.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestRoundedRectItem) [TestRoundedRectItem](https://github.com/richelbilderbeek/TestRoundedRectItem)
- * [![Build Status](https://travis-ci.org/richelbilderbeek/TestRoundedEditRectItem.svg?branch=master)](https://travis-ci.org/richelbilderbeek/TestRoundedEditRectItem) [TestRoundedEditRectItem](https://github.com/richelbilderbeek/TestRoundedEditRectItem)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BoostGraphTutorial) [![codecov.io](https://codecov.io/github/richelbilderbeek/BoostGraphTutorial/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BoostGraphTutorial?branch=master) [BoostGraphTutorial](https://github.com/richelbilderbeek/BoostGraphTutorial)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/RibiClasses.svg?branch=master)](https://travis-ci.org/richelbilderbeek/RibiClasses) [![codecov.io](https://codecov.io/github/richelbilderbeek/RibiClasses/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/RibiClasses?branch=master) [RibiClasses](https://github.com/richelbilderbeek/RibiClasses)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/StyleSheetSetter.svg?branch=master)](https://travis-ci.org/richelbilderbeek/StyleSheetSetter) [![codecov.io](https://codecov.io/github/richelbilderbeek/StyleSheetSetter/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/StyleSheetSetter?branch=master) [StyleSheetSetter](https://github.com/richelbilderbeek/StyleSheetSetter)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/ConceptMap/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/ConceptMap?branch=master) [ConceptMap](https://github.com/richelbilderbeek/ConceptMap)
+ * [![Build Status](https://travis-ci.org/richelbilderbeek/QtConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/QtConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtConceptMap/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/QtConceptMap?branch=master) [QtConceptMap](https://github.com/richelbilderbeek/QtConceptMap)
 
 ## Building
 
