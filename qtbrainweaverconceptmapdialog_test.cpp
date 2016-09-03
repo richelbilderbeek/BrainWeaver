@@ -184,7 +184,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
   {
     QTest::keyClick(&d, Qt::Key_Space, Qt::NoModifier, 100);
     //Must select one QtNode
-    const auto qtnodes = ribi::cmap::GetSelectedQtNodesNotOnEdge(d.GetWidget()->GetScene());
+    const auto qtnodes = ribi::cmap::GetSelectedQtNodes(d.GetWidget()->GetScene());
     if (qtnodes.size() != 1) continue;
     //QtNode must have an example
     const ribi::cmap::QtNode * const qtnode = qtnodes[0];
