@@ -29,7 +29,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 
 #include "qtbrainweaveraboutdialog.h"
 //#include "brainweavermenudialog.h"
-#include "qtconceptmaprateconceptdialognewname.h"
+#include "qtconceptmaprateconceptdialog.h"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
 
 #include "qtbrainweaverrateconceptmapdialog.h"

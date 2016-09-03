@@ -40,11 +40,11 @@ script:
   - ./build_other_githubs.sh
   - ./build_console_test.sh
   - ./build_desktop_test.sh
-  - ./build_desktop.sh
   - ./BrainweaverConsoleTest
   - ./BrainweaverDesktopTest
   - ./get_code_cov.sh
   - codecov
+  - ./build_desktop.sh
   - ./do_oclint.sh
 
 after_success:

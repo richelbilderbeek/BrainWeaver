@@ -64,9 +64,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
 #include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmaprateconceptdialognewname.h"
-#include "qtconceptmaprateconcepttallydialognewname.h"
-#include "qtconceptmaprateexamplesdialognewname.h"
+#include "qtconceptmaprateconceptdialog.h"
+#include "qtconceptmaprateconcepttallydialog.h"
+#include "qtconceptmaprateexamplesdialog.h"
 #include "qtstylesheetsettermaindialog.h"
 #include "ribi_regex.h"
 #include "testtimer.h"
@@ -128,8 +128,8 @@ void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
   const int index = 2;
   assert(index < ConceptFactory().GetNumberOfTests());
   const ribi::cmap::Concept concept = ConceptFactory().GetTests().at(index);
-  QtRateExamplesDialogNewName * const d{
-    new QtRateExamplesDialogNewName(concept)
+  QtRateExamplesDialog * const d{
+    new QtRateExamplesDialog(concept)
   };
   emit add_me(d);
 }

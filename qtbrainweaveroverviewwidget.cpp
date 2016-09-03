@@ -48,9 +48,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverstudentmenudialog.h"
 #include "qtbrainweaverstudentstartcompletedialog.h"
 #include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmaprateconceptdialognewname.h"
-#include "qtconceptmaprateconcepttallydialognewname.h"
-#include "qtconceptmaprateexamplesdialognewname.h"
+#include "qtconceptmaprateconceptdialog.h"
+#include "qtconceptmaprateconcepttallydialog.h"
+#include "qtconceptmaprateexamplesdialog.h"
 #include "trace.h"
 #pragma GCC diagnostic pop
 
@@ -116,7 +116,7 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs()
   );
   v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2)));
   v.push_back(
-    new ribi::cmap::QtRateExamplesDialogNewName(
+    new ribi::cmap::QtRateExamplesDialog(
       ribi::cmap::ConceptFactory().GetTests().at(2)
     )
   );

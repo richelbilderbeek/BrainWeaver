@@ -45,7 +45,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "trace.h"
 #include "qtbrainweaverratingdialog.h"
 
-#include "qtconceptmaprateconceptdialognewname.h"
+#include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 #pragma GCC diagnostic pop
 
