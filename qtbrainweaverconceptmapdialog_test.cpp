@@ -145,8 +145,8 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
 
   const auto qtconceptmap = d.GetWidget();
-  const auto qtnodes = ribi::cmap::GetQtNodesNotOnEdge(qtconceptmap->GetScene());
-  const auto excepted_vertices = 3;
+  const auto qtnodes = ribi::cmap::GetQtNodes(qtconceptmap->GetScene());
+  const auto excepted_vertices = 2;
   const auto measured_vertices = qtnodes.size();
   QVERIFY(measured_vertices == excepted_vertices);
   const auto qtedges = ribi::cmap::GetQtEdges(qtconceptmap->GetScene());

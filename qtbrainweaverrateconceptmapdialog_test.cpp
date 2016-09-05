@@ -20,7 +20,7 @@
 #include "trace.h"
 #include "qtbrainweaverratingdialog.h"
 
-#include "qtconceptmaprateconceptdialognewname.h"
+#include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
 void ribi::braw::qtbrainweaverrateconceptmapdialog_test::all_tests()
