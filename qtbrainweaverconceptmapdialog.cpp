@@ -278,12 +278,12 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
-  GetWidget()->CheckInvariants();
+  CheckInvariants(*GetWidget());
 
   m_file.SetConceptMap(GetWidget()->GetConceptMap());
   assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
 
-  GetWidget()->CheckInvariants();
+  CheckInvariants(*GetWidget());
 }
 
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
