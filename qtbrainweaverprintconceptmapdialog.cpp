@@ -65,7 +65,7 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
 
   //Allow a QtConceptMapWidget to have no QtExamplesItem
   //This allows to omit showing these in the PDF versions used for printing (#205)
-  m_widget->HideExamplesItem();
+  HideExamplesItem(*m_widget);
 
   ui->label_student_name->setText(
     ("Concept map van "

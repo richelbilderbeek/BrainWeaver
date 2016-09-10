@@ -1,7 +1,7 @@
 #!/bin/bash
 qmake BrainweaverDeveloper.pro
-make
+make debug
 qmake BrainweaverAssessor.pro
-make
+make debug
 qmake BrainweaverStudent.pro
-make
+make debug

@@ -1,3 +1,3 @@
 #!/bin/bash
 qmake BrainweaverDesktopTest.pro
-make
+make debug
