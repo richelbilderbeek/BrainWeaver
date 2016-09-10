@@ -1,5 +1,7 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
+CONFIG += debug_and_release
+
 # Most specific first
 include(BrainweaverDesktop.pri)
 include(BrainweaverDesktopTest.pri)

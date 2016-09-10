@@ -1,5 +1,7 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
+CONFIG += debug_and_release
+
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)

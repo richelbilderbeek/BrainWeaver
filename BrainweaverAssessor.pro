@@ -3,6 +3,8 @@ include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/BoostAll.pri)
 
+CONFIG += debug_and_release
+
 include(../RibiLibraries/GeneralConsole.pri)
 include(../RibiLibraries/GeneralDesktop.pri)
 

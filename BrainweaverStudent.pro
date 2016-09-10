@@ -1,5 +1,7 @@
 SOURCES += qtmain_student.cpp
 
+CONFIG += debug_and_release
+
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
