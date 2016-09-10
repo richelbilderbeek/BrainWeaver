@@ -191,6 +191,6 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
     if (qtnode->GetNode().GetConcept().GetExamples().Get().empty()) continue;
 
     //QtExamplesItem must have that QtNode as its buddy
-    QVERIFY(d.GetWidget()->GetQtExamplesItem()->GetBuddyItem() == qtnode);
+    QVERIFY(d.GetWidget()->GetQtExamplesItem().GetBuddyItem() == qtnode);
   }
 }
