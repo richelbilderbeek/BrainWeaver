@@ -1,9 +1,11 @@
 #include "qtbrainweaverconceptmapdialog_test.h"
 
-#include "is_custom_vertices_isomorphic.h"
-#include "qtbrainweaverconceptmapdialog.h"
-#include "conceptmapcenternodefactory.h"
 #include "add_custom_and_selectable_vertex.h"
+#include "brainweaverclusterfactory.h"
+#include "brainweavercluster.h"
+#include "brainweaverfilefactory.h"
+#include "brainweaverfile.h"
+#include "conceptmapcenternodefactory.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconcept.h"
 #include "conceptmapedgefactory.h"
@@ -14,18 +16,15 @@
 #include "conceptmaphelper.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapnode.h"
-#include "brainweaverclusterfactory.h"
-#include "brainweavercluster.h"
-#include "brainweaverfile.h"
-#include "brainweaverfilefactory.h"
+#include "is_custom_vertices_isomorphic.h"
+#include "qtbrainweaverconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmapqtedge.h"
+#include "qtconceptmapexamplesitem.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
+#include "qtconceptmapqtedge.h"
 #include "qtconceptmapqtnode.h"
-#include "qtconceptmapexamplesitem.h"
-#include "testtimer.h"
-#include "trace.h"
+#include "qtquadbezierarrowitem.h"
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
 {
@@ -155,9 +154,9 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   QVERIFY(measured_edges == excepted_edges);
   const QtEdge * const qtedge = qtedges[0];
   assert(qtedge);
-  QVERIFY(qtedge->HasHeadArrow());
+  QVERIFY(qtedge->GetArrow()->HasHead());
   QVERIFY(qtedge->GetEdge().HasHeadArrow());
-  QVERIFY(!qtedge->HasTailArrow());
+  QVERIFY(!qtedge->GetArrow()->HasTail());
   QVERIFY(!qtedge->GetEdge().HasTailArrow());
 
   const std::string filename{"create_edge_with_arrow_head.cmp"};

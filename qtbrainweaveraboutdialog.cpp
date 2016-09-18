@@ -48,7 +48,7 @@ ribi::About GetAbout()
     + ribi::QtHideAndShowDialog::GetVersion()
   );
   about.AddLibrary("QtKeyboardFriendlyGraphicsView version: "
-    + ribi::QtKeyboardFriendlyGraphicsView::GetVersion()
+    + ribi::GetQtKeyboardFriendlyGraphicsViewVersion()
   );
   about.AddLibrary("QtQuadBezierArrowItem version: "
     + ribi::QtQuadBezierArrowItem::GetVersion()

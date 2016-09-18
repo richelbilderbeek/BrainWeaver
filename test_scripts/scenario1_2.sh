@@ -127,10 +127,9 @@ then
   exit 1
 fi
 
-exit 
 # Move to an item with an example and edit
 # xdotool windowactivate $id key space
-xdotool windowactivate $id key space sleep 0.2 key Up Up F2 sleep 1.0
+xdotool windowactivate $id key space sleep 0.5 key Up Up F2 sleep 1.0
 
 ####################################
 # 'Concept/Relatie bewerken'
@@ -151,7 +150,7 @@ xdotool windowactivate $id key Tab F2 Right type "$example_addition"
 xdotool windowactivate $id sleep 0.5 key Return sleep 0.5 key alt+o
 
 # Save
-xdotool windowactivate $id sleep 0.2 key alt+s sleep 0.2
+xdotool windowactivate $id sleep 0.5 key alt+s sleep 0.5
 
 ####################################
 # 'Sla de concept map op'
@@ -179,6 +178,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
+
 # Export to PDF
 xdotool windowactivate $id sleep 0.2 key alt+e sleep 0.2
 
