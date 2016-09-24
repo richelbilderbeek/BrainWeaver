@@ -47,7 +47,7 @@ const std::string CreateStyleSheet()
 }
 
 //From https://rohieb.wordpress.com/2010/07/08/qt-throw-exceptions-from-signals-and-slots/
-//which is adapted fromhttp://stackoverflow.com/a/1578433/3364162
+//which is adapted from http://stackoverflow.com/a/1578433/3364162
 class MyApplication : public QApplication
 {
 public:
