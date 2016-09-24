@@ -32,6 +32,11 @@ ribi::braw::QtMasterDialog::~QtMasterDialog()
 
 void ribi::braw::QtMasterDialog::add_new(QDialog * const dialog)
 {
+  //if (ui->stackedWidget->currentWidget())
+  //{
+  //  ui->stackedWidget->currentWidget()->setEnabled(false);
+  //}
+
   const int new_index = ui->stackedWidget->addWidget(dialog);
   ui->stackedWidget->setCurrentIndex(new_index);
 
@@ -75,6 +80,7 @@ void ribi::braw::QtMasterDialog::remove(QDialog * const dialog)
   if (new_index >= 0)
   {
     this->setWindowTitle(ui->stackedWidget->currentWidget()->windowTitle());
+    //ui->stackedWidget->currentWidget()->setEnabled(true);
   }
   else
   {

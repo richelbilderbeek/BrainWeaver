@@ -57,6 +57,7 @@ class QtConceptMapDialog : public QtDialog
   private slots:
 
   void keyPressEvent(QKeyEvent *);
+  void showEvent(QShowEvent *);
   void on_autosave() noexcept;
   void on_button_save_clicked();
   void on_button_print_clicked();

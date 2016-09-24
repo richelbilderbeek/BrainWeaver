@@ -31,6 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include <boost/numeric/conversion/cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
+#include <QEvent>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFileDialog>
@@ -119,6 +120,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
 ribi::braw::QtConceptMapDialog::~QtConceptMapDialog() noexcept
 {
+  this->m_widget->StopTimer();
   delete ui;
 }
 
@@ -206,10 +208,11 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
 {
   UpdateFileWithConceptMapFromWidget();
-  //this->m_widget->setEnabled(false);
+  this->m_widget->setEnabled(false); //Prevents #101
   m_widget->StopTimer();
   QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
   emit add_me(d);
+
   //this->m_widget->setEnabled(true);
 }
 
@@ -257,6 +260,11 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
   //emit remove_me(this); //2013-04-19 Request by client
+}
+
+void ribi::braw::QtConceptMapDialog::showEvent(QShowEvent *)
+{
+  m_widget->setFocus();
 }
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()

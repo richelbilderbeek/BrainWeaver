@@ -94,28 +94,28 @@ then
   exit 1
 fi
 # Text to add
-xdotool windowactivate $id type "hard to make up"
+xdotool windowactivate $id sleep 0.2 type "hard to make up"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate $id sleep 0.2 key Tab Return
 # Text to add
-xdotool windowactivate $id type "that one I spent a year on"
+xdotool windowactivate $id sleep 0.2 type "that one I spent a year on"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate $id sleep 0.2 key Tab Return
 # Text to add
-xdotool windowactivate $id type "precise"
+xdotool windowactivate $id sleep 0.2 type "precise"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate $id sleep 0.2 key Tab Return
 # Text to add
-xdotool windowactivate $id type "not vague"
+xdotool windowactivate $id sleep 0.2 type "not vague"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate $id sleep 0.2 key Tab Return
 # Text to add
-xdotool windowactivate $id type "not too long"
+xdotool windowactivate $id sleep 0.2 type "not too long"
 # Add 
-xdotool windowactivate $id key Tab Return
+xdotool windowactivate $id sleep 0.2 key Tab Return
 
 # Go to widget
-xdotool windowactivate $id key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 2.0
+xdotool windowactivate $id sleep 0.2 key Shift+Tab sleep 0.2 key Down Right Down Right Alt+b sleep 2.0
 
 ####################################
 # 'Construeer een concept map-scherm'
