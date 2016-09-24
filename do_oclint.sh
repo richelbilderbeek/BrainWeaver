@@ -24,7 +24,7 @@ h_files=`ls *.h | egrep -v "^ui_.*\.h$"`
   -I../RibiClasses/CppQtArrowItem \
   -I../QtConceptMap \
   -I../RibiClasses/CppQtHideAndShowDialog \
-  -I../RibiClasses/CppQtKeyboardFriendlyGraphicsView \
+  -I../QtKeyboardFriendlyGraphicsView \
   -I../RibiClasses/CppQtQuadBezierArrowItem \
   -I../RibiClasses/CppQtRoundedEditRectItem \
   -I../RibiClasses/CppQtRoundedRectItem \
