@@ -64,26 +64,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtbrainweaverconceptmapdialog.h"
 #pragma GCC diagnostic pop
 
-/*
-///Collect all QGraphicsItems with class T in an unorderly way
-template <class T>
-std::vector<T*> Collect(const QGraphicsScene* const scene)
-{
-  std::vector<T*> v;
-  const QList<QGraphicsItem *> items = scene->items();
-  std::transform(items.begin(),items.end(),std::back_inserter(v),
-    [](QGraphicsItem* const item)
-    {
-      assert(item);
-      return dynamic_cast<T*>(item);
-    }
-  );
-  v.erase(std::remove(v.begin(),v.end(),nullptr),v.end());
-  assert(std::count(v.begin(),v.end(),nullptr)==0);
-  return v;
-}
-*/
-
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
@@ -226,8 +206,11 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
 {
   UpdateFileWithConceptMapFromWidget();
+  //this->m_widget->setEnabled(false);
+  m_widget->StopTimer();
   QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
   emit add_me(d);
+  //this->m_widget->setEnabled(true);
 }
 
 void ribi::braw::QtConceptMapDialog::on_autosave() noexcept
