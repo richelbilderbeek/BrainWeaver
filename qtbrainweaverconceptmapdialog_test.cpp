@@ -135,19 +135,24 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   File file = FileFactory().Get1();
   QtConceptMapDialog d(file);
   d.show();
+  const auto initial_n_qtnodes = ribi::cmap::GetQtNodes(d.GetWidget()->GetScene()).size();
 
   //Normally I'd say:
   //If you want to use 'd.GetQtConceptMap()' go work on the QtConceptMap tests
   QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
+  d.show();
   QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
+  d.show();
   QTest::keyClick(&d, Qt::Key_E, Qt::ControlModifier, 100);
+  d.show();
   QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
+  d.show();
 
   const auto qtconceptmap = d.GetWidget();
   const auto qtnodes = ribi::cmap::GetQtNodes(qtconceptmap->GetScene());
-  const auto excepted_vertices = 2;
+  const auto expected_vertices = initial_n_qtnodes + 2;
   const auto measured_vertices = qtnodes.size();
-  QVERIFY(measured_vertices == excepted_vertices);
+  QVERIFY(measured_vertices == expected_vertices);
   const auto qtedges = ribi::cmap::GetQtEdges(qtconceptmap->GetScene());
   const auto excepted_edges = 1;
   const auto measured_edges = qtedges.size();

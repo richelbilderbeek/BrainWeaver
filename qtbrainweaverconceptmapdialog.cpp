@@ -202,7 +202,10 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
     on_button_save_clicked(); return;
   }
   m_widget->keyPressEvent(e);
-  QDialog::keyPressEvent(e);
+  if (!e->isAccepted())
+  {
+    QDialog::keyPressEvent(e);
+  }
 }
 
 void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
