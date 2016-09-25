@@ -42,8 +42,8 @@ script:
   - ./build_desktop_test.sh
   - ./BrainweaverConsoleTest
   - ./BrainweaverDesktopTest
-  - ./get_code_cov.sh
-  - codecov
+  - ./get_code_cov.sh >/dev/null
+  - codecov >/dev/null
   - ./build_desktop.sh
   - ./do_oclint.sh
 
