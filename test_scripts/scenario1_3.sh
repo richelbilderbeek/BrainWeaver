@@ -38,7 +38,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id key alt+e sleep 0.2
+xdotool windowactivate $id key alt+e sleep 1.0
 
 ####################################
 # 'Kies een assessment bestand', 
@@ -67,7 +67,7 @@ then
 fi
 
 # Rate first concept
-xdotool windowactivate $id sleep 0.2 key Tab space Up Up F1 sleep 1.0
+xdotool windowactivate $id sleep 0.2 key space F1 sleep 1.0
 
 ####################################
 # 'Evalueer concept'
@@ -96,7 +96,7 @@ then
 fi
 
 # Rate first concept its examples
-xdotool windowactivate $id sleep 0.2 key F2 sleep 0.2
+xdotool windowactivate $id sleep 0.2 key F2 sleep 1.0
 
 ####################################
 # 'Evalueer voorbeelden'
@@ -124,7 +124,7 @@ then
 fi
 
 # Rate second concept
-xdotool windowactivate $id sleep 0.2 key Down F1 sleep 0.5
+xdotool windowactivate $id sleep 0.2 key space space F1 sleep 0.5
 
 ####################################
 # 'Evalueer concept'
@@ -181,7 +181,7 @@ then
 fi
 
 # Rate third concept
-xdotool windowactivate $id sleep 0.2 key Left F1 sleep 0.5
+xdotool windowactivate $id sleep 0.2 key space F1 sleep 0.5
 
 ####################################
 # 'Evalueer concept'
@@ -196,7 +196,7 @@ then
 fi
 
 # Rate 2-0-1
-xdotool windowactivate $id sleep 0.2 key Down Down Down Tab sleep 0.2 key Down Tab sleep 0.2 key Down Down sleep 0.2 key Alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Down Down Down Tab sleep 0.2 key Down Tab sleep 0.2 key Down Down sleep 0.2 key Alt+o sleep 0.5
 
 ####################################
 # 'Evalueer concept map', 
@@ -211,6 +211,7 @@ fi
 
 # Rate third concept
 xdotool windowactivate $id sleep 0.2 key alt+g sleep 0.4
+
 
 ####################################
 # 'De kentallen'
@@ -300,7 +301,7 @@ then
 fi
 
 # Rate third concept
-xdotool windowactivate $id sleep 0.2 key Escape
+xdotool windowactivate $id sleep 0.2 key Escape sleep 0.2
 
 ####################################
 # 'Mijn persoonlijke werktheorie', choose '&Stoppen'

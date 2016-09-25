@@ -81,14 +81,27 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move( screen.center() - this->rect().center() );
   }
-
-
-  this->m_concept_map->setFocus();
 }
 
 ribi::braw::QtRateConceptMapDialog::~QtRateConceptMapDialog() noexcept
 {
+  this->m_concept_map->StopTimer();
   delete ui;
+}
+
+void ribi::braw::QtRateConceptMapDialog::changeEvent(QEvent * event)
+{
+  if (event->type() == QEvent::EnabledChange)
+  {
+    if (isEnabled())
+    {
+      this->m_concept_map->StartTimer();
+    }
+    else
+    {
+      this->m_concept_map->StopTimer();
+    }
+  }
 }
 
 ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
@@ -108,6 +121,7 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 {
   m_file.SetConceptMap(m_concept_map->GetConceptMap());
   assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
+  m_concept_map->StopTimer();
   QtRatingDialog * const d{
     new QtRatingDialog(m_file)
   };
@@ -124,11 +138,11 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 
 void ribi::braw::QtRateConceptMapDialog::Save()
 {
-  this->hide(); //Obligatory, otherwise program will freeze
-
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
+  this->setEnabled(false);
   const int status = d->exec();
+  this->setEnabled(true);
   if (status == QDialog::Rejected || d->selectedFiles().empty())
   {
     this->show();
@@ -154,6 +168,7 @@ void ribi::braw::QtRateConceptMapDialog::Save()
 
 void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 {
+  m_file.SetConceptMap(m_concept_map->GetConceptMap());
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
     && "File must have correct file extension name");
@@ -168,4 +183,9 @@ void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 void ribi::braw::QtRateConceptMapDialog::on_button_save_clicked()
 {
   Save();
+}
+
+void ribi::braw::QtRateConceptMapDialog::showEvent(QShowEvent *)
+{
+  this->m_concept_map->setFocus();
 }

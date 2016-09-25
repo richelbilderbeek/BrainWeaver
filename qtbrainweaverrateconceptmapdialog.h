@@ -54,9 +54,10 @@ public:
   void Save(const std::string& filename);
 
 private slots:
+  void changeEvent(QEvent *) override;
   void on_button_next_clicked();
-
   void on_button_save_clicked();
+  void showEvent(QShowEvent *) override;
 
 private:
   Ui::QtRateConceptMapDialog *ui;
