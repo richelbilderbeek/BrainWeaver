@@ -31,14 +31,11 @@
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
-#include "trace.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
 void ribi::braw::qtbrainweaverclusterdialog_test
   ::enable_button_depending_on_file()
 {
-  //Described at https://github.com/richelbilderbeek/Brainweaver/issues/94
-  #ifdef FIX_ISSUE_94
   const auto v = File::GetTests();
   std::for_each(v.begin(),v.end(),
     [](const File& file)
@@ -65,7 +62,6 @@ void ribi::braw::qtbrainweaverclusterdialog_test
       }
     }
   );
-  #endif
 }
 
 void ribi::braw::qtbrainweaverclusterdialog_test

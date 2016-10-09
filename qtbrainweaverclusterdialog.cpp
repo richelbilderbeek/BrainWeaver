@@ -95,6 +95,12 @@ ribi::braw::QtClusterDialog::QtClusterDialog(
   if (m_widget) m_widget->setEnabled(do_enable);
   ui->edit->setEnabled(do_enable);
 
+  //Add button
+  {
+    const bool had_concept_map = boost::num_vertices(file.GetConceptMap());
+    ui->button_add->setEnabled(!had_concept_map);
+  }
+
   //Display the focal question
   ui->label_question->setText(m_file.GetQuestion().c_str());
 }
