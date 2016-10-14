@@ -226,8 +226,8 @@ void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 {
-  const ribi::cmap::ConceptMap concept_map
-    = ribi::cmap::ConceptMapFactory().Get6();
+  const auto concept_map
+    = ribi::cmap::ConceptMapFactory().GetRateConceptTallyDialogExample();
   ribi::cmap::QtRateConceptTallyDialog * const d{
     new cmap::QtRateConceptTallyDialog(concept_map)
   };
