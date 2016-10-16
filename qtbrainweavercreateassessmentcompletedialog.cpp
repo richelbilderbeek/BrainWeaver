@@ -24,8 +24,12 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "qtbrainweavercreateassessmentcompletedialog.h"
 
+#include <sstream>
+#include <stdexcept>
+
 #include <QKeyEvent>
 #include <QFileDialog>
+
 #include "conceptmap.h"
 #include "brainweaverfile.h"
 #include "conceptmapfactory.h"
@@ -90,9 +94,16 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const
 {
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+  if (filename.size() < 3
+    || filename.substr( filename.size() - 3, 3 ) != GetFilenameExtension()
+  )
+  {
+    std::stringstream msg;
+    msg << __func__ << ": filename '" << filename << "' needs to have a '"
+      << GetFilenameExtension() << "' extension"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   const std::string question = ui->edit->text().toStdString();
   File file;
   file.SetQuestion(question);

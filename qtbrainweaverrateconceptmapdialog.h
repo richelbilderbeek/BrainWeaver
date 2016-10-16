@@ -43,9 +43,8 @@ public:
   QtRateConceptMapDialog& operator=(const QtRateConceptMapDialog&) = delete;
   ~QtRateConceptMapDialog() noexcept;
 
+  const File& GetFile() const noexcept;
   cmap::QtConceptMap * GetWidget();
-
-  File GetFile() const noexcept { return m_file; }
 
   ///Respond to key press
   void keyPressEvent(QKeyEvent *);

@@ -46,7 +46,7 @@ class QtConceptMapDialog : public QtDialog
   ribi::cmap::QtConceptMap * GetWidget();
 
   ///Does the user need to go back to the student menu?
-  bool GoBackToMenu() const noexcept { return m_back_to_menu; }
+  bool GoBackToMenu() const noexcept;
 
   ///Update concept map into file
   void UpdateFileWithConceptMapFromWidget();

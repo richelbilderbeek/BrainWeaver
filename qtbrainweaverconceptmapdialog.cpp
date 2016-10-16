@@ -185,6 +185,11 @@ ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget()
 
 }
 
+bool ribi::braw::QtConceptMapDialog::GoBackToMenu() const noexcept
+{
+  return m_back_to_menu;
+}
+
 void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)

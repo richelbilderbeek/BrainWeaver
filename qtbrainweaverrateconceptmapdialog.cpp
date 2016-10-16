@@ -104,6 +104,11 @@ void ribi::braw::QtRateConceptMapDialog::changeEvent(QEvent * event)
   }
 }
 
+const ribi::braw::File& ribi::braw::QtRateConceptMapDialog::GetFile() const noexcept
+{
+  return m_file;
+}
+
 ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 {
   assert(m_concept_map);
