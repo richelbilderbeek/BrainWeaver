@@ -139,6 +139,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
 
   //Normally I'd say:
   //If you want to use 'd.GetQtConceptMap()' go work on the QtConceptMap tests
+  QTest::qWait(100);
   QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
   d.show();
   QTest::keyClick(&d, Qt::Key_N, Qt::ControlModifier, 100);
