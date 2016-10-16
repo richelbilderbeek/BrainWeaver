@@ -41,7 +41,11 @@ class QtStudentStartCompleteDialog : public QtDialog
   ~QtStudentStartCompleteDialog() noexcept;
 
   ///Does the user need to go back to the student menu?
-  bool GoBackToMenu() const { return m_back_to_menu; }
+  bool GoBackToMenu() const noexcept;
+
+  ///Save to file
+  ///Will throw if there is an incorrect file extension
+  void Save(const std::string& filename);
 
   private slots:
   void keyPressEvent(QKeyEvent* e);

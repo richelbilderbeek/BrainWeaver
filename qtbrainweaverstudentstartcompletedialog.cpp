@@ -23,17 +23,17 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "qtbrainweaverstudentstartcompletedialog.h"
 
 #include <fstream>
+#include <sstream>
+#include <stdexcept>
 #include <QKeyEvent>
 #include <QFileDialog>
+
 #include "brainweaverfile.h"
 #include "brainweaverclusterfactory.h"
 #include "conceptmapfactory.h"
-//#include "brainweavermenudialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
-
-#include "trace.h"
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
 #pragma GCC diagnostic pop
 
@@ -52,6 +52,11 @@ ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
 ribi::braw::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept
 {
   delete ui;
+}
+
+bool ribi::braw::QtStudentStartCompleteDialog::GoBackToMenu() const noexcept
+{
+  return m_back_to_menu;
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
@@ -112,10 +117,22 @@ void ribi::braw::QtStudentStartCompleteDialog::Save()
     =  (filename_raw.size() < GetFilenameExtension().size()
       || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
      ? filename_raw + "." + GetFilenameExtension()
-     : filename_raw);
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+     : filename_raw
+  );
+  Save(filename);
+}
+
+void ribi::braw::QtStudentStartCompleteDialog::Save(const std::string& filename)
+{
+  if (filename.size() < 3
+    || filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
+  )
+  {
+    std::stringstream msg;
+    msg << __func__ << ": filename '" << filename << "' lacks extension '"
+      << ribi::braw::GetFilenameExtension() << "'"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   m_file.Save(filename);
-  { const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }

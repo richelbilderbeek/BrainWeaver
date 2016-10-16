@@ -12,6 +12,11 @@ class qtbrainweaverstudentstartcompletedialog_test : public QObject
 
 private slots:
   void default_construction();
+  void press_escape();
+  void save();
+  void save_with_incorrect_extension();
+  void start_associate();
+  void start_construct();
 };
 
 } //~namespace braw
