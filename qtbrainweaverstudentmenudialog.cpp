@@ -135,13 +135,14 @@ void ribi::braw::QtStudentMenuDialog::on_button_save_clicked()
 
 void ribi::braw::QtStudentMenuDialog::Save(const std::string& filename)
 {
+  if (filename.size() < 3
+    || filename.substr( filename.size() - 3, 3 ) != GetFilenameExtension()
+  )
+  {
+    throw std::invalid_argument("File must have correct file extension name");
+  }
   m_file.SetStudentName(ui->edit_name->text().toStdString());
-
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
   m_file.Save(filename);
-  //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }
 
 void ribi::braw::QtStudentMenuDialog::SetName(const std::string& name)

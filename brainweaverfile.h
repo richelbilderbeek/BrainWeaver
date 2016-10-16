@@ -102,6 +102,7 @@ class File
   void SetQuestion(const std::string& question);
 
   ///Set the student his/her name
+  ///Will throw if name is empty
   void SetStudentName(const std::string& student_name);
 
   private:

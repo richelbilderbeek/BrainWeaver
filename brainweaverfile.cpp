@@ -358,7 +358,12 @@ void ribi::braw::File::SetQuestion(const std::string& question)
 
 void ribi::braw::File::SetStudentName(const std::string& student_name)
 {
-  assert(student_name.size() > 1);
+  if (student_name.empty())
+  {
+    throw std::invalid_argument(
+      "Student must have a name with of least one character"
+    );
+  }
   m_student_name = student_name;
   this->AutoSave();
 }

@@ -40,15 +40,12 @@ public:
   QtAssessorMenuDialog& operator=(const QtAssessorMenuDialog&) = delete;
   ~QtAssessorMenuDialog() noexcept;
 
-private slots:
+public slots:
   void keyPressEvent(QKeyEvent *);
-  void on_button_create_assessment_clicked();
-
   void on_button_about_clicked();
-
-  void on_button_quit_clicked();
-
   void on_button_assess_result_clicked();
+  void on_button_create_assessment_clicked();
+  void on_button_quit_clicked();
 
 private:
   Ui::QtAssessorMenuDialog *ui;

@@ -63,7 +63,7 @@ protected:
   ///Delete: remove current item
   void keyPressEvent(QKeyEvent *);
 
-private slots:
+public slots:
 
   void on_button_add_clicked();
   void on_button_next_clicked();

@@ -49,17 +49,13 @@ class QtStudentMenuDialog : public QtDialog
   ///Set the student his/her name
   void SetName(const std::string& name);
 
-  private slots:
+  public slots:
   void keyPressEvent(QKeyEvent* e);
-  void on_button_start_clicked();
-
   void on_button_about_clicked();
-
   void on_button_quit_clicked();
-
-  void on_edit_name_textChanged(const QString &arg1);
-
   void on_button_save_clicked();
+  void on_button_start_clicked();
+  void on_edit_name_textChanged(const QString &arg1);
 
 private:
   Ui::QtStudentMenuDialog *ui;
