@@ -125,7 +125,7 @@ void ribi::braw::QtStudentStartCompleteDialog::Save()
 void ribi::braw::QtStudentStartCompleteDialog::Save(const std::string& filename)
 {
   if (filename.size() < 3
-    || filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
+    || filename.substr( filename.size() - 3, 3 ) != GetFilenameExtension()
   )
   {
     std::stringstream msg;
