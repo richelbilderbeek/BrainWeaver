@@ -224,7 +224,7 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   //this->m_widget->setEnabled(true);
 }
 
-void ribi::braw::QtConceptMapDialog::on_autosave() noexcept
+void ribi::braw::QtConceptMapDialog::on_autosave()
 {
   if (!isVisible()) return;
   try
