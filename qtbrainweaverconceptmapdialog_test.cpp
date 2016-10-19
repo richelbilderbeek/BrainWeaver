@@ -122,7 +122,8 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   const auto question = ribi::cmap::GetCenterNode(concept_map).GetConcept().GetName();
   file.SetQuestion(question);
   file.SetConceptMap(concept_map);
-  const QtConceptMapDialog d(file);
+  QtConceptMapDialog d(file);
+  d.show();
 
   QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
 }
