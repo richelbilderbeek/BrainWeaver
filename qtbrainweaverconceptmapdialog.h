@@ -58,7 +58,9 @@ class QtConceptMapDialog : public QtDialog
 
   void keyPressEvent(QKeyEvent *);
   void showEvent(QShowEvent *);
-  void on_autosave();
+
+  ///Must use CamelCase, otherwise this slot is assumed to connect automatically
+  void OnAutosave();
   void on_button_save_clicked();
   void on_button_print_clicked();
 

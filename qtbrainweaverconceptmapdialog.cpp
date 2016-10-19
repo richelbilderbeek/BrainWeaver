@@ -112,7 +112,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   //Start autosave
   {
     QTimer * const timer{new QTimer(this)};
-    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(on_autosave()));
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(OnAutosave()));
     timer->setInterval(10000);
     timer->start();
   }
@@ -224,7 +224,7 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   //this->m_widget->setEnabled(true);
 }
 
-void ribi::braw::QtConceptMapDialog::on_autosave()
+void ribi::braw::QtConceptMapDialog::OnAutosave()
 {
   if (!isVisible()) return;
   try
