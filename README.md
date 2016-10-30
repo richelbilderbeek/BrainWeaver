@@ -69,13 +69,22 @@ Within the `Brainweaver` folder,
 If you do not use Qt Creator, you can build the project using `qmake` and `make` like this:
 
 ```
-qmake BrainweaverDeveloper.pro
-make
+qmake BrainweaverDeveloper.pro -qt=qt5
+make 
 ```
 
 ## Manual
 
 See [the Brainweaver manual](Manual.md).
+
+## Testing
+
+Testing is done by:
+
+ * BrainweaverConsoleTest.pro (run by Travis CI)
+ * BrainweaverDeveloperTest.pro (run by Travis CI)
+ * the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, Brainweaver must be running)
+ * the file `test_scripts/scenario2.sh` for a more complex run (started by hand, Brainweaver must be running)
 
 ## Help
 
