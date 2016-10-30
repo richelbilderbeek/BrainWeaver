@@ -52,3 +52,4 @@ oclint.log
 qrc_*
 moc_*
 BrainweaverDesktopTest
+*.pro.user.*

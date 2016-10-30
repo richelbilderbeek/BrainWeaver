@@ -67,7 +67,7 @@ then
 fi
 
 # Rate first concept
-xdotool windowactivate $id sleep 0.2 key space F1 sleep 1.0
+xdotool windowactivate $id sleep 0.5 key space F1 sleep 1.0
 
 ####################################
 # 'Evalueer concept'
@@ -153,7 +153,7 @@ then
 fi
 
 # Rate second concept its examples
-xdotool windowactivate $id sleep 0.2 key F2 sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Right F2 sleep 0.2
 
 ####################################
 # 'Evalueer voorbeelden'
