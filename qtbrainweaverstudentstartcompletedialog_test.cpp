@@ -27,7 +27,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
   assert(!is_regular_file(filename));
   d.Save(filename);
   QVERIFY(is_regular_file(filename));
-  delete_file(filename);
+  ribi::delete_file(filename);
   assert(!is_regular_file(filename));
 }
 
