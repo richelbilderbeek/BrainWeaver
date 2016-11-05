@@ -11,7 +11,9 @@ class qtbrainweaverrateconceptmapdialog_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void all_tests();
+  void file_must_match_getfile();
+  void save();
+  void widget_must_be_initialized();
 };
 
 } //~namespace braw
