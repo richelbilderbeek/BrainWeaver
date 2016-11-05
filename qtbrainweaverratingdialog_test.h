@@ -10,9 +10,18 @@ class qtbrainweaverratingdialog_test : public QObject
 {
     Q_OBJECT //!OCLINT
 
+public:
+  qtbrainweaverratingdialog_test();
+  int m_n_hits;
+public slots:
+  void add_hit();
+
 private slots:
   void default_construction();
   void default_construction_without_nodes();
+  void press_escape_should_emit_remove_me();
+  void save();
+
 };
 
 } //~namespace braw

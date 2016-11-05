@@ -105,6 +105,11 @@ ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept
   delete ui;
 }
 
+bool ribi::braw::QtRatingDialog::GetBackToMenu() const noexcept
+{
+  return m_back_to_menu;
+}
+
 void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape) { emit remove_me(this); }

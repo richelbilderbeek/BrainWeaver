@@ -45,7 +45,8 @@ class QtRatingDialog : public QtDialog
   QtRatingDialog& operator=(const QtRatingDialog&) = delete;
   ~QtRatingDialog() noexcept;
 
-  bool GetBackToMenu() const { return m_back_to_menu; }
+  bool GetBackToMenu() const noexcept;
+  void Save(const std::string& filename) const;
 
   private slots:
   void on_button_save_clicked();
@@ -58,8 +59,6 @@ private:
   Ui::QtRatingDialog *ui;
   bool m_back_to_menu;
   File m_file;
-
-  void Save(const std::string& filename) const;
 };
 
 } //~namespace braw
