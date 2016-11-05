@@ -186,11 +186,15 @@ fi
 xdotool windowactivate $id sleep 0.3 key space Shift+Left Ctrl+e sleep 0.2 key Ctrl+z sleep 0.2
 
 # Create new edge by mouse
-xdotool mousemove 520 650 click 1 sleep 1 mousemove 450 450 sleep 1 click 1
+  # Move to bottom-left node, so tool icon appears above it
+  xdotool windowactivate $id key Down Down Left sleep 0.2
+  # Click the bottom-left node
+  xdotool windowactivate $id mousemove 395 570 click 1 sleep 1
+  # Move to right, should see the arrow move
+  xdotool windowactivate $id mousemove 750 580 sleep 1
+  # Click the bottom-left node
+  xdotool windowactivate $id mousemove 900 590 sleep 1 click 1
 
-# xdotool mousemove 540 560 click 1 sleep 1 mousemove 450 360 sleep 0.5 click 1
-
-exit 
 # Click on target node to select it
 xdotool sleep 0.5 click 1
 
@@ -214,7 +218,7 @@ then
 fi
 
 # OK
-xdotool key Alt+o
+xdotool windowactivate $id key Alt+o
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -227,16 +231,11 @@ then
   exit 1
 fi
 
+# Delete a node
 xdotool windowactivate $id sleep 0.3 key Delete
 
-exit
-
-# Type filename
-xdotool windowactivate $id type $mycmp_result
-# OK
-xdotool windowactivate $id key Escape sleep 0.1 key Return sleep 0.2
 # Export
-xdotool windowactivate $id key alt+e sleep 0.3
+xdotool windowactivate $id key alt+e sleep 0.2
 
 ####################################
 # 'Preview van PDF'
@@ -250,7 +249,7 @@ then
 fi
 
 # Save ('&Opslaan')
-xdotool windowactivate $id key Return sleep 0.2
+xdotool windowactivate $id key Alt+o sleep 0.5
 
 ####################################
 # 'Exporteer document naar PDF'
@@ -267,6 +266,7 @@ fi
 xdotool windowactivate $id type $mypdf_result
 # OK
 xdotool windowactivate $id sleep 0.1 key Return sleep 0.1
+
 
 ####################################
 #
@@ -287,7 +287,7 @@ then
   echo "ID not found, line "$LINENO
   exit 1
 fi
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 ####################################
 # 'Construeer een concept map-scherm'
@@ -300,7 +300,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 ####################################
 # 'Associeer- en cluster-scherm'
@@ -313,7 +313,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -326,7 +326,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -339,7 +339,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 
 ####################################
@@ -353,7 +353,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
+xdotool windowactivate $id sleep 0.1 key Escape sleep 0.1
 
 
 
@@ -366,12 +366,10 @@ xdotool windowactivate $id sleep 0.1 key alt+F4 sleep 0.1
 
 if [ ! -e $mycmp_result ]
 then
-  echo "File "$mycmp_result" could not be found"
-  exit 1
+  echo "File "$mycmp_result" could not be found here (but it may be stored somewhere else)"
 fi
 
 if [ ! -e $mypdf_result ]
 then
-  echo "File "$mypdf_result" could not be found"
-  exit 1
+  echo "File "$mypdf_result" could not be found here (but it may be stored somewhere else)"
 fi
