@@ -15,7 +15,6 @@ private slots:
   void go_back_to_menu_is_false_at_construction();
   void press_escape();
   void save();
-  void save_with_incorrect_extension();
   void start_associate();
   void start_construct();
 };

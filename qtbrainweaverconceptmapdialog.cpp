@@ -263,7 +263,7 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
      : filename_raw);
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+    && "File must have correct file extension");
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
@@ -287,9 +287,6 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
 {
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
   if (m_file.GetConceptMap() != GetWidget()->GetConceptMap())
   {
     std::clog << __func__ << ": warning: you should have called "

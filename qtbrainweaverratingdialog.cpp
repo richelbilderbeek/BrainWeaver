@@ -139,7 +139,7 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
      : filename_raw);
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+    && "File must have correct file extension");
   Save(filename);
   this->m_back_to_menu = true;
   emit remove_me(this);
@@ -147,15 +147,8 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
 
 void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 {
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
-
   m_file.Save(filename);
-  //{ const std::string debug_str = "File saved as " + filename; TRACE(debug_str); }
 }
-
-
 
 void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {

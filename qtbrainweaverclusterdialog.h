@@ -30,6 +30,8 @@ namespace Ui { class QtClusterDialog; }
 namespace ribi {
 namespace braw {
 
+struct qtbrainweaverclusterdialog_test;
+
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
 ///because the widget needs something to work on
@@ -85,6 +87,8 @@ private:
 
   //Start saving procedure, with request of filename
   void Save();
+
+  friend class qtbrainweaverclusterdialog_test;
 };
 
 ///Add a Cluster to the file if it is not yet present,

@@ -85,7 +85,7 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
      : filename_raw);
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+    && "File must have correct file extension");
   Save(filename);
 
   m_back_to_menu = true;
@@ -94,16 +94,6 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const
 {
-  if (filename.size() < 3
-    || filename.substr( filename.size() - 3, 3 ) != GetFilenameExtension()
-  )
-  {
-    std::stringstream msg;
-    msg << __func__ << ": filename '" << filename << "' needs to have a '"
-      << GetFilenameExtension() << "' extension"
-    ;
-    throw std::invalid_argument(msg.str());
-  }
   const std::string question = ui->edit->text().toStdString();
   File file;
   file.SetQuestion(question);

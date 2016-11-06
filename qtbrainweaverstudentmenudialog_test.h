@@ -17,7 +17,6 @@ private slots:
   void default_construction();
   void press_escape();
   void save();
-  void save_with_incorrect_extension();
   void set_and_get_name();
 };
 

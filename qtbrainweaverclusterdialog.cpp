@@ -253,7 +253,7 @@ void ribi::braw::QtClusterDialog::Save()
      : filename_raw);
   assert(filename.size() > 3
     && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
+    && "File must have correct file extension");
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
   //emit remove_me(this); //2013-04-19 Request by client
@@ -261,9 +261,6 @@ void ribi::braw::QtClusterDialog::Save()
 
 void ribi::braw::QtClusterDialog::Save(const std::string& filename)
 {
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name");
   if (this->GetWidget())
   {
     assert(this->GetWidget());

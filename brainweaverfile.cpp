@@ -284,11 +284,6 @@ ribi::braw::File ribi::braw::LoadFile(const std::string &filename)
 
 void ribi::braw::File::Save(const std::string &filename) const
 {
-  //Check for correct extension
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension name"
-  );
   try
   {
     const std::string s = ToXml(*this);

@@ -28,12 +28,14 @@
 #include "brainweavercluster.h"
 #include "brainweaverfilefactory.h"
 #include "brainweaverfile.h"
+#include "fileio.h"
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
-void ribi::braw::qtbrainweaverclusterdialog_test::button_add_clicked()
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::button_add_clicked_nothing_to_add()
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -43,7 +45,20 @@ void ribi::braw::qtbrainweaverclusterdialog_test::button_add_clicked()
   d.on_button_add_clicked();
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::button_next_clicked()
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::button_add_clicked_something_to_add()
+{
+  File file = FileFactory().Get0();
+  const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
+  file.SetCluster(cluster);
+  QtClusterDialog d(file);
+  d.show();
+  d.ui->edit->setText("Something");
+  d.on_button_add_clicked();
+}
+
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::button_next_clicked_no_concept_map()
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -54,6 +69,15 @@ void ribi::braw::qtbrainweaverclusterdialog_test::button_next_clicked()
 
 }
 
+void ribi::braw::qtbrainweaverclusterdialog_test
+  ::button_next_clicked_with_concept_map()
+{
+  File file = FileFactory().Get5();
+  assert(boost::num_vertices(file.GetConceptMap()));
+  QtClusterDialog d(file);
+  d.show();
+  d.on_button_next_clicked();
+}
 
 
 void ribi::braw::qtbrainweaverclusterdialog_test
@@ -157,13 +181,26 @@ void ribi::braw::qtbrainweaverclusterdialog_test::press_escape()
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::save()
+void ribi::braw::qtbrainweaverclusterdialog_test::press_something()
 {
-
+  //Pressing something that has to be passed to child
+  File file = FileFactory().Get0();
+  const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
+  file.SetCluster(cluster);
+  QtClusterDialog d(file);
+  d.show();
+  QTest::keyClick(&d, Qt::Key_0);
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::save_with_incorrect_extension()
+void ribi::braw::qtbrainweaverclusterdialog_test::save()
 {
-
+  File file = FileFactory().Get5();
+  QtClusterDialog d(file);
+  d.show();
+  const std::string filename{"qtbrainweaverclusterdialog_test_save.cmp"};
+  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
+  assert(!ribi::is_regular_file(filename));
+  d.Save(filename);
+  QVERIFY(ribi::is_regular_file(filename));
 }
 

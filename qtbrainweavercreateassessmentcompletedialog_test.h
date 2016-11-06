@@ -14,7 +14,6 @@ private slots:
   void close_on_escape();
   void default_construction();
   void save();
-  void save_with_incorrect_extension();
   void set_and_get_question();
 };
 

@@ -40,23 +40,6 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
 }
 
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save_with_incorrect_extension()
-{
-  File f;
-  QtStudentStartCompleteDialog d(f);
-  const std::string filename{"save_with_incorrect_extension"};
-  try
-  {
-    d.Save(filename); //Should throw
-    QVERIFY(!"Should not get here");
-  }
-  catch (std::invalid_argument&)
-  {
-    QVERIFY("Should get here");
-  }
-}
-
-
 void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   ::start_associate()
 {

@@ -62,24 +62,6 @@ void ribi::braw::qtbrainweaverstudentmenudialog_test::save()
   assert(!is_regular_file(filename));
 }
 
-
-void ribi::braw::qtbrainweaverstudentmenudialog_test::save_with_incorrect_extension()
-{
-  File f;
-  QtStudentMenuDialog d(f);
-  d.SetName("John Doe");
-  const std::string filename{"save_with_incorrect_extension"};
-  try
-  {
-    d.Save(filename); //Should throw
-    QVERIFY(!"Should not get here");
-  }
-  catch (std::invalid_argument&)
-  {
-    QVERIFY("Should get here");
-  }
-}
-
 void ribi::braw::qtbrainweaverstudentmenudialog_test::set_and_get_name()
 {
   File f;
