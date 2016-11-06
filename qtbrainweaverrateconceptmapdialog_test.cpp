@@ -23,6 +23,35 @@
 #include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
+void ribi::braw::qtbrainweaverrateconceptmapdialog_test
+  ::button_next_clicked()
+{
+  const File file = FileFactory().Get5();
+  QtRateConceptMapDialog d(file);
+  d.show();
+  d.on_button_next_clicked();
+}
+
+void ribi::braw::qtbrainweaverrateconceptmapdialog_test
+  ::close_on_escape()
+{
+  const File file = FileFactory().Get5();
+  QtRateConceptMapDialog d(file);
+  d.show();
+  QTest::keyClick(&d, Qt::Key_Escape);
+}
+
+void ribi::braw::qtbrainweaverrateconceptmapdialog_test
+  ::change_events()
+{
+  const File file = FileFactory().Get5();
+  QtRateConceptMapDialog d(file);
+  d.show();
+  d.setEnabled(false);
+  d.show();
+  d.setEnabled(true);
+  d.show();
+}
 
 void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   ::file_must_match_getfile()

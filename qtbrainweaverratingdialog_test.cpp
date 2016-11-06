@@ -54,6 +54,14 @@ void ribi::braw::qtbrainweaverratingdialog_test::press_escape_should_emit_remove
   QVERIFY(n_hits_before < n_hits_after);
 }
 
+void ribi::braw::qtbrainweaverratingdialog_test::print()
+{
+  const File file = FileFactory().Get5();
+  QtRatingDialog d(file);
+  d.show();
+  d.on_button_print_clicked();
+}
+
 void ribi::braw::qtbrainweaverratingdialog_test::save()
 {
   const std::string filename{

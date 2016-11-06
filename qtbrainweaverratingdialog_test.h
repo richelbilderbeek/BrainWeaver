@@ -20,6 +20,7 @@ private slots:
   void default_construction();
   void default_construction_without_nodes();
   void press_escape_should_emit_remove_me();
+  void print();
   void save();
 
 };

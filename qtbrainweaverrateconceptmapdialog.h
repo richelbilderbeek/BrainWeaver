@@ -30,6 +30,8 @@ namespace Ui { class QtRateConceptMapDialog; }
 namespace ribi {
 namespace braw {
 
+struct qtbrainweaverrateconceptmapdialog_test;
+
 class QtRateConceptMapDialog : public QtDialog
 {
   Q_OBJECT //!OCLINT
@@ -62,6 +64,8 @@ private:
   Ui::QtRateConceptMapDialog *ui;
   File m_file;
   ConceptMap * const m_concept_map;
+
+  friend class qtbrainweaverrateconceptmapdialog_test;
 };
 
 } //~namespace braw

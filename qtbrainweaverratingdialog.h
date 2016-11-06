@@ -33,6 +33,8 @@ struct QTableWidget;
 namespace ribi {
 namespace braw {
 
+class qtbrainweaverratingdialog_test;
+
 ///View the current rating, optimized for humans
 ///QtPrintRatingDialog is optimized for printers
 class QtRatingDialog : public QtDialog
@@ -59,6 +61,8 @@ private:
   Ui::QtRatingDialog *ui;
   bool m_back_to_menu;
   File m_file;
+
+  friend class qtbrainweaverratingdialog_test;
 };
 
 } //~namespace braw

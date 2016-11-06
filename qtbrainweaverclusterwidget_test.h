@@ -11,7 +11,8 @@ class qtbrainweaverclusterwidget_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void all_tests();
+  void item_abuse();
+  void use();
 };
 
 } //~namespace braw
