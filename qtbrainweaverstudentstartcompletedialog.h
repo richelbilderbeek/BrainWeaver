@@ -47,10 +47,12 @@ class QtStudentStartCompleteDialog : public QtDialog
   ///Will throw if there is an incorrect file extension
   void Save(const std::string& filename);
 
+  void StartAssociate();
+  void StartConstruct();
+
   private slots:
   void keyPressEvent(QKeyEvent* e);
   void on_button_start_associate_clicked();
-
   void on_button_start_construct_clicked();
 
   private:

@@ -11,6 +11,14 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::default_construct
   d.show();
 }
 
+void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+  ::go_back_to_menu_is_false_at_construction()
+{
+  File f;
+  QtStudentStartCompleteDialog d(f);
+  QVERIFY(!d.GoBackToMenu());
+}
+
 void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_escape()
 {
   File f;
@@ -49,18 +57,20 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save_with_incorre
 }
 
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::start_associate()
+void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+  ::start_associate()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
-  QTest::keyClick(&d, Qt::Key_A, Qt::AltModifier);
+  d.StartAssociate();
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::start_construct()
+void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+  ::start_construct()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
-  QTest::keyClick(&d, Qt::Key_C, Qt::AltModifier);
+  d.StartConstruct();
 }

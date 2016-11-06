@@ -12,6 +12,7 @@ class qtbrainweaverstudentstartcompletedialog_test : public QObject
 
 private slots:
   void default_construction();
+  void go_back_to_menu_is_false_at_construction();
   void press_escape();
   void save();
   void save_with_incorrect_extension();

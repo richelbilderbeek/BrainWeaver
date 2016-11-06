@@ -68,36 +68,12 @@ void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
 {
-  QtClusterDialog * const d{
-    new QtClusterDialog(m_file)
-  };
-  emit add_me(d);
-
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-  if (d->GoBackToMenu())
-  {
-    m_back_to_menu = true;
-    emit remove_me(this);
-  }
+  StartAssociate();
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
 {
-  QtConceptMapDialog * const d{
-    new QtConceptMapDialog(m_file)
-  };
-  emit add_me(d);
-
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-  if (d->GoBackToMenu())
-  {
-    m_back_to_menu = true;
-    emit remove_me(this);
-  }
+  StartConstruct();
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::Save()
@@ -135,4 +111,38 @@ void ribi::braw::QtStudentStartCompleteDialog::Save(const std::string& filename)
     throw std::invalid_argument(msg.str());
   }
   m_file.Save(filename);
+}
+
+void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
+{
+  QtClusterDialog * const d{
+    new QtClusterDialog(m_file)
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  if (d->GoBackToMenu())
+  {
+    m_back_to_menu = true;
+    emit remove_me(this);
+  }
+}
+
+void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()
+{
+  QtConceptMapDialog * const d{
+    new QtConceptMapDialog(m_file)
+  };
+  emit add_me(d);
+
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  if (d->GoBackToMenu())
+  {
+    m_back_to_menu = true;
+    emit remove_me(this);
+  }
 }
