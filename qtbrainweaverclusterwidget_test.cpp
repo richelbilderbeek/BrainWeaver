@@ -23,7 +23,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   //These should fail
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, -1, 0, 0);
+    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, -2, 0, 0);
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -32,7 +32,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   }
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, -1, 0);
+    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, -2, 0);
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -41,7 +41,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   }
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, 0, -1);
+    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, 0, -2);
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
