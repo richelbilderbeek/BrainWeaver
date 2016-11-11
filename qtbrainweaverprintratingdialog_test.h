@@ -13,6 +13,7 @@ class qtbrainweaverprintratingdialog_test : public QObject
 private slots:
   void default_construction();
   void default_construction_without_nodes();
+  void print_should_produce_file();
 };
 
 } //~namespace braw

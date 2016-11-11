@@ -12,6 +12,7 @@ class qtbrainweaverprintconceptmapdialog_test : public QObject
 
 private slots:
   void default_construct();
+  void print_should_produce_file();
 };
 
 } //~namespace braw

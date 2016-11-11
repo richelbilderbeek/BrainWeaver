@@ -112,8 +112,12 @@ void ribi::braw::QtPrintConceptMapDialog::Print()
   assert(!print_dialog->selectedFiles().empty());
   assert(print_dialog->selectedFiles().size() == 1);
   const std::string filename = print_dialog->selectedFiles()[0].toStdString();
+  Print(filename);
+}
 
 
+void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
+{
   QPrinter printer;
   printer.setOrientation(QPrinter::Portrait);
   printer.setPaperSize(QPrinter::A4);

@@ -30,6 +30,7 @@ public:
   QtPrintConceptMapDialog& operator=(const QtPrintConceptMapDialog&) = delete;
   ~QtPrintConceptMapDialog() noexcept;
   void Print();
+  void Print(const std::string& filename);
 
 protected:
   void keyPressEvent(QKeyEvent * event);

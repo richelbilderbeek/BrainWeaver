@@ -3,6 +3,7 @@
 
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
+#include "fileio.h"
 
 void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction()
 {
@@ -30,4 +31,23 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_witho
     QVERIFY(std::string(e.what()) == expected_message);
     QVERIFY("Should get here");
   }
+}
+
+void ribi::braw::qtbrainweaverprintratingdialog_test::print_should_produce_file()
+{
+  const auto file = FileFactory().Get3();
+  QtPrintRatingDialog d(file);
+  d.show();
+  const std::string filename{
+    "qtbrainweaverprintconceptmapdialog_test.pdf"
+  };
+  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
+  QVERIFY(!ribi::is_regular_file(filename));
+  d.Print(filename);
+  QVERIFY(ribi::is_regular_file(filename));
+
+  //Cleanup
+  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
+  assert(!ribi::is_regular_file(filename));
+
 }

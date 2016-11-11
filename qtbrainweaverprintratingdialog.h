@@ -35,6 +35,7 @@ public:
   QTableWidget * GetTableValues();
   QTableWidget * GetTableMiscValues();
   void Print();
+  void Print(const std::string& filename);
 
 protected:
   void keyPressEvent(QKeyEvent * event);

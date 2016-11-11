@@ -6,6 +6,7 @@
 #include "brainweaverfilefactory.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
+#include "fileio.h"
 
 void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
 {
@@ -32,5 +33,24 @@ void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
     }
   }
 }
+
+void ribi::braw::qtbrainweaverprintconceptmapdialog_test::print_should_produce_file()
+{
+  const auto file = FileFactory().Get3();
+  QtPrintConceptMapDialog d(file);
+  d.show();
+  const std::string filename{
+    "qtbrainweaverprintconceptmapdialog_test.pdf"
+  };
+  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
+  QVERIFY(!ribi::is_regular_file(filename));
+  d.Print(filename);
+  QVERIFY(ribi::is_regular_file(filename));
+
+  //Cleanup
+  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
+  assert(!ribi::is_regular_file(filename));
+}
+
 
 

@@ -1,4 +1,5 @@
 #include "qtbrainweaverratingdialog_test.h"
+#include "ui_qtbrainweaverratingdialog.h"
 
 #include "brainweaverfile.h"
 #include "qtbrainweaverratingdialog.h"
@@ -40,6 +41,20 @@ void ribi::braw::qtbrainweaverratingdialog_test::default_construction_without_no
     QVERIFY(std::string(e.what()) == expected_message);
     QVERIFY("Should get here");
   }
+}
+
+void ribi::braw::qtbrainweaverratingdialog_test::edit_name()
+{
+  const File file = FileFactory().Get5();
+  QtRatingDialog d(file);
+  d.on_edit_name_textEdited("");
+  d.on_edit_name_textEdited("Something else");
+  d.on_edit_name_textEdited("");
+  d.on_edit_name_textEdited("Something else again");
+  d.ui->edit_name->setText("");
+  d.ui->edit_name->setText("Other");
+  d.ui->edit_name->setText("");
+  d.ui->edit_name->setText("Another other");
 }
 
 void ribi::braw::qtbrainweaverratingdialog_test::press_escape_should_emit_remove_me()
