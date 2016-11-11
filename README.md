@@ -73,9 +73,9 @@ qmake BrainweaverDeveloper.pro -qt=qt5
 make 
 ```
 
-## Manual
+## User documentation
 
-See [the Brainweaver manual](Manual.md).
+See [the Brainweaver documentation](doc/README.md).
 
 ## Testing
 
