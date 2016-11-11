@@ -180,7 +180,7 @@ then
 fi
 
 # Export to PDF
-xdotool windowactivate $id sleep 0.2 key alt+e sleep 0.2
+xdotool windowactivate $id sleep 0.2 key alt+e sleep 1.0
 
 ####################################
 # 'Preview van PDF'
@@ -194,7 +194,7 @@ then
 fi
 
 # Save ('&Opslaan')
-xdotool windowactivate $id key alt+o sleep 0.2
+xdotool windowactivate $id key alt+o sleep 1.0
 
 ####################################
 # 'Exporteer document naar PDF'
@@ -233,7 +233,7 @@ then
   exit 1
 fi
 
-xdotool windowactivate $id sleep 0.1 key Escape sleep 0.2
+xdotool windowactivate $id sleep 0.1 key Escape sleep 1.0
 
 ####################################
 # 'Construeer een concept map-scherm'
