@@ -21,6 +21,7 @@ public:
   ~QtAssessorMenuDialog() noexcept;
 
 public slots:
+  void Assess(const std::string& filename);
   void keyPressEvent(QKeyEvent *);
   void on_button_about_clicked();
   void on_button_assess_result_clicked();

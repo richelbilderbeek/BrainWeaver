@@ -33,6 +33,17 @@ ribi::braw::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
   delete ui;
 }
 
+void ribi::braw::QtAssessorMenuDialog::Assess(const std::string& filename)
+{
+  File file = LoadFile(filename);
+  QtRateConceptMapDialog * const d = new QtRateConceptMapDialog(file);
+  emit add_me(d);
+  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
+  //The former architecture showed d modally, thus at this point d would have
+  //a new file now. In this case, the file is read before modification
+  file = d->GetFile();
+}
+
 void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape || (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier)))
@@ -75,12 +86,6 @@ void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
   {
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
-    File file = LoadFile(filename);
-    QtRateConceptMapDialog * const d = new QtRateConceptMapDialog(file);
-    emit add_me(d);
-    //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-    //The former architecture showed d modally, thus at this point d would have
-    //a new file now. In this case, the file is read before modification
-    file = d->GetFile();
+    Assess(filename);
   }
 }

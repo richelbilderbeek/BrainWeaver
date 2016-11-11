@@ -200,3 +200,27 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
     QVERIFY(d.GetWidget()->GetQtExamplesItem().GetBuddyItem() == qtnode);
   }
 }
+
+void ribi::braw::qtbrainweaverconceptmapdialog_test::press_alt_f4()
+{
+  File file = FileFactory().Get4();
+  QtConceptMapDialog d(file);
+  d.show();
+  QTest::keyPress(&d, Qt::Key_F4, Qt::AltModifier);
+}
+
+void ribi::braw::qtbrainweaverconceptmapdialog_test::press_escape()
+{
+  File file = FileFactory().Get4();
+  QtConceptMapDialog d(file);
+  d.show();
+  QTest::keyPress(&d, Qt::Key_Escape);
+}
+
+void ribi::braw::qtbrainweaverconceptmapdialog_test::press_nonsense()
+{
+  File file = FileFactory().Get4();
+  QtConceptMapDialog d(file);
+  d.show();
+  QTest::keyPress(&d, Qt::Key_X);
+}
