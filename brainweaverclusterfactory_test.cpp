@@ -13,10 +13,5 @@
 BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_factory_test)
 {
   ribi::braw::ClusterFactory f;
-  if (f.GetNumberOfTests() != static_cast<int>(f.GetTests().size()))
-  {
-    TRACE(f.GetNumberOfTests());
-    TRACE(f.GetTests().size());
-  }
-  BOOST_CHECK(f.GetNumberOfTests() == static_cast<int>(f.GetTests().size()));
+  BOOST_CHECK_EQUAL(f.GetNumberOfTests(), static_cast<int>(f.GetTests().size()));
 }
