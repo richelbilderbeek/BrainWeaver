@@ -139,7 +139,7 @@ then
 fi
 
 # Rate 1-2-0
-xdotool windowactivate $id sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down Tab sleep 0.2 key Down sleep 0.2 key Alt+o sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Down Down Tab sleep 0.2 key Down Down Down Tab sleep 0.2 key Down sleep 0.2 key Alt+o sleep 1.0
 
 ####################################
 # 'Evalueer concept map', 
@@ -153,7 +153,7 @@ then
 fi
 
 # Rate second concept its examples
-xdotool windowactivate $id sleep 0.2 key Right F2 sleep 0.2
+xdotool windowactivate $id sleep 0.2 key Right F2 sleep 1.0
 
 ####################################
 # 'Evalueer voorbeelden'
