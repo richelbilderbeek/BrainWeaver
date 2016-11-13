@@ -224,16 +224,7 @@ void ribi::braw::QtClusterDialog::Save()
   const int status = d->exec();
   if (status == QDialog::Rejected) return;
   assert(d->selectedFiles().size() == 1);
-  const std::string filename_raw = d->selectedFiles()[0].toStdString();
-
-  const std::string filename
-    =  (filename_raw.size() < GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
-     ? filename_raw + "." + GetFilenameExtension()
-     : filename_raw);
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension");
+  const std::string filename = d->selectedFiles()[0].toStdString();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
   //emit remove_me(this); //2013-04-19 Request by client

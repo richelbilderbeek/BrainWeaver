@@ -221,11 +221,6 @@ void ribi::braw::QtConceptMapDialog::OnAutosave()
 
 void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 {
-  //Temporarily disable to widget, otherwise saving cannot succeed
-  //const QtScopedDisable<cmap::QtConceptMap> scoped_disable1(GetWidget());
-  //const QtScopedDisable<QtConceptMapDialog> scoped_disable2(this);
-  //this->hide();
-
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
   const int status = d->exec();
@@ -235,15 +230,7 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
     return;
   }
   assert(d->selectedFiles().size() == 1);
-  const std::string filename_raw = d->selectedFiles()[0].toStdString();
-  const std::string filename
-    =  (filename_raw.size() < GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
-     ? filename_raw + "." + GetFilenameExtension()
-     : filename_raw);
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension");
+  const std::string filename = d->selectedFiles()[0].toStdString();
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client

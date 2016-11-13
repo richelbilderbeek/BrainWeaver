@@ -27,6 +27,14 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_escape()
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
+void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_nonsense()
+{
+  File f;
+  QtStudentStartCompleteDialog d(f);
+  d.show();
+  QTest::keyClick(&d, Qt::Key_X);
+}
+
 void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
 {
   File f;
@@ -40,13 +48,14 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
 }
 
 
+
 void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   ::start_associate()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
-  d.StartAssociate();
+  d.on_button_start_associate_clicked();
 }
 
 void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
@@ -55,5 +64,5 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
-  d.StartConstruct();
+  d.on_button_start_construct_clicked();
 }

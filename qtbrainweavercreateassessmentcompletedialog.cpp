@@ -41,7 +41,11 @@ std::string ribi::braw::QtCreateAssessmentCompleteDialog::GetQuestion() const no
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
+  if (e->key()  == Qt::Key_Escape)
+  {
+    emit remove_me(this);
+    return;
+  }
 }
 
 void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
@@ -55,19 +59,9 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
     return;
   }
   assert(d->selectedFiles().size() == 1);
-  const std::string filename_raw = d->selectedFiles()[0].toStdString();
-  assert(!filename_raw.empty());
-
-  const std::string filename
-    =  (filename_raw.size() < GetFilenameExtension().size()
-      || filename_raw.substr( filename_raw.size() - 3, 3 ) != GetFilenameExtension()
-     ? filename_raw + "." + GetFilenameExtension()
-     : filename_raw);
-  assert(filename.size() > 3
-    && filename.substr( filename.size() - 3, 3 ) == GetFilenameExtension()
-    && "File must have correct file extension");
+  const std::string filename = d->selectedFiles()[0].toStdString();
+  assert(!filename.empty());
   Save(filename);
-
   m_back_to_menu = true;
   emit remove_me(this);
 }

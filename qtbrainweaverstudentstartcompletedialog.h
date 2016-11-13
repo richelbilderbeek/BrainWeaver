@@ -10,6 +10,8 @@ namespace Ui { class QtStudentStartCompleteDialog; }
 namespace ribi {
 namespace braw {
 
+class qtbrainweaverstudentstartcompletedialog_test;
+
 class QtStudentStartCompleteDialog : public QtDialog
 {
   Q_OBJECT //!OCLINT
@@ -24,7 +26,6 @@ class QtStudentStartCompleteDialog : public QtDialog
   bool GoBackToMenu() const noexcept;
 
   ///Save to file
-  ///Will throw if there is an incorrect file extension
   void Save(const std::string& filename);
 
   void StartAssociate();
@@ -45,6 +46,8 @@ class QtStudentStartCompleteDialog : public QtDialog
 
   ///Save to file
   void Save();
+
+  friend class qtbrainweaverstudentstartcompletedialog_test;
 };
 
 } //~namespace braw

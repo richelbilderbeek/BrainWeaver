@@ -14,6 +14,7 @@ private slots:
   void default_construction();
   void go_back_to_menu_is_false_at_construction();
   void press_escape();
+  void press_nonsense();
   void save();
   void start_associate();
   void start_construct();
