@@ -8,7 +8,7 @@ h_files=`ls *.h | egrep -v "^ui_.*\.h$"`
   $cpp_files \
   $h_files \
   -- \
-  -c -std=c++11 -fPIC \
+  -c -std=c++14 -fPIC \
   -I../RibiClasses/CppAbout \
   -I../ConceptMap \
   -I../RibiClasses/CppContainer \
