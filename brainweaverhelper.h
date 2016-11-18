@@ -45,6 +45,9 @@ int CalculateRichnessExperimental(const File& file);
 ///Experimental, thus relies on rating by assessor
 int CalculateSpecificityExperimental(const File& file);
 
+///Does the file has some concept examples that are not rated yet?
+bool HasUnitializedExamples(const File& file) noexcept;
+
 ///Undo a Wordwrap
 std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
 

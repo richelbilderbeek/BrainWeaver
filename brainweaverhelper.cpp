@@ -149,48 +149,37 @@ int ribi::braw::CalculateConcretenessExperimental(const File& file)
 
 int ribi::braw::CalculateRichnessExperimental(const File& file)
 {
-  std::map<cmap::Competency,int> m = TallyCompetencies(file);
+  if (HasUnitializedExamples(file))
+  {
+    throw std::invalid_argument(
+      "Cannot calculate richness if not all examples are rated"
+    );
+  }
+  #ifndef KNOW_IF_NEEDS_TO_REMOVE_FIRST_NOTE
+  //Must or must not the center node be removed?
+  //H: no, because a center node has no examples
+  const int a{
+    ribi::cmap::CalculateRichnessExperimental(file.GetConceptMap())
+  };
+  assert(ribi::cmap::IsCenterNode(ribi::cmap::GetFirstNode(file.GetConceptMap())));
+  assert(ribi::cmap::GetCenterNode(file.GetConceptMap()).GetConcept().GetExamples().Get().empty());
 
-  //Remove category 'misc'
-  #ifndef NDEBUG
-  const int debug_m_size_old = static_cast<int>(m.size());
-  const bool debug_will_resize = m.count(cmap::Competency::misc);
-  #endif
-  m.erase(cmap::Competency::misc);
-  #ifndef NDEBUG
-  const int debug_m_size_new = static_cast<int>(m.size());
-  assert( ( debug_will_resize && debug_m_size_old == debug_m_size_new + 1)
-       || (!debug_will_resize && debug_m_size_old == debug_m_size_new    )
-  );
-  #endif
-
-
-  const int a = static_cast<int>(m.size());
-  const int n_examples = std::accumulate(m.begin(),m.end(),0,
-    [](int& init,const std::pair<cmap::Competency,int>& p)
-    {
-      return init + p.second;
-    }
-  );
-  const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
-  const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
-  const int b = std::count_if(m.begin(),m.end(),
-    [my_min,my_max](const std::pair<cmap::Competency,int>& p)
-    {
-      return p.second >= my_min && p.second <= my_max;
-    }
-  );
-
-  return static_cast<int>(
-    std::round(
-      100.0 * ( static_cast<double>(a+b) / 12.0)
+  const int b{
+    ribi::cmap::CalculateRichnessExperimental(
+      ribi::cmap::RemoveFirstNode(file.GetConceptMap())
     )
-  );
+  };
+  assert(a == b);
+  #endif
+  return ribi::cmap::CalculateRichnessExperimental(file.GetConceptMap());
 }
 
 int ribi::braw::CalculateSpecificityExperimental(const File& file)
 {
+  using namespace ribi::cmap;
+
   //The first node removed, as this is the focal question
+  assert(IsCenterNode(GetFirstNode(file.GetConceptMap())));
   const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
 
   const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
@@ -213,6 +202,11 @@ int ribi::braw::CalculateSpecificityExperimental(const File& file)
       / static_cast<double>(nodes.size())
     )
   );
+}
+
+bool ribi::braw::HasUnitializedExamples(const File& file) noexcept
+{
+  return ribi::cmap::HasUninitializedExamples(file.GetConceptMap());
 }
 
 std::string ribi::braw::Unwordwrap(

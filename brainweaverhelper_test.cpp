@@ -4,6 +4,8 @@
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
 
+using namespace ribi::braw;
+
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateComplexityEstimated)
 {
   const auto file = ribi::braw::FileFactory().Get5();
@@ -44,9 +46,26 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateConcretenessExperimental)
   BOOST_CHECK(result <= 100);
 }
 
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateRichnessExperimental)
+BOOST_AUTO_TEST_CASE(test_ribi_CalculateRichnessExperimental_throws_on_incomplete_concept_map)
 {
   const auto file = ribi::braw::FileFactory().Get5();
+  assert(HasUnitializedExamples(file));
+  BOOST_CHECK_THROW(
+    ribi::braw::CalculateRichnessExperimental(file),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateRichnessExperimental)
+{
+  const auto file = ribi::braw::FileFactory().GetWithExamplesWithCompetencies(
+     {
+       ribi::cmap::Competency::organisations,
+       ribi::cmap::Competency::profession
+     }
+  );
+  assert(!HasUnitializedExamples(file));
   const int result = ribi::braw::CalculateRichnessExperimental(file);
   BOOST_CHECK(result >= 0);
   BOOST_CHECK(result <= 100);
@@ -170,3 +189,4 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_Wordwrap)
     }
   }
 }
+

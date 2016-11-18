@@ -2,6 +2,7 @@
 #define BRAINWEAVERFILEFACTORY_H
 
 #include <vector>
+#include "conceptmapcompetency.h"
 
 namespace ribi {
 namespace braw {
@@ -13,7 +14,7 @@ struct FileFactory
 {
   FileFactory();
 
-  int GetNumberOfTests() const noexcept { return 6; }
+  int GetNumberOfTests() const noexcept { return 7; }
 
   ///Empty file
   File Get0() const noexcept;
@@ -30,8 +31,13 @@ struct FileFactory
   ///File with rated complex concept map and complex cluster
   File Get4() const noexcept;
 
-  ///File with rated complex concept map and complex cluster, all multiple lines
+  ///File with partially rated complex concept map and complex cluster, all multiple lines
   File Get5() const noexcept;
+
+  ///File with completely rated simple readable concept map
+  File GetWithExamplesWithCompetencies(
+    const std::vector<ribi::cmap::Competency>& competencies
+  ) const noexcept;
 
   ///Get all the tests
   std::vector<File> GetTests() const noexcept;

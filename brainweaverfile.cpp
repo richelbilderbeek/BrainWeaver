@@ -346,29 +346,9 @@ void ribi::braw::File::SetStudentName(const std::string& student_name)
 std::map<ribi::cmap::Competency,int> ribi::braw::TallyCompetencies(const File& file)
 {
   //The first node removed, as this is the focal question
-  const auto g = RemoveFirstNode(file.GetConceptMap());
-  const std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-
-  std::map<ribi::cmap::Competency,int> m;
-
-  //Tally the competencies
-  for (const ribi::cmap::Node& node: nodes)
-  {
-    for (const ribi::cmap::Example& example: node.GetConcept().GetExamples().Get())
-    {
-      const cmap::Competency competency = example.GetCompetency();
-      const auto iter = m.find(competency);
-      if (iter != m.end())
-      {
-        ++(*iter).second; //Tally the known competency
-      }
-      else
-      {
-        m.insert(std::make_pair(competency,1)); //Tally the first of this competency
-      }
-    }
-  }
-  return m;
+  assert(IsCenterNode(ribi::cmap::GetFirstNode(file.GetConceptMap())));
+  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
+  return ribi::cmap::TallyCompetencies(g);
 }
 
 ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
