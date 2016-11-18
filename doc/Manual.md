@@ -85,20 +85,20 @@ In Brainweaver, there are seven domains, of which 'misc' is excluded from the ca
 To demonstrate this calculation, we will use a concept map with
 only one added node with some examples:
 
-`Competency         `|`#`|`  #`
----|---|---
-`profession         `|`0`|`  1`
-`organisations      `|`0`|`  1`
-`social_surroundings`|`0`|`  1`
-`target_audience    `|`0`|`  1`
-`ti_knowledge       `|`0`|`  1`
-`prof_growth        `|`0`|`  1`
----|---|---
-`Score              `|` `|`   `
----|---|---
-`a                  `|`0`|`  6`
-`b                  `|`0`|`  6`
-`r                  `|`0`|`100`
+`Competency         `|`#`|`  #`|`  #`|`  #`
+---|---|---|---|---
+`profession         `|`0`|`  1`|`  9`|` 33`
+`organisations      `|`0`|`  1`|`  1`|` 13`
+`social_surroundings`|`0`|`  1`|`  0`|` 14`
+`target_audience    `|`0`|`  1`|`  0`|` 13`
+`ti_knowledge       `|`0`|`  1`|`  0`|` 13`
+`prof_growth        `|`0`|`  1`|`  0`|` 14`
+---|---|---|---|---
+`Score              `|` `|`   `|`   `|`   `
+---|---|---|---|---
+`a                  `|`0`|`  6`|`  2`|`  6`
+`b                  `|`0`|`  6`|`  1`|`  5`
+`r                  `|`0`|`100`|` 25`|` 92`
 
 
 
