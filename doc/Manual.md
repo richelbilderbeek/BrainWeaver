@@ -61,7 +61,31 @@ can be created with the same lack of errors.
 
 ## Calculations
 
-### Richness
+
+### Complexity (estimated, that is, using the graph information only)
+
+ * `n_n`: Number of nodes, excluding the focal question node
+ * `n_r`: Number of relations, excluding the relations connected to the focal question node
+ * `x`: complexity (estimated): `100.0 * (((n_r * 2) / (n_n * (n_n - 1))) ^ 0.25)`
+
+
+Assumes `n_n` at least being `2`.
+
+
+`n_n`|`  2`|`  2`|`  3`|`  3`|`  3`|`  3`
+`n_r`|`  0`|`  1`|`  0`|`  1`|`  2`|`  3`
+---|---|---|---|---|---|---
+`x  `|`  0`|`100`|`  0`|` 76`|` 90`|`100`
+
+
+### Complexity (experimental, that is, working on input from humans)
+
+ * `k_i`: sum of all nodes' complexity, as rated by a human, excluding the focal question node
+ * `n_n`: number of all nodes , excluding the focal question node
+ * `x`: complexity: `x = 50 * k_i / n_n`
+
+
+### Richness (experimental, that is, working on input from humans)
 
 Richness is calculated as the equation below (from [1], page 617):
 
@@ -99,12 +123,3 @@ only one added node with some examples:
 `a                  `|`0`|`  6`|`  2`|`  6`
 `b                  `|`0`|`  6`|`  1`|`  5`
 `r                  `|`0`|`100`|` 25`|` 92`
-
-
-
-
-
-
-
-
-

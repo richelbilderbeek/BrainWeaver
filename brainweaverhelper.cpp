@@ -22,57 +22,13 @@
 
 int ribi::braw::CalculateComplexityEstimated(const File& file)
 {
-  //The first node removed
-  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
-
-  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-  const int n_nodes{static_cast<int>(nodes.size())};
-
-  if (nodes.size() < 2)
-  {
-    throw std::invalid_argument("Cannot CalculateComplexityEstimated");
-  }
-
-  ///This works, because focal node has already been deleted
-  const int nrntf{static_cast<int>(boost::num_edges(g))}; //n_relations_not_to_focus
-  return static_cast<int>(
-    std::round(100.0
-      * std::pow(
-        static_cast<double>(nrntf * 2)
-        / static_cast<double>(n_nodes * (n_nodes - 1) ),
-        0.25
-      )
-    )
-  );
+  return ribi::cmap::CalculateComplexityEstimated(file.GetConceptMap());
 }
 
 
 int ribi::braw::CalculateComplexityExperimental(const File& file)
 {
-  //The first node removed
-  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
-
-  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-  const int n_nodes{static_cast<int>(nodes.size())};
-
-  if (nodes.empty())
-  {
-    throw std::invalid_argument("Cannot CalculateComplexityExperimental");
-  }
-
-  const int sum_rated_complexity //Constant 'k_i'
-    = std::accumulate(nodes.begin(),nodes.end(),0,
-    [](int& init, const ribi::cmap::Node& node)
-    {
-      return init + node.GetConcept().GetRatingComplexity();
-    }
-  );
-  return static_cast<int>(
-    std::round(
-      50.0 * static_cast<double>(sum_rated_complexity)
-       / static_cast<double>(n_nodes)
-    )
-  );
+  return ribi::cmap::CalculateComplexityExperimental(file.GetConceptMap());
 }
 
 
