@@ -58,3 +58,55 @@ becomes corrupted, `autosave1.cmp` is still valid.
 
 If `autosave2.cmp` can be created, it is assumed that `autosave1.cmp`
 can be created with the same lack of errors.
+
+## Calculations
+
+### Richness
+
+Richness is calculated as the equation below (from [1], page 617):
+
+![Richness](Richness.png)
+
+where
+
+ * `a`: the number of domains of knowledge, excluding 'misc'
+ * `b`: the number of domains (excluding 'misc') with a relative frequency between 12% and 25%
+
+In Brainweaver, there are seven domains, of which 'misc' is excluded from the calculation:
+
+ * `profession`: 'Beroepsdomein'
+ * `organisations`: 'Organisaties'
+ * `social_surroundings`: 'Sociale omgeving'
+ * `target_audience`: 'Doelgroep'
+ * `ti_knowledge`: 'Technical Instrumental knowledge', NL: 'Technische instrumentele kennis'
+ * `prof_growth`: Professionele groei
+ * `misc`: 'Overig'
+
+To demonstrate this calculation, we will use a concept map with
+only one added node with some examples:
+
+---------------------|---|---
+Competency           |  #|  #
+---------------------|---|---
+`profession`         |  0|  1
+`organisations`      |  0|  1
+`social_surroundings`|  0|  1
+`target_audience`    |  0|  1
+`ti_knowledge`       |  0|  1
+`prof_growth`        |  0|  1
+---------------------|---|---
+Score                |   |   
+---------------------|---|---
+a                    |  0|  6
+b                    |  0|  6
+r                    |  0|100
+---------------------|---|---
+
+
+
+
+
+
+
+
+
