@@ -95,7 +95,7 @@ Competency           |  #|  #
 `ti_knowledge`       |  0|  1
 `prof_growth`        |  0|  1
 ---|---|---
-Score                |   |` `
+Score                |` `|` `
 ---|---|---
 a                    |  0|  6
 b                    |  0|  6
