@@ -86,20 +86,20 @@ To demonstrate this calculation, we will use a concept map with
 only one added node with some examples:
 
 ---|---|---
-Competency           |  #|  #
+`Competency         `|`#`|`  #`
 ---|---|---
-`profession`         |  0|  1
-`organisations`      |  0|  1
-`social_surroundings`|  0|  1
-`target_audience`    |  0|  1
-`ti_knowledge`       |  0|  1
-`prof_growth`        |  0|  1
+`profession         `|`0`|`  1`
+`organisations      `|`0`|`  1`
+`social_surroundings`|`0`|`  1`
+`target_audience    `|`0`|`  1`
+`ti_knowledge       `|`0`|`  1`
+`prof_growth        `|`0`|`  1`
 ---|---|---
-Score                |` `|` `
+`Score              `|` `|`   `
 ---|---|---
-a                    |  0|  6
-b                    |  0|  6
-r                    |  0|100
+`a                  `|`0`|`  6`
+`b                  `|`0`|`  6`
+`r                  `|`0`|`100`
 ---|---|---
 
 
