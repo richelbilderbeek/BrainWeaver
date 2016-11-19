@@ -40,28 +40,7 @@ int ribi::braw::CalculateConcretenessEstimated(const File& file)
 
 int ribi::braw::CalculateConcretenessExperimental(const File& file)
 {
-  //The first node removed
-  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
-  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-
-  if (nodes.empty())
-  {
-    throw std::invalid_argument("Cannot CalculateConcretenessExperimental");
-  }
-
-  const int src // sum_rated_concreteness
-    = std::accumulate(nodes.begin(),nodes.end(),0,
-    [](int& init, const ribi::cmap::Node& node)
-    {
-      return init + node.GetConcept().GetRatingConcreteness();
-    }
-  );
-  return static_cast<int>(
-    std::round(
-      50.0 * static_cast<double>(src)
-      / static_cast<double>(nodes.size())
-    )
-  );
+  return ribi::cmap::CalculateConcretenessExperimental(file.GetConceptMap());
 }
 
 int ribi::braw::CalculateRichnessExperimental(const File& file)
