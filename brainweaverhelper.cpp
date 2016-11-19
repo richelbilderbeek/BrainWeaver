@@ -34,46 +34,7 @@ int ribi::braw::CalculateComplexityExperimental(const File& file)
 
 int ribi::braw::CalculateConcretenessEstimated(const File& file)
 {
-  //The first node removed
-  const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
-
-  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-  const int n_nodes{static_cast<int>(nodes.size())};
-
-  if (nodes.empty())
-  {
-    throw std::invalid_argument("Cannot CalculateConcretenessEstimated");
-  }
-
-  const std::vector<ribi::cmap::Edge> edges = GetEdges(file.GetConceptMap());
-  const int n_nodes_examples = std::accumulate(nodes.begin(),nodes.end(),0,
-    [](int& init, const ribi::cmap::Node& node)
-    {
-      return init + static_cast<int>(node.GetConcept().GetExamples().Get().size());
-    }
-  );
-  const int n_edges_examples = std::accumulate(edges.begin(),edges.end(),0,
-    [](int& init, const ribi::cmap::Edge& edge)
-    {
-      return init + static_cast<int>(edge.GetNode().GetConcept().GetExamples().Get().size());
-    }
-  );
-
-  //This works, because the focus is already removed
-  const int nrntf{static_cast<int>(boost::num_edges(g))}; //n_relations_not_to_focus
-
-  const int n_examples //Constant 'v'
-    = n_nodes_examples + n_edges_examples;
-  if (n_examples + n_nodes + nrntf == 0)
-  {
-    throw std::invalid_argument("Cannot calculate the experimental complexity");
-  }
-  return static_cast<int>(
-    std::round(
-      100.0 * static_cast<double>(n_examples)
-      / static_cast<double>(n_examples + n_nodes + nrntf)
-    )
-  );
+  return ribi::cmap::CalculateConcretenessEstimated(file.GetConceptMap());
 }
 
 
