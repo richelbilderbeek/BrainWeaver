@@ -25,6 +25,10 @@ QtFileDialog::GetOpenFileDialog() const
   d->setFileMode(QFileDialog::ExistingFile);
   d->setAcceptDrops(QFileDialog::AcceptOpen);
   d->setOptions(QFileDialog::ReadOnly);
+  d->setLabelText(QFileDialog::LookIn, "Kijk in");
+  d->setLabelText(QFileDialog::Accept, "Open");
+  d->setLabelText(QFileDialog::FileName, "Bestand");
+  d->setLabelText(QFileDialog::FileType, "Soort bestanden");
 
   const std::string namefile = "Brainweaver concept map (*."
     + GetFilenameExtension() + ")";
@@ -42,7 +46,11 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
   d->setFileMode(QFileDialog::AnyFile);
   d->setAcceptDrops(QFileDialog::AcceptSave);
 
+  d->setLabelText(QFileDialog::LookIn, "Kijk in");
   d->setLabelText(QFileDialog::Accept, "Sla op");
+  d->setLabelText(QFileDialog::FileName, "Bestand");
+  d->setLabelText(QFileDialog::FileType, "Soort bestanden");
+
 
   //Workaround for https://bugreports.qt-project.org/browse/QTBUG-29248
   d->setOptions( QFileDialog::DontUseNativeDialog );
