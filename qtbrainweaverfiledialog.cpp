@@ -42,6 +42,8 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
   d->setFileMode(QFileDialog::AnyFile);
   d->setAcceptDrops(QFileDialog::AcceptSave);
 
+  d->setLabelText(QFileDialog::Accept, "Sla op");
+
   //Workaround for https://bugreports.qt-project.org/browse/QTBUG-29248
   d->setOptions( QFileDialog::DontUseNativeDialog );
 
