@@ -38,7 +38,6 @@ std::unique_ptr<QFileDialog>
 QtFileDialog::GetSaveFileDialog(const FileType type) const
 {
   std::unique_ptr<QFileDialog> d(new QFileDialog);
-
   d->setViewMode(QFileDialog::Detail);
   d->setFileMode(QFileDialog::AnyFile);
   d->setAcceptDrops(QFileDialog::AcceptSave);
