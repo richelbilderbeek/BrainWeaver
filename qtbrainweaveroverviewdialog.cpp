@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 
 #include "qtbrainweaveroverviewwidget.h"
-#include "trace.h"
+
 #pragma GCC diagnostic pop
 
 ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)

@@ -24,7 +24,7 @@
 #include "brainweaverhelper.h"
 #include "conceptmapnode.h"
 #include "qtconceptmapcompetency.h"
-#include "testtimer.h"
+
 #pragma GCC diagnostic pop
 
 ribi::braw::QtDisplay::QtDisplay()

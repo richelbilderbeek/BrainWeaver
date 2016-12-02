@@ -14,7 +14,7 @@
 
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
-#include "trace.h"
+
 
 
 #include "ui_qtbrainweaverassessormenudialog.h"

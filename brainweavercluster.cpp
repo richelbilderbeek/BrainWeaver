@@ -15,7 +15,6 @@
 #include "conceptmapconceptfactory.h"
 #include "brainweaverregex.h"
 #include "ribi_regex.h"
-#include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
 
@@ -59,9 +58,9 @@ ribi::braw::Cluster ribi::braw::XmlToCluster(const std::string &s)
     cluster_str, r.GetRegexConcept()
   );
   std::for_each(w.begin(),w.end(),
-    [&concepts](const std::string& s)
+    [&concepts](const std::string& t)
     {
-      concepts.push_back(ribi::cmap::XmlToConcept(s));
+      concepts.push_back(ribi::cmap::XmlToConcept(t));
     }
   );
 

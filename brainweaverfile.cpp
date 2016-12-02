@@ -38,8 +38,6 @@
 #include "brainweaverfilefactory.h"
 #include "brainweaverhelper.h"
 #include "ribi_regex.h"
-#include "testtimer.h"
-#include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
 

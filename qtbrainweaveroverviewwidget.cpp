@@ -31,7 +31,7 @@
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtconceptmaprateconcepttallydialog.h"
 #include "qtconceptmaprateexamplesdialog.h"
-#include "trace.h"
+
 #pragma GCC diagnostic pop
 
 ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)

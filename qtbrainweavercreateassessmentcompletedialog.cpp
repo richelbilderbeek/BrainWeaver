@@ -17,7 +17,7 @@
 
 #include "ui_qtbrainweavercreateassessmentcompletedialog.h"
 
-#include "trace.h"
+
 #pragma GCC diagnostic pop
 
 ribi::braw::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(QWidget* parent)

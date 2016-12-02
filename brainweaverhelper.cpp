@@ -15,9 +15,7 @@
 #include "brainweaverfile.h"
 #include "conceptmap.h"
 #include "conceptmaphelper.h"
-#include "testtimer.h"
 #include "fileio.h"
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 int ribi::braw::CalculateComplexityEstimated(const File& file)

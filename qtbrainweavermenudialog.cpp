@@ -49,8 +49,6 @@
 #include "qtconceptmaprateexamplesdialog.h"
 #include "qtstylesheetsettermaindialog.h"
 #include "ribi_regex.h"
-#include "testtimer.h"
-#include "trace.h"
 #include "ui_qtbrainweavermenudialog.h"
 #pragma GCC diagnostic pop
 
@@ -138,10 +136,10 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
     assert(v.size() == 1);
     const std::string filename = v[0].toStdString();
     const File file = LoadFile(filename);
-    QtStudentMenuDialog * const d{
+    QtStudentMenuDialog * const menu_dialog{
       new QtStudentMenuDialog(file)
     };
-    emit add_me(d);
+    emit add_me(menu_dialog);
   }
 }
 

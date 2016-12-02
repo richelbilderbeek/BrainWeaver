@@ -41,7 +41,7 @@
 #include "qtconceptmapqtedge.h"
 #include "qtconceptmapqtnode.h"
 #include "qtscopeddisable.h"
-#include "trace.h"
+
 #include "ui_qtbrainweaverconceptmapdialog.h"
 #pragma GCC diagnostic pop
 

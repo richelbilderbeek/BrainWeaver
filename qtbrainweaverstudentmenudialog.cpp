@@ -11,7 +11,7 @@
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverstudentstartcompletedialog.h"
-#include "trace.h"
+
 #include "ui_qtbrainweaverstudentmenudialog.h"
 #pragma GCC diagnostic pop
 

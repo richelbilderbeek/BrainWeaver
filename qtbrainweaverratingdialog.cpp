@@ -22,7 +22,7 @@
 #include "qtbrainweaverdisplay.h"
 #include "qtbrainweaverfiledialog.h"
 #include "brainweaverfile.h"
-#include "trace.h"
+
 #include "ui_qtbrainweaverratingdialog.h"
 #pragma GCC diagnostic pop
 

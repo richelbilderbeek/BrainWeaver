@@ -1,16 +1,15 @@
-#DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
-
-CONFIG += debug_and_release
-
 #Don't enable Effective C++ warnings when using Qwt
-include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
-include(../RibiLibraries/Apfloat.pri)
+#include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/BoostAll.pri)
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
-include(../RibiLibraries/GeneralConsole.pri)
-include(../RibiLibraries/GeneralDesktop.pri)
+include(../RibiClasses/CppAbout/CppAbout.pri)
+include(../RibiClasses/CppFileIo/CppFileIo.pri)
+include(../RibiClasses/CppHelp/CppHelp.pri)
+include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
+include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
+include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
 
 #Specific, console
 include(../RibiClasses/CppContainer/CppContainer.pri)
@@ -53,6 +52,37 @@ SOURCES += qtmain_developer.cpp
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
 
-# gcov
-QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
-LIBS += -lgcov
+# Debug and release settings
+CONFIG += debug_and_release
+CONFIG(release, debug|release) {
+
+  DEFINES += NDEBUG
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+}
+
+CONFIG(debug, debug|release) {
+
+  # gcov
+  QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+  LIBS += -lgcov
+
+  # UBSAN
+  QMAKE_CXXFLAGS += -fsanitize=undefined
+  QMAKE_LFLAGS += -fsanitize=undefined
+  LIBS += -lubsan
+}
+
+# C++14
+CONFIG += c++14
+QMAKE_CXX = g++-5
+QMAKE_LINK = g++-5
+QMAKE_CC = gcc-5
+QMAKE_CXXFLAGS += -std=c++14
+
+# High warning level, warnings are errors
+QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+#QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
+QMAKE_CXXFLAGS += -Werror

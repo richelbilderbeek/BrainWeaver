@@ -21,8 +21,8 @@
 #include "qtbrainweaverclustertreewidgetitem.h"
 #include "brainweavercluster.h"
 #include "qtconceptmapcompetency.h"
-#include "testtimer.h"
-#include "trace.h"
+
+
 #pragma GCC diagnostic pop
 
 ribi::braw::QtClusterWidget::QtClusterWidget(

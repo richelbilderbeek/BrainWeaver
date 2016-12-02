@@ -16,7 +16,7 @@
 #include "geometry.h"
 #include "plane.h"
 #include "ribi_regex.h"
-#include "trace.h"
+
 #include "xml.h"
 #pragma GCC diagnostic pop
 

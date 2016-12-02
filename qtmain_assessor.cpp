@@ -14,7 +14,7 @@
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
-#include "trace.h"
+
 #pragma GCC diagnostic pop
 
 const std::string CreateStyleSheet()

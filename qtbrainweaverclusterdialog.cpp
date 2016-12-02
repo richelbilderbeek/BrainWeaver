@@ -34,7 +34,7 @@
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
-#include "trace.h"
+
 #include "ui_qtbrainweaverclusterdialog.h"
 #pragma GCC diagnostic pop
 

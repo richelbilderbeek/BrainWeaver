@@ -9,7 +9,6 @@
 #include "brainweavercluster.h"
 #include "brainweaverclusterfactory.h"
 #include "brainweaverfile.h"
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 ribi::braw::FileFactory::FileFactory()

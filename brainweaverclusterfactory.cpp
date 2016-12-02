@@ -10,8 +10,6 @@
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
-#include "testtimer.h"
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 ribi::braw::ClusterFactory::ClusterFactory()
