@@ -8,8 +8,6 @@ include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
 include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
 include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
-
 #Specific, console
 include(../ConceptMap/ConceptMap.pri)
 include(../RibiClasses/CppContainer/CppContainer.pri)
@@ -80,5 +78,4 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5
-QT += core gui widgets
-LIBS += concurrent opengl printsupport svg
+QT += core gui widgets concurrent opengl printsupport svg
