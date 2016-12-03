@@ -7,6 +7,10 @@
 
 [![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver)
 [![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=master)
+<a href="https://scan.coverity.com/projects/richelbilderbeek-brainweaver">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/11051/badge.svg"/>
+</a>
 
 Brainweaver, tool for teacher education, as described in [1].
 
