@@ -52,7 +52,6 @@ ribi::About ribi::braw::MenuDialog::GetAbout() const noexcept
   a.AddLibrary("Geometry version: " + Geometry().GetVersion());
   a.AddLibrary("Plane version: " + Plane::GetVersion());
   a.AddLibrary("ribi::Regex version: " + ribi::Regex::GetVersion());
-  a.AddLibrary("Trace version: " + Trace::GetVersion());
   return a;
 }
 
