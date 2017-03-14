@@ -20,9 +20,11 @@ install:
   - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   # C++14
+  # C++14
   - sudo apt-get install -qq g++-5
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
   # Codecov
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
   - sudo pip install codecov
   # OCLint
   - ./install_oclint.sh

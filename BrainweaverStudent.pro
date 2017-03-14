@@ -1,7 +1,5 @@
 SOURCES += qtmain_student.cpp
 
-CONFIG += debug_and_release
-
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/Apfloat.pri)
@@ -42,11 +40,40 @@ include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 include(BrainweaverDesktop.pri)
 
-
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
-QMAKE_CXXFLAGS += -fext-numeric-literals
 
-# gcov
-QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
-LIBS += -lgcov
+# Debug and release settings
+CONFIG += debug_and_release
+CONFIG(release, debug|release) {
+
+  DEFINES += NDEBUG
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+}
+
+CONFIG(debug, debug|release) {
+
+  # gcov
+  QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+  LIBS += -lgcov
+
+  # UBSAN
+  QMAKE_CXXFLAGS += -fsanitize=undefined
+  QMAKE_LFLAGS += -fsanitize=undefined
+  LIBS += -lubsan
+}
+
+# C++14
+CONFIG += c++14
+QMAKE_CXXFLAGS += -std=c++14
+
+# High warning level, warnings are errors
+# -Weffc++ #Qt goes bad with -Weffc++
+QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+QMAKE_CXXFLAGS += -Werror
+
+# Qt5
+QT += core gui widgets concurrent opengl printsupport svg

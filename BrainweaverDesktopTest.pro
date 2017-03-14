@@ -1,7 +1,5 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
-CONFIG += debug_and_release
-
 # Most specific first
 include(BrainweaverDesktop.pri)
 include(BrainweaverDesktopTest.pri)
@@ -51,18 +49,44 @@ include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 
 SOURCES += qtmain_test.cpp
 
-# gcov
-QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
-LIBS += -lgcov
-
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
 
-# Qt:
-# QtConcurrent::filterInternal(Sequence&, KeepFunctor, ReduceFunctor)’:
-# /usr/include/qt4/QtCore/qtconcurrentfilter.h:108:47: error: typedef ‘Iterator’ locally defined but not used [-Werror=unused-local-typedefs]
-# typedef typename Sequence::const_iterator Iterator;
-QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
+# Debug and release settings
+CONFIG += debug_and_release
+CONFIG(release, debug|release) {
+
+  DEFINES += NDEBUG
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+}
+
+CONFIG(debug, debug|release) {
+
+  # gcov
+  QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+  LIBS += -lgcov
+
+  # UBSAN
+  QMAKE_CXXFLAGS += -fsanitize=undefined
+  QMAKE_LFLAGS += -fsanitize=undefined
+  LIBS += -lubsan
+}
+
+# C++14
+CONFIG += c++14
+QMAKE_CXXFLAGS += -std=c++14
+
+# High warning level, warnings are errors
+QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+#QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
+QMAKE_CXXFLAGS += -Werror
+
+# Qt5
+QT += core gui widgets concurrent opengl printsupport svg
 
 # QTest
 QT += testlib
+

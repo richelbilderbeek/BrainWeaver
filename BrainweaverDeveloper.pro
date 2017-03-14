@@ -77,12 +77,12 @@ CONFIG(debug, debug|release) {
 
 # C++14
 CONFIG += c++14
-QMAKE_CXX = g++-5
-QMAKE_LINK = g++-5
-QMAKE_CC = gcc-5
 QMAKE_CXXFLAGS += -std=c++14
 
 # High warning level, warnings are errors
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 #QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Werror
+
+# Qt5
+QT += core gui widgets concurrent opengl printsupport svg
