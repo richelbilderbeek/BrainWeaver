@@ -1,12 +1,11 @@
 # Brainweaver
 
-[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
-![Whitespace](Whitespace.png)
-[![Codecov logo](Codecov.png)](https://www.codecov.io)
-[![gplv3](http://www.gnu.org/graphics/gplv3-88x31.png)](http://www.gnu.org/licenses/gpl.html)
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
+---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/Brainweaver)
+coverity_scan|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=coverity_scan)](https://travis-ci.org/richelbilderbeek/Brainweaver)
 
-[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=master)
 <a href="https://scan.coverity.com/projects/richelbilderbeek-brainweaver">
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/11051/badge.svg"/>
