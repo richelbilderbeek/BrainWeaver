@@ -2,7 +2,7 @@ SOURCES += qtmain_student.cpp
 
 #Don't enable Effective C++ warnings when using Qwt
 include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
-include(../RibiLibraries/Apfloat.pri)
+#include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/BoostAll.pri)
 include(../RibiLibraries/GeneralConsole.pri)
 include(../RibiLibraries/GeneralDesktop.pri)

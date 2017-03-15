@@ -1,8 +1,6 @@
 #Don't enable Effective C++ warnings when using Qwt
-#include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 include(../RibiLibraries/BoostAll.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 include(../RibiClasses/CppAbout/CppAbout.pri)
 include(../RibiClasses/CppFileIo/CppFileIo.pri)
@@ -17,7 +15,7 @@ include(../RibiClasses/CppCounter/CppCounter.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(../RibiClasses/CppGrabber/CppGrabber.pri)
-include(../RibiClasses/CppPlane/CppPlane.pri)
+include(../plane/plane.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
@@ -80,8 +78,8 @@ CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
 
 # High warning level, warnings are errors
+# Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
-#QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5

@@ -62,17 +62,11 @@ script:
   # Build console test
   - qmake BrainweaverConsoleTest.pro
   - make debug
+  - ./BrainweaverConsoleTest
   # Build and run desktop test
   - qmake BrainweaverDesktopTest.pro
   - make debug
-  # Run tests
-  - ./BrainweaverConsoleTest
   - ./BrainweaverDesktopTest
-  # cppcheck
-  - cppcheck --quiet --error-exitcode=1 . 
-  # Get code coverage
-  - ./get_code_cov.sh >/dev/null
-  - codecov
   # Build 'true' executables
   - qmake BrainweaverDeveloper.pro
   - make debug
@@ -80,6 +74,11 @@ script:
   - make debug
   - qmake BrainweaverStudent.pro
   - make debug
+  # cppcheck
+  - cppcheck --quiet --error-exitcode=1 . 
+  # Get code coverage
+  - ./get_code_cov.sh >/dev/null
+  - codecov
   # Call OCLint
   - ./do_oclint.sh
 

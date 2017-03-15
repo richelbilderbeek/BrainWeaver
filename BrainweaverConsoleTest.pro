@@ -1,17 +1,11 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
-CONFIG += debug_and_release
-
 # Most specific first
 include(BrainweaverConsole.pri)
 include(BrainweaverConsoleTest.pri)
 
-#Don't enable Effective C++ warnings when using Qwt
-include(../RibiLibraries/ConsoleApplicationNoWeffcpp.pri)
-include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/BoostAll.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 include(../RibiLibraries/GeneralConsole.pri)
 include(../RibiLibraries/GeneralDesktop.pri)
@@ -71,9 +65,10 @@ CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
 
 # High warning level, warnings are errors
+# -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
-#QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Werror
 
 # Qt
-QT += core gui
+QT += core gui printsupport
+
