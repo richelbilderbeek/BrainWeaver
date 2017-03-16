@@ -18,12 +18,16 @@
 void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
 {
   //This works
-  QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, 0, 0);
+  {
+    const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, 0, 0);
+    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Don't care
+  }
 
   //These should fail
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, -2, 0, 0);
+    const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, -2, 0, 0);
+    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -32,7 +36,8 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   }
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, -2, 0);
+    const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, -2, 0);
+    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -41,7 +46,8 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   }
   try
   {
-    QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 0, 0, -2);
+    const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, 0, -2);
+    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)

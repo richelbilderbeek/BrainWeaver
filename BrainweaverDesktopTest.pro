@@ -40,7 +40,10 @@ include(../RibiClasses/CppXml/CppXml.pri)
 include(../ConceptMap/ConceptMap.pri)
 include(../QtConceptMap/QtConceptMap.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+
+INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_no_properties.pri)
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_helper.pri)
 
 SOURCES += qtmain_test.cpp
 
@@ -73,6 +76,14 @@ CONFIG(debug, debug|release) {
 # C++14
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
+
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,fwn-biol-132-102) {
+  message("Host is university computer in my office")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
 
 # High warning level, warnings are errors
 # Qt goes bad with -Weffc++
