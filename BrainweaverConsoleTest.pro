@@ -16,7 +16,7 @@ include(../RibiClasses/CppCounter/CppCounter.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(../RibiClasses/CppGrabber/CppGrabber.pri)
-include(../RibiClasses/CppPlane/CppPlane.pri)
+include(../plane/plane.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
@@ -27,7 +27,13 @@ include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
 include(../ConceptMap/ConceptMap.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+
+# Boost Graph Tutorial
+#include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_helper.pri)
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_no_properties.pri)
+
 
 SOURCES += main_test.cpp
 
