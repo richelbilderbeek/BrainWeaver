@@ -57,7 +57,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script: 
-  - ./download_other_githubs.sh
+  - ./download_other_githubs
   - ./build_other_githubs.sh
   # Build console test
   - qmake BrainweaverConsoleTest.pro
