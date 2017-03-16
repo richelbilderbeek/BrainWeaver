@@ -34,12 +34,12 @@ before_install:
   - sudo apt-get update -qq
 
 install: 
-  # Qt5
-  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
-  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   # C++14
   - sudo apt-get install -qq g++-5
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+  # Qt5
+  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
+  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Coverity Scan
