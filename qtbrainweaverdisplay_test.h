@@ -11,7 +11,6 @@ class qtbrainweaverdisplay_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
   void display_examples();
   void display_misc_values();
   void display_misc_values_without_center_node();
