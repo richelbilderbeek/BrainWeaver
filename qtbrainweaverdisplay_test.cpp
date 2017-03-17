@@ -6,12 +6,6 @@
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
 
-void ribi::braw::qtbrainweaverdisplay_test::default_construction()
-{
-  QtDisplay();
-  QVERIFY("Should get here");
-}
-
 void ribi::braw::qtbrainweaverdisplay_test::display_examples()
 {
   File f = FileFactory().Get5();
