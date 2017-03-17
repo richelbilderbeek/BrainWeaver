@@ -3,7 +3,7 @@
 # Assumes BrainweaverDeveloper is already running
 
 # Load scripts
-. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
+. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id
 
 # Variables
 mycmp="scenario1.cmp"

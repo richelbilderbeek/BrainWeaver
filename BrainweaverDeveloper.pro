@@ -1,49 +1,44 @@
-#Don't enable Effective C++ warnings when using Qwt
-include(../RibiLibraries/BoostAll.pri)
-
-
+include(BrainweaverDesktop.pri)
+include(../ConceptMap/ConceptMap.pri)
+include(../plane/plane.pri)
+include(../QtConceptMap/QtConceptMap.pri)
+include(../QtKeyboardFriendlyGraphicsView/QtKeyboardFriendlyGraphicsView.pri)
 include(../RibiClasses/CppAbout/CppAbout.pri)
-include(../RibiClasses/CppFileIo/CppFileIo.pri)
-include(../RibiClasses/CppHelp/CppHelp.pri)
-include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
-include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
-include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
-
-#Specific, console
 include(../RibiClasses/CppContainer/CppContainer.pri)
 include(../RibiClasses/CppCounter/CppCounter.pri)
+include(../RibiClasses/CppFileIo/CppFileIo.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(../RibiClasses/CppGrabber/CppGrabber.pri)
-include(../plane/plane.pri)
-include(../RibiClasses/CppQtImage/CppQtImage.pri)
-include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
-include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
-include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
-include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
-include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
-
+include(../RibiClasses/CppHelp/CppHelp.pri)
+include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
+include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
 include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
 include(../RibiClasses/CppQtGraphics/CppQtGraphics.pri)
-include(../QtKeyboardFriendlyGraphicsView/QtKeyboardFriendlyGraphicsView.pri)
+include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
+include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtPathArrowItem/CppQtPathArrowItem.pri)
 include(../RibiClasses/CppQtQuadBezierArrowItem/CppQtQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtRoundedEditRectItem/CppQtRoundedEditRectItem.pri)
 include(../RibiClasses/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
 include(../RibiClasses/CppQtScopedDisable/CppQtScopedDisable.pri)
+include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
+include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
+include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
+include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
+include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
 include(../RibiClasses/CppTrace/CppTrace.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
-
-#Specific
-include(../ConceptMap/ConceptMap.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+include(../RibiLibraries/BoostAll.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 
-#Desktop
-include(../QtConceptMap/QtConceptMap.pri)
-include(BrainweaverDesktop.pri)
+# Boost Graph Tutorial
+INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_helper.pri)
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_properties.pri)
+
 
 SOURCES += qtmain_developer.cpp
 
@@ -76,6 +71,14 @@ CONFIG(debug, debug|release) {
 # C++14
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
+
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,fwn-biol-132-102) {
+  message("Host is university computer in my office")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
 
 # High warning level, warnings are errors
 # Qt goes bad with -Weffc++
