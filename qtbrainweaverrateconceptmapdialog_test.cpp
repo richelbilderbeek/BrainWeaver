@@ -16,8 +16,6 @@
 #include "qtscopeddisable.h"
 #include "brainweaverfile.h"
 #include "qtconceptmap.h"
-#include "testtimer.h"
-#include "trace.h"
 #include "qtbrainweaverratingdialog.h"
 #include "fileio.h"
 #include "qtconceptmaprateconceptdialog.h"

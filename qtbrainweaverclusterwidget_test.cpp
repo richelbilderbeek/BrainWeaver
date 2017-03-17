@@ -1,5 +1,6 @@
 #include "qtbrainweaverclusterwidget_test.h"
 
+#include <cassert>
 #include <vector>
 #include "qtbrainweaverclusterwidget.h"
 #include "conceptmapconceptfactory.h"
@@ -11,23 +12,21 @@
 #include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
 #include "qtconceptmapcompetency.h"
-#include "testtimer.h"
 #include "qtbrainweaverclustertreewidgetitem.h"
-#include "trace.h"
 
 void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
 {
   //This works
   {
     const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, 0, 0);
-    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Don't care
+    assert(i.m_competency == ribi::cmap::Competency::misc); //Don't care
   }
 
   //These should fail
   try
   {
     const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, -2, 0, 0);
-    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
+    assert(i.m_competency == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -37,7 +36,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   try
   {
     const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, -2, 0);
-    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
+    assert(i.m_competency == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
@@ -47,7 +46,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   try
   {
     const QtClusterTreeWidgetItem i(ribi::cmap::Competency::misc, false, 0, 0, -2);
-    assert(i.GetCompetency() == ribi::cmap::Competency::misc); //Should not get here
+    assert(i.m_competency == ribi::cmap::Competency::misc); //Should not get here
     QVERIFY(!"Should not get here");
   }
   catch (std::invalid_argument&)
