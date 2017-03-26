@@ -29,7 +29,6 @@ include(../RibiClasses/CppXml/CppXml.pri)
 include(../ConceptMap/ConceptMap.pri)
 
 # Boost Graph Tutorial
-#include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_helper.pri)
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_no_properties.pri)
@@ -70,18 +69,6 @@ CONFIG(debug, debug|release) {
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
 
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,fwn-biol-132-102) {
-  message("Host is university computer in my office")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
-
-contains(QMAKE_HOST.name,pg-login) {
-  message("Host is Peregrine cluster")
-}
-
 # High warning level, warnings are errors
 # -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
@@ -90,3 +77,22 @@ QMAKE_CXXFLAGS += -Werror
 # Qt
 QT += core gui printsupport
 
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,fwn-biol-132-102) {
+  message("Host is university computer in my office")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
+
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,pc-157-103) {
+  message("Host is university computer in the canteen")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
+
+contains(QMAKE_HOST.name,pg-login) {
+  message("Host is Peregrine cluster")
+}

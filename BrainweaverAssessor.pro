@@ -34,7 +34,12 @@ include(../RibiClasses/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
 include(../RibiClasses/CppQtScopedDisable/CppQtScopedDisable.pri)
 include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+
+# Boost Graph Tutorial
+INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_helper.pri)
+include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_no_properties.pri)
+
 include(BrainweaverDesktop.pri)
 
 SOURCES += qtmain_assessor.cpp
@@ -76,3 +81,19 @@ QMAKE_CXXFLAGS += -Werror
 
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
+
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,fwn-biol-132-102) {
+  message("Host is university computer in my office")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
+
+message(Host name: $$QMAKE_HOST.name)
+contains(QMAKE_HOST.name,pc-157-103) {
+  message("Host is university computer in the canteen")
+  QMAKE_CXX = g++-5
+  QMAKE_LINK = g++-5
+  QMAKE_CC = gcc-5
+}
