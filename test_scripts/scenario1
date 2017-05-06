@@ -1,0 +1,2 @@
+#!/bin/bash
+./scenario1_1 && ./scenario1_2 && ./scenario1_3

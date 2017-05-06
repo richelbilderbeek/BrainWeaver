@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. ./start_brainweaver
+. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id_by_title
+
+test_start_brainweaver()
+{
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  assertNull "$id"
+  start_brainweaver
+  sleep 1
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  assertNotNull "$id"
+}
+
+# load shunit2
+. ../../shunit2/source/2.1/src/shunit2

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function start_brainweaver()
+{
+  ./../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper &
+}
