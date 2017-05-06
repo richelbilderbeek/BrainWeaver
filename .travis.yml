@@ -49,6 +49,10 @@ install:
   - sudo apt-get install -qq valgrind
   # SLOCcount
   - sudo apt-get install sloccount
+  # Get my folder
+  - my_github=${PWD##*/}  
+  # shunit2
+  - cd ..; git clone https://github.com/kward/shunit2.git; cd $my_github
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -80,6 +84,8 @@ script:
   - make debug
   - qmake BrainweaverStudent.pro
   - make debug
+  # shunit2 tests
+  - cd test_scipts; ./test; cd ..
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
   # Get code coverage
