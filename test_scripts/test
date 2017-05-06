@@ -1,16 +1,37 @@
 #!/bin/bash
 
+# Prerequisite scripts
+cd ../../testing_cpp_gui_applications_tutorial/scripts
+. ./get_dialog_id_by_title
+. ./close_first_dialog_by_title
+
+# Go back
+cd ../../Brainweaver/test_scripts
+
+# Brainweaver scripts
 . ./start_brainweaver
-. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id_by_title
+
+
 
 test_start_brainweaver()
 {
+  # Should first be absent
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   assertNull "$id"
+
+  # Create dialog
   start_brainweaver
   sleep 1
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   assertNotNull "$id"
+
+  # Close dialog
+  #close_first_dialog_by_title 'Menu voor de ontwikkelaar'
+  #sleep 1
+
+  # Should be absent again
+  #id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  #assertNull "$id"
 }
 
 # load shunit2
