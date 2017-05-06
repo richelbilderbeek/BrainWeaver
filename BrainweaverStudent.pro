@@ -64,10 +64,14 @@ CONFIG(debug, debug|release) {
   QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
   LIBS += -lgcov
 
+  # helgrind, for helgrind and memcheck
+  QMAKE_LFLAGS += -pthread -Wl,--no-as-needed
+
   # UBSAN
   QMAKE_CXXFLAGS += -fsanitize=undefined
   QMAKE_LFLAGS += -fsanitize=undefined
   LIBS += -lubsan
+
 }
 
 # C++14

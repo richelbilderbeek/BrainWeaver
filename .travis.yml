@@ -49,6 +49,10 @@ install:
   - sudo pip install codecov
   # OCLint
   - ./install_oclint.sh
+  # valgrind, for helgrind and memcheck
+  - sudo apt-get install -qq valgrind
+  # SLOCcount
+  - sudo apt-get install sloccount
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -67,6 +71,12 @@ script:
   - qmake BrainweaverDesktopTest.pro
   - make debug
   - ./BrainweaverDesktopTest
+  # helgrind
+  - valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainweaverDesktopTest
+  - cat helgrind.log
+  # memcheck
+  - valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainweaverDesktopTest
+  - cat memcheck.log
   # Build 'true' executables
   - qmake BrainweaverDeveloper.pro
   - make debug
@@ -81,6 +91,10 @@ script:
   - codecov
   # Call OCLint
   - ./do_oclint
+  # Get my folder
+  - my_github=${PWD##*/}  
+  # SLOCcount
+  - cd ..; sloccount --overhead 1 --personcost 22614 the_richel_setup; cd $my_github
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
