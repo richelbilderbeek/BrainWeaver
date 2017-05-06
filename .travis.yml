@@ -72,11 +72,11 @@ script:
   - make debug
   - ./BrainweaverDesktopTest
   # helgrind
-  - valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainweaverDesktopTest
-  - cat helgrind.log
+  #- valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainweaverDesktopTest
+  #- cat helgrind.log
   # memcheck
-  - valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainweaverDesktopTest
-  - cat memcheck.log
+  #- valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainweaverDesktopTest
+  #- cat memcheck.log
   # Build 'true' executables
   - qmake BrainweaverDeveloper.pro
   - make debug
@@ -84,7 +84,7 @@ script:
   - make debug
   - qmake BrainweaverStudent.pro
   - make debug
-  # shunit2 tests
+  # shunit2 tests, must be run locally only
   - cd test_scipts; ./test; cd ..
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
