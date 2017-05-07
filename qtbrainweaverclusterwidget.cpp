@@ -137,7 +137,7 @@ void ribi::braw::MoveJthChildToTop(
   QtClusterWidget * const widget,
   QTreeWidgetItem * const top,
   const int j
-) noexcept
+)
 {
   QTreeWidgetItem * const clone = top->child(j)->clone();
   assert(clone);

@@ -81,7 +81,7 @@ void MoveJthChildToTop(
   QtClusterWidget * const widget,
   QTreeWidgetItem * const top,
   const int j
-) noexcept;
+);
 
 } //~namespace braw
 } //~namespace ribi

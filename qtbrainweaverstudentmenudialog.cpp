@@ -3,6 +3,7 @@
 #include "qtbrainweaverstudentmenudialog.h"
 
 #include <cassert>
+#include <memory>
 
 #include <QKeyEvent>
 #include <QFileDialog>
@@ -53,7 +54,7 @@ void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtStudentMenuDialog::on_button_about_clicked()
 {
-  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
+  std::scoped_ptr<ribi::braw::QtAboutDialog> d{new ribi::braw::QtAboutDialog};
   assert(d);
   //const auto d(QtAboutDialog().Get());
   this->hide();
