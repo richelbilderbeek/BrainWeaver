@@ -92,7 +92,7 @@ script:
   - ./get_code_cov >/dev/null
   - codecov
   # Call OCLint
-  - ./do_oclint
+  - ./do_oclint.sh
   # Get my folder
   - my_github=${PWD##*/}  
   # SLOCcount

@@ -54,7 +54,7 @@ void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtStudentMenuDialog::on_button_about_clicked()
 {
-  std::scoped_ptr<ribi::braw::QtAboutDialog> d{new ribi::braw::QtAboutDialog};
+  std::unique_ptr<ribi::braw::QtAboutDialog> d{new ribi::braw::QtAboutDialog};
   assert(d);
   //const auto d(QtAboutDialog().Get());
   this->hide();
