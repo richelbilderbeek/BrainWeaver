@@ -36,6 +36,8 @@ install:
   # Qt5
   - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  # Qt5 SVG
+  - sudo apt-get install libqt5svg5-dev
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Coverity Scan
