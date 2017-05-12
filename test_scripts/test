@@ -16,19 +16,24 @@ cd ../../Brainweaver/test_scripts
 # Brainweaver scripts
 . ./start_brainweaver
 
-
-
 test_start_brainweaver()
 {
   # Should first be absent
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
-  assertNull "$id"
+
+  echo "A"
+
+  ${_ASSERT_NULL_} $id $id
+
+  echo "B"
 
   # Create dialog
   start_brainweaver
   sleep 1
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
-  assertNotNull "$id"
+  ${_ASSERT_NOT_NULL_} "$id"
+
+  echo "C"
 
   # Close dialog
   #close_first_dialog_by_title 'Menu voor de ontwikkelaar'
