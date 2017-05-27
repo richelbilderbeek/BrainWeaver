@@ -33,8 +33,9 @@ test_start_brainweaver()
   ${_ASSERT_NOT_NULL_} "$id"
 
   # Close dialog
-  close_first_dialog_by_title 'Menu voor de ontwikkelaar'
-  sleep 1
+  xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
+  # Cannot use the line below, as Brainweaver closes with Escape only
+  #close_first_dialog_by_title 'Menu voor de ontwikkelaar'
 
   # Should be absent again
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
