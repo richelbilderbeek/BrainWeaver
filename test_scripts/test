@@ -14,8 +14,9 @@ cd ../../testing_cpp_gui_applications_tutorial/scripts
 cd ../../Brainweaver/test_scripts
 
 # Brainweaver scripts
-. ./start_brainweaver
+. ./close_developer_menu
 . ./goto_assessor_start_menu
+. ./start_brainweaver
 
 # The first screen
 test_start_brainweaver()
@@ -46,6 +47,36 @@ test_start_brainweaver()
     fail "Closed dialog must not have an ID"
   fi
 }
+
+test_close_developer_menu()
+{
+  # echo "Developer start menu must initially be absent"
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create developer start menu"
+  start_brainweaver
+  sleep 1
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  if [ ! $id ]; then
+    fail "Developer main menu cannot be found"
+    return
+  fi
+
+  close_developer_menu
+  sleep 1
+
+  # Should be closed
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Developer main menu has not been closed"
+  fi
+}
+
 
 test_goto_assessor_start_menu()
 {

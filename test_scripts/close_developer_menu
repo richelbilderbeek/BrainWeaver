@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function close_developer_menu()
+{
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  if [ $id ]; then
+    xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
+  else
+    (>&2 echo "Developer menu cannot be found")
+  fi
+}
