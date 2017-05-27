@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function goto_assessor_set_focal_question()
+{
+  goto_assessor_start_menu
+ 
+  sleep 1
+
+  id=`find_assessor_start_menu`
+
+  if [ $id ]; then
+    # Pick '2.'
+    xdotool windowactivate $id key Alt+G sleep 1.0
+  else
+    (>&2 echo "Set focal question dialog not created")
+  fi
+}

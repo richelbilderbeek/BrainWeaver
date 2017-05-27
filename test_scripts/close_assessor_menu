@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function close_assessor_menu()
+{
+  id=`find_assessor_menu`
+  if [ $id ]; then
+    xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
+  else
+    (>&2 echo "Assessor menu cannot be found")
+  fi
+}

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function goto_assessor_menu()
+{
+  goto_developer_menu
+ 
+  sleep 1
+
+  id=`find_developer_menu`
+
+  if [ $id ]; then
+    # Pick '2.'
+    xdotool windowactivate $id key Alt+2 sleep 1.0
+  else
+    (>&2 echo "Assessor menu not created")
+  fi
+}

@@ -14,9 +14,11 @@ cd ../../testing_cpp_gui_applications_tutorial/scripts
 cd ../../Brainweaver/test_scripts
 
 # Brainweaver scripts
+. ./close_assessor_menu
 . ./close_developer_menu
+. ./find_assessor_menu
 . ./find_developer_menu
-. ./goto_assessor_start_menu
+. ./goto_assessor_menu
 . ./goto_developer_menu
 . ./start_brainweaver
 
@@ -139,7 +141,7 @@ test_goto_developer_menu()
   fi
 }
 
-test_goto_assessor_start_menu()
+test_goto_assessor_menu()
 {
   # echo "Assessor start menu dialog must initially be absent"
   id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de assessor'`
@@ -151,7 +153,7 @@ test_goto_assessor_start_menu()
   fi
 
   # echo "Creating assessor start menu dialog"
-  goto_assessor_start_menu
+  goto_assessor_menu
   sleep 1
 
   # echo "Assessor start menu dialog should be present now"
@@ -171,6 +173,36 @@ test_goto_assessor_start_menu()
   fi
   xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
 }
+
+test_find_assessor_menu()
+{
+  # echo "Assessor start menu must initially be absent"
+  id=`find_assessor_menu`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create Assessor start menu"
+  goto_assessor_menu
+  sleep 1
+  id=`find_assessor_menu`
+  if [ ! $id ]; then
+    fail "Assessor start menu cannot be found"
+    return
+  fi
+
+  # echo "Close assessor start menu"
+  close_assessor_menu
+
+  # Should be absent again
+  id=`find_assessor_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
+}
+
 
 # load shunit2
 . ../../shunit2/source/2.1/src/shunit2
