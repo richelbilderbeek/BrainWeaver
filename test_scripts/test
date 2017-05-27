@@ -20,24 +20,24 @@ cd ../../Brainweaver/test_scripts
 # The first screen
 test_start_brainweaver()
 {
-  # Should first be absent
+  echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
-
-  #${_ASSERT_NULL_} "$id"
   if [ $id ]; then
     fail "Absent dialog must not have an ID"
+    return
   fi
 
-  # Create dialog
+  echo "Create developer start menu"
   start_brainweaver
   sleep 1
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
-  ${_ASSERT_NOT_NULL_} "$id"
+  if [ ! $id ]; then
+    fail "Developer main menu cannot be found"
+    return
+  fi
 
-  # Close dialog
+  echo "Close developer start menu"
   xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
-  # Cannot use the line below, as Brainweaver closes with Escape only
-  #close_first_dialog_by_title 'Menu voor de ontwikkelaar'
 
   # Should be absent again
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
@@ -55,6 +55,7 @@ test_goto_assessor_start_menu()
   #${_ASSERT_NULL_} "$id"
   if [ $id ]; then
     fail "Absent dialog must not have an ID"
+    return
   fi
 
   echo "Creating assessor start menu dialog"
@@ -63,14 +64,19 @@ test_goto_assessor_start_menu()
 
   echo "Assessor start menu dialog should be present now"
   id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de assessor'`
-  ${_ASSERT_NOT_NULL_} "$id"
+  if [ ! $id ]; then
+    fail "Could not find create assessor start menu dialog"
+    return
+  fi
 
   echo "Close assessor start menu dialog"
   xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
 
   echo "Close developer main menu dialog"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
-  ${_ASSERT_NOT_NULL_} "$id"
+  if [ ! $id ]; then
+    fail "Could not find developer main menu dialog"
+  fi
   xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
 }
 
