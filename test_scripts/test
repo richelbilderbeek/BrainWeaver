@@ -15,6 +15,7 @@ cd ../../Brainweaver/test_scripts
 
 # Brainweaver scripts
 . ./close_developer_menu
+. ./find_developer_menu
 . ./goto_assessor_start_menu
 . ./start_brainweaver
 
@@ -76,6 +77,36 @@ test_close_developer_menu()
     fail "Developer main menu has not been closed"
   fi
 }
+
+test_find_developer_menu()
+{
+  # echo "Developer start menu must initially be absent"
+  id=`find_developer_menu`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create developer start menu"
+  start_brainweaver
+  sleep 1
+  id=`find_developer_menu`
+  if [ ! $id ]; then
+    fail "Developer menu cannot be found"
+    return
+  fi
+
+  # echo "Close developer menu"
+  close_developer_menu
+
+  # Should be absent again
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
+}
+
 
 
 test_goto_assessor_start_menu()

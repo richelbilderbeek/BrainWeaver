@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_developer_menu()
+{
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  echo $id
+}
