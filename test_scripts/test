@@ -17,10 +17,12 @@ cd ../../Brainweaver/test_scripts
 . ./close_assessor_menu
 . ./close_assessor_set_focal_question
 . ./close_developer_menu
+. ./create_focal_question
 . ./exit_assessor_menu
 . ./exit_assessor_set_focal_question
 . ./exit_developer_menu
 . ./find_assessor_menu
+. ./find_assessor_save_focal_question
 . ./find_assessor_set_focal_question
 . ./find_developer_menu
 . ./goto_assessor_menu
@@ -369,6 +371,28 @@ test_exit_assessor_set_focal_question()
   fi
 }
 
+test_create_focal_question()
+{
+  # echo "Create"
+  create_focal_question "What is A + B?" 'test_create_focal_question.cmp'
+
+  # Everything should be absent
+  id=`find_assessor_set_focal_question`
+  if [ $id ]; then
+    fail "Closed assessor 'set focal question' dialog must not have an ID"
+    return
+  fi
+  id=`find_assessor_menu`
+  if [ $id ]; then
+    fail "Closed assessor menu must not have an ID"
+    return
+  fi
+  id=`find_developer_menu`
+  if [ $id ]; then
+    fail "Closed develop menu must not have an ID"
+    return
+  fi
+}
 
 # load shunit2
 . ../../shunit2/source/2.1/src/shunit2

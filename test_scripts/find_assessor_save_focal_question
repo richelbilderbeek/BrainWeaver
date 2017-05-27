@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_assessor_save_focal_question()
+{
+  id=`get_dialog_id_by_title 'Sla het assessment invoer-bestand op'`
+  echo $id
+}
