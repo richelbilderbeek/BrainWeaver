@@ -10,16 +10,17 @@ function create_focal_question()
 
   if [ $id ]; then
     # Type the word
-    xdotool windowactivate $id sleep 0.2 type "$1"
+    xdotool windowactivate $id type "$1"
     # Save
-    xdotool windowactivate $id sleep 0.2 key Alt+s sleep 1.0
+    xdotool windowactivate $id key Alt+s sleep 1.0
     # Find the save dialog
     id=`find_assessor_save_focal_question`
     if [ $id ]; then
     # Type filename
-      xdotool windowactivate $id sleep 0.2 type "$2"
+      xdotool windowactivate $id type "$2"
+      sleep 1
       # OK
-      xdotool windowactivate $id sleep 0.2 key Alt+Return sleep 1.0
+      xdotool windowactivate $id key Alt+Return sleep 1.0
       # Exits to assessor menu
       exit_assessor_menu
     else

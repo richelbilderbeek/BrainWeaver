@@ -30,6 +30,11 @@ cd ../../Brainweaver/test_scripts
 . ./goto_developer_menu
 . ./start_brainweaver
 
+
+
+
+
+
 # The first screen
 test_start_brainweaver()
 {
@@ -57,6 +62,7 @@ test_start_brainweaver()
   #${_ASSERT_NULL_} "$id"
   if [ $id ]; then
     fail "Closed dialog must not have an ID"
+    return
   fi
 }
 
@@ -371,10 +377,10 @@ test_exit_assessor_set_focal_question()
   fi
 }
 
-test_create_focal_question()
+test_create_focal_question_flow()
 {
   # echo "Create"
-  create_focal_question "What is A + B?" 'test_create_focal_question.cmp'
+  create_focal_question "What is A + B?" 'test_create_focal_question_flow.cmp'
 
   # Everything should be absent
   id=`find_assessor_set_focal_question`
@@ -392,6 +398,38 @@ test_create_focal_question()
     fail "Closed develop menu must not have an ID"
     return
   fi
+
+  # Cleanup
+  rm $filename
+}
+
+test_create_focal_question_data()
+{
+  question="What is A plus B?"
+  filename="test_create_focal_question_data.cmp"
+
+  # Delete output filename if already present
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  # echo "Create"
+  create_focal_question "$question" "$filename"
+
+  if [ ! -f $filename ]; then
+    fail "Output file '"$filename"' not created"
+    return
+  fi
+
+  ok=`cat $filename | egrep "$question" | wc --words`
+
+  if [ $ok -lt 1 ]; then
+    fail "Question "$question"in file '"$filename"' not created"
+    return
+  fi
+
+  # Cleanup
+  rm $filename
 }
 
 # load shunit2
