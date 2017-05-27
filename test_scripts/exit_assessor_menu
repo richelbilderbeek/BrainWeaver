@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function exit_assessor_menu()
+{
+  close_assessor_menu
+  exit_developer_menu
+}

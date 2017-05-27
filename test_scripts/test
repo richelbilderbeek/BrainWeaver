@@ -17,6 +17,9 @@ cd ../../Brainweaver/test_scripts
 . ./close_assessor_menu
 . ./close_assessor_set_focal_question
 . ./close_developer_menu
+. ./exit_assessor_menu
+. ./exit_assessor_set_focal_question
+. ./exit_developer_menu
 . ./find_assessor_menu
 . ./find_assessor_set_focal_question
 . ./find_developer_menu
@@ -74,6 +77,35 @@ test_close_developer_menu()
   fi
 
   close_developer_menu
+  sleep 1
+
+  # Should be closed
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Developer main menu has not been closed"
+  fi
+}
+
+test_exit_developer_menu()
+{
+  # echo "Developer start menu must initially be absent"
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create developer start menu"
+  start_brainweaver
+  sleep 1
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  if [ ! $id ]; then
+    fail "Developer main menu cannot be found"
+    return
+  fi
+
+  exit_developer_menu
   sleep 1
 
   # Should be closed
@@ -214,6 +246,41 @@ test_find_assessor_menu()
   fi
 }
 
+test_exit_assessor_menu()
+{
+  # echo "Assessor start menu must initially be absent"
+  id=`find_assessor_menu`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create Assessor start menu"
+  goto_assessor_menu
+  sleep 1
+  id=`find_assessor_menu`
+  if [ ! $id ]; then
+    fail "Assessor start menu cannot be found"
+    return
+  fi
+
+  # echo "Exiting from assessor start menu"
+  exit_assessor_menu
+
+  id=`find_assessor_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+    return
+  fi
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+    return
+  fi
+}
+
 test_find_assessor_set_focal_question()
 {
   # echo "Assessor start menu must initially be absent"
@@ -258,6 +325,47 @@ test_find_assessor_set_focal_question()
   #${_ASSERT_NULL_} "$id"
   if [ $id ]; then
     fail "Closed dialog must not have an ID"
+  fi
+}
+
+test_exit_assessor_set_focal_question()
+{
+  # echo "Assessor start menu must initially be absent"
+  id=`find_assessor_set_focal_question`
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  # echo "Create Assessor start menu"
+  goto_assessor_set_focal_question
+  sleep 1
+  id=`find_assessor_set_focal_question`
+  if [ ! $id ]; then
+    fail "Assessor 'set focal question' dialog cannot be found"
+    return
+  fi
+
+  # echo "Close assessor 'set focal question' dialog"
+  exit_assessor_set_focal_question
+
+  # Should be absent again
+  id=`find_assessor_set_focal_question`
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+    return
+  fi
+  id=`find_assessor_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+    return
+  fi
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+    return
   fi
 }
 

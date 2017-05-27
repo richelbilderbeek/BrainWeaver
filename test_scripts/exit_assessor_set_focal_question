@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function exit_assessor_set_focal_question()
+{
+  close_assessor_set_focal_question
+  exit_assessor_menu
+}

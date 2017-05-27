@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function exit_developer_menu()
+{
+  close_developer_menu
+}
