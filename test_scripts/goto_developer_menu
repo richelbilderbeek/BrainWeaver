@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function goto_developer_menu()
+{
+  ./../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper &
+}
