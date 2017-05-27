@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function goto_assessor_start_menu()
+{
+  start_brainweaver
+ 
+  sleep 1
+
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+
+  if [ ! $id ]; then
+    fail "Menu screen not created"
+  fi
+
+  # Pick '2. '
+  xdotool windowactivate $id key Alt+2 sleep 1.0
+}

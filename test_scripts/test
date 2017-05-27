@@ -15,7 +15,9 @@ cd ../../Brainweaver/test_scripts
 
 # Brainweaver scripts
 . ./start_brainweaver
+. ./goto_assessor_start_menu
 
+# The first screen
 test_start_brainweaver()
 {
   # Should first be absent
@@ -43,6 +45,33 @@ test_start_brainweaver()
   if [ $id ]; then
     fail "Closed dialog must not have an ID"
   fi
+}
+
+test_goto_assessor_start_menu()
+{
+  echo "Assessor start menu dialog must initially be absent"
+  id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de assessor'`
+
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+  fi
+
+  echo "Creating assessor start menu dialog"
+  goto_assessor_start_menu
+  sleep 1
+
+  echo "Assessor start menu dialog should be present now"
+  id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de assessor'`
+  ${_ASSERT_NOT_NULL_} "$id"
+
+  echo "Close assessor start menu dialog"
+  xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
+
+  echo "Close developer main menu dialog"
+  id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
+  ${_ASSERT_NOT_NULL_} "$id"
+  xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
 }
 
 # load shunit2
