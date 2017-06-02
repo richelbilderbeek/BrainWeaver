@@ -379,8 +379,10 @@ test_exit_assessor_set_focal_question()
 
 test_create_focal_question_flow()
 {
+  filename="test_create_focal_question_flow.cmp"
+
   # echo "Create"
-  create_focal_question "What is A + B?" 'test_create_focal_question_flow.cmp'
+  create_focal_question "What is A + B?" "$filename"
 
   # Everything should be absent
   id=`find_assessor_set_focal_question`
