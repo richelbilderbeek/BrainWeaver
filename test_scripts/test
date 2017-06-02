@@ -17,18 +17,74 @@ cd ../../Brainweaver/test_scripts
 . ./close_assessor_menu
 . ./close_assessor_set_focal_question
 . ./close_developer_menu
+. ./close_student_open_file_dialog
 . ./create_focal_question
 . ./exit_assessor_menu
 . ./exit_assessor_set_focal_question
 . ./exit_developer_menu
+. ./exit_student_menu
+. ./exit_student_open_file_dialog
 . ./find_assessor_menu
 . ./find_assessor_save_focal_question
 . ./find_assessor_set_focal_question
 . ./find_developer_menu
+. ./find_student_open_file_dialog
+. ./find_student_menu
 . ./goto_assessor_menu
 . ./goto_assessor_set_focal_question
 . ./goto_developer_menu
+. ./goto_student_menu
+. ./goto_student_open_file_dialog
 . ./start_brainweaver
+
+
+
+
+
+
+
+
+
+
+
+
+test_goto_student_open_file_dialog()
+{
+  # echo "Student open file dialog must initially be absent"
+  id=`find_student_open_file_dialog`
+
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Absent dialog must not have an ID"
+    return
+  fi
+
+  echo "Creating student open file dialog"
+  goto_student_open_file_dialog
+  sleep 1
+
+  echo "Student open file dialog should be present now"
+  id=`find_student_open_file_dialog`
+  if [ ! $id ]; then
+    fail "Could not find student open file dialog"
+    return
+  fi
+
+  echo "Close student open file dialog"
+  close_student_open_file_dialog
+
+  echo "Close developer main menu dialog"
+  close_developer_menu
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -38,6 +94,7 @@ cd ../../Brainweaver/test_scripts
 # The first screen
 test_start_brainweaver()
 {
+  sleep 1000 
   # echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ $id ]; then

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function goto_student_open_file_dialog()
+{
+  goto_developer_menu
+ 
+  sleep 1
+
+  id=`find_developer_menu`
+
+  if [ $id ]; then
+    # Pick '1.'
+    xdotool windowactivate $id key Alt+1 sleep 1.0
+  else
+    (>&2 echo "Student open file dialog not created")
+  fi
+}

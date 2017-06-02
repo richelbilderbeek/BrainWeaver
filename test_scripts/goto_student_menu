@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function goto_student_menu()
+{
+  goto_student_open_file_dialog
+ 
+  sleep 1
+
+  id=`find_student_open_file_dialog`
+
+  if [ $id ]; then
+    # Pick '1.'
+    xdotool windowactivate $id type "$1"
+    sleep 1
+    xdotool windowactivate $id key Return
+  else
+    (>&2 echo "Assessor menu not created")
+  fi
+}

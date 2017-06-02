@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function exit_student_menu()
+{
+  close_student_menu
+  exit_developer_menu
+}

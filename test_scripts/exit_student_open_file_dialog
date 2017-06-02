@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function exit_student_open_file_dialog()
+{
+  close_student_open_file_dialog
+  exit_developer_menu
+}

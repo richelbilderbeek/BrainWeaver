@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_student_open_file_dialog()
+{
+  id=`get_dialog_id_by_title 'Kies een assessment bestand'`
+  echo $id
+}
