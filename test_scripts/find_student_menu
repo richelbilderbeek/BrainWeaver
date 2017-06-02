@@ -2,6 +2,6 @@
 
 function find_student_menu()
 {
-  id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de assessor'`
+  id=`get_dialog_id_by_title 'Mijn persoonlijke werktheorie, programma voor de student'`
   echo $id
 }

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_save_concept_map()
+{
+  id=`get_dialog_id_by_title 'Sla de concept map op'`
+  echo $id
+}

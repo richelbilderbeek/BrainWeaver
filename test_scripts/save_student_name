@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# $1: question
+# $2: student name
+# $3: cmp filename
+function save_student_name()
+{
+  question="$1"
+  student_name="$2"
+  filename="$3"
+
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  create_focal_question "$question" "$filename"
+
+  if [ ! -f $filename ]; then
+    fail "Input file '"$1"' absent"
+    return
+  fi
+
+  echo "Go to student menu"
+  goto_student_menu $filename
+ 
+  sleep 1
+
+  echo "Find the student menu"
+  id=`find_student_menu`
+
+  if [ $id ]; then
+    # Type the student name and save
+    xdotool windowactivate $id type "$student_name"
+    sleep 1
+    xdotool windowactivate $id key Alt+s
+    sleep 1
+  else
+    (>&2 echo "Student menu not created")
+    return
+  fi
+
+  id=`find_save_concept_map`
+  if [ $id ]; then
+    xdotool windowactivate $id key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete v
+    sleep 1
+    xdotool windowactivate $id type $filename
+    sleep 1
+    xdotool windowactivate $id key Return
+  else
+    (>&2 echo "Save concept map dialog not created")
+    return
+  fi
+
+
+
+
+}

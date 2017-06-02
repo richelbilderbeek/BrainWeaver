@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function close_student_menu()
+{
+  id=`find_student_menu`
+  if [ $id ]; then
+    xdotool windowactivate $id sleep 0.2 key Escape sleep 1.0
+  else
+    (>&2 echo "Student menu cannot be found")
+  fi
+}
