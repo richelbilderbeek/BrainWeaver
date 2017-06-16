@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# $1: question
+# $2: student name
+# $3: cmp filename
+function goto_student_start()
+{
+  question="$1"
+  student_name="$2"
+  filename="$3"
+
+  save_student_name "$question" "$student_name" "$filename"
+
+  id=`find_student_menu`
+
+  if [ $id ]; then
+    # echo "Pick '&Begin'"
+    xdotool windowactivate $id key Alt+b
+    sleep 1
+  else
+    (>&2 echo "Student begin dialog not created")
+  fi
+}
