@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# $1: cmp filename
+# $2: associations
+function are_associations_in_file()
+{
+  filename="$1"
+  associations="$2"
+  text=`cat $filename`
+
+  i=1 
+  while [ 1 ]; do
+    s=`echo "$associations" | cut -d '|' -f "$i"`
+    does_contain=`contains $text $s`
+    if [[ does_contain -eq 0 ]]; then return 0; fi
+    i=$((i+1))
+  done    
+  return 1
+}
