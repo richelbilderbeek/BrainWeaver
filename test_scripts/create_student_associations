@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# $1: question
+# $2: student name
+# $3: cmp filename
+# $4: associations
+function create_student_associations()
+{
+  question="$1"
+  student_name="$2"
+  filename="$3"
+  associations="$4"
+
+  goto_student_association "$question" "$student_name" "$filename"
+
+  sleep 1
+
+  id=`find_student_association`
+
+  if [ $id ]; then
+    # echo "Type the association"
+    i=1 
+    while [ 1 ]; do
+      s=`echo "$associations" | cut -d '|' -f "$i"`
+      if [[ -z $s ]]; then break; fi
+
+      echo "Typing association: "$s
+      xdotool windowactivate $id sleep 0.2 type "$s"
+      sleep 1
+      xdotool windowactivate $id sleep 0.2 key Tab
+      xdotool windowactivate $id sleep 0.2 key Return
+
+      i=$((i+1))
+    done    
+
+  else
+    (>&2 echo "Student association dialog not created")
+  fi
+}

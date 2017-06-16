@@ -23,6 +23,7 @@ cd ../../Brainweaver/test_scripts
 . ./close_student_open_file_dialog
 . ./close_student_start
 . ./create_focal_question
+. ./create_student_associations
 . ./exit_assessor_menu
 . ./exit_assessor_set_focal_question
 . ./exit_developer_menu
@@ -49,22 +50,24 @@ cd ../../Brainweaver/test_scripts
 . ./goto_student_start
 . ./start_brainweaver
 
-test_goto_student_association()
+test_create_student_associations()
 {
-  filename="test_goto_student_association.cmp"
-  question="What does 'test_goto_student_association' do?"
-  student_name="John 'goto_student_association' Doe"
+  filename="test_create_student_associations.cmp"
+  question="What does 'create_student_associations' do?"
+  student_name="John 'create_student_associations' Doe"
+  associations="create associations|check flow of program|go to associations screen"
   # echo "filename: "$filename
   # echo "question: "$question
   # echo "student_name: "$student_name
+  # echo "associations: "$associations
 
   # echo "Input file must be absent"
   if [ -f $filename ]; then
     rm $filename
   fi
 
-  echo "Goto student association dialog"
-  goto_student_association "$question" "$student_name" "$filename"
+  echo "Create student associations"
+  create_student_associations "$question" "$student_name" "$filename" "$associations"
 
   sleep 1
 
@@ -89,7 +92,6 @@ test_goto_student_association()
 # The first screen
 test_start_brainweaver()
 {
-  sleep 1000000
   # echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ $id ]; then
@@ -497,21 +499,21 @@ test_goto_student_open_file_dialog()
     return
   fi
 
-  echo "Creating student open file dialog"
+  # echo "Creating student open file dialog"
   goto_student_open_file_dialog
   sleep 1
 
-  echo "Student open file dialog should be present now"
+  # echo "Student open file dialog should be present now"
   id=`find_student_open_file_dialog`
   if [ ! $id ]; then
     fail "Could not find student open file dialog"
     return
   fi
 
-  echo "Close student open file dialog"
+  # echo "Close student open file dialog"
   close_student_open_file_dialog
 
-  echo "Close developer main menu dialog"
+  # echo "Close developer main menu dialog"
   close_developer_menu
 }
 
@@ -607,6 +609,43 @@ test_goto_student_start()
 
   # echo "Close student start dialog"
   exit_student_start
+
+  # Should be absent again
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
+}
+
+test_goto_student_association()
+{
+  filename="test_goto_student_association.cmp"
+  question="What does 'test_goto_student_association' do?"
+  student_name="John 'goto_student_association' Doe"
+  # echo "filename: "$filename
+  # echo "question: "$question
+  # echo "student_name: "$student_name
+
+  # echo "Input file must be absent"
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  # echo "Goto student association dialog"
+  goto_student_association "$question" "$student_name" "$filename"
+
+  sleep 1
+
+  # echo "Find student association dialog"
+  id=`find_student_association`
+  if [ ! $id ]; then
+    fail "Student association dialog cannot be found"
+    return
+  fi
+
+  # echo "Close student association dialog"
+  exit_student_association
 
   # Should be absent again
   id=`find_developer_menu`
