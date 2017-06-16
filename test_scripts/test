@@ -42,24 +42,18 @@ cd ../../Brainweaver/test_scripts
 . ./start_brainweaver
 
 
-
-
 test_save_student_name()
 {
   filename="test_save_student_name.cmp"
   question="What does 'test_save_student_name' do?"
   student_name="John 'save_student_name' Doe"
-  echo "filename: "$filename
-  echo "question: "$question
-  echo "student_name: "$student_name
+  # echo "filename: "$filename
+  # echo "question: "$question
+  # echo "student_name: "$student_name
 
-  echo "Create fresh input file"
-  create_focal_question "$question" "$filename"
-
-  echo "Input file must be present"
-  if [ ! -f $filename ]; then
-    fail "Input file '"$filename"' absent"
-    return
+  # echo "Input file must be absent"
+  if [ -f $filename ]; then
+    rm $filename
   fi
 
   # echo "Save the student name"
@@ -67,17 +61,9 @@ test_save_student_name()
 
   sleep 1
 
-
-  # echo "Close student menu"
-  close_student_menu
-
-  # echo "Close developer main menu dialog"
-  close_developer_menu
+  # echo "Exit student menu"
+  exit_student_menu
 }
-
-
-
-
 
 # The first screen
 test_start_brainweaver()

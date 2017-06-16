@@ -9,26 +9,27 @@ function create_focal_question()
   id=`find_assessor_set_focal_question`
 
   if [ $id ]; then
-    # Type the word
+    echo "Type the focal question"
     xdotool windowactivate $id type "$1"
-    # Save
+    echo "Save"
     xdotool windowactivate $id key Alt+s sleep 1.0
-    # Find the save dialog
+    echo "Find the save dialog"
     id=`find_assessor_save_focal_question`
     if [ $id ]; then
-    # Type filename
+      echo "Type filename"
       xdotool windowactivate $id type "$2"
       sleep 1
-      # OK
+      echo "Press OK using ALT+ENTER"
       xdotool windowactivate $id key Alt+Return sleep 1.0
-      # Exits to assessor menu
+      echo "Exits to assessor menu"
       exit_assessor_menu
     else
       (>&2 echo "Save focal question dialog not created")
-      # Exit
+      echo "Exit"
       exit_assessor_set_focal_question
     fi
   else
+    echo "Exit"
     (>&2 echo "Set focal question dialog not created")
   fi
 }

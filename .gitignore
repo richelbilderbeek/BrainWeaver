@@ -53,3 +53,4 @@ qrc_*
 moc_*
 BrainweaverDesktopTest
 *.pro.user.*
+test_scripts/*.cmp
