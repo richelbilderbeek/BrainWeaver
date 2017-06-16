@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_student_association()
+{
+  id=`get_dialog_id_by_title 'Associeer- en cluster-scherm'`
+  echo $id
+}

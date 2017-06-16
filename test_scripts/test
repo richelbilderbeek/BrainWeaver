@@ -18,6 +18,7 @@ cd ../../Brainweaver/test_scripts
 . ./close_assessor_set_focal_question
 . ./close_developer_menu
 . ./close_assessor_menu
+. ./close_student_association
 . ./close_student_menu
 . ./close_student_open_file_dialog
 . ./close_student_start
@@ -25,6 +26,7 @@ cd ../../Brainweaver/test_scripts
 . ./exit_assessor_menu
 . ./exit_assessor_set_focal_question
 . ./exit_developer_menu
+. ./exit_student_association
 . ./exit_student_menu
 . ./exit_student_open_file_dialog
 . ./exit_student_start
@@ -33,23 +35,25 @@ cd ../../Brainweaver/test_scripts
 . ./find_assessor_set_focal_question
 . ./find_developer_menu
 . ./find_save_concept_map
+. ./find_student_association
 . ./find_student_open_file_dialog
 . ./find_student_menu
 . ./find_student_start
 . ./goto_assessor_menu
 . ./goto_assessor_set_focal_question
 . ./goto_developer_menu
+. ./goto_student_association
 . ./goto_student_menu
 . ./goto_student_open_file_dialog
 . ./save_student_name
 . ./goto_student_start
 . ./start_brainweaver
 
-test_goto_student_start()
+test_goto_student_association()
 {
-  filename="test_goto_student_start.cmp"
-  question="What does 'test_goto_student_start' do?"
-  student_name="John 'goto_student_start' Doe"
+  filename="test_goto_student_association.cmp"
+  question="What does 'test_goto_student_association' do?"
+  student_name="John 'goto_student_association' Doe"
   # echo "filename: "$filename
   # echo "question: "$question
   # echo "student_name: "$student_name
@@ -59,19 +63,20 @@ test_goto_student_start()
     rm $filename
   fi
 
-  # echo "Save the student name"
-  goto_student_start  "$question" "$student_name" "$filename"
+  echo "Goto student association dialog"
+  goto_student_association "$question" "$student_name" "$filename"
 
   sleep 1
 
-  id=`find_student_start`
+  echo "Find student association dialog"
+  id=`find_student_association`
   if [ ! $id ]; then
-    fail "Student start dialog cannot be found"
+    fail "Student association dialog cannot be found"
     return
   fi
 
-  # echo "Close student start dialog"
-  exit_student_start
+  echo "Close student association dialog"
+  exit_student_association
 
   # Should be absent again
   id=`find_developer_menu`
@@ -84,6 +89,7 @@ test_goto_student_start()
 # The first screen
 test_start_brainweaver()
 {
+  sleep 1000000
   # echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ $id ]; then
@@ -572,6 +578,42 @@ test_save_student_name()
 
   # echo "Exit student menu"
   exit_student_menu
+}
+
+test_goto_student_start()
+{
+  filename="test_goto_student_start.cmp"
+  question="What does 'test_goto_student_start' do?"
+  student_name="John 'goto_student_start' Doe"
+  # echo "filename: "$filename
+  # echo "question: "$question
+  # echo "student_name: "$student_name
+
+  # echo "Input file must be absent"
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  # echo "Save the student name"
+  goto_student_start  "$question" "$student_name" "$filename"
+
+  sleep 1
+
+  id=`find_student_start`
+  if [ ! $id ]; then
+    fail "Student start dialog cannot be found"
+    return
+  fi
+
+  # echo "Close student start dialog"
+  exit_student_start
+
+  # Should be absent again
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
 }
 
 # load shunit2

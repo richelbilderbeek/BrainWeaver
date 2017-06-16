@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function exit_student_association()
+{
+  close_student_association
+  exit_student_start
+}

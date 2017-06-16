@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# $1: question
+# $2: student name
+# $3: cmp filename
+function goto_student_association()
+{
+  question="$1"
+  student_name="$2"
+  filename="$3"
+
+  goto_student_start "$question" "$student_name" "$filename"
+
+  sleep 1
+
+  id=`find_student_start`
+
+  if [ $id ]; then
+    # echo "Pick 'Start with &Association'"
+    xdotool windowactivate $id sleep 0.2 key Alt+a
+    sleep 1
+  else
+    (>&2 echo "Student association dialog not created")
+  fi
+}
