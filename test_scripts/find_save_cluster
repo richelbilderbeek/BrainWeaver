@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function find_save_cluster()
+{
+  id=`get_dialog_id_by_title 'Sla de clustering op'`
+  echo $id
+}

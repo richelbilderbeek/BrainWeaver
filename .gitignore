@@ -54,3 +54,4 @@ moc_*
 BrainweaverDesktopTest
 *.pro.user.*
 test_scripts/*.cmp
+test_scripts/*.log

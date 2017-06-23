@@ -37,6 +37,7 @@ cd ../../Brainweaver/test_scripts
 . ./find_assessor_save_focal_question
 . ./find_assessor_set_focal_question
 . ./find_developer_menu
+. ./find_save_cluster
 . ./find_save_concept_map
 . ./find_student_association
 . ./find_student_open_file_dialog
@@ -48,7 +49,7 @@ cd ../../Brainweaver/test_scripts
 . ./goto_student_association
 . ./goto_student_menu
 . ./goto_student_open_file_dialog
-#. ./save_student_associations
+. ./save_student_associations
 . ./save_student_name
 . ./goto_student_start
 . ./start_brainweaver

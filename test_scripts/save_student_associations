@@ -11,29 +11,30 @@ function save_student_associations()
   filename="$3"
   associations="$4"
 
-  create_student_association "$question" "$student_name" "$filename" "$associations"
+  create_student_associations "$question" "$student_name" "$filename" "$associations"
 
   sleep 1
 
+  # Press ALT-S
   id=`find_student_association`
-
   if [ $id ]; then
-    # echo "Type the association"
-    i=1 
-    while [ 1 ]; do
-      s=`echo "$associations" | cut -d '|' -f "$i"`
-      if [[ -z $s ]]; then break; fi
-
-      echo "Typing association: "$s
-      xdotool windowactivate $id sleep 0.2 type "$s"
-      sleep 1
-      xdotool windowactivate $id sleep 0.2 key Tab
-      xdotool windowactivate $id sleep 0.2 key Return
-
-      i=$((i+1))
-    done    
-
+    # Save
+    xdotool windowactivate $id key Alt+s
+    sleep 1
   else
     (>&2 echo "Student association dialog not created")
   fi
+
+  id=`find_save_cluster`
+  if [ $id ]; then
+    xdotool windowactivate $id key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete v
+    sleep 1
+    xdotool windowactivate $id type $filename
+    sleep 1
+    xdotool windowactivate $id key Return
+  else
+    (>&2 echo "Save concept map dialog not created")
+    return
+  fi
+
 }

@@ -51,7 +51,16 @@ function save_student_name()
     return
   fi
 
-
-
+  id=`find_save_concept_map`
+  if [ $id ]; then
+    xdotool windowactivate $id key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete v
+    sleep 1
+    xdotool windowactivate $id type $filename
+    sleep 1
+    xdotool windowactivate $id key Return
+  else
+    (>&2 echo "Save cluster dialog not created")
+    return
+  fi
 
 }
