@@ -2,17 +2,23 @@
 
 # contains(string, substring)
 #
-# Returns 0 if the specified string contains the specified substring,
-# otherwise returns 1.
+# Returns 1 if the specified string contains the specified substring,
+# otherwise returns 0.
 #
 # From https://stackoverflow.com/a/8811800/3364162
 contains() {
     string="$1"
     substring="$2"
+
+    # echo "string: "$string > contains.log
+    # echo "substring: "$substring >> contains.log
+
     if test "${string#*$substring}" != "$string"
     then
-        return 0    # $substring is in $string
+        # echo "substring is in string" >> contains.log
+        echo "1"
     else
-        return 1    # $substring is not in $string
+        # echo "substring is not in string" >> contains.log
+        echo "0"
     fi
 }

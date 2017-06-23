@@ -152,7 +152,11 @@ test_start_brainweaver()
 
   # echo "Create developer start menu"
   start_brainweaver
-  sleep 1
+
+  # This is usually the first test of a day. Then
+  # Brainweaver needs some time to start up, where usually 1 second is fine 
+  sleep 5
+
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ ! $id ]; then
     fail "Developer main menu cannot be found"

@@ -1,0 +1,147 @@
+ #!/bin/bash
+
+# From the documentation:
+# For example, to include line numbers for a assertEquals() 
+# function call, replace the assertEquals() with ${_ASSERT_EQUALS_}.
+
+
+# Prerequisite scripts
+cd ../../testing_cpp_gui_applications_tutorial/scripts
+. ./get_dialog_id_by_title
+. ./close_first_dialog_by_title
+
+# Go back
+cd ../../Brainweaver/test_scripts
+
+# Brainweaver scripts
+. ./are_associations_in_file
+. ./close_assessor_menu
+. ./close_assessor_set_focal_question
+. ./close_developer_menu
+. ./close_assessor_menu
+. ./close_student_association
+. ./close_student_menu
+. ./close_student_open_file_dialog
+. ./close_student_start
+. ./contains
+. ./create_focal_question
+. ./create_student_associations
+. ./exit_assessor_menu
+. ./exit_assessor_set_focal_question
+. ./exit_developer_menu
+. ./exit_student_association
+. ./exit_student_menu
+. ./exit_student_open_file_dialog
+. ./exit_student_start
+. ./find_assessor_menu
+. ./find_assessor_save_focal_question
+. ./find_assessor_set_focal_question
+. ./find_developer_menu
+. ./find_save_concept_map
+. ./find_student_association
+. ./find_student_open_file_dialog
+. ./find_student_menu
+. ./find_student_start
+. ./goto_assessor_menu
+. ./goto_assessor_set_focal_question
+. ./goto_developer_menu
+. ./goto_student_association
+. ./goto_student_menu
+. ./goto_student_open_file_dialog
+#. ./save_student_associations
+. ./save_student_name
+. ./goto_student_start
+. ./start_brainweaver
+
+test_are_associations_in_file()
+{
+  filename="/home/p230198/test.cmp"
+  associations_present="My first association|My second association"
+  associations_absent="I am an absent association"
+  associations_partial="My first association|I am an absent association"
+  echo "test_are_associations_in_file: filename: "$filename
+  echo ""
+  echo "test_are_associations_in_file: associations_present: "$associations_present
+  echo ""
+  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
+
+  # echo "Input file must be absent"
+  if [ ! -f $filename ]; then
+    fail "test_are_associations_in_file file cannot be found"
+    return
+  fi
+
+  present=`are_associations_in_file "$filename" "$associations_present"`
+  #absent=`are_associations_in_file "$filename" "$associations_absent"`
+  #partial=`are_associations_in_file "$filename" "$associations_partial"`
+
+  echo "test_are_associations_in_file: present: "$present
+  echo ""
+  #echo "absent: "$absent
+  #echo "partial: "$partial
+
+  assertEquals "1" "$present" 
+  #assertEquals "0" "$absent" 
+  #assertEquals "0" "$partial" 
+}
+
+
+
+test_save_student_associations()
+{
+  return
+
+  filename="test_save_student_associations.cmp"
+  question="What does 'save_student_associations' do?"
+  student_name="John 'save_student_associations' Doe"
+  associations="create associations|check flow of program|go to associations screen|save the associations"
+  # echo "filename: "$filename
+  # echo "question: "$question
+  # echo "student_name: "$student_name
+  # echo "associations: "$associations
+
+  # echo "Input file must be absent"
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  echo "Save student associations"
+  save_student_associations "$question" "$student_name" "$filename" "$associations"
+
+  sleep 1
+
+  # File should be created with the associations
+  if [ -f $filename ]; then
+    fail "test_save_student_associations file cannot be found"
+    return
+  fi
+
+  is_ok=`are_associations_in_file "$filename" "$associations"`
+  if [ ! $is_ok ]; then
+    fail "Associations not found in file"
+    return
+  fi
+
+
+  echo "Find student association dialog"
+  id=`find_student_association`
+  if [ ! $id ]; then
+    fail "Student association dialog cannot be found"
+    return
+  fi
+
+  echo "Close student association dialog"
+  exit_student_association
+
+  # Should be absent again
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
+}
+
+
+# load shunit2
+. ../../shunit2/source/2.1/src/shunit2
