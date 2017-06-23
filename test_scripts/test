@@ -53,6 +53,38 @@ cd ../../Brainweaver/test_scripts
 . ./goto_student_start
 . ./start_brainweaver
 
+test_are_associations_in_file()
+{
+  filename="test_are_associations_in_file.cmp"
+  associations_present="My first association|My second association"
+  associations_absent="I am an absent association"
+  associations_partial="My first association|I am an absent association"
+
+  #echo "test_are_associations_in_file: filename: "$filename
+  #echo "test_are_associations_in_file: associations_present: "$associations_present
+  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
+
+  # echo "Input file must be absent"
+  if [ ! -f $filename ]; then
+    fail "test_are_associations_in_file file cannot be found"
+    return
+  fi
+
+  present=`are_associations_in_file "$filename" "$associations_present"`
+  absent=`are_associations_in_file "$filename" "$associations_absent"`
+  partial=`are_associations_in_file "$filename" "$associations_partial"`
+
+
+  #echo "test_are_associations_in_file: present: "$present
+  #echo "test_are_associations_in_file: absent: "$absent
+  #echo "test_are_associations_in_file: partial: "$partial
+
+  assertEquals "1" "$present" 
+  assertEquals "0" "$absent" 
+  assertEquals "1" "$partial" 
+}
+
 test_save_student_associations()
 {
   return
@@ -61,6 +93,7 @@ test_save_student_associations()
   question="What does 'save_student_associations' do?"
   student_name="John 'save_student_associations' Doe"
   associations="create associations|check flow of program|go to associations screen|save the associations"
+
   # echo "filename: "$filename
   # echo "question: "$question
   # echo "student_name: "$student_name
@@ -82,12 +115,12 @@ test_save_student_associations()
     return
   fi
 
-  is_ok=`are_associations_in_file "$filename" "$associations"`
-  if [ ! $is_ok ]; then
+  are_present=`are_associations_in_file "$filename" "$associations"`
+
+  if [ $are_present -eq "0" ]; then
     fail "Associations not found in file"
     return
   fi
-
 
   echo "Find student association dialog"
   id=`find_student_association`
@@ -718,44 +751,22 @@ test_create_student_associations()
 
 test_contains()
 {
-  assertFalse "contains abcd e"
-  assertTrue "contains abcd ab"
-  assertTrue "contains abcd bc"
-  assertTrue "contains abcd cd"
-  assertTrue "contains abcd abcd"
-  assertTrue "contains 'abcd efgh' 'cd ef'"
-  assertTrue "contains 'abcd efgh' ' '"
-}
+  absent=`contains abcd e`
+  assertEquals "0" "$absent"
 
-test_are_associations_in_file()
-{
-  filename="/home/p230198/test.cmp"
-  associations_present="My first association|My second association"
-  associations_absent="I am an absent association"
-  associations_partial="My first association|I am an absent association"
+  present_a=`contains abcd ab`
+  present_b=`contains abcd bc`
+  present_c=`contains abcd cd`
+  present_d=`contains abcd abcd`
+  present_e=`contains 'abcd efgh' 'cd ef'`
+  present_f=`contains 'abcd efgh' ' '`
 
-  #echo "test_are_associations_in_file: filename: "$filename
-  #echo "test_are_associations_in_file: associations_present: "$associations_present
-  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
-  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
-
-  # echo "Input file must be absent"
-  if [ ! -f $filename ]; then
-    fail "test_are_associations_in_file file cannot be found"
-    return
-  fi
-
-  present=`are_associations_in_file "$filename" "$associations_present"`
-  absent=`are_associations_in_file "$filename" "$associations_absent"`
-  partial=`are_associations_in_file "$filename" "$associations_partial"`
-
-  #echo "test_are_associations_in_file: present: "$present
-  #echo "test_are_associations_in_file: absent: "$absent
-  #echo "test_are_associations_in_file: partial: "$partial
-
-  assertEquals "1" "$present" 
-  assertEquals "0" "$absent" 
-  assertEquals "1" "$partial" 
+  assertEquals "1" "$present_a"
+  assertEquals "1" "$present_b"
+  assertEquals "1" "$present_c"
+  assertEquals "1" "$present_d"
+  assertEquals "1" "$present_e"
+  assertEquals "1" "$present_f"
 }
 
 # load shunit2
