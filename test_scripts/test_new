@@ -74,17 +74,18 @@ test_are_associations_in_file()
 
   present=`are_associations_in_file "$filename" "$associations_present"`
   absent=`are_associations_in_file "$filename" "$associations_absent"`
-  #partial=`are_associations_in_file "$filename" "$associations_partial"`
+  partial=`are_associations_in_file "$filename" "$associations_partial"`
 
   echo "test_are_associations_in_file: present: "$present
   echo ""
   echo "test_are_associations_in_file: absent: "$absent
   echo ""
-  #echo "partial: "$partial
+  echo "test_are_associations_in_file: partial: "$partial
+  echo ""
 
   assertEquals "1" "$present" 
   assertEquals "0" "$absent" 
-  #assertEquals "0" "$partial" 
+  assertEquals "1" "$partial" 
 }
 
 
