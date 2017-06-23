@@ -53,46 +53,14 @@ cd ../../Brainweaver/test_scripts
 . ./goto_student_start
 . ./start_brainweaver
 
-test_are_associations_in_file()
-{
-  filename="test_are_associations_in_file.cmp"
-  associations_present="My first association|My second association"
-  associations_absent="I am an absent association"
-  associations_partial="My first association|I am an absent association"
-
-  #echo "test_are_associations_in_file: filename: "$filename
-  #echo "test_are_associations_in_file: associations_present: "$associations_present
-  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
-  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
-
-  # echo "Input file must be absent"
-  if [ ! -f $filename ]; then
-    fail "test_are_associations_in_file file cannot be found"
-    return
-  fi
-
-  present=`are_associations_in_file "$filename" "$associations_present"`
-  absent=`are_associations_in_file "$filename" "$associations_absent"`
-  partial=`are_associations_in_file "$filename" "$associations_partial"`
-
-
-  #echo "test_are_associations_in_file: present: "$present
-  #echo "test_are_associations_in_file: absent: "$absent
-  #echo "test_are_associations_in_file: partial: "$partial
-
-  assertEquals "1" "$present" 
-  assertEquals "0" "$absent" 
-  assertEquals "1" "$partial" 
-}
-
 test_save_student_associations()
 {
-  return
-
+  return 
   filename="test_save_student_associations.cmp"
   question="What does 'save_student_associations' do?"
   student_name="John 'save_student_associations' Doe"
   associations="create associations|check flow of program|go to associations screen|save the associations"
+  non_associations="Britney Spears|Paris Hilton"
 
   # echo "filename: "$filename
   # echo "question: "$question
@@ -115,6 +83,7 @@ test_save_student_associations()
     return
   fi
 
+  # Associations put in, must be present in the file
   are_present=`are_associations_in_file "$filename" "$associations"`
 
   if [ $are_present -eq "0" ]; then
@@ -122,6 +91,14 @@ test_save_student_associations()
     return
   fi
 
+  # Associations not put in, must be absent in the file
+  are_absent=`are_associations_in_file "$filename" "$non_associations"`
+  if [ $are_absent -eq "1" ]; then
+    fail "Absent associations must not be found in file"
+    return
+  fi
+
+  # Close
   echo "Find student association dialog"
   id=`find_student_association`
   if [ ! $id ]; then
@@ -767,6 +744,38 @@ test_contains()
   assertEquals "1" "$present_d"
   assertEquals "1" "$present_e"
   assertEquals "1" "$present_f"
+}
+
+test_are_associations_in_file()
+{
+  filename="test_are_associations_in_file.cmp"
+  associations_present="My first association|My second association"
+  associations_absent="I am an absent association"
+  associations_partial="My first association|I am an absent association"
+
+  #echo "test_are_associations_in_file: filename: "$filename
+  #echo "test_are_associations_in_file: associations_present: "$associations_present
+  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
+
+  # echo "Input file must be absent"
+  if [ ! -f $filename ]; then
+    fail "test_are_associations_in_file file cannot be found"
+    return
+  fi
+
+  present=`are_associations_in_file "$filename" "$associations_present"`
+  absent=`are_associations_in_file "$filename" "$associations_absent"`
+  partial=`are_associations_in_file "$filename" "$associations_partial"`
+
+
+  #echo "test_are_associations_in_file: present: "$present
+  #echo "test_are_associations_in_file: absent: "$absent
+  #echo "test_are_associations_in_file: partial: "$partial
+
+  assertEquals "1" "$present" 
+  assertEquals "0" "$absent" 
+  assertEquals "1" "$partial" 
 }
 
 # load shunit2
