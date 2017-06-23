@@ -47,12 +47,19 @@ cd ../../Brainweaver/test_scripts
 . ./goto_assessor_set_focal_question
 . ./goto_developer_menu
 . ./goto_student_association
+. ./goto_student_concept_map_via_associations
 . ./goto_student_menu
 . ./goto_student_open_file_dialog
 . ./save_student_associations
 . ./save_student_name
 . ./goto_student_start
 . ./start_brainweaver
+
+test_goto_student_concept_map_via_associations()
+{
+  return
+}
+
 
 test_save_student_associations()
 {
@@ -108,6 +115,7 @@ test_save_student_associations()
 
   echo "Close student association dialog"
   exit_student_association
+  sleep 1
 
   # Should be absent again
   id=`find_developer_menu`
@@ -120,6 +128,8 @@ test_save_student_associations()
 # The first screen
 test_start_brainweaver()
 {
+  sleep 100000
+
   # echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ $id ]; then

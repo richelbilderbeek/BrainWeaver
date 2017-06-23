@@ -3,5 +3,8 @@
 function exit_student_start()
 {
   close_student_start
+
+  sleep 1
+
   exit_student_menu
 }

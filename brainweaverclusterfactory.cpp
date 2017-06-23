@@ -44,8 +44,7 @@ ribi::braw::Cluster ribi::braw::ClusterFactory::GetTest(
       return concept;
     }
   );
-  Cluster cluster(concepts);
-  return cluster;
+  return Cluster(concepts);
 }
 
 std::vector<ribi::braw::Cluster>

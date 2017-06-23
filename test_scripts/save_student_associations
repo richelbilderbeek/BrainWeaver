@@ -23,6 +23,7 @@ function save_student_associations()
     sleep 1
   else
     (>&2 echo "Student association dialog not created")
+    return
   fi
 
   id=`find_save_cluster`
@@ -34,7 +35,7 @@ function save_student_associations()
     xdotool windowactivate $id key Return
     sleep 1
   else
-    (>&2 echo "Save concept map dialog not created")
+    (>&2 echo "Save cluster dialog not created")
     return
   fi
 

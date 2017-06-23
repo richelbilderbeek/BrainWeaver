@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# $1: question
+# $2: student name
+# $3: cmp filename
+# $4: associations
+function goto_student_concept_map_via_associations()
+{
+  question="$1"
+  student_name="$2"
+  filename="$3"
+  associations="$4"
+
+  save_student_associations "$question" "$student_name" "$filename" "$associations"
+  
+  sleep 1
+
+  id=`find_student_association`
+
+  if [ $id ]; then
+    # echo "Pick '&Build concept map'"
+    xdotool windowactivate $id sleep 0.2 key Alt+b
+    sleep 1
+  else
+    (>&2 echo "Student concept map dialog not created")
+  fi
+}
