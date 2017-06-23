@@ -1,0 +1,7 @@
+are_associations_in_file: filename: /home/p230198/test.cmp
+are_associations_in_file: associations: I am an absent association
+are_associations_in_file: text: <file><about>Brainweaver</about><assessor_name></assessor_name><cluster><concept><name>My first association</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><concept><name>My second association</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept></cluster><conceptmap>graph G { }</conceptmap><question>Het leven is ...</question><student_name>John Doe</student_name><version>0.4</version></file>
+n_fields: 1
+i: 1
+s: I am an absent association
+does_contain: 0

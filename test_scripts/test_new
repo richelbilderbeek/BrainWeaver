@@ -63,8 +63,8 @@ test_are_associations_in_file()
   echo ""
   echo "test_are_associations_in_file: associations_present: "$associations_present
   echo ""
-  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
-  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
+  echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  echo "test_are_associations_in_file: associations_partial: "$associations_partial
 
   # echo "Input file must be absent"
   if [ ! -f $filename ]; then
@@ -73,16 +73,17 @@ test_are_associations_in_file()
   fi
 
   present=`are_associations_in_file "$filename" "$associations_present"`
-  #absent=`are_associations_in_file "$filename" "$associations_absent"`
+  absent=`are_associations_in_file "$filename" "$associations_absent"`
   #partial=`are_associations_in_file "$filename" "$associations_partial"`
 
   echo "test_are_associations_in_file: present: "$present
   echo ""
-  #echo "absent: "$absent
+  echo "test_are_associations_in_file: absent: "$absent
+  echo ""
   #echo "partial: "$partial
 
   assertEquals "1" "$present" 
-  #assertEquals "0" "$absent" 
+  assertEquals "0" "$absent" 
   #assertEquals "0" "$partial" 
 }
 
