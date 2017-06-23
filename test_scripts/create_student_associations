@@ -29,6 +29,7 @@ function create_student_associations()
       sleep 1
       xdotool windowactivate $id sleep 0.2 key Tab
       xdotool windowactivate $id sleep 0.2 key Return
+      sleep 1
 
       i=$((i+1))
     done    

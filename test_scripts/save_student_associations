@@ -13,7 +13,7 @@ function save_student_associations()
 
   create_student_associations "$question" "$student_name" "$filename" "$associations"
 
-  sleep 1
+  sleep 2
 
   # Press ALT-S
   id=`find_student_association`
@@ -27,11 +27,12 @@ function save_student_associations()
 
   id=`find_save_cluster`
   if [ $id ]; then
-    xdotool windowactivate $id key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete v
+    xdotool windowactivate $id key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete
     sleep 1
     xdotool windowactivate $id type $filename
     sleep 1
     xdotool windowactivate $id key Return
+    sleep 1
   else
     (>&2 echo "Save concept map dialog not created")
     return

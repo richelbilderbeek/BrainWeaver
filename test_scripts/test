@@ -56,7 +56,6 @@ cd ../../Brainweaver/test_scripts
 
 test_save_student_associations()
 {
-  return 
   filename="test_save_student_associations.cmp"
   question="What does 'save_student_associations' do?"
   student_name="John 'save_student_associations' Doe"
