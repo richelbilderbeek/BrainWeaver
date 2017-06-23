@@ -53,39 +53,6 @@ cd ../../Brainweaver/test_scripts
 . ./goto_student_start
 . ./start_brainweaver
 
-test_are_associations_in_file()
-{
-  return # TODO
-
-
-  filename="test_are_associations_in_file.cmp"
-  associations_present="My first association|My second association"
-  associations_absent="I am an absent association"
-  associations_partial="My first association|I am an absent association"
-  # echo "filename: "$filename
-  # echo "associations: "$associations
-
-  # echo "Input file must be absent"
-  if [ ! -f $filename ]; then
-    fail "test_are_associations_in_file file cannot be found"
-    return
-  fi
-
-  present=`are_associations_in_file $filename $associations_present`
-  absent=`are_associations_in_file $filename $associations_absent`
-  partial=`are_associations_in_file $filename $associations_partial`
-
-  echo "present: "$present
-  echo "absent: "$absent
-  echo "partial: "$partial
-
-  assertEquals "1" "$present" 
-  assertEquals "0" "$absent" 
-  assertEquals "0" "$partial" 
-}
-
-
-
 test_save_student_associations()
 {
   return
@@ -758,6 +725,37 @@ test_contains()
   assertTrue "contains abcd abcd"
   assertTrue "contains 'abcd efgh' 'cd ef'"
   assertTrue "contains 'abcd efgh' ' '"
+}
+
+test_are_associations_in_file()
+{
+  filename="/home/p230198/test.cmp"
+  associations_present="My first association|My second association"
+  associations_absent="I am an absent association"
+  associations_partial="My first association|I am an absent association"
+
+  #echo "test_are_associations_in_file: filename: "$filename
+  #echo "test_are_associations_in_file: associations_present: "$associations_present
+  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
+
+  # echo "Input file must be absent"
+  if [ ! -f $filename ]; then
+    fail "test_are_associations_in_file file cannot be found"
+    return
+  fi
+
+  present=`are_associations_in_file "$filename" "$associations_present"`
+  absent=`are_associations_in_file "$filename" "$associations_absent"`
+  partial=`are_associations_in_file "$filename" "$associations_partial"`
+
+  #echo "test_are_associations_in_file: present: "$present
+  #echo "test_are_associations_in_file: absent: "$absent
+  #echo "test_are_associations_in_file: partial: "$partial
+
+  assertEquals "1" "$present" 
+  assertEquals "0" "$absent" 
+  assertEquals "1" "$partial" 
 }
 
 # load shunit2
