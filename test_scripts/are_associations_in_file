@@ -8,9 +8,9 @@ function are_associations_in_file()
   associations="$2"
   text=`cat $filename`
 
-  echo "are_associations_in_file: filename: "$filename > are_associations_in_file.log
-  echo "are_associations_in_file: associations: "$associations >> are_associations_in_file.log
-  echo "are_associations_in_file: text: "$text >> are_associations_in_file.log
+  #echo "are_associations_in_file: filename: "$filename > are_associations_in_file.log
+  #echo "are_associations_in_file: associations: "$associations >> are_associations_in_file.log
+  #echo "are_associations_in_file: text: "$text >> are_associations_in_file.log
 
 
   # Each field has pipes in between. Thus zero pipes, one field.
@@ -22,18 +22,20 @@ function are_associations_in_file()
   i=1 
   while [  $i -le $n_fields ]; do
 
-    echo "i: "$i >> are_associations_in_file.log
+    #echo "i: "$i >> are_associations_in_file.log
 
     s=`echo "$associations" | cut -d '|' -f "$i"`
 
-    echo "s: "$s >> are_associations_in_file.log
+    #echo "s: "$s >> are_associations_in_file.log
 
     does_contain=`contains "$text" "$s"`
 
-    echo "does_contain: "$does_contain >> are_associations_in_file.log
+    #echo "does_contain: "$does_contain >> are_associations_in_file.log
 
     if [[ $does_contain -eq "1" ]]; then echo "1"; return 0; fi
+
     i=$((i+1))
+
   done
 
   echo "0"

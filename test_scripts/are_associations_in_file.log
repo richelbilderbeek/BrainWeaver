@@ -5,3 +5,6 @@ n_fields: 2
 i: 1
 s: My first association
 does_contain: 1
+n_fields: 2
+n_fields: 1
+n_fields: 2

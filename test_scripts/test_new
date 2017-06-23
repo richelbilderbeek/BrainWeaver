@@ -59,12 +59,11 @@ test_are_associations_in_file()
   associations_present="My first association|My second association"
   associations_absent="I am an absent association"
   associations_partial="My first association|I am an absent association"
-  echo "test_are_associations_in_file: filename: "$filename
-  echo ""
-  echo "test_are_associations_in_file: associations_present: "$associations_present
-  echo ""
-  echo "test_are_associations_in_file: associations_absent: "$associations_absent
-  echo "test_are_associations_in_file: associations_partial: "$associations_partial
+
+  #echo "test_are_associations_in_file: filename: "$filename
+  #echo "test_are_associations_in_file: associations_present: "$associations_present
+  #echo "test_are_associations_in_file: associations_absent: "$associations_absent
+  #echo "test_are_associations_in_file: associations_partial: "$associations_partial
 
   # echo "Input file must be absent"
   if [ ! -f $filename ]; then
@@ -76,12 +75,9 @@ test_are_associations_in_file()
   absent=`are_associations_in_file "$filename" "$associations_absent"`
   partial=`are_associations_in_file "$filename" "$associations_partial"`
 
-  echo "test_are_associations_in_file: present: "$present
-  echo ""
-  echo "test_are_associations_in_file: absent: "$absent
-  echo ""
-  echo "test_are_associations_in_file: partial: "$partial
-  echo ""
+  #echo "test_are_associations_in_file: present: "$present
+  #echo "test_are_associations_in_file: absent: "$absent
+  #echo "test_are_associations_in_file: partial: "$partial
 
   assertEquals "1" "$present" 
   assertEquals "0" "$absent" 
