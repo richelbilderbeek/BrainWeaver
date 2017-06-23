@@ -57,79 +57,17 @@ cd ../../Brainweaver/test_scripts
 
 test_goto_student_concept_map_via_associations()
 {
-  return
-}
+  filename="goto_student_concept_map_via_associations.cmp"
+  question="What does 'goto_student_concept_map_via_associations' do?"
+  student_name="John 'goto_student_concept_map_via_associations' Doe"
+  associations="check flow of program|via associations screen|harmful"
 
-
-test_save_student_associations()
-{
-  filename="test_save_student_associations.cmp"
-  question="What does 'save_student_associations' do?"
-  student_name="John 'save_student_associations' Doe"
-  associations="create associations|check flow of program|go to associations screen|save the associations"
-  non_associations="Britney Spears|Paris Hilton"
-
-  echo "filename: "$filename
-  echo "question: "$question
-  echo "student_name: "$student_name
-  echo "associations: "$associations
-
-  # echo "Input file must be absent"
-  if [ -f $filename ]; then
-    rm $filename
-  fi
-
-  echo "Save student associations"
-  save_student_associations "$question" "$student_name" "$filename" "$associations"
-
-  sleep 1
-
-  # File should be created with the associations
-  if [ ! -f $filename ]; then
-    fail "test_save_student_associations file cannot be found"
-    return
-  fi
-
-  # Associations put in, must be present in the file
-  are_present=`are_associations_in_file "$filename" "$associations"`
-
-  if [ $are_present -eq "0" ]; then
-    fail "Associations not found in file"
-    return
-  fi
-
-  # Associations not put in, must be absent in the file
-  are_absent=`are_associations_in_file "$filename" "$non_associations"`
-  if [ $are_absent -eq "1" ]; then
-    fail "Absent associations must not be found in file"
-    return
-  fi
-
-  # Close
-  echo "Find student association dialog"
-  id=`find_student_association`
-  if [ ! $id ]; then
-    fail "Student association dialog cannot be found"
-    return
-  fi
-
-  echo "Close student association dialog"
-  exit_student_association
-  sleep 1
-
-  # Should be absent again
-  id=`find_developer_menu`
-  #${_ASSERT_NULL_} "$id"
-  if [ $id ]; then
-    fail "Closed dialog must not have an ID"
-  fi
+  goto_student_concept_map_via_associations
 }
 
 # The first screen
 test_start_brainweaver()
 {
-  sleep 100000
-
   # echo "Developer start menu must initially be absent"
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`
   if [ $id ]; then
@@ -786,6 +724,70 @@ test_are_associations_in_file()
   assertEquals "1" "$present" 
   assertEquals "0" "$absent" 
   assertEquals "1" "$partial" 
+}
+
+test_save_student_associations()
+{
+  filename="test_save_student_associations.cmp"
+  question="What does 'save_student_associations' do?"
+  student_name="John 'save_student_associations' Doe"
+  associations="create associations|check flow of program|go to associations screen|save the associations"
+  non_associations="Britney Spears|Paris Hilton"
+
+  echo "filename: "$filename
+  echo "question: "$question
+  echo "student_name: "$student_name
+  echo "associations: "$associations
+
+  # echo "Input file must be absent"
+  if [ -f $filename ]; then
+    rm $filename
+  fi
+
+  echo "Save student associations"
+  save_student_associations "$question" "$student_name" "$filename" "$associations"
+
+  sleep 1
+
+  # File should be created with the associations
+  if [ ! -f $filename ]; then
+    fail "test_save_student_associations file cannot be found"
+    return
+  fi
+
+  # Associations put in, must be present in the file
+  are_present=`are_associations_in_file "$filename" "$associations"`
+
+  if [ $are_present -eq "0" ]; then
+    fail "Associations not found in file"
+    return
+  fi
+
+  # Associations not put in, must be absent in the file
+  are_absent=`are_associations_in_file "$filename" "$non_associations"`
+  if [ $are_absent -eq "1" ]; then
+    fail "Absent associations must not be found in file"
+    return
+  fi
+
+  # Close
+  echo "Find student association dialog"
+  id=`find_student_association`
+  if [ ! $id ]; then
+    fail "Student association dialog cannot be found"
+    return
+  fi
+
+  echo "Close student association dialog"
+  exit_student_association
+  sleep 1
+
+  # Should be absent again
+  id=`find_developer_menu`
+  #${_ASSERT_NULL_} "$id"
+  if [ $id ]; then
+    fail "Closed dialog must not have an ID"
+  fi
 }
 
 # load shunit2
