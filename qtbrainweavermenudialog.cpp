@@ -29,7 +29,7 @@
 #include "container.h"
 #include "counter.h"
 #include "fileio.h"
-#include "plane.h"
+//#include "plane.h"
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
 #include "qtbrainweaverclusterdialog.h"
