@@ -14,7 +14,7 @@
 #include "fileio.h"
 #include "fuzzy_equal_to.h"
 #include "geometry.h"
-#include "plane.h"
+//#include "plane.h"
 #include "ribi_regex.h"
 
 #include "xml.h"
