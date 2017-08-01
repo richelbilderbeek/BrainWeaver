@@ -55,6 +55,17 @@ install:
   - my_github=${PWD##*/}  
   # shunit2
   - cd ..; git clone https://github.com/kward/shunit2.git; cd $my_github
+  # GSL and other GitHubs
+  - my_github=${PWD##*/}  
+  - cd ..
+  - git clone https://github.com/Microsoft/GSL
+  - git clone https://github.com/richelbilderbeek/BoostGraphTutorial
+  - git clone https://github.com/richelbilderbeek/ConceptMap
+  - git clone https://github.com/richelbilderbeek/plane
+  - git clone https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
+  - git clone https://github.com/richelbilderbeek/RibiClasses
+  - git clone https://github.com/richelbilderbeek/RibiLibraries
+  - cd $my_github
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
