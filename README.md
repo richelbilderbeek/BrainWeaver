@@ -1,15 +1,9 @@
 # Brainweaver
 
-Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
----|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver)
-develop|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/Brainweaver)
-coverity_scan|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=coverity_scan)](https://travis-ci.org/richelbilderbeek/Brainweaver)
-
-<a href="https://scan.coverity.com/projects/richelbilderbeek-brainweaver">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/11051/badge.svg"/>
-</a>
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
+---|---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=master)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/Brainweaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=develop)
 
 Brainweaver, tool for teacher education, as described in [1].
 
