@@ -222,6 +222,22 @@ std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
   return v;
 }
 
+bool ribi::braw::HasSimilarData(
+  const File& lhs,
+  const File& rhs,
+  const double tolerance
+) noexcept
+{
+  return
+     lhs.GetAssessorName() == rhs.GetAssessorName()
+  && lhs.GetCluster() == rhs.GetCluster()
+  && ::ribi::cmap::HasSimilarData(
+    lhs.GetConceptMap(), rhs.GetConceptMap(), tolerance)
+  && lhs.GetStudentName() == rhs.GetStudentName()
+  && lhs.GetVersion() == rhs.GetVersion();
+
+}
+
 ribi::braw::File ribi::braw::LoadFile(const std::string &filename)
 {
   if(!ribi::is_regular_file(filename))

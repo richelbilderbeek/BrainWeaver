@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_nonexisting_file)
 {
   const std::string tmp_filename = ribi::get_temp_filename(".txt");
   assert(!is_regular_file(tmp_filename));
-  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument)
+  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument);
 }
 
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_gibberish)
   const std::string tmp_filename = ribi::get_temp_filename(".txt");
   { std::ofstream f(tmp_filename); f << "gibberish"; }
   assert(is_regular_file(tmp_filename));
-  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument)
+  BOOST_CHECK_THROW(ribi::braw::LoadFile(tmp_filename), std::invalid_argument);
   std::remove(tmp_filename.c_str());
 }
 
@@ -216,7 +216,8 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_normal_file)
   BOOST_TEST_PASSPOINT();
   BOOST_CHECK_EQUAL(GetFirstNode(second_file.GetConceptMap()).GetName(), question);
   BOOST_TEST_PASSPOINT();
-  BOOST_CHECK_EQUAL(first_file, second_file);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(first_file, second_file, tolerance));
   BOOST_TEST_PASSPOINT();
   //Modify f, to test operator!=
   first_file.SetStudentName( first_file.GetStudentName() + " (modified)");
@@ -233,7 +234,8 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_all_testing_files)
     file.Save(filename);
     assert(is_regular_file(filename));
     const auto file_again = ribi::braw::LoadFile(filename);
-    BOOST_CHECK_EQUAL (file, file_again);
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(file, file_again, tolerance));
     ribi::FileIo().DeleteFile(filename);
   }
 }

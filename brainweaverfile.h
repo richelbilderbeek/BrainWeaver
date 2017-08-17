@@ -146,6 +146,8 @@ std::string ExtractFileVersionFromXml(const std::string& s);
 ///Tally the competencies
 std::map<ribi::cmap::Competency,int> TallyCompetencies(const File& file);
 
+///Only suitable for exact copies, use 'HasSimilarContent' when saving
+///and loading a file
 bool operator==(const File& lhs, const File& rhs) noexcept;
 bool operator!=(const File& lhs, const File& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const File& f) noexcept;
@@ -158,6 +160,13 @@ std::string GetTempFileName() noexcept;
 
 ///Obtain a test filename
 std::string GetTestFileName() noexcept;
+
+/// As operator==, except that floating point differences and
+/// different Edge and Node IDs are tolerated
+bool HasSimilarData(
+  const File& lhs,
+  const File& rhs,
+  const double tolerance) noexcept;
 
 } //~namespace braw
 } //~namespace ribi
