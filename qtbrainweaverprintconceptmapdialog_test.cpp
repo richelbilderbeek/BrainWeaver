@@ -6,6 +6,7 @@
 #include "brainweaverfilefactory.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
+#include "qtconceptmapqtnode.h"
 #include "fileio.h"
 
 void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
