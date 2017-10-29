@@ -1,6 +1,5 @@
 language: cpp
 compiler: gcc
-dist: trusty
 
 # Coverity Scan
 env:
