@@ -61,6 +61,7 @@ install:
   - git clone https://github.com/richelbilderbeek/BoostGraphTutorial
   - git clone https://github.com/richelbilderbeek/ConceptMap
   - git clone https://github.com/richelbilderbeek/plane
+  - git clone https://github.com/richelbilderbeek/QEventLogger
   - git clone https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
   - git clone https://github.com/richelbilderbeek/RibiClasses
   - git clone https://github.com/richelbilderbeek/RibiLibraries

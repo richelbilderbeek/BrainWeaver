@@ -18,6 +18,10 @@ if [ ! -d QtConceptMap ]; then
   git clone https://github.com/richelbilderbeek/QtConceptMap
 fi
 
+if [ ! -d QEventLogger ]; then
+  git clone https://github.com/richelbilderbeek/QEventLogger
+fi
+
 if [ ! -d QtKeyboardFriendlyGraphicsView ]; then
   git clone https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
 fi
