@@ -15,7 +15,7 @@ ribi::braw::QtMasterDialog::QtMasterDialog(QWidget *parent) :
 
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
   setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint); //Remove close?
-  setWindowFlags(windowFlags() & ~Qt::WindowCancelButtonHint); //Remove close?
+  //setWindowFlags(windowFlags() & ~Qt::WindowCancelButtonHint); //Remove close?
 
   //this->setWindowState(Qt::WindowFullScreen);
   //Dialog * const dialog = new Dialog(this);
