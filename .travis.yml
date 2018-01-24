@@ -1,27 +1,10 @@
 language: cpp
 compiler: gcc
 
-# Coverity Scan
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "OU8A+Po0kalZ1TJZRPgT8C/ZOlwcw3n+Jxj/imvFrhvvNdR7Z+p1LoRo4QiLqMFZXhKN9N4QXm5diUnYqrfTtiRTyU+bxuV56glxcuVqEiWomRyl58PpBZEIo3nnu+sJQjNc/F9wqEi0DXsNpXDZUSWvmCOeQpv42fHiV2HOegKm6OBhphE1jBbmxmcAZsA3o/TnEQavdl74eeBgb/VHaVWAavhTmnSQ9ThP1gqcTHIpPzZVU9YJSr8u2SGhPwUiAeoqwMP56HaPi/4jRNmO1goXr13xqqDepy7cWwCCxu7Be5Ay/PEmynUS+hVogtuT5aU/pdb1z1DmMCIFnfotx32QqlkJL/TCUEnlGiU7lJij1q8/aHbhhNhxdRA1CkAO9SB7r1NI+/FgqWQhUizNeWYVVGPI9adKU0YewuX7LKPBQT7tjxtl3W3uchIT0McB1li5w7UfJ255P7I29V7BVdK33P41jkbPz6OkW+WYx2tvt4Xqbzm2nN4Wo80wQrzXcg/Bb+vKrZ5DZN4h43+AwVB4e76Ce6LjnGme4/j4QFZrQLFcflXo1bE1os8NuaI3Ed0H2F9Lglrh+gWFbBwcJmNROIxlFMW5dhiJISHKGigUzEv4s0RjEicT4uh6Bn8Zpp3n/srd3Gr4tYjnRVeMqSaNVNDKIhFQ8cfTwkRX+60="
-
-
 addons:
   # Boost
   apt: 
     packages: libboost-all-dev
-  # Coverity Scan
-  coverity_scan:
-    project:
-      name: "richelbilderbeek/Brainweaver"
-      description: "Build submitted via Travis CI"
-    notification_email: richel@richelbilderbeek.nl
-    build_command_prepend: "./configure; make clean"
-    build_command:   "make -j 4"
-    branch_pattern: coverity_scan
 
 before_install:
   # C++14
@@ -39,8 +22,6 @@ install:
   - sudo apt-get install libqt5svg5-dev
   # cppcheck
   - sudo apt-get install -qq cppcheck
-  # Coverity Scan
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   # Codecov
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
   - sudo pip install codecov
