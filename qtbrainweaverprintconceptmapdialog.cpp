@@ -157,7 +157,7 @@ void ribi::braw::QtPrintConceptMapDialog::resizeEvent(QResizeEvent *)
 void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
 {
   assert(m_widget);
-  if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
+  if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
   const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
   m_widget->setMinimumHeight(all_items_rect.height() + 2);
   m_widget->fitInView(all_items_rect);
@@ -166,12 +166,12 @@ void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
 
 void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
-  if (boost::num_vertices(m_widget->GetConceptMap()) == 0) return;
+  if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
 
   //Concept map
   {
     assert(m_widget);
-    assert(boost::num_vertices(m_widget->GetConceptMap()) > 0);
+    assert(boost::num_vertices(m_widget->ToConceptMap()) > 0);
 
     //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

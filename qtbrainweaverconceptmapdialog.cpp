@@ -22,8 +22,8 @@
 #include <QMessageBox>
 #include <QTimer>
 
-#include "add_custom_and_selectable_edge_between_vertices.h"
-#include "add_custom_and_selectable_vertex.h"
+#include "add_custom_edge_between_vertices.h"
+#include "add_custom_vertex.h"
 #include "brainweavercluster.h"
 #include "brainweaverfile.h"
 #include "conceptmapcenternodefactory.h"
@@ -66,7 +66,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
     using ribi::cmap::CenterNodeFactory;
     using ribi::cmap::Concept;
     const auto cn = CenterNodeFactory().Create(Concept(m_file.GetQuestion()));
-    add_custom_and_selectable_vertex(cn, false, m_file.GetConceptMap());
+    add_custom_vertex(cn, m_file.GetConceptMap());
     assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   }
   assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
@@ -78,7 +78,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
-  assert(m_widget->GetConceptMap() == m_file.GetConceptMap());
+  assert(m_widget->ToConceptMap() == m_file.GetConceptMap());
   assert(this->layout());
   this->layout()->addWidget(m_widget);
 
@@ -111,14 +111,13 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   ribi::cmap::ConceptMap p;
 
   //Add center node
-  const auto vd_center = add_custom_and_selectable_vertex(
+  const auto vd_center = add_custom_vertex(
     ribi::cmap::Node{
       ribi::cmap::Concept(question),
       true, //Center node
       0.0,
       0.0
     },
-    false,
     p
   );
 
@@ -132,12 +131,11 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
     const int x =  std::sin(angle) * 200.0;
     const int y = -std::cos(angle) * 200.0;
     ribi::cmap::Node node(v[i],false,x,y);
-    const auto vd_here = add_custom_and_selectable_vertex(
-      node, false, p
+    const auto vd_here = add_custom_vertex(
+      node, p
     );
-    add_custom_and_selectable_edge_between_vertices(
+    add_custom_edge_between_vertices(
       ribi::cmap::Edge(ribi::cmap::Node()),
-      false,
       vd_center,
       vd_here,
       p
@@ -246,15 +244,15 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
   CheckInvariants(*GetWidget());
 
-  m_file.SetConceptMap(GetWidget()->GetConceptMap());
-  assert(m_file.GetConceptMap() == GetWidget()->GetConceptMap());
+  m_file.SetConceptMap(GetWidget()->ToConceptMap());
+  assert(m_file.GetConceptMap() == GetWidget()->ToConceptMap());
 
   CheckInvariants(*GetWidget());
 }
 
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
 {
-  if (m_file.GetConceptMap() != GetWidget()->GetConceptMap())
+  if (m_file.GetConceptMap() != GetWidget()->ToConceptMap())
   {
     std::clog << __func__ << ": warning: you should have called "
       << "'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n"

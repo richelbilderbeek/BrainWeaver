@@ -104,8 +104,8 @@ void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 {
-  m_file.SetConceptMap(m_concept_map->GetConceptMap());
-  assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
+  m_file.SetConceptMap(m_concept_map->ToConceptMap());
+  assert(m_concept_map->ToConceptMap() == m_file.GetConceptMap());
   m_concept_map->StopTimer();
   QtRatingDialog * const d{
     new QtRatingDialog(m_file)
@@ -144,8 +144,8 @@ void ribi::braw::QtRateConceptMapDialog::Save()
 
 void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 {
-  m_file.SetConceptMap(m_concept_map->GetConceptMap());
-  assert(m_concept_map->GetConceptMap() == m_file.GetConceptMap());
+  m_file.SetConceptMap(m_concept_map->ToConceptMap());
+  assert(m_concept_map->ToConceptMap() == m_file.GetConceptMap());
   //const ribi::cmap::ConceptMap concept_map = GetWidget()->GetConceptMap();
   //assert(boost::num_vertices(concept_map) > 0);
   //m_file.SetConceptMap(concept_map);
