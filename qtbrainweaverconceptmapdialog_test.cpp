@@ -1,6 +1,6 @@
 #include "qtbrainweaverconceptmapdialog_test.h"
 
-#include "add_custom_and_selectable_vertex.h"
+#include "add_custom_vertex.h"
 #include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
 #include "brainweaverfilefactory.h"
@@ -38,8 +38,8 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
     QVERIFY(!boost::num_vertices(file.GetConceptMap()));
 
     ribi::cmap::ConceptMap concept_map;
-    add_custom_and_selectable_vertex(
-      ribi::cmap::Node(ribi::cmap::Concept(question), true),false,concept_map);
+    add_custom_vertex(
+      ribi::cmap::Node(ribi::cmap::Concept(question), true),concept_map);
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     QVERIFY(file.GetQuestion() == question);
@@ -48,7 +48,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
     QVERIFY(HasCenterNode(file.GetConceptMap()));
     const QtConceptMapDialog d(file);
     assert(d.GetWidget());
-    QVERIFY(boost::num_vertices(d.GetWidget()->GetConceptMap()) == 1);
+    QVERIFY(boost::num_vertices(d.GetWidget()->ToConceptMap()) == 1);
   }
   catch (std::exception& e)
   {
@@ -91,7 +91,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_with_cluster_only_wi
   const QtConceptMapDialog d(file);
 
 
-  QVERIFY(boost::num_vertices(d.GetWidget()->GetConceptMap())
+  QVERIFY(boost::num_vertices(d.GetWidget()->ToConceptMap())
     == cluster.Get().size() + 1); //+1 because of focus question
 }
 
@@ -108,7 +108,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   file.SetConceptMap(concept_map);
   const QtConceptMapDialog d(file);
 
-  QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
+  QVERIFY(d.GetWidget()->ToConceptMap() == concept_map);
 }
 
 
@@ -125,7 +125,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   QtConceptMapDialog d(file);
   d.show();
 
-  QVERIFY(d.GetWidget()->GetConceptMap() == concept_map);
+  QVERIFY(d.GetWidget()->ToConceptMap() == concept_map);
 }
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head()
@@ -194,7 +194,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
     if (qtnodes.size() != 1) continue;
     //QtNode must have an example
     const ribi::cmap::QtNode * const qtnode = qtnodes[0];
-    if (qtnode->GetNode().GetConcept().GetExamples().Get().empty()) continue;
+    if (qtnode->GetExamples().Get().empty()) continue;
 
     //QtExamplesItem must have that QtNode as its buddy
     QVERIFY(d.GetWidget()->GetQtExamplesItem().GetBuddyItem() == qtnode);
