@@ -84,10 +84,13 @@ contains(QMAKE_HOST.name,fwn-biol-132-102) {
   QMAKE_CC = gcc-5
 }
 
-# High warning level, warnings are errors
-# Qt goes bad with -Weffc++
-QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
-QMAKE_CXXFLAGS += -Werror
+# Develop on GNU/Linux
+unix {
+  # High warning level, warnings are errors
+  # Qt goes bad with -Weffc++
+  QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+  QMAKE_CXXFLAGS += -Werror
+}
 
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
