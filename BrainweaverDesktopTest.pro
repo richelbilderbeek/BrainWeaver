@@ -46,9 +46,10 @@ include(../ConceptMap/ConceptMap.pri)
 include(../QtConceptMap/QtConceptMap.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 
-INCLUDEPATH += ../BoostGraphTutorial/BoostGraphTutorial
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_no_properties.pri)
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial_no_graphviz_helper.pri)
+# Boost Graph Cookbook 1
+INCLUDEPATH += ../boost_graph_cookbook_1/boost_graph_cookbook_1
+include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_helper.pri)
+include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_no_properties.pri)
 
 SOURCES += qtmain_test.cpp
 
