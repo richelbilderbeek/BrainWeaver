@@ -22,7 +22,7 @@
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
 
-#include "add_custom_vertex.h"
+#include "add_bundled_vertex.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
@@ -371,7 +371,7 @@ ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
   ribi::cmap::ConceptMap g;
   ribi::cmap::Node n(ribi::cmap::Concept(text),true);
   assert(n.IsCenterNode());
-  add_custom_vertex(n, g);
+  add_bundled_vertex(n, g);
   assert(ribi::cmap::CountCenterNodes(g) == 1);
   return g;
 }

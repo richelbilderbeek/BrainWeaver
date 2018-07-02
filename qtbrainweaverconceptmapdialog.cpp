@@ -22,8 +22,8 @@
 #include <QMessageBox>
 #include <QTimer>
 
-#include "add_custom_edge_between_vertices.h"
-#include "add_custom_vertex.h"
+#include "add_bundled_edge_between_vertices.h"
+#include "add_bundled_vertex.h"
 #include "brainweavercluster.h"
 #include "brainweaverfile.h"
 #include "conceptmapcenternodefactory.h"
@@ -66,7 +66,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
     using ribi::cmap::CenterNodeFactory;
     using ribi::cmap::Concept;
     const auto cn = CenterNodeFactory().Create(Concept(m_file.GetQuestion()));
-    add_custom_vertex(cn, m_file.GetConceptMap());
+    add_bundled_vertex(cn, m_file.GetConceptMap());
     assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
   }
   assert(boost::num_vertices(m_file.GetConceptMap()) > 0);
@@ -111,7 +111,7 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   ribi::cmap::ConceptMap p;
 
   //Add center node
-  const auto vd_center = add_custom_vertex(
+  const auto vd_center = add_bundled_vertex(
     ribi::cmap::Node{
       ribi::cmap::Concept(question),
       true, //Center node
@@ -131,10 +131,10 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
     const int x =  std::sin(angle) * 200.0;
     const int y = -std::cos(angle) * 200.0;
     ribi::cmap::Node node(v[i],false,x,y);
-    const auto vd_here = add_custom_vertex(
+    const auto vd_here = add_bundled_vertex(
       node, p
     );
-    add_custom_edge_between_vertices(
+    add_bundled_edge_between_vertices(
       ribi::cmap::Edge(ribi::cmap::Node()),
       vd_center,
       vd_here,

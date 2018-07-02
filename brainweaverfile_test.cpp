@@ -17,9 +17,8 @@
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
 
-#include "add_custom_vertex.h"
+#include "add_bundled_vertex.h"
 #include "is_regular_file.h"
-#include "add_custom_and_selectable_vertex.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
 #include "conceptmap.h"
@@ -99,7 +98,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_without_center_node
   ribi::cmap::ConceptMap g;
   const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), false);
   assert(!n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
+  add_bundled_vertex(n,g);
   BOOST_CHECK_THROW(
     file.SetConceptMap(g),
     std::invalid_argument
@@ -113,8 +112,8 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_two_center_nod
   ribi::cmap::ConceptMap g;
   const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), true);
   assert(n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
-  add_custom_and_selectable_vertex(n,false,g);
+  add_bundled_vertex(n, g);
+  add_bundled_vertex(n, g);
   BOOST_CHECK_THROW(
     file.SetConceptMap(g),
     std::invalid_argument
@@ -130,7 +129,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_center_node_wi
   file.SetQuestion(file_question);
   const auto n = ribi::cmap::Node(ribi::cmap::Concept(text_on_center_node), true);
   assert(n.IsCenterNode());
-  add_custom_and_selectable_vertex(n,false,g);
+  add_bundled_vertex(n, g);
   BOOST_CHECK_THROW(file.SetConceptMap(g), std::invalid_argument);
 }
 
@@ -142,7 +141,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_accepts_concept_map_with_center_node)
   ribi::cmap::ConceptMap g;
   const auto node = ribi::cmap::Node(ribi::cmap::Concept(question), true);
   assert(node.IsCenterNode());
-  add_custom_and_selectable_vertex(node,false,g);
+  add_bundled_vertex(node, g);
   BOOST_CHECK_NO_THROW(file.SetConceptMap(g));
 }
 
