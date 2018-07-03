@@ -1,6 +1,6 @@
 #include "qtbrainweaverconceptmapdialog_test.h"
 
-#include "add_custom_vertex.h"
+#include "add_bundled_vertex.h"
 #include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
 #include "brainweaverfilefactory.h"
@@ -38,7 +38,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
     QVERIFY(!boost::num_vertices(file.GetConceptMap()));
 
     ribi::cmap::ConceptMap concept_map;
-    add_custom_vertex(
+    add_bundled_vertex(
       ribi::cmap::Node(ribi::cmap::Concept(question), true),concept_map);
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
