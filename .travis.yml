@@ -39,13 +39,13 @@ install:
   - my_github=${PWD##*/}  
   - cd ..
   - git clone https://github.com/Microsoft/GSL
-  - git clone https://github.com/richelbilderbeek/BoostGraphTutorial
-  - git clone https://github.com/richelbilderbeek/ConceptMap
-  - git clone https://github.com/richelbilderbeek/plane
+  - git clone -b develop https://github.com/richelbilderbeek/boost_graph_cookbook_1
+  - git clone -b develop https://github.com/richelbilderbeek/ConceptMap
+  - git clone -b develop https://github.com/richelbilderbeek/plane
   - git clone https://github.com/richelbilderbeek/QEventLogger
-  - git clone https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
-  - git clone https://github.com/richelbilderbeek/RibiClasses
-  - git clone https://github.com/richelbilderbeek/RibiLibraries
+  - git clone -b develop https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
+  - git clone -b develop https://github.com/richelbilderbeek/RibiClasses
+  - git clone -b develop https://github.com/richelbilderbeek/RibiLibraries
   - cd $my_github
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/

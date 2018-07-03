@@ -3,6 +3,6 @@ SOURCES += \
     $$PWD/brainweavercluster_test.cpp \
     $$PWD/brainweaverfile_test.cpp \
     $$PWD/brainweaverfilefactory_test.cpp \
-    brainweaverhelper_test.cpp \
-    brainweaverregex_test.cpp \
-    brainweavermenudialog_test.cpp
+    $$PWD/brainweaverhelper_test.cpp \
+    $$PWD/brainweaverregex_test.cpp \
+    $$PWD/brainweavermenudialog_test.cpp

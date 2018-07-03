@@ -87,6 +87,12 @@ QMAKE_CXXFLAGS += -Werror
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
 
+# Fixes
+#/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'
+#   BOOST_DEFINE_MATH_CONSTANT(half, 5.000000000000000000000000000000000000e-01, "5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-01")
+#   ^
+QMAKE_CXXFLAGS += -fext-numeric-literals
+
 message(Host name: $$QMAKE_HOST.name)
 contains(QMAKE_HOST.name,fwn-biol-132-102) {
   message("Host is university computer in my office")
