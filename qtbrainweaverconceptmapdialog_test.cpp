@@ -19,7 +19,6 @@
 #include "is_custom_vertices_isomorphic.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmapexamplesitem.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
 #include "qtconceptmapqtedge.h"
@@ -176,29 +175,6 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   const std::string t = ToXml(LoadFile(filename).GetConceptMap());
   QVERIFY(t.find("<has_head>1</has_head>") != std::string::npos);
   QVERIFY(t.find("<has_tail>0</has_tail>") != std::string::npos);
-}
-
-void ribi::braw::qtbrainweaverconceptmapdialog_test
-  ::node_with_vignette_must_show_examples()
-{
-  using namespace cmap;
-  File file = FileFactory().Get4();
-  QtConceptMapDialog d(file);
-  d.show();
-
-  for (int i=0; i!=100; ++i)
-  {
-    QTest::keyClick(&d, Qt::Key_Space, Qt::NoModifier, 100);
-    //Must select one QtNode
-    const auto qtnodes = ribi::cmap::GetSelectedQtNodes(d.GetWidget()->GetScene());
-    if (qtnodes.size() != 1) continue;
-    //QtNode must have an example
-    const ribi::cmap::QtNode * const qtnode = qtnodes[0];
-    if (qtnode->GetExamples().Get().empty()) continue;
-
-    //QtExamplesItem must have that QtNode as its buddy
-    QVERIFY(d.GetWidget()->GetQtExamplesItem().GetBuddyItem() == qtnode);
-  }
 }
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::press_alt_f4()

@@ -67,10 +67,6 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     ui->frame_concept_map->layout()->addWidget(m_widget);
   }
 
-  //Allow a QtConceptMapWidget to have no QtExamplesItem
-  //This allows to omit showing these in the PDF versions used for printing (#205)
-  HideExamplesItem(*m_widget);
-
   {
     std::time_t my_time;
     std::time( &my_time );

@@ -38,10 +38,6 @@ private slots:
   void press_alt_f4();
   void press_escape();
   void press_nonsense();
-
-  ///Select a node with examples, the examples must be visible
-  //For https://github.com/richelbilderbeek/Brainweaver/issues/96
-  void node_with_vignette_must_show_examples();
 };
 
 } //~namespace braw
