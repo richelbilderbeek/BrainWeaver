@@ -2,20 +2,20 @@
 
 cd ..
 
-if [ ! -d BoostGraphTutorial ]; then
-  git clone https://github.com/richelbilderbeek/BoostGraphTutorial
+if [ ! -d boost_graph_cookbook_1 ]; then
+  git clone -b develop https://github.com/richelbilderbeek/boost_graph_cookbook_1
 fi
 
 if [ ! -d ConceptMap ]; then
-  git clone https://github.com/richelbilderbeek/ConceptMap
+  git clone -b develop https://github.com/richelbilderbeek/ConceptMap
 fi
 
 if [ ! -d plane ]; then
-  git clone https://github.com/richelbilderbeek/plane
+  git clone -b develop https://github.com/richelbilderbeek/plane
 fi
 
 if [ ! -d QtConceptMap ]; then
-  git clone https://github.com/richelbilderbeek/QtConceptMap
+  git clone -b develop https://github.com/richelbilderbeek/QtConceptMap
 fi
 
 if [ ! -d QEventLogger ]; then
@@ -23,17 +23,17 @@ if [ ! -d QEventLogger ]; then
 fi
 
 if [ ! -d QtKeyboardFriendlyGraphicsView ]; then
-  git clone https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
+  git clone -b develop https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
 fi
 
 if [ ! -d RibiClasses ]; then
-  git clone https://github.com/richelbilderbeek/RibiClasses
+  git clone -b develop https://github.com/richelbilderbeek/RibiClasses
 fi
 
 if [ ! -d RibiLibraries ]; then
-  git clone https://github.com/richelbilderbeek/RibiLibraries
+  git clone -b develop https://github.com/richelbilderbeek/RibiLibraries
 fi
 
 if [ ! -d StyleSheetSetter ]; then
-  git clone https://github.com/richelbilderbeek/StyleSheetSetter
+  git clone -b develop https://github.com/richelbilderbeek/StyleSheetSetter
 fi
