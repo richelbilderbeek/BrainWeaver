@@ -43,6 +43,7 @@ install:
   - git clone -b develop https://github.com/richelbilderbeek/ConceptMap
   - git clone -b develop https://github.com/richelbilderbeek/plane
   - git clone https://github.com/richelbilderbeek/QEventLogger
+  - git clone -b develop https://github.com/richelbilderbeek/QtConceptMap
   - git clone -b develop https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
   - git clone -b develop https://github.com/richelbilderbeek/RibiClasses
   - git clone -b develop https://github.com/richelbilderbeek/RibiLibraries
