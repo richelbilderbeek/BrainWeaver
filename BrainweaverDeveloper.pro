@@ -78,16 +78,8 @@ QMAKE_CXXFLAGS += -std=c++14
 # Fix error: unrecognized option '--push-state--no-as-needed'
 QMAKE_LFLAGS += -fuse-ld=gold
 
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,fwn-biol-132-102) {
-  message("Host is university computer in my office")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
-
 # Develop on GNU/Linux
-unix {
+unix:!macx {
   # High warning level, warnings are errors
   # Qt goes bad with -Weffc++
   QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
@@ -107,35 +99,3 @@ QMAKE_CXXFLAGS += -fext-numeric-literals
 # qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used
 # [*]: the resource filename
 QMAKE_CXXFLAGS += -Wno-unused-variable
-
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,fwn-biol-132-102) {
-  message("Host is university computer in my office")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
-
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,pc-157-100) {
-  message("Host is university computer in the canteen")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
-
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,pc-157-103) {
-  message("Host is university computer in the canteen")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
-
-message(Host name: $$QMAKE_HOST.name)
-contains(QMAKE_HOST.name,pc-157-108) {
-  message("Host is university computer in the canteen")
-  QMAKE_CXX = g++-5
-  QMAKE_LINK = g++-5
-  QMAKE_CC = gcc-5
-}
