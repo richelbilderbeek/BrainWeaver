@@ -133,7 +133,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="button_test_conceptmap">
+       <widget class="QPushButton" name="button_edit_conceptmap">
         <property name="text">
          <string>&amp;5. QtConceptMap</string>
         </property>
@@ -220,7 +220,7 @@
   <tabstop>button_student</tabstop>
   <tabstop>button_assessor</tabstop>
   <tabstop>button_test_cluster</tabstop>
-  <tabstop>button_test_conceptmap</tabstop>
+  <tabstop>button_edit_conceptmap</tabstop>
   <tabstop>button_print_concept_map</tabstop>
   <tabstop>button_rate_concept_map</tabstop>
   <tabstop>button_rate_examples</tabstop>

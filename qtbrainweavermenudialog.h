@@ -37,7 +37,7 @@ public slots:
   void on_button_rate_examples_clicked() noexcept;
   void on_button_rating_clicked() noexcept;
   void on_button_student_clicked() noexcept;
-  void on_button_test_conceptmap_clicked();
+  void on_button_edit_conceptmap_clicked();
   void on_button_test_cluster_clicked() noexcept;
 
 private slots:

@@ -190,7 +190,9 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
 {
+  qDebug() << __func__ << (__LINE__);
   UpdateFileWithConceptMapFromWidget();
+  qDebug() << __func__ << (__LINE__);
   this->m_widget->setEnabled(false); //Prevents #101
   m_widget->StopTimer();
   QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);

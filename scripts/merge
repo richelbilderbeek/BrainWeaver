@@ -1,0 +1,64 @@
+#!/bin/bash
+
+cd ..
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd boost_graph_cookbook_1
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd RibiClasses
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd RibiLibraries
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd StyleSheetSetter
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd ConceptMap
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd QtConceptMap
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd QtKeyboardFriendlyGraphicsView
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..
+
+cd plane
+git checkout master
+git merge develop
+git push
+git checkout develop
+cd ..

@@ -189,7 +189,7 @@ void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 {
   QtPrintConceptMapDialog * const d{
-    new QtPrintConceptMapDialog(FileFactory().GetTests().front())
+    new QtPrintConceptMapDialog(FileFactory().Get5())
   };
   emit add_me(d);
 }
@@ -212,9 +212,9 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   emit add_me(d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_test_conceptmap_clicked()
+void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
 {
-  const File file = FileFactory().Get4();
+  const File file = FileFactory().Get2();
   QtConceptMapDialog * const d{
     new QtConceptMapDialog(file)
   };
