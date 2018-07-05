@@ -21,9 +21,9 @@ class QtConceptMapDialog : public QtDialog
   QtConceptMapDialog& operator=(const QtConceptMapDialog&) = delete;
   ~QtConceptMapDialog() noexcept;
 
-  ///Obtain the widget
-  const ribi::cmap::QtConceptMap * GetWidget() const;
-  ribi::cmap::QtConceptMap * GetWidget();
+  ///Obtain the QtConceptMap
+  const ribi::cmap::QtConceptMap * GetQtConceptMap() const;
+  ribi::cmap::QtConceptMap * GetQtConceptMap();
 
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept;

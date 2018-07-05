@@ -78,7 +78,6 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
-  assert(m_widget->ToConceptMap() == m_file.GetConceptMap());
   assert(this->layout());
   this->layout()->addWidget(m_widget);
 
@@ -114,7 +113,7 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   const auto vd_center = add_bundled_vertex(
     ribi::cmap::Node{
       ribi::cmap::Concept(question),
-      true, //Center node
+      ribi::cmap::NodeType::center,
       0.0,
       0.0
     },
@@ -130,10 +129,8 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
     const double angle{(static_cast<double>(i) * delta_angle) + 0.00001}; //Add noise
     const int x =  std::sin(angle) * 200.0;
     const int y = -std::cos(angle) * 200.0;
-    ribi::cmap::Node node(v[i],false,x,y);
-    const auto vd_here = add_bundled_vertex(
-      node, p
-    );
+    ribi::cmap::Node node(v[i], ribi::cmap::NodeType::normal, x, y);
+    const auto vd_here = add_bundled_vertex(node, p);
     add_bundled_edge_between_vertices(
       ribi::cmap::Edge(ribi::cmap::Node()),
       vd_center,
@@ -146,20 +143,20 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   return p;
 }
 
-const ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget() const
+const ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetQtConceptMap() const
 {
   assert(m_widget);
   return m_widget;
 }
 
-ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetWidget()
+ribi::cmap::QtConceptMap * ribi::braw::QtConceptMapDialog::GetQtConceptMap()
 {
   //Calls the const version of this member function
   //To avoid duplication in const and non-const member functions [1]
   //[1] Scott Meyers. Effective C++ (3rd edition). ISBN: 0-321-33487-6.
   //    Item 3, paragraph 'Avoid duplication in const and non-const member functions'
   return const_cast<cmap::QtConceptMap*>(
-    const_cast<const QtConceptMapDialog*>(this)->GetWidget()); //?Why Dialog
+    const_cast<const QtConceptMapDialog*>(this)->GetQtConceptMap()); //?Why Dialog
 
 }
 
@@ -242,17 +239,17 @@ void ribi::braw::QtConceptMapDialog::showEvent(QShowEvent *)
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 {
-  CheckInvariants(*GetWidget());
+  CheckInvariants(*GetQtConceptMap());
 
-  m_file.SetConceptMap(GetWidget()->ToConceptMap());
-  assert(m_file.GetConceptMap() == GetWidget()->ToConceptMap());
+  m_file.SetConceptMap(GetQtConceptMap()->ToConceptMap());
+  assert(m_file.GetConceptMap() == GetQtConceptMap()->ToConceptMap());
 
-  CheckInvariants(*GetWidget());
+  CheckInvariants(*GetQtConceptMap());
 }
 
 void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
 {
-  if (m_file.GetConceptMap() != GetWidget()->ToConceptMap())
+  if (m_file.GetConceptMap() != GetQtConceptMap()->ToConceptMap())
   {
     std::clog << __func__ << ": warning: you should have called "
       << "'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n"
