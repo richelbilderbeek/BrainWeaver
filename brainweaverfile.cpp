@@ -369,8 +369,8 @@ ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
   const std::string& text) noexcept
 {
   ribi::cmap::ConceptMap g;
-  ribi::cmap::Node n(ribi::cmap::Concept(text),true);
-  assert(n.IsCenterNode());
+  ribi::cmap::Node n(ribi::cmap::Concept(text), ribi::cmap::NodeType::center);
+  assert(n.GetType());
   add_bundled_vertex(n, g);
   assert(ribi::cmap::CountCenterNodes(g) == 1);
   return g;
