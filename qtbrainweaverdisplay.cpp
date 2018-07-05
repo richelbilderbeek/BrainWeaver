@@ -198,7 +198,7 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     const auto vip = vertices(g);
     for (auto i = vip.first; i != vip.second; ++i)
     {
-      if (ribi::cmap::GetNode(*i, g).IsCenterNode()) continue;
+      if (IsCenterNode(g[*i])) continue;
       degrees.push_back(boost::degree(*i, g));
     }
     const int sum{std::accumulate(std::begin(degrees), std::end(degrees), 0)};
