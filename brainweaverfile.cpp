@@ -370,7 +370,7 @@ ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
 {
   ribi::cmap::ConceptMap g;
   ribi::cmap::Node n(ribi::cmap::Concept(text), ribi::cmap::NodeType::center);
-  assert(n.GetType());
+  assert(n.GetType() == ribi::cmap::NodeType::center);
   add_bundled_vertex(n, g);
   assert(ribi::cmap::CountCenterNodes(g) == 1);
   return g;
