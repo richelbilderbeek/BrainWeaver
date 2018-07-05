@@ -47,6 +47,7 @@ install:
   - git clone -b develop https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView
   - git clone -b develop https://github.com/richelbilderbeek/RibiClasses
   - git clone -b develop https://github.com/richelbilderbeek/RibiLibraries
+  - git clone -b develop https://github.com/richelbilderbeek/StyleSheetSetter
   - cd $my_github
   #- ./download_other_githubs
 
