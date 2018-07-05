@@ -96,8 +96,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_without_center_node
 {
   ribi::braw::File file;
   ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), false);
-  assert(!n.IsCenterNode());
+  const auto n = ribi::cmap::Node(
+    ribi::cmap::Concept("question with spaces"),
+    ribi::cmap::NodeType::normal
+  );
+  assert(!IsCenterNode(n));
   add_bundled_vertex(n,g);
   BOOST_CHECK_THROW(
     file.SetConceptMap(g),
@@ -110,8 +113,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_two_center_nod
 {
   ribi::braw::File file;
   ribi::cmap::ConceptMap g;
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept("question with spaces"), true);
-  assert(n.IsCenterNode());
+  const auto n = ribi::cmap::Node(
+    ribi::cmap::Concept("question with spaces"),
+    ribi::cmap::NodeType::center
+  );
+  assert(IsCenterNode(n));
   add_bundled_vertex(n, g);
   add_bundled_vertex(n, g);
   BOOST_CHECK_THROW(
@@ -127,8 +133,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_concept_map_with_center_node_wi
   const std::string file_question{"File question"};
   const std::string text_on_center_node{"Text on center node"};
   file.SetQuestion(file_question);
-  const auto n = ribi::cmap::Node(ribi::cmap::Concept(text_on_center_node), true);
-  assert(n.IsCenterNode());
+  const auto n = ribi::cmap::Node(
+    ribi::cmap::Concept(text_on_center_node),
+    ribi::cmap::NodeType::center
+  );
+  assert(IsCenterNode(n));
   add_bundled_vertex(n, g);
   BOOST_CHECK_THROW(file.SetConceptMap(g), std::invalid_argument);
 }
@@ -139,8 +148,11 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_accepts_concept_map_with_center_node)
   ribi::braw::File file;
   file.SetQuestion(question);
   ribi::cmap::ConceptMap g;
-  const auto node = ribi::cmap::Node(ribi::cmap::Concept(question), true);
-  assert(node.IsCenterNode());
+  const auto node = ribi::cmap::Node(
+    ribi::cmap::Concept(question),
+    ribi::cmap::NodeType::center
+  );
+  assert(IsCenterNode(node));
   add_bundled_vertex(node, g);
   BOOST_CHECK_NO_THROW(file.SetConceptMap(g));
 }
