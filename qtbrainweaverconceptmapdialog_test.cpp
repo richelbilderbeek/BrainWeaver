@@ -25,7 +25,8 @@
 #include "qtconceptmapqtnode.h"
 #include "qtquadbezierarrowitem.h"
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_have_a_center_node()
+void ribi::braw::qtbrainweaverconceptmapdialog_test
+  ::a_file_its_conceptmap_must_have_a_center_node()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
   try
@@ -38,7 +39,12 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
 
     ribi::cmap::ConceptMap concept_map;
     add_bundled_vertex(
-      ribi::cmap::Node(ribi::cmap::Concept(question), true),concept_map);
+      ribi::cmap::Node(
+        ribi::cmap::Concept(question),
+        ribi::cmap::NodeType::center
+      ),
+      concept_map
+    );
     QVERIFY(boost::num_vertices(concept_map) > 0);
     file.SetConceptMap(concept_map);
     QVERIFY(file.GetQuestion() == question);
@@ -46,8 +52,8 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
     QVERIFY(!GetNodes(file.GetConceptMap()).empty());
     QVERIFY(HasCenterNode(file.GetConceptMap()));
     const QtConceptMapDialog d(file);
-    assert(d.GetWidget());
-    QVERIFY(boost::num_vertices(d.GetWidget()->ToConceptMap()) == 1);
+    assert(d.GetQtConceptMap());
+    QVERIFY(boost::num_vertices(d.GetQtConceptMap()->ToConceptMap()) == 1);
   }
   catch (std::exception& e)
   {
@@ -58,40 +64,49 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_its_conceptmap_must_
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::create_from_cluster()
 {
-  const std::string question = "TESTQUESTION";
+  const std::string question = "Focal question";
   ribi::braw::Cluster cluster(
     {
-      ribi::cmap::Concept("name 1"),
-      ribi::cmap::Concept("name 2"),
-      ribi::cmap::Concept("name 3")
+      ribi::cmap::Concept("Association 1"),
+      ribi::cmap::Concept("Association 2"),
+      ribi::cmap::Concept("Association 3")
     }
   );
-  const auto concept_map = CreateFromCluster(question,cluster);
-  const auto n_rows = cluster.Get().size();
-  QVERIFY(boost::num_vertices(concept_map) == n_rows + 1);
+  const auto concept_map = CreateFromCluster(question, cluster);
+  const auto n_concepts = cluster.Get().size();
+
+  // +1 because the question also becomes a vertex
+  QVERIFY(boost::num_vertices(concept_map) == n_concepts + 1);
+  QVERIFY(CountCenterNodes(concept_map) == 1);
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::a_file_with_cluster_only_will_create_a_concept_map()
+void ribi::braw::qtbrainweaverconceptmapdialog_test
+  ::a_file_with_cluster_only_will_create_a_concept_map()
 {
-  //using namespace cmap;
-  const std::string question = "TESTQUESTION";
   File file;
-  file.SetQuestion(question);
-  Cluster cluster(
-    {
-      ribi::cmap::Concept("name 1"),
-      ribi::cmap::Concept("name 2")
-    }
-  );
-  file.SetCluster(cluster);
-
-  QVERIFY(!boost::num_vertices(file.GetConceptMap()));
-
+  //Set a focal question
+  {
+    const std::string question = "Focal question";
+    file.SetQuestion(question);
+  }
+  //Set a cluster
+  {
+    const Cluster cluster(
+      {
+        ribi::cmap::Concept("Association 1"),
+        ribi::cmap::Concept("Association 2")
+      }
+    );
+    file.SetCluster(cluster);
+    assert(file.GetCluster() == cluster);
+    QVERIFY(boost::num_vertices(file.GetConceptMap()) == 0);
+  }
   const QtConceptMapDialog d(file);
-
-
-  QVERIFY(boost::num_vertices(d.GetWidget()->ToConceptMap())
-    == cluster.Get().size() + 1); //+1 because of focus question
+  const auto qtconcept_map = d.GetQtConceptMap();
+  QVERIFY(ribi::cmap::CountQtCenterNodes(*qtconcept_map) == 1);
+  //Association 1, Association 2 and focal question
+  QVERIFY(ribi::cmap::CountQtNodes(*qtconcept_map) == 3);
+  assert(1 == 2);
 }
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_a_concept_map_over_a_cluster()
@@ -107,7 +122,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   file.SetConceptMap(concept_map);
   const QtConceptMapDialog d(file);
 
-  QVERIFY(d.GetWidget()->ToConceptMap() == concept_map);
+  QVERIFY(d.GetQtConceptMap()->ToConceptMap() == concept_map);
 }
 
 
@@ -124,7 +139,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
   QtConceptMapDialog d(file);
   d.show();
 
-  QVERIFY(d.GetWidget()->ToConceptMap() == concept_map);
+  QVERIFY(d.GetQtConceptMap()->ToConceptMap() == concept_map);
 }
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head()
@@ -135,7 +150,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   File file = FileFactory().Get1();
   QtConceptMapDialog d(file);
   d.show();
-  const auto initial_n_qtnodes = ribi::cmap::GetQtNodes(d.GetWidget()->GetScene()).size();
+  const auto initial_n_qtnodes = ribi::cmap::GetQtNodes(d.GetQtConceptMap()->GetScene()).size();
 
   //Normally I'd say:
   //If you want to use 'd.GetQtConceptMap()' go work on the QtConceptMap tests
@@ -149,7 +164,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
   d.show();
 
-  const auto qtconceptmap = d.GetWidget();
+  const auto qtconceptmap = d.GetQtConceptMap();
   const auto qtnodes = ribi::cmap::GetQtNodes(qtconceptmap->GetScene());
   const auto expected_vertices = initial_n_qtnodes + 2;
   const auto measured_vertices = qtnodes.size();
