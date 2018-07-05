@@ -93,7 +93,9 @@ script:
   # Get my folder
   - my_github=${PWD##*/}  
   # SLOCcount
-  - cd ..; sloccount --overhead 1 --personcost 22614 $my_github; cd $my_github
+  - cd ..; sloccount --overhead 1 --personcost 22614 Brainweaver boost_graph_cookbook_1 ConceptMap plane QtConceptMap QtKeyboardFriendlyGraphicsView RibiClasses RibiLibraries StyleSheetSetter; cd $my_github
+
+
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
