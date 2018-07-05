@@ -12,7 +12,9 @@ $myqmake -v
 
 for myprofile in `ls | egrep ".pro\>"`
 do
-  #echo $myprofile
+  echo "========================================="
+  echo "Working on .pro file: "$myprofile
+  echo "========================================="
   mybasename=`echo $myprofile | sed "s/\.pro//"`
 
   #echo "mybasename: "$mybasename
