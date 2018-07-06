@@ -95,12 +95,13 @@ void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 {
-  //Obtain an empty file
-  const File file = FileFactory().Get5();
-  QtRateConceptMapDialog * const d{
-    new QtRateConceptMapDialog(file)
+  const auto concept_map
+    = ribi::cmap::ConceptMapFactory().GetRateConceptTallyDialogExample();
+  ribi::cmap::QtRateConceptDialog * const d{
+    new ribi::cmap::QtRateConceptDialog(concept_map)
   };
-  emit add_me(d);
+  //emit add_me(d);
+  d->exec();
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
