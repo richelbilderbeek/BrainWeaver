@@ -71,10 +71,26 @@ void ribi::braw::QtMenuDialog::keyPressEvent(QKeyEvent* e) noexcept
   if (e->key() == Qt::Key_Escape) { emit remove_me(this); return; }
 }
 
+void ribi::braw::QtMenuDialog::on_button_about_clicked() noexcept
+{
+  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
+  //emit add_me(d);
+  d->exec();
+}
+
 void ribi::braw::QtMenuDialog::on_button_assessor_clicked() noexcept
 {
   QtAssessorMenuDialog * const d = new QtAssessorMenuDialog;
   emit add_me(d);
+}
+
+void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
+{
+  QtOverviewDialog * const d{
+    new QtOverviewDialog
+  };
+  d->exec();
+  //emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
@@ -93,6 +109,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
   QtRateConceptMapDialog * const d{
     new QtRateConceptMapDialog(file)
   };
+  //d->exec();
   emit add_me(d);
 }
 
@@ -105,7 +122,8 @@ void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
   QtRateExamplesDialog * const d{
     new QtRateExamplesDialog(concept)
   };
-  emit add_me(d);
+  d->exec();
+  //emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
@@ -155,27 +173,15 @@ void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
   emit add_me(d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
-{
-  QtOverviewDialog * const d{
-    new QtOverviewDialog
-  };
-  emit add_me(d);
-}
 
-void ribi::braw::QtMenuDialog::on_button_about_clicked() noexcept
-{
-  ribi::braw::QtAboutDialog * const d = new ribi::braw::QtAboutDialog;
-  emit add_me(d);
-}
 
 void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
   QtStyleSheetSetterMainDialog * const d{
     new QtStyleSheetSetterMainDialog(qApp->styleSheet().toStdString())
   };
-  emit add_me(d);
-
+  //emit add_me(d);
+  d->exec();
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have
   //a new file now. In this case, the file is read before modification
@@ -205,7 +211,8 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   ribi::cmap::QtRateConceptTallyDialog * const d{
     new cmap::QtRateConceptTallyDialog(concept_map)
   };
-  emit add_me(d);
+  d->exec();
+  //emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()

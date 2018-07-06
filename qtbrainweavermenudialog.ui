@@ -177,7 +177,7 @@
       <item>
        <widget class="QPushButton" name="button_rate_concept_auto">
         <property name="text">
-         <string>&amp;A. QtRateConceptAutoDialog</string>
+         <string>&amp;A. QtRateConceptTallyDialog</string>
         </property>
        </widget>
       </item>

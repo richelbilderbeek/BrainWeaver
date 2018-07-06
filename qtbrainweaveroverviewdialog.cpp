@@ -11,7 +11,7 @@
 #pragma GCC diagnostic pop
 
 ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
-  : QtDialog(parent)
+  : QDialog(parent)
 {
   
   QLayout * const layout = new QVBoxLayout(this);
@@ -23,6 +23,11 @@ ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
 void ribi::braw::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
 {
   assert(e);
-  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
+  if (e->key() == Qt::Key_Escape)
+  {
+    close();
+    //emit remove_me(this);
+    return;
+  }
   QDialog::keyPressEvent(e);
 }

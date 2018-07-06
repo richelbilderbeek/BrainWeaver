@@ -7,7 +7,7 @@
 namespace ribi {
 namespace braw {
 
-struct QtOverviewDialog : public QtDialog
+struct QtOverviewDialog : public QDialog
 {
   explicit QtOverviewDialog(QWidget* parent = 0);
 
