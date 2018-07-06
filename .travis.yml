@@ -89,7 +89,7 @@ script:
   - ./do_oclint
   # Get code coverage
   - ./get_code_cov >/dev/null
-  - codecov
+  - codecov >/dev/null
   # Get my folder
   - my_github=${PWD##*/}  
   # SLOCcount
