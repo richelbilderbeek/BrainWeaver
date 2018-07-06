@@ -116,12 +116,9 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
 {
-  using namespace cmap;
-  const int index = 2;
-  assert(index < ConceptFactory().GetNumberOfTests());
-  const ribi::cmap::Concept concept = ConceptFactory().GetTests().at(index);
-  QtRateExamplesDialog * const d{
-    new QtRateExamplesDialog(concept)
+  const auto concept = ribi::cmap::ConceptFactory().Get2();
+  auto d{
+    new ribi::cmap::QtRateExamplesDialog(concept)
   };
   d->exec();
   //emit add_me(d);
@@ -235,3 +232,10 @@ void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
   emit add_me(d);
 }
 
+
+void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
+{
+  const auto concept = ribi::cmap::ConceptFactory().Get2();
+  ribi::cmap::QtConceptMapConceptEditDialog d(concept);
+  d.exec();
+}

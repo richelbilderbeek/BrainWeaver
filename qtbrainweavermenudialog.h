@@ -45,6 +45,8 @@ private slots:
 
   void on_button_empty_qtconceptmap_clicked();
 
+  void on_button_edit_concept_clicked();
+
 private:
   Ui::QtMenuDialog *ui;
 
