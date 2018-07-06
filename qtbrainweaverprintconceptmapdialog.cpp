@@ -9,6 +9,7 @@
 
 #include <QKeyEvent>
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QPrinter>
 #include <QTimer>
@@ -37,6 +38,7 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   m_widget->SetConceptMap(file.GetConceptMap());
+  m_widget->rotate(70.0);
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
@@ -154,9 +156,14 @@ void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
 {
   assert(m_widget);
   if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
+  //m_widget->update();
+  //m_widget->setMinimumHeight(all_items_rect.width() + 2);
   const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
-  m_widget->setMinimumHeight(all_items_rect.height() + 2);
-  m_widget->fitInView(all_items_rect);
+  QRectF all_items_rot = all_items_rect;
+  //all_items_rot.setWidth(all_items_rect.height());
+  //all_items_rot.setHeight(all_items_rect.width());
+  qDebug() << all_items_rot;
+  m_widget->fitInView(all_items_rot);
 
 }
 
@@ -172,13 +179,13 @@ void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
     //m_widget->ReadFromConceptMap(copy_concept_map);
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_widget->setMinimumHeight(m_widget->scene()->itemsBoundingRect().height() + 2);
+    //m_widget->setMinimumHeight(m_widget->scene()->itemsBoundingRect().width() + 2);
     //Fit concept map to widget
-    const QRectF all_items_rect {
-      m_widget->scene()->itemsBoundingRect() //Does not work
-      //m_widget->scene()->sceneRect() //Does not work
-    };
-    m_widget->fitInView(all_items_rect); //Does not work
+    //const QRectF all_items_rect {
+    //  m_widget->scene()->itemsBoundingRect() //Does not work
+    //  //m_widget->scene()->sceneRect() //Does not work
+    //};
+    //m_widget->fitInView(all_items_rect); //Does not work
     //m_widget->ensureVisible(all_items_rect,0,0); //Does not work
   }
   //Concept map as text
