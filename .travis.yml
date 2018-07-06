@@ -75,11 +75,11 @@ script:
   #- cat memcheck.log
   # Build 'true' executables
   - qmake BrainweaverDeveloper.pro
-  - make debug
+  - make -s debug
   - qmake BrainweaverAssessor.pro
-  - make debug
+  - make -s debug
   - qmake BrainweaverStudent.pro
-  - make debug
+  - make -s debug
   # shunit2 tests, must be run locally only
   #- cd test_scipts; ./test; cd ..
   # cppcheck, be mild
