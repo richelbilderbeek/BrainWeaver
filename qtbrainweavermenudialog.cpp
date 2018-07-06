@@ -89,11 +89,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
 {
-  File file;
-  const ribi::cmap::ConceptMap concept_map
-    = ribi::cmap::ConceptMapFactory().Get6();
-  file.SetQuestion(ribi::cmap::GetCenterNode(concept_map).GetName());
-  file.SetConceptMap(concept_map);
+  const File file = FileFactory().Get2();
   QtRateConceptMapDialog * const d{
     new QtRateConceptMapDialog(file)
   };
