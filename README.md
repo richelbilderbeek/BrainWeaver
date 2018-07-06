@@ -96,6 +96,27 @@ I personally hate building problems, so I will be most happy to help you out. Pl
 
 Please let me know, by, for example, adding an Issue.
 
+## SLOCcount
+
+From [a Travis build log](https://travis-ci.org/richelbilderbeek/Brainweaver/builds/400737135#L2590):
+
+```
+Total Physical Source Lines of Code (SLOC)                = 445,425
+Development Effort Estimate, Person-Years (Person-Months) = 120.85 (1,450.19)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 3.31 (39.74)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 36.49
+Total Estimated Cost to Develop                           = $ 2,732,881
+ (average salary = $22,614/year, overhead = 1.00).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+```
+
 ## References
 
  * [1] van den Bogaart, A. C., Bilderbeek, R. J. C., Schaap, H., Hummel, H. G., & Kirschner, P. A. (2016). A computer-supported method to reveal and assess Personal Professional Theories in vocational education. Technology, Pedagogy and Education, 1-17.
