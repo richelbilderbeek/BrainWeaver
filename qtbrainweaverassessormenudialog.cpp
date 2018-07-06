@@ -65,8 +65,7 @@ void ribi::braw::QtAssessorMenuDialog::on_button_about_clicked()
   ribi::braw::QtAboutDialog * const d{
     new ribi::braw::QtAboutDialog
   };
-  assert(d);
-  emit add_me(d);
+  d->exec();
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_quit_clicked()
