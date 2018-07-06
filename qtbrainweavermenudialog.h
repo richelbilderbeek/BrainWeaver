@@ -11,7 +11,7 @@ namespace ribi {
 
 namespace braw {
 
-class QtMenuDialog : public QtDialog
+class QtMenuDialog : public QtDialog //!OCLINT Indeed a lot of methods: one per button
 {
   Q_OBJECT //!OCLINT
     
