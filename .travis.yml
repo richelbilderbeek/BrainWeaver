@@ -61,11 +61,11 @@ script:
   - ./build_other_githubs
   # Build console test
   - qmake BrainweaverConsoleTest.pro
-  - make debug
+  - make -s debug
   - ./BrainweaverConsoleTest
   # Build and run desktop test
   - qmake BrainweaverDesktopTest.pro
-  - make debug
+  - make -s debug
   - ./BrainweaverDesktopTest
   # helgrind
   #- valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainweaverDesktopTest
