@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd ..
+cd ..
+
+for folder in boost_graph_cookbook_1 RibiClasses RibiLibraries StyleSheetSetter ConceptMap QtConceptMap QtKeyboardFriendlyGraphicsView plane
+do
+
+  cd $folder
+
+  echo "git folder: "$folder
+  git add --all :/
+  git commit -m "Brainweaver update"
+  git pull
+  git push
+
+  cd ..
+done
