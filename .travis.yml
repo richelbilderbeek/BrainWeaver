@@ -60,11 +60,11 @@ before_script:
 script: 
   - ./build_other_githubs
   # Build console test
-  - qmake BrainweaverConsoleTest.pro
+  - qmake -qt=qt5 BrainweaverConsoleTest.pro
   - make -s debug
   - ./BrainweaverConsoleTest
   # Build and run desktop test
-  - qmake BrainweaverDesktopTest.pro
+  - qmake -qt=qt5 BrainweaverDesktopTest.pro
   - make -s debug
   - ./BrainweaverDesktopTest
   # helgrind
@@ -74,11 +74,11 @@ script:
   #- valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainweaverDesktopTest
   #- cat memcheck.log
   # Build 'true' executables
-  - qmake BrainweaverDeveloper.pro
+  - qmake -qt=qt5 BrainweaverDeveloper.pro
   - make -s debug
-  - qmake BrainweaverAssessor.pro
+  - qmake -qt=qt5 BrainweaverAssessor.pro
   - make -s debug
-  - qmake BrainweaverStudent.pro
+  - qmake -qt=qt5 BrainweaverStudent.pro
   - make -s debug
   # shunit2 tests, must be run locally only
   #- cd test_scipts; ./test; cd ..
