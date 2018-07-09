@@ -41,9 +41,10 @@ std::string ribi::braw::QtCreateAssessmentDialog::GetQuestion() const noexcept
 
 void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape)
+  if (e->key() == Qt::Key_Escape)
   {
     emit remove_me(this);
+    close();
     return;
   }
 }
