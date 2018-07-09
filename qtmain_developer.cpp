@@ -41,9 +41,14 @@ const std::string CreateStyleSheet()
     "} "
     ""
     "QPlainTextEdit {"
-    "  font-size: 12px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;"
-    "}";
+    "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;"
+    "}"
+    ""
+    "QTableWidget {"
+    "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;"
+    "}"
 
+  ;
   return s;
 }
 
