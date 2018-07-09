@@ -2,7 +2,7 @@
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include "qtbrainweavercreateassessmentcompletedialog.h"
+#include "qtbrainweavercreateassessmentdialog.h"
 
 #include <sstream>
 #include <stdexcept>
@@ -15,31 +15,31 @@
 #include "conceptmapfactory.h"
 #include "qtbrainweaverfiledialog.h"
 
-#include "ui_qtbrainweavercreateassessmentcompletedialog.h"
+#include "ui_qtbrainweavercreateassessmentdialog.h"
 
 
 #pragma GCC diagnostic pop
 
-ribi::braw::QtCreateAssessmentCompleteDialog::QtCreateAssessmentCompleteDialog(QWidget* parent)
+ribi::braw::QtCreateAssessmentDialog::QtCreateAssessmentDialog(QWidget* parent)
   : QtDialog(parent),
-    ui(new Ui::QtCreateAssessmentCompleteDialog),
+    ui(new Ui::QtCreateAssessmentDialog),
     m_back_to_menu(false)
 {
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::braw::QtCreateAssessmentCompleteDialog::~QtCreateAssessmentCompleteDialog() noexcept
+ribi::braw::QtCreateAssessmentDialog::~QtCreateAssessmentDialog() noexcept
 {
   delete ui;
 }
 
-std::string ribi::braw::QtCreateAssessmentCompleteDialog::GetQuestion() const noexcept
+std::string ribi::braw::QtCreateAssessmentDialog::GetQuestion() const noexcept
 {
   return ui->edit->text().toStdString();
 }
 
-void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
@@ -48,7 +48,7 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::keyPressEvent(QKeyEvent* e)
   }
 }
 
-void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
+void ribi::braw::QtCreateAssessmentDialog::on_button_save_clicked()
 {
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
@@ -66,7 +66,7 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::on_button_save_clicked()
   emit remove_me(this);
 }
 
-void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filename) const
+void ribi::braw::QtCreateAssessmentDialog::Save(const std::string& filename) const
 {
   const std::string question = ui->edit->text().toStdString();
   File file;
@@ -75,12 +75,12 @@ void ribi::braw::QtCreateAssessmentCompleteDialog::Save(const std::string& filen
   file.Save(filename);
 }
 
-void ribi::braw::QtCreateAssessmentCompleteDialog::SetQuestion(const std::string& question)
+void ribi::braw::QtCreateAssessmentDialog::SetQuestion(const std::string& question)
 {
   ui->edit->setText(question.c_str());
 }
 
-void ribi::braw::QtCreateAssessmentCompleteDialog::on_edit_textChanged(const QString &arg1)
+void ribi::braw::QtCreateAssessmentDialog::on_edit_textChanged(const QString &arg1)
 {
   assert(ui->edit->text() == arg1);
   ui->button_save->setEnabled(!arg1.isEmpty());

@@ -10,7 +10,7 @@
 #include "qtbrainweaveraboutdialog.h"
 //#include "brainweavermenudialog.h"
 #include "qtconceptmaprateconceptdialog.h"
-#include "qtbrainweavercreateassessmentcompletedialog.h"
+#include "qtbrainweavercreateassessmentdialog.h"
 
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
@@ -55,7 +55,7 @@ void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 
 void ribi::braw::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
-  QtCreateAssessmentCompleteDialog * const d = new QtCreateAssessmentCompleteDialog;
+  QtCreateAssessmentDialog * const d = new QtCreateAssessmentDialog;
   emit add_me(d);
 }
 

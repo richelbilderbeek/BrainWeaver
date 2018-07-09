@@ -4,20 +4,20 @@
 #include "qtbrainweaverdialog.h"
 #include "brainweaverfwd.h"
 
-namespace Ui { class QtCreateAssessmentCompleteDialog; }
+namespace Ui { class QtCreateAssessmentDialog; }
 
 namespace ribi {
 namespace braw {
 
-class QtCreateAssessmentCompleteDialog : public QtDialog
+class QtCreateAssessmentDialog : public QtDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtCreateAssessmentCompleteDialog(QWidget* parent = 0);
-  QtCreateAssessmentCompleteDialog(const QtCreateAssessmentCompleteDialog&) = delete;
-  QtCreateAssessmentCompleteDialog& operator=(const QtCreateAssessmentCompleteDialog&) = delete;
-  ~QtCreateAssessmentCompleteDialog() noexcept;
+  explicit QtCreateAssessmentDialog(QWidget* parent = 0);
+  QtCreateAssessmentDialog(const QtCreateAssessmentDialog&) = delete;
+  QtCreateAssessmentDialog& operator=(const QtCreateAssessmentDialog&) = delete;
+  ~QtCreateAssessmentDialog() noexcept;
 
   ///Get the filled in concept map focal question
   std::string GetQuestion() const noexcept;
@@ -40,7 +40,7 @@ private slots:
   void on_edit_textChanged(const QString &arg1);
 
 private:
-  Ui::QtCreateAssessmentCompleteDialog *ui;
+  Ui::QtCreateAssessmentDialog *ui;
 
   ///Must the parent go back to the menu?
   bool m_back_to_menu;

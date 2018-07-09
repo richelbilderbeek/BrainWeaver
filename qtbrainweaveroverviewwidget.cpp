@@ -17,7 +17,7 @@
 #include "qtbrainweaverassessormenudialog.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
-#include "qtbrainweavercreateassessmentcompletedialog.h"
+#include "qtbrainweavercreateassessmentdialog.h"
 
 #include "qtbrainweavermenudialog.h"
 #include "qtbrainweaveroverviewwidget.h"
@@ -83,7 +83,7 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs()
     )
   );
   v.push_back(new QtConceptMapDialog(FileFactory().Get2()));
-  v.push_back(new QtCreateAssessmentCompleteDialog);
+  v.push_back(new QtCreateAssessmentDialog);
   v.push_back(new QtMenuDialog);
   v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5()));
   v.push_back(

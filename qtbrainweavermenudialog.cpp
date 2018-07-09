@@ -35,7 +35,7 @@
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
-#include "qtbrainweavercreateassessmentcompletedialog.h"
+#include "qtbrainweavercreateassessmentdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaveroverviewdialog.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
@@ -222,20 +222,18 @@ void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
   emit add_me(d);
 }
 
-void ribi::braw::QtMenuDialog::on_button_empty_qtconceptmap_clicked()
-{
-  const int test{0};
-  assert(test < static_cast<int>(FileFactory().GetNumberOfTests()));
-  const File file = FileFactory().GetTests().at(test);
-
-  QtConceptMapDialog * const d{new QtConceptMapDialog(file)};
-  emit add_me(d);
-}
-
 
 void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
 {
   const auto concept = ribi::cmap::ConceptFactory().Get2();
   ribi::cmap::QtConceptMapConceptEditDialog d(concept);
   d.exec();
+}
+
+void ribi::braw::QtMenuDialog::on_button_create_assessment_clicked()
+{
+  auto * const d{
+    new ribi::braw::QtCreateAssessmentDialog()
+  };
+  d->exec();
 }

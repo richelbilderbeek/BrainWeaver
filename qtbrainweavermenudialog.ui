@@ -61,7 +61,7 @@
       <item>
        <widget class="QPushButton" name="button_about">
         <property name="text">
-         <string>&amp;E. About screen</string>
+         <string>&amp;G. About screen</string>
         </property>
        </widget>
       </item>
@@ -71,7 +71,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>&amp;F. Program overview</string>
+         <string>&amp;H. Program overview</string>
         </property>
         <property name="default">
          <bool>false</bool>
@@ -81,7 +81,7 @@
       <item>
        <widget class="QPushButton" name="button_modify_stylesheet">
         <property name="text">
-         <string>&amp;G. Modify stylesheet</string>
+         <string>&amp;I. Modify stylesheet</string>
         </property>
        </widget>
       </item>
@@ -121,28 +121,21 @@
       <item>
        <widget class="QPushButton" name="button_test_cluster">
         <property name="text">
-         <string>&amp;4. QtClusterDialog</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="button_empty_qtconceptmap">
-        <property name="text">
-         <string>&amp;D. Empty QtConceptMap</string>
+         <string>&amp;3. QtClusterDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_edit_conceptmap">
         <property name="text">
-         <string>&amp;5. QtConceptMap</string>
+         <string>&amp;4. QtConceptMap</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_edit_concept">
         <property name="text">
-         <string>5.1. QtEditConcept</string>
+         <string>&amp;5. QtEditConcept</string>
         </property>
        </widget>
       </item>
@@ -161,44 +154,51 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="button_create_assessment">
+        <property name="text">
+         <string>&amp;7. Create assessment</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="button_rate_concept_map">
         <property name="text">
-         <string>&amp;7. QtRateConceptMapDialog</string>
+         <string>&amp;8. QtRateConceptMapDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_rate_examples">
         <property name="text">
-         <string>&amp;8. QtRateExamplesDialog</string>
+         <string>&amp;9. QtRateExamplesDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_rate_concept">
         <property name="text">
-         <string>&amp;9. QtRateConceptDialog</string>
+         <string>&amp;A. QtRateConceptDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_rate_concept_auto">
         <property name="text">
-         <string>&amp;A. QtRateConceptTallyDialog</string>
+         <string>&amp;B. QtRateConceptTallyDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_rating">
         <property name="text">
-         <string>&amp;B. QtRatingDialog</string>
+         <string>&amp;C. QtRatingDialog</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="button_print_rating">
         <property name="text">
-         <string>&amp;C. QtPrintRatingDialog</string>
+         <string>&amp;D. QtPrintRatingDialog</string>
         </property>
        </widget>
       </item>
