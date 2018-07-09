@@ -5,7 +5,6 @@ HEADERS  += \
     $$PWD/qtbrainweaverclustertreewidgetitem_test.h \
     $$PWD/qtbrainweaverclusterwidget_test.h \
     $$PWD/qtbrainweaverconceptmapdialog_test.h \
-    $$PWD/qtbrainweavercreateassessmentcompletedialog_test.h \
     $$PWD/qtbrainweaverdisplay_test.h \
     $$PWD/qtbrainweaverfiledialog_test.h \
     $$PWD/qtbrainweavermenudialog_test.h \
@@ -16,7 +15,8 @@ HEADERS  += \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.h \
     $$PWD/qtbrainweaverratingdialog_test.h \
     $$PWD/qtbrainweaverstudentmenudialog_test.h \
-    $$PWD/qtbrainweaverstudentstartcompletedialog_test.h
+    $$PWD/qtbrainweaverstudentstartcompletedialog_test.h \
+    $$PWD/qtbrainweavercreateassessmentdialog_test.h
 
 SOURCES += \
     $$PWD/qtbrainweaveraboutdialog_test.cpp \
@@ -25,7 +25,6 @@ SOURCES += \
     $$PWD/qtbrainweaverclustertreewidgetitem_test.cpp \
     $$PWD/qtbrainweaverclusterwidget_test.cpp \
     $$PWD/qtbrainweaverconceptmapdialog_test.cpp \
-    $$PWD/qtbrainweavercreateassessmentcompletedialog_test.cpp \
     $$PWD/qtbrainweaverdisplay_test.cpp \
     $$PWD/qtbrainweaverfiledialog_test.cpp \
     $$PWD/qtbrainweavermenudialog_test.cpp \
@@ -36,4 +35,5 @@ SOURCES += \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.cpp \
     $$PWD/qtbrainweaverratingdialog_test.cpp \
     $$PWD/qtbrainweaverstudentmenudialog_test.cpp \
-    $$PWD/qtbrainweaverstudentstartcompletedialog_test.cpp
+    $$PWD/qtbrainweaverstudentstartcompletedialog_test.cpp \
+    $$PWD/qtbrainweavercreateassessmentdialog_test.cpp
