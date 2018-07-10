@@ -197,7 +197,7 @@ void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 {
   QtPrintConceptMapDialog * const d{
-    new QtPrintConceptMapDialog(FileFactory().Get4())
+    new QtPrintConceptMapDialog(FileFactory().Get5())
   };
   emit add_me(d);
 }
