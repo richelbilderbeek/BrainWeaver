@@ -57,3 +57,4 @@ test_scripts/*.cmp
 test_scripts/*.log
 Brainweaver.zip
 BrainweaverDeveloper.zip
+*.zip
