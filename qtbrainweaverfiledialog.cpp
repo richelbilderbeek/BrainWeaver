@@ -32,7 +32,7 @@ QtFileDialog::GetOpenFileDialog() const
 
   const std::string namefile = "Brainweaver concept map (*."
     + GetFilenameExtension() + ")";
-  d->setDefaultSuffix(GetFilenameExtension());
+  d->setDefaultSuffix(GetFilenameExtension().c_str());
   d->setNameFilter(namefile.c_str());
 
   return d;
@@ -61,7 +61,7 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
     case FileType::cmp:
       namefile = "Brainweaver concept map (*."
       + GetFilenameExtension() + ")";
-      d->setDefaultSuffix(GetFilenameExtension());
+      d->setDefaultSuffix(GetFilenameExtension().c_str());
     break;
     case FileType::pdf:
       namefile = "Portable document format (*.pdf)";
