@@ -56,20 +56,19 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
   d->setOptions( QFileDialog::DontUseNativeDialog );
 
   std::string namefile;
-  switch (type) //!OCLINT Too few branches in switch statement is false: there are only two enum class values
+  if (type == FileType::cmp)
   {
-    case FileType::cmp:
-      namefile = "Brainweaver concept map (*."
-      + GetFilenameExtension() + ")";
-      d->setDefaultSuffix(GetFilenameExtension().c_str());
-    break;
-    case FileType::pdf:
-      namefile = "Portable document format (*.pdf)";
-      d->setDefaultSuffix("pdf");
-    break;
+    namefile = "Brainweaver concept map (*."
+    + GetFilenameExtension() + ")";
+    d->setDefaultSuffix(GetFilenameExtension().c_str());
+  }
+  else
+  {
+    assert(type == FileType::pdf);
+    namefile = "Portable document format (*.pdf)";
+    d->setDefaultSuffix("pdf");
   }
   d->setNameFilter(namefile.c_str());
-
   return d;
 }
 
