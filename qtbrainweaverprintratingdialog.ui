@@ -37,8 +37,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>696</width>
-        <height>1298</height>
+        <width>699</width>
+        <height>1302</height>
        </rect>
       </property>
       <property name="maximumSize">
@@ -549,6 +549,11 @@
             <row>
              <property name="text">
               <string>Hierarchische niveaus</string>
+             </property>
+            </row>
+            <row>
+             <property name="text">
+              <string>Aantal voorbeelden</string>
              </property>
             </row>
             <column>

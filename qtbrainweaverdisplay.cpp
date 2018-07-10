@@ -223,7 +223,17 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     assert(0 < table->columnCount());
     table->setItem(2,0,item);
   }
-
+  //Number of examples
+  {
+    const int n{CountExamples(g)};
+    const std::string text{boost::lexical_cast<std::string>(n)};
+    QTableWidgetItem * const item = new QTableWidgetItem;
+    item->setText(text.c_str());
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    assert(3 < table->rowCount());
+    assert(0 < table->columnCount());
+    table->setItem(3, 0, item);
+  }
 
   //Fixing table
   table->verticalHeader()->setMaximumWidth(300);

@@ -39,8 +39,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>839</width>
-        <height>1038</height>
+        <width>841</width>
+        <height>1042</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -458,6 +458,11 @@
          <row>
           <property name="text">
            <string>Hierarchische niveaus</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Aantal voorbeelden</string>
           </property>
          </row>
          <column>

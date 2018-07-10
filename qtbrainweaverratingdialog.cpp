@@ -69,7 +69,7 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
   QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
   QtDisplay().DisplayExamples(file,ui->table_examples);
   QtDisplay().DisplayValues(file,ui->table_values);
-  QtDisplay().DisplayMiscValues(file,ui->table_misc_values);
+  QtDisplay().DisplayMiscValues(file, ui->table_misc_values);
 
   //Center the dialog
   {
