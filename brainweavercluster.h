@@ -3,13 +3,8 @@
 
 #include <map>
 #include <vector>
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "brainweaverfwd.h"
 #include "conceptmapconcept.h"
-#pragma GCC diagnostic pop
 
 namespace ribi {
 namespace braw {
