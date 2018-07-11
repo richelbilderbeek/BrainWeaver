@@ -6,34 +6,10 @@
 
 using namespace ribi::braw;
 
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateComplexityEstimated)
-{
-  const auto file = ribi::braw::FileFactory().Get5();
-  const int result = ribi::braw::CalculateComplexityEstimated(file);
-  BOOST_CHECK(result >= 0);
-  BOOST_CHECK(result <= 100);
-}
-
 BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateComplexityExperimental)
 {
   const auto file = ribi::braw::FileFactory().Get5();
   const int result = ribi::braw::CalculateComplexityExperimental(file);
-  BOOST_CHECK(result >= 0);
-  BOOST_CHECK(result <= 100);
-}
-
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateConcretenessEstimated)
-{
-  const auto file = ribi::braw::FileFactory().Get5();
-
-  //This must be satisfied for CalculateConcretenessEstimated to do its work
-  {
-    const auto g = ribi::cmap::RemoveFirstNode(file.GetConceptMap());
-    std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
-    assert(!nodes.empty());
-  }
-
-  const int result = ribi::braw::CalculateConcretenessEstimated(file);
   BOOST_CHECK(result >= 0);
   BOOST_CHECK(result <= 100);
 }
