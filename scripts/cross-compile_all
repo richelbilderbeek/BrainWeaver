@@ -22,7 +22,7 @@ do
 
   echo "Creating makefile"
 
-  $myqmake -qt=qt5 $myprofile
+  $myqmake $myprofile
 
   if [ ! -e Makefile ]
   then
