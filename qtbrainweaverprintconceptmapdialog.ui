@@ -31,8 +31,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>695</width>
-        <height>622</height>
+        <width>683</width>
+        <height>1070</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -76,6 +76,12 @@
        </item>
        <item>
         <widget class="QFrame" name="frame_concept_map">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>978</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
