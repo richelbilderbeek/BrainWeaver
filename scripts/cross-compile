@@ -22,7 +22,7 @@ do
 
   echo "Creating makefile"
 
-  $myqmake $myprofile
+  $myqmake -qt=qt5 $myprofile
 
   if [ ! -e Makefile ]
   then
@@ -32,7 +32,7 @@ do
 
   echo "Start make"
 
-  make
+  make -s debug
 
   if [ -e ./release/$mybasename".exe" ]
   then
