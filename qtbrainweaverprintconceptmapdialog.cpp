@@ -37,11 +37,19 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
+  setMinimumWidth(780);
+  setMaximumWidth(780);
+
   m_widget->SetConceptMap(file.GetConceptMap());
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
     ui->frame_concept_map->layout()->addWidget(m_widget);
+    ui->frame_concept_map->setMinimumWidth(750);
+    ui->frame_concept_map->setMaximumWidth(750);
+    ui->frame_concept_map->setMinimumHeight(
+      1.44 * ui->frame_concept_map->width()
+    );
   }
 
   ui->label_student_name->setText(
@@ -165,10 +173,6 @@ void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
 
 void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
-  ui->frame_concept_map->setMinimumHeight(
-    1.44 * ui->frame_concept_map->width()
-  );
-
   assert(m_widget);
   if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
   m_widget->rotate(90);

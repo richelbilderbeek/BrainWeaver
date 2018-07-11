@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
+    <width>756</width>
     <height>679</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>683</width>
+        <width>722</width>
         <height>1070</height>
        </rect>
       </property>
@@ -45,10 +45,10 @@
           </sizepolicy>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Box</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Plain</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -57,7 +57,7 @@
              <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
             <property name="text">
-             <string>Naam: ?</string>
+             <string>Concept map van ...</string>
             </property>
            </widget>
           </item>
@@ -86,10 +86,10 @@
           <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Box</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Plain</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2"/>
         </widget>
