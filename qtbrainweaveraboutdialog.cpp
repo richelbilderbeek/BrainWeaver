@@ -24,9 +24,6 @@ ribi::About GetAbout()
   about.AddLibrary("QtArrowItem version: "
     + ribi::QtArrowItem::GetVersion()
   );
-  about.AddLibrary("QtHideAndShowDialog version: "
-    + ribi::QtHideAndShowDialog::GetVersion()
-  );
   about.AddLibrary("QtKeyboardFriendlyGraphicsView version: "
     + ribi::GetQtKeyboardFriendlyGraphicsViewVersion()
   );
