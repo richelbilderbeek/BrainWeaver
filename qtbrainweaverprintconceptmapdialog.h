@@ -21,7 +21,6 @@ class QtPrintConceptMapDialog : public QtDialog
   
 public:
   using ConceptMap = cmap::QtConceptMap;
-  ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   explicit QtPrintConceptMapDialog(
     const File& file,
     QWidget *parent = 0
@@ -34,16 +33,14 @@ public:
 
 protected:
   void keyPressEvent(QKeyEvent * event);
-  void resizeEvent(QResizeEvent *);
   void showEvent(QShowEvent *);
 
 private slots:
   void on_button_print_clicked();
-  void fitConceptMap();
 private:
   Ui::QtPrintConceptMapDialog *ui;
 
-  File m_file;
+  const File m_file;
 
   ConceptMap * const m_widget;
 
@@ -53,7 +50,6 @@ private:
 };
 
 } //~namespace braw
-
 } //~namespace ribi
 
 #endif // QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_H

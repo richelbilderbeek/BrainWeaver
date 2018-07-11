@@ -38,7 +38,6 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   m_widget->SetConceptMap(file.GetConceptMap());
-  m_widget->rotate(70.0);
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
@@ -56,10 +55,27 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
     const std::string s = std::asctime(time_and_date);
     ui->label_date->setText( ("Datum: " + s).c_str());
   }
-
-  //Much work done in ShowEvent
+  //Concept map
   {
-    QTimer::singleShot(1000,this,SLOT(fitConceptMap()));
+    assert(m_widget);
+    assert(boost::num_vertices(m_widget->ToConceptMap()) > 0);
+    m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  //Concept map as text
+  {
+    assert(ui->frame_concept_map_as_text->layout());
+    const auto conceptmap = m_file.GetConceptMap();
+    const auto nodes = GetNodes(conceptmap);
+    for (const auto node: nodes)
+    {
+      if (IsCenterNode(node)) continue;
+      ribi::cmap::QtConceptMapRatedConceptDialog * const widget
+        = new ribi::cmap::QtConceptMapRatedConceptDialog(conceptmap, node);
+      assert(widget);
+      widget->HideRating();
+      ui->frame_concept_map_as_text->layout()->addWidget(widget);
+    }
   }
 }
 
@@ -147,12 +163,7 @@ void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
   painter.end();
 }
 
-void ribi::braw::QtPrintConceptMapDialog::resizeEvent(QResizeEvent *)
-{
-  fitConceptMap();
-}
-
-void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
+void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
   assert(m_widget);
   if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
@@ -164,44 +175,4 @@ void ribi::braw::QtPrintConceptMapDialog::fitConceptMap()
   //all_items_rot.setHeight(all_items_rect.width());
   qDebug() << all_items_rot;
   m_widget->fitInView(all_items_rot);
-
-}
-
-void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
-{
-  if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
-
-  //Concept map
-  {
-    assert(m_widget);
-    assert(boost::num_vertices(m_widget->ToConceptMap()) > 0);
-
-    //m_widget->ReadFromConceptMap(copy_concept_map);
-    m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //m_widget->setMinimumHeight(m_widget->scene()->itemsBoundingRect().width() + 2);
-    //Fit concept map to widget
-    //const QRectF all_items_rect {
-    //  m_widget->scene()->itemsBoundingRect() //Does not work
-    //  //m_widget->scene()->sceneRect() //Does not work
-    //};
-    //m_widget->fitInView(all_items_rect); //Does not work
-    //m_widget->ensureVisible(all_items_rect,0,0); //Does not work
-  }
-  //Concept map as text
-  {
-    assert(ui->frame_concept_map_as_text->layout());
-    const auto conceptmap = m_file.GetConceptMap();
-    const auto nodes = GetNodes(conceptmap);
-    for (const auto node: nodes)
-    {
-      if (IsCenterNode(node)) continue;
-      ribi::cmap::QtConceptMapRatedConceptDialog * const widget
-        = new ribi::cmap::QtConceptMapRatedConceptDialog(conceptmap, node);
-      assert(widget);
-      widget->HideRating();
-      ui->frame_concept_map_as_text->layout()->addWidget(widget);
-    }
-  }
-  fitConceptMap();
 }
