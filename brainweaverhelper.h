@@ -13,20 +13,10 @@
 namespace ribi {
 namespace braw {
 
-///compleXity eStimated: X_s, a percentage, that will be shown at row = 0, col = 1
-///x_s = ((2*n_relations_not_to_focus)/(n_nodes*(n_nodes-1))))^0.25*100%
-///Estimated, thus needs no assessor, nor ratings
-int CalculateComplexityEstimated(const File& file);
-
 ///Complexity experimental value: X_e at row = 0, col = 0
 ///50.0 * sum_rated_complexity / n_nodes
 ///Experimental, thus relies on rating by assessor
 int CalculateComplexityExperimental(const File& file);
-
-///Concreteness eStimated: C_s at row = 1, col = 1
-///C_s = 100.0 * n_examples / (n_examples + n_nodes + n_relations_not_to_focus)
-///Estimated, thus needs no assessor, nor ratings
-int CalculateConcretenessEstimated(const File& file);
 
 ///Concreteness Experimental: C_e, a percentage that will be shown at row = 1, col = 0
 ///50.0 * sum_rated_concreteness / n_nodes

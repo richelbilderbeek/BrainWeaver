@@ -139,7 +139,7 @@
       <item>
        <widget class="QPushButton" name="button_add">
         <property name="text">
-         <string>Voeg toe</string>
+         <string>&amp;Voeg toe</string>
         </property>
        </widget>
       </item>

@@ -261,9 +261,7 @@ void ribi::braw::QtDisplay::DisplayValues(
   using Cell = std::tuple<std::function<int(const File&)>, int, int>;
   std::vector<Cell> v;
   v.push_back(std::make_tuple(CalculateComplexityExperimental  , 0, 0));
-  v.push_back(std::make_tuple(CalculateComplexityEstimated     , 0, 1));
   v.push_back(std::make_tuple(CalculateConcretenessExperimental, 1, 0));
-  v.push_back(std::make_tuple(CalculateConcretenessEstimated   , 1, 1));
   v.push_back(std::make_tuple(CalculateSpecificityExperimental , 2, 0));
   v.push_back(std::make_tuple(CalculateRichnessExperimental    , 3, 0));
 

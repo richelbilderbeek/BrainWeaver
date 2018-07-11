@@ -438,12 +438,7 @@
             </row>
             <column>
              <property name="text">
-              <string>Experimentele waarde</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Geschatte waarde</string>
+              <string>Waarde</string>
              </property>
             </column>
             <item row="0" column="0">
@@ -451,19 +446,9 @@
               <string>X_e</string>
              </property>
             </item>
-            <item row="0" column="1">
-             <property name="text">
-              <string>X_s</string>
-             </property>
-            </item>
             <item row="1" column="0">
              <property name="text">
               <string>C_e</string>
-             </property>
-            </item>
-            <item row="1" column="1">
-             <property name="text">
-              <string>C_s</string>
              </property>
             </item>
             <item row="2" column="0">
@@ -471,19 +456,9 @@
               <string>S_e</string>
              </property>
             </item>
-            <item row="2" column="1">
-             <property name="text">
-              <string>-</string>
-             </property>
-            </item>
             <item row="3" column="0">
              <property name="text">
               <string>R_e</string>
-             </property>
-            </item>
-            <item row="3" column="1">
-             <property name="text">
-              <string>-</string>
              </property>
             </item>
            </widget>

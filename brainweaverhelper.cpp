@@ -18,23 +18,10 @@
 #include "fileio.h"
 #pragma GCC diagnostic pop
 
-int ribi::braw::CalculateComplexityEstimated(const File& file)
-{
-  return ribi::cmap::CalculateComplexityEstimated(file.GetConceptMap());
-}
-
-
 int ribi::braw::CalculateComplexityExperimental(const File& file)
 {
   return ribi::cmap::CalculateComplexityExperimental(file.GetConceptMap());
 }
-
-
-int ribi::braw::CalculateConcretenessEstimated(const File& file)
-{
-  return ribi::cmap::CalculateConcretenessEstimated(file.GetConceptMap());
-}
-
 
 int ribi::braw::CalculateConcretenessExperimental(const File& file)
 {
