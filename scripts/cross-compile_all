@@ -33,7 +33,7 @@ do
 
   echo "Start make"
 
-  make
+  make -s
 
   if [ -e ./release/$mybasename".exe" ]
   then
