@@ -20,6 +20,15 @@ const std::string CreateStyleSheet()
     "  font-weight: bold;"
     "  padding: 1px;"
     "} "
+    "QLabel#label_concept_examples { "
+    "  font-size: 10px;  font-weight: normal;"
+    "}"
+    "QLabel#label_cluster_relations { "
+    "  font-size: 10px;  font-weight: normal;"
+    "}"
+    "QLabel#label_name { "
+    "  font-size: 12px; font-weight: bold;"
+    "}"
     ""
     "QPushButton {"
     "  font-family: \"Courier New\", \"Courier\", Courier, monospace;"
@@ -51,6 +60,9 @@ const std::string CreateStyleSheet()
   ;
   return s;
 }
+
+
+
 
 //From https://rohieb.wordpress.com/2010/07/08/qt-throw-exceptions-from-signals-and-slots/
 //which is adapted from http://stackoverflow.com/a/1578433/3364162
