@@ -171,8 +171,6 @@ void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
   emit add_me(d);
 }
 
-
-
 void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
 {
   QtStyleSheetSetterMainDialog * const d{
@@ -191,7 +189,8 @@ void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
   QtPrintConceptMapDialog * const d{
     new QtPrintConceptMapDialog(FileFactory().Get5())
   };
-  emit add_me(d);
+  d->exec();
+  //emit add_me(d);
 }
 
 void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
@@ -199,7 +198,9 @@ void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
   QtPrintConceptMapDialog * const d{
     new QtPrintConceptMapDialog(FileFactory().Get5())
   };
-  emit add_me(d);
+  d->exec();
+  // 'emit add_me(d);' causes Wine crash,
+  // see https://github.com/richelbilderbeek/Brainweaver/issues/161
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
@@ -210,7 +211,8 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
     new cmap::QtRateConceptTallyDialog(concept_map)
   };
   d->exec();
-  //emit add_me(d);
+  // 'emit add_me(d);' causes Wine crash,
+  // see https://github.com/richelbilderbeek/Brainweaver/issues/161
 }
 
 void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()

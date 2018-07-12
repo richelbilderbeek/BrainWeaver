@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <ctime>
+#include <iostream>
 
 #include <boost/numeric/conversion/cast.hpp>
 
@@ -34,29 +35,28 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
     m_file(file),
     m_widget(new cmap::QtConceptMap)
 {
-  qDebug() << __LINE__;
   ui->setupUi(this);
-  qDebug() << __LINE__;
+  
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   setMinimumWidth(780);
   setMaximumWidth(780);
 
-  qDebug() << __LINE__;
+  
   m_widget->SetConceptMap(file.GetConceptMap());
-  qDebug() << __LINE__;
+  
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
     ui->frame_concept_map->layout()->addWidget(m_widget);
-  qDebug() << __LINE__;
+    
     ui->frame_concept_map->setMinimumWidth(750);
     ui->frame_concept_map->setMaximumWidth(750);
     ui->frame_concept_map->setMinimumHeight(
       1.44 * ui->frame_concept_map->width()
     );
   }
-  qDebug() << __LINE__;
+  
 
   ui->label_student_name->setText(
     ("Concept map van "
@@ -91,6 +91,7 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
       ui->frame_concept_map_as_text->layout()->addWidget(widget);
     }
   }
+  
 }
 
 ribi::braw::QtPrintConceptMapDialog::~QtPrintConceptMapDialog() noexcept
@@ -117,16 +118,19 @@ std::vector<QWidget *> ribi::braw::QtPrintConceptMapDialog::CollectWidgets() con
 
 void ribi::braw::QtPrintConceptMapDialog::keyPressEvent(QKeyEvent * event)
 {
+  
   if (event->key() == Qt::Key_Escape) { emit remove_me(this); return; }
 }
 
 void ribi::braw::QtPrintConceptMapDialog::on_button_print_clicked()
 {
+  
   Print();
 }
 
 void ribi::braw::QtPrintConceptMapDialog::Print()
 {
+  
   //Start save dialog
   const std::unique_ptr<QFileDialog> print_dialog(
     QtFileDialog().GetSaveFileDialog(
@@ -146,6 +150,7 @@ void ribi::braw::QtPrintConceptMapDialog::Print()
 
 void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
 {
+  
   QPrinter printer;
   printer.setOrientation(QPrinter::Portrait);
   printer.setPaperSize(QPrinter::A4);
@@ -179,9 +184,12 @@ void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
 
 void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
+  
   assert(m_widget);
   if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
+  
   m_widget->rotate(90);
+  
   //m_widget->scale(1.0, 1.0);
   //m_widget->update();
   //m_widget->setMinimumHeight(all_items_rect.width() + 2);
@@ -190,4 +198,5 @@ void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
   //all_items_rot.setWidth(all_items_rect.height());
   //all_items_rot.setHeight(all_items_rect.width());
   m_widget->fitInView(all_items_rot, Qt::KeepAspectRatio);
+  
 }
