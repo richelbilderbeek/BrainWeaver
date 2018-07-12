@@ -21,7 +21,7 @@
 #include "counter.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
-
+#include "count_undirected_graph_levels.h"
 #include "add_bundled_vertex.h"
 #include "conceptmapconcept.h"
 #include "conceptmapfactory.h"
@@ -80,7 +80,7 @@ void ribi::braw::File::AutoSave() const
   this->Save("autosave1." + GetFilenameExtension());
 }
 
-double ribi::braw::CountEdgesPerNode(const File& file) noexcept
+double ribi::braw::CountEdgesPerNormalNode(const File& file) noexcept
 {
   auto g = file.GetConceptMap();
   std::vector<int> degrees;
@@ -95,6 +95,18 @@ double ribi::braw::CountEdgesPerNode(const File& file) noexcept
     static_cast<double>(sum) / static_cast<double>(degrees.size())
   };
   return adpc;
+}
+
+int ribi::braw::CountExamples(const File& file) noexcept
+{
+  return CountExamples(file.GetConceptMap());
+}
+
+int ribi::braw::CountHierarchicalLevels(const File& file) noexcept
+{
+  const auto g = file.GetConceptMap();
+  const auto vd = ribi::cmap::FindCenterNode(g);
+  return count_undirected_graph_levels(vd, g);
 }
 
 int ribi::braw::CountNodes(const File& file) noexcept

@@ -38,10 +38,6 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
 ) const
 {
   auto * const table = new QTableWidget(8, 1, parent);
-  //DisplayValues(file, table);
-  DisplayMiscValues(file, table);
-  //assert(table->rowCount() == 8);
-  //assert(table->columnCount() == 1);
   table->verticalHeader()->setMinimumWidth(200);
   table->setMinimumHeight(269);
   table->setMaximumHeight(269);
@@ -85,12 +81,18 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   {
     const int row_index{5};
     table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Relaties per concept"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdgesPerNode(file))));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdgesPerNormalNode(file))));
   }
-
-  table->setVerticalHeaderItem(6, new QTableWidgetItem("Hierarchische niveaus"));
-  table->setVerticalHeaderItem(7, new QTableWidgetItem("Aantal voorbeelden"));
-
+  {
+    const int row_index{6};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Hierarchische niveaus"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountHierarchicalLevels(file))));
+  }
+  {
+    const int row_index{7};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal voorbeelden"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountExamples(file))));
+  }
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   return table;
@@ -272,69 +274,4 @@ void ribi::braw::QtDisplay::DisplayExamples(
       }
     }
   }
-}
-
-
-void ribi::braw::QtDisplay::DisplayMiscValues(
-  const File& file,
-  QTableWidget * const table) const
-{
-  //SetNumberOfNodes(file, table);
-  auto g = file.GetConceptMap();
-  //Average number of connections per non-center node
-  {
-    std::vector<int> degrees;
-    const auto vip = vertices(g);
-    for (auto i = vip.first; i != vip.second; ++i)
-    {
-      if (IsCenterNode(g[*i])) continue;
-      degrees.push_back(boost::degree(*i, g));
-    }
-    const int sum{std::accumulate(std::begin(degrees), std::end(degrees), 0)};
-    const double adpc{ //average_degree_per_concept
-      static_cast<double>(sum) / static_cast<double>(degrees.size())
-    };
-    const std::string text = boost::lexical_cast<std::string>(adpc);
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(4 + 1,0,item);
-  }
-  //Hierarchical levels
-  {
-    const auto vd = ribi::cmap::FindCenterNode(g);
-    const int n{count_undirected_graph_levels(vd, g)};
-    const std::string text{boost::lexical_cast<std::string>(n)};
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    assert(2 < table->rowCount());
-    assert(0 < table->columnCount());
-    table->setItem(4 + 2,0,item);
-  }
-  //Number of examples
-  {
-    const int n{CountExamples(g)};
-    const std::string text{boost::lexical_cast<std::string>(n)};
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    assert(3 < table->rowCount());
-    assert(0 < table->columnCount());
-    table->setItem(4 + 3, 0, item);
-  }
-}
-
-void ribi::braw::QtDisplay::SetNumberOfNodes(
-  const File& file,
-  QTableWidget * const table) const
-{
-  const auto g = file.GetConceptMap();
-  const std::string text = boost::lexical_cast<std::string>(boost::num_vertices(g));
-  QTableWidgetItem * const item = new QTableWidgetItem;
-  item->setText(text.c_str());
-  item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-  assert(0 < table->rowCount());
-  assert(0 < table->columnCount());
-  table->setItem(4 + 0,0,item);
 }

@@ -111,7 +111,13 @@ class File
 };
 
 ///Count the average number of connections per non-center node
-double CountEdgesPerNode(const File& file) noexcept;
+double CountEdgesPerNormalNode(const File& file) noexcept;
+
+///Count the total number of examples
+int CountExamples(const File& file) noexcept;
+
+///Count the number of hierarchical levels
+int CountHierarchicalLevels(const File& file) noexcept;
 
 ///Count the number of nodes
 int CountNodes(const File& file) noexcept;
