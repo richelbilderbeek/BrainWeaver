@@ -30,7 +30,6 @@ public:
   QtPrintRatingDialog& operator=(const QtPrintRatingDialog&) = delete;
   ~QtPrintRatingDialog() noexcept;
 
-  QTableWidget * GetTableConcepts();
   void Print();
   void Print(const std::string& filename);
 

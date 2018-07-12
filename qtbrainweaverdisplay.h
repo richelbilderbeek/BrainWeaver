@@ -20,16 +20,19 @@ struct QtDisplay
     const File& file, QWidget * const parent = nullptr
   ) const;
 
+  QTableWidget * CreateRatedConceptsWidget(
+    const File& file, QWidget * const parent = nullptr
+  ) const;
+
   QTableWidget * CreateTalliedExamplesWidget(
     const File& file, QWidget * const parent = nullptr
   ) const;
 
-
-  void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
-
   private:
 
   void DisplayExamples(const File& file, QTableWidget * const table) const;
+
+  void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
 
   void DisplayRatedConceptName(
     const ribi::cmap::Concept& concept,

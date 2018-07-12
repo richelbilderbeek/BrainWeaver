@@ -13,7 +13,9 @@
 #include <QFileDialog>
 #include <QDesktopWidget>
 #include <QPainter>
+#include <QLayout>
 #include <QPrinter>
+#include <QTableWidget>
 
 #include "conceptmap.h"
 #include "qtconceptmap.h"
@@ -66,8 +68,20 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
   }
 
   
-
-  QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
+  //Add rated concepts
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Overzicht concepten",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateRatedConceptsWidget(file, this)
+    );
+  }
+  //QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
 
   //Add tallied examples
   {

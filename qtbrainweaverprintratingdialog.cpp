@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include <QScrollBar>
 #include <QPrinter>
+#include <QTableWidget>
 
 #include "brainweaverfile.h"
 #include "conceptmapconcept.h"
@@ -95,13 +96,7 @@ const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() c
       v.push_back(ui->widget_concept_map_as_text->layout()->itemAt(i)->widget());
     }
   }
-  v.push_back(ui->frame_concepts);
   return v;
-}
-
-QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableConcepts()
-{
-  return ui->table_concepts;
 }
 
 void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
@@ -193,12 +188,18 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
     }
   }
 
-  //Copied from caller
-  QtDisplay().DisplayRatedConcepts(m_file,this->GetTableConcepts());
+  //Add rated concepts
   {
-    const int sz = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
-    //Standard row is 30 pixels high, header 25 pixels
-    this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 );
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Overzicht concepten",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateRatedConceptsWidget(file, this)
+    );
   }
 
   //Add tallied examples

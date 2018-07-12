@@ -103,6 +103,19 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   return table;
 }
 
+QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
+  const File& file,
+  QWidget * const parent
+) const
+{
+  auto * const table = new QTableWidget(0, 3, parent);
+  DisplayRatedConcepts(file, table);
+  table->setHorizontalHeaderLabels( { "X", "S", "C" } );
+  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  return table;
+}
+
 QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
   const File& file,
   QWidget * const parent
@@ -141,7 +154,7 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const auto g = RemoveFirstNode(file.GetConceptMap());
 
   table->setRowCount(boost::num_vertices(file.GetConceptMap()));
-
+  assert(table->columnCount() == 3);
   int row = 0;
   for (const ribi::cmap::Node& node: ribi::cmap::GetNodes(g))
   {
@@ -153,8 +166,8 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
     ++row;
   }
 
-  table->verticalHeader()->setMinimumWidth(300);
-  table->verticalHeader()->setMaximumWidth(300);
+  table->verticalHeader()->setMinimumWidth(400);
+  table->verticalHeader()->setMaximumWidth(400);
   table->setColumnWidth(0,100);
   table->setColumnWidth(1,100);
   table->setColumnWidth(2,100);
