@@ -11,13 +11,8 @@ class qtbrainweaverdisplay_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void display_examples();
-  void display_misc_values();
-  void display_misc_values_without_center_node();
   void display_rated_concepts();
   void display_rated_concepts_without_center_node();
-  void display_values();
-  void display_values_without_nodes();
 };
 
 } //~namespace braw

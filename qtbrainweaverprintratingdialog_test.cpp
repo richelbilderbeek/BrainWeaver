@@ -11,9 +11,6 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction()
   ribi::braw::QtPrintRatingDialog d(f);
   d.show();
   QVERIFY(d.GetTableConcepts());
-  QVERIFY(d.GetTableExamples());
-  QVERIFY(d.GetTableMiscValues());
-  QVERIFY(d.GetTableValues());
 }
 
 void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_without_nodes()
