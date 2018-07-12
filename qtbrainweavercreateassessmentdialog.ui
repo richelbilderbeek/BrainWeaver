@@ -446,17 +446,17 @@ verbindingen</string>
               </item>
               <item row="0" column="2">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="3">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="4">
                <property name="text">
-                <string>0</string>
+                <string>2</string>
                </property>
               </item>
              </widget>
@@ -617,17 +617,17 @@ verbindingen</string>
               </item>
               <item row="0" column="2">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="3">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="4">
                <property name="text">
-                <string>0</string>
+                <string>2</string>
                </property>
               </item>
              </widget>
