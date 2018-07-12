@@ -66,10 +66,25 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
   }
 
   
+
   QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
-  QtDisplay().DisplayExamples(file,ui->table_examples);
+
+  //Add tallied examples
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Verdeling van de voorbeelden/toelichting over de zes objecten van kennis",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateTalliedExamplesWidget(file, this)
+    );
+  }
+
   QtDisplay().DisplayValues(file,ui->table_values);
-  QtDisplay().DisplayMiscValues(file, ui->table_misc_values);
+  QtDisplay().DisplayMiscValues(file, ui->table_values);
 
   //Center the dialog
   {

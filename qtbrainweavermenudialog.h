@@ -47,6 +47,8 @@ private slots:
 
   void on_button_create_assessment_clicked();
 
+  void on_label_example_competencies_clicked();
+
 private:
   Ui::QtMenuDialog *ui;
 

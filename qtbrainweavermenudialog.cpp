@@ -12,7 +12,7 @@
 #include <QKeyEvent>
 #include <QLayout>
 #include <QVBoxLayout>
-
+#include <QTableWidget>
 #include "add_custom_vertex.h"
 #include "brainweaverfilefactory.h"
 #include "brainweaverfile.h"
@@ -36,6 +36,7 @@
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweavercreateassessmentdialog.h"
+#include "qtbrainweaverdisplay.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaveroverviewdialog.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
@@ -195,12 +196,10 @@ void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 {
-  QtPrintConceptMapDialog * const d{
-    new QtPrintConceptMapDialog(FileFactory().Get5())
+  auto * const d{
+    new QtPrintRatingDialog(FileFactory().Get5())
   };
   d->exec();
-  // 'emit add_me(d);' causes Wine crash,
-  // see https://github.com/richelbilderbeek/Brainweaver/issues/161
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
@@ -238,4 +237,13 @@ void ribi::braw::QtMenuDialog::on_button_create_assessment_clicked()
     new ribi::braw::QtCreateAssessmentDialog()
   };
   d->exec();
+}
+
+void ribi::braw::QtMenuDialog::on_label_example_competencies_clicked()
+{
+  auto w = QtDisplay().CreateTalliedExamplesWidget(
+    FileFactory().Get5(),
+    this
+  );
+  w->show();
 }

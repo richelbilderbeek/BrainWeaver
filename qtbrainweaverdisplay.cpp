@@ -32,6 +32,28 @@ ribi::braw::QtDisplay::QtDisplay()
 
 }
 
+QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
+  const File& file,
+  QWidget * const parent
+) const
+{
+  auto * const table = new QTableWidget(7, 1, parent);
+  DisplayExamples(file, table);
+  assert(table->rowCount() == 7);
+  assert(table->columnCount() == 1);
+  table->verticalHeader()->setMinimumWidth(200);
+  table->setMinimumHeight(239);
+  table->setMaximumHeight(239);
+  table->setMinimumWidth(327);
+  table->setMaximumWidth(327);
+  table->setColumnWidth(0,70);
+  table->setHorizontalHeaderLabels( { "%" } );
+  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  return table;
+}
+
+
 void ribi::braw::QtDisplay::DisplayRatedConcepts(
   const File& file,
   QTableWidget * const table
@@ -138,6 +160,9 @@ void ribi::braw::QtDisplay::DisplayExamples(
   const File& file,
   QTableWidget * const table) const
 {
+  assert(table->rowCount() == 7);
+  assert(table->columnCount() == 1);
+  //Display competency names, with icon
   {
     const int n_rows = table->rowCount();
     for(int i=0; i!=n_rows; ++i)
@@ -152,7 +177,7 @@ void ribi::braw::QtDisplay::DisplayExamples(
       table->setVerticalHeaderItem(i,item);
     }
   }
-  //Examples' competencies
+  //Display the tallied Examples' competencies
   {
     std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
 
@@ -209,7 +234,7 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     QTableWidgetItem * const item = new QTableWidgetItem;
     item->setText(text.c_str());
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    table->setItem(1,0,item);
+    table->setItem(4 + 1,0,item);
   }
   //Hierarchical levels
   {
@@ -221,7 +246,7 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     assert(2 < table->rowCount());
     assert(0 < table->columnCount());
-    table->setItem(2,0,item);
+    table->setItem(4 + 2,0,item);
   }
   //Number of examples
   {
@@ -232,17 +257,8 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     assert(3 < table->rowCount());
     assert(0 < table->columnCount());
-    table->setItem(3, 0, item);
+    table->setItem(4 + 3, 0, item);
   }
-
-  //Fixing table
-  table->verticalHeader()->setMaximumWidth(300);
-  table->verticalHeader()->setMinimumWidth(300);
-  table->setColumnWidth(0,300);
-  table->setMaximumWidth(
-      table->verticalHeader()->width()
-    + table->columnWidth(0)
-  );
 }
 
 
@@ -310,5 +326,5 @@ void ribi::braw::QtDisplay::SetNumberOfNodes(
   item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
   assert(0 < table->rowCount());
   assert(0 < table->columnCount());
-  table->setItem(0,0,item);
+  table->setItem(4 + 0,0,item);
 }

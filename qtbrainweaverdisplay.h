@@ -1,8 +1,10 @@
 #ifndef QTBRAINWEAVERDISPLAY_H
 #define QTBRAINWEAVERDISPLAY_H
 
+#include <memory>
 #include "brainweaverfwd.h"
 
+struct QWidget;
 struct QTableWidget;
 
 namespace ribi {
@@ -13,6 +15,10 @@ namespace braw {
 struct QtDisplay
 {
   QtDisplay();
+
+  QTableWidget * CreateTalliedExamplesWidget(
+    const File& file, QWidget * const parent = nullptr
+  ) const;
 
   void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
   void DisplayExamples(const File& file, QTableWidget * const table) const;

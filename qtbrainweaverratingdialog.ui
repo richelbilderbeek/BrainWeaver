@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>861</width>
-    <height>1117</height>
+    <height>969</height>
    </rect>
   </property>
   <property name="font">
@@ -40,7 +40,7 @@
         <x>0</x>
         <y>0</y>
         <width>841</width>
-        <height>1042</height>
+        <height>894</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -147,149 +147,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Verdeling van de voorbeelden/toelichting over de zes objecten van kennis</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="table_examples">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>235</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>324</width>
-           <height>235</height>
-          </size>
-         </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-         <row>
-          <property name="text">
-           <string>Kennis van het beroepsdomein</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Kennis van organisaties</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Kennis van de sociale omgeving</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Kennis van de doelgroep</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Technisch instrumentele kennis</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Kennis van de eigen persoon</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Overige</string>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>%</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="1" column="0">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="background">
-           <brush brushstyle="NoBrush">
-            <color alpha="255">
-             <red>255</red>
-             <green>255</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </property>
-         </item>
-         <item row="2" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="3" column="0">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="background">
-           <brush brushstyle="NoBrush">
-            <color alpha="255">
-             <red>255</red>
-             <green>255</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </property>
-         </item>
-         <item row="4" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="5" column="0">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="background">
-           <brush brushstyle="NoBrush">
-            <color alpha="255">
-             <red>255</red>
-             <green>255</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </property>
-         </item>
-         <item row="6" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_5">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -305,10 +162,16 @@
        <item>
         <widget class="QTableWidget" name="table_values">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>362</height>
+          </size>
          </property>
          <property name="maximumSize">
           <size>
@@ -351,103 +214,14 @@
            <string>Rijkheid</string>
           </property>
          </row>
-         <column>
-          <property name="text">
-           <string>Experimentele waarde</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Geschatte waarde</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string>X_e</string>
-          </property>
-         </item>
-         <item row="0" column="1">
-          <property name="text">
-           <string>X_s</string>
-          </property>
-         </item>
-         <item row="1" column="0">
-          <property name="text">
-           <string>C_e</string>
-          </property>
-         </item>
-         <item row="1" column="1">
-          <property name="text">
-           <string>C_s</string>
-          </property>
-         </item>
-         <item row="2" column="0">
-          <property name="text">
-           <string>S_e</string>
-          </property>
-         </item>
-         <item row="2" column="1">
-          <property name="text">
-           <string>-</string>
-          </property>
-         </item>
-         <item row="3" column="0">
-          <property name="text">
-           <string>R_e</string>
-          </property>
-         </item>
-         <item row="3" column="1">
-          <property name="text">
-           <string>-</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_misc_values">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Overige waarden</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="table_misc_values">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>500</width>
-           <height>144</height>
-          </size>
-         </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>200</number>
-         </attribute>
-         <attribute name="horizontalHeaderMinimumSectionSize">
-          <number>100</number>
-         </attribute>
          <row>
           <property name="text">
            <string>Aantal concepten</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Aantal voorbeelden</string>
           </property>
          </row>
          <row>
@@ -460,11 +234,6 @@
            <string>Hierarchische niveaus</string>
           </property>
          </row>
-         <row>
-          <property name="text">
-           <string>Aantal voorbeelden</string>
-          </property>
-         </row>
          <column>
           <property name="text">
            <string>Waarde</string>
@@ -472,12 +241,22 @@
          </column>
          <item row="0" column="0">
           <property name="text">
-           <string/>
+           <string>X_e</string>
           </property>
          </item>
          <item row="1" column="0">
           <property name="text">
-           <string/>
+           <string>C_e</string>
+          </property>
+         </item>
+         <item row="2" column="0">
+          <property name="text">
+           <string>S_e</string>
+          </property>
+         </item>
+         <item row="3" column="0">
+          <property name="text">
+           <string>R_e</string>
           </property>
          </item>
         </widget>

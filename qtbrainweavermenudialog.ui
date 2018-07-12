@@ -52,6 +52,13 @@
     <widget class="QWidget" name="widget_debug_2" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
+       <widget class="QPushButton" name="label_example_competencies">
+        <property name="text">
+         <string>&amp;J. Example compenties</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_additional_screens">
         <property name="text">
          <string>Additional developer test dialog</string>

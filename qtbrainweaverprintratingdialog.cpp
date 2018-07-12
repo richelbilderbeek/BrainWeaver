@@ -96,25 +96,13 @@ const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() c
     }
   }
   v.push_back(ui->frame_concepts);
-  v.push_back(ui->frame_competencies);
   v.push_back(ui->frame_values);
-  v.push_back(ui->frame_misc_values);
   return v;
 }
 
 QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableConcepts()
 {
   return ui->table_concepts;
-}
-
-QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableExamples()
-{
-  return ui->table_examples;
-}
-
-QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableMiscValues()
-{
-  return ui->table_misc_values;
 }
 
 QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableValues()
@@ -218,7 +206,20 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
     this->GetTableConcepts()->setMinimumHeight( ((sz-1) * 30) + 26 );
   }
 
-  QtDisplay().DisplayExamples(m_file,this->GetTableExamples());
+  //Add tallied examples
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Verdeling van de voorbeelden/toelichting over de zes objecten van kennis",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateTalliedExamplesWidget(m_file, this)
+    );
+  }
+
   QtDisplay().DisplayValues(m_file,this->GetTableValues());
-  QtDisplay().DisplayMiscValues(m_file,this->GetTableMiscValues());
+  QtDisplay().DisplayMiscValues(m_file,this->GetTableValues());
 }
