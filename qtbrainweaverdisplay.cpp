@@ -153,7 +153,7 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
   //The first node, the focal question, removed
   const auto g = RemoveFirstNode(file.GetConceptMap());
 
-  table->setRowCount(boost::num_vertices(file.GetConceptMap()));
+  table->setRowCount(boost::num_vertices(g));
   assert(table->columnCount() == 3);
   int row = 0;
   for (const ribi::cmap::Node& node: ribi::cmap::GetNodes(g))
@@ -165,17 +165,21 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
     DisplayRatedConceptRatingSpecificity(concept, table, row, 2);
     ++row;
   }
-
-  table->verticalHeader()->setMinimumWidth(400);
-  table->verticalHeader()->setMaximumWidth(400);
-  table->setColumnWidth(0,100);
-  table->setColumnWidth(1,100);
-  table->setColumnWidth(2,100);
-  table->setMaximumWidth(
+  table->setColumnWidth(0, 50);
+  table->setColumnWidth(1, 50);
+  table->setColumnWidth(2, 50);
+  table->setMinimumWidth(
       table->verticalHeader()->width()
     + table->columnWidth(0)
     + table->columnWidth(1)
     + table->columnWidth(2)
+  );
+  table->setSizeAdjustPolicy(
+    QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents
+  );
+  table->resizeRowsToContents();
+  table->setMinimumHeight(
+    table->sizeHint().height()
   );
 }
 
