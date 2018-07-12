@@ -7,9 +7,9 @@
 #include "qtbrainweavermenudialog.h"
 #include "qtbrainweavermasterdialog.h"
 
-const std::string CreateStyleSheet()
+std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
 {
-  const std::string s =
+  return
     "QDialog { "
 //    "  background-image: url(:/images/PicLoomBackground.png);" //Sorry Joost!
     "  background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, stop: 0 #bbf, stop: 1 #bff);"
@@ -56,9 +56,7 @@ const std::string CreateStyleSheet()
     "QTableWidget {"
     "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;"
     "}"
-
   ;
-  return s;
 }
 
 
