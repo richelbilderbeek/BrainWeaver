@@ -95,6 +95,7 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5
+#QT += core gui widgets concurrent opengl printsupport svg
 QT += core gui widgets concurrent opengl printsupport svg
 
 # QTest

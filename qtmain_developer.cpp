@@ -87,6 +87,9 @@ int main(int argc, char *argv[])
   try
   {
     MyApplication a(argc, argv);
+    #ifndef NDEBUG
+    qDebug() << "DEBUG mode";
+    #endif
     a.setStyleSheet(CreateStyleSheet().c_str());
     a.setWindowIcon(QIcon(":/images/R.png"));
     ribi::braw::QtMasterDialog d;

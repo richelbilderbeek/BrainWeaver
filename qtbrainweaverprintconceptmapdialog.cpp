@@ -34,23 +34,29 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
     m_file(file),
     m_widget(new cmap::QtConceptMap)
 {
+  qDebug() << __LINE__;
   ui->setupUi(this);
+  qDebug() << __LINE__;
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   setMinimumWidth(780);
   setMaximumWidth(780);
 
+  qDebug() << __LINE__;
   m_widget->SetConceptMap(file.GetConceptMap());
+  qDebug() << __LINE__;
   {
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
     ui->frame_concept_map->layout()->addWidget(m_widget);
+  qDebug() << __LINE__;
     ui->frame_concept_map->setMinimumWidth(750);
     ui->frame_concept_map->setMaximumWidth(750);
     ui->frame_concept_map->setMinimumHeight(
       1.44 * ui->frame_concept_map->width()
     );
   }
+  qDebug() << __LINE__;
 
   ui->label_student_name->setText(
     ("Concept map van "

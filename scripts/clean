@@ -1,4 +1,6 @@
 #!/bin/bash
 
 cd ..
-rm ui_*
+rm -f ui_*
+rm -f *_plugin_import.cpp
+rm -f Makefile.*

@@ -87,6 +87,7 @@ unix:!macx {
 }
 
 # Qt5
+#QT += core gui widgets concurrent opengl printsupport svg
 QT += core gui widgets concurrent opengl printsupport svg
 
 # Fixes

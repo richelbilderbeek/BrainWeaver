@@ -58,3 +58,4 @@ test_scripts/*.log
 Brainweaver.zip
 BrainweaverDeveloper.zip
 *.zip
+autosave*.cmp
