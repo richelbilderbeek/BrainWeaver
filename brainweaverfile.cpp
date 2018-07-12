@@ -80,9 +80,14 @@ void ribi::braw::File::AutoSave() const
   this->Save("autosave1." + GetFilenameExtension());
 }
 
+int ribi::braw::CountEdges(const File& file) noexcept
+{
+  return boost::num_edges(file.GetConceptMap());
+}
+
 double ribi::braw::CountEdgesPerNormalNode(const File& file) noexcept
 {
-  auto g = file.GetConceptMap();
+  const auto g = file.GetConceptMap();
   std::vector<int> degrees;
   const auto vip = vertices(g);
   for (auto i = vip.first; i != vip.second; ++i)

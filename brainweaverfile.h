@@ -110,6 +110,9 @@ class File
   std::string m_version;
 };
 
+///Count the number of edges, including those connected to the center node
+int CountEdges(const File& file) noexcept;
+
 ///Count the average number of connections per non-center node
 double CountEdgesPerNormalNode(const File& file) noexcept;
 

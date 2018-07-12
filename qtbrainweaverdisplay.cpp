@@ -37,10 +37,10 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   QWidget * const parent
 ) const
 {
-  auto * const table = new QTableWidget(8, 1, parent);
+  auto * const table = new QTableWidget(9, 1, parent);
   table->verticalHeader()->setMinimumWidth(200);
-  table->setMinimumHeight(269);
-  table->setMaximumHeight(269);
+  table->setMinimumHeight(299);
+  table->setMaximumHeight(299);
   table->setMinimumWidth(275);
   table->setMaximumWidth(275);
   table->setColumnWidth(0,70);
@@ -80,16 +80,21 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   }
   {
     const int row_index{5};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal relaties"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdges(file))));
+  }
+  {
+    const int row_index{6};
     table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Relaties per concept"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdgesPerNormalNode(file))));
   }
   {
-    const int row_index{6};
+    const int row_index{7};
     table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Hierarchische niveaus"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountHierarchicalLevels(file))));
   }
   {
-    const int row_index{7};
+    const int row_index{8};
     table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal voorbeelden"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountExamples(file))));
   }
