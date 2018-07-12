@@ -31,7 +31,6 @@ public:
   ~QtPrintRatingDialog() noexcept;
 
   QTableWidget * GetTableConcepts();
-  QTableWidget * GetTableValues();
   void Print();
   void Print(const std::string& filename);
 

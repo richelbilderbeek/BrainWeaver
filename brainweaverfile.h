@@ -110,6 +110,11 @@ class File
   std::string m_version;
 };
 
+///Count the average number of connections per non-center node
+double CountEdgesPerNode(const File& file) noexcept;
+
+///Count the number of nodes
+int CountNodes(const File& file) noexcept;
 
 ///Create a concept map with a center node with text
 ribi::cmap::ConceptMap CreateConceptMap(const std::string& text) noexcept;

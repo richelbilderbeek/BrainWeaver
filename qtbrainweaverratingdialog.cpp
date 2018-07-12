@@ -83,8 +83,21 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
     );
   }
 
-  QtDisplay().DisplayValues(file,ui->table_values);
-  QtDisplay().DisplayMiscValues(file, ui->table_values);
+  //Add diagnostics
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Gevonden waarden",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateDiagnosticsWidget(file, this)
+    );
+  }
+  //QtDisplay().DisplayValues(file,ui->table_values);
+  //QtDisplay().DisplayMiscValues(file, ui->table_values);
 
   //Center the dialog
   {

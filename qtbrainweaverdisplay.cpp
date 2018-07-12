@@ -32,6 +32,70 @@ ribi::braw::QtDisplay::QtDisplay()
 
 }
 
+QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
+  const File& file,
+  QWidget * const parent
+) const
+{
+  auto * const table = new QTableWidget(8, 1, parent);
+  //DisplayValues(file, table);
+  DisplayMiscValues(file, table);
+  //assert(table->rowCount() == 8);
+  //assert(table->columnCount() == 1);
+  table->verticalHeader()->setMinimumWidth(200);
+  table->setMinimumHeight(269);
+  table->setMaximumHeight(269);
+  table->setMinimumWidth(275);
+  table->setMaximumWidth(275);
+  table->setColumnWidth(0,70);
+  table->setHorizontalHeaderLabels( { "Waarde" } );
+  {
+    const int row_index{0};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Complexiteit"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateComplexityExperimental(file))));
+  }
+  {
+    const int row_index{1};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Concreetheid"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateConcretenessExperimental(file))));
+  }
+  {
+    const int row_index{2};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Specificiteit"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateSpecificityExperimental(file))));
+  }
+  {
+    const int row_index{3};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Rijkheid"));
+    try
+    {
+      table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateRichnessExperimental(file))));
+    }
+    catch (const std::invalid_argument& e)
+    {
+      //OK, just display nothing
+      assert(std::string(e.what()) == "Cannot calculate richness if not all examples are rated");
+    }
+  }
+  {
+    const int row_index{4};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal concepten"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountNodes(file))));
+  }
+  {
+    const int row_index{5};
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Relaties per concept"));
+    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdgesPerNode(file))));
+  }
+
+  table->setVerticalHeaderItem(6, new QTableWidgetItem("Hierarchische niveaus"));
+  table->setVerticalHeaderItem(7, new QTableWidgetItem("Aantal voorbeelden"));
+
+  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  return table;
+}
+
 QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
   const File& file,
   QWidget * const parent
@@ -215,7 +279,7 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
   const File& file,
   QTableWidget * const table) const
 {
-  SetNumberOfNodes(file, table);
+  //SetNumberOfNodes(file, table);
   auto g = file.GetConceptMap();
   //Average number of connections per non-center node
   {
@@ -260,60 +324,6 @@ void ribi::braw::QtDisplay::DisplayMiscValues(
     table->setItem(4 + 3, 0, item);
   }
 }
-
-
-void ribi::braw::QtDisplay::DisplayValues(
-  const File& file,
-  QTableWidget * const table) const
-{
-  if (boost::num_vertices(file.GetConceptMap()) == 0)
-  {
-    std::stringstream msg;
-    msg << __func__ << ": must have at least one node";
-    throw std::invalid_argument(msg.str());
-  }
-
-  // function row column
-  using Cell = std::tuple<std::function<int(const File&)>, int, int>;
-  std::vector<Cell> v;
-  v.push_back(std::make_tuple(CalculateComplexityExperimental  , 0, 0));
-  v.push_back(std::make_tuple(CalculateConcretenessExperimental, 1, 0));
-  v.push_back(std::make_tuple(CalculateSpecificityExperimental , 2, 0));
-  v.push_back(std::make_tuple(CalculateRichnessExperimental    , 3, 0));
-
-  for (const auto t: v)
-  {
-    std::string text;
-    try
-    {
-      text = boost::lexical_cast<std::string>(std::get<0>(t)(file));
-    }
-    catch (std::exception&)
-    {
-      text = "N/A";
-    }
-    QTableWidgetItem * const item = new QTableWidgetItem;
-    item->setText(text.c_str());
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    assert(std::get<1>(t) >= 0);
-    assert(std::get<1>(t) < table->rowCount());
-    assert(std::get<2>(t) >= 0);
-    assert(std::get<2>(t) < table->columnCount());
-    table->setItem(std::get<1>(t),std::get<2>(t),item);
-  }
-
-  table->verticalHeader()->setMaximumWidth(100);
-  table->verticalHeader()->setMinimumWidth(100);
-  table->setColumnWidth(0,200);
-  table->setColumnWidth(1,200);
-  assert(table->verticalHeader()->width() == 100);
-  table->setMaximumWidth(
-      table->verticalHeader()->width()
-    + table->columnWidth(0)
-    + table->columnWidth(1)
-  );
-}
-
 
 void ribi::braw::QtDisplay::SetNumberOfNodes(
   const File& file,

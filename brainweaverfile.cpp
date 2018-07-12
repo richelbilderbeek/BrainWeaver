@@ -80,9 +80,27 @@ void ribi::braw::File::AutoSave() const
   this->Save("autosave1." + GetFilenameExtension());
 }
 
+double ribi::braw::CountEdgesPerNode(const File& file) noexcept
+{
+  auto g = file.GetConceptMap();
+  std::vector<int> degrees;
+  const auto vip = vertices(g);
+  for (auto i = vip.first; i != vip.second; ++i)
+  {
+    if (IsCenterNode(g[*i])) continue;
+    degrees.push_back(boost::degree(*i, g));
+  }
+  const int sum{std::accumulate(std::begin(degrees), std::end(degrees), 0)};
+  const double adpc{ //average_degree_per_concept
+    static_cast<double>(sum) / static_cast<double>(degrees.size())
+  };
+  return adpc;
+}
 
-
-
+int ribi::braw::CountNodes(const File& file) noexcept
+{
+  return boost::num_vertices(file.GetConceptMap());
+}
 
 std::string ribi::braw::ExtractFileAboutFromXml(const std::string& s)
 {

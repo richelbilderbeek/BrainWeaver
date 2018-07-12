@@ -96,18 +96,12 @@ const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() c
     }
   }
   v.push_back(ui->frame_concepts);
-  v.push_back(ui->frame_values);
   return v;
 }
 
 QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableConcepts()
 {
   return ui->table_concepts;
-}
-
-QTableWidget * ribi::braw::QtPrintRatingDialog::GetTableValues()
-{
-  return ui->table_values;
 }
 
 void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
@@ -174,6 +168,7 @@ void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
 
 void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
 {
+  const auto& file = m_file; //Just an alias
   //Concept map
   {
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -216,10 +211,23 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
       )
     );
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateTalliedExamplesWidget(m_file, this)
+      QtDisplay().CreateTalliedExamplesWidget(file, this)
     );
   }
 
-  QtDisplay().DisplayValues(m_file,this->GetTableValues());
-  QtDisplay().DisplayMiscValues(m_file,this->GetTableValues());
+  //Add diagnostics
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      new QLabel(
+        "Gevonden waarden",
+        this
+      )
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      QtDisplay().CreateDiagnosticsWidget(file, this)
+    );
+  }
+  //QtDisplay().DisplayValues(m_file,this->GetTableValues());
+  //QtDisplay().DisplayMiscValues(m_file,this->GetTableValues());
 }

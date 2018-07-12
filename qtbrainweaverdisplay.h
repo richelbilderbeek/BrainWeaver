@@ -16,13 +16,16 @@ struct QtDisplay
 {
   QtDisplay();
 
+  QTableWidget * CreateDiagnosticsWidget(
+    const File& file, QWidget * const parent = nullptr
+  ) const;
+
   QTableWidget * CreateTalliedExamplesWidget(
     const File& file, QWidget * const parent = nullptr
   ) const;
 
   void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
   void DisplayExamples(const File& file, QTableWidget * const table) const;
-  void DisplayValues(const File& file, QTableWidget * const table) const;
   void DisplayMiscValues(const File& file, QTableWidget * const table) const;
 
   private:
