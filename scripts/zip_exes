@@ -1,4 +1,4 @@
 #!/bin/sh
 cd ..
 
-zip Brainweaver.zip BrainweaverAssessor.exe BrainweaverStudent.exe 
+zip BrainweaverDeveloper.zip BrainweaverAssessor.exe BrainweaverStudent.exe BrainweaverDeveloper.exe BrainweaverDesktopTest.exe 
