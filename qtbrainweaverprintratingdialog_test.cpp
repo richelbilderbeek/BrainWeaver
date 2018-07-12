@@ -10,7 +10,6 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction()
   const File f = FileFactory().GetTests().back();
   ribi::braw::QtPrintRatingDialog d(f);
   d.show();
-  QVERIFY(d.GetTableConcepts());
 }
 
 void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_without_nodes()

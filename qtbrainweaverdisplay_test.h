@@ -11,8 +11,7 @@ class qtbrainweaverdisplay_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void display_rated_concepts();
-  void display_rated_concepts_without_center_node();
+  void construct();
 };
 
 } //~namespace braw
