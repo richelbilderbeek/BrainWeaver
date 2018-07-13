@@ -85,9 +85,12 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
     {
       if (IsCenterNode(node)) continue;
       ribi::cmap::QtConceptMapRatedConceptDialog * const widget
-        = new ribi::cmap::QtConceptMapRatedConceptDialog(conceptmap, node);
+        = new ribi::cmap::QtConceptMapRatedConceptDialog(
+          conceptmap,
+          node,
+          ribi::cmap::Role::student
+        );
       assert(widget);
-      widget->HideRating();
       ui->frame_concept_map_as_text->layout()->addWidget(widget);
     }
   }

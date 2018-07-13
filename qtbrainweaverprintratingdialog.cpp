@@ -182,7 +182,11 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
     {
       const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
       cmap::QtConceptMapRatedConceptDialog * const widget
-        = new cmap::QtConceptMapRatedConceptDialog(m_file.GetConceptMap(),node);
+        = new cmap::QtConceptMapRatedConceptDialog(
+          m_file.GetConceptMap(),
+          node,
+          ribi::cmap::Role::assessor
+        );
       assert(widget);
       ui->widget_concept_map_as_text->layout()->addWidget(widget);
     }
