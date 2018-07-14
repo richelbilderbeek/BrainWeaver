@@ -37,3 +37,5 @@ fi
 if [ ! -d StyleSheetSetter ]; then
   git clone -b develop https://github.com/richelbilderbeek/StyleSheetSetter
 fi
+
+git clone -b develop https://github.com/Microsoft/GSL
