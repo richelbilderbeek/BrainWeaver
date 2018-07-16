@@ -52,7 +52,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
     ui(new Ui::QtConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
-    m_widget{new ribi::cmap::QtConceptMap(this)}
+    m_widget{new ribi::cmap::QtConceptMap(file.GetRating(), this)}
 {
   if (!m_file.GetCluster().Empty() && boost::num_vertices(m_file.GetConceptMap()) == 0)
   {

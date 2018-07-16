@@ -47,6 +47,7 @@ ribi::braw::File::File()
     m_cluster{},
     m_concept_map{},
     m_question{},
+    m_rating{ribi::cmap::CreateDefaultRating()},
     m_student_name{},
     m_version("0.4")
 {
@@ -66,6 +67,7 @@ ribi::braw::File::File(
     m_cluster(cluster),
     m_concept_map(concept_map),
     m_question(question),
+    m_rating{ribi::cmap::CreateDefaultRating()},
     m_student_name(student_name),
     m_version(version)
 {

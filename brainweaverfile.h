@@ -4,13 +4,10 @@
 #include <string>
 #include <vector>
 
-
-
-
 #include "conceptmap.h"
 #include "brainweaverfwd.h"
 #include "brainweavercluster.h"
-
+#include "qtconceptmaprating.h"
 
 namespace ribi {
 namespace braw {
@@ -53,6 +50,8 @@ class File
 
   ///Get the assessors' questions
   std::string GetQuestion() const;
+
+  const auto& GetRating() const noexcept { return m_rating; }
 
   ///Get the student his/her name
   const std::string& GetStudentName() const { return m_student_name; }
@@ -102,6 +101,9 @@ class File
 
   ///The question the student must answer
   std::string m_question;
+
+  ///The rating that will be suggested on concepts
+  ribi::cmap::Rating m_rating;
 
   ///The student his/her name
   std::string m_student_name;
