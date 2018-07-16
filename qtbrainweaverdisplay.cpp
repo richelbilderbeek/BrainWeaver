@@ -108,11 +108,51 @@ QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
   QWidget * const parent
 ) const
 {
+  if (!boost::num_vertices(file.GetConceptMap()))
+  {
+    std::stringstream msg;
+    msg << __func__ << ": must have at least one node";
+    throw std::invalid_argument(msg.str());
+  }
+
   auto * const table = new QTableWidget(0, 3, parent);
-  DisplayRatedConcepts(file, table);
+
+  //The first node, the focal question, removed
+  const auto g = RemoveFirstNode(file.GetConceptMap());
+
+  table->setRowCount(boost::num_vertices(g));
+  assert(table->columnCount() == 3);
+  int row = 0;
+  for (const ribi::cmap::Node& node: ribi::cmap::GetNodes(g))
+  {
+    const ribi::cmap::Concept& concept = node.GetConcept();
+    DisplayRatedConceptName(concept, table, row);
+    DisplayRatedConceptRatingComplexity(concept, table, row, 0);
+    DisplayRatedConceptRatingConcreteness(concept, table, row, 1);
+    DisplayRatedConceptRatingSpecificity(concept, table, row, 2);
+    ++row;
+  }
+  table->setColumnWidth(0, 50);
+  table->setColumnWidth(1, 50);
+  table->setColumnWidth(2, 50);
+  table->setWordWrap(true);
+  //table->setMaximumWidth(650);
+  table->setMinimumWidth(650);
   table->setHorizontalHeaderLabels( { "X", "S", "C" } );
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  table->verticalHeader()->setMaximumWidth(530);
+  table->verticalHeader()->setTextElideMode(Qt::TextElideMode::ElideNone);
+  table->setSizeAdjustPolicy(
+    QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents
+  );
+  table->verticalHeader()->resizeSections(
+    QHeaderView::ResizeMode::ResizeToContents
+  );
+  table->resizeRowsToContents();
+  table->setMinimumHeight(
+    table->sizeHint().height()
+  );
   return table;
 }
 
@@ -138,46 +178,6 @@ QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
 }
 
 
-void ribi::braw::QtDisplay::DisplayRatedConcepts(
-  const File& file,
-  QTableWidget * const table
-) const
-{
-  if (!boost::num_vertices(file.GetConceptMap()))
-  {
-    std::stringstream msg;
-    msg << __func__ << ": must have at least one node";
-    throw std::invalid_argument(msg.str());
-  }
-
-  //The first node, the focal question, removed
-  const auto g = RemoveFirstNode(file.GetConceptMap());
-
-  table->setRowCount(boost::num_vertices(g));
-  assert(table->columnCount() == 3);
-  int row = 0;
-  for (const ribi::cmap::Node& node: ribi::cmap::GetNodes(g))
-  {
-    const ribi::cmap::Concept& concept = node.GetConcept();
-    DisplayRatedConceptName(concept, table, row);
-    DisplayRatedConceptRatingComplexity(concept, table, row, 0);
-    DisplayRatedConceptRatingConcreteness(concept, table, row, 1);
-    DisplayRatedConceptRatingSpecificity(concept, table, row, 2);
-    ++row;
-  }
-  table->setColumnWidth(0, 50);
-  table->setColumnWidth(1, 50);
-  table->setColumnWidth(2, 50);
-  table->setMaximumWidth(650);
-  table->setMinimumWidth(650);
-  table->setSizeAdjustPolicy(
-    QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents
-  );
-  table->resizeRowsToContents();
-  table->setMinimumHeight(
-    table->sizeHint().height()
-  );
-}
 
 void ribi::braw::QtDisplay::DisplayRatedConceptName(
   const ribi::cmap::Concept& concept,
@@ -185,8 +185,8 @@ void ribi::braw::QtDisplay::DisplayRatedConceptName(
   const int row
 ) const
 {
-  QTableWidgetItem * const item = new QTableWidgetItem;
-  item->setText(concept.GetName().c_str());
+  QTableWidgetItem * const item =
+    new QTableWidgetItem(concept.GetName().c_str());
   assert(row >= 0);
   assert(row < table->rowCount());
   table->setVerticalHeaderItem(row,item);

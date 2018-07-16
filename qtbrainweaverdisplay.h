@@ -32,8 +32,6 @@ struct QtDisplay
 
   void DisplayExamples(const File& file, QTableWidget * const table) const;
 
-  void DisplayRatedConcepts(const File& file,QTableWidget * const table) const;
-
   void DisplayRatedConceptName(
     const ribi::cmap::Concept& concept,
     QTableWidget * const table, const int row
