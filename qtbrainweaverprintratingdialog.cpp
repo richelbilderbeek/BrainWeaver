@@ -88,109 +88,6 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     ui->label_date->setText( ("Datum: " + s).c_str()
     );
   }
-}
-
-ribi::braw::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
-{
-  delete ui;
-}
-
-const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() const
-{
-  std::vector<QWidget *> v = {
-    ui->frame_header,
-    ui->frame_concept_map,
-    m_label_rated_concepts,
-    m_table_rated_concepts,
-    m_label_tallied_examples,
-    m_table_tallied_examples,
-    m_label_diagnostics,
-    m_table_diagnostics,
-    m_label_concept_map_as_text
-  };
-  {
-    std::copy(
-      begin(m_concept_map_as_texts),
-      end(m_concept_map_as_texts),
-      std::back_inserter(v)
-    );
-    //Add widgets in widget_concept_map_as_text
-    /*
-    const int n = ui->widget_concept_map_as_text->layout()->count();
-    for (int i=0; i!=n; ++i)
-    {
-      v.push_back(ui->widget_concept_map_as_text->layout()->itemAt(i)->widget());
-    }
-    */
-  }
-  return v;
-}
-
-void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
-{
-  if (event->key() == Qt::Key_Escape) { emit remove_me(this); return; }
-}
-
-void ribi::braw::QtPrintRatingDialog::on_button_print_clicked()
-{
-  Print();
-}
-
-void ribi::braw::QtPrintRatingDialog::Print()
-{
-  //Start save dialog
-  const std::unique_ptr<QFileDialog> print_dialog(
-    QtFileDialog().GetSaveFileDialog(
-      QtFileDialog::FileType::pdf)
-  );
-  print_dialog->setWindowTitle("Exporteer document naar PDF");
-  if (print_dialog->exec() != QDialog::Accepted
-    || print_dialog->selectedFiles().empty() )
-  {
-    return;
-  }
-  assert(!print_dialog->selectedFiles().empty());
-  assert(print_dialog->selectedFiles().size() == 1);
-  const std::string filename = print_dialog->selectedFiles()[0].toStdString();
-  Print(filename);
-}
-
-void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
-{
-  QPrinter printer;
-  printer.setOrientation(QPrinter::Portrait);
-  printer.setPaperSize(QPrinter::A4);
-  printer.setFullPage(false);
-  printer.setOutputFileName(filename.c_str());
-
-  //Draw the image to painter to printer (?must be done before printing)
-  QPainter painter;
-
-  painter.begin(&printer);
-  {
-    //Collect widgets to print
-    const std::vector<QWidget *> widgets = CollectWidgets();
-
-    int y = 0;
-    for (QWidget * const widget: widgets)
-    {
-      const int h = widget->height();
-      if (y+h > painter.window().height())
-      {
-        printer.newPage();
-        y = 0;
-      }
-      widget->render(&painter,QPoint(0,y));
-      y+=h;
-    }
-  }
-  painter.end();
-
-}
-
-void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
-{
-  const auto& file = m_file; //Just an alias
   //Concept map
   {
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -255,4 +152,91 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
     }
   }
 
+}
+
+ribi::braw::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
+{
+  delete ui;
+}
+
+const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() const
+{
+  std::vector<QWidget *> v = {
+    ui->frame_header,
+    ui->frame_concept_map,
+    m_label_rated_concepts,
+    m_table_rated_concepts,
+    m_label_tallied_examples,
+    m_table_tallied_examples,
+    m_label_diagnostics,
+    m_table_diagnostics,
+    m_label_concept_map_as_text
+  };
+  std::copy(
+    std::begin(m_concept_map_as_texts),
+    std::end(m_concept_map_as_texts),
+    std::back_inserter(v)
+  );
+  return v;
+}
+
+void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
+{
+  if (event->key() == Qt::Key_Escape) { emit remove_me(this); return; }
+}
+
+void ribi::braw::QtPrintRatingDialog::on_button_print_clicked()
+{
+  Print();
+}
+
+void ribi::braw::QtPrintRatingDialog::Print()
+{
+  //Start save dialog
+  const std::unique_ptr<QFileDialog> print_dialog(
+    QtFileDialog().GetSaveFileDialog(
+      QtFileDialog::FileType::pdf)
+  );
+  print_dialog->setWindowTitle("Exporteer document naar PDF");
+  if (print_dialog->exec() != QDialog::Accepted
+    || print_dialog->selectedFiles().empty() )
+  {
+    return;
+  }
+  assert(!print_dialog->selectedFiles().empty());
+  assert(print_dialog->selectedFiles().size() == 1);
+  const std::string filename = print_dialog->selectedFiles()[0].toStdString();
+  Print(filename);
+}
+
+void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
+{
+  QPrinter printer;
+  printer.setOrientation(QPrinter::Portrait);
+  printer.setPaperSize(QPrinter::A4);
+  printer.setFullPage(false);
+  printer.setOutputFileName(filename.c_str());
+
+  //Draw the image to painter to printer (?must be done before printing)
+  QPainter painter;
+
+  painter.begin(&printer);
+  {
+    //Collect widgets to print
+    const std::vector<QWidget *> widgets = CollectWidgets();
+
+    int y = 0;
+    for (QWidget * const widget: widgets)
+    {
+      const int h = widget->height();
+      if (y+h > painter.window().height())
+      {
+        printer.newPage();
+        y = 0;
+      }
+      widget->render(&painter,QPoint(0,y));
+      y+=h;
+    }
+  }
+  painter.end();
 }
