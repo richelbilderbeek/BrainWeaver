@@ -60,6 +60,7 @@ ribi::braw::File::File(
   const Cluster& cluster,
   const ribi::cmap::ConceptMap& concept_map,
   const std::string& question,
+  const ribi::cmap::Rating& rating,
   const std::string& student_name,
   const std::string& version)
   : m_about(about),
@@ -67,7 +68,7 @@ ribi::braw::File::File(
     m_cluster(cluster),
     m_concept_map(concept_map),
     m_question(question),
-    m_rating{ribi::cmap::CreateDefaultRating()},
+    m_rating{rating},
     m_student_name(student_name),
     m_version(version)
 {
@@ -250,6 +251,7 @@ std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
         cluster,
         concept_map,
         question,
+        ribi::cmap::CreateDefaultRating(),
         student_name,
         version
       );
@@ -382,6 +384,12 @@ void ribi::braw::File::SetQuestion(const std::string& question)
   this->AutoSave();
 }
 
+void ribi::braw::File::SetRating(const ribi::cmap::Rating& rating)
+{
+  m_rating = rating;
+  AutoSave();
+}
+
 void ribi::braw::File::SetStudentName(const std::string& student_name)
 {
   if (student_name.empty())
@@ -454,6 +462,7 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
     ExtractFileClusterFromXml(s),
     ExtractFileConceptMapFromXml(s),
     ExtractFileQuestionFromXml(s),
+    ribi::cmap::CreateDefaultRating(),
     ExtractFileStudentNameFromXml(s),
     ExtractFileVersionFromXml(s)
   );

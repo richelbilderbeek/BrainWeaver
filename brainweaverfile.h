@@ -7,7 +7,7 @@
 #include "conceptmap.h"
 #include "brainweaverfwd.h"
 #include "brainweavercluster.h"
-#include "qtconceptmaprating.h"
+#include "conceptmaprating.h"
 
 namespace ribi {
 namespace braw {
@@ -27,6 +27,7 @@ class File
     const Cluster& cluster,
     const ribi::cmap::ConceptMap& concept_map,
     const std::string& question,
+    const ribi::cmap::Rating& rating,
     const std::string& student_name,
     const std::string& version
   );
@@ -79,6 +80,9 @@ class File
 
   ///Set the question
   void SetQuestion(const std::string& question);
+
+  ///The the suggested rating
+  void SetRating(const ribi::cmap::Rating& rating);
 
   ///Set the student his/her name
   ///Will throw if name is empty

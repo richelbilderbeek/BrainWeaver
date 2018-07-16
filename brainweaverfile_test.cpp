@@ -82,6 +82,15 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setstudentname_and_getstudentname_are_s
   BOOST_CHECK_EQUAL(f.GetStudentName(), studentname);
 }
 
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_setrating_and_getrating_are_symmetric)
+{
+  ribi::braw::File f;
+  ribi::cmap::Rating rating = ribi::cmap::CreateTestRating();
+  BOOST_CHECK_NE(f.GetRating(), rating);
+  f.SetRating(rating);
+  BOOST_CHECK_EQUAL(f.GetRating(), rating);
+}
+
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_rejects_empty_concept_map)
 {
   ribi::braw::File file;
