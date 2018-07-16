@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweaverratingdialog.h"
 
 #include <cassert>
@@ -26,7 +26,7 @@
 #include "brainweaverfile.h"
 
 #include "ui_qtbrainweaverratingdialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtRatingDialog::QtRatingDialog(
   const File file,
@@ -81,7 +81,6 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
       QtDisplay().CreateRatedConceptsWidget(file, this)
     );
   }
-  //QtDisplay().DisplayRatedConcepts(file,ui->table_concepts);
 
   //Add tallied examples
   {
@@ -110,16 +109,12 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
       QtDisplay().CreateDiagnosticsWidget(file, this)
     );
   }
-  //QtDisplay().DisplayValues(file,ui->table_values);
-  //QtDisplay().DisplayMiscValues(file, ui->table_values);
-
   //Center the dialog
   {
     const QRect screen = QApplication::desktop()->screenGeometry();
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move(screen.center() - this->rect().center());
   }
-
 }
 
 ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept

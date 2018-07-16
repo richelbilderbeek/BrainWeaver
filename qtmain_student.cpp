@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include <iostream>
 
 #include <QApplication>
@@ -15,7 +15,7 @@
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
 #include "trace.h"
-#pragma GCC diagnostic pop
+
 
 const std::string CreateStyleSheet()
 {

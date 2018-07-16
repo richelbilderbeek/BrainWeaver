@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweaveraboutdialog.h"
 
 #include <cassert>
@@ -16,7 +16,7 @@
 #include "qtkeyboardfriendlygraphicsview.h"
 #include "qtquadbezierarrowitem.h"
 #include "qtscopeddisable.h"
-#pragma GCC diagnostic pop
+
 
 ribi::About GetAbout()
 {

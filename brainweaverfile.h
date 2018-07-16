@@ -3,14 +3,14 @@
 
 #include <string>
 #include <vector>
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "conceptmap.h"
 #include "brainweaverfwd.h"
 #include "brainweavercluster.h"
-#pragma GCC diagnostic pop
+
 
 namespace ribi {
 namespace braw {

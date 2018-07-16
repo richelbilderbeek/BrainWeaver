@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaveroverviewdialog.h"
 
 #include <cassert>
@@ -8,7 +8,7 @@
 
 #include "qtbrainweaveroverviewwidget.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtOverviewDialog::QtOverviewDialog(QWidget* parent)
   : QDialog(parent)

@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaverstudentmenudialog.h"
 
 #include <cassert>
@@ -14,7 +14,7 @@
 #include "qtbrainweaverstudentstartcompletedialog.h"
 
 #include "ui_qtbrainweaverstudentmenudialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(
   const File file, QWidget* parent

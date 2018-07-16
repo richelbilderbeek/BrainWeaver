@@ -8,7 +8,7 @@
 #include "brainweaverclusterfactory.h"
 #include "brainweaverfile.h"
 #include "trace.h"
-#pragma GCC diagnostic pop
+
 
 BOOST_AUTO_TEST_CASE(ribi_pvdb_filefactory_test)
 {

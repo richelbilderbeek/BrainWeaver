@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweaverprintratingdialog.h"
 
 #include <cassert>
@@ -28,7 +28,7 @@
 #include "qtbrainweaverdisplay.h"
 #include "qtconceptmap.h"
 #include "ui_qtbrainweaverprintratingdialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
   const File& file,

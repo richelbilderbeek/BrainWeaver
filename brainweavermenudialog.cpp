@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "brainweavermenudialog.h"
 
 #include <cassert>
@@ -18,7 +18,7 @@
 #include "ribi_regex.h"
 
 #include "xml.h"
-#pragma GCC diagnostic pop
+
 
 int ribi::braw::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
 {

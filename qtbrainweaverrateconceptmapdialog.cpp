@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweaverrateconceptmapdialog.h"
 
 #include <cassert>
@@ -27,7 +27,7 @@
 
 #include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,

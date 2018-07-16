@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "brainweaverhelper.h"
 
 #include <cassert>
@@ -16,7 +16,7 @@
 #include "conceptmap.h"
 #include "conceptmaphelper.h"
 #include "fileio.h"
-#pragma GCC diagnostic pop
+
 
 int ribi::braw::CalculateComplexityExperimental(const File& file)
 {

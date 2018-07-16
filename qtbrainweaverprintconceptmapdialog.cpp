@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaverprintconceptmapdialog.h"
 
 #include <cassert>
@@ -25,7 +25,7 @@
 #include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverprintconceptmapdialog.h"
 #include "qtconceptmap.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   const File& file,

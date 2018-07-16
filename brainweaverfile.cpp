@@ -1,6 +1,6 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+
+
+
 #include "brainweaverfile.h"
 
 #include <cassert>
@@ -39,7 +39,7 @@
 #include "brainweaverhelper.h"
 #include "ribi_regex.h"
 #include "xml.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::File::File()
   : m_about("Brainweaver"),

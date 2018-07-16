@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaveroverviewdialog.h"
 
 #include <QDialog>
@@ -32,7 +32,7 @@
 #include "qtconceptmaprateconcepttallydialog.h"
 #include "qtconceptmaprateexamplesdialog.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
   : QGraphicsView(new QGraphicsScene,parent),

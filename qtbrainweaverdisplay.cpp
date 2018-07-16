@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweaverdisplay.h"
 
 #include <tuple>
@@ -25,7 +25,7 @@
 #include "conceptmapnode.h"
 #include "qtconceptmapcompetency.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtDisplay::QtDisplay()
 {

@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaverfiledialog.h"
 
 #include <cassert>
@@ -10,7 +10,7 @@
 #include <QFileDialog>
 
 #include "brainweaverfile.h"
-#pragma GCC diagnostic pop
+
 
 namespace ribi {
 

@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "brainweaverfilefactory.h"
 
 #include <cassert>
@@ -9,7 +9,7 @@
 #include "brainweavercluster.h"
 #include "brainweaverclusterfactory.h"
 #include "brainweaverfile.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::FileFactory::FileFactory()
 {

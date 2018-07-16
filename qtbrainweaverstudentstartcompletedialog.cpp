@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "qtbrainweaverstudentstartcompletedialog.h"
 
 #include <fstream>
@@ -15,7 +15,7 @@
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,

@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "qtbrainweavermenudialog.h"
 
 #include <boost/lexical_cast.hpp>
@@ -51,7 +51,7 @@
 #include "qtstylesheetsettermaindialog.h"
 #include "ribi_regex.h"
 #include "ui_qtbrainweavermenudialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::QtMenuDialog::QtMenuDialog(QWidget* parent)
   : QtDialog(parent),

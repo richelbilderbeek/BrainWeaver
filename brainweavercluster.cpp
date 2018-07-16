@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "brainweavercluster.h"
 
 #include <sstream>
@@ -16,7 +16,7 @@
 #include "brainweaverregex.h"
 #include "ribi_regex.h"
 #include "xml.h"
-#pragma GCC diagnostic pop
+
 
 ribi::braw::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
   : m_v(v)
