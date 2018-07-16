@@ -123,18 +123,6 @@
          </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_concept_map_as_text">
-         <property name="text">
-          <string>Conceptmap als tekst</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_concept_map_as_text" native="true">
-         <layout class="QVBoxLayout" name="verticalLayout_4"/>
-        </widget>
-       </item>
       </layout>
      </widget>
     </widget>

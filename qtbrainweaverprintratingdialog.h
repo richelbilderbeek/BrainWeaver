@@ -9,6 +9,7 @@ namespace Ui {
   class QtPrintRatingDialog;
 }
 
+struct QLabel;
 struct QTableWidget;
 
 namespace ribi {
@@ -44,8 +45,15 @@ private:
   Ui::QtPrintRatingDialog *ui;
 
   const File m_file;
-
+  QLabel * const m_label_concept_map_as_text;
+  QLabel * const m_label_diagnostics;
+  QLabel * const m_label_rated_concepts;
+  QLabel * const m_label_tallied_examples;
+  QTableWidget * const m_table_diagnostics;
+  QTableWidget * const m_table_rated_concepts;
+  QTableWidget * const m_table_tallied_examples;
   cmap::QtConceptMap * const m_widget;
+  std::vector<QWidget*> m_concept_map_as_texts;
 };
 
 } //~namespace braw

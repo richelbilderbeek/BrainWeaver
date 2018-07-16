@@ -1,7 +1,3 @@
-
-
-
-
 #include "qtbrainweaverprintratingdialog.h"
 
 #include <cassert>
@@ -11,6 +7,7 @@
 
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QScrollBar>
 #include <QPrinter>
 #include <QTableWidget>
@@ -29,13 +26,28 @@
 #include "qtconceptmap.h"
 #include "ui_qtbrainweaverprintratingdialog.h"
 
-
 ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
   const File& file,
   QWidget *parent)
   : QtDialog(parent),
     ui(new Ui::QtPrintRatingDialog),
     m_file(file),
+    m_label_concept_map_as_text{new QLabel("Conceptmap als tekst", this)},
+    m_label_diagnostics{new QLabel("Gevonden waarden", this)},
+    m_label_rated_concepts{new QLabel("Overzicht concepten", this)},
+    m_label_tallied_examples{
+      new QLabel(
+        "Verdeling van de voorbeelden/toelichting over de zes objecten van kennis",
+        this
+      )
+    },
+    m_table_diagnostics{
+      QtDisplay().CreateDiagnosticsWidget(file, this)
+    },
+    m_table_rated_concepts{QtDisplay().CreateRatedConceptsWidget(file, this)},
+    m_table_tallied_examples{
+      QtDisplay().CreateTalliedExamplesWidget(file, this)
+    },
     m_widget(new cmap::QtConceptMap)
 {
   if (boost::num_vertices(file.GetConceptMap()) == 0)
@@ -86,15 +98,30 @@ ribi::braw::QtPrintRatingDialog::~QtPrintRatingDialog() noexcept
 const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() const
 {
   std::vector<QWidget *> v = {
-    ui->frame_header, ui->frame_concept_map, ui->label_concept_map_as_text
+    ui->frame_header,
+    ui->frame_concept_map,
+    m_label_rated_concepts,
+    m_table_rated_concepts,
+    m_label_tallied_examples,
+    m_table_tallied_examples,
+    m_label_diagnostics,
+    m_table_diagnostics,
+    m_label_concept_map_as_text
   };
   {
+    std::copy(
+      begin(m_concept_map_as_texts),
+      end(m_concept_map_as_texts),
+      std::back_inserter(v)
+    );
     //Add widgets in widget_concept_map_as_text
+    /*
     const int n = ui->widget_concept_map_as_text->layout()->count();
     for (int i=0; i!=n; ++i)
     {
       v.push_back(ui->widget_concept_map_as_text->layout()->itemAt(i)->widget());
     }
+    */
   }
   return v;
 }
@@ -173,36 +200,15 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
     //Fit concept map to widget
     m_widget->fitInView(m_widget->scene()->itemsBoundingRect());
   }
-  //Concept map as text
-  {
-    assert(ui->widget_concept_map_as_text->layout());
-    //std::string text;
-    const int n_nodes = static_cast<int>(GetNodes(m_file.GetConceptMap()).size());
-    for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
-    {
-      const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
-      cmap::QtConceptMapRatedConceptDialog * const widget
-        = new cmap::QtConceptMapRatedConceptDialog(
-          m_file.GetConceptMap(),
-          node,
-          ribi::cmap::Role::assessor
-        );
-      assert(widget);
-      ui->widget_concept_map_as_text->layout()->addWidget(widget);
-    }
-  }
-
   //Add rated concepts
   {
     assert(ui->scrollAreaWidgetContents->layout());
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      new QLabel(
-        "Overzicht concepten",
-        this
-      )
+      m_label_rated_concepts
     );
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateRatedConceptsWidget(file, this)
+      m_table_rated_concepts
+
     );
   }
 
@@ -210,13 +216,10 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
   {
     assert(ui->scrollAreaWidgetContents->layout());
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      new QLabel(
-        "Verdeling van de voorbeelden/toelichting over de zes objecten van kennis",
-        this
-      )
+      m_label_tallied_examples
     );
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateTalliedExamplesWidget(file, this)
+      m_table_tallied_examples
     );
   }
 
@@ -224,15 +227,32 @@ void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
   {
     assert(ui->scrollAreaWidgetContents->layout());
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      new QLabel(
-        "Gevonden waarden",
-        this
-      )
+      m_label_diagnostics
     );
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateDiagnosticsWidget(file, this)
+      m_table_diagnostics
     );
   }
-  //QtDisplay().DisplayValues(m_file,this->GetTableValues());
-  //QtDisplay().DisplayMiscValues(m_file,this->GetTableValues());
+  //Concept map as text
+  {
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      m_label_concept_map_as_text
+    );
+
+    const int n_nodes = CountNodes(m_file);
+    for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
+    {
+      const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
+      auto * const widget
+        = new cmap::QtConceptMapRatedConceptDialog(
+          m_file.GetConceptMap(),
+          node,
+          ribi::cmap::Role::assessor
+        );
+      assert(widget);
+      m_concept_map_as_texts.push_back(widget);
+      ui->scrollAreaWidgetContents->layout()->addWidget(widget);
+    }
+  }
+
 }

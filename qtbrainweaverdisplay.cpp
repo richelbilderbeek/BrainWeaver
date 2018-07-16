@@ -168,12 +168,8 @@ void ribi::braw::QtDisplay::DisplayRatedConcepts(
   table->setColumnWidth(0, 50);
   table->setColumnWidth(1, 50);
   table->setColumnWidth(2, 50);
-  table->setMinimumWidth(
-      table->verticalHeader()->width()
-    + table->columnWidth(0)
-    + table->columnWidth(1)
-    + table->columnWidth(2)
-  );
+  table->setMaximumWidth(650);
+  table->setMinimumWidth(650);
   table->setSizeAdjustPolicy(
     QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents
   );
