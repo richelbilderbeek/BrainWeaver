@@ -3,6 +3,7 @@
 
 #include "qtbrainweaverdialog.h"
 #include "brainweaverfwd.h"
+#include "conceptmaprating.h"
 
 namespace Ui { class QtCreateAssessmentDialog; }
 
@@ -21,6 +22,9 @@ class QtCreateAssessmentDialog : public QtDialog
 
   ///Get the filled in concept map focal question
   std::string GetQuestion() const noexcept;
+
+  ///Get the automatic rating scores
+  ribi::cmap::Rating GetRating() const;
 
   ///Must the parent go back to the menu?
   bool GoBackToMenu() const noexcept { return m_back_to_menu; }
@@ -44,6 +48,15 @@ private:
 
   ///Must the parent go back to the menu?
   bool m_back_to_menu;
+
+  ///Get the automatic rating scores
+  ribi::cmap::RatingComplexity GetRatingComplexity() const;
+
+  ///Get the automatic rating scores
+  ribi::cmap::RatingConcreteness GetRatingConcreteness() const;
+
+  ///Get the automatic rating scores
+  ribi::cmap::RatingSpecificity GetRatingSpecificity() const;
 };
 
 } //~namespace braw

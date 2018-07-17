@@ -1,7 +1,3 @@
-
-
-
-
 #include "qtbrainweaverratingdialog.h"
 
 #include <cassert>

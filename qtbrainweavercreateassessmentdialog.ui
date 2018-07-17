@@ -62,10 +62,10 @@
     </spacer>
    </item>
    <item>
-    <widget class="QWidget" name="widget" native="true">
+    <widget class="QWidget" name="widget_ccs" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QFrame" name="frame_2">
+       <widget class="QFrame" name="frame_complexity">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -90,14 +90,14 @@
              </spacer>
             </item>
             <item row="2" column="1">
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="label_complexity_n_examples">
               <property name="text">
                <string>Aantal voorbeelden</string>
               </property>
              </widget>
             </item>
             <item row="0" column="0" colspan="2">
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="label_complexity">
               <property name="text">
                <string>Complexiteit</string>
               </property>
@@ -107,7 +107,7 @@
              </widget>
             </item>
             <item row="3" column="0">
-             <widget class="QLabel" name="label_4">
+             <widget class="QLabel" name="label_complexity_n_edges">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -121,7 +121,7 @@ verbindingen</string>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QTableWidget" name="tableWidget">
+             <widget class="QTableWidget" name="table_complexity">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>
@@ -186,6 +186,11 @@ verbindingen</string>
               <row>
                <property name="text">
                 <string>2</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>&gt;=3</string>
                </property>
               </row>
               <column>
@@ -288,6 +293,31 @@ verbindingen</string>
                 <string>2</string>
                </property>
               </item>
+              <item row="3" column="0">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item row="3" column="1">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item row="3" column="2">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item row="3" column="3">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item row="3" column="4">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="4" column="1">
@@ -310,7 +340,7 @@ verbindingen</string>
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame">
+       <widget class="QFrame" name="frame_concreteness">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -319,10 +349,10 @@ verbindingen</string>
         </property>
         <layout class="QFormLayout" name="formLayout">
          <item row="0" column="0">
-          <widget class="QWidget" name="widget_3" native="true">
+          <widget class="QWidget" name="widget_concreteness" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="label_concreteness">
               <property name="text">
                <string>Concreetheid</string>
               </property>
@@ -345,14 +375,14 @@ verbindingen</string>
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="label_8">
+             <widget class="QLabel" name="label_concreteness_n_examples">
               <property name="text">
                <string>Aantal voorbeelden</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTableWidget" name="tableWidget_3">
+             <widget class="QTableWidget" name="table_concreteness">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>
@@ -481,7 +511,7 @@ verbindingen</string>
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame_3">
+       <widget class="QFrame" name="frame_specificity">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -490,10 +520,10 @@ verbindingen</string>
         </property>
         <layout class="QFormLayout" name="formLayout_3">
          <item row="0" column="0">
-          <widget class="QWidget" name="widget_4" native="true">
+          <widget class="QWidget" name="widget_specificity" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="label_specificity">
               <property name="text">
                <string>Specificiteit</string>
               </property>
@@ -516,14 +546,14 @@ verbindingen</string>
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="label_9">
+             <widget class="QLabel" name="label_specificity_n_examples">
               <property name="text">
                <string>Aantal voorbeelden</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTableWidget" name="tableWidget_2">
+             <widget class="QTableWidget" name="table_specificity">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                 <horstretch>0</horstretch>

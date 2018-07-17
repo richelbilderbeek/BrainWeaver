@@ -383,7 +383,7 @@ void ribi::braw::File::SetCluster(const Cluster& cluster) noexcept
 
 void ribi::braw::File::SetQuestion(const std::string& question)
 {
-  assert(question.size() > 0);
+  //assert(question.size() > 0);
   m_question = question;
   this->AutoSave();
 }

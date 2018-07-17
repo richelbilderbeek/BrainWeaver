@@ -1,7 +1,3 @@
-
-
-
-
 #include "qtbrainweavercreateassessmentdialog.h"
 
 #include <sstream>
@@ -16,9 +12,6 @@
 #include "qtbrainweaverfiledialog.h"
 
 #include "ui_qtbrainweavercreateassessmentdialog.h"
-
-
-
 
 ribi::braw::QtCreateAssessmentDialog::QtCreateAssessmentDialog(QWidget* parent)
   : QtDialog(parent),
@@ -37,6 +30,71 @@ ribi::braw::QtCreateAssessmentDialog::~QtCreateAssessmentDialog() noexcept
 std::string ribi::braw::QtCreateAssessmentDialog::GetQuestion() const noexcept
 {
   return ui->edit->text().toStdString();
+}
+
+ribi::cmap::Rating ribi::braw::QtCreateAssessmentDialog::GetRating() const
+{
+  return ribi::cmap::Rating(
+    GetRatingComplexity(),
+    GetRatingConcreteness(),
+    GetRatingSpecificity()
+  );
+}
+
+
+ribi::cmap::RatingComplexity ribi::braw::QtCreateAssessmentDialog::GetRatingComplexity() const
+{
+  // { {number of edges, number of examples}, score }
+  std::map<std::pair<int, int>, int> m;
+  // X/column: n_examples
+  // Y/row: n_edges
+  const int n_cols = ui->table_complexity->columnCount();
+  const int n_rows = ui->table_complexity->rowCount();
+  for (int col = 0; col != n_cols; ++col)
+  {
+    for (int row = 0; row != n_rows; ++row)
+    {
+      const int n_examples{col};
+      const int n_edges{row};
+      const int score{
+        ui->table_complexity->itemAt(col, row)->text().toInt()
+      };
+      m.insert( { { n_edges, n_examples }, score } );
+    }
+  }
+  return ribi::cmap::RatingComplexity(m);
+}
+
+ribi::cmap::RatingConcreteness ribi::braw::QtCreateAssessmentDialog::GetRatingConcreteness() const
+{
+  std::map<int, int> m;
+  // X/column: n_examples
+  const int n_cols = ui->table_concreteness->columnCount();
+  for (int col = 0; col != n_cols; ++col)
+  {
+    const int n_examples{col};
+    const int score{
+      ui->table_concreteness->itemAt(col, 0)->text().toInt()
+    };
+    m.insert( { n_examples , score } );
+  }
+  return ribi::cmap::RatingConcreteness(m);
+}
+
+ribi::cmap::RatingSpecificity ribi::braw::QtCreateAssessmentDialog::GetRatingSpecificity() const
+{
+  std::map<int, int> m;
+  // X/column: n_examples
+  const int n_cols = ui->table_specificity->columnCount();
+  for (int col = 0; col != n_cols; ++col)
+  {
+    const int n_examples{col};
+    const int score{
+      ui->table_specificity->itemAt(col, 0)->text().toInt()
+    };
+    m.insert( { n_examples , score } );
+  }
+  return ribi::cmap::RatingSpecificity(m);
 }
 
 void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
@@ -69,10 +127,11 @@ void ribi::braw::QtCreateAssessmentDialog::on_button_save_clicked()
 
 void ribi::braw::QtCreateAssessmentDialog::Save(const std::string& filename) const
 {
-  const std::string question = ui->edit->text().toStdString();
   File file;
-  file.SetQuestion(question);
-  assert(file.GetQuestion() == question);
+  file.SetQuestion(GetQuestion());
+  file.SetRating(GetRating());
+  assert(file.GetQuestion() == GetQuestion());
+  assert(file.GetRating() == GetRating());
   file.Save(filename);
 }
 
