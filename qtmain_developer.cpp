@@ -49,12 +49,12 @@ std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
     "\n"
     "QPushButton:enabled {\n"
     "  color: black;\n"
-    "  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccc, stop: 1 #fff);\n"
+    "  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccc, stop: 1 #fff);\n" //!OCLINT
     "  border-color: #111;\n"
     "}\n"
     "QPushButton:disabled {\n"
     "  color: #888;\n"
-    "  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccc, stop: 1 #fff);\n"
+    "  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccc, stop: 1 #fff);\n" //!OCLINT
     "  border-color: #fff;\n"
     "}\n"
     "\n"
