@@ -1,6 +1,4 @@
 
-
-
 #include "brainweaverfile.h"
 
 #include <cassert>
@@ -19,6 +17,7 @@
 #include <QRegExp>
 
 #include "counter.h"
+#include "conceptmaprating.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
 #include "count_undirected_graph_levels.h"
@@ -184,6 +183,11 @@ std::string ribi::braw::ExtractFileQuestionFromXml(const std::string& s) noexcep
     return ""; //No question yet
   }
   return graphviz_decode(ribi::xml::StripXmlTag(v[0]));
+}
+
+ribi::cmap::Rating ribi::braw::ExtractFileRatingFromXml(const std::string& s) noexcept
+{
+  return ribi::cmap::XmlToRating(s);
 }
 
 std::string ribi::braw::ExtractFileStudentNameFromXml(const std::string& s)
@@ -424,15 +428,17 @@ ribi::cmap::ConceptMap ribi::braw::CreateConceptMap(
 std::string ribi::braw::ToXml(const File& file) noexcept
 {
   std::stringstream s;
-  s << "<file>";
-  s << "<about>" << file.GetAbout() << "</about>";
-  s << "<assessor_name>" << file.GetAssessorName() << "</assessor_name>";
-  s << ToXml(file.GetCluster());
-  s << ribi::cmap::ToXml(file.GetConceptMap());
-  s << "<question>" << file.GetQuestion() << "</question>";
-  s << "<student_name>" << file.GetStudentName() << "</student_name>";
-  s << "<version>" << file.GetVersion() << "</version>";
-  s << "</file>";
+  s << "<file>"
+    << "<about>" << file.GetAbout() << "</about>"
+    << "<assessor_name>" << file.GetAssessorName() << "</assessor_name>"
+    << ToXml(file.GetCluster())
+    << ribi::cmap::ToXml(file.GetConceptMap())
+    << "<question>" << file.GetQuestion() << "</question>"
+    << ToXml(file.GetRating())
+    << "<student_name>" << file.GetStudentName() << "</student_name>"
+    << "<version>" << file.GetVersion() << "</version>"
+    << "</file>"
+  ;
 
   const std::string r = s.str();
   assert(r.size() >= 13);
@@ -462,7 +468,7 @@ ribi::braw::File ribi::braw::XmlToFile(const std::string& s)
     ExtractFileClusterFromXml(s),
     ExtractFileConceptMapFromXml(s),
     ExtractFileQuestionFromXml(s),
-    ribi::cmap::CreateDefaultRating(),
+    ExtractFileRatingFromXml(s),
     ExtractFileStudentNameFromXml(s),
     ExtractFileVersionFromXml(s)
   );
@@ -474,6 +480,7 @@ bool ribi::braw::operator==(const File& lhs, const File& rhs) noexcept
      lhs.GetAssessorName() == rhs.GetAssessorName()
   && lhs.GetCluster() == rhs.GetCluster()
   && lhs.GetConceptMap() == rhs.GetConceptMap()
+  && lhs.GetRating() == rhs.GetRating()
   && lhs.GetStudentName() == rhs.GetStudentName()
   && lhs.GetVersion() == rhs.GetVersion();
 }

@@ -6,32 +6,33 @@
 #include <string>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 #include <boost/xpressive/xpressive.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
 #include <QFile>
-#include <QRegExp>
+//#include <QRegExp>
 
 #include "counter.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
 
 #include "add_bundled_vertex.h"
-#include "is_regular_file.h"
-#include "conceptmapconcept.h"
-#include "conceptmapfactory.h"
-#include "conceptmap.h"
-#include "conceptmapnode.h"
-#include "fileio.h"
-#include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
+#include "brainweaverclusterfactory.h"
 #include "brainweaverfilefactory.h"
 #include "brainweaverhelper.h"
 #include "brainweaverregex.h"
+#include "conceptmap.h"
+#include "conceptmapconcept.h"
+#include "conceptmapfactory.h"
+#include "conceptmapnode.h"
+#include "conceptmaprating.h"
+#include "fileio.h"
+#include "is_regular_file.h"
 #include "ribi_regex.h"
-#include "testtimer.h"
-#include "trace.h"
+//#include "testtimer.h"
+//#include "trace.h"
 #include "xml.h"
 
 
@@ -188,6 +189,22 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_empty_file)
   std::remove(tmp_filename.c_str());
 }
 
+BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_save_and_load_rating)
+{
+  using namespace ribi::braw;
+  const std::string tmp_filename = ribi::braw::GetTempFileName();
+  //Test Save/Load on empty File
+  File first_file;
+  first_file.SetRating(ribi::cmap::CreateTestRating());
+  first_file.Save(tmp_filename);
+  const File secondfile = LoadFile(tmp_filename);
+  BOOST_CHECK_EQUAL(first_file, secondfile);
+  //Modify f, to test operator!=
+  first_file.SetRating(ribi::cmap::CreateDefaultRating());
+  BOOST_CHECK_NE(first_file, secondfile);
+  std::remove(tmp_filename.c_str());
+}
+
 BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_cannot_load_nonexisting_file)
 {
   const std::string tmp_filename = ribi::get_temp_filename(".txt");
@@ -275,3 +292,4 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_file_TallyCompetencies)
   );
   BOOST_CHECK(sum_score > 0);
 }
+

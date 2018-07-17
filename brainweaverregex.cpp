@@ -35,6 +35,26 @@ std::string ribi::braw::Regex::GetRegexQuestion() const noexcept
   return GetRegexOfSomething("question");
 }
 
+std::string ribi::braw::Regex::GetRegexRating() const noexcept
+{
+  return GetRegexOfSomething("rating");
+}
+
+std::string ribi::braw::Regex::GetRegexRatingComplexity() const noexcept
+{
+  return GetRegexOfSomething("rating_complexity");
+}
+
+std::string ribi::braw::Regex::GetRegexRatingConcreteness() const noexcept
+{
+  return GetRegexOfSomething("rating_concreteness");
+}
+
+std::string ribi::braw::Regex::GetRegexRatingSpecificity() const noexcept
+{
+  return GetRegexOfSomething("rating_specificity");
+}
+
 std::string ribi::braw::Regex::GetRegexStudentName() const noexcept
 {
   return GetRegexOfSomething("student_name");

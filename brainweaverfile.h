@@ -160,6 +160,10 @@ ribi::cmap::ConceptMap ExtractFileConceptMapFromXml(const std::string& s) noexce
 
 ///If there is no question, will return an empty string
 std::string ExtractFileQuestionFromXml(const std::string& s) noexcept;
+
+///Will return the default Rating if absent
+ribi::cmap::Rating ExtractFileRatingFromXml(const std::string& s) noexcept;
+
 std::string ExtractFileStudentNameFromXml(const std::string& s);
 std::string ExtractFileVersionFromXml(const std::string& s);
 
