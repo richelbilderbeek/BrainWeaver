@@ -207,7 +207,10 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   const auto concept_map
     = ribi::cmap::ConceptMapFactory().GetRateConceptTallyDialogExample();
   auto * const d{
-    new cmap::QtRateConceptTallyDialog(concept_map)
+    new cmap::QtRateConceptTallyDialog(
+      concept_map,
+      ribi::cmap::CreateDefaultRating()
+    )
   };
   d->exec();
   // 'emit add_me(d);' causes Wine crash,
