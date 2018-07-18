@@ -47,22 +47,22 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   table->setHorizontalHeaderLabels( { "Waarde" } );
   {
     const int row_index{0};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Complexiteit"));
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Complexiteit (%)"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateComplexityExperimental(file))));
   }
   {
     const int row_index{1};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Concreetheid"));
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Concreetheid (%)"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateConcretenessExperimental(file))));
   }
   {
     const int row_index{2};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Specificiteit"));
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Specificiteit (%)"));
     table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateSpecificityExperimental(file))));
   }
   {
     const int row_index{3};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Rijkheid"));
+    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Rijkheid (%)"));
     try
     {
       table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateRichnessExperimental(file))));
