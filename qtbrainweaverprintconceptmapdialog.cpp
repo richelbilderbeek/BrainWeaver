@@ -190,19 +190,10 @@ void ribi::braw::QtPrintConceptMapDialog::Print(const std::string& filename)
 
 void ribi::braw::QtPrintConceptMapDialog::showEvent(QShowEvent *)
 {
-  
   assert(m_widget);
   if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
   
   m_widget->rotate(90);
-  
-  //m_widget->scale(1.0, 1.0);
-  //m_widget->update();
-  //m_widget->setMinimumHeight(all_items_rect.width() + 2);
   const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
-  QRectF all_items_rot = all_items_rect;
-  //all_items_rot.setWidth(all_items_rect.height());
-  //all_items_rot.setHeight(all_items_rect.width());
-  m_widget->fitInView(all_items_rot, Qt::KeepAspectRatio);
-  
+  m_widget->fitInView(all_items_rect, Qt::KeepAspectRatio);
 }
