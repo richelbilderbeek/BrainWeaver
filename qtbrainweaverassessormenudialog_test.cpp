@@ -30,6 +30,7 @@ void ribi::braw::qtbrainweaverassessormenudialog_test::click_button_about_clicke
 {
   QtAssessorMenuDialog d;
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_about_clicked();
 }
 

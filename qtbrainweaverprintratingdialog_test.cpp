@@ -23,7 +23,9 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_witho
   }
   catch (std::invalid_argument& e)
   {
-    const std::string expected_message = "QtPrintRatingDialog: must have at least one node";
+    const std::string expected_message{
+      "Need at least one non-focal node to calculate experimental complexity"
+    };
     QVERIFY(std::string(e.what()) == expected_message);
     QVERIFY("Should get here");
   }

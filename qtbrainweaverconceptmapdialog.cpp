@@ -244,7 +244,16 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
   CheckInvariants(*GetQtConceptMap());
 
   m_file.SetConceptMap(GetQtConceptMap()->ToConceptMap());
-  assert(m_file.GetConceptMap() == GetQtConceptMap()->ToConceptMap());
+
+  assert(
+    HasSimilarData(
+      GetSortedNodes(m_file.GetConceptMap()),
+      GetSortedNodes(GetQtConceptMap()->ToConceptMap()),
+      0.001
+    )
+  );
+  //Cannot assume same Edges, as they may change direction
+  //assert(HasSimilarData(GetSortedEdges(m_file.GetConceptMap()), GetSortedEdges(GetQtConceptMap()->ToConceptMap()), 0.001));
 
   CheckInvariants(*GetQtConceptMap());
 }

@@ -90,6 +90,7 @@ ribi::braw::File ribi::braw::FileFactory::Get5() const noexcept
   f.SetConceptMap(concept_map);
   const Cluster cluster = ClusterFactory().GetTests().at(3);
   f.SetCluster(cluster);
+  assert(IsCenterNode(ribi::cmap::GetFirstNode(f.GetConceptMap())));
   return f;
 }
 

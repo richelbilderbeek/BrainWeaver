@@ -25,6 +25,7 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   ::button_next_clicked()
 {
   const File file = FileFactory().Get5();
+  assert(IsCenterNode(ribi::cmap::GetFirstNode(file.GetConceptMap())));
   QtRateConceptMapDialog d(file);
   d.show();
   d.on_button_next_clicked();

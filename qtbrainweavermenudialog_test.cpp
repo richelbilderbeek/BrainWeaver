@@ -21,6 +21,7 @@ void ribi::braw::qtbrainweavermenudialog_test::press_all_keys()
     ribi::braw::QtMasterDialog d;
     d.add_new(new ribi::braw::QtMenuDialog);
     d.show();
+    QTimer::singleShot(1000, qApp, SLOT(closeAllWindows()));
     QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::AltModifier, 100);
     QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
     QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
@@ -32,6 +33,7 @@ void ribi::braw::qtbrainweavermenudialog_test::press_all_keys()
     ribi::braw::QtMasterDialog d;
     d.add_new(new ribi::braw::QtMenuDialog);
     d.show();
+    QTimer::singleShot(1000, qApp, SLOT(closeAllWindows()));
     QTest::keyClick(&d, static_cast<Qt::Key>(k), Qt::AltModifier, 100);
     QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
     QTest::keyClick(&d, Qt::Key::Key_Escape, Qt::NoModifier, 100);
