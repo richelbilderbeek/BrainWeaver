@@ -5,6 +5,7 @@
 
 #include <QKeyEvent>
 #include <QFileDialog>
+#include <QItemDelegate>
 
 #include "conceptmap.h"
 #include "brainweaverfile.h"
@@ -13,12 +14,33 @@
 
 #include "ui_qtbrainweavercreateassessmentdialog.h"
 
+//From https://stackoverflow.com/a/22708821
+class RatingDelegate : public QItemDelegate
+{
+public:
+  QWidget* createEditor(
+    QWidget *parent,
+    const QStyleOptionViewItem & /* option */,
+    const QModelIndex & /* index */
+  ) const
+  {
+    QLineEdit *lineEdit = new QLineEdit(parent);
+    // Set validator
+    QIntValidator *validator = new QIntValidator(0, 2, lineEdit);
+    lineEdit->setValidator(validator);
+    return lineEdit;
+  }
+};
+
 ribi::braw::QtCreateAssessmentDialog::QtCreateAssessmentDialog(QWidget* parent)
   : QtDialog(parent),
     ui(new Ui::QtCreateAssessmentDialog),
     m_back_to_menu(false)
 {
   ui->setupUi(this);
+  ui->table_complexity->setItemDelegate(new RatingDelegate);
+  ui->table_concreteness->setItemDelegate(new RatingDelegate);
+  ui->table_specificity->setItemDelegate(new RatingDelegate);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
