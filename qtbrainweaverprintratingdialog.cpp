@@ -78,6 +78,12 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     assert(m_widget);
     assert(ui->frame_concept_map->layout());
     ui->frame_concept_map->layout()->addWidget(m_widget);
+
+    ui->frame_concept_map->setMinimumWidth(750);
+    ui->frame_concept_map->setMaximumWidth(750);
+    ui->frame_concept_map->setMinimumHeight(
+      1.44 * ui->frame_concept_map->width()
+    );
   }
 
   {
@@ -92,10 +98,6 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
   {
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_widget->setMaximumHeight(m_widget->scene()->itemsBoundingRect().height() + 2);
-    m_widget->setMinimumHeight(m_widget->scene()->itemsBoundingRect().height() + 2);
-    //Fit concept map to widget
-    m_widget->fitInView(m_widget->scene()->itemsBoundingRect());
   }
   //Add rated concepts
   {
@@ -239,4 +241,14 @@ void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
     }
   }
   painter.end();
+}
+
+void ribi::braw::QtPrintRatingDialog::showEvent(QShowEvent *)
+{
+  assert(m_widget);
+  if (boost::num_vertices(m_widget->ToConceptMap()) == 0) return;
+
+  m_widget->rotate(90);
+  const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
+  m_widget->fitInView(all_items_rect, Qt::KeepAspectRatio);
 }

@@ -36,7 +36,7 @@ public:
 
 protected:
   void keyPressEvent(QKeyEvent * event);
-
+  void showEvent(QShowEvent *);
 private slots:
   void on_button_print_clicked();
   const std::vector<QWidget *> CollectWidgets() const;
