@@ -1,10 +1,6 @@
-
-
-
-
 #include "qtbrainweavermenudialog.h"
 
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 
 #include <QDebug>
 #include <QFile>
@@ -241,13 +237,4 @@ void ribi::braw::QtMenuDialog::on_button_create_assessment_clicked()
     new ribi::braw::QtCreateAssessmentDialog()
   };
   d->exec();
-}
-
-void ribi::braw::QtMenuDialog::on_label_example_competencies_clicked()
-{
-  auto w = QtDisplay().CreateTalliedExamplesWidget(
-    FileFactory().Get5(),
-    this
-  );
-  w->show();
 }
