@@ -186,7 +186,7 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
   }
 
   auto * const d = new QtConceptMapDialog(m_file, this);
-  d->close();
+  d->exec();
 
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have

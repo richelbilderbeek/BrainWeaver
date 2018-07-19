@@ -208,6 +208,8 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
 void ribi::braw::QtConceptMapDialog::showEvent(QShowEvent *)
 {
   m_widget->setFocus();
+  const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
+  m_widget->fitInView(all_items_rect, Qt::KeepAspectRatio);
 }
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
