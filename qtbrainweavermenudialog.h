@@ -1,22 +1,21 @@
 #ifndef QTBRAINWEAVERMENUDIALOG_H
 #define QTBRAINWEAVERMENUDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
 
 namespace Ui { class QtMenuDialog; }
 
 namespace ribi {
-
 namespace braw {
 
-class QtMenuDialog : public QtDialog //!OCLINT Indeed a lot of methods: one per button
+class QtMenuDialog : public QDialog //!OCLINT Indeed a lot of methods: one per button
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtMenuDialog(QWidget* parent = 0);
+  explicit QtMenuDialog(QWidget* parent = nullptr);
   QtMenuDialog(const QtMenuDialog&) = delete;
   QtMenuDialog& operator=(const QtMenuDialog&) = delete;
   ~QtMenuDialog() noexcept;

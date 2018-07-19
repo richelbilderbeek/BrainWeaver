@@ -21,6 +21,7 @@ void ribi::braw::qtbrainweaverassessormenudialog_test::assess()
 
   QtAssessorMenuDialog d;
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.Assess(filename);
   ribi::delete_file(filename);
   assert(!ribi::is_regular_file(filename));
@@ -38,15 +39,8 @@ void ribi::braw::qtbrainweaverassessormenudialog_test::click_button_create_asses
 {
   QtAssessorMenuDialog d;
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_create_assessment_clicked();
-
-}
-
-void ribi::braw::qtbrainweaverassessormenudialog_test::click_button_quit()
-{
-  QtAssessorMenuDialog d;
-  d.show();
-  d.on_button_quit_clicked();
 }
 
 void ribi::braw::qtbrainweaverassessormenudialog_test::default_construction()

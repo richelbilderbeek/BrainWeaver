@@ -1,10 +1,10 @@
 #ifndef QTBRAINWEAVERRATINGDIALOG_H
 #define QTBRAINWEAVERRATINGDIALOG_H
 
+#include <QDialog>
 #include <iosfwd>
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
-#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtRatingDialog; }
 
@@ -17,12 +17,15 @@ class qtbrainweaverratingdialog_test;
 
 ///View the current rating, optimized for humans
 ///QtPrintRatingDialog is optimized for printers
-class QtRatingDialog : public QtDialog
+class QtRatingDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
 
   public:
-  explicit QtRatingDialog(const File file, QWidget* parent = 0);
+  explicit QtRatingDialog(
+    const File file,
+    QWidget* parent = nullptr
+  );
   QtRatingDialog(const QtRatingDialog&) = delete;
   QtRatingDialog& operator=(const QtRatingDialog&) = delete;
   ~QtRatingDialog() noexcept;

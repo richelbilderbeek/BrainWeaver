@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVERASSESSORMENUDIALOG_H
 #define QTBRAINWEAVERASSESSORMENUDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "brainweaverfwd.h"
 #include "brainweaverfile.h"
 
@@ -10,12 +10,12 @@ namespace Ui { class QtAssessorMenuDialog; }
 namespace ribi {
 namespace braw {
 
-class QtAssessorMenuDialog : public QtDialog
+class QtAssessorMenuDialog : public QDialog
 {
     Q_OBJECT //!OCLINT
     
 public:
-  explicit QtAssessorMenuDialog(QWidget* parent = 0);
+  explicit QtAssessorMenuDialog(QWidget* parent = nullptr);
   QtAssessorMenuDialog(const QtAssessorMenuDialog&) = delete;
   QtAssessorMenuDialog& operator=(const QtAssessorMenuDialog&) = delete;
   ~QtAssessorMenuDialog() noexcept;
@@ -26,7 +26,6 @@ public slots:
   void on_button_about_clicked();
   void on_button_assess_result_clicked();
   void on_button_create_assessment_clicked();
-  void on_button_quit_clicked();
 
 private:
   Ui::QtAssessorMenuDialog *ui;

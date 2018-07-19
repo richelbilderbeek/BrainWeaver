@@ -48,7 +48,7 @@
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
@@ -169,12 +169,12 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)
   {
-    emit remove_me(this);
+    close();
     return;
   }
   if (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier))
   {
-    emit remove_me(this);
+    close();
     return;
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
@@ -195,9 +195,8 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   qDebug() << __func__ << (__LINE__);
   this->m_widget->setEnabled(false); //Prevents #101
   m_widget->StopTimer();
-  QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
-  emit add_me(d);
-
+  auto * const d = new QtPrintConceptMapDialog(m_file, this);
+  d->exec();
   //this->m_widget->setEnabled(true);
 }
 
@@ -231,7 +230,7 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
-  //emit remove_me(this); //2013-04-19 Request by client
+  //close(); //2013-04-19 Request by client
 }
 
 void ribi::braw::QtConceptMapDialog::showEvent(QShowEvent *)

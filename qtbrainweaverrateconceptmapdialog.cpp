@@ -32,7 +32,7 @@
 ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,
   QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
   ui(new Ui::QtRateConceptMapDialog),
   m_file(file),
   m_concept_map(new cmap::QtConceptMap)
@@ -108,7 +108,11 @@ ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 
 void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape) { emit remove_me(this); return; }
+  if (e->key()  == Qt::Key_Escape)
+  {
+    close();
+    return;
+  }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
   QDialog::keyPressEvent(e);
 }
@@ -126,17 +130,17 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
   );
   assert(IsCenterNode(ribi::cmap::GetFirstNode(m_file.GetConceptMap())));
   m_concept_map->StopTimer();
-  QtRatingDialog * const d{
-    new QtRatingDialog(m_file)
+  auto * const d{
+    new QtRatingDialog(m_file, this)
   };
-  emit add_me(d);
+  d->exec();
 
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have
   //a new file now. In this case, the file is read before modification
   if (d->GetBackToMenu())
   {
-    emit remove_me(this);
+    close();
   }
 }
 

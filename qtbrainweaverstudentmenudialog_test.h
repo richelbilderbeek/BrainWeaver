@@ -12,7 +12,6 @@ class qtbrainweaverstudentmenudialog_test : public QObject
 
 private slots:
   void click_button_about_clicked();
-  void click_button_quit();
   void click_button_start();
   void default_construction();
   void press_escape();

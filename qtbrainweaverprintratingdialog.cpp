@@ -29,7 +29,7 @@
 ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
   const File& file,
   QWidget *parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtPrintRatingDialog),
     m_file(file),
     m_label_concept_map_as_text{new QLabel("Conceptmap als tekst", this)},
@@ -184,7 +184,11 @@ const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() c
 
 void ribi::braw::QtPrintRatingDialog::keyPressEvent(QKeyEvent * event)
 {
-  if (event->key() == Qt::Key_Escape) { emit remove_me(this); return; }
+  if (event->key() == Qt::Key_Escape)
+  {
+    close();
+    return;
+  }
 }
 
 void ribi::braw::QtPrintRatingDialog::on_button_print_clicked()

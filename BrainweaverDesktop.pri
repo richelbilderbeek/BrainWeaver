@@ -8,11 +8,9 @@ HEADERS  += \
     $$PWD/qtbrainweaverclusterwidget.h \
     $$PWD/qtbrainweaverconceptmapdialog.h \
     $$PWD/qtbrainweavercreateassessmentdialog.h \
-    $$PWD/qtbrainweaverdialog.h \
     $$PWD/qtbrainweaverdisplay.h \
     $$PWD/qtbrainweaverfiledialog.h \
     $$PWD/qtbrainweaverfwd.h \
-    $$PWD/qtbrainweavermasterdialog.h \
     $$PWD/qtbrainweavermenudialog.h \
     $$PWD/qtbrainweaveroverviewdialog.h \
     $$PWD/qtbrainweaveroverviewwidget.h \
@@ -32,10 +30,8 @@ SOURCES += \
     $$PWD/qtbrainweaverclusterwidget.cpp \
     $$PWD/qtbrainweaverconceptmapdialog.cpp \
     $$PWD/qtbrainweavercreateassessmentdialog.cpp \
-    $$PWD/qtbrainweaverdialog.cpp \
     $$PWD/qtbrainweaverdisplay.cpp \
     $$PWD/qtbrainweaverfiledialog.cpp \
-    $$PWD/qtbrainweavermasterdialog.cpp \
     $$PWD/qtbrainweavermenudialog.cpp \
     $$PWD/qtbrainweaveroverviewdialog.cpp \
     $$PWD/qtbrainweaveroverviewwidget.cpp \
@@ -52,7 +48,6 @@ FORMS += \
     $$PWD/qtbrainweaverclusterdialog.ui \
     $$PWD/qtbrainweaverconceptmapdialog.ui \
     $$PWD/qtbrainweavercreateassessmentdialog.ui \
-    $$PWD/qtbrainweavermasterdialog.ui \
     $$PWD/qtbrainweavermenudialog.ui \
     $$PWD/qtbrainweaverprintconceptmapdialog.ui \
     $$PWD/qtbrainweaverprintratingdialog.ui \

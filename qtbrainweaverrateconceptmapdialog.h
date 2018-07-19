@@ -1,9 +1,9 @@
 #ifndef QTBRAINWEAVERRATECONCEPTMAPDIALOG_H
 #define QTBRAINWEAVERRATECONCEPTMAPDIALOG_H
 
+#include <QDialog>
 #include "qtbrainweaverfwd.h"
 #include "brainweaverfile.h"
-#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtRateConceptMapDialog; }
 
@@ -12,7 +12,7 @@ namespace braw {
 
 struct qtbrainweaverrateconceptmapdialog_test;
 
-class QtRateConceptMapDialog : public QtDialog
+class QtRateConceptMapDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
   
@@ -20,7 +20,8 @@ public:
   using ConceptMap = cmap::QtConceptMap;
   explicit QtRateConceptMapDialog(
     const File& file,
-    QWidget* parent = 0);
+    QWidget* parent = nullptr
+  );
   QtRateConceptMapDialog(const QtRateConceptMapDialog&) = delete;
   QtRateConceptMapDialog& operator=(const QtRateConceptMapDialog&) = delete;
   ~QtRateConceptMapDialog() noexcept;

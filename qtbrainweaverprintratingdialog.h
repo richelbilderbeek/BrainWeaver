@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVERPRINTRATINGDIALOG_H
 #define QTBRAINWEAVERPRINTRATINGDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "qtbrainweaverfwd.h"
 #include "brainweaverfile.h"
 
@@ -18,7 +18,7 @@ namespace braw {
 ///View the current rating, optimized for printers
 ///This dialog will not be visible for humans at all in release
 ///QtRatingDialog is optimized for humans
-class QtPrintRatingDialog : public QtDialog
+class QtPrintRatingDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
   
@@ -26,7 +26,8 @@ public:
   ///file be const, as the Display Concept map cannot deal with const ribi::cmap::ConceptMap (yet?)
   explicit QtPrintRatingDialog(
     const File& file,
-    QWidget *parent = 0);
+    QWidget *parent = nullptr
+  );
   QtPrintRatingDialog(const QtPrintRatingDialog&) = delete;
   QtPrintRatingDialog& operator=(const QtPrintRatingDialog&) = delete;
   ~QtPrintRatingDialog() noexcept;

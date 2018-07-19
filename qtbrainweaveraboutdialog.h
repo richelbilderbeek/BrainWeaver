@@ -8,7 +8,7 @@ namespace braw {
 
 struct QtAboutDialog : public ::ribi::QtAboutDialog
 {
-  QtAboutDialog();
+  QtAboutDialog(QWidget * const parent = nullptr);
 };
 
 } //~namespace braw

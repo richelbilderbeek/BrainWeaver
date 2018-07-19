@@ -1,9 +1,9 @@
 #ifndef QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
 #define QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
 
+#include <QDialog>
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
-#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtStudentStartCompleteDialog; }
 
@@ -12,12 +12,15 @@ namespace braw {
 
 class qtbrainweaverstudentstartcompletedialog_test;
 
-class QtStudentStartCompleteDialog : public QtDialog
+class QtStudentStartCompleteDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtStudentStartCompleteDialog(const File file, QWidget* parent = 0);
+  explicit QtStudentStartCompleteDialog(
+    const File file,
+    QWidget* parent = nullptr
+  );
   QtStudentStartCompleteDialog(const QtStudentStartCompleteDialog&) = delete;
   QtStudentStartCompleteDialog& operator=(const QtStudentStartCompleteDialog&) = delete;
   ~QtStudentStartCompleteDialog() noexcept;

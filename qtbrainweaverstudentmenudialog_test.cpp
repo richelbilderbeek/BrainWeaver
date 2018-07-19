@@ -17,20 +17,13 @@ void ribi::braw::qtbrainweaverstudentmenudialog_test::click_button_about_clicked
   //d.on_button_about_clicked();
 }
 
-void ribi::braw::qtbrainweaverstudentmenudialog_test::click_button_quit()
-{
-  File f;
-  QtStudentMenuDialog d(f);
-  d.show();
-  d.on_button_quit_clicked();
-}
-
 void ribi::braw::qtbrainweaverstudentmenudialog_test::click_button_start()
 {
   File f;
   f.SetStudentName("John Doe");
   QtStudentMenuDialog d(f);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_start_clicked();
 }
 

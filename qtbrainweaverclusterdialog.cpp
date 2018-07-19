@@ -1,7 +1,3 @@
-
-
-
-
 #include "qtbrainweaverclusterdialog.h"
 
 #include <fstream>
@@ -41,7 +37,7 @@
 ribi::braw::QtClusterDialog::QtClusterDialog(
   const File& file,
   QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtClusterDialog),
     m_back_to_menu(false),
     m_file(file),
@@ -130,8 +126,7 @@ void ribi::braw::QtClusterDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
-    emit remove_me(this);
-    return;
+    close();
   }
   if (!m_widget)
   {
@@ -190,8 +185,8 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
     assert(m_file.GetCluster() == GetWidget()->GetCluster());
   }
 
-  QtConceptMapDialog * const d = new QtConceptMapDialog(m_file);
-  emit add_me(d);
+  auto * const d = new QtConceptMapDialog(m_file, this);
+  d->close();
 
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have
@@ -201,7 +196,8 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
   if (d->GoBackToMenu())
   {
     m_back_to_menu = true;
-    emit remove_me(this);
+    close();
+    return;
   }
 
   //Same test as in constructor
@@ -226,8 +222,7 @@ void ribi::braw::QtClusterDialog::Save()
   assert(d->selectedFiles().size() == 1);
   const std::string filename = d->selectedFiles()[0].toStdString();
   Save(filename);
-  //this->m_back_to_menu = true; //2013-04-19 Request by client
-  //emit remove_me(this); //2013-04-19 Request by client
+  //close(); //2013-04-19 Don't close: request by client
 }
 
 void ribi::braw::QtClusterDialog::Save(const std::string& filename)

@@ -1,21 +1,24 @@
 #ifndef QTBRAINWEAVERSTUDENTMENUDIALOG_H
 #define QTBRAINWEAVERSTUDENTMENUDIALOG_H
 
+#include <QDialog>
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
-#include "qtbrainweaverdialog.h"
 
 namespace Ui { class QtStudentMenuDialog; }
 
 namespace ribi {
 namespace braw {
 
-class QtStudentMenuDialog : public QtDialog
+class QtStudentMenuDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtStudentMenuDialog(const File file, QWidget* parent = 0);
+  explicit QtStudentMenuDialog(
+    const File file,
+    QWidget* parent = nullptr
+  );
   QtStudentMenuDialog(const QtStudentMenuDialog&) = delete;
   QtStudentMenuDialog& operator=(const QtStudentMenuDialog&) = delete;
   ~QtStudentMenuDialog() noexcept;
@@ -32,7 +35,6 @@ class QtStudentMenuDialog : public QtDialog
   public slots:
   void keyPressEvent(QKeyEvent* e);
   void on_button_about_clicked();
-  void on_button_quit_clicked();
   void on_button_save_clicked();
   void on_button_start_clicked();
   void on_edit_name_textChanged(const QString &arg1);

@@ -28,6 +28,7 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   assert(IsCenterNode(ribi::cmap::GetFirstNode(file.GetConceptMap())));
   QtRateConceptMapDialog d(file);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_next_clicked();
 }
 

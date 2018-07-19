@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_H
 #define QTBRAINWEAVERPRINTCONCEPTMAPDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "qtbrainweaverfwd.h"
 #include "brainweaverfile.h"
 
@@ -15,7 +15,7 @@ namespace braw {
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
 ///QtPrintConceptMapDialog is optimized for printers
-class QtPrintConceptMapDialog : public QtDialog
+class QtPrintConceptMapDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
   
