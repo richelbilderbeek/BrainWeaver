@@ -1,31 +1,24 @@
-
-
-
-
 #include "qtbrainweaverrateconceptmapdialog.h"
 
 #include <cassert>
 
-#include <boost/bind.hpp>
-#include <boost/lambda/lambda.hpp>
-#include <boost/numeric/conversion/cast.hpp>
+//#include <boost/bind.hpp>
+//#include <boost/lambda/lambda.hpp>
+//#include <boost/numeric/conversion/cast.hpp>
 
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QKeyEvent>
 
-#include "conceptmapfactory.h"
-#include "conceptmap.h"
-#include "brainweaverfilefactory.h"
+//#include "conceptmapfactory.h"
+//#include "conceptmap.h"
+//#include "brainweaverfilefactory.h"
 #include "qtbrainweaverfiledialog.h"
-#include "qtscopeddisable.h"
-#include "brainweaverfile.h"
+//#include "qtscopeddisable.h"
+//#include "brainweaverfile.h"
 #include "qtconceptmap.h"
-
-
 #include "qtbrainweaverratingdialog.h"
-
-#include "qtconceptmaprateconceptdialog.h"
+//#include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
 
@@ -189,5 +182,7 @@ void ribi::braw::QtRateConceptMapDialog::on_button_save_clicked()
 
 void ribi::braw::QtRateConceptMapDialog::showEvent(QShowEvent *)
 {
+  const QRectF all_items_rect = m_concept_map->scene()->itemsBoundingRect();
+  m_concept_map->fitInView(all_items_rect, Qt::KeepAspectRatio);
   this->m_concept_map->setFocus();
 }
