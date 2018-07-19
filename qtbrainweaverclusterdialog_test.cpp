@@ -65,8 +65,8 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   file.SetCluster(cluster);
   QtClusterDialog d(file);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_next_clicked();
-
 }
 
 void ribi::braw::qtbrainweaverclusterdialog_test
@@ -76,6 +76,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   assert(boost::num_vertices(file.GetConceptMap()));
   QtClusterDialog d(file);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_next_clicked();
 }
 
