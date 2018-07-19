@@ -1,49 +1,21 @@
-
-
-
-
 #include "qtbrainweaverconceptmapdialog.h"
 
 #include <cassert>
 #include <iostream>
-#include <boost/lambda/lambda.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/numeric/conversion/cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
-#include <QEvent>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFileDialog>
-#include <QGraphicsScene>
 #include <QKeyEvent>
-#include <QLabel>
-#include <QLayout>
-#include <QMessageBox>
 #include <QTimer>
 
 #include "add_bundled_edge_between_vertices.h"
 #include "add_bundled_vertex.h"
-#include "brainweavercluster.h"
-#include "brainweaverfile.h"
 #include "conceptmapcenternodefactory.h"
-#include "conceptmapconcept.h"
-#include "conceptmapedge.h"
-#include "conceptmapfactory.h"
-#include "conceptmap.h"
-#include "conceptmapnodefactory.h"
-#include "conceptmapnode.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmap.h"
-#include "qtconceptmap.h"
-#include "qtconceptmapqtedge.h"
-#include "qtconceptmapqtnode.h"
-#include "qtscopeddisable.h"
-
 #include "ui_qtbrainweaverconceptmapdialog.h"
-
 
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
