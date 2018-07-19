@@ -71,7 +71,7 @@ can be created with the same lack of errors.
 
 Assumes `n_n` at least being `2`.
 
-
+---|---|---|---|---|---|---
 `n_n`|`  2`|`  2`|`  3`|`  3`|`  3`|`  3`
 `n_r`|`  0`|`  1`|`  0`|`  1`|`  2`|`  3`
 ---|---|---|---|---|---|---
