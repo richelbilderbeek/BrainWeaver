@@ -9,13 +9,7 @@ do
   cd $folder
 
   echo "git folder: "$folder
-  git checkout master
   git pull
-  git merge develop
-  git push
-  git checkout develop
-  git pull
-  git merge master
-  git push
+
   cd ..
 done
