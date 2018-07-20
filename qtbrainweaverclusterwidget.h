@@ -21,6 +21,7 @@ public:
     const Cluster& cluster,
     QWidget* parent = 0
   );
+  void DoubleClicked();
 
   void addTopLevelItem(QTreeWidgetItem *item);
 
