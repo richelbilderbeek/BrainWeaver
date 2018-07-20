@@ -10,6 +10,7 @@
 
 #include <QDebug>
 #include <QKeyEvent>
+#include <iostream>
 
 #include "conceptmapconceptfactory.h"
 #include "conceptmapconcept.h"
@@ -21,9 +22,6 @@
 #include "qtbrainweaverclustertreewidgetitem.h"
 #include "brainweavercluster.h"
 #include "qtconceptmapcompetency.h"
-
-
-
 
 ribi::braw::QtClusterWidget::QtClusterWidget(
   const Cluster& cluster,
@@ -81,6 +79,7 @@ void ribi::braw::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
 void ribi::braw::QtClusterWidget::dropEvent(QDropEvent *event)
 {
   QTreeWidget::dropEvent(event);
+
   //Fix the possibility of dropping a tree with depth three
   while (1)
   {
@@ -203,9 +202,18 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
   //Without this seemingly useless member function,
   //the widget cannot be edited
   QTreeWidget::keyPressEvent(event);
+  if(event->key()==Qt::Key_Delete)
+  {
+    QTreeWidgetItem *item = this->currentItem();
+    if(item)
+      delete item;
+   }
+
   switch (event->key())
   {
     case Qt::Key_Space:
+
+      break;
     case Qt::Key_Select:
       if(currentItem())
       {
@@ -213,6 +221,7 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
       }
     break;
     case Qt::Key_Right: keyPressEventRight(event); break;
+
 //    case Qt::Key_Left:
 //    {
 //      auto cur_item = currentItem();
@@ -235,9 +244,20 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
   }
 }
 
+void ribi::braw::QtClusterWidget::DoubleClicked()
+{
+    auto cur_item = currentItem();
+    if(cur_item->isSelected())
+    {
+        delete cur_item;
+        this->update();
+    }
+}
+
 void ribi::braw::QtClusterWidget::keyPressEventRight(QKeyEvent *)
 {
   auto cur_item = currentItem();
+
   assert(dynamic_cast<QtClusterTreeWidgetItem*>(cur_item));
   if (cur_item && GetDepth(cur_item) == 0)
   {
@@ -336,7 +356,6 @@ Qt::ItemFlags ribi::braw::QtClusterWidget::GetTopLevelFlags() const noexcept
 
 void ribi::braw::QtClusterWidget::RemoveEmptyItem(QTreeWidgetItem* item,int col)
 {
-
   if (item->text(col).isEmpty())
   {
     delete item;
