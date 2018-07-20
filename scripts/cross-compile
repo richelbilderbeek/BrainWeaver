@@ -13,7 +13,7 @@ $myqmake -v
 # Go to the BrainWeaver root folder
 cd ..
 
-for myprofile in $(ls BrainweaverDeveloper.pro)
+for myprofile in BrainweaverDeveloper.pro BrainweaverStudent.pro BrainweaverAssessor.pro
 do
   echo "========================================="
   echo "Working on .pro file: "$myprofile
