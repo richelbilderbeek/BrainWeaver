@@ -1,7 +1,5 @@
 #include "qtbrainweavermenudialog.h"
 
-//#include <boost/lexical_cast.hpp>
-
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
@@ -126,8 +124,8 @@ void ribi::braw::QtMenuDialog::on_button_rating_clicked() noexcept
 {
   const int test = 4;
   assert(test < FileFactory().GetNumberOfTests());
-  const File file = FileFactory().GetTests().at(test);
-
+  File file = FileFactory().GetTests().at(test);
+  file.SetAssessorName("William Ebright");
   auto * const d{
     new QtRatingDialog(file, this)
   };
