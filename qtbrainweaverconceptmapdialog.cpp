@@ -1,54 +1,26 @@
-
-
-
-
 #include "qtbrainweaverconceptmapdialog.h"
 
 #include <cassert>
 #include <iostream>
-#include <boost/lambda/lambda.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/numeric/conversion/cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
-#include <QEvent>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFileDialog>
-#include <QGraphicsScene>
 #include <QKeyEvent>
-#include <QLabel>
-#include <QLayout>
-#include <QMessageBox>
 #include <QTimer>
 
 #include "add_bundled_edge_between_vertices.h"
 #include "add_bundled_vertex.h"
-#include "brainweavercluster.h"
-#include "brainweaverfile.h"
 #include "conceptmapcenternodefactory.h"
-#include "conceptmapconcept.h"
-#include "conceptmapedge.h"
-#include "conceptmapfactory.h"
-#include "conceptmap.h"
-#include "conceptmapnodefactory.h"
-#include "conceptmapnode.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverprintconceptmapdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
-#include "qtconceptmap.h"
-#include "qtconceptmap.h"
-#include "qtconceptmapqtedge.h"
-#include "qtconceptmapqtnode.h"
-#include "qtscopeddisable.h"
-
 #include "ui_qtbrainweaverconceptmapdialog.h"
-
 
 ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   const File& file,
   QWidget *parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtConceptMapDialog),
     m_back_to_menu(false),
     m_file(file),
@@ -169,12 +141,12 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)
   {
-    emit remove_me(this);
+    close();
     return;
   }
   if (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier))
   {
-    emit remove_me(this);
+    close();
     return;
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
@@ -195,9 +167,8 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   qDebug() << __func__ << (__LINE__);
   this->m_widget->setEnabled(false); //Prevents #101
   m_widget->StopTimer();
-  QtPrintConceptMapDialog * const d = new QtPrintConceptMapDialog(m_file);
-  emit add_me(d);
-
+  auto * const d = new QtPrintConceptMapDialog(m_file, this);
+  d->exec();
   //this->m_widget->setEnabled(true);
 }
 
@@ -231,12 +202,14 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
   UpdateFileWithConceptMapFromWidget();
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
-  //emit remove_me(this); //2013-04-19 Request by client
+  //close(); //2013-04-19 Request by client
 }
 
 void ribi::braw::QtConceptMapDialog::showEvent(QShowEvent *)
 {
   m_widget->setFocus();
+  const QRectF all_items_rect = m_widget->scene()->itemsBoundingRect();
+  m_widget->fitInView(all_items_rect, Qt::KeepAspectRatio);
 }
 
 void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()

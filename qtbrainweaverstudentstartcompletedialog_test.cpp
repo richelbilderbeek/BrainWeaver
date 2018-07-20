@@ -55,6 +55,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_start_associate_clicked();
 }
 
@@ -64,5 +65,6 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_start_construct_clicked();
 }

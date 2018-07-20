@@ -19,7 +19,7 @@ class QtClusterWidget : public QTreeWidget
 public:
   explicit QtClusterWidget(
     const Cluster& cluster,
-    QWidget* parent = 0
+    QWidget* parent = nullptr
   );
   void DoubleClicked();
 

@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVEROVERVIEWDIALOG_H
 #define QTBRAINWEAVEROVERVIEWDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "brainweaverfwd.h"
 
 namespace ribi {
@@ -9,7 +9,7 @@ namespace braw {
 
 struct QtOverviewDialog : public QDialog
 {
-  explicit QtOverviewDialog(QWidget* parent = 0);
+  explicit QtOverviewDialog(QWidget* parent = nullptr);
 
 protected:
   void keyPressEvent(QKeyEvent *);

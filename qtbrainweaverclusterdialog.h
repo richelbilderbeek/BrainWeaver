@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVERCLUSTERDIALOG_H
 #define QTBRAINWEAVERCLUSTERDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "brainweaverfile.h"
 #include "qtbrainweaverfwd.h"
 
@@ -15,12 +15,12 @@ struct qtbrainweaverclusterdialog_test;
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
 ///because the widget needs something to work on
-class QtClusterDialog : public QtDialog
+class QtClusterDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
 
 public:
-  explicit QtClusterDialog(const File& file, QWidget* parent = 0);
+  explicit QtClusterDialog(const File& file, QWidget* parent = nullptr);
   QtClusterDialog(const QtClusterDialog&) = delete;
   QtClusterDialog& operator=(const QtClusterDialog&) = delete;
   ~QtClusterDialog() noexcept;

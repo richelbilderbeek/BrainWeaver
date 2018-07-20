@@ -27,7 +27,7 @@
 ribi::braw::QtRatingDialog::QtRatingDialog(
   const File file,
   QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtRatingDialog),
     m_back_to_menu(false),
     m_file(file)
@@ -125,7 +125,10 @@ bool ribi::braw::QtRatingDialog::GetBackToMenu() const noexcept
 
 void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape) { emit remove_me(this); }
+  if (e->key() == Qt::Key_Escape)
+  {
+    close();
+  }
 }
 
 void ribi::braw::QtRatingDialog::on_button_save_clicked()
@@ -146,7 +149,7 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
   assert(!filename.empty());
   Save(filename);
   this->m_back_to_menu = true;
-  emit remove_me(this);
+  close();
 }
 
 void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
@@ -156,10 +159,10 @@ void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 
 void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {
-  QtPrintRatingDialog * const d{
-    new QtPrintRatingDialog(this->m_file)
+  auto * const d{
+    new QtPrintRatingDialog(m_file, this)
   };
-  emit add_me(d);
+  d->exec();
 }
 
 void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)

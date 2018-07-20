@@ -1,9 +1,9 @@
 #ifndef QTBRAINWEAVERCONCEPTMAPDIALOG_H
 #define QTBRAINWEAVERCONCEPTMAPDIALOG_H
 
+#include <QDialog>
 #include "qtconceptmap.h"
 #include "brainweaverfile.h"
-#include "qtbrainweaverdialog.h"
 #include "conceptmap.h"
 
 namespace Ui { class QtConceptMapDialog; }
@@ -11,12 +11,12 @@ namespace Ui { class QtConceptMapDialog; }
 namespace ribi {
 namespace braw {
 
-class QtConceptMapDialog : public QtDialog
+class QtConceptMapDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtConceptMapDialog(const File& file, QWidget* parent = 0);
+  explicit QtConceptMapDialog(const File& file, QWidget* parent = nullptr);
   QtConceptMapDialog(const QtConceptMapDialog&) = delete;
   QtConceptMapDialog& operator=(const QtConceptMapDialog&) = delete;
   ~QtConceptMapDialog() noexcept;

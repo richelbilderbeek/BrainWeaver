@@ -26,7 +26,6 @@ void ribi::braw::QtOverviewDialog::keyPressEvent(QKeyEvent* e)
   if (e->key() == Qt::Key_Escape)
   {
     close();
-    //emit remove_me(this);
     return;
   }
   QDialog::keyPressEvent(e);

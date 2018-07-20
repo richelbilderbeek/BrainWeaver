@@ -15,11 +15,9 @@
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
 
-
-
-const std::string CreateStyleSheet()
+std::string CreateStyleSheet() noexcept
 {
-  const std::string s =
+  return
     "QDialog { "
     "  background-color: qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, stop: 0 #bbf, stop: 1 #bff);"
     "} "
@@ -51,9 +49,8 @@ const std::string CreateStyleSheet()
     ""
     "QPlainTextEdit {"
     "  font-size: 12px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;"
-    "}";
-
-  return s;
+    "}"
+  ;
 }
 
 int main(int argc, char *argv[])

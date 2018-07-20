@@ -20,7 +20,7 @@
 ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,
   QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtStudentStartCompleteDialog),
     m_back_to_menu(false),
     m_file(file)
@@ -43,7 +43,7 @@ void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
-    emit remove_me(this);
+    close();
     return;
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
@@ -86,10 +86,10 @@ void ribi::braw::QtStudentStartCompleteDialog::Save(const std::string& filename)
 
 void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
 {
-  QtClusterDialog * const d{
-    new QtClusterDialog(m_file)
+  auto * const d{
+    new QtClusterDialog(m_file, this)
   };
-  emit add_me(d);
+  d->exec();
 
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have
@@ -103,10 +103,10 @@ void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
 
 void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()
 {
-  QtConceptMapDialog * const d{
-    new QtConceptMapDialog(m_file)
+  auto * const d{
+    new QtConceptMapDialog(m_file, this)
   };
-  emit add_me(d);
+  d->exec();
 
   //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
   //The former architecture showed d modally, thus at this point d would have

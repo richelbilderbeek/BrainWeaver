@@ -57,23 +57,12 @@ void ribi::braw::qtbrainweaverratingdialog_test::edit_name()
   d.ui->edit_name->setText("Another other");
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::press_escape_should_emit_remove_me()
-{
-  const File file = FileFactory().Get5();
-  QtRatingDialog d(file);
-  const int n_hits_before{m_n_hits};
-  QObject::connect(&d, SIGNAL(remove_me(QDialog * const)),this,SLOT(add_hit()));
-  d.show();
-  QTest::keyPress(&d, Qt::Key_Escape);
-  const int n_hits_after{m_n_hits};
-  QVERIFY(n_hits_before < n_hits_after);
-}
-
 void ribi::braw::qtbrainweaverratingdialog_test::print()
 {
   const File file = FileFactory().Get5();
   QtRatingDialog d(file);
   d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_print_clicked();
 }
 

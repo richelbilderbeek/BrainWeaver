@@ -5,7 +5,6 @@
 #include <QDebug>
 #include <QIcon>
 #include "qtbrainweavermenudialog.h"
-#include "qtbrainweavermasterdialog.h"
 
 std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
 {
@@ -113,8 +112,7 @@ int main(int argc, char *argv[])
     #endif
     a.setStyleSheet(CreateStyleSheet().c_str());
     a.setWindowIcon(QIcon(":/images/R.png"));
-    ribi::braw::QtMasterDialog d;
-    d.add_new(new ribi::braw::QtMenuDialog);
+    ribi::braw::QtMenuDialog d;
     d.show();
     //Put d in screen center at 80% of fullscreen size
     {

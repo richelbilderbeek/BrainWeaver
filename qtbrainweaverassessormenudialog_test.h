@@ -14,7 +14,6 @@ private slots:
   void assess();
   void click_button_about_clicked();
   void click_button_create_assessment();
-  void click_button_quit();
   void default_construction();
   void press_escape();
 

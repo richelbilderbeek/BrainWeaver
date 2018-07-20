@@ -33,7 +33,7 @@ public:
 };
 
 ribi::braw::QtCreateAssessmentDialog::QtCreateAssessmentDialog(QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtCreateAssessmentDialog),
     m_back_to_menu(false)
 {
@@ -123,7 +123,6 @@ void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)
   {
-    emit remove_me(this);
     close();
     return;
   }
@@ -144,7 +143,7 @@ void ribi::braw::QtCreateAssessmentDialog::on_button_save_clicked()
   assert(!filename.empty());
   Save(filename);
   m_back_to_menu = true;
-  emit remove_me(this);
+  close();
 }
 
 void ribi::braw::QtCreateAssessmentDialog::Save(const std::string& filename) const

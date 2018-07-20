@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVEROVERVIEWWIDGET_H
 #define QTBRAINWEAVEROVERVIEWWIDGET_H
 
-#include "qtbrainweaverdialog.h"
+
 #include <QGraphicsView>
 #include "brainweaverfwd.h"
 
@@ -17,7 +17,7 @@ class QtOverviewWidget : public QGraphicsView
 
 public:
 
-  explicit QtOverviewWidget(QWidget* parent = 0);
+  explicit QtOverviewWidget(QWidget* parent = nullptr);
     
 public slots:
 

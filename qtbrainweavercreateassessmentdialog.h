@@ -1,7 +1,7 @@
 #ifndef QTBRAINWEAVERCREATEASSESSMENTCOMPLETEDIALOG_H
 #define QTBRAINWEAVERCREATEASSESSMENTCOMPLETEDIALOG_H
 
-#include "qtbrainweaverdialog.h"
+#include <QDialog>
 #include "brainweaverfwd.h"
 #include "conceptmaprating.h"
 
@@ -10,12 +10,12 @@ namespace Ui { class QtCreateAssessmentDialog; }
 namespace ribi {
 namespace braw {
 
-class QtCreateAssessmentDialog : public QtDialog
+class QtCreateAssessmentDialog : public QDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtCreateAssessmentDialog(QWidget* parent = 0);
+  explicit QtCreateAssessmentDialog(QWidget* parent = nullptr);
   QtCreateAssessmentDialog(const QtCreateAssessmentDialog&) = delete;
   QtCreateAssessmentDialog& operator=(const QtCreateAssessmentDialog&) = delete;
   ~QtCreateAssessmentDialog() noexcept;

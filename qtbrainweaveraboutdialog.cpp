@@ -37,8 +37,8 @@ ribi::About GetAbout()
   return about;
 }
 
-ribi::braw::QtAboutDialog::QtAboutDialog()
-  : ::ribi::QtAboutDialog(GetAbout())
+ribi::braw::QtAboutDialog::QtAboutDialog(QWidget * const parent)
+  : ::ribi::QtAboutDialog(GetAbout(), parent)
 {
   //Add Loom image
   assert(layout());

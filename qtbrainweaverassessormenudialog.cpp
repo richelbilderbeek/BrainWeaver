@@ -1,31 +1,31 @@
-
-
-
-
 #include "qtbrainweaverassessormenudialog.h"
 
 #include <QFileDialog>
 #include <QKeyEvent>
 
 #include "qtbrainweaveraboutdialog.h"
-//#include "brainweavermenudialog.h"
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtbrainweavercreateassessmentdialog.h"
 
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
 
-
-
 #include "ui_qtbrainweaverassessormenudialog.h"
 
 
 ribi::braw::QtAssessorMenuDialog::QtAssessorMenuDialog(QWidget* parent)
-  : QtDialog(parent),
+  : QDialog(parent),
     ui(new Ui::QtAssessorMenuDialog)
 {
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
+
+  connect(
+    ui->button_quit,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(close())
+  );
 }
 
 ribi::braw::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
@@ -36,11 +36,8 @@ ribi::braw::QtAssessorMenuDialog::~QtAssessorMenuDialog() noexcept
 void ribi::braw::QtAssessorMenuDialog::Assess(const std::string& filename)
 {
   File file = LoadFile(filename);
-  QtRateConceptMapDialog * const d = new QtRateConceptMapDialog(file);
-  emit add_me(d);
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
+  auto * const d = new QtRateConceptMapDialog(file, this);
+  d->exec();
   file = d->GetFile();
 }
 
@@ -48,29 +45,26 @@ void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape || (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier)))
   {
-    emit remove_me(this);
+    close();
     return;
   }
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_create_assessment_clicked()
 {
-  QtCreateAssessmentDialog * const d = new QtCreateAssessmentDialog;
-  emit add_me(d);
+  auto * const d{
+    new QtCreateAssessmentDialog(this)
+  };
+  d->exec();
 }
 
 
 void ribi::braw::QtAssessorMenuDialog::on_button_about_clicked()
 {
-  ribi::braw::QtAboutDialog * const d{
-    new ribi::braw::QtAboutDialog
+  auto * const d{
+    new ribi::braw::QtAboutDialog(this)
   };
   d->exec();
-}
-
-void ribi::braw::QtAssessorMenuDialog::on_button_quit_clicked()
-{
-  emit remove_me(this);
 }
 
 void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
