@@ -205,9 +205,9 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
   if(event->key()==Qt::Key_Delete)
   {
     QTreeWidgetItem *item = this->currentItem();
-    if(item)
-      delete item;
-   }
+    assert(item);
+    delete item;
+  }
 
   switch (event->key())
   {
