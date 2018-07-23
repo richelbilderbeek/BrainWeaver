@@ -66,9 +66,17 @@ std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
     "  alternate-background-color: #BBB;\n"
     "  gridline-color: black;\n"
     "}\n"
+    "\n"
     "QGraphicsItem {\n"
     "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;\n"
     "}\n"
+    "\n"
+    "QHeaderView {\n"
+    "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;\n"
+    "  border-width: 1px;\n"
+    "  border-style: solid;\n"
+    "}\n"
+    "\n"
   ;
 }
 
