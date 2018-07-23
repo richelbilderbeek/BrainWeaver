@@ -63,7 +63,7 @@ std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
     "\n"
     "QTableWidget {\n"
     "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;\n"
-    "  alternate-background-color: #CCC;\n"
+    "  alternate-background-color: #BBB;\n"
     "}\n"
     "QGraphicsItem {\n"
     "  font-size: 14px;  font-family: \"Courier\", \"Courier New\", Courier, monospace;\n"
