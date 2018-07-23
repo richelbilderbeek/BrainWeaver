@@ -87,7 +87,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Welke belangrijke kennis- en houdingsaspecten, voorbeelden, ervaringen, waarden en idealen komen dan bij u op? </string>
+      <string>Welke primaire concepten en voorbeelden/anekdotes komen dan bij u op? </string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -103,7 +103,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Maak een lijst en groepeer de items door te slepen. Met F2 kunt u een geselecteerd item bewerken.</string>
+      <string>Maak een lijst en groepeer de items door te slepen. Met F2 kunt u een geselecteerd item bewerken. Sleep de voorbeelden onder het bijbehorende concept.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
