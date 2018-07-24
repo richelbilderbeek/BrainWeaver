@@ -40,14 +40,14 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   };
 
   const QVector<QString> tooltip_texts = {
-      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016",
-      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten",
-      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten",
+      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016", //!OCLINT I want to put one tooltip text per line
+      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
+      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
       "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
       "Aantal concepten (exclusief focusvraag)",
       "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
-      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)",
-      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera",
+      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)", //!OCLINT I want to put one tooltip text per line
+      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera", //!OCLINT I want to put one tooltip text per line
       "Het totaal aantal voorbeelden"
   };
 
@@ -256,7 +256,10 @@ void ribi::braw::QtDisplay::DisplayExamples(
         const int row = static_cast<int>(p.first) - 1;
         if (row == -1) continue; //0 == uninitialized
         QTableWidgetItem * const item  = new QTableWidgetItem;
-        const double f = static_cast<double>(p.second) / static_cast<double>(sum);
+        const double f{
+          static_cast<double>(p.second)
+          / static_cast<double>(sum)
+        };
         const int percentage = static_cast<int>(std::round(100.0 * f));
         item->setText(QString::number(percentage));
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
