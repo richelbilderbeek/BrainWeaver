@@ -144,9 +144,10 @@ QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
   table->verticalHeader()->setMinimumWidth(200);
   table->setMinimumHeight(239);
   table->setMaximumHeight(239);
-  table->setMinimumWidth(327);
-  table->setMaximumWidth(327);
-  table->setColumnWidth(0,70);
+  const int w = 45;
+  table->setMinimumWidth(285 + w);
+  table->setMaximumWidth(285 + w);
+  table->setColumnWidth(0, w);
   table->setHorizontalHeaderLabels( { "%" } );
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -263,6 +264,7 @@ void ribi::braw::QtDisplay::DisplayExamples(
         const int percentage = static_cast<int>(std::round(100.0 * f));
         item->setText(QString::number(percentage));
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        item->setTextAlignment(Qt::AlignCenter);
         assert(row >= 0);
         assert(row < table->rowCount());
         assert(col < table->columnCount());
