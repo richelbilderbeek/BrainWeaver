@@ -101,12 +101,24 @@ ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 
 void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key()  == Qt::Key_Escape)
+  if (e->key() == Qt::Key_Escape)
   {
     close();
     return;
   }
-  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S) { Save(); return; }
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      Save();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file.toStdString());
+      return;
+    }
+  }
   QDialog::keyPressEvent(e);
 }
 
@@ -152,6 +164,7 @@ void ribi::braw::QtRateConceptMapDialog::Save()
   assert(d->selectedFiles().size() == 1);
   const std::string filename = d->selectedFiles()[0].toStdString();
   assert(!filename.empty());
+  QtFileDialog::m_last_file = filename.c_str();
   Save(filename);
   //emit remove_me(this); //Do not close after saving
   this->show();

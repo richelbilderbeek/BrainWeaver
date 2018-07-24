@@ -129,6 +129,19 @@ void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
   {
     close();
   }
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      on_button_save_clicked();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file.toStdString());
+      return;
+    }
+  }
 }
 
 void ribi::braw::QtRatingDialog::on_button_save_clicked()
@@ -147,6 +160,7 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
   assert(d->selectedFiles().size() == 1);
   const std::string filename = d->selectedFiles()[0].toStdString();
   assert(!filename.empty());
+  QtFileDialog::m_last_file = filename.c_str();
   Save(filename);
   this->m_back_to_menu = true;
   close();

@@ -1,5 +1,3 @@
-
-
 #include "qtbrainweaverprintconceptmapdialog.h"
 
 #include <cassert>

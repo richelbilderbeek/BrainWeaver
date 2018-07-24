@@ -126,6 +126,19 @@ void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
     close();
     return;
   }
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      on_button_save_clicked();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file.toStdString());
+      return;
+    }
+  }
 }
 
 void ribi::braw::QtCreateAssessmentDialog::on_button_save_clicked()
@@ -140,6 +153,7 @@ void ribi::braw::QtCreateAssessmentDialog::on_button_save_clicked()
   }
   assert(d->selectedFiles().size() == 1);
   const std::string filename = d->selectedFiles()[0].toStdString();
+  QtFileDialog::m_last_file = filename.c_str();
   assert(!filename.empty());
   Save(filename);
   m_back_to_menu = true;
