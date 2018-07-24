@@ -24,13 +24,13 @@ class QtStudentMenuDialog : public QDialog
   ~QtStudentMenuDialog() noexcept;
 
   ///Get the student his/her name
-  std::string GetName() const noexcept;
+  QString GetName() const noexcept;
 
   ///Save to file
-  void Save(const std::string& filename);
+  void Save(const QString& filename);
 
   ///Set the student his/her name
-  void SetName(const std::string& name);
+  void SetName(const QString& name);
 
   public slots:
   void keyPressEvent(QKeyEvent* e);

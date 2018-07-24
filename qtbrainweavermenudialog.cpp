@@ -142,8 +142,9 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
   if (!v.isEmpty())
   {
     assert(v.size() == 1);
-    const std::string filename = v[0].toStdString();
-    const File file = LoadFile(filename);
+    const QString filename = v[0];
+    QtFileDialog::m_last_file = filename;
+    const File file = LoadFile(filename.toStdString());
     auto * const menu{
       new QtStudentMenuDialog(file, this)
     };

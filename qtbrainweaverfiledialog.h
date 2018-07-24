@@ -2,6 +2,7 @@
 #define QTBRAINWEAVERFILEDIALOG_H
 
 #include <memory>
+#include <QString>
 
 struct QFileDialog;
 
@@ -18,6 +19,8 @@ struct QtFileDialog
 
   ///Create a QFileDialog to save Brainweaver files with
   std::unique_ptr<QFileDialog> GetSaveFileDialog(const FileType type) const;
+
+  static QString m_last_file;
 };
 
 } //~namespace braw

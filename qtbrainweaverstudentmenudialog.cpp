@@ -22,7 +22,7 @@ ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(
 
   if (!m_file.GetStudentName().empty())
   {
-    SetName(m_file.GetStudentName());
+    SetName(m_file.GetStudentName().c_str());
   }
   on_edit_name_textChanged(ui->edit_name->text());
 
@@ -39,9 +39,9 @@ ribi::braw::QtStudentMenuDialog::~QtStudentMenuDialog() noexcept
   delete ui;
 }
 
-std::string ribi::braw::QtStudentMenuDialog::GetName() const noexcept
+QString ribi::braw::QtStudentMenuDialog::GetName() const noexcept
 {
-  return ui->edit_name->text().toStdString();
+  return ui->edit_name->text();
 }
 
 void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
@@ -53,7 +53,16 @@ void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
   {
-    on_button_save_clicked(); return;
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      on_button_save_clicked();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file);
+      return;
+    }
   }
   QDialog::keyPressEvent(e);
 }
@@ -62,7 +71,6 @@ void ribi::braw::QtStudentMenuDialog::on_button_about_clicked()
 {
   std::unique_ptr<ribi::braw::QtAboutDialog> d{new ribi::braw::QtAboutDialog};
   assert(d);
-  //const auto d(QtAboutDialog().Get());
   this->hide();
   d->exec();
   this->show();
@@ -101,18 +109,19 @@ void ribi::braw::QtStudentMenuDialog::on_button_save_clicked()
     return;
   }
   assert(d->selectedFiles().size() == 1);
-  const std::string filename = d->selectedFiles()[0].toStdString();
-  assert(!filename.empty());
+  const QString filename = d->selectedFiles()[0];
+  QtFileDialog::m_last_file = filename;
+  assert(!filename.isEmpty());
   Save(filename);
 }
 
-void ribi::braw::QtStudentMenuDialog::Save(const std::string& filename)
+void ribi::braw::QtStudentMenuDialog::Save(const QString& filename)
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
-  m_file.Save(filename);
+  m_file.Save(filename.toStdString());
 }
 
-void ribi::braw::QtStudentMenuDialog::SetName(const std::string& name)
+void ribi::braw::QtStudentMenuDialog::SetName(const QString& name)
 {
-  ui->edit_name->setText(name.c_str());
+  ui->edit_name->setText(name);
 }

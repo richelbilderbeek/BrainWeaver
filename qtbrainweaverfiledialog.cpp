@@ -1,23 +1,15 @@
-
-
 #include "qtbrainweaverfiledialog.h"
 
 #include <cassert>
-#include <stdexcept>
 
-#include <QApplication>
-#include <QDesktopWidget>
 #include <QFileDialog>
 
 #include "brainweaverfile.h"
 
-
-namespace ribi {
-
-namespace braw {
+QString ribi::braw::QtFileDialog::m_last_file;
 
 std::unique_ptr<QFileDialog>
-QtFileDialog::GetOpenFileDialog() const
+ribi::braw::QtFileDialog::GetOpenFileDialog() const
 {
   std::unique_ptr<QFileDialog> d(new QFileDialog);
 
@@ -30,7 +22,7 @@ QtFileDialog::GetOpenFileDialog() const
   d->setLabelText(QFileDialog::FileName, "Bestand");
   d->setLabelText(QFileDialog::FileType, "Soort bestanden");
 
-  const std::string namefile = "Brainweaver concept map (*."
+  const std::string namefile = "BrainWeaver concept map (*."
     + GetFilenameExtension() + ")";
   d->setDefaultSuffix(GetFilenameExtension().c_str());
   d->setNameFilter(namefile.c_str());
@@ -39,7 +31,7 @@ QtFileDialog::GetOpenFileDialog() const
 }
 
 std::unique_ptr<QFileDialog>
-QtFileDialog::GetSaveFileDialog(const FileType type) const
+ribi::braw::QtFileDialog::GetSaveFileDialog(const FileType type) const
 {
   std::unique_ptr<QFileDialog> d(new QFileDialog);
   d->setViewMode(QFileDialog::Detail);
@@ -58,7 +50,7 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
   std::string namefile;
   if (type == FileType::cmp)
   {
-    namefile = "Brainweaver concept map (*."
+    namefile = "BrainWeaver concept map (*."
     + GetFilenameExtension() + ")";
     d->setDefaultSuffix(GetFilenameExtension().c_str());
   }
@@ -71,6 +63,3 @@ QtFileDialog::GetSaveFileDialog(const FileType type) const
   d->setNameFilter(namefile.c_str());
   return d;
 }
-
-} //~namespace braw
-} //~namespace ribi
