@@ -1,20 +1,15 @@
-
-
 #include "qtbrainweaverstudentmenudialog.h"
 
 #include <cassert>
-#include <memory>
 
-#include <QKeyEvent>
 #include <QFileDialog>
+#include <QKeyEvent>
 
-#include "brainweaverfile.h"
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverstudentstartcompletedialog.h"
 
 #include "ui_qtbrainweaverstudentmenudialog.h"
-
 
 ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(
   const File file, QWidget* parent
