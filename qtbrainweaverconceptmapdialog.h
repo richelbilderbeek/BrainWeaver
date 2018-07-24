@@ -32,7 +32,7 @@ class QtConceptMapDialog : public QDialog
   void UpdateFileWithConceptMapFromWidget();
 
   ///Save to disk
-  void Save(const std::string& filename) const;
+  void Save(const QString& filename) const;
 
   private slots:
 

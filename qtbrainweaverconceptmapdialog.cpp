@@ -57,7 +57,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   {
     const QRect screen = QApplication::desktop()->screenGeometry();
     this->setGeometry(screen.adjusted(64,64,-64,-64));
-    this->move( screen.center() - this->rect().center() );
+    this->move(screen.center() - this->rect().center());
   }
 
   //Start autosave
@@ -151,7 +151,16 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
   {
-    on_button_save_clicked(); return;
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      on_button_save_clicked();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file);
+      return;
+    }
   }
   m_widget->keyPressEvent(e);
   if (!e->isAccepted())
@@ -196,8 +205,9 @@ void ribi::braw::QtConceptMapDialog::on_button_save_clicked()
     return;
   }
   assert(d->selectedFiles().size() == 1);
-  const std::string filename = d->selectedFiles()[0].toStdString();
+  const QString filename = d->selectedFiles()[0];
   UpdateFileWithConceptMapFromWidget();
+  QtFileDialog::m_last_file = filename;
   Save(filename);
   //this->m_back_to_menu = true; //2013-04-19 Request by client
   //close(); //2013-04-19 Request by client
@@ -230,7 +240,7 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
   CheckInvariants(*GetQtConceptMap());
 }
 
-void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
+void ribi::braw::QtConceptMapDialog::Save(const QString& filename) const
 {
   if (m_file.GetConceptMap() != GetQtConceptMap()->ToConceptMap())
   {
@@ -239,5 +249,5 @@ void ribi::braw::QtConceptMapDialog::Save(const std::string& filename) const
     ;
     const_cast<QtConceptMapDialog*>(this)->UpdateFileWithConceptMapFromWidget();
   }
-  m_file.Save(filename);
+  m_file.Save(filename.toStdString());
 }
