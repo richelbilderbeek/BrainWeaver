@@ -198,10 +198,10 @@ void ribi::braw::qtbrainweaverclusterdialog_test::save()
   File file = FileFactory().Get5();
   QtClusterDialog d(file);
   d.show();
-  const std::string filename{"qtbrainweaverclusterdialog_test_save.cmp"};
-  if (ribi::is_regular_file(filename)) { ribi::delete_file(filename); }
-  assert(!ribi::is_regular_file(filename));
+  const QString filename{"qtbrainweaverclusterdialog_test_save.cmp"};
+  if (ribi::is_regular_file(filename.toStdString())) { ribi::delete_file(filename.toStdString()); }
+  assert(!ribi::is_regular_file(filename.toStdString()));
   d.Save(filename);
-  QVERIFY(ribi::is_regular_file(filename));
+  QVERIFY(ribi::is_regular_file(filename.toStdString()));
 }
 

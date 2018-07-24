@@ -47,19 +47,19 @@ void ribi::braw::qtbrainweaverstudentmenudialog_test::save()
   File f;
   QtStudentMenuDialog d(f);
   d.SetName("Jane Doe");
-  const std::string filename{"test_save." + GetFilenameExtension()};
-  assert(!is_regular_file(filename));
+  const QString filename{QString("test_save.") + GetFilenameExtension().c_str()};
+  assert(!is_regular_file(filename.toStdString()));
   d.Save(filename);
-  QVERIFY(is_regular_file(filename));
-  ribi::delete_file(filename);
-  assert(!is_regular_file(filename));
+  QVERIFY(is_regular_file(filename.toStdString()));
+  ribi::delete_file(filename.toStdString());
+  assert(!is_regular_file(filename.toStdString()));
 }
 
 void ribi::braw::qtbrainweaverstudentmenudialog_test::set_and_get_name()
 {
   File f;
   QtStudentMenuDialog d(f);
-  const std::string name{"Elenore Aderman"};
+  const QString name{"Elenore Aderman"};
   QVERIFY(d.GetName() != name);
   d.SetName(name);
   QVERIFY(d.GetName() == name);

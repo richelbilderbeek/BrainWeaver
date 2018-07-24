@@ -184,11 +184,11 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   QVERIFY(qtedge->GetArrow()->HasHead() ^ qtedge->GetArrow()->HasTail());
   QVERIFY(qtedge->GetEdge().HasHeadArrow() ^ qtedge->GetEdge().HasTailArrow());
 
-  const std::string filename{"create_edge_with_arrow_head.cmp"};
+  const QString filename{"create_edge_with_arrow_head.cmp"};
   d.UpdateFileWithConceptMapFromWidget();
   d.Save(filename);
 
-  const std::string s = ToDot(LoadFile(filename).GetConceptMap());
+  const std::string s = ToDot(LoadFile(filename.toStdString()).GetConceptMap());
   QVERIFY(
       (s.find("<has_head>1</has_head>") != std::string::npos)
     ^ (s.find("<has_tail>1</has_tail>") != std::string::npos)
@@ -197,7 +197,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
       (s.find("<has_head>0</has_head>") != std::string::npos)
     ^ (s.find("<has_tail>0</has_tail>") != std::string::npos)
   );
-  const std::string t = ToXml(LoadFile(filename).GetConceptMap());
+  const std::string t = ToXml(LoadFile(filename.toStdString()).GetConceptMap());
   QVERIFY(
       (t.find("<has_head>1</has_head>") != std::string::npos)
     ^ (t.find("<has_tail>1</has_tail>") != std::string::npos)

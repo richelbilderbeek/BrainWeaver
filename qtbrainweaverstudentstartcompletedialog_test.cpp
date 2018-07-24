@@ -39,12 +39,14 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
-  const std::string filename{"test_save." + GetFilenameExtension()};
-  assert(!is_regular_file(filename));
+  const QString filename{
+    QString("test_save.") + GetFilenameExtension().c_str()
+  };
+  assert(!is_regular_file(filename.toStdString()));
   d.Save(filename);
-  QVERIFY(is_regular_file(filename));
-  ribi::delete_file(filename);
-  assert(!is_regular_file(filename));
+  QVERIFY(is_regular_file(filename.toStdString()));
+  ribi::delete_file(filename.toStdString());
+  assert(!is_regular_file(filename.toStdString()));
 }
 
 

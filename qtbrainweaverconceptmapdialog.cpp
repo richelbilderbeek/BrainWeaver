@@ -56,7 +56,7 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   //Center the dialog
   {
     const QRect screen = QApplication::desktop()->screenGeometry();
-    this->setGeometry(screen.adjusted(64,64,-64,-64));
+    this->setGeometry(screen.adjusted(64, 64, -64, -64));
     this->move(screen.center() - this->rect().center());
   }
 
