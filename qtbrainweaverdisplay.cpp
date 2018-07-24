@@ -1,31 +1,12 @@
-
-
-
-
 #include "qtbrainweaverdisplay.h"
-
-#include <tuple>
-
-#include <boost/lexical_cast.hpp>
 
 #include <QHeaderView>
 #include <QTableWidget>
 
-#include "conceptmapcompetencies.h"
-#include "conceptmapcompetency.h"
-#include "conceptmapconcept.h"
-#include "conceptmap.h"
-#include "conceptmapedge.h"
-#include "count_undirected_graph_levels.h"
-#include "conceptmapexample.h"
-#include "get_my_custom_vertexes.h"
-#include "conceptmapexamples.h"
 #include "brainweaverfile.h"
 #include "brainweaverhelper.h"
-#include "conceptmapnode.h"
+#include "conceptmapcompetencies.h"
 #include "qtconceptmapcompetency.h"
-
-
 
 ribi::braw::QtDisplay::QtDisplay()
 {
@@ -265,8 +246,8 @@ void ribi::braw::QtDisplay::DisplayExamples(
   {
     std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
 
-    const int sum = std::accumulate(cnts.begin(),cnts.end(),0,
-      [](int& init,const std::pair<cmap::Competency,int>& p)
+    const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
+      [](int& init, const std::pair<cmap::Competency, int>& p)
       {
         init += p.second;
         return init;
@@ -274,7 +255,7 @@ void ribi::braw::QtDisplay::DisplayExamples(
     );
     if (sum != 0)
     {
-      for (const std::pair<cmap::Competency,int>& p: cnts)
+      for (const std::pair<cmap::Competency, int>& p: cnts)
       {
         const int col = 0;
         const int row = static_cast<int>(p.first) - 1;
@@ -282,13 +263,12 @@ void ribi::braw::QtDisplay::DisplayExamples(
         QTableWidgetItem * const item  = new QTableWidgetItem;
         const double f = static_cast<double>(p.second) / static_cast<double>(sum);
         const int percentage = static_cast<int>(std::round(100.0 * f));
-        const std::string text = boost::lexical_cast<std::string>(percentage);
-        item->setText(text.c_str());
+        item->setText(QString::number(percentage));
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         assert(row >= 0);
         assert(row < table->rowCount());
         assert(col < table->columnCount());
-        table->setItem(row,col,item);
+        table->setItem(row, col, item);
       }
     }
   }

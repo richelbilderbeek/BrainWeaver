@@ -225,7 +225,10 @@ void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
 void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
 {
   const auto concept = ribi::cmap::ConceptFactory().Get2();
-  ribi::cmap::QtConceptMapConceptEditDialog d(concept);
+  ribi::cmap::QtConceptMapConceptEditDialog d(
+    concept,
+    ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept
+  );
   d.exec();
 }
 

@@ -79,7 +79,8 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs()
   v.push_back(new QtClusterDialog(FileFactory().Get3()));
   v.push_back(
     new ribi::cmap::QtConceptMapConceptEditDialog(
-      ribi::cmap::ConceptFactory().GetTest(2)
+      ribi::cmap::ConceptFactory().GetTest(2),
+      ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept
     )
   );
   v.push_back(new QtConceptMapDialog(FileFactory().Get2()));
