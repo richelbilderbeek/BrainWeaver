@@ -36,7 +36,7 @@ public:
   bool GoBackToMenu() const { return m_back_to_menu; }
 
   //Save to disk
-  void Save(const std::string& filename);
+  void Save(const QString& filename);
 
 
 protected:

@@ -1,21 +1,12 @@
-
-
 #include "qtbrainweaverstudentstartcompletedialog.h"
 
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <QKeyEvent>
 #include <QFileDialog>
+#include <QKeyEvent>
 
-#include "brainweaverfile.h"
-#include "brainweaverclusterfactory.h"
-#include "conceptmapfactory.h"
-#include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
+#include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverstudentstartcompletedialog.h"
-
 
 ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   const File file,
@@ -48,8 +39,16 @@ void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
   {
-    Save();
-    return;
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      Save();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file);
+      return;
+    }
   }
   QDialog::keyPressEvent(e);
 }
@@ -74,14 +73,15 @@ void ribi::braw::QtStudentStartCompleteDialog::Save()
     return;
   }
   assert(d->selectedFiles().size() == 1);
-  const std::string filename = d->selectedFiles()[0].toStdString();
-  assert(!filename.empty());
+  const QString filename = d->selectedFiles()[0];
+  QtFileDialog::m_last_file = filename;
+  assert(!filename.isEmpty());
   Save(filename);
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::Save(const std::string& filename)
+void ribi::braw::QtStudentStartCompleteDialog::Save(const QString& filename)
 {
-  m_file.Save(filename);
+  m_file.Save(filename.toStdString());
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()

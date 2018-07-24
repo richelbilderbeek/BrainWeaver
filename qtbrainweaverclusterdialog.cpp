@@ -1,38 +1,14 @@
 #include "qtbrainweaverclusterdialog.h"
 
-#include <fstream>
-
 #include <boost/algorithm/string/trim_all.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <QFileDialog>
 #include <QKeyEvent>
-#include <QMessageBox>
 
-#include "qtbrainweaverconceptmapdialog.h"
-#include "conceptmapcenternodefactory.h"
-
-#include "conceptmapcompetency.h"
-#include "conceptmapconceptfactory.h"
-#include "conceptmapconceptfactory.h"
-#include "conceptmapconcept.h"
-#include "conceptmapedgefactory.h"
-#include "conceptmapedge.h"
-#include "conceptmapexamplefactory.h"
-#include "conceptmapfactory.h"
-#include "conceptmap.h"
-#include "conceptmapnodefactory.h"
-#include "conceptmapnode.h"
-#include "brainweaverclusterfactory.h"
-#include "brainweavercluster.h"
-#include "brainweaverfilefactory.h"
-#include "brainweaverfile.h"
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
-
 #include "ui_qtbrainweaverclusterdialog.h"
-
 
 ribi::braw::QtClusterDialog::QtClusterDialog(
   const File& file,
@@ -134,8 +110,16 @@ void ribi::braw::QtClusterDialog::keyPressEvent(QKeyEvent* e)
   }
   if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
   {
-    Save();
-    return;
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      Save();
+      return;
+    }
+    else
+    {
+      Save(QtFileDialog::m_last_file);
+      return;
+    }
   }
   QDialog::keyPressEvent(e);
 
@@ -220,12 +204,13 @@ void ribi::braw::QtClusterDialog::Save()
   const int status = d->exec();
   if (status == QDialog::Rejected) return;
   assert(d->selectedFiles().size() == 1);
-  const std::string filename = d->selectedFiles()[0].toStdString();
+  const QString filename = d->selectedFiles()[0];
+  QtFileDialog::m_last_file = filename;
   Save(filename);
   //close(); //2013-04-19 Don't close: request by client
 }
 
-void ribi::braw::QtClusterDialog::Save(const std::string& filename)
+void ribi::braw::QtClusterDialog::Save(const QString& filename)
 {
   if (this->GetWidget())
   {
@@ -234,7 +219,7 @@ void ribi::braw::QtClusterDialog::Save(const std::string& filename)
     m_file.SetCluster(cluster);
     assert(m_file.GetCluster() == GetWidget()->GetCluster());
   }
-  m_file.Save(filename);
+  m_file.Save(filename.toStdString());
 }
 
 void ribi::braw::QtClusterDialog::on_button_save_clicked()

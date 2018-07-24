@@ -29,7 +29,7 @@ class QtStudentStartCompleteDialog : public QDialog
   bool GoBackToMenu() const noexcept;
 
   ///Save to file
-  void Save(const std::string& filename);
+  void Save(const QString& filename);
 
   void StartAssociate();
   void StartConstruct();
