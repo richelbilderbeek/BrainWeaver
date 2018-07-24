@@ -30,7 +30,7 @@ public:
   cmap::QtConceptMap * GetWidget();
 
   ///Respond to key press
-  void keyPressEvent(QKeyEvent *);
+  void keyPressEvent(QKeyEvent *) override;
 
   void Save();
   void Save(const std::string& filename);
