@@ -26,59 +26,54 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   table->setMaximumWidth(275);
   table->setColumnWidth(0,70);
   table->setHorizontalHeaderLabels( { "Waarde" } );
+
+  const QVector<QString> header_texts = {
+    "Complexiteit (%)",
+    "Concreetheid (%)",
+    "Specificiteit (%)",
+    "Rijkheid (%)",
+    "Aantal concepten",
+    "Aantal relaties",
+    "Relaties per concept",
+    "Hierarchische niveaus",
+    "Aantal voorbeelden"
+  };
+
+  const QVector<QString> tooltip_texts = {
+      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016",
+      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten",
+      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten",
+      "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
+      "Aantal concepten (exclusief focusvraag)",
+      "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
+      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)",
+      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera",
+      "Het totaal aantal voorbeelden"
+  };
+
+  QVector<QString> values = {
+    QString::number(CalculateComplexityExperimental(file)),
+    QString::number(CalculateConcretenessExperimental(file)),
+    QString::number(CalculateSpecificityExperimental(file)),
+    "",
+    QString::number(CountNodes(file) - 1),
+    QString::number(CountEdges(file)),
+    QString::number(CountEdgesPerNormalNode(file)),
+    QString::number(CountHierarchicalLevels(file)),
+    QString::number(CountExamples(file))
+  };
+
+  for (int row_index = 0; row_index != 9; ++row_index)
   {
-    const int row_index{0};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Complexiteit (%)"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateComplexityExperimental(file))));
+    auto * const headerItem = new QTableWidgetItem(header_texts[row_index]);
+    headerItem->setToolTip(tooltip_texts[row_index]);
+    table->setVerticalHeaderItem(row_index, headerItem);
+    auto * const item = new QTableWidgetItem(values[row_index]);
+    item->setToolTip(tooltip_texts[row_index]);
+    table->setItem(row_index, 0, item);
   }
-  {
-    const int row_index{1};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Concreetheid (%)"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateConcretenessExperimental(file))));
-  }
-  {
-    const int row_index{2};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Specificiteit (%)"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateSpecificityExperimental(file))));
-  }
-  {
-    const int row_index{3};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Rijkheid (%)"));
-    try
-    {
-      table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CalculateRichnessExperimental(file))));
-    }
-    catch (const std::invalid_argument& e)
-    {
-      //OK, just display nothing
-      assert(std::string(e.what()) == "Cannot calculate richness if not all examples are rated");
-    }
-  }
-  {
-    const int row_index{4};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal concepten"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountNodes(file))));
-  }
-  {
-    const int row_index{5};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal relaties"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdges(file))));
-  }
-  {
-    const int row_index{6};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Relaties per concept"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountEdgesPerNormalNode(file))));
-  }
-  {
-    const int row_index{7};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Hierarchische niveaus"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountHierarchicalLevels(file))));
-  }
-  {
-    const int row_index{8};
-    table->setVerticalHeaderItem(row_index, new QTableWidgetItem("Aantal voorbeelden"));
-    table->setItem(row_index, 0, new QTableWidgetItem(QString::number(CountExamples(file))));
-  }
+
+
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   return table;
