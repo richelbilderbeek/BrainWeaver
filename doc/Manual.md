@@ -15,13 +15,17 @@ In Brainweaver,
 
 ## Controls
 
+### General controls
 
+ * `CTRL + S`: save
 
-### Mouse
+### Edit a concept map
+
+#### Mouse
 
  * Double-click: create a new concept
 
-### Keyboard
+#### Keyboard
 
  * `CTRL + N`: create a new concept
  * `CTRL + E`: create a relation between two selected concepts
@@ -31,6 +35,8 @@ In Brainweaver,
  * `CTRL + Z`: undo
  * `CTRL + SHIFT + Z`: redo
  * `ESC`: cancel creating a new relation, or close the dialog
+ * F2: edit the concept or relation
+
 
 ## Recovering files
 
@@ -39,7 +45,7 @@ Would Brainweaver be interrupted roughly (for example,
 the computer its power cord is pulled), that concept map
 can still be recovered. 
 
-Just load the file `autosave1.cmp`.
+Just load the file `autosave1.cmp`. 
 
 ## What is the file `autosave1.cmp`?
 
