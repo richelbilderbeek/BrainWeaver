@@ -63,21 +63,6 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
     }
   }
 
-  
-  //Add rated concepts
-  {
-    assert(ui->scrollAreaWidgetContents->layout());
-    ui->scrollAreaWidgetContents->layout()->addWidget(
-      new QLabel(
-        "Overzicht concepten",
-        this
-      )
-    );
-    ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateRatedConceptsWidget(file, this)
-    );
-  }
-
   //Add tallied examples
   {
     assert(ui->scrollAreaWidgetContents->layout());
