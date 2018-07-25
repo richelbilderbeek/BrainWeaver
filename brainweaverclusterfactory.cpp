@@ -71,16 +71,5 @@ ribi::braw::ClusterFactory::GetTests() const noexcept
     const Cluster p = GetTest( {} );
     v[4] = p;
   }
-  /* DO NOT DO THIS FOR WINE
-  const std::vector<Cluster > v
-    =
-    {
-      GetTest( {0} ),
-      GetTest( {1} ),
-      GetTest( {0,1} ),
-      GetTest( {0,1,2} ),
-      GetTest( { } )
-    };
-  */
   return v;
 }

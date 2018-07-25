@@ -20,8 +20,8 @@ class RatingDelegate : public QItemDelegate
 public:
   QWidget* createEditor(
     QWidget *parent,
-    const QStyleOptionViewItem & /* option */,
-    const QModelIndex & /* index */
+    const QStyleOptionViewItem &,
+    const QModelIndex &
   ) const
   {
     QLineEdit *lineEdit = new QLineEdit(parent);

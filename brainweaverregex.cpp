@@ -73,14 +73,3 @@ std::string ribi::braw::Regex::GetRegexOfSomething(
   t << "(<" << s << ">.*?</" << s << ">)";
   return t.str();
 }
-
-/*
-std::vector<std::string>
-  ribi::braw::GetRegexMatches(
-  const std::string& s,
-  const std::string& regex_str
-)
-{
-  return ribi::Regex().GetRegexMatches(s,regex_str);
-}
-*/
