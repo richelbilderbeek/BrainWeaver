@@ -215,7 +215,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
 {
-  const File file = FileFactory().Get2();
+  const File file = FileFactory().GetUnrated();
   auto * const d{
     new QtConceptMapDialog(file, this)
   };
