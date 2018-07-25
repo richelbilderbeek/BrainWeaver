@@ -62,7 +62,6 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
       ui->button_print->setEnabled(true);
     }
   }
-
   //Add tallied examples
   {
     assert(ui->scrollAreaWidgetContents->layout());
