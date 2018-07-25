@@ -39,6 +39,9 @@ struct FileFactory
     const std::vector<ribi::cmap::Competency>& competencies
   ) const noexcept;
 
+  ///File with unrated and human-friendly concept map
+  File GetUnrated() const noexcept;
+
   ///Get all the tests
   std::vector<File> GetTests() const noexcept;
 };

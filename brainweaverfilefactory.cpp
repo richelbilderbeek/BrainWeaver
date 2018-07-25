@@ -94,6 +94,18 @@ ribi::braw::File ribi::braw::FileFactory::Get5() const noexcept
   return f;
 }
 
+ribi::braw::File ribi::braw::FileFactory::GetUnrated() const noexcept
+{
+  using ribi::cmap::ConceptMap;
+  using ribi::cmap::ConceptMapFactory;
+  File f;
+  const ConceptMap concept_map = ConceptMapFactory().GetUnrated();
+  assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+  f.SetQuestion(GetFirstNode(concept_map).GetName());
+  f.SetConceptMap(concept_map);
+  return f;
+}
+
 ribi::braw::File ribi::braw::FileFactory::GetWithExamplesWithCompetencies(
   const std::vector<ribi::cmap::Competency>& competencies
 ) const noexcept
