@@ -2,25 +2,14 @@
 
 #include <cassert>
 
-//#include <boost/bind.hpp>
-//#include <boost/lambda/lambda.hpp>
-//#include <boost/numeric/conversion/cast.hpp>
-
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QKeyEvent>
 
-//#include "conceptmapfactory.h"
-//#include "conceptmap.h"
-//#include "brainweaverfilefactory.h"
 #include "qtbrainweaverfiledialog.h"
-//#include "qtscopeddisable.h"
-//#include "brainweaverfile.h"
-#include "qtconceptmap.h"
 #include "qtbrainweaverratingdialog.h"
-//#include "qtconceptmaprateconceptdialog.h"
+#include "qtconceptmap.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
-
 
 ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   const File& file,

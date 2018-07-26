@@ -1,24 +1,15 @@
-
-
-
-
 #include "brainweavermenudialog.h"
 
 #include <cassert>
 #include <iostream>
 
-#include <boost/make_shared.hpp>
-
-#include "container.h"
 #include "conceptmap.h"
+#include "container.h"
 #include "fileio.h"
 #include "fuzzy_equal_to.h"
 #include "geometry.h"
-//#include "plane.h"
 #include "ribi_regex.h"
-
 #include "xml.h"
-
 
 int ribi::braw::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
 {
