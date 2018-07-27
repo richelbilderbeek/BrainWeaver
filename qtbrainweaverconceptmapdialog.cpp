@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QUndoView>
 
 #include "add_bundled_edge_between_vertices.h"
 #include "add_bundled_vertex.h"
@@ -52,6 +53,11 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
   assert(this->layout());
   this->layout()->addWidget(m_widget);
+  {
+    QUndoView * undo_view{new QUndoView(&m_widget->GetUndo())};
+    undo_view->setMaximumHeight(100);
+    this->layout()->addWidget(undo_view);
+  }
 
   //Center the dialog
   {
