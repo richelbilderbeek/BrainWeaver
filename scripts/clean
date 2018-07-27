@@ -4,3 +4,4 @@ cd ..
 rm -f ui_*
 rm -f *_plugin_import.cpp
 rm -f Makefile.*
+rm -f mocinclude.opt
