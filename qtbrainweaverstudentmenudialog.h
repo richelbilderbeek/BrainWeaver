@@ -10,7 +10,7 @@ namespace Ui { class QtStudentMenuDialog; }
 namespace ribi {
 namespace braw {
 
-class QtStudentMenuDialog : public QDialog
+class QtStudentMenuDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
     

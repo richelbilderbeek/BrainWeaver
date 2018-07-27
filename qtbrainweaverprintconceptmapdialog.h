@@ -15,7 +15,7 @@ namespace braw {
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
 ///QtPrintConceptMapDialog is optimized for printers
-class QtPrintConceptMapDialog : public QDialog
+class QtPrintConceptMapDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
   

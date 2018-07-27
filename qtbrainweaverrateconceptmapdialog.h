@@ -12,7 +12,7 @@ namespace braw {
 
 struct qtbrainweaverrateconceptmapdialog_test;
 
-class QtRateConceptMapDialog : public QDialog
+class QtRateConceptMapDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
   

@@ -12,7 +12,7 @@ namespace braw {
 
 class qtbrainweaverstudentstartcompletedialog_test;
 
-class QtStudentStartCompleteDialog : public QDialog
+class QtStudentStartCompleteDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
     

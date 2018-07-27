@@ -11,7 +11,7 @@ namespace Ui { class QtConceptMapDialog; }
 namespace ribi {
 namespace braw {
 
-class QtConceptMapDialog : public QDialog
+class QtConceptMapDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
     

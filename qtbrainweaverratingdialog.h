@@ -17,7 +17,7 @@ class qtbrainweaverratingdialog_test;
 
 ///View the current rating, optimized for humans
 ///QtPrintRatingDialog is optimized for printers
-class QtRatingDialog : public QDialog
+class QtRatingDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
 

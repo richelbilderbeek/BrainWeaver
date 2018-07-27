@@ -15,7 +15,7 @@ struct qtbrainweaverclusterdialog_test;
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
 ///because the widget needs something to work on
-class QtClusterDialog : public QDialog
+class QtClusterDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
 

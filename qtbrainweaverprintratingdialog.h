@@ -18,7 +18,7 @@ namespace braw {
 ///View the current rating, optimized for printers
 ///This dialog will not be visible for humans at all in release
 ///QtRatingDialog is optimized for humans
-class QtPrintRatingDialog : public QDialog
+class QtPrintRatingDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
   

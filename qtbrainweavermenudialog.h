@@ -10,7 +10,7 @@ namespace Ui { class QtMenuDialog; }
 namespace ribi {
 namespace braw {
 
-class QtMenuDialog : public QDialog //!OCLINT Indeed a lot of methods: one per button
+class QtMenuDialog final : public QDialog //!OCLINT Indeed a lot of methods: one per button
 {
   Q_OBJECT //!OCLINT
     
@@ -18,7 +18,7 @@ class QtMenuDialog : public QDialog //!OCLINT Indeed a lot of methods: one per b
   explicit QtMenuDialog(QWidget* parent = nullptr);
   QtMenuDialog(const QtMenuDialog&) = delete;
   QtMenuDialog& operator=(const QtMenuDialog&) = delete;
-  ~QtMenuDialog() noexcept;
+  virtual ~QtMenuDialog() noexcept;
 
   const Ui::QtMenuDialog * GetUi() const noexcept { return ui; }
         Ui::QtMenuDialog * GetUi()       noexcept { return ui; }
