@@ -233,13 +233,13 @@ void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
     for (QWidget * const widget: widgets)
     {
       const int h = widget->height();
-      if (y+h > painter.window().height())
+      if (y + h > painter.window().height())
       {
         printer.newPage();
         y = 0;
       }
-      widget->render(&painter,QPoint(0,y));
-      y+=h;
+      widget->render(&painter, QPoint(0, y));
+      y += h;
     }
   }
   painter.end();
