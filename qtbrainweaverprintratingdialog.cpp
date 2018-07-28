@@ -34,6 +34,7 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     m_file(file),
     m_label_concept_map_as_text{new QLabel("Conceptmap als tekst", this)},
     m_label_diagnostics{new QLabel("Gevonden waarden", this)},
+    m_label_rated_concepts{new QLabel("Overzicht concepten", this)},
     m_label_tallied_examples{
       new QLabel(
         "Verdeling van de voorbeelden/toelichting over de zes objecten van kennis",
@@ -43,6 +44,7 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     m_table_diagnostics{
       QtDisplay().CreateDiagnosticsWidget(file, this)
     },
+    m_table_rated_concepts{QtDisplay().CreateRatedConceptsWidget(file, this)},
     m_table_tallied_examples{
       QtDisplay().CreateTalliedExamplesWidget(file, this)
     },
@@ -97,7 +99,16 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   }
-
+  //Add rated concepts
+  {
+    assert(ui->scrollAreaWidgetContents->layout());
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      m_label_rated_concepts
+    );
+    ui->scrollAreaWidgetContents->layout()->addWidget(
+      m_table_rated_concepts
+    );
+  }
   //Add tallied examples
   {
     assert(ui->scrollAreaWidgetContents->layout());
@@ -153,6 +164,8 @@ const std::vector<QWidget *> ribi::braw::QtPrintRatingDialog::CollectWidgets() c
   std::vector<QWidget *> v = {
     ui->frame_header,
     ui->frame_concept_map,
+    m_label_rated_concepts,
+    m_table_rated_concepts,
     m_label_tallied_examples,
     m_table_tallied_examples,
     m_label_diagnostics,
