@@ -69,6 +69,7 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     headerItem->setToolTip(tooltip_texts[row_index]);
     table->setVerticalHeaderItem(row_index, headerItem);
     auto * const item = new QTableWidgetItem(values[row_index]);
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     item->setToolTip(tooltip_texts[row_index]);
     table->setItem(row_index, 0, item);
   }
@@ -233,6 +234,7 @@ void ribi::braw::QtDisplay::DisplayExamples(
       const std::string text = cmap::Competencies().ToStrDutch(competency);
       const QIcon icon = cmap::QtCompetency().CompetencyToIcon(competency);
       QTableWidgetItem * const item = new QTableWidgetItem;
+      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
       item->setText(text.c_str());
       item->setIcon(icon);
       table->setVerticalHeaderItem(i,item);
