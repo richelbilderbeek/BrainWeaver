@@ -128,14 +128,6 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
     new QtRatingDialog(m_file, this)
   };
   d->exec();
-
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-  if (d->GetBackToMenu())
-  {
-    close();
-  }
 }
 
 void ribi::braw::QtRateConceptMapDialog::Save()
@@ -155,7 +147,6 @@ void ribi::braw::QtRateConceptMapDialog::Save()
   assert(!filename.empty());
   QtFileDialog::m_last_file = filename.c_str();
   Save(filename);
-  //emit remove_me(this); //Do not close after saving
   this->show();
 }
 

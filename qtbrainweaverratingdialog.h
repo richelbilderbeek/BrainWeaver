@@ -30,7 +30,6 @@ class QtRatingDialog final : public QDialog
   QtRatingDialog& operator=(const QtRatingDialog&) = delete;
   ~QtRatingDialog() noexcept;
 
-  bool GetBackToMenu() const noexcept;
   void Save(const std::string& filename) const;
 
   private slots:
@@ -42,7 +41,6 @@ class QtRatingDialog final : public QDialog
 
 private:
   Ui::QtRatingDialog *ui;
-  bool m_back_to_menu;
   File m_file;
 
   friend class qtbrainweaverratingdialog_test;

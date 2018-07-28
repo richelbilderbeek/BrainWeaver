@@ -29,7 +29,6 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
   QWidget* parent)
   : QDialog(parent),
     ui(new Ui::QtRatingDialog),
-    m_back_to_menu(false),
     m_file(file)
 {
   if (boost::num_vertices(file.GetConceptMap()) == 0)
@@ -115,11 +114,6 @@ ribi::braw::QtRatingDialog::~QtRatingDialog() noexcept
   delete ui;
 }
 
-bool ribi::braw::QtRatingDialog::GetBackToMenu() const noexcept
-{
-  return m_back_to_menu;
-}
-
 void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)
@@ -149,9 +143,9 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
+  this->show();
   if (status == QDialog::Rejected)
   {
-    this->show();
     return;
   }
   assert(d->selectedFiles().size() == 1);
@@ -159,8 +153,6 @@ void ribi::braw::QtRatingDialog::on_button_save_clicked()
   assert(!filename.empty());
   QtFileDialog::m_last_file = filename.c_str();
   Save(filename);
-  this->m_back_to_menu = true;
-  close();
 }
 
 void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
