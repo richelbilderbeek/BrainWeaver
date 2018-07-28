@@ -108,6 +108,8 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
     const int x =  std::sin(angle) * 200.0;
     const int y = -std::cos(angle) * 200.0;
     ribi::cmap::Node node(v[i], ribi::cmap::NodeType::normal, x, y);
+    add_bundled_vertex(node, p);
+    #ifdef NO_EDGES_ISSUE_217
     const auto vd_here = add_bundled_vertex(node, p);
     add_bundled_edge_between_vertices(
       ribi::cmap::Edge(ribi::cmap::Node()),
@@ -115,6 +117,7 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
       vd_here,
       p
     );
+    #endif
   }
   assert(v.size() + 1 == boost::num_vertices(p)
     && "Assume the ConceptMap has as much nodes as the cluster has concepts + one focal question");
