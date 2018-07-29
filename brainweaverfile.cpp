@@ -121,6 +121,32 @@ int ribi::braw::CountNodes(const File& file) noexcept
   return boost::num_vertices(file.GetConceptMap());
 }
 
+int ribi::braw::CountPrimaryConcepts(const File& file) noexcept
+{
+  const auto& g = file.GetConceptMap();
+  const auto vip = boost::vertices(g);
+  int cnt{0};
+  for (auto vi = vip.first; vi != vip.second; ++vi)
+  {
+    const ribi::cmap::VertexDescriptor vd = *vi;
+    if (IsPrimaryConcept(vd, g)) ++cnt;
+  }
+  return cnt;
+}
+
+int ribi::braw::CountSecondaryConcepts(const File& file) noexcept
+{
+  const auto& g = file.GetConceptMap();
+  const auto vip = boost::vertices(g);
+  int cnt{0};
+  for (auto vi = vip.first; vi != vip.second; ++vi)
+  {
+    const ribi::cmap::VertexDescriptor vd = *vi;
+    if (IsSecondaryConcept(vd, g)) ++cnt;
+  }
+  return cnt;
+}
+
 std::string ribi::braw::ExtractFileAboutFromXml(const std::string& s)
 {
   const std::vector<std::string> v

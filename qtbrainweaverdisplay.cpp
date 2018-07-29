@@ -18,12 +18,13 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   QWidget * const parent
 ) const
 {
-  auto * const table = new QTableWidget(9, 1, parent);
+  const int n_rows{11};
+  auto * const table = new QTableWidget(n_rows, 1, parent);
   table->verticalHeader()->setMinimumWidth(200);
-  table->setMinimumHeight(299);
-  table->setMaximumHeight(299);
-  table->setMinimumWidth(275);
-  table->setMaximumWidth(275);
+  table->setMinimumHeight(360);
+  table->setMaximumHeight(360);
+  table->setMinimumWidth(310);
+  table->setMaximumWidth(310);
   table->setColumnWidth(0,70);
   table->setHorizontalHeaderLabels( { "Waarde" } );
 
@@ -33,23 +34,28 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     "Specificiteit (%)",
     "Rijkheid (%)",
     "Aantal concepten",
+    "Aantal primaire concepten",
+    "Aantal secundaire concepten",
     "Aantal relaties",
     "Relaties per concept",
     "Hierarchische niveaus",
     "Aantal voorbeelden"
   };
-
+  assert(n_rows == static_cast<int>(header_texts.size()));
   const QVector<QString> tooltip_texts = {
       "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016", //!OCLINT I want to put one tooltip text per line
       "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
       "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
       "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
-      "Aantal concepten (exclusief focusvraag)",
+      "Aantal concepten",
+      "Aantal concepten verbonden met de focusvraag",
+      "Aantal concepten niet verbonden met focusvraag",
       "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
       "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)", //!OCLINT I want to put one tooltip text per line
       "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera", //!OCLINT I want to put one tooltip text per line
       "Het totaal aantal voorbeelden"
   };
+  assert(n_rows == static_cast<int>(tooltip_texts.size()));
 
   QVector<QString> values = {
     QString::number(CalculateComplexityExperimental(file)),
@@ -57,13 +63,16 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     QString::number(CalculateSpecificityExperimental(file)),
     "",
     QString::number(CountNodes(file) - 1),
+    QString::number(CountPrimaryConcepts(file)),
+    QString::number(CountSecondaryConcepts(file)),
     QString::number(CountEdges(file)),
     QString::number(CountEdgesPerNormalNode(file)),
     QString::number(CountHierarchicalLevels(file)),
     QString::number(CountExamples(file))
   };
+  assert(n_rows == values.size());
 
-  for (int row_index = 0; row_index != 9; ++row_index)
+  for (int row_index = 0; row_index != n_rows; ++row_index)
   {
     auto * const headerItem = new QTableWidgetItem(header_texts[row_index]);
     headerItem->setToolTip(tooltip_texts[row_index]);
@@ -73,8 +82,17 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     item->setToolTip(tooltip_texts[row_index]);
     table->setItem(row_index, 0, item);
   }
-
-
+  #ifdef NOTE_20180729
+  connect(
+      ui->table->horizontalHeader(),
+      SIGNAL(sectionResized(int, int, int)),
+      ui->table,
+      SLOT(resizeRowsToContents())
+    );
+  #endif // NOTE_20180729
+  //table->verticalHeader()->setSectionResizeMode(
+  //  QHeaderView::ResizeMode::ResizeToContents
+  //);
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   return table;
