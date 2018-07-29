@@ -23,8 +23,8 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   table->verticalHeader()->setMinimumWidth(200);
   table->setMinimumHeight(360);
   table->setMaximumHeight(360);
-  table->setMinimumWidth(310);
-  table->setMaximumWidth(310);
+  table->setMinimumWidth(313);
+  table->setMaximumWidth(313);
   table->setColumnWidth(0,70);
   table->setHorizontalHeaderLabels( { "Waarde" } );
 
@@ -82,17 +82,6 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     item->setToolTip(tooltip_texts[row_index]);
     table->setItem(row_index, 0, item);
   }
-  #ifdef NOTE_20180729
-  connect(
-      ui->table->horizontalHeader(),
-      SIGNAL(sectionResized(int, int, int)),
-      ui->table,
-      SLOT(resizeRowsToContents())
-    );
-  #endif // NOTE_20180729
-  //table->verticalHeader()->setSectionResizeMode(
-  //  QHeaderView::ResizeMode::ResizeToContents
-  //);
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   return table;
@@ -164,8 +153,8 @@ QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
   table->setMinimumHeight(239);
   table->setMaximumHeight(239);
   const int w = 45;
-  table->setMinimumWidth(285 + w);
-  table->setMaximumWidth(285 + w);
+  table->setMinimumWidth(286 + w);
+  table->setMaximumWidth(286 + w);
   table->setColumnWidth(0, w);
   table->setHorizontalHeaderLabels( { "%" } );
   table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

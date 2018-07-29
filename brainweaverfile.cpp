@@ -87,8 +87,12 @@ int ribi::braw::CountEdges(const File& file) noexcept
   return boost::num_edges(file.GetConceptMap());
 }
 
-double ribi::braw::CountEdgesPerNormalNode(const File& file) noexcept
+double ribi::braw::CountEdgesPerNormalNode(
+  const File& file,
+  const int n_digits_behind_comma
+)
 {
+  assert(n_digits_behind_comma >= 0);
   const auto g = file.GetConceptMap();
   std::vector<int> degrees;
   const auto vip = vertices(g);
@@ -101,7 +105,10 @@ double ribi::braw::CountEdgesPerNormalNode(const File& file) noexcept
   const double adpc{ //average_degree_per_concept
     static_cast<double>(sum) / static_cast<double>(degrees.size())
   };
-  return adpc;
+
+  //Get the right number of digits behind the comma
+  const double exponent{std::pow(10, n_digits_behind_comma)};
+  return std::round(adpc * exponent) / exponent;
 }
 
 int ribi::braw::CountExamples(const File& file) noexcept
