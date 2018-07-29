@@ -71,6 +71,16 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     QString::number(CountExamples(file))
   };
   assert(n_rows == values.size());
+  try
+  {
+    values[3] = QString::number(CalculateRichnessExperimental(file));
+  }
+  catch (const std::exception& e)
+  {
+    assert(std::string(e.what())
+      == "Cannot calculate richness if not all examples are rated"
+    );
+  }
 
   for (int row_index = 0; row_index != n_rows; ++row_index)
   {

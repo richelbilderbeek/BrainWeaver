@@ -1,14 +1,13 @@
-
-
-
-
 #include "brainweaverhelper.h"
 
 #include <cassert>
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+
 #include <boost/algorithm/string.hpp>
+
+#include <QDebug>
 #include <QFile>
 #include <QRegExp>
 
