@@ -1,7 +1,3 @@
-
-
-
-
 #include "brainweavercluster.h"
 
 #include <sstream>
