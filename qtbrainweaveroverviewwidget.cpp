@@ -88,7 +88,10 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs()
   v.push_back(new QtMenuDialog);
   v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5()));
   v.push_back(
-    new cmap::QtRateConceptDialog(ribi::cmap::ConceptMapFactory().Get6())
+    new cmap::QtRateConceptDialog(
+      ribi::cmap::ConceptMapFactory().Get6(),
+      ribi::cmap::CreateDefaultRating()
+    )
   );
   v.push_back(
     new cmap::QtRateConceptTallyDialog(

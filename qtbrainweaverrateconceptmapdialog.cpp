@@ -17,7 +17,7 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   : QDialog(parent),
   ui(new Ui::QtRateConceptMapDialog),
   m_file(file),
-  m_concept_map(new cmap::QtConceptMap)
+  m_concept_map(new cmap::QtConceptMap(file.GetRating()))
 {
   if (CountCenterNodes(file.GetConceptMap()) != 1)
   {

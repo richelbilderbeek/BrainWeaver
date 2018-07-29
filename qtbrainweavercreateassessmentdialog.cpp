@@ -3,6 +3,7 @@
 #include <sstream>
 #include <stdexcept>
 
+#include <QDebug>
 #include <QKeyEvent>
 #include <QFileDialog>
 #include <QItemDelegate>
@@ -81,6 +82,7 @@ ribi::cmap::RatingComplexity ribi::braw::QtCreateAssessmentDialog::GetRatingComp
       const int score{
         ui->table_complexity->itemAt(col, row)->text().toInt()
       };
+      qDebug() << n_edges << n_examples << score;
       m.insert( { { n_edges, n_examples }, score } );
     }
   }
