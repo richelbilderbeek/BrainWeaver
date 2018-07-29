@@ -24,4 +24,8 @@
         <file>PicAbout.png</file>
         <file>PicPrint.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>Montserrat-Bold.ttf</file>
+        <file>Montserrat-Regular.ttf</file>
+    </qresource>
 </RCC>
