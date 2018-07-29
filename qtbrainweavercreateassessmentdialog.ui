@@ -17,6 +17,21 @@
    <iconset resource="Brainweaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTableWidget {
+  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Regular.ttf&quot;;
+  alternate-background-color: #BBB;
+  gridline-color: black;
+}
+
+QHeaderView {
+  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Regular.ttf&quot;;
+  border-width: 1px;
+  border-style: solid;
+}
+
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <spacer name="verticalSpacer_9">
@@ -190,7 +205,7 @@ verbindingen</string>
               </row>
               <row>
                <property name="text">
-                <string>&gt;=3</string>
+                <string>&gt;2</string>
                </property>
               </row>
               <column>
@@ -210,12 +225,7 @@ verbindingen</string>
               </column>
               <column>
                <property name="text">
-                <string>3</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>&gt;=4</string>
+                <string>&gt;2</string>
                </property>
               </column>
               <item row="0" column="0">
@@ -234,11 +244,6 @@ verbindingen</string>
                </property>
               </item>
               <item row="0" column="3">
-               <property name="text">
-                <string>0</string>
-               </property>
-              </item>
-              <item row="0" column="4">
                <property name="text">
                 <string>0</string>
                </property>
@@ -263,11 +268,6 @@ verbindingen</string>
                 <string>1</string>
                </property>
               </item>
-              <item row="1" column="4">
-               <property name="text">
-                <string>1</string>
-               </property>
-              </item>
               <item row="2" column="0">
                <property name="text">
                 <string>1</string>
@@ -288,11 +288,6 @@ verbindingen</string>
                 <string>2</string>
                </property>
               </item>
-              <item row="2" column="4">
-               <property name="text">
-                <string>2</string>
-               </property>
-              </item>
               <item row="3" column="0">
                <property name="text">
                 <string>2</string>
@@ -309,11 +304,6 @@ verbindingen</string>
                </property>
               </item>
               <item row="3" column="3">
-               <property name="text">
-                <string>2</string>
-               </property>
-              </item>
-              <item row="3" column="4">
                <property name="text">
                 <string>2</string>
                </property>
@@ -461,7 +451,7 @@ verbindingen</string>
               </column>
               <column>
                <property name="text">
-                <string>&gt;=4</string>
+                <string>&gt;3</string>
                </property>
               </column>
               <item row="0" column="0">
@@ -632,7 +622,7 @@ verbindingen</string>
               </column>
               <column>
                <property name="text">
-                <string>&gt;=4</string>
+                <string>&gt;3</string>
                </property>
               </column>
               <item row="0" column="0">
