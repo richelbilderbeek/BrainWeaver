@@ -129,16 +129,6 @@ int main(int argc, char *argv[])
     d.show();
     //Put d in screen center at 80% of fullscreen size
     {
-      /*
-      QRect r{QApplication::desktop()->screenGeometry()};
-      r.adjust(
-         r.width()  / 20,
-         r.height() / 20,
-        -r.width()  / 20,
-        -r.height() / 20
-      );
-      qDebug() << r;
-      */
       d.setGeometry(QRect(64,51,1152,922));
     }
     return a.exec();
