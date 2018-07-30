@@ -172,10 +172,6 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
   auto * const d = new QtConceptMapDialog(m_file, this);
   d->exec();
 
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-
   //By now, the concept map must have been (1) created (2) already present
   if (d->GoBackToMenu())
   {
@@ -183,6 +179,9 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
     close();
     return;
   }
+
+  //Extract the freshly created concept map back
+  m_file.SetConceptMap(d->GetQtConceptMap()->ToConceptMap());
 
   //Same test as in constructor
   if (boost::num_vertices(m_file.GetConceptMap())) //1, as node[0] is focal question
