@@ -254,6 +254,9 @@ void ribi::braw::QtDisplay::DisplayExamples(
       item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
       item->setText(text.c_str());
       item->setIcon(icon);
+      item->setToolTip(
+        ribi::cmap::Competencies().ToStrDutchShort(competency).c_str()
+      );
       table->setVerticalHeaderItem(i,item);
     }
   }
