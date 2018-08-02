@@ -89,6 +89,7 @@ void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 {
+  #ifdef SHOW_RATE_CONCEPT_DIALOG_20180802
   const auto concept_map
     = ribi::cmap::ConceptMapFactory().GetRateConceptTallyDialogExample();
   auto * const d{
@@ -99,6 +100,9 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
     )
   };
   d->exec();
+  #else
+  qDebug() << "Not today";
+  #endif
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
