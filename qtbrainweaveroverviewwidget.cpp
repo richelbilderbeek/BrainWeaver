@@ -52,7 +52,7 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
     QWidget * const widget = m_dialogs[i];
     assert(widget);
 
-    QGraphicsProxyWidget * const proxy = scene()->addWidget(widget,Qt::Dialog);
+    QGraphicsProxyWidget * const proxy = scene()->addWidget(widget, Qt::Dialog);
     assert(proxy);
 
     proxy->setPos(32,y_sum);
@@ -89,18 +89,13 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
   v.push_back(new QtMenuDialog(parent));
   v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5(), parent));
   {
-    auto * const qtconceptmap{
-      new ribi::cmap::QtConceptMap(
-        ribi::cmap::CreateDefaultRating(),
-        parent
-      )
-    };
-    qtconceptmap->SetConceptMap(ribi::cmap::ConceptMapFactory().GetUnrated());
-    const auto * const qtnode = ribi::cmap::GetFirstQtNode(*qtconceptmap);
+    ribi::cmap::QtConceptMap qtconceptmap;
+    qtconceptmap.SetConceptMap(ribi::cmap::ConceptMapFactory().GetUnrated());
+    const auto * const qtnode = ribi::cmap::GetFirstQtNode(qtconceptmap);
     assert(qtnode);
     v.push_back(
       new cmap::QtRateConceptDialog(
-        *qtconceptmap, *qtnode, parent
+        qtconceptmap, *qtnode, parent
       )
     );
   }

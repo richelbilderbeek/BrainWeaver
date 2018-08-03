@@ -5,5 +5,4 @@ void ribi::braw::qtbrainweaveroverviewdialog_test::default_construction()
 {
   ribi::braw::QtOverviewDialog d;
   d.show();
-
 }

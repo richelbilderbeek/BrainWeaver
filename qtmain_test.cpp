@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
   //{ ribi::braw::qtbrainweaverrateconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //{ ribi::braw::qtbrainweaverprintratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //{ ribi::braw::qtbrainweaverconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
+  //{ ribi::braw::qtbrainweaveroverviewdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::qtbrainweaveraboutdialog_test t; error |= QTest::qExec(&t, argc, argv); }
