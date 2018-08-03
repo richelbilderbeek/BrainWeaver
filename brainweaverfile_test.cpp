@@ -6,17 +6,13 @@
 #include <string>
 
 #include <boost/algorithm/string.hpp>
-//#include <boost/lexical_cast.hpp>
 #include <boost/xpressive/xpressive.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
 #include <QFile>
-//#include <QRegExp>
 
-#include "counter.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
-
 #include "add_bundled_vertex.h"
 #include "brainweavercluster.h"
 #include "brainweaverclusterfactory.h"
@@ -31,8 +27,6 @@
 #include "fileio.h"
 #include "is_regular_file.h"
 #include "ribi_regex.h"
-//#include "testtimer.h"
-//#include "trace.h"
 #include "xml.h"
 
 
