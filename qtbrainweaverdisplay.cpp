@@ -84,7 +84,8 @@ void ribi::braw::QtDisplay::DisplayDiagnosticsHeader(QTableWidget * const table)
   }
 }
 
-void ribi::braw::QtDisplay::DisplayDiagnosticsItems(const File& file, QTableWidget * const table) const
+void ribi::braw::QtDisplay::DisplayDiagnosticsItems(
+  const File& file, QTableWidget * const table) const
 {
   const int n_rows{table->rowCount()};
   assert(n_rows == 11);
