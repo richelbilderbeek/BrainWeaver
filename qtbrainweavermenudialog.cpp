@@ -89,20 +89,18 @@ void ribi::braw::QtMenuDialog::on_button_overview_clicked() noexcept
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_clicked() noexcept
 {
-  #ifdef SHOW_RATE_CONCEPT_DIALOG_20180802
-  const auto concept_map
-    = ribi::cmap::ConceptMapFactory().GetRateConceptTallyDialogExample();
+  auto * const qtconceptmap{
+    new ribi::cmap::QtConceptMap(ribi::cmap::CreateDefaultRating(), this)
+  };
+  qtconceptmap->SetConceptMap(ribi::cmap::ConceptMapFactory().GetUnrated());
+  const auto * const qtnode = ribi::cmap::GetFirstQtNode(*qtconceptmap);
+  assert(qtnode);
   auto * const d{
-    new ribi::cmap::QtRateConceptDialog(
-      concept_map,
-      ribi::cmap::CreateDefaultRating(),
-      this
+    new cmap::QtRateConceptDialog(
+      *qtconceptmap, *qtnode, this
     )
   };
   d->exec();
-  #else
-  qDebug() << "Not today";
-  #endif
 }
 
 void ribi::braw::QtMenuDialog::on_button_rate_concept_map_clicked() noexcept
