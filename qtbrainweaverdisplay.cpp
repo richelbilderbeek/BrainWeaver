@@ -8,7 +8,7 @@
 #include "conceptmapcompetencies.h"
 #include "qtconceptmapcompetency.h"
 
-QVector<QString> GetDisplayDiagnosticsTooltips()
+QVector<QString> GetDisplayDiagnosticsTooltips() //!OCLINT indeed this is a long function
 {
   return {
       "Deze waarde is:\n"
