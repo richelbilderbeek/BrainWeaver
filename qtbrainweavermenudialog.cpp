@@ -21,7 +21,6 @@
 #include "conceptmap.h"
 #include "conceptmapnode.h"
 #include "container.h"
-#include "counter.h"
 #include "fileio.h"
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverassessormenudialog.h"

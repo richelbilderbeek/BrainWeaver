@@ -16,7 +16,6 @@
 #include <QFile>
 #include <QRegExp>
 
-#include "counter.h"
 #include "conceptmaprating.h"
 #include "conceptmapregex.h"
 #include "conceptmapcenternodefactory.h"
