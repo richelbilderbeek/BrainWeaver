@@ -15,8 +15,6 @@
 #include "qtarrowitem.h"
 #include "qtkeyboardfriendlygraphicsview.h"
 #include "qtquadbezierarrowitem.h"
-#include "qtscopeddisable.h"
-
 
 ribi::About GetAbout()
 {
@@ -29,9 +27,6 @@ ribi::About GetAbout()
   );
   about.AddLibrary("QtQuadBezierArrowItem version: "
     + ribi::QtQuadBezierArrowItem::GetVersion()
-  );
-  about.AddLibrary("QtScopedDisable version: "
-    + QtScopedDisable<int>::GetVersion()
   );
   about.AddLibrary("Artwork from LibreOffice");
   return about;
