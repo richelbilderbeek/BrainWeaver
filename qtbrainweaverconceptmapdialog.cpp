@@ -53,11 +53,13 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
   assert(this->layout());
   this->layout()->addWidget(m_widget);
+  #ifndef NDEBUG
   {
     QUndoView * undo_view{new QUndoView(&m_widget->GetUndo())};
     undo_view->setMaximumHeight(100);
     this->layout()->addWidget(undo_view);
   }
+  #endif
 
   //Center the dialog
   {
