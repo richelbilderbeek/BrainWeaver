@@ -11,17 +11,81 @@
 QVector<QString> GetDisplayDiagnosticsTooltips()
 {
   return {
-      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016", //!OCLINT I want to put one tooltip text per line
-      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
-      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
-      "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
-      "Aantal concepten",
-      "Aantal concepten verbonden met de focusvraag",
-      "Aantal concepten niet verbonden met focusvraag",
-      "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
-      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)", //!OCLINT I want to put one tooltip text per line
-      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera", //!OCLINT I want to put one tooltip text per line
-      "Het totaal aantal voorbeelden"
+      "Deze waarde is:\n"
+      "\n"
+      "100% * (Sx / n) * (1 / 2)\n"
+      "\n"
+      " * Sx = de som van de gescoorde complexiteit van de concepten\n"
+      " * n = het aantal concepten\n"
+      "\n"
+      "Omdat een complexiteit gescoord kan worden met een waarde van 0 t/m 2,\n"
+      "wordt deze som door twee gedeeld.\n"
+      "\n"
+      "Indien alle complexiteiten gescoord zijn,\n"
+      "zal dit getal een waarde van 0 t/m 100% hebben.\n"
+      "\n"
+      "Dit getal kan een negatieve waarde hebben,\n"
+      "als niet alle complexiteiten gescoord zijn."
+    ,
+      "Deze waarde is:\n"
+      "\n"
+      "100% * (Sc / n) * (1 / 2)\n"
+      "\n"
+      " * Sc = de som van de gescoorde concreetheid van de concepten\n"
+      " * n = het aantal concepten\n"
+      "\n"
+      "Omdat een concreetheid gescoord kan worden met een waarde van 0 t/m 2,\n"
+      "wordt deze som door twee gedeeld.\n"
+      "\n"
+      "Indien alle concreetheden gescoord zijn,\n"
+      "zal dit getal een waarde van 0 t/m 100% hebben.\n"
+      "\n"
+      "Dit getal kan een negatieve waarde hebben,\n"
+      "als niet alle concreetheden gescoord zijn."
+    ,
+      "Deze waarde is:\n"
+      "\n"
+      "100% * (Ss / n) * (1 / 2)\n"
+      "\n"
+      " * Ss = de som van de gescoorde specificiteit van de concepten\n"
+      " * n = het aantal concepten\n"
+      "\n"
+      "Omdat een specificiteit gescoord kan worden met een waarde van 0 t/m 2,\n"
+      "wordt deze som door twee gedeeld.\n"
+      "\n"
+      "Indien alle specificiteiten gescoord zijn,\n"
+      "zal dit getal een waarde van 0 t/m 100% hebben.\n"
+      "\n"
+      "Dit getal kan een negatieve waarde hebben,\n"
+      "als niet alle specificiteiten gescoord zijn."
+    ,
+      "Deze waarde is, uit [1]:\n"
+      "\n"
+      "100% * ((a /12) + (b / 12))\n"
+      "\n"
+      "Zie [1] van de exacte berekening.\n"
+      "\n"
+      "[1] van den Bogaart, Antoine CM, et al.\n"
+      "    \"A computer-supported method to reveal and assess \n"
+      "    Personal Professional Theories in vocational education.\"\n"
+      "    Technology, pedagogy and education 25.5 (2016): 613-629."
+    ,
+    "Aantal concepten",
+    "Aantal concepten verbonden met de focusvraag",
+    "Aantal concepten niet verbonden met focusvraag",
+    "Aantal verbindingen (inclusief verbindingen met de focusvraag)"
+    ,
+      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\n"
+      "per concept (exclusief focusvraag)"
+    ,
+      "De diepte van de concept map:\n"
+      "\n"
+      " * enkel focusvraag = 0\n"
+      " * enkel concepten verbonden met focusvraag = 1\n"
+      " * concept verbonden aan concepten verbonden aan focusvraag = 2\n"
+      " * etcetera"
+    ,
+    "Het totaal aantal voorbeelden"
   };
 }
 
