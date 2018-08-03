@@ -13,7 +13,6 @@
 #include "conceptmap.h"
 #include "brainweaverfilefactory.h"
 #include "qtbrainweaverfiledialog.h"
-#include "qtscopeddisable.h"
 #include "brainweaverfile.h"
 #include "qtconceptmap.h"
 #include "qtbrainweaverratingdialog.h"
