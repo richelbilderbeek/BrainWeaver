@@ -40,7 +40,7 @@
 
 
 ribi::braw::File::File()
-  : m_about("Brainweaver"),
+  : m_about("BrainWeaver"),
     m_assessor_name{},
     m_cluster{},
     m_concept_map{},
@@ -386,7 +386,7 @@ void ribi::braw::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
   {
     std::stringstream msg;
     msg << __func__ << ": "
-      << "in Brainweaver, every concept map must have exactly one center node, "
+      << "in BrainWeaver, every concept map must have exactly one center node, "
       << "supplied number of center nodes was " << CountCenterNodes(concept_map)
     ;
     throw std::invalid_argument(msg.str());
@@ -395,7 +395,7 @@ void ribi::braw::File::SetConceptMap(const ribi::cmap::ConceptMap& concept_map)
   {
     std::stringstream msg;
     msg << __func__ << ": "
-      << "in Brainweaver, the question will be put on the center node of the concept map. "
+      << "in BrainWeaver, the question will be put on the center node of the concept map. "
       << "However, these do not match. "
       << "Question: '" << GetQuestion() << "', "
       << "text on center node: '" << GetCenterNode(concept_map).GetName()

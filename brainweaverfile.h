@@ -35,7 +35,7 @@ class File
   ///AutoSave
   void AutoSave() const;
 
-  ///Obtain the string which indicates this file is a Brainweaver file
+  ///Obtain the string which indicates this file is a BrainWeaver file
   const std::string& GetAbout() const { return m_about; }
 
   ///Get the assessor his/her name
@@ -90,7 +90,7 @@ class File
 
   private:
 
-  ///The string which indicates this file is a Brainweaver file
+  ///The string which indicates this file is a BrainWeaver file
   std::string m_about;
 
   ///The assessor his/her name

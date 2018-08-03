@@ -88,15 +88,6 @@ void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
     new QtClusterDialog(m_file, this)
   };
   d->exec();
-
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-  //if (d->GoBackToMenu())
-  //{
-  //  m_back_to_menu = true;
-  //  emit remove_me(this);
-  //}
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()
@@ -105,13 +96,4 @@ void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()
     new QtConceptMapDialog(m_file, this)
   };
   d->exec();
-
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
-  //if (d->GoBackToMenu())
-  //{
-  //  m_back_to_menu = true;
-  //  emit remove_me(this);
-  //}
 }

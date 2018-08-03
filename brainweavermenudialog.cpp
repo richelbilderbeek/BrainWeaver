@@ -27,11 +27,11 @@ ribi::About ribi::braw::MenuDialog::GetAbout() const noexcept
 {
   About a(
     "Richel Bilderbeek",
-    "Brainweaver",
+    "BrainWeaver",
     "tool to create and assess concept maps",
     "June 12th of 2016",
     "2012-2016",
-    "http://www.richelbilderbeek.nl/ProjectBrainweaver.htm",
+    "http://www.richelbilderbeek.nl/ProjectBrainWeaver.htm",
     GetVersion(),
     GetVersionHistory());
 
@@ -67,6 +67,6 @@ std::string ribi::braw::MenuDialog::GetVersion() const noexcept
 std::vector<std::string> ribi::braw::MenuDialog::GetVersionHistory() const noexcept
 {
   return {
-    "See https://github.com/richelbilderbeek/Brainweaver/blob/master/NEWS.md"
+    "See https://github.com/richelbilderbeek/BrainWeaver/blob/master/NEWS.md"
   };
 }

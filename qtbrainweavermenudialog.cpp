@@ -177,9 +177,6 @@ void ribi::braw::QtMenuDialog::on_button_modify_stylesheet_clicked() noexcept
     )
   };
   d->exec();
-  //Will fail due to #85 at https://github.com/richelbilderbeek/Brainweaver/issues/85
-  //The former architecture showed d modally, thus at this point d would have
-  //a new file now. In this case, the file is read before modification
   qApp->setStyleSheet(d->GetStyleSheet().c_str());
 }
 

@@ -22,8 +22,8 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   if (CountCenterNodes(file.GetConceptMap()) != 1)
   {
     std::stringstream msg;
-    msg << __func__ << ": "
-      << "in Brainweaver, every concept map must have exactly one center node, "
+    msg <<
+      "In BrainWeaver, every concept map must have exactly one center node, "
       << "supplied number of center nodes was "
       << CountCenterNodes(file.GetConceptMap())
     ;
