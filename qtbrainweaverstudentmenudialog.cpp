@@ -58,11 +58,9 @@ void ribi::braw::QtStudentMenuDialog::keyPressEvent(QKeyEvent* e)
       on_button_save_clicked();
       return;
     }
-    else
-    {
-      Save(QtFileDialog::m_last_file);
-      return;
-    }
+    assert(!QtFileDialog::m_last_file.isEmpty());
+    Save(QtFileDialog::m_last_file);
+    return;
   }
   QDialog::keyPressEvent(e);
 }

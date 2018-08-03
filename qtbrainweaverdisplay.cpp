@@ -8,6 +8,24 @@
 #include "conceptmapcompetencies.h"
 #include "qtconceptmapcompetency.h"
 
+QVector<QString> GetDisplayDiagnosticsTooltips()
+{
+  return {
+      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016", //!OCLINT I want to put one tooltip text per line
+      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
+      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
+      "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
+      "Aantal concepten",
+      "Aantal concepten verbonden met de focusvraag",
+      "Aantal concepten niet verbonden met focusvraag",
+      "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
+      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)", //!OCLINT I want to put one tooltip text per line
+      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera", //!OCLINT I want to put one tooltip text per line
+      "Het totaal aantal voorbeelden"
+  };
+}
+
+
 ribi::braw::QtDisplay::QtDisplay()
 {
 
@@ -28,6 +46,18 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   table->setColumnWidth(0,70);
   table->setHorizontalHeaderLabels( { "Waarde" } );
 
+  DisplayDiagnosticsHeader(table);
+  DisplayDiagnosticsItems(file, table);
+  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  return table;
+}
+
+void ribi::braw::QtDisplay::DisplayDiagnosticsHeader(QTableWidget * const table) const
+{
+  const int n_rows{table->rowCount()};
+  assert(n_rows == 11);
+
   const QVector<QString> header_texts = {
     "Complexiteit (%)",
     "Concreetheid (%)",
@@ -42,20 +72,22 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     "Aantal voorbeelden"
   };
   assert(n_rows == static_cast<int>(header_texts.size()));
-  const QVector<QString> tooltip_texts = {
-      "De waarde van k_i in [1]\nk_i = 0.5 * de som van de gescoorde complexiteit van de concepten\ngedeeld door het aantal concepten\n\n[1] ACM van den Bogaart et al., 2016", //!OCLINT I want to put one tooltip text per line
-      "0.5 * de som van de gescoorde concreetheid van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
-      "0.5 * de som van de gescoorde specificiteit van de concepten\ngedeeld door het aantal concepten", //!OCLINT I want to put one tooltip text per line
-      "Rijkheid van de voorbeelden, iets met 'a + b / 12.0'",
-      "Aantal concepten",
-      "Aantal concepten verbonden met de focusvraag",
-      "Aantal concepten niet verbonden met focusvraag",
-      "Aantal verbindingen (inclusief verbindingen met de focusvraag)",
-      "Gemiddeld aantal verbindingen\nmet andere concepten (niet de focusvraag)\nper concept (exclusief focusvraag)", //!OCLINT I want to put one tooltip text per line
-      "De diepte van de concept map:\n * enkel focusvraag = 0\n * enkel concepten verbonden met focusvraag = 1\n * concept verbonden aan concepten verbonden aan focusvraag = 2\n * etcetera", //!OCLINT I want to put one tooltip text per line
-      "Het totaal aantal voorbeelden"
-  };
+
+  const auto tooltip_texts = GetDisplayDiagnosticsTooltips();
   assert(n_rows == static_cast<int>(tooltip_texts.size()));
+
+  for (int row_index = 0; row_index != n_rows; ++row_index)
+  {
+    auto * const headerItem = new QTableWidgetItem(header_texts[row_index]);
+    headerItem->setToolTip(tooltip_texts[row_index]);
+    table->setVerticalHeaderItem(row_index, headerItem);
+  }
+}
+
+void ribi::braw::QtDisplay::DisplayDiagnosticsItems(const File& file, QTableWidget * const table) const
+{
+  const int n_rows{table->rowCount()};
+  assert(n_rows == 11);
 
   QVector<QString> values = {
     QString::number(CalculateComplexityExperimental(file)),
@@ -82,19 +114,16 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
     );
   }
 
+  const auto tooltip_texts = GetDisplayDiagnosticsTooltips();
+  assert(n_rows == static_cast<int>(tooltip_texts.size()));
+
   for (int row_index = 0; row_index != n_rows; ++row_index)
   {
-    auto * const headerItem = new QTableWidgetItem(header_texts[row_index]);
-    headerItem->setToolTip(tooltip_texts[row_index]);
-    table->setVerticalHeaderItem(row_index, headerItem);
     auto * const item = new QTableWidgetItem(values[row_index]);
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     item->setToolTip(tooltip_texts[row_index]);
     table->setItem(row_index, 0, item);
   }
-  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  return table;
 }
 
 QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
@@ -241,57 +270,69 @@ void ribi::braw::QtDisplay::DisplayExamples(
 {
   assert(table->rowCount() == 7);
   assert(table->columnCount() == 1);
-  //Display competency names, with icon
-  {
-    const int n_rows = table->rowCount();
-    for(int i=0; i!=n_rows; ++i)
-    {
-      //Skip 0 == uninitialized
-      const cmap::Competency competency = static_cast<cmap::Competency>(i + 1);
-      const std::string text = cmap::Competencies().ToStrDutch(competency);
-      const QIcon icon = cmap::QtCompetency().CompetencyToIcon(competency);
-      QTableWidgetItem * const item = new QTableWidgetItem;
-      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-      item->setText(text.c_str());
-      item->setIcon(icon);
-      item->setToolTip(
-        ribi::cmap::Competencies().ToStrDutchShort(competency).c_str()
-      );
-      table->setVerticalHeaderItem(i,item);
-    }
-  }
-  //Display the tallied Examples' competencies
-  {
-    std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
+  DisplayExamplesHeader(table);
+  DisplayExamplesItems(file, table);
+}
 
-    const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
-      [](int& init, const std::pair<cmap::Competency, int>& p)
-      {
-        init += p.second;
-        return init;
-      }
+void ribi::braw::QtDisplay::DisplayExamplesHeader(
+  QTableWidget * const table) const
+{
+  assert(table->rowCount() == 7);
+  assert(table->columnCount() == 1);
+  //Display competency names, with icon
+  const int n_rows = table->rowCount();
+  for(int i=0; i!=n_rows; ++i)
+  {
+    //Skip 0 == uninitialized
+    const cmap::Competency competency = static_cast<cmap::Competency>(i + 1);
+    const std::string text = cmap::Competencies().ToStrDutch(competency);
+    const QIcon icon = cmap::QtCompetency().CompetencyToIcon(competency);
+    QTableWidgetItem * const item = new QTableWidgetItem;
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    item->setText(text.c_str());
+    item->setIcon(icon);
+    item->setToolTip(
+      ribi::cmap::Competencies().ToStrDutchShort(competency).c_str()
     );
-    if (sum != 0)
+    table->setVerticalHeaderItem(i,item);
+  }
+}
+
+void ribi::braw::QtDisplay::DisplayExamplesItems(
+  const File& file,
+  QTableWidget * const table) const
+{
+  assert(table->rowCount() == 7);
+  assert(table->columnCount() == 1);
+  std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
+
+  const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
+    [](int& init, const std::pair<cmap::Competency, int>& p)
     {
-      for (const std::pair<cmap::Competency, int>& p: cnts)
-      {
-        const int col = 0;
-        const int row = static_cast<int>(p.first) - 1;
-        if (row == -1) continue; //0 == uninitialized
-        QTableWidgetItem * const item  = new QTableWidgetItem;
-        const double f{
-          static_cast<double>(p.second)
-          / static_cast<double>(sum)
-        };
-        const int percentage = static_cast<int>(std::round(100.0 * f));
-        item->setText(QString::number(percentage));
-        item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-        item->setTextAlignment(Qt::AlignCenter);
-        assert(row >= 0);
-        assert(row < table->rowCount());
-        assert(col < table->columnCount());
-        table->setItem(row, col, item);
-      }
+      init += p.second;
+      return init;
+    }
+  );
+  if (sum != 0)
+  {
+    for (const std::pair<cmap::Competency, int>& p: cnts)
+    {
+      const int col = 0;
+      const int row = static_cast<int>(p.first) - 1;
+      if (row == -1) continue; //0 == uninitialized
+      QTableWidgetItem * const item  = new QTableWidgetItem;
+      const double f{
+        static_cast<double>(p.second)
+        / static_cast<double>(sum)
+      };
+      const int percentage = static_cast<int>(std::round(100.0 * f));
+      item->setText(QString::number(percentage));
+      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+      item->setTextAlignment(Qt::AlignCenter);
+      assert(row >= 0);
+      assert(row < table->rowCount());
+      assert(col < table->columnCount());
+      table->setItem(row, col, item);
     }
   }
 }

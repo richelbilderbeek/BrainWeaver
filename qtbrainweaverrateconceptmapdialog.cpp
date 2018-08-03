@@ -102,11 +102,9 @@ void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
       Save();
       return;
     }
-    else
-    {
-      Save(QtFileDialog::m_last_file.toStdString());
-      return;
-    }
+    assert(!QtFileDialog::m_last_file.isEmpty());
+    Save(QtFileDialog::m_last_file.toStdString());
+    return;
   }
   QDialog::keyPressEvent(e);
 }

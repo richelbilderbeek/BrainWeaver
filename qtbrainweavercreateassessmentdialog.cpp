@@ -134,11 +134,9 @@ void ribi::braw::QtCreateAssessmentDialog::keyPressEvent(QKeyEvent* e)
       on_button_save_clicked();
       return;
     }
-    else
-    {
-      Save(QtFileDialog::m_last_file.toStdString());
-      return;
-    }
+    assert(!QtFileDialog::m_last_file.isEmpty());
+    Save(QtFileDialog::m_last_file.toStdString());
+    return;
   }
 }
 

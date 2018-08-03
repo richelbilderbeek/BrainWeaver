@@ -30,7 +30,13 @@ struct QtDisplay
 
   private:
 
+  void DisplayDiagnosticsHeader(QTableWidget * const table) const;
+  void DisplayDiagnosticsItems(const File& file, QTableWidget * const table) const;
+
   void DisplayExamples(const File& file, QTableWidget * const table) const;
+
+  void DisplayExamplesHeader(QTableWidget * const table) const;
+  void DisplayExamplesItems(const File& file, QTableWidget * const table) const;
 
   void DisplayRatedConceptName(
     const ribi::cmap::Concept& concept,

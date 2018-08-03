@@ -44,11 +44,9 @@ void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
       Save();
       return;
     }
-    else
-    {
-      Save(QtFileDialog::m_last_file);
-      return;
-    }
+    assert(!QtFileDialog::m_last_file.isEmpty());
+    Save(QtFileDialog::m_last_file);
+    return;
   }
   QDialog::keyPressEvent(e);
 }
