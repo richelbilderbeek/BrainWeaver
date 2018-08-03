@@ -35,8 +35,8 @@
 
 
 ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
-  : QGraphicsView(new QGraphicsScene,parent),
-    m_dialogs(GetAllDialogs())
+  : QGraphicsView(new QGraphicsScene, parent),
+    m_dialogs(GetAllDialogs(this))
 {
   assert(scene());
   assert(std::count_if(m_dialogs.begin(),m_dialogs.end(),[](QDialog* p) { return !p; } ) == 0);
@@ -72,51 +72,55 @@ ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
 }
 
 
-std::vector<QDialog* > ribi::braw::GetAllDialogs()
+std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
 {
   std::vector<QDialog* > v;
-  v.push_back(new QtAssessorMenuDialog);
-  v.push_back(new QtClusterDialog(FileFactory().Get3()));
+  v.push_back(new QtAssessorMenuDialog(parent));
+  v.push_back(new QtClusterDialog(FileFactory().Get3(), parent));
   v.push_back(
     new ribi::cmap::QtConceptMapConceptEditDialog(
       ribi::cmap::ConceptFactory().GetTest(2),
-      ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept
+      ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept,
+      parent
     )
   );
-  v.push_back(new QtConceptMapDialog(FileFactory().Get2()));
-  v.push_back(new QtCreateAssessmentDialog);
-  v.push_back(new QtMenuDialog);
-  v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5()));
+  v.push_back(new QtConceptMapDialog(FileFactory().Get2(), parent));
+  v.push_back(new QtCreateAssessmentDialog(parent));
+  v.push_back(new QtMenuDialog(parent));
+  v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5(), parent));
   {
-    //Memory leak here! qtconceptmap will not be deleted
-    //Issue 253, #253
     auto * const qtconceptmap{
-      new ribi::cmap::QtConceptMap
+      new ribi::cmap::QtConceptMap(
+        ribi::cmap::CreateDefaultRating(),
+        parent
+      )
     };
     qtconceptmap->SetConceptMap(ribi::cmap::ConceptMapFactory().GetUnrated());
     const auto * const qtnode = ribi::cmap::GetFirstQtNode(*qtconceptmap);
     assert(qtnode);
     v.push_back(
       new cmap::QtRateConceptDialog(
-        *qtconceptmap, *qtnode
+        *qtconceptmap, *qtnode, parent
       )
     );
   }
   v.push_back(
     new cmap::QtRateConceptTallyDialog(
       ribi::cmap::ConceptMapFactory().Get6(),
-      ribi::cmap::CreateDefaultRating()
+      ribi::cmap::CreateDefaultRating(),
+      parent
     )
   );
-  v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2)));
+  v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2), parent));
   v.push_back(
     new ribi::cmap::QtRateExamplesDialog(
-      ribi::cmap::ConceptFactory().GetTests().at(2)
+      ribi::cmap::ConceptFactory().GetTests().at(2),
+      parent
     )
   );
-  v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4)));
-  v.push_back(new QtStudentMenuDialog(FileFactory().GetTests().at(2)));
-  v.push_back(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(2)));
+  v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4), parent));
+  v.push_back(new QtStudentMenuDialog(FileFactory().GetTests().at(2), parent));
+  v.push_back(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(2), parent));
   assert(std::count_if(v.begin(),v.end(),[](QDialog* p) { return !p; } ) == 0);
   return v;
 }

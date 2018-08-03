@@ -25,15 +25,13 @@ public slots:
 
 private:
 
-  ///NASTY BUG ALERT: It crashes Wine if m_dialogs is created as
-  ///const std::vector<boost::shared_ptr<QDialog> > m_dialogs;
-  ///No idea why...
+  //All deleted by QtOverviewWidget
   const std::vector<QDialog* > m_dialogs;
 
 };
 
 ///Create all dialogs
-std::vector<QDialog* > GetAllDialogs();
+std::vector<QDialog* > GetAllDialogs(QWidget* parent);
 
 } //~namespace braw
 } //~namespace ribi
