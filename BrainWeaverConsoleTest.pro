@@ -1,29 +1,26 @@
-#DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
-
 # Most specific first
 include(BrainWeaverConsole.pri)
 include(BrainWeaverConsoleTest.pri)
 
 include(../RibiLibraries/BoostAll.pri)
 
-
 include(../RibiLibraries/GeneralConsole.pri)
 include(../RibiLibraries/GeneralDesktop.pri)
 
 #Specific, console
 include(../RibiClasses/CppContainer/CppContainer.pri)
-include(../RibiClasses/CppCounter/CppCounter.pri)
+#include(../RibiClasses/CppCounter/CppCounter.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(gsl.pri)
-include(../RibiClasses/CppGrabber/CppGrabber.pri)
+#include(../RibiClasses/CppGrabber/CppGrabber.pri)
 include(../plane/plane.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
 include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
 include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
-include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
+#include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
