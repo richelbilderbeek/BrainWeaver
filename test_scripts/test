@@ -11,9 +11,9 @@ cd ../../testing_cpp_gui_applications_tutorial/scripts
 . ./close_first_dialog_by_title
 
 # Go back
-cd ../../Brainweaver/test_scripts
+cd ../../BrainWeaver/test_scripts
 
-# Brainweaver scripts
+# BrainWeaver scripts
 . ./are_associations_in_file
 . ./close_assessor_menu
 . ./close_assessor_set_focal_question
@@ -79,7 +79,7 @@ test_start_brainweaver()
   start_brainweaver
 
   # This is usually the first test of a day. Then
-  # Brainweaver needs some time to start up, where usually 1 second is fine 
+  # BrainWeaver needs some time to start up, where usually 1 second is fine 
   sleep 5
 
   id=`get_dialog_id_by_title 'Menu voor de ontwikkelaar'`

@@ -1,8 +1,8 @@
 #DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
 
 # Most specific first
-include(BrainweaverConsole.pri)
-include(BrainweaverConsoleTest.pri)
+include(BrainWeaverConsole.pri)
+include(BrainWeaverConsoleTest.pri)
 
 include(../RibiLibraries/BoostAll.pri)
 

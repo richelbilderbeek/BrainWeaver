@@ -1,6 +1,6 @@
 #!/bin/bash
 # Let the assessor create a test concept map with name 'scenario1.cmp'
-# Assumes BrainweaverDeveloper is already running
+# Assumes BrainWeaverDeveloper is already running
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh

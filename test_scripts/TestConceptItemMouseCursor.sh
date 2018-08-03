@@ -37,7 +37,7 @@ test_qtconceptmapeditwidget_index=22
 mytestname="TestConceptItemMouseCursor"
 
 #Test with release version
-myexe="../../../bin/ProjectBrainweaverDeveloperRelease"
+myexe="../../../bin/ProjectBrainWeaverDeveloperRelease"
 mytester="../../Libraries/libcvautomation/examples/cva-input"
 
 if [ -e /$myexe ]
@@ -53,7 +53,7 @@ then
 fi
 
 $myexe $test_test_conceptitem_index &
-#./../build-BrainweaverDeveloper-Desktop-Release/BrainweaverDeveloper $test_qtconceptmapeditwidget_index &
+#./../build-BrainWeaverDeveloper-Desktop-Release/BrainWeaverDeveloper $test_qtconceptmapeditwidget_index &
 
 sleep 2
 

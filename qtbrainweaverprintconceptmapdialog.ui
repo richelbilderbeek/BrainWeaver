@@ -14,7 +14,7 @@
    <string>Preview van PDF</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <property name="styleSheet">
@@ -142,7 +142,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

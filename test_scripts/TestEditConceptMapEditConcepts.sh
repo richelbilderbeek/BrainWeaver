@@ -1,5 +1,5 @@
 #!/bin/bash
-#./../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper 1 &
+#./../build-BrainWeaverDeveloper-Desktop-Debug/BrainWeaverDeveloper 1 &
 
 #0 about
 #1 assessor
@@ -36,8 +36,8 @@ test_qtconceptmapeditwidget_index=22
 mytestname="TestConceptItemMouseCursor"
 
 #Test with release version
-myexe="../../../bin/ProjectBrainweaverDeveloper"
-#myexe="../../../.wine/drive_c/windows/system32/ProjectBrainweaverDeveloper.exe"
+myexe="../../../bin/ProjectBrainWeaverDeveloper"
+#myexe="../../../.wine/drive_c/windows/system32/ProjectBrainWeaverDeveloper.exe"
 
 mytester="../../Libraries/libcvautomation/examples/cva-input"
 #mytester="../../Test/build-CppLibcvautomationExample2-Desktop-Debug/CppLibcvautomationExample2"
@@ -56,7 +56,7 @@ fi
 
 #wine $myexe $test_qtconceptmapeditwidget_index &
 $myexe $test_qtconceptmapeditwidget_index &
-#./../build-BrainweaverDeveloper-Desktop-Release/BrainweaverDeveloper $test_qtconceptmapeditwidget_index &
+#./../build-BrainWeaverDeveloper-Desktop-Release/BrainWeaverDeveloper $test_qtconceptmapeditwidget_index &
 
 sleep 2
 

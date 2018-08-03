@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_pvdb_regex_GetRegexMatches)
   //Bug 2016-04-09
   {
     const std::string s =
-      "<file><about>Brainweaver</about><assessor_name></assessor_name>"
+      "<file><about>BrainWeaver</about><assessor_name></assessor_name>"
       "<cluster></cluster><conceptmap>digraph G {"
       "0[label=\"<node><concept><name>Focal$$$SPACE$$$question?</name>"
       "<examples></examples><concept_is_complex>0</concept_is_complex>"

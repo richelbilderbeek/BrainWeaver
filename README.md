@@ -1,15 +1,15 @@
-# Brainweaver
+# BrainWeaver
 
 Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
 ---|---|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Brainweaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=master)
-develop|[![Build Status](https://travis-ci.org/richelbilderbeek/Brainweaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/Brainweaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/Brainweaver/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/Brainweaver?branch=develop)
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaver?branch=master)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaver/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/BrainWeaver?branch=develop)
 
-Brainweaver, tool for teacher education, as described in [1].
+BrainWeaver, tool for teacher education, as described in [1].
 
-Brainweaver is in active development.
+BrainWeaver is in active development.
 
-## Build status of builds that Brainweaver relies on
+## Build status of builds that BrainWeaver relies on
 
 master|develop|project
 ---|---|---
@@ -23,19 +23,19 @@ master|develop|project
 
 ## Building
 
-Building `Brainweaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
+Building `BrainWeaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
 operating system or package manager, feel invited to add building instructions for those platforms.
 
-To build `Brainweaver` you will need to:
+To build `BrainWeaver` you will need to:
 
  * Install some packages
  * Download some other GitHubs
  * Build some other GitHubs
- * Build `Brainweaver`
+ * Build `BrainWeaver`
 
 ### Install packages
 
-In the `Brainweaver` folder, run the `install_packages.sh` script with root rights:
+In the `BrainWeaver` folder, run the `install_packages.sh` script with root rights:
 
 ```
 sudo ./install_packages.sh
@@ -44,7 +44,7 @@ sudo ./install_packages.sh
 
 ### Download other GitHubs
 
-In the `Brainweaver` folder, run the `download_other_githubs.sh` script (without root access):
+In the `BrainWeaver` folder, run the `download_other_githubs.sh` script (without root access):
 
 ```
 ./download_other_githubs.sh
@@ -52,39 +52,39 @@ In the `Brainweaver` folder, run the `download_other_githubs.sh` script (without
 
 ### Build other GitHubs
 
-In the `Brainweaver` folder, run the `build_other_githubs.sh` script (without root access):
+In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without root access):
 
 ```
 ./build_other_githubs.sh
 ```
 
-### Build `Brainweaver`
+### Build `BrainWeaver`
 
-Within the `Brainweaver` folder, 
+Within the `BrainWeaver` folder, 
 
- * Developer: Open the Qt Creator project file `BrainweaverDeveloper.pro` in Qt Creator and build
- * Student module: Open the Qt Creator project file `BrainweaverStudent.pro` in Qt Creator and build
- * Assessor module: Open the Qt Creator project file `BrainweaverAssessor.pro` in Qt Creator and build
+ * Developer: Open the Qt Creator project file `BrainWeaverDeveloper.pro` in Qt Creator and build
+ * Student module: Open the Qt Creator project file `BrainWeaverStudent.pro` in Qt Creator and build
+ * Assessor module: Open the Qt Creator project file `BrainWeaverAssessor.pro` in Qt Creator and build
 
 If you do not use Qt Creator, you can build the project using `qmake` and `make` like this:
 
 ```
-qmake BrainweaverDeveloper.pro -qt=qt5
+qmake BrainWeaverDeveloper.pro -qt=qt5
 make 
 ```
 
 ## User documentation
 
-See [the Brainweaver documentation](doc/README.md).
+See [the BrainWeaver documentation](doc/README.md).
 
 ## Testing
 
 Testing is done by:
 
- * BrainweaverConsoleTest.pro (run by Travis CI)
- * BrainweaverDeveloperTest.pro (run by Travis CI)
- * the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, Brainweaver must be running)
- * the file `test_scripts/scenario2.sh` for a more complex run (started by hand, Brainweaver must be running)
+ * BrainWeaverConsoleTest.pro (run by Travis CI)
+ * BrainWeaverDeveloperTest.pro (run by Travis CI)
+ * the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, BrainWeaver must be running)
+ * the file `test_scripts/scenario2.sh` for a more complex run (started by hand, BrainWeaver must be running)
 
 ## Help
 
@@ -98,7 +98,7 @@ Please let me know, by, for example, adding an Issue.
 
 ## SLOCcount
 
-From [a Travis build log](https://travis-ci.org/richelbilderbeek/Brainweaver/builds/400737135#L2590):
+From [a Travis build log](https://travis-ci.org/richelbilderbeek/BrainWeaver/builds/400737135#L2590):
 
 ```
 Total Physical Source Lines of Code (SLOC)                = 445,425

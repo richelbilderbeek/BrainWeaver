@@ -11,9 +11,9 @@ cd ../../testing_cpp_gui_applications_tutorial/scripts
 . ./close_first_dialog_by_title
 
 # Go back
-cd ../../Brainweaver/test_scripts
+cd ../../BrainWeaver/test_scripts
 
-# Brainweaver scripts
+# BrainWeaver scripts
 . ./are_associations_in_file
 . ./close_assessor_menu
 . ./close_assessor_set_focal_question

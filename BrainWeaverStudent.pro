@@ -1,36 +1,33 @@
-#DEFINES += BRAINWEAVER_MOVE_ITEMS_ON_COLLISION
+SOURCES += qtmain_student.cpp
 
-# Most specific first
-include(BrainweaverDesktop.pri)
-include(BrainweaverDesktopTest.pri)
-
+#Don't enable Effective C++ warnings when using Qwt
+#include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
+#include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/BoostAll.pri)
+include(../RibiLibraries/GeneralConsole.pri)
+include(../RibiLibraries/GeneralDesktop.pri)
 
-include(../RibiClasses/CppAbout/CppAbout.pri)
-include(../RibiClasses/CppFileIo/CppFileIo.pri)
-include(../RibiClasses/CppHelp/CppHelp.pri)
-include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
-include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
-include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
+greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 #Specific, console
+include(../ConceptMap/ConceptMap.pri)
 include(../RibiClasses/CppContainer/CppContainer.pri)
-#include(../RibiClasses/CppCounter/CppCounter.pri)
+include(../RibiClasses/CppCounter/CppCounter.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(gsl.pri)
-#include(../RibiClasses/CppGrabber/CppGrabber.pri)
+include(../RibiClasses/CppGrabber/CppGrabber.pri)
 include(../plane/plane.pri)
-include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
-include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
-include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
-#include(../RibiClasses/CppStopwatch/CppStopwatch.pri)
+include(../RibiClasses/CppXml/CppXml.pri)
+
+#Specific, desktop
 
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
+include(../QtConceptMap/QtConceptMap.pri)
 include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
-include(../RibiClasses/CppQtGraphics/CppQtGraphics.pri)
+include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../QtKeyboardFriendlyGraphicsView/QtKeyboardFriendlyGraphicsView.pri)
 include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtPathArrowItem/CppQtPathArrowItem.pri)
@@ -38,12 +35,7 @@ include(../RibiClasses/CppQtQuadBezierArrowItem/CppQtQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtRoundedEditRectItem/CppQtRoundedEditRectItem.pri)
 include(../RibiClasses/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
 include(../RibiClasses/CppQtScopedDisable/CppQtScopedDisable.pri)
-#include(../RibiClasses/CppTrace/CppTrace.pri)
-include(../RibiClasses/CppXml/CppXml.pri)
-
-#Specific
-include(../ConceptMap/ConceptMap.pri)
-include(../QtConceptMap/QtConceptMap.pri)
+include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
 include(../StyleSheetSetter/StyleSheetSetterDesktop.pri)
 
 # Boost Graph Cookbook 1
@@ -51,7 +43,7 @@ INCLUDEPATH += ../boost_graph_cookbook_1/boost_graph_cookbook_1
 include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_helper.pri)
 include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_no_properties.pri)
 
-SOURCES += qtmain_test.cpp
+include(BrainWeaverDesktop.pri)
 
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
@@ -80,6 +72,7 @@ CONFIG(debug, debug|release) {
   QMAKE_CXXFLAGS += -fsanitize=undefined
   QMAKE_LFLAGS += -fsanitize=undefined
   LIBS += -lubsan
+
 }
 
 # C++14
@@ -90,16 +83,13 @@ QMAKE_CXXFLAGS += -std=c++14
 QMAKE_LFLAGS += -fuse-ld=gold
 
 # High warning level, warnings are errors
-# Qt goes bad with -Weffc++
+# -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5
 #QT += core gui widgets concurrent opengl printsupport svg
 QT += core gui widgets concurrent opengl printsupport svg
-
-# QTest
-QT += testlib
 
 # Fixes
 #/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'

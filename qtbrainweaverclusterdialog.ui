@@ -14,7 +14,7 @@
    <string>Associeer- en cluster-scherm</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -175,7 +175,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -14,7 +14,7 @@
    <string>Menu voor de ontwikkelaar</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -240,7 +240,7 @@
   <tabstop>button_modify_stylesheet</tabstop>
  </tabstops>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

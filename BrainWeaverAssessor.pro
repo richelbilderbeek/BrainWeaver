@@ -1,13 +1,12 @@
-SOURCES += qtmain_student.cpp
-
 #Don't enable Effective C++ warnings when using Qwt
-#include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
-#include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/BoostAll.pri)
-include(../RibiLibraries/GeneralConsole.pri)
-include(../RibiLibraries/GeneralDesktop.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
+include(../RibiClasses/CppAbout/CppAbout.pri)
+include(../RibiClasses/CppFileIo/CppFileIo.pri)
+include(../RibiClasses/CppHelp/CppHelp.pri)
+include(../RibiClasses/CppMenuDialog/CppMenuDialog.pri)
+include(../RibiClasses/CppQtAboutDialog/CppQtAboutDialog.pri)
+include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
 
 #Specific, console
 include(../ConceptMap/ConceptMap.pri)
@@ -23,10 +22,9 @@ include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific, desktop
-
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
-include(../QtConceptMap/QtConceptMap.pri)
 include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
+include(../QtConceptMap/QtConceptMap.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../QtKeyboardFriendlyGraphicsView/QtKeyboardFriendlyGraphicsView.pri)
 include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
@@ -43,7 +41,9 @@ INCLUDEPATH += ../boost_graph_cookbook_1/boost_graph_cookbook_1
 include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_helper.pri)
 include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1_no_properties.pri)
 
-include(BrainweaverDesktop.pri)
+include(BrainWeaverDesktop.pri)
+
+SOURCES += qtmain_assessor.cpp
 
 # QResources give this error
 QMAKE_CXXFLAGS += -Wno-unused-variable
@@ -72,7 +72,6 @@ CONFIG(debug, debug|release) {
   QMAKE_CXXFLAGS += -fsanitize=undefined
   QMAKE_LFLAGS += -fsanitize=undefined
   LIBS += -lubsan
-
 }
 
 # C++14
@@ -83,16 +82,9 @@ QMAKE_CXXFLAGS += -std=c++14
 QMAKE_LFLAGS += -fuse-ld=gold
 
 # High warning level, warnings are errors
-# -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+#QMAKE_CXXFLAGS += -Weffc++ #Qt goes bad with -Weffc++
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5
-#QT += core gui widgets concurrent opengl printsupport svg
 QT += core gui widgets concurrent opengl printsupport svg
-
-# Fixes
-#/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'
-#   BOOST_DEFINE_MATH_CONSTANT(half, 5.000000000000000000000000000000000000e-01, "5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-01")
-#   ^
-QMAKE_CXXFLAGS += -fext-numeric-literals

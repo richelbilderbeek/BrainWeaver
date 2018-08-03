@@ -149,7 +149,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
 
 void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head()
 {
-  //Added this for https://github.com/richelbilderbeek/Brainweaver/issues/88
+  //Added this for https://github.com/richelbilderbeek/BrainWeaver/issues/88
   //just to be sure that a QtConceptMap gets saved correctly
   using namespace cmap;
   File file = FileFactory().Get1();

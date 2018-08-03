@@ -2,5 +2,5 @@
 
 function start_brainweaver()
 {
-  ./../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper &
+  ./../../build-BrainWeaverDeveloper-Desktop-Debug/BrainWeaverDeveloper &
 }

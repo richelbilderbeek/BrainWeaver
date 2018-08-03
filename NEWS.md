@@ -45,7 +45,7 @@ Newest versions at top.
  * 2013-07-27: Version 0.32: first step in semi-automated rating mechanism
  * 2013-05-04: Version 0.31: improved printing for student and assessor, first steps in implementing undo functionality
  * 2013-04-21: Version 0.30: shows sub-concepts maps in rating well, allows saving without going back to the main menu
- * 2013-02-12: Version 0.29: changed name to Brainweaver, progress on printing
+ * 2013-02-12: Version 0.29: changed name to BrainWeaver, progress on printing
  * 2013-01-23: Version 0.28: allow ConceptMapEdit arrows having solitary focus, progress on printing
  * 2013-01-20: Version 0.27: added graphics to menu's, using 'Dolphin' style
  * 2013-01-18: Version 0.26: calculate rating values correctly

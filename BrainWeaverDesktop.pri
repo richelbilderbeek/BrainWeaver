@@ -1,4 +1,4 @@
-include(BrainweaverConsole.pri)
+include(BrainWeaverConsole.pri)
 
 HEADERS  += \
     $$PWD/qtbrainweaveraboutdialog.h \

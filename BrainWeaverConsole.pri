@@ -1,5 +1,5 @@
 INCLUDEPATH += \
-  ../Brainweaver
+  ../BrainWeaver
 
 SOURCES += \
     $$PWD/brainweavercluster.cpp \
@@ -21,5 +21,5 @@ HEADERS  += \
     $$PWD/brainweavercluster.h
 
 RESOURCES += \
-    $$PWD/Brainweaver.qrc
+    $$PWD/BrainWeaver.qrc
 

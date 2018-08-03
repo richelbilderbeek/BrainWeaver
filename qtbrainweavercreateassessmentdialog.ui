@@ -14,7 +14,7 @@
    <string>Formuleer de focusvraag</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <property name="styleSheet">
@@ -698,7 +698,7 @@ verbindingen</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

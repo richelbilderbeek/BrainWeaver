@@ -2,5 +2,5 @@
 
 function goto_developer_menu()
 {
-  ./../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper &
+  ./../../build-BrainWeaverDeveloper-Desktop-Debug/BrainWeaverDeveloper &
 }

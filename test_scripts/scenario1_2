@@ -1,6 +1,6 @@
 #!/bin/bash
 # Let the student work on the concept map
-# Assumes BrainweaverDeveloper is already running
+# Assumes BrainWeaverDeveloper is already running
 
 # Load scripts
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh

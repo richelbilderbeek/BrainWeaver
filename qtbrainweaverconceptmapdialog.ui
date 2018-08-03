@@ -14,7 +14,7 @@
    <string>Construeer een concept map-scherm</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -32,7 +32,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="Brainweaver.qrc">:/images/PicSave.png</pixmap>
+        <pixmap resource="BrainWeaver.qrc">:/images/PicSave.png</pixmap>
        </property>
       </widget>
      </item>
@@ -58,7 +58,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="Brainweaver.qrc">:/images/PicExport.png</pixmap>
+        <pixmap resource="BrainWeaver.qrc">:/images/PicExport.png</pixmap>
        </property>
       </widget>
      </item>
@@ -80,7 +80,7 @@
   <tabstop>button_print</tabstop>
  </tabstops>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

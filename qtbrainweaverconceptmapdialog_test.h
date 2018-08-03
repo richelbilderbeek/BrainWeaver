@@ -20,7 +20,7 @@ private slots:
 
   ///Create a concept map of two nodes and one edge with an arrow head
   ///The concept map should have saved that the arrow head is there
-  //For https://github.com/richelbilderbeek/Brainweaver/issues/88
+  //For https://github.com/richelbilderbeek/BrainWeaver/issues/88
   void create_edge_with_arrow_head();
 
   ///When a concept map is created from a Cluster with n items,

@@ -14,7 +14,7 @@
    <string>Mijn persoonlijke werktheorie, programma voor de student</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Brainweaver.qrc">
+   <iconset resource="BrainWeaver.qrc">
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -84,7 +84,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="Brainweaver.qrc">:/images/PicCreateAssessment.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/images/PicCreateAssessment.png</pixmap>
      </property>
     </widget>
    </item>
@@ -100,7 +100,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="Brainweaver.qrc">:/images/PicSave.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/images/PicSave.png</pixmap>
      </property>
     </widget>
    </item>
@@ -116,7 +116,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="Brainweaver.qrc">:/images/PicAbout.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/images/PicAbout.png</pixmap>
      </property>
     </widget>
    </item>
@@ -132,7 +132,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="Brainweaver.qrc">:/images/PicQuit.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/images/PicQuit.png</pixmap>
      </property>
     </widget>
    </item>
@@ -177,7 +177,7 @@
   <tabstop>button_quit</tabstop>
  </tabstops>
  <resources>
-  <include location="Brainweaver.qrc"/>
+  <include location="BrainWeaver.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -3,14 +3,14 @@
 cd ..
 cd ..
 
-for folder in Brainweaver boost_graph_cookbook_1 RibiClasses RibiLibraries StyleSheetSetter ConceptMap QtConceptMap QtKeyboardFriendlyGraphicsView plane
+for folder in BrainWeaver boost_graph_cookbook_1 RibiClasses RibiLibraries StyleSheetSetter ConceptMap QtConceptMap QtKeyboardFriendlyGraphicsView plane
 do
 
   cd $folder
 
   echo "git folder: "$folder
   git add --all :/
-  git commit -m "Brainweaver update"
+  git commit -m "BrainWeaver update"
   git pull
   git push
 

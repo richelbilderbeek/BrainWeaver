@@ -51,11 +51,11 @@ oclint-0.10.3/
 oclint.log
 qrc_*
 moc_*
-BrainweaverDesktopTest
+BrainWeaverDesktopTest
 *.pro.user.*
 test_scripts/*.cmp
 test_scripts/*.log
-Brainweaver.zip
-BrainweaverDeveloper.zip
+BrainWeaver.zip
+BrainWeaverDeveloper.zip
 *.zip
 autosave*.cmp

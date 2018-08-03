@@ -60,25 +60,25 @@ before_script:
 script: 
   - ./build_other_githubs
   # Build console test
-  - qmake -qt=qt5 BrainweaverConsoleTest.pro
+  - qmake -qt=qt5 BrainWeaverConsoleTest.pro
   - make -s debug
-  - ./BrainweaverConsoleTest
+  - ./BrainWeaverConsoleTest
   # Build and run desktop test
-  - qmake -qt=qt5 BrainweaverDesktopTest.pro
+  - qmake -qt=qt5 BrainWeaverDesktopTest.pro
   - make -s debug
-  - ./BrainweaverDesktopTest
+  - ./BrainWeaverDesktopTest
   # helgrind
-  #- valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainweaverDesktopTest
+  #- valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainWeaverDesktopTest
   #- cat helgrind.log
   # memcheck
-  #- valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainweaverDesktopTest
+  #- valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./BrainWeaverDesktopTest
   #- cat memcheck.log
   # Build 'true' executables
-  - qmake -qt=qt5 BrainweaverDeveloper.pro
+  - qmake -qt=qt5 BrainWeaverDeveloper.pro
   - make -s debug
-  - qmake -qt=qt5 BrainweaverAssessor.pro
+  - qmake -qt=qt5 BrainWeaverAssessor.pro
   - make -s debug
-  - qmake -qt=qt5 BrainweaverStudent.pro
+  - qmake -qt=qt5 BrainWeaverStudent.pro
   - make -s debug
   # shunit2 tests, must be run locally only
   #- cd test_scipts; ./test; cd ..
@@ -93,7 +93,7 @@ script:
   # Get my folder
   - my_github=${PWD##*/}  
   # SLOCcount
-  - cd ..; sloccount --overhead 1 --personcost 22614 Brainweaver boost_graph_cookbook_1 ConceptMap plane QtConceptMap QtKeyboardFriendlyGraphicsView RibiClasses RibiLibraries StyleSheetSetter; cd $my_github
+  - cd ..; sloccount --overhead 1 --personcost 22614 BrainWeaver boost_graph_cookbook_1 ConceptMap plane QtConceptMap QtKeyboardFriendlyGraphicsView RibiClasses RibiLibraries StyleSheetSetter; cd $my_github
 
 
 

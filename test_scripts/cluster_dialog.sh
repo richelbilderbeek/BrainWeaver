@@ -5,7 +5,7 @@
 . ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
 
 # Variables
-myexe="../../build-BrainweaverDeveloper-Desktop-Debug/BrainweaverDeveloper"
+myexe="../../build-BrainWeaverDeveloper-Desktop-Debug/BrainWeaverDeveloper"
 
 ####################################
 # Check executable
