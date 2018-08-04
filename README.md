@@ -47,7 +47,7 @@ sudo ./install_packages.sh
 In the `BrainWeaver` folder, run the `download_other_githubs.sh` script (without root access):
 
 ```
-./download_other_githubs.sh
+./download_other_githubs
 ```
 
 ### Build other GitHubs
@@ -55,7 +55,7 @@ In the `BrainWeaver` folder, run the `download_other_githubs.sh` script (without
 In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without root access):
 
 ```
-./build_other_githubs.sh
+./build_other_githubs
 ```
 
 ### Build `BrainWeaver`
