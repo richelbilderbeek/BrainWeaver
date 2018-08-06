@@ -2,8 +2,6 @@
 
 #include <cassert>
 
-#include <boost/lexical_cast.hpp>
-
 #include <QDebug>
 #include <QKeyEvent>
 #include <QFileDialog>

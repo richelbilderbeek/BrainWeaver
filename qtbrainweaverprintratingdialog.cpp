@@ -3,8 +3,6 @@
 #include <cassert>
 #include <ctime>
 
-#include <boost/lexical_cast.hpp>
-
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QLabel>

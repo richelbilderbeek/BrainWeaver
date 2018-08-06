@@ -8,7 +8,6 @@
 #include <stdexcept>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/xpressive/xpressive.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
