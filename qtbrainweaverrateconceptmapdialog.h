@@ -17,7 +17,6 @@ class QtRateConceptMapDialog final : public QDialog
   Q_OBJECT //!OCLINT
   
 public:
-  using ConceptMap = cmap::QtConceptMap;
   explicit QtRateConceptMapDialog(
     const File& file,
     QWidget* parent = nullptr
@@ -27,7 +26,7 @@ public:
   ~QtRateConceptMapDialog() noexcept;
 
   const File& GetFile() const noexcept;
-  cmap::QtConceptMap * GetWidget();
+  ::ribi::cmap::QtConceptMap * GetWidget();
 
   ///Respond to key press
   void keyPressEvent(QKeyEvent *) override;
@@ -44,7 +43,7 @@ private slots:
 private:
   Ui::QtRateConceptMapDialog *ui;
   File m_file;
-  ConceptMap * const m_concept_map;
+  ::ribi::cmap::QtConceptMap * const m_qtconcept_map;
 
   friend class qtbrainweaverrateconceptmapdialog_test;
 };

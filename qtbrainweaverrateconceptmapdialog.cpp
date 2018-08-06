@@ -17,7 +17,7 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   : QDialog(parent),
   ui(new Ui::QtRateConceptMapDialog),
   m_file(file),
-  m_concept_map(new cmap::QtConceptMap(file.GetRating()))
+  m_qtconcept_map(new ::ribi::cmap::QtConceptMap(file.GetRating()))
 {
   if (CountCenterNodes(file.GetConceptMap()) != 1)
   {
@@ -33,14 +33,14 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
-  m_concept_map->SetConceptMap(file.GetConceptMap());
-  m_concept_map->SetMode(ribi::cmap::Mode::rate);
+  m_qtconcept_map->SetConceptMap(file.GetConceptMap());
+  m_qtconcept_map->SetMode(ribi::cmap::Mode::rate);
 
   {
     assert(!ui->widget->layout());
     QLayout * const layout = new QGridLayout;
     ui->widget->setLayout(layout);
-    layout->addWidget(m_concept_map);
+    layout->addWidget(m_qtconcept_map);
   }
 
   {
@@ -58,7 +58,7 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
 
 ribi::braw::QtRateConceptMapDialog::~QtRateConceptMapDialog() noexcept
 {
-  this->m_concept_map->StopTimer();
+  this->m_qtconcept_map->StopTimer();
   delete ui;
 }
 
@@ -68,11 +68,11 @@ void ribi::braw::QtRateConceptMapDialog::changeEvent(QEvent * event)
   {
     if (isEnabled())
     {
-      this->m_concept_map->StartTimer();
+      this->m_qtconcept_map->StartTimer();
     }
     else
     {
-      this->m_concept_map->StopTimer();
+      this->m_qtconcept_map->StopTimer();
     }
   }
 }
@@ -84,8 +84,8 @@ const ribi::braw::File& ribi::braw::QtRateConceptMapDialog::GetFile() const noex
 
 ribi::cmap::QtConceptMap * ribi::braw::QtRateConceptMapDialog::GetWidget()
 {
-  assert(m_concept_map);
-  return m_concept_map;
+  assert(m_qtconcept_map);
+  return m_qtconcept_map;
 }
 
 void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
@@ -106,29 +106,33 @@ void ribi::braw::QtRateConceptMapDialog::keyPressEvent(QKeyEvent* e)
     Save(QtFileDialog::m_last_file.toStdString());
     return;
   }
-  QDialog::keyPressEvent(e);
+  m_qtconcept_map->keyPressEvent(e);
+  if (!e->isAccepted())
+  {
+    QDialog::keyPressEvent(e);
+  }
 }
 
 void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
 {
   assert(IsCenterNode(ribi::cmap::GetFirstNode(m_file.GetConceptMap())));
-  m_file.SetConceptMap(m_concept_map->ToConceptMap());
+  m_file.SetConceptMap(m_qtconcept_map->ToConceptMap());
   assert(
     ribi::cmap::HasSimilarData(
-      m_concept_map->ToConceptMap(),
+      m_qtconcept_map->ToConceptMap(),
       m_file.GetConceptMap(),
       0.001
     )
   );
   assert(IsCenterNode(ribi::cmap::GetFirstNode(m_file.GetConceptMap())));
-  m_concept_map->StopTimer();
-  m_concept_map->setEnabled(false);
+  m_qtconcept_map->StopTimer();
+  m_qtconcept_map->setEnabled(false);
   auto * const d{
     new QtRatingDialog(m_file, this)
   };
   d->exec();
-  m_concept_map->setEnabled(true);
-  m_concept_map->StartTimer();
+  m_qtconcept_map->setEnabled(true);
+  m_qtconcept_map->StartTimer();
 }
 
 void ribi::braw::QtRateConceptMapDialog::Save()
@@ -154,10 +158,10 @@ void ribi::braw::QtRateConceptMapDialog::Save()
 
 void ribi::braw::QtRateConceptMapDialog::Save(const std::string& filename)
 {
-  m_file.SetConceptMap(m_concept_map->ToConceptMap());
+  m_file.SetConceptMap(m_qtconcept_map->ToConceptMap());
   assert(
     HasSimilarData(
-      m_concept_map->ToConceptMap(),
+      m_qtconcept_map->ToConceptMap(),
       m_file.GetConceptMap(),
       0.001
     )
@@ -176,7 +180,7 @@ void ribi::braw::QtRateConceptMapDialog::on_button_save_clicked()
 
 void ribi::braw::QtRateConceptMapDialog::showEvent(QShowEvent *)
 {
-  const QRectF all_items_rect = m_concept_map->scene()->itemsBoundingRect();
-  m_concept_map->fitInView(all_items_rect, Qt::KeepAspectRatio);
-  this->m_concept_map->setFocus();
+  const QRectF all_items_rect = m_qtconcept_map->scene()->itemsBoundingRect();
+  m_qtconcept_map->fitInView(all_items_rect, Qt::KeepAspectRatio);
+  this->m_qtconcept_map->setFocus();
 }
