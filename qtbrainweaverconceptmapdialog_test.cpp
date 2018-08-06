@@ -166,8 +166,9 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   d.show();
   QTest::keyClick(&d, Qt::Key_E, Qt::ControlModifier, 100);
   d.show();
-  QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
-  d.show();
+  //New arrow has a head by default
+  //QTest::keyClick(&d, Qt::Key_H, Qt::ControlModifier, 100);
+  //d.show();
 
   const auto qtconceptmap = d.GetQtConceptMap();
   const auto qtnodes = ribi::cmap::GetQtNodes(qtconceptmap->GetScene());
