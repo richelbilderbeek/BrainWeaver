@@ -122,10 +122,13 @@ void ribi::braw::QtRateConceptMapDialog::on_button_next_clicked()
   );
   assert(IsCenterNode(ribi::cmap::GetFirstNode(m_file.GetConceptMap())));
   m_concept_map->StopTimer();
+  m_concept_map->setEnabled(false);
   auto * const d{
     new QtRatingDialog(m_file, this)
   };
   d->exec();
+  m_concept_map->setEnabled(true);
+  m_concept_map->StartTimer();
 }
 
 void ribi::braw::QtRateConceptMapDialog::Save()
