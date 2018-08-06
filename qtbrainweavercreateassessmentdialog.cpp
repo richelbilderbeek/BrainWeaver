@@ -80,7 +80,7 @@ ribi::cmap::RatingComplexity ribi::braw::QtCreateAssessmentDialog::GetRatingComp
       const int n_examples{col};
       const int n_edges{row};
       const int score{
-        ui->table_complexity->itemAt(col, row)->text().toInt()
+        ui->table_complexity->item(col, row)->text().toInt()
       };
       m.insert( { { n_edges, n_examples }, score } );
     }
@@ -97,7 +97,7 @@ ribi::cmap::RatingConcreteness ribi::braw::QtCreateAssessmentDialog::GetRatingCo
   {
     const int n_examples{col};
     const int score{
-      ui->table_concreteness->itemAt(col, 0)->text().toInt()
+      ui->table_concreteness->item(col, 0)->text().toInt()
     };
     m.insert( { n_examples , score } );
   }
@@ -113,7 +113,7 @@ ribi::cmap::RatingSpecificity ribi::braw::QtCreateAssessmentDialog::GetRatingSpe
   {
     const int n_examples{col};
     const int score{
-      ui->table_specificity->itemAt(col, 0)->text().toInt()
+      ui->table_specificity->item(col, 0)->text().toInt()
     };
     m.insert( { n_examples , score } );
   }
