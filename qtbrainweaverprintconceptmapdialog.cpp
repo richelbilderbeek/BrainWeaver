@@ -81,7 +81,7 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
   {
     assert(ui->frame_concept_map_as_text->layout());
     const auto conceptmap = m_file.GetConceptMap();
-    const auto nodes = GetNodes(conceptmap);
+    const auto nodes = GetNodesSortedByLevel(conceptmap);
     for (const auto node: nodes)
     {
       if (IsCenterNode(node)) continue;

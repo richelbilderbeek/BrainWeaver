@@ -137,7 +137,7 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     const int n_nodes = CountNodes(m_file);
     for (int node_index = 1; node_index != n_nodes; ++node_index) //1: skip center node
     {
-      const auto node = GetNodes(m_file.GetConceptMap()).at(node_index);
+      const auto node = GetNodesSortedByLevel(m_file.GetConceptMap()).at(node_index);
       auto * const widget
         = new cmap::QtConceptMapRatedConceptDialog(
           m_file.GetConceptMap(),
