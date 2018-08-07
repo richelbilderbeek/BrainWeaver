@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="BrainWeaver.qrc">
-    <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
+    <normaloff>:/BrainWeaver/pics/Arrow14x14.png</normaloff>:/BrainWeaver/pics/Arrow14x14.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

@@ -34,11 +34,10 @@ In BrainWeaver,
  * `CTRL + arrows`: move selected concepts
  * `CTRL + Z`: undo
  * `CTRL + SHIFT + Z`: redo
- * `CTRL + H`: toggle arrow head, when having selected a relation
- * `CTRL + T`: toggle arrow tail, when having selected a relation
+ * `1` or `CTRL + T`: toggle arrow tail, when having selected a relation
+ * `2` or `CTRL + H`: toggle arrow head, when having selected a relation
  * `ESC`: cancel creating a new relation, or close the dialog
  * F2: edit the concept or relation
-
 
 ## Recovering files
 

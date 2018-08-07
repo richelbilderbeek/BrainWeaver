@@ -21,7 +21,7 @@
    <string>Mijn persoonlijke werktheorie, programma voor de student</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="BrainWeaver.qrc">
+   <iconset>
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -47,7 +47,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="BrainWeaver.qrc">:/images/ConceptMapEdit.png</pixmap>
+         <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/ConceptMapEdit.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignBottom|Qt::AlignHCenter</set>
@@ -79,7 +79,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="BrainWeaver.qrc">:/images/Cluster.png</pixmap>
+         <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/Cluster.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -92,7 +92,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="BrainWeaver.qrc">:/images/ConceptMapEdit.png</pixmap>
+         <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/ConceptMapEdit.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

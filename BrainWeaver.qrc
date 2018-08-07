@@ -1,31 +1,39 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>R.png</file>
-        <file>PicArrow14x14.png</file>
-        <file>PicArrow28x28.png</file>
-        <file>PicBlue14x14.png</file>
-        <file>PicCyan14x14.png</file>
-        <file>PicGreen14x14.png</file>
-        <file>PicOrange14x14.png</file>
-        <file>PicPurple14x14.png</file>
-        <file>PicRed14x14.png</file>
-        <file>PicWhite14x14.png</file>
-        <file>PicYellow14x14.png</file>
-        <file>ConceptMapEdit.png</file>
-        <file>Cluster.png</file>
-        <file>PicLoomAbout.png</file>
-        <file>PicLoomBackground.png</file>
-        <file>PicExport.png</file>
-        <file>PicLoad.png</file>
-        <file>PicQuit.png</file>
-        <file>PicSave.png</file>
-        <file>PicCreateAssessment.png</file>
-        <file>PicAssess.png</file>
-        <file>PicAbout.png</file>
-        <file>PicPrint.png</file>
-    </qresource>
-    <qresource prefix="/fonts">
-        <file>Montserrat-Bold.ttf</file>
-        <file>Montserrat-Regular.ttf</file>
+    <qresource prefix="/BrainWeaver">
+        <file>pics/Yellow.png</file>
+        <file>pics/Yellow14x14.png</file>
+        <file>pics/White.png</file>
+        <file>pics/White14x14.png</file>
+        <file>pics/About.png</file>
+        <file>pics/Arrow.png</file>
+        <file>pics/Arrow14x14.png</file>
+        <file>pics/Arrow28x28.png</file>
+        <file>pics/Assess.png</file>
+        <file>pics/Blue.png</file>
+        <file>pics/Blue14x14.png</file>
+        <file>pics/Cluster.png</file>
+        <file>pics/ClusterSkip.png</file>
+        <file>pics/ConceptMapEdit.png</file>
+        <file>pics/CreateAssessment.png</file>
+        <file>pics/Cyan.png</file>
+        <file>pics/Cyan14x14.png</file>
+        <file>pics/Export.png</file>
+        <file>pics/Green.png</file>
+        <file>pics/Green14x14.png</file>
+        <file>pics/Load.png</file>
+        <file>pics/LoomAbout.png</file>
+        <file>pics/LoomBackground.png</file>
+        <file>pics/Orange.png</file>
+        <file>pics/Orange14x14.png</file>
+        <file>pics/Print.png</file>
+        <file>pics/Purple.png</file>
+        <file>pics/Purple14x14.png</file>
+        <file>pics/Quit.png</file>
+        <file>pics/R.png</file>
+        <file>pics/Red.png</file>
+        <file>pics/Red14x14.png</file>
+        <file>pics/Save.png</file>
+        <file>fonts/Montserrat-Bold.ttf</file>
+        <file>fonts/Montserrat-Regular.ttf</file>
     </qresource>
 </RCC>

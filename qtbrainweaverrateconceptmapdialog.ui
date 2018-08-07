@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="BrainWeaver.qrc">
-    <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
+    <normaloff>:/BrainWeaver/pics/Arrow14x14.png</normaloff>:/BrainWeaver/pics/Arrow14x14.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -81,7 +81,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="BrainWeaver.qrc">:/images/PicSave.png</pixmap>
+        <pixmap>:/images/PicSave.png</pixmap>
        </property>
       </widget>
      </item>
@@ -104,7 +104,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="BrainWeaver.qrc">:/images/PicCreateAssessment.png</pixmap>
+        <pixmap>:/images/PicCreateAssessment.png</pixmap>
        </property>
       </widget>
      </item>

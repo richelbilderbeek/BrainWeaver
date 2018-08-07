@@ -22,7 +22,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="BrainWeaver.qrc">
-    <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
+    <normaloff>:/BrainWeaver/pics/Arrow14x14.png</normaloff>:/BrainWeaver/pics/Arrow14x14.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="3" column="1">
@@ -84,7 +84,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BrainWeaver.qrc">:/images/PicCreateAssessment.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/CreateAssessment.png</pixmap>
      </property>
     </widget>
    </item>
@@ -117,7 +117,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BrainWeaver.qrc">:/images/PicAssess.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/Assess.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -136,7 +136,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BrainWeaver.qrc">:/images/PicAbout.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/About.png</pixmap>
      </property>
     </widget>
    </item>
@@ -152,7 +152,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BrainWeaver.qrc">:/images/PicQuit.png</pixmap>
+      <pixmap resource="BrainWeaver.qrc">:/BrainWeaver/pics/Quit.png</pixmap>
      </property>
     </widget>
    </item>

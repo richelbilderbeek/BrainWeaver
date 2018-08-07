@@ -191,7 +191,7 @@ void ribi::braw::QtMenuDialog::on_button_print_concept_map_clicked() noexcept
 void ribi::braw::QtMenuDialog::on_button_print_rating_clicked() noexcept
 {
   auto * const d{
-    new QtPrintRatingDialog(FileFactory().Get5())
+    new QtPrintRatingDialog(FileFactory().GetUnrated())
   };
   d->exec();
 }
