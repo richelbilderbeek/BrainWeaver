@@ -1,9 +1,10 @@
 #!/bin/bash
 # Let the student work on the concept map
 # Assumes BrainWeaverDeveloper is already running
+PATH=$PATH:~/GitHubs/testing_cpp_gui_applications_tutorial/scripts
 
 # Load scripts
-. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
+. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id
 
 # Variables
 mycmp="scenario1.cmp"
@@ -53,8 +54,8 @@ fi
 xdotool windowactivate --sync $id key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete key Delete
 # Type filename
 xdotool windowactivate --sync $id type $mycmp
-# OK
-xdotool windowactivate --sync $id sleep 0.4 key Return sleep 0.6
+# OK, type Return twice due to pop-up
+xdotool windowactivate --sync $id sleep 2.0 key Return Return sleep 0.6
 
 ####################################
 # 'Mijn persoonlijke werktheorie, programma voor de student'
@@ -135,7 +136,7 @@ xdotool windowactivate $id key space sleep 0.5 key F2 sleep 1.0
 # 'Concept/Relatie bewerken'
 # Edit concept
 ####################################
-id=`get_dialog_id "Concept/Relatie bewerken"`
+id=`get_dialog_id "Concept bewerken"`
 if [ -z $id ]
 then
   echo "ID not found, line "$LINENO

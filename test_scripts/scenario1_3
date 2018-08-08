@@ -1,9 +1,10 @@
 #!/bin/bash
 # Let the assessor create a test concept map with name 'scenario1.cmp'
 # Assumes BrainWeaverDeveloper is already running
+PATH=$PATH:~/GitHubs/testing_cpp_gui_applications_tutorial/scripts
 
 # Load scripts
-. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id.sh
+. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id
 
 # Variables
 mycmp="scenario1_2_result.cmp"
@@ -52,8 +53,12 @@ then
 fi
 
 xdotool windowactivate $id sleep 0.2 key Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete
+
+# Type filename
 xdotool windowactivate $id type $mycmp
-xdotool windowactivate $id sleep 0.2 key Return sleep 0.4
+
+# OK, type Return twice due to pop-up
+xdotool windowactivate $id sleep 2.0 key Return Return sleep 0.4
 
 ####################################
 # 'Evalueer concept map', 
@@ -67,7 +72,7 @@ then
 fi
 
 # Rate first concept
-xdotool windowactivate $id sleep 0.5 key space F1 sleep 1.0
+xdotool windowactivate $id sleep 0.5 key space Up F1 sleep 1.0
 
 ####################################
 # 'Evalueer concept'
@@ -124,7 +129,7 @@ then
 fi
 
 # Rate second concept
-xdotool windowactivate $id sleep 0.2 key space space F1 sleep 0.5
+xdotool windowactivate $id sleep 0.2 key Right F1 sleep 0.5
 
 ####################################
 # 'Evalueer concept'
