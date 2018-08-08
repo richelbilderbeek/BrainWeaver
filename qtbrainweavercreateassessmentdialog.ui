@@ -19,13 +19,13 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QTableWidget {
-  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Regular.ttf&quot;;
+  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Bold.ttf&quot;;
   alternate-background-color: #BBB;
   gridline-color: black;
 }
 
 QHeaderView {
-  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Regular.ttf&quot;;
+  font-size: 14px; font-family: &quot;:/fonts/Montserrat-Bold.ttf&quot;;
   border-width: 1px;
   border-style: solid;
 }
