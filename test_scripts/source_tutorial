@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Sources all files of the testing_cpp_gui_applications_tutorial 
+function source_tutorial()
+{
+  for file in $(ls -d -1 ~/GitHubs/testing_cpp_gui_applications_tutorial/scripts/*) ; do
+    if [ -f "$file" ] ; then
+      if [[ $(echo "$file" | egrep -v "_test" | egrep -v ".md") ]]; then
+        echo "Sourcing file '"$file"'"
+        . "$file"
+      fi
+    fi
+  done
+}
+
