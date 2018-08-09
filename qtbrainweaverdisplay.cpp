@@ -237,6 +237,12 @@ QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
   table->verticalHeader()->resizeSections(
     QHeaderView::ResizeMode::ResizeToContents
   );
+  //Prevents the horizontal header extending to the right
+  table->setSizePolicy(
+    QSizePolicy::Policy::Maximum,
+    QSizePolicy::Policy::Preferred
+  );
+
   table->resizeRowsToContents();
   table->setMinimumHeight(
     table->sizeHint().height()
@@ -253,16 +259,17 @@ QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
   DisplayExamples(file, table);
   assert(table->rowCount() == 7);
   assert(table->columnCount() == 1);
-  table->verticalHeader()->setMinimumWidth(200);
-  table->setMinimumHeight(239);
-  table->setMaximumHeight(239);
-  const int w = 45;
-  table->setMinimumWidth(286 + w);
-  table->setMaximumWidth(286 + w);
-  table->setColumnWidth(0, w);
   table->setHorizontalHeaderLabels( { "%" } );
-  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  //Prevents the horizontal header extending to the right
+  table->setSizePolicy(
+    QSizePolicy::Policy::Maximum,
+    QSizePolicy::Policy::Preferred
+  );
+  table->setSizeAdjustPolicy(QHeaderView::AdjustToContents);
+  table->resizeColumnsToContents();
+  table->resizeRowsToContents();
+
   return table;
 }
 
