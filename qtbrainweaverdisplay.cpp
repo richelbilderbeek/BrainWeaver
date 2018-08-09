@@ -102,18 +102,18 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
 {
   const int n_rows{11};
   auto * const table = new QTableWidget(n_rows, 1, parent);
-  table->verticalHeader()->setMinimumWidth(200);
-  table->setMinimumHeight(360);
-  table->setMaximumHeight(360);
-  table->setMinimumWidth(313);
-  table->setMaximumWidth(313);
-  table->setColumnWidth(0,70);
   table->setHorizontalHeaderLabels( { "Waarde" } );
-
   DisplayDiagnosticsHeader(table);
   DisplayDiagnosticsItems(file, table);
-  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  //Prevents the horizontal header extending to the right
+  table->setSizePolicy(
+    QSizePolicy::Policy::Maximum,
+    QSizePolicy::Policy::Preferred
+  );
+  table->setSizeAdjustPolicy(QHeaderView::AdjustToContents);
+  table->resizeColumnsToContents();
+  table->resizeRowsToContents();
   return table;
 }
 
