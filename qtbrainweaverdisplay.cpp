@@ -224,19 +224,13 @@ QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
   table->setColumnWidth(1, 50);
   table->setColumnWidth(2, 50);
   table->setWordWrap(true);
-  //table->setMaximumWidth(650);
   table->setMinimumWidth(650);
   table->setHorizontalHeaderLabels( { "X", "S", "C" } );
-  table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  table->verticalHeader()->setMaximumWidth(530);
   table->verticalHeader()->setTextElideMode(Qt::TextElideMode::ElideNone);
   table->setSizeAdjustPolicy(
     QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents
   );
-  table->verticalHeader()->resizeSections(
-    QHeaderView::ResizeMode::ResizeToContents
-  );
+
   //Prevents the horizontal header extending to the right
   table->setSizePolicy(
     QSizePolicy::Policy::Maximum,
@@ -244,9 +238,6 @@ QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
   );
 
   table->resizeRowsToContents();
-  table->setMinimumHeight(
-    table->sizeHint().height()
-  );
   return table;
 }
 
