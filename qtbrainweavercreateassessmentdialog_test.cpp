@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <stdexcept>
+#include <iostream>
 #include "fileio.h"
 
 #include "brainweaverfile.h"
@@ -26,65 +27,7 @@ void ribi::braw::qtbrainweavercreateassessmentdialog_test
 {
   const QtCreateAssessmentDialog d;
   const ribi::cmap::Rating rating = d.GetRating();
-  // CLASSIC BEHAVIOUR
-  //
-  //              || n_examples
-  //              ||-------------------
-  //             .|| 0 | 1 | 2 | 3 | >3
-  // =============||===|===|===|===|===
-  // n_edges |  0 || 0 | 0 | 0 | 0 | 0
-  //         |  1 || 0 | 1 | 1 | 1 | 1
-  //         |  2 || 1 | 2 | 2 | 2 | 2
-  //         | >2 || 2 | 2 | 2 | 2 | 2
-
-  // BEHAVIOUR SUGGESTED AT 2018-08-08 BY EMPLOYER
-  //
-  //              || n_examples
-  //              ||-------------------
-  //             .|| 0 | 1 | 2 | 3 | >3
-  // =============||===|===|===|===|===
-  // n_edges |  0 || 0 | 0 | 1 | 1 | 2
-  //         |  1 || 0 | 1 | 1 | 2 | 2
-  //         |  2 || 1 | 2 | 2 | 2 | 2
-  //         | >2 || 2 | 2 | 2 | 2 | 2
-
-  // Test for classic behaviour
-  // { n_edges, n_examples }
-  // First row
-  QVERIFY(rating.SuggestComplexity(0, 0) == 0);
-  QVERIFY(rating.SuggestComplexity(0, 1) == 0);
-  QVERIFY(rating.SuggestComplexity(0, 2) == 0);
-  QVERIFY(rating.SuggestComplexity(0, 3) == 0);
-  QVERIFY(rating.SuggestComplexity(0, 4) == 0);
-  QVERIFY(rating.SuggestComplexity(0, 5) == 0);
-  // Second row
-  QVERIFY(rating.SuggestComplexity(1, 0) == 0);
-  QVERIFY(rating.SuggestComplexity(1, 1) == 1);
-  QVERIFY(rating.SuggestComplexity(1, 2) == 1);
-  QVERIFY(rating.SuggestComplexity(1, 3) == 1);
-  QVERIFY(rating.SuggestComplexity(1, 4) == 1);
-  QVERIFY(rating.SuggestComplexity(1, 5) == 1);
-  // Third row
-  QVERIFY(rating.SuggestComplexity(2, 0) == 1);
-  QVERIFY(rating.SuggestComplexity(2, 1) == 2);
-  QVERIFY(rating.SuggestComplexity(2, 2) == 2);
-  QVERIFY(rating.SuggestComplexity(2, 3) == 2);
-  QVERIFY(rating.SuggestComplexity(2, 4) == 2);
-  QVERIFY(rating.SuggestComplexity(2, 5) == 2);
-  // Fourth row
-  QVERIFY(rating.SuggestComplexity(3, 0) == 2);
-  QVERIFY(rating.SuggestComplexity(3, 1) == 2);
-  QVERIFY(rating.SuggestComplexity(3, 2) == 2);
-  QVERIFY(rating.SuggestComplexity(3, 3) == 2);
-  QVERIFY(rating.SuggestComplexity(3, 4) == 2);
-  QVERIFY(rating.SuggestComplexity(3, 5) == 2);
-  // Fifth row
-  QVERIFY(rating.SuggestComplexity(4, 0) == 2);
-  QVERIFY(rating.SuggestComplexity(4, 1) == 2);
-  QVERIFY(rating.SuggestComplexity(4, 2) == 2);
-  QVERIFY(rating.SuggestComplexity(4, 3) == 2);
-  QVERIFY(rating.SuggestComplexity(4, 4) == 2);
-  QVERIFY(rating.SuggestComplexity(4, 5) == 2);
+  QVERIFY(rating == ribi::cmap::CreateDefaultRating());
 }
 
 void ribi::braw::qtbrainweavercreateassessmentdialog_test::save()

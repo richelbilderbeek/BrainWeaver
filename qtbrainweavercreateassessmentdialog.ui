@@ -138,7 +138,7 @@ relaties</string>
             <item row="3" column="1">
              <widget class="QTableWidget" name="table_complexity">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -236,17 +236,17 @@ relaties</string>
               </item>
               <item row="0" column="2">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="3">
                <property name="text">
-                <string>0</string>
+                <string>1</string>
                </property>
               </item>
               <item row="0" column="4">
                <property name="text">
-                <string>0</string>
+                <string>2</string>
                </property>
               </item>
               <item row="1" column="0">
@@ -266,12 +266,12 @@ relaties</string>
               </item>
               <item row="1" column="3">
                <property name="text">
-                <string>1</string>
+                <string>2</string>
                </property>
               </item>
               <item row="1" column="4">
                <property name="text">
-                <string>1</string>
+                <string>2</string>
                </property>
               </item>
               <item row="2" column="0">
@@ -281,7 +281,7 @@ relaties</string>
               </item>
               <item row="2" column="1">
                <property name="text">
-                <string>2</string>
+                <string>1</string>
                </property>
               </item>
               <item row="2" column="2">
@@ -301,7 +301,7 @@ relaties</string>
               </item>
               <item row="3" column="0">
                <property name="text">
-                <string>2</string>
+                <string>1</string>
                </property>
               </item>
               <item row="3" column="1">
@@ -390,7 +390,7 @@ relaties</string>
             <item>
              <widget class="QTableWidget" name="table_concreteness">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -555,7 +555,7 @@ relaties</string>
             <item>
              <widget class="QTableWidget" name="table_specificity">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
