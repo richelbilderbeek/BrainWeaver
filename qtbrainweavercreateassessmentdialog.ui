@@ -14,7 +14,7 @@
    <string>Formuleer de focusvraag</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="BrainWeaver.qrc">
+   <iconset>
     <normaloff>:/images/PicArrow14x14.png</normaloff>:/images/PicArrow14x14.png</iconset>
   </property>
   <property name="styleSheet">
@@ -131,7 +131,7 @@ QHeaderView {
               </property>
               <property name="text">
                <string>Aantal
-verbindingen</string>
+relaties</string>
               </property>
              </widget>
             </item>
@@ -146,12 +146,6 @@ verbindingen</string>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
               </property>
@@ -163,9 +157,6 @@ verbindingen</string>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideMiddle</enum>
               </property>
               <property name="gridStyle">
                <enum>Qt::DashLine</enum>
@@ -225,7 +216,12 @@ verbindingen</string>
               </column>
               <column>
                <property name="text">
-                <string>&gt;2</string>
+                <string>3</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>&gt;3</string>
                </property>
               </column>
               <item row="0" column="0">
@@ -244,6 +240,11 @@ verbindingen</string>
                </property>
               </item>
               <item row="0" column="3">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </item>
+              <item row="0" column="4">
                <property name="text">
                 <string>0</string>
                </property>
@@ -268,6 +269,11 @@ verbindingen</string>
                 <string>1</string>
                </property>
               </item>
+              <item row="1" column="4">
+               <property name="text">
+                <string>1</string>
+               </property>
+              </item>
               <item row="2" column="0">
                <property name="text">
                 <string>1</string>
@@ -288,6 +294,11 @@ verbindingen</string>
                 <string>2</string>
                </property>
               </item>
+              <item row="2" column="4">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
               <item row="3" column="0">
                <property name="text">
                 <string>2</string>
@@ -304,6 +315,11 @@ verbindingen</string>
                </property>
               </item>
               <item row="3" column="3">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item row="3" column="4">
                <property name="text">
                 <string>2</string>
                </property>
@@ -381,12 +397,6 @@ verbindingen</string>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
-              </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -553,12 +563,6 @@ verbindingen</string>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
               </property>
@@ -697,8 +701,6 @@ verbindingen</string>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="BrainWeaver.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

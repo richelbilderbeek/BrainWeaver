@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   int error = 0;
+  //{ ribi::braw::qtbrainweavercreateassessmentdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //{ ribi::braw::qtbrainweaverratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //{ ribi::braw::qtbrainweaverfiledialog_test t; error |= QTest::qExec(&t, argc, argv); }
   //{ ribi::braw::qtbrainweaverrateconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
