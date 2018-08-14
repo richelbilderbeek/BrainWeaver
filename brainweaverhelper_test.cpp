@@ -22,18 +22,18 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateConcretenessExperimental)
   BOOST_CHECK(result <= 100);
 }
 
-BOOST_AUTO_TEST_CASE(test_ribi_CalculateRichnessExperimental_throws_on_incomplete_concept_map)
+BOOST_AUTO_TEST_CASE(test_ribi_CalculateRichness_throws_on_incomplete_concept_map)
 {
   const auto file = ribi::braw::FileFactory().Get5();
   assert(HasUnitializedExamples(file));
   BOOST_CHECK_THROW(
-    ribi::braw::CalculateRichnessExperimental(file),
+    ribi::braw::CalculateRichness(file),
     std::invalid_argument
   );
 
 }
 
-BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateRichnessExperimental)
+BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateRichness)
 {
   const auto file = ribi::braw::FileFactory().GetWithExamplesWithCompetencies(
      {
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_braw_helper_CalculateRichnessExperimental)
      }
   );
   assert(!HasUnitializedExamples(file));
-  const int result = ribi::braw::CalculateRichnessExperimental(file);
+  const int result = ribi::braw::CalculateRichness(file);
   BOOST_CHECK(result >= 0);
   BOOST_CHECK(result <= 100);
 }

@@ -27,7 +27,7 @@ int ribi::braw::CalculateConcretenessExperimental(const File& file)
   return ribi::cmap::CalculateConcretenessExperimental(file.GetConceptMap());
 }
 
-int ribi::braw::CalculateRichnessExperimental(const File& file)
+int ribi::braw::CalculateRichness(const File& file)
 {
   if (HasUnitializedExamples(file))
   {
@@ -35,7 +35,7 @@ int ribi::braw::CalculateRichnessExperimental(const File& file)
       "Cannot calculate richness if not all examples are rated"
     );
   }
-  return ribi::cmap::CalculateRichnessExperimental(file.GetConceptMap());
+  return ribi::cmap::CalculateRichness(file.GetConceptMap());
 }
 
 int ribi::braw::CalculateSpecificityExperimental(const File& file)

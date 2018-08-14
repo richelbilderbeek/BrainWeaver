@@ -170,7 +170,7 @@ void ribi::braw::QtDisplay::DisplayDiagnosticsItems(
   assert(n_rows == values.size());
   try
   {
-    values[3] = QString::number(CalculateRichnessExperimental(file));
+    values[3] = QString::number(CalculateRichness(file));
   }
   catch (const std::exception& e)
   {

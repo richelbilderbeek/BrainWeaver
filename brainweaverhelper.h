@@ -28,7 +28,7 @@ int CalculateConcretenessExperimental(const File& file);
 ///a = number of different Competencies
 ///b = number of Competencies between 1/12th and 1/4th of number of examples
 ///Experimental, thus relies on rating by assessor
-int CalculateRichnessExperimental(const File& file);
+int CalculateRichness(const File& file);
 
 ///Experimental specificity: s_e, a percentage that will be shown at row = 2, col = 0
 ///s_e = 50.0 * sum_rated_specificity / n_nodes
