@@ -1,0 +1,35 @@
+#!/bin/bash
+# Let the assessor create a test concept map with name 'scenario1.cmp'
+# Assumes BrainWeaverDeveloper is already running
+PATH=$PATH:~/GitHubs/testing_cpp_gui_applications_tutorial/scripts
+
+# Load scripts
+. ../../testing_cpp_gui_applications_tutorial/scripts/get_dialog_id_by_title
+
+while [ 1 ];
+do
+  ####################################
+  # Concept bewerken
+  ####################################
+  id=`get_dialog_id_by_title "Concept bewerken"`
+  sleep 0.2
+  if [ -z $id ]
+  then
+    echo "No 'Concept bewerken' window found"
+  else
+    xdotool windowactivate $id key alt+o sleep 0.2
+  fi
+
+  ####################################
+  # Relatie bewerken
+  ####################################
+  id=`get_dialog_id_by_title "Relatie bewerken"`
+  sleep 0.2
+  if [ -z $id ]
+  then
+    echo "No 'Relatie bewerken' window found"
+  else
+    xdotool windowactivate $id key alt+o sleep 0.2
+  fi
+
+done
