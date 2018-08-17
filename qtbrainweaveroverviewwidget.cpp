@@ -84,7 +84,7 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
       parent
     )
   );
-  v.push_back(new QtConceptMapDialog(FileFactory().Get2(), parent));
+  //v.push_back(new QtConceptMapDialog(FileFactory().Get2(), parent));
   v.push_back(new QtCreateAssessmentDialog(parent));
   v.push_back(new QtMenuDialog(parent));
   v.push_back(new QtPrintConceptMapDialog(FileFactory().Get5(), parent));
@@ -106,14 +106,14 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
       parent
     )
   );
-  v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2), parent));
+  //v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2), parent));
   v.push_back(
     new ribi::cmap::QtRateExamplesDialog(
       ribi::cmap::ConceptFactory().GetTests().at(2),
       parent
     )
   );
-  v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4), parent));
+  //v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4), parent));
   v.push_back(new QtStudentMenuDialog(FileFactory().GetTests().at(2), parent));
   v.push_back(new QtStudentStartCompleteDialog(FileFactory().GetTests().at(2), parent));
   assert(std::count_if(v.begin(),v.end(),[](QDialog* p) { return !p; } ) == 0);

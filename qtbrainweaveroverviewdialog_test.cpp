@@ -4,9 +4,6 @@
 
 void ribi::braw::qtbrainweaveroverviewdialog_test::default_construction()
 {
-  if (!ribi::cmap::OnTravis())
-  {
-    ribi::braw::QtOverviewDialog d;
-    d.show();
-  }
+  ribi::braw::QtOverviewDialog d;
+  d.show();
 }
