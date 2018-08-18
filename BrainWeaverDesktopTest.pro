@@ -15,26 +15,19 @@ include(../RibiClasses/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
 
 #Specific, console
 include(../RibiClasses/CppContainer/CppContainer.pri)
-#include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
 include(../RibiClasses/CppGeometry/CppGeometry.pri)
 include(gsl.pri)
 include(../plane/plane.pri)
 include(../RibiClasses/CppQtImage/CppQtImage.pri)
 include(../RibiClasses/CppRibiRandom/CppRibiRandom.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
-#include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
-#include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
 
 include(../RibiClasses/CppQtArrowItem/CppQtArrowItem.pri)
-#include(../RibiClasses/CppQtDisplayPosItem/CppQtDisplayPosItem.pri)
-#include(../RibiClasses/CppQtGraphics/CppQtGraphics.pri)
 include(../QtKeyboardFriendlyGraphicsView/QtKeyboardFriendlyGraphicsView.pri)
-#include(../RibiClasses/CppQtLabeledQuadBezierArrowItem/CppQtLabeledQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtPathArrowItem/CppQtPathArrowItem.pri)
 include(../RibiClasses/CppQtQuadBezierArrowItem/CppQtQuadBezierArrowItem.pri)
 include(../RibiClasses/CppQtRoundedEditRectItem/CppQtRoundedEditRectItem.pri)
 include(../RibiClasses/CppQtRoundedRectItem/CppQtRoundedRectItem.pri)
-#include(../RibiClasses/CppQtScopedDisable/CppQtScopedDisable.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 
 #Specific
