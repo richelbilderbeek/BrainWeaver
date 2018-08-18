@@ -26,16 +26,8 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   int error = 0;
-  //{ ribi::braw::qtbrainweavercreateassessmentdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaverratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaverfiledialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaverrateconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaverprintratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaverconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaveroverviewdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::qtbrainweaveroverviewwidget_test t; error |= QTest::qExec(&t, argc, argv); }
-  //{ ribi::braw::QtBrainWeaverMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  //assert(!"Do not forget to comment this out on Travis");
+  { ribi::braw::QtBrainWeaverStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::QtBrainWeaverAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtBrainWeaverAssessorMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
@@ -53,7 +45,7 @@ int main(int argc, char *argv[])
   { ribi::braw::qtbrainweaverprintratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverrateconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverstudentmenudialog_test t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtBrainWeaverStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverstudentstartcompletedialog_test t; error |= QTest::qExec(&t, argc, argv); }
 
   if (error == 0) { std::cout << "Pass\n"; }
