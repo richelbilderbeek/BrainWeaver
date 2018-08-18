@@ -21,6 +21,12 @@ master|develop|project
 [![Build Status](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView.svg?branch=master)](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView?branch=develop) | [QtKeyboardFriendlyGraphicsView](https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView)
 [![Build Status](https://travis-ci.org/richelbilderbeek/plane.svg?branch=master)](https://travis-ci.org/richelbilderbeek/plane) [![codecov.io](https://codecov.io/github/richelbilderbeek/plane/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/plane?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/plane.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/plane) [![codecov.io](https://codecov.io/github/richelbilderbeek/plane/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/plane?branch=develop) | [plane](https://github.com/richelbilderbeek/plane)
 
+Projects relying on BrainWeaver:
+
+master|develop|project
+---|---|---
+[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
+
 ## Building
 
 Building `BrainWeaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
