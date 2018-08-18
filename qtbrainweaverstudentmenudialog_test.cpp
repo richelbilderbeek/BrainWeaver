@@ -33,21 +33,14 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::DefaultConstruction()
   d.show();
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::PressEscape()
-{
-  File f;
-  QtStudentMenuDialog d(f);
-  d.show();
-  QTest::keyClick(&d, Qt::Key_Escape);
-}
-
 void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveFirstTimeOpensDialog()
 {
   File f;
   QtStudentMenuDialog d(f);
+  d.show();
   d.SetName("Jane Doe");
-  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 
 void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveSecondTimeSavesFast()
@@ -62,6 +55,14 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveSecondTimeSavesFas
   QFile::remove(filename);
 }
 
+void ribi::braw::QtBrainWeaverStudentMenuDialogTest::PressEscape()
+{
+  File f;
+  QtStudentMenuDialog d(f);
+  d.show();
+  QTest::keyClick(&d, Qt::Key_Escape);
+  QVERIFY(d.isHidden());
+}
 
 void ribi::braw::QtBrainWeaverStudentMenuDialogTest::Save()
 {
