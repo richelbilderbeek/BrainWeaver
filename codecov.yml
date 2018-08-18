@@ -1,0 +1,3 @@
+ignore:
+  - qtmain_*.cpp # Will not be run
+  - *_test.cpp # Do not care about tests, they run incomplete on Travis
