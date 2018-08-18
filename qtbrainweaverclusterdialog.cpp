@@ -35,8 +35,8 @@ ribi::braw::QtClusterDialog::QtClusterDialog(
     else
     {
       QLabel * const label = new QLabel(
-        "Cannot start a new clustering "
-        "when there is already a concept map created"
+        "Er kan geen nieuwe clustering gestart worden, "
+        "als er al een concept map is gemaakt"
       );
       layout->addWidget(label);
     }
