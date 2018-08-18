@@ -6,13 +6,13 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweavermenudialog_test : public QObject
+class QtBrainWeaverMenuDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
-  void press_all_keys();
+  void Construction();
+  void PressAllKeys();
 
 };
 
