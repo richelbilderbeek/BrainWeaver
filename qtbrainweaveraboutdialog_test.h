@@ -6,7 +6,7 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweaveraboutdialog_test : public QObject
+class QtBrainWeaverAboutDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 

@@ -6,12 +6,13 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweaveroverviewdialog_test : public QObject
+class QtBrainWeaverOverviewDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
+  void CloseOnEscape();
+  void Construction();
 };
 
 } //~namespace braw

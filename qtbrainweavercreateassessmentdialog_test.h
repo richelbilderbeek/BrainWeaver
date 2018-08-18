@@ -11,7 +11,7 @@ class qtbrainweavercreateassessmentdialog_test : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void close_on_escape();
+  void CloseOnEscape();
   void default_construction();
   void has_correct_default_rating();
   void save();

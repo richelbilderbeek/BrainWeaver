@@ -2,8 +2,15 @@
 #include "qtbrainweaveroverviewdialog.h"
 #include "conceptmaphelper.h"
 
-void ribi::braw::qtbrainweaveroverviewdialog_test::default_construction()
+void ribi::braw::QtBrainWeaverOverviewDialogTest::CloseOnEscape()
 {
-  ribi::braw::QtOverviewDialog d;
+  QtOverviewDialog d;
+  d.show();
+  QTest::keyClick(&d, Qt::Key_Escape);
+}
+
+void ribi::braw::QtBrainWeaverOverviewDialogTest::Construction()
+{
+  QtOverviewDialog d;
   d.show();
 }

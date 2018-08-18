@@ -9,7 +9,7 @@
 #include "conceptmaprating.h"
 #include "qtbrainweavercreateassessmentdialog.h"
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test::close_on_escape()
+void ribi::braw::qtbrainweavercreateassessmentdialog_test::CloseOnEscape()
 {
   QtCreateAssessmentDialog d;
   d.show();

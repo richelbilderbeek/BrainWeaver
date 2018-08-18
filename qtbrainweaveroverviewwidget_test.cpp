@@ -1,7 +1,7 @@
 #include "qtbrainweaveroverviewwidget_test.h"
 #include "qtbrainweaveroverviewwidget.h"
 #include "conceptmaphelper.h"
- void ribi::braw::qtbrainweaveroverviewwidget_test::default_construction()
+ void ribi::braw::QtBrainWeaverOverviewWidgetTest::default_construction()
 {
   if (!ribi::cmap::OnTravis())
   {
