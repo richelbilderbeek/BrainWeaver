@@ -12,6 +12,8 @@ namespace Ui {
 namespace ribi {
 namespace braw {
 
+class QtPrintConceptMapDialogTest;
+
 ///View the current work, optimized for humans
 ///This dialog will not be visible for humans at all in release
 ///QtPrintConceptMapDialog is optimized for printers
@@ -46,7 +48,7 @@ private:
 
   std::vector<QWidget *> CollectWidgets() const;
 
-  friend class qtbrainweaverprintconceptmapdialog_test;
+  friend class QtPrintConceptMapDialogTest;
 };
 
 } //~namespace braw
