@@ -11,13 +11,15 @@ class QtStudentStartCompleteDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
-  void go_back_to_menu_is_false_at_construction();
-  void press_escape();
-  void press_nonsense();
-  void save();
-  void start_associate();
-  void start_construct();
+  void DefaultConstruction() const noexcept;
+  void GoBackToMenuIsFalseAtConstruction() const noexcept;
+  void PressEscape() const noexcept;
+  void PressNonsense() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
+  void Save() const noexcept;
+  void StartAssociate() const noexcept;
+  void StartConstruct() const noexcept;
 };
 
 } //~namespace braw
