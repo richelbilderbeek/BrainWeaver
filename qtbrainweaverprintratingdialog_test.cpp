@@ -5,14 +5,14 @@
 #include "brainweaverfilefactory.h"
 #include "fileio.h"
 
-void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction()
+void ribi::braw::QtPrintRatingDialogTest::default_construction()
 {
   const File f = FileFactory().GetTests().back();
   ribi::braw::QtPrintRatingDialog d(f);
   d.show();
 }
 
-void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_without_nodes()
+void ribi::braw::QtPrintRatingDialogTest::default_construction_without_nodes()
 {
   const File f;
   try
@@ -31,7 +31,7 @@ void ribi::braw::qtbrainweaverprintratingdialog_test::default_construction_witho
   }
 }
 
-void ribi::braw::qtbrainweaverprintratingdialog_test::print_should_produce_file()
+void ribi::braw::QtPrintRatingDialogTest::print_should_produce_file()
 {
   const auto file = FileFactory().Get3();
   QtPrintRatingDialog d(file);

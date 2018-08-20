@@ -25,7 +25,7 @@
 #include "qtconceptmapqtnode.h"
 #include "qtquadbezierarrowitem.h"
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test
+void ribi::braw::QtConceptMapDialogTest
   ::a_file_its_conceptmap_must_have_a_center_node()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
@@ -62,7 +62,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
   }
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::create_from_cluster()
+void ribi::braw::QtConceptMapDialogTest::create_from_cluster()
 {
   const std::string question = "Focal question";
   ribi::braw::Cluster cluster(
@@ -80,7 +80,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_from_cluster()
   QVERIFY(CountCenterNodes(concept_map) == 1);
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test
+void ribi::braw::QtConceptMapDialogTest
   ::a_file_with_cluster_only_will_create_a_concept_map()
 {
   File file;
@@ -108,7 +108,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
   QVERIFY(ribi::cmap::CountQtNodes(*qtconcept_map) == 3);
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_a_concept_map_over_a_cluster()
+void ribi::braw::QtConceptMapDialogTest::dialog_will_prefer_to_read_a_concept_map_over_a_cluster()
 {
   File file;
   const auto cluster = ClusterFactory().GetTest( { 0,1,2 } );
@@ -128,7 +128,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::dialog_will_prefer_to_read_
 }
 
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test
+void ribi::braw::QtConceptMapDialogTest
   ::dialog_will_prefer_to_read_an_existing_concept_map_over_creating_one()
 {
   using namespace cmap;
@@ -147,7 +147,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test
   //QVERIFY(HasSimilarData(GetSortedEdges(concept_map), GetSortedEdges(created), 0.001));
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head()
+void ribi::braw::QtConceptMapDialogTest::create_edge_with_arrow_head()
 {
   //Added this for https://github.com/richelbilderbeek/BrainWeaver/issues/88
   //just to be sure that a QtConceptMap gets saved correctly
@@ -209,7 +209,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::create_edge_with_arrow_head
   );
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::press_alt_f4()
+void ribi::braw::QtConceptMapDialogTest::press_alt_f4()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
@@ -217,7 +217,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::press_alt_f4()
   QTest::keyPress(&d, Qt::Key_F4, Qt::AltModifier);
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::press_escape()
+void ribi::braw::QtConceptMapDialogTest::press_escape()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
@@ -225,7 +225,7 @@ void ribi::braw::qtbrainweaverconceptmapdialog_test::press_escape()
   QTest::keyPress(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweaverconceptmapdialog_test::press_nonsense()
+void ribi::braw::QtConceptMapDialogTest::press_nonsense()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);

@@ -9,7 +9,7 @@
 #include "qtconceptmapqtnode.h"
 #include "fileio.h"
 
-void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
+void ribi::braw::QtPrintConceptMapDialogTest::default_construct()
 {
   const auto files = FileFactory().GetTests();
   for (const auto file: files) {
@@ -35,7 +35,7 @@ void ribi::braw::qtbrainweaverprintconceptmapdialog_test::default_construct()
   }
 }
 
-void ribi::braw::qtbrainweaverprintconceptmapdialog_test::print_should_produce_file()
+void ribi::braw::QtPrintConceptMapDialogTest::print_should_produce_file()
 {
   const auto file = FileFactory().Get3();
   QtPrintConceptMapDialog d(file);

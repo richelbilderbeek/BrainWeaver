@@ -6,26 +6,26 @@
 #include "brainweaverfilefactory.h"
 #include "fileio.h"
 
-ribi::braw::qtbrainweaverratingdialog_test
-  ::qtbrainweaverratingdialog_test()
+ribi::braw::QtRatingDialogTest
+  ::QtRatingDialogTest()
   : m_n_hits{0}
 {
 
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::add_hit()
+void ribi::braw::QtRatingDialogTest::add_hit()
 {
   ++m_n_hits;
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::default_construction()
+void ribi::braw::QtRatingDialogTest::default_construction()
 {
   const File f = FileFactory().GetTests().back();
   QtRatingDialog d(f);
   d.show();
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::default_construction_without_nodes()
+void ribi::braw::QtRatingDialogTest::default_construction_without_nodes()
 {
   const File f;
   try
@@ -42,7 +42,7 @@ void ribi::braw::qtbrainweaverratingdialog_test::default_construction_without_no
   }
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::edit_name()
+void ribi::braw::QtRatingDialogTest::edit_name()
 {
   const File file = FileFactory().Get5();
   QtRatingDialog d(file);
@@ -56,7 +56,7 @@ void ribi::braw::qtbrainweaverratingdialog_test::edit_name()
   d.ui->edit_name->setText("Another other");
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::print()
+void ribi::braw::QtRatingDialogTest::print()
 {
   const File file = FileFactory().Get5();
   QtRatingDialog d(file);
@@ -65,7 +65,7 @@ void ribi::braw::qtbrainweaverratingdialog_test::print()
   d.on_button_print_clicked();
 }
 
-void ribi::braw::qtbrainweaverratingdialog_test::save()
+void ribi::braw::QtRatingDialogTest::save()
 {
   const std::string filename{
     "qtbrainweaverratingdialog_test_save.cmp"

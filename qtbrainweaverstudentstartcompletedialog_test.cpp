@@ -4,14 +4,14 @@
 #include "qtbrainweaverstudentstartcompletedialog.h"
 #include "fileio.h"
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::default_construction()
+void ribi::braw::QtStudentStartCompleteDialogTest::default_construction()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
   d.show();
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+void ribi::braw::QtStudentStartCompleteDialogTest
   ::go_back_to_menu_is_false_at_construction()
 {
   File f;
@@ -19,7 +19,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   QVERIFY(!d.GoBackToMenu());
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_escape()
+void ribi::braw::QtStudentStartCompleteDialogTest::press_escape()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
@@ -27,7 +27,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_escape()
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_nonsense()
+void ribi::braw::QtStudentStartCompleteDialogTest::press_nonsense()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
@@ -35,7 +35,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::press_nonsense()
   QTest::keyClick(&d, Qt::Key_X);
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
+void ribi::braw::QtStudentStartCompleteDialogTest::save()
 {
   File f;
   QtStudentStartCompleteDialog d(f);
@@ -51,7 +51,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test::save()
 
 
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+void ribi::braw::QtStudentStartCompleteDialogTest
   ::start_associate()
 {
   File f;
@@ -61,7 +61,7 @@ void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
   d.on_button_start_associate_clicked();
 }
 
-void ribi::braw::qtbrainweaverstudentstartcompletedialog_test
+void ribi::braw::QtStudentStartCompleteDialogTest
   ::start_construct()
 {
   File f;

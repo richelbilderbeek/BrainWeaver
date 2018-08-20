@@ -9,20 +9,20 @@
 #include "conceptmaprating.h"
 #include "qtbrainweavercreateassessmentdialog.h"
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test::CloseOnEscape()
+void ribi::braw::QtCreateAssessmentDialogTest::CloseOnEscape()
 {
   QtCreateAssessmentDialog d;
   d.show();
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test::default_construction()
+void ribi::braw::QtCreateAssessmentDialogTest::default_construction()
 {
   QtCreateAssessmentDialog d;
   d.show();
 }
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test
+void ribi::braw::QtCreateAssessmentDialogTest
   ::has_correct_default_rating()
 {
   const QtCreateAssessmentDialog d;
@@ -30,7 +30,7 @@ void ribi::braw::qtbrainweavercreateassessmentdialog_test
   QVERIFY(rating == ribi::cmap::CreateDefaultRating());
 }
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test::save()
+void ribi::braw::QtCreateAssessmentDialogTest::save()
 {
   QtCreateAssessmentDialog d;
   d.SetQuestion("A question");
@@ -43,7 +43,7 @@ void ribi::braw::qtbrainweavercreateassessmentdialog_test::save()
 }
 
 
-void ribi::braw::qtbrainweavercreateassessmentdialog_test::set_and_get_question()
+void ribi::braw::QtCreateAssessmentDialogTest::set_and_get_question()
 {
   QtCreateAssessmentDialog d;
   const std::string s{"What is good question?"};

@@ -3,14 +3,14 @@
 #include <QDebug>
 #include "qtbrainweavermenudialog.h"
 
-void ribi::braw::QtBrainWeaverMenuDialogTest::Construction()
+void ribi::braw::QtMenuDialogTest::Construction()
 {
   auto menu{std::make_unique<ribi::braw::QtMenuDialog>()};
   menu->show();
   //QTest::keyClick(&d,Qt::Key_Escape, Qt::NoModifier);
 }
 
-void ribi::braw::QtBrainWeaverMenuDialogTest::PressAllKeys()
+void ribi::braw::QtMenuDialogTest::PressAllKeys()
 {
 
   //Press digit

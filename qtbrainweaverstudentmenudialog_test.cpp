@@ -7,7 +7,7 @@
 #include "fileio.h"
 #include "qtbrainweaverfiledialog.h"
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::ClickAboutButton()
+void ribi::braw::QtStudentMenuDialogTest::ClickAboutButton()
 {
   File f;
   QtStudentMenuDialog d(f);
@@ -16,7 +16,7 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::ClickAboutButton()
   d.on_button_about_clicked();
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::ClickStartButton()
+void ribi::braw::QtStudentMenuDialogTest::ClickStartButton()
 {
   File f;
   f.SetStudentName("John Doe");
@@ -26,14 +26,14 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::ClickStartButton()
   d.on_button_start_clicked();
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::DefaultConstruction()
+void ribi::braw::QtStudentMenuDialogTest::DefaultConstruction()
 {
   File f;
   QtStudentMenuDialog d(f);
   d.show();
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveFirstTimeOpensDialog()
+void ribi::braw::QtStudentMenuDialogTest::QuickSaveFirstTimeOpensDialog()
 {
   File f;
   QtStudentMenuDialog d(f);
@@ -43,7 +43,7 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveFirstTimeOpensDial
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveSecondTimeSavesFast()
+void ribi::braw::QtStudentMenuDialogTest::QuickSaveSecondTimeSavesFast()
 {
   File f;
   QtStudentMenuDialog d(f);
@@ -55,7 +55,7 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::QuickSaveSecondTimeSavesFas
   QFile::remove(filename);
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::PressEscape()
+void ribi::braw::QtStudentMenuDialogTest::PressEscape()
 {
   File f;
   QtStudentMenuDialog d(f);
@@ -64,7 +64,7 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::PressEscape()
   QVERIFY(d.isHidden());
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::Save()
+void ribi::braw::QtStudentMenuDialogTest::Save()
 {
   File f;
   QtStudentMenuDialog d(f);
@@ -77,7 +77,7 @@ void ribi::braw::QtBrainWeaverStudentMenuDialogTest::Save()
   assert(!is_regular_file(filename.toStdString()));
 }
 
-void ribi::braw::QtBrainWeaverStudentMenuDialogTest::SetAndGetName()
+void ribi::braw::QtStudentMenuDialogTest::SetAndGetName()
 {
   File f;
   QtStudentMenuDialog d(f);

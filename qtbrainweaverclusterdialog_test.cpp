@@ -34,7 +34,7 @@
 #include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::button_add_clicked_nothing_to_add()
 {
   File file = FileFactory().Get0();
@@ -45,7 +45,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   d.on_button_add_clicked();
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::button_add_clicked_something_to_add()
 {
   File file = FileFactory().Get0();
@@ -57,7 +57,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   d.on_button_add_clicked();
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::button_next_clicked_no_concept_map()
 {
   File file = FileFactory().Get0();
@@ -69,7 +69,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   d.on_button_next_clicked();
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::button_next_clicked_with_concept_map()
 {
   File file = FileFactory().Get5();
@@ -81,7 +81,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
 }
 
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
 {
   using namespace ribi::cmap;
@@ -98,7 +98,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   QVERIFY(w && w->isEnabled());
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::
+void ribi::braw::QtClusterDialogTest::
   cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
 {
   using namespace ribi::cmap;
@@ -122,7 +122,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::
   QVERIFY(!d.GetWidget()->isEnabled());
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::default_construct()
+void ribi::braw::QtClusterDialogTest::default_construct()
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -131,7 +131,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::default_construct()
   d.show();
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test
+void ribi::braw::QtClusterDialogTest
   ::enable_button_depending_on_file()
 {
   const auto v = File::GetTests();
@@ -162,7 +162,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test
   );
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::get_widget()
+void ribi::braw::QtClusterDialogTest::get_widget()
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -172,7 +172,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::get_widget()
   QVERIFY(d.GetWidget());
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::press_escape()
+void ribi::braw::QtClusterDialogTest::press_escape()
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -182,7 +182,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::press_escape()
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::press_something()
+void ribi::braw::QtClusterDialogTest::press_something()
 {
   //Pressing something that has to be passed to child
   File file = FileFactory().Get0();
@@ -193,7 +193,7 @@ void ribi::braw::qtbrainweaverclusterdialog_test::press_something()
   QTest::keyClick(&d, Qt::Key_0);
 }
 
-void ribi::braw::qtbrainweaverclusterdialog_test::save()
+void ribi::braw::QtClusterDialogTest::save()
 {
   File file = FileFactory().Get5();
   QtClusterDialog d(file);

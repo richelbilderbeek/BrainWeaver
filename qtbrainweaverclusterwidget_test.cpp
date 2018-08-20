@@ -14,7 +14,7 @@
 #include "qtconceptmapcompetency.h"
 #include "qtbrainweaverclustertreewidgetitem.h"
 
-void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
+void ribi::braw::QtClusterWidgetTest::item_abuse()
 {
   //This works
   {
@@ -55,7 +55,7 @@ void ribi::braw::qtbrainweaverclusterwidget_test::item_abuse()
   }
 }
 
-void ribi::braw::qtbrainweaverclusterwidget_test::use()
+void ribi::braw::QtClusterWidgetTest::use()
 {
   for (const Cluster& c: ClusterFactory().GetTests())
   {

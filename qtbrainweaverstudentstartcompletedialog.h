@@ -10,7 +10,7 @@ namespace Ui { class QtStudentStartCompleteDialog; }
 namespace ribi {
 namespace braw {
 
-class qtbrainweaverstudentstartcompletedialog_test;
+class QtStudentStartCompleteDialogTest;
 
 class QtStudentStartCompleteDialog final : public QDialog
 {
@@ -50,7 +50,7 @@ class QtStudentStartCompleteDialog final : public QDialog
   ///Save to file
   void Save();
 
-  friend class qtbrainweaverstudentstartcompletedialog_test;
+  friend class QtStudentStartCompleteDialogTest;
 };
 
 } //~namespace braw

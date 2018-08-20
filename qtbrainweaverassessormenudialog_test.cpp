@@ -4,7 +4,7 @@
 #include "brainweaverfilefactory.h"
 #include "qtbrainweaverassessormenudialog.h"
 
-void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::assess()
+void ribi::braw::QtAssessorMenuDialogTest::assess()
 {
   const std::string filename{
     "assess.cmp"
@@ -27,7 +27,7 @@ void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::assess()
   assert(!ribi::is_regular_file(filename));
 }
 
-void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::click_button_about_clicked()
+void ribi::braw::QtAssessorMenuDialogTest::click_button_about_clicked()
 {
   QtAssessorMenuDialog d;
   d.show();
@@ -35,7 +35,7 @@ void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::click_button_about_clicked
   d.on_button_about_clicked();
 }
 
-void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::click_button_create_assessment()
+void ribi::braw::QtAssessorMenuDialogTest::click_button_create_assessment()
 {
   QtAssessorMenuDialog d;
   d.show();
@@ -43,13 +43,13 @@ void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::click_button_create_assess
   d.on_button_create_assessment_clicked();
 }
 
-void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::default_construction()
+void ribi::braw::QtAssessorMenuDialogTest::default_construction()
 {
   QtAssessorMenuDialog d;
   d.show();
 }
 
-void ribi::braw::QtBrainWeaverAssessorMenuDialogTest::press_escape()
+void ribi::braw::QtAssessorMenuDialogTest::press_escape()
 {
   QtAssessorMenuDialog d;
   d.show();

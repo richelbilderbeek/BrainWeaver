@@ -6,7 +6,7 @@
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
 
-void ribi::braw::qtbrainweaverdisplay_test::construct()
+void ribi::braw::QtDisplayTest::construct()
 {
   const QtDisplay d;
 }

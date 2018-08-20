@@ -6,7 +6,7 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweaverdisplay_test : public QObject
+class QtDisplayTest : public QObject
 {
     Q_OBJECT //!OCLINT
 

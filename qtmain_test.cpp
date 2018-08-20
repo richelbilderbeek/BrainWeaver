@@ -30,24 +30,24 @@ int main(int argc, char *argv[])
   //{ ribi::braw::QtRateConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   //assert(!"Do not forget to comment this out on Travis");
 
-  { ribi::braw::QtBrainWeaverAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtBrainWeaverAssessorMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverclusterdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverclustertreewidgetitem_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverclusterwidget_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweavercreateassessmentdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverdisplay_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverfiledialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtBrainWeaverMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtBrainWeaverOverviewDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtBrainWeaverOverviewWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverprintconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverprintratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtAssessorMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtClusterDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtClusterTreeWidgetItemTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtClusterWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtCreateAssessmentDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtDisplayTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtFileDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtOverviewDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtOverviewWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtPrintConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtPrintRatingDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtRateConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtBrainWeaverStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverstudentstartcompletedialog_test t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtRatingDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
 
   if (error == 0) { std::cout << "Pass\n"; }
   if (error != 0) { std::cout << "Fail\n"; }

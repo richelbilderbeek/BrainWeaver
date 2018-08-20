@@ -6,12 +6,12 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweaverratingdialog_test : public QObject
+class QtRatingDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 
 public:
-  qtbrainweaverratingdialog_test();
+  QtRatingDialogTest();
   int m_n_hits;
 public slots:
   void add_hit();
