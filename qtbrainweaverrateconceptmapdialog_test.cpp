@@ -20,8 +20,8 @@
 #include "qtconceptmaprateconceptdialog.h"
 #include "ui_qtbrainweaverrateconceptmapdialog.h"
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test
-  ::button_next_clicked()
+void ribi::braw::QtRateConceptMapDialogTest
+::ButtonNextClicked() const noexcept
 {
   const File file = FileFactory().Get5();
   assert(IsCenterNode(ribi::cmap::GetFirstNode(file.GetConceptMap())));
@@ -31,8 +31,8 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   d.on_button_next_clicked();
 }
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test
-  ::close_on_escape()
+void ribi::braw::QtRateConceptMapDialogTest
+  ::CloseOnEscape() const noexcept
 {
   const File file = FileFactory().Get5();
   QtRateConceptMapDialog d(file);
@@ -40,8 +40,8 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test
-  ::change_events()
+void ribi::braw::QtRateConceptMapDialogTest
+  ::ChangeEvents() const noexcept
 {
   const File file = FileFactory().Get5();
   QtRateConceptMapDialog d(file);
@@ -52,8 +52,8 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   d.show();
 }
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test
-  ::file_must_match_getfile()
+void ribi::braw::QtRateConceptMapDialogTest
+  ::FileMustMatchGetFile() const noexcept
 {
   for (const auto& file: FileFactory().GetTests())
   {
@@ -68,7 +68,28 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test
   }
 }
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test::save()
+void ribi::braw::QtRateConceptMapDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
+{
+  const File file = FileFactory().Get5();
+  QtRateConceptMapDialog d(file);
+  d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+}
+
+
+void ribi::braw::QtRateConceptMapDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
+{
+  const File file = FileFactory().Get5();
+  QtRateConceptMapDialog d(file);
+  const QString filename{"tmp.cmp"};
+  QtFileDialog::m_last_file = filename;
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+  QVERIFY(QFile::exists(filename));
+  QFile::remove(filename);
+}
+
+void ribi::braw::QtRateConceptMapDialogTest::Save() const noexcept
 {
   const std::string filename{
     "qtbrainweaverrateconceptmapdialog_test_save.cmp"
@@ -83,7 +104,7 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test::save()
   QVERIFY(ribi::is_regular_file(filename));
 }
 
-void ribi::braw::qtbrainweaverrateconceptmapdialog_test::widget_must_be_initialized()
+void ribi::braw::QtRateConceptMapDialogTest::WidgetIsInitialized() const noexcept
 {
   for (const auto& file: FileFactory().GetTests())
   {
@@ -97,3 +118,4 @@ void ribi::braw::qtbrainweaverrateconceptmapdialog_test::widget_must_be_initiali
     QVERIFY(d.GetWidget());
   }
 }
+

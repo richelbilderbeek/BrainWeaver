@@ -19,16 +19,8 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
   m_file(file),
   m_qtconcept_map(new ::ribi::cmap::QtConceptMap(file.GetRating()))
 {
-  if (CountCenterNodes(file.GetConceptMap()) != 1)
-  {
-    std::stringstream msg;
-    msg <<
-      "In BrainWeaver, every concept map must have exactly one center node, "
-      << "supplied number of center nodes was "
-      << CountCenterNodes(file.GetConceptMap())
-    ;
-    throw std::invalid_argument(msg.str());
-  }
+  //Checked by File
+  assert(CountCenterNodes(file.GetConceptMap()) == 1);
 
   ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help

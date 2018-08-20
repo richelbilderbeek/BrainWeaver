@@ -26,7 +26,8 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   int error = 0;
-  //{ ribi::braw::QtBrainWeaverStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+
+  //{ ribi::braw::QtRateConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   //assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::QtBrainWeaverAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtBrainWeaverOverviewWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverprintconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverprintratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::qtbrainweaverrateconceptmapdialog_test t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtRateConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverratingdialog_test t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtBrainWeaverStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::qtbrainweaverstudentstartcompletedialog_test t; error |= QTest::qExec(&t, argc, argv); }

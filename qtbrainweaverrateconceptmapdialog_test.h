@@ -6,17 +6,19 @@
 namespace ribi {
 namespace braw {
 
-class qtbrainweaverrateconceptmapdialog_test : public QObject
+class QtRateConceptMapDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 
 private slots:
-  void button_next_clicked();
-  void change_events();
-  void close_on_escape();
-  void file_must_match_getfile();
-  void save();
-  void widget_must_be_initialized();
+  void ButtonNextClicked() const noexcept;
+  void ChangeEvents() const noexcept;
+  void CloseOnEscape() const noexcept;
+  void FileMustMatchGetFile() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
+  void Save() const noexcept;
+  void WidgetIsInitialized() const noexcept;
 };
 
 } //~namespace braw
