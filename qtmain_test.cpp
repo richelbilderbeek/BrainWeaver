@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   int error = 0;
 
-  { ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  assert(!"Do not forget to comment this out on Travis");
+  //{ ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  //assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::QtAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtAssessorMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
