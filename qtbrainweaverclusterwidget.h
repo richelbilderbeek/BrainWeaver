@@ -10,7 +10,9 @@
 namespace ribi {
 namespace braw {
 
-struct QtClusterTreeWidgetItem;
+class QtClusterTreeWidgetItem;
+class QtClusterWidgetTest;
+
 
 class QtClusterWidget : public QTreeWidget
 {
@@ -21,7 +23,6 @@ public:
     const Cluster& cluster,
     QWidget* parent = nullptr
   );
-  void DoubleClicked();
 
   void addTopLevelItem(QTreeWidgetItem *item);
 
@@ -75,6 +76,8 @@ private:
   void SetCorrectFlags() noexcept;
 
   void keyPressEventRight(QKeyEvent *event);
+
+  friend class QtClusterWidgetTest;
 };
 
 ///Move the ith child to top

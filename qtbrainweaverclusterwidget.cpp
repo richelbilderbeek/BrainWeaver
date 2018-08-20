@@ -1,27 +1,12 @@
-
-
-
-
 #include "qtbrainweaverclusterwidget.h"
 
 #include <cassert>
 #include <sstream>
-#include <vector>
 
 #include <QDebug>
 #include <QKeyEvent>
-#include <iostream>
 
-#include "conceptmapconceptfactory.h"
-#include "conceptmapconcept.h"
-#include "conceptmapexamplefactory.h"
-#include "conceptmapexample.h"
-#include "conceptmapexamplesfactory.h"
-#include "conceptmapexamples.h"
-#include "brainweaverclusterfactory.h"
 #include "qtbrainweaverclustertreewidgetitem.h"
-#include "brainweavercluster.h"
-#include "qtconceptmapcompetency.h"
 
 ribi::braw::QtClusterWidget::QtClusterWidget(
   const Cluster& cluster,
@@ -66,11 +51,9 @@ void ribi::braw::QtClusterWidget::addTopLevelItem(QTreeWidgetItem *item)
 {
   if (!dynamic_cast<QtClusterTreeWidgetItem*>(item))
   {
-    std::stringstream msg;
-    msg << __func__ << ": "
-      << "must add items of type 'QtClusterTreeWidgetItem'"
-    ;
-    throw std::invalid_argument(msg.str());
+    throw std::invalid_argument(
+      "must add items of type 'QtClusterTreeWidgetItem'"
+    );
   }
   QTreeWidget::addTopLevelItem(item);
 }
@@ -138,6 +121,9 @@ void ribi::braw::MoveJthChildToTop(
   const int j
 )
 {
+  assert(top);
+  assert(j >= 0);
+  assert(j < top->childCount());
   QTreeWidgetItem * const clone = top->child(j)->clone();
   assert(clone);
   widget->addTopLevelItem(clone);
@@ -211,47 +197,17 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
 
   switch (event->key())
   {
-    case Qt::Key_Space:
-
-      break;
     case Qt::Key_Select:
       if(currentItem())
       {
         emit QTreeWidget::itemClicked(currentItem(), 0);
       }
     break;
-    case Qt::Key_Right: keyPressEventRight(event); break;
-
-//    case Qt::Key_Left:
-//    {
-//      auto cur_item = currentItem();
-//      if (cur_item && GetDepth(cur_item) == 1)
-//      {
-//        assert(cur_item->parent());
-//        const auto parent = cur_item->parent();
-//        const auto clone = cur_item->clone();
-//        auto above = itemAbove(cur_item);
-//        parent->removeChild(cur_item);
-//        above->addChild(clone);
-//        delete cur_item;
-//        clone->setSelected(true);
-//        //assert(GetDepth(clone) == 1);
-//      }
-//    }
-//    break;
-
+    case Qt::Key_Right:
+      keyPressEventRight(event);
+    break;
     default: break;
   }
-}
-
-void ribi::braw::QtClusterWidget::DoubleClicked()
-{
-    auto cur_item = currentItem();
-    if(cur_item->isSelected())
-    {
-        delete cur_item;
-        this->update();
-    }
 }
 
 void ribi::braw::QtClusterWidget::keyPressEventRight(QKeyEvent *)

@@ -1,7 +1,7 @@
 #include "qtbrainweaverclustertreewidgetitem_test.h"
 #include "qtbrainweaverclustertreewidgetitem.h"
 
-void ribi::braw::QtClusterTreeWidgetItemTest::default_construction()
+void ribi::braw::QtClusterTreeWidgetItemTest::DefaultConstruction()
 {
   const QtClusterTreeWidgetItem * const i{
     new QtClusterTreeWidgetItem(ribi::cmap::Competency::misc, false, 1, 1, 1)

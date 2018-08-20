@@ -11,8 +11,11 @@ class QtClusterWidgetTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void item_abuse();
-  void use();
+  void AddTopLevelItemWithNullptr() const noexcept;
+  void HasNoItemsAtLevelThree() const noexcept;
+  void ItemAbuse() const noexcept;
+  void MoveJthChildToTop() const noexcept;
+  void Use() const noexcept;
 };
 
 } //~namespace braw

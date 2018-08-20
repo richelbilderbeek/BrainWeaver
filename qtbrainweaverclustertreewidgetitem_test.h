@@ -11,7 +11,7 @@ class QtClusterTreeWidgetItemTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
+  void DefaultConstruction();
 };
 
 } //~namespace braw
