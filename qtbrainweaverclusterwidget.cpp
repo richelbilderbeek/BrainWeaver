@@ -195,7 +195,7 @@ void ribi::braw::QtClusterWidget::keyPressEvent(QKeyEvent *event)
     delete item;
   }
 
-  switch (event->key())
+  switch (event->key()) //!OCLINT no case for each of +100 keys
   {
     case Qt::Key_Select:
       if(currentItem())
