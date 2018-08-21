@@ -11,33 +11,33 @@ class QtConceptMapDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void a_file_its_conceptmap_must_have_a_center_node();
+  void FileHasConceptMapWithOneCenterNode();
 
   ///If this dialog is fed with a file with a cluster and without a concept map
   /// (that is, one node (the focal question) only)
   ///it will create a concept map from the cluster
-  void a_file_with_cluster_only_will_create_a_concept_map();
+  void FileWithOnlyClusterCreatesConceptMap();
 
   ///Create a concept map of two nodes and one edge with an arrow head
   ///The concept map should have saved that the arrow head is there
   //For https://github.com/richelbilderbeek/BrainWeaver/issues/88
-  void create_edge_with_arrow_head();
+  void CreateEdgeWithArrowHead();
 
   ///When a concept map is created from a Cluster with n items,
   ///it will have n+1 concepts
-  void create_from_cluster();
+  void CreateFromCluster();
 
   ///If this dialog is fed with a file with a cluster and a concept map
   ///it will read the concept map
-  void dialog_will_prefer_to_read_a_concept_map_over_a_cluster();
+  void DialogPrefersReadingConceptMapOverReadingCluster();
 
   ///If this dialog is fed with a file without a cluster, but with concept map
   ///it will read the concept map
-  void dialog_will_prefer_to_read_an_existing_concept_map_over_creating_one();
+  void DialogPrefersExistingConceptMapOverCreatingOne();
 
-  void press_alt_f4();
-  void press_escape();
-  void press_nonsense();
+  void PressAltF4();
+  void PressEscape();
+  void PressNonsense();
 };
 
 } //~namespace braw

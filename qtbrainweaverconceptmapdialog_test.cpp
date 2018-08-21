@@ -25,8 +25,10 @@
 #include "qtconceptmapqtnode.h"
 #include "qtquadbezierarrowitem.h"
 
+using namespace ribi::braw;
+
 void ribi::braw::QtConceptMapDialogTest
-  ::a_file_its_conceptmap_must_have_a_center_node()
+  ::FileHasConceptMapWithOneCenterNode()
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
   try
@@ -62,7 +64,7 @@ void ribi::braw::QtConceptMapDialogTest
   }
 }
 
-void ribi::braw::QtConceptMapDialogTest::create_from_cluster()
+void ribi::braw::QtConceptMapDialogTest::CreateFromCluster()
 {
   const std::string question = "Focal question";
   ribi::braw::Cluster cluster(
@@ -72,7 +74,7 @@ void ribi::braw::QtConceptMapDialogTest::create_from_cluster()
       ribi::cmap::Concept("Association 3")
     }
   );
-  const auto concept_map = CreateFromCluster(question, cluster);
+  const auto concept_map = ::ribi::braw::CreateFromCluster(question, cluster);
   const auto n_concepts = cluster.Get().size();
 
   // +1 because the question also becomes a vertex
@@ -81,7 +83,7 @@ void ribi::braw::QtConceptMapDialogTest::create_from_cluster()
 }
 
 void ribi::braw::QtConceptMapDialogTest
-  ::a_file_with_cluster_only_will_create_a_concept_map()
+  ::FileWithOnlyClusterCreatesConceptMap()
 {
   File file;
   //Set a focal question
@@ -108,7 +110,7 @@ void ribi::braw::QtConceptMapDialogTest
   QVERIFY(ribi::cmap::CountQtNodes(*qtconcept_map) == 3);
 }
 
-void ribi::braw::QtConceptMapDialogTest::dialog_will_prefer_to_read_a_concept_map_over_a_cluster()
+void ribi::braw::QtConceptMapDialogTest::DialogPrefersReadingConceptMapOverReadingCluster()
 {
   File file;
   const auto cluster = ClusterFactory().GetTest( { 0,1,2 } );
@@ -129,7 +131,7 @@ void ribi::braw::QtConceptMapDialogTest::dialog_will_prefer_to_read_a_concept_ma
 
 
 void ribi::braw::QtConceptMapDialogTest
-  ::dialog_will_prefer_to_read_an_existing_concept_map_over_creating_one()
+  ::DialogPrefersExistingConceptMapOverCreatingOne()
 {
   using namespace cmap;
   ribi::braw::File file;
@@ -147,7 +149,7 @@ void ribi::braw::QtConceptMapDialogTest
   //QVERIFY(HasSimilarData(GetSortedEdges(concept_map), GetSortedEdges(created), 0.001));
 }
 
-void ribi::braw::QtConceptMapDialogTest::create_edge_with_arrow_head()
+void ribi::braw::QtConceptMapDialogTest::CreateEdgeWithArrowHead()
 {
   //Added this for https://github.com/richelbilderbeek/BrainWeaver/issues/88
   //just to be sure that a QtConceptMap gets saved correctly
@@ -175,15 +177,11 @@ void ribi::braw::QtConceptMapDialogTest::create_edge_with_arrow_head()
   const auto expected_vertices = initial_n_qtnodes + 2;
   const auto n_measured_vertices = qtnodes.size();
   QVERIFY(n_measured_vertices == expected_vertices);
-  #ifndef TRUST_GETQTEDGES_20180821
-  const ribi::cmap::QtEdge * const qtedge = ribi::cmap::GetFirstQtEdge(qtconceptmap);
-  #else
   const auto qtedges = ribi::cmap::GetQtEdges(qtconceptmap->GetScene());
   const auto excepted_edges = 1;
   const auto n_measured_edges = qtedges.size();
   QVERIFY(n_measured_edges == excepted_edges);
   const QtEdge * const qtedge = qtedges[0];
-  #endif
   assert(qtedge);
   //Arrow is either at head or tail
   QVERIFY(qtedge->GetArrow()->HasHead() ^ qtedge->GetArrow()->HasTail());
@@ -213,7 +211,7 @@ void ribi::braw::QtConceptMapDialogTest::create_edge_with_arrow_head()
   );
 }
 
-void ribi::braw::QtConceptMapDialogTest::press_alt_f4()
+void ribi::braw::QtConceptMapDialogTest::PressAltF4()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
@@ -221,7 +219,7 @@ void ribi::braw::QtConceptMapDialogTest::press_alt_f4()
   QTest::keyPress(&d, Qt::Key_F4, Qt::AltModifier);
 }
 
-void ribi::braw::QtConceptMapDialogTest::press_escape()
+void ribi::braw::QtConceptMapDialogTest::PressEscape()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
@@ -229,7 +227,7 @@ void ribi::braw::QtConceptMapDialogTest::press_escape()
   QTest::keyPress(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::QtConceptMapDialogTest::press_nonsense()
+void ribi::braw::QtConceptMapDialogTest::PressNonsense()
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
