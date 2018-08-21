@@ -17,10 +17,11 @@
 #include "testtimer.h"
 #include "trace.h"
 
+using namespace ribi::cmap;
+using namespace ribi::braw;
+
 BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_test)
 {
-  using namespace ribi::cmap;
-  using namespace ribi::braw;
   //Test operator== and operator!=
   {
     const auto tmp_tests_1 = ClusterFactory().GetTests();
@@ -63,19 +64,76 @@ BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_test)
       }
     }
   }
-  //Test all Clusters with each combination of Concepts
-  {
-    const std::vector<std::vector<ribi::cmap::Concept> > v
-      = GetCombinations(ConceptFactory().GetTests());
-    std::for_each(v.begin(),v.end(),
-      [](const std::vector<ribi::cmap::Concept>& concepts)
-      {
-        Cluster c(concepts);
-        const std::string s = ToXml(c);
-        const auto d = XmlToCluster(s);
-        BOOST_CHECK(c == d);
-      }
-    );
-  }
 }
 
+BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_to_xml_and_back)
+{
+  //Empty cluster
+  {
+    const Cluster c;
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with one concept without examples
+  {
+    const Cluster c( { Concept("A") } );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with one concept with one example
+  {
+    const Cluster c( { Concept("A", Examples( {Example("1") } )) } );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with one concept with two examples
+  {
+    const Cluster c(
+      {
+        Concept("A", Examples( { Example("1"), Example("2") } ))
+      }
+    );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with two concepts without examples
+  {
+    const Cluster c(
+      {
+        Concept("A"),
+        Concept("B")
+      }
+    );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with two concepts with one example
+  {
+    const Cluster c(
+      {
+        Concept("A", Examples( {Example("1") } )),
+        Concept("B", Examples( {Example("2") } ))
+      }
+    );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+  //Cluster with two concepts with two examples
+  {
+    const Cluster c(
+      {
+        Concept("A", Examples( { Example("1"), Example("2") } )),
+        Concept("B", Examples( { Example("3"), Example("4") } ))
+      }
+    );
+    const std::string s = ToXml(c);
+    const auto d = XmlToCluster(s);
+    BOOST_CHECK_EQUAL(c, d);
+  }
+}
