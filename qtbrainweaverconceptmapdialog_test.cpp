@@ -173,13 +173,17 @@ void ribi::braw::QtConceptMapDialogTest::create_edge_with_arrow_head()
   const auto qtconceptmap = d.GetQtConceptMap();
   const auto qtnodes = ribi::cmap::GetQtNodes(qtconceptmap->GetScene());
   const auto expected_vertices = initial_n_qtnodes + 2;
-  const auto measured_vertices = qtnodes.size();
-  QVERIFY(measured_vertices == expected_vertices);
+  const auto n_measured_vertices = qtnodes.size();
+  QVERIFY(n_measured_vertices == expected_vertices);
+  #ifndef TRUST_GETQTEDGES_20180821
+  const ribi::cmap::QtEdge * const qtedge = ribi::cmap::GetFirstQtEdge(qtconceptmap);
+  #else
   const auto qtedges = ribi::cmap::GetQtEdges(qtconceptmap->GetScene());
   const auto excepted_edges = 1;
-  const auto measured_edges = qtedges.size();
-  QVERIFY(measured_edges == excepted_edges);
+  const auto n_measured_edges = qtedges.size();
+  QVERIFY(n_measured_edges == excepted_edges);
   const QtEdge * const qtedge = qtedges[0];
+  #endif
   assert(qtedge);
   //Arrow is either at head or tail
   QVERIFY(qtedge->GetArrow()->HasHead() ^ qtedge->GetArrow()->HasTail());
