@@ -55,7 +55,7 @@ void ribi::braw::QtStudentMenuDialogTest::QuickSaveSecondTimeSavesFast()
   QFile::remove(filename);
 }
 
-void ribi::braw::QtStudentMenuDialogTest::PressEscape()
+void ribi::braw::QtStudentMenuDialogTest::PressEscapeClosesDialog()
 {
   File f;
   QtStudentMenuDialog d(f);

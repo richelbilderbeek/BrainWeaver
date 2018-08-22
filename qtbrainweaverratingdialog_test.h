@@ -10,18 +10,15 @@ class QtRatingDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 
-public:
-  QtRatingDialogTest();
-  int m_n_hits;
-public slots:
-  void add_hit();
-
 private slots:
-  void default_construction();
-  void default_construction_without_nodes();
-  void edit_name();
-  void print();
-  void save();
+  void Construction() const noexcept;
+  void ConstructionWithoutNodes() const noexcept;
+  void EditName() const noexcept;
+  void Print() const noexcept;
+  void PressEscapeClosesDialog() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
+  void Save() const noexcept;
 
 };
 

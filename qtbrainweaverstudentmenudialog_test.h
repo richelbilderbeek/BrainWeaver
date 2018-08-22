@@ -16,7 +16,7 @@ private slots:
   void DefaultConstruction();
   void QuickSaveFirstTimeOpensDialog();
   void QuickSaveSecondTimeSavesFast();
-  void PressEscape();
+  void PressEscapeClosesDialog();
   void Save();
   void SetAndGetName();
 };

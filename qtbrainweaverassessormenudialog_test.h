@@ -11,12 +11,13 @@ class QtAssessorMenuDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void assess();
-  void click_button_about_clicked();
-  void click_button_create_assessment();
-  void default_construction();
-  void press_escape();
-
+  void Assess() const noexcept;
+  void ClickAboutButtonShowsAboutDialog() const noexcept;
+  void ClickCreateButtonStartsAssessment() const noexcept;
+  void Construction() const noexcept;
+  void PressEscapeClosesDialog() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
 };
 
 } //~namespace braw

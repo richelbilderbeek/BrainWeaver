@@ -20,14 +20,6 @@ ribi::braw::Cluster::Cluster(const std::vector<ribi::cmap::Concept>& v)
 
 }
 
-void ribi::braw::Cluster::Add(const ribi::cmap::Concept & concept)
-{
-  assert(concept.GetRatingComplexity() >= -1);
-  assert(concept.GetRatingComplexity() <=  2);
-  m_v.push_back(concept);
-
-}
-
 bool ribi::braw::Cluster::Empty() const noexcept
 {
   return m_v.empty();

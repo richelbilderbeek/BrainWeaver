@@ -1,31 +1,20 @@
 #include "qtbrainweaverratingdialog_test.h"
-#include "ui_qtbrainweaverratingdialog.h"
 
 #include "brainweaverfile.h"
-#include "qtbrainweaverratingdialog.h"
 #include "brainweaverfilefactory.h"
 #include "fileio.h"
+#include "qtbrainweaverfiledialog.h"
+#include "qtbrainweaverratingdialog.h"
+#include "ui_qtbrainweaverratingdialog.h"
 
-ribi::braw::QtRatingDialogTest
-  ::QtRatingDialogTest()
-  : m_n_hits{0}
-{
-
-}
-
-void ribi::braw::QtRatingDialogTest::add_hit()
-{
-  ++m_n_hits;
-}
-
-void ribi::braw::QtRatingDialogTest::default_construction()
+void ribi::braw::QtRatingDialogTest::Construction() const noexcept
 {
   const File f = FileFactory().GetTests().back();
   QtRatingDialog d(f);
   d.show();
 }
 
-void ribi::braw::QtRatingDialogTest::default_construction_without_nodes()
+void ribi::braw::QtRatingDialogTest::ConstructionWithoutNodes() const noexcept
 {
   const File f;
   try
@@ -42,7 +31,7 @@ void ribi::braw::QtRatingDialogTest::default_construction_without_nodes()
   }
 }
 
-void ribi::braw::QtRatingDialogTest::edit_name()
+void ribi::braw::QtRatingDialogTest::EditName() const noexcept
 {
   const File file = FileFactory().Get5();
   QtRatingDialog d(file);
@@ -56,7 +45,16 @@ void ribi::braw::QtRatingDialogTest::edit_name()
   d.ui->edit_name->setText("Another other");
 }
 
-void ribi::braw::QtRatingDialogTest::print()
+void ribi::braw::QtRatingDialogTest::PressEscapeClosesDialog() const noexcept
+{
+  const File file = FileFactory().Get5();
+  QtRatingDialog d(file);
+  d.show();
+  QTest::keyClick(&d, Qt::Key_Escape);
+  QVERIFY(d.isHidden());
+}
+
+void ribi::braw::QtRatingDialogTest::Print() const noexcept
 {
   const File file = FileFactory().Get5();
   QtRatingDialog d(file);
@@ -65,7 +63,28 @@ void ribi::braw::QtRatingDialogTest::print()
   d.on_button_print_clicked();
 }
 
-void ribi::braw::QtRatingDialogTest::save()
+void ribi::braw::QtRatingDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
+{
+  const File file = FileFactory().Get5();
+  QtRatingDialog d(file);
+  d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+}
+
+
+void ribi::braw::QtRatingDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
+{
+  const File file = FileFactory().Get5();
+  QtRatingDialog d(file);
+  const QString filename{"tmp.cmp"};
+  QtFileDialog::m_last_file = filename;
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+  QVERIFY(QFile::exists(filename));
+  QFile::remove(filename);
+}
+
+void ribi::braw::QtRatingDialogTest::Save() const noexcept
 {
   const std::string filename{
     "qtbrainweaverratingdialog_test_save.cmp"

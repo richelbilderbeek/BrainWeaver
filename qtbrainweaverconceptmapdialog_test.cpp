@@ -24,11 +24,11 @@
 #include "qtconceptmapqtedge.h"
 #include "qtconceptmapqtnode.h"
 #include "qtquadbezierarrowitem.h"
+#include "qtbrainweaverfiledialog.h"
 
 using namespace ribi::braw;
 
-void ribi::braw::QtConceptMapDialogTest
-  ::FileHasConceptMapWithOneCenterNode()
+void ribi::braw::QtConceptMapDialogTest::FileHasConceptMapWithOneCenterNode() const noexcept
 {
   //If this dialog is fed with a file with only a focal question, it will create a one-node concept map
   try
@@ -64,7 +64,7 @@ void ribi::braw::QtConceptMapDialogTest
   }
 }
 
-void ribi::braw::QtConceptMapDialogTest::CreateFromCluster()
+void ribi::braw::QtConceptMapDialogTest::CreateFromCluster() const noexcept
 {
   const std::string question = "Focal question";
   ribi::braw::Cluster cluster(
@@ -83,7 +83,7 @@ void ribi::braw::QtConceptMapDialogTest::CreateFromCluster()
 }
 
 void ribi::braw::QtConceptMapDialogTest
-  ::FileWithOnlyClusterCreatesConceptMap()
+  ::FileWithOnlyClusterCreatesConceptMap() const noexcept
 {
   File file;
   //Set a focal question
@@ -110,7 +110,7 @@ void ribi::braw::QtConceptMapDialogTest
   QVERIFY(ribi::cmap::CountQtNodes(*qtconcept_map) == 3);
 }
 
-void ribi::braw::QtConceptMapDialogTest::DialogPrefersReadingConceptMapOverReadingCluster()
+void ribi::braw::QtConceptMapDialogTest::DialogPrefersReadingConceptMapOverReadingCluster() const noexcept
 {
   File file;
   const auto cluster = ClusterFactory().GetTest( { 0,1,2 } );
@@ -130,8 +130,7 @@ void ribi::braw::QtConceptMapDialogTest::DialogPrefersReadingConceptMapOverReadi
 }
 
 
-void ribi::braw::QtConceptMapDialogTest
-  ::DialogPrefersExistingConceptMapOverCreatingOne()
+void ribi::braw::QtConceptMapDialogTest::DialogPrefersExistingConceptMapOverCreatingOne() const noexcept
 {
   using namespace cmap;
   ribi::braw::File file;
@@ -149,7 +148,7 @@ void ribi::braw::QtConceptMapDialogTest
   //QVERIFY(HasSimilarData(GetSortedEdges(concept_map), GetSortedEdges(created), 0.001));
 }
 
-void ribi::braw::QtConceptMapDialogTest::CreateEdgeWithArrowHead()
+void ribi::braw::QtConceptMapDialogTest::CreateEdgeWithArrowHead() const noexcept
 {
   //Added this for https://github.com/richelbilderbeek/BrainWeaver/issues/88
   //just to be sure that a QtConceptMap gets saved correctly
@@ -211,26 +210,49 @@ void ribi::braw::QtConceptMapDialogTest::CreateEdgeWithArrowHead()
   );
 }
 
-void ribi::braw::QtConceptMapDialogTest::PressAltF4()
+void ribi::braw::QtConceptMapDialogTest::PressAltF4() const noexcept
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
   d.show();
   QTest::keyPress(&d, Qt::Key_F4, Qt::AltModifier);
+  QVERIFY(d.isHidden()); //?Really need to support this?
 }
 
-void ribi::braw::QtConceptMapDialogTest::PressEscape()
+void ribi::braw::QtConceptMapDialogTest::PressEscapeClosesDialog() const noexcept
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
   d.show();
   QTest::keyPress(&d, Qt::Key_Escape);
+  QVERIFY(d.isHidden());
 }
 
-void ribi::braw::QtConceptMapDialogTest::PressNonsense()
+void ribi::braw::QtConceptMapDialogTest::PressNonsense() const noexcept
 {
   File file = FileFactory().Get4();
   QtConceptMapDialog d(file);
   d.show();
   QTest::keyPress(&d, Qt::Key_X);
+}
+
+void ribi::braw::QtConceptMapDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
+{
+  File file = FileFactory().Get4();
+  QtConceptMapDialog d(file);
+  d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+}
+
+
+void ribi::braw::QtConceptMapDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
+{
+  File file = FileFactory().Get4();
+  QtConceptMapDialog d(file);
+  const QString filename{"tmp.cmp"};
+  QtFileDialog::m_last_file = filename;
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+  QVERIFY(QFile::exists(filename));
+  QFile::remove(filename);
 }

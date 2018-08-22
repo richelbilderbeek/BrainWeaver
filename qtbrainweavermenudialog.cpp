@@ -157,10 +157,13 @@ void ribi::braw::QtMenuDialog::on_button_test_cluster_clicked() noexcept
   File file;
   const std::string question = "A good question to test the clustering dialog is ...";
   file.SetQuestion(question);
-  Cluster cluster;
-  cluster.Add(ribi::cmap::Concept("A"));
-  cluster.Add(ribi::cmap::Concept("B"));
-  cluster.Add(ribi::cmap::Concept("C"));
+  Cluster cluster(
+    {
+      ribi::cmap::Concept("A"),
+      ribi::cmap::Concept("B"),
+      ribi::cmap::Concept("C")
+    }
+  );
   file.SetCluster(cluster);
   QtClusterDialog * const d{
     new QtClusterDialog(file, this)
