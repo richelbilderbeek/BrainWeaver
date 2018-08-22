@@ -36,6 +36,14 @@ void ribi::braw::QtAssessorMenuDialogTest::ClickAboutButtonShowsAboutDialog() co
   d.on_button_about_clicked();
 }
 
+void ribi::braw::QtAssessorMenuDialogTest::ClickAssessButtonStartsRating() const noexcept
+{
+  QtAssessorMenuDialog d;
+  d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  d.on_button_assess_result_clicked();
+}
+
 void ribi::braw::QtAssessorMenuDialogTest::ClickCreateButtonStartsAssessment() const noexcept
 {
   QtAssessorMenuDialog d;

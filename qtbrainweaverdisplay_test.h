@@ -11,7 +11,7 @@ class QtDisplayTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void construct();
+  void CreateRatedConceptsWidgetOnEmptyGraphThrows() const noexcept;
 };
 
 } //~namespace braw

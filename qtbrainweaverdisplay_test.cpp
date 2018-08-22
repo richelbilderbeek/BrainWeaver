@@ -6,7 +6,16 @@
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
 
-void ribi::braw::QtDisplayTest::construct()
+void ribi::braw::QtDisplayTest::CreateRatedConceptsWidgetOnEmptyGraphThrows() const noexcept
 {
-  const QtDisplay d;
+  File f = FileFactory().Get0();
+  try
+  {
+    QtDisplay().CreateRatedConceptsWidget(f);
+    assert(!"Should not get here");
+  }
+  catch (const std::invalid_argument&)
+  {
+    QVERIFY("Should get here");
+  }
 }

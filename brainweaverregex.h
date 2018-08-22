@@ -17,10 +17,6 @@ public:
   std::string GetRegexConcept() const noexcept;
   std::string GetRegexConceptMap() const noexcept;
   std::string GetRegexQuestion() const noexcept;
-  std::string GetRegexRating() const noexcept;
-  std::string GetRegexRatingComplexity() const noexcept;
-  std::string GetRegexRatingConcreteness() const noexcept;
-  std::string GetRegexRatingSpecificity() const noexcept;
   std::string GetRegexStudentName() const noexcept;
   std::string GetRegexVersion() const noexcept;
 

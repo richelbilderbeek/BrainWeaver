@@ -11,11 +11,13 @@ class QtCreateAssessmentDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void CloseOnEscape();
-  void default_construction();
-  void has_correct_default_rating();
-  void save();
-  void set_and_get_question();
+  void CloseOnEscape() const noexcept;
+  void Construction() const noexcept;
+  void HasCorrectDefaultRating() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
+  void Save() const noexcept;
+  void SetAndGetQuestionIsSymmetric() const noexcept;
 };
 
 } //~namespace braw

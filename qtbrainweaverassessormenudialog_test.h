@@ -13,6 +13,7 @@ class QtAssessorMenuDialogTest : public QObject
 private slots:
   void Assess() const noexcept;
   void ClickAboutButtonShowsAboutDialog() const noexcept;
+  void ClickAssessButtonStartsRating() const noexcept;
   void ClickCreateButtonStartsAssessment() const noexcept;
   void Construction() const noexcept;
   void PressEscapeClosesDialog() const noexcept;
