@@ -2,6 +2,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <algorithm>
+#include <iostream>
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
@@ -135,5 +136,23 @@ BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_to_xml_and_back)
     const std::string s = ToXml(c);
     const auto d = XmlToCluster(s);
     BOOST_CHECK_EQUAL(c, d);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_to_stream)
+{
+  //Empty cluster gives empty string
+  {
+    const Cluster c;
+    std::stringstream s;
+    s << c;
+    BOOST_CHECK(s.str().empty());
+  }
+  //Cluster with one concept gives string
+  {
+    const Cluster c( { Concept("A") } );
+    std::stringstream s;
+    s << c;
+    BOOST_CHECK(!s.str().empty());
   }
 }

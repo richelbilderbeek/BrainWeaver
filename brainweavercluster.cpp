@@ -28,7 +28,7 @@ void ribi::braw::Cluster::Add(const ribi::cmap::Concept & concept)
 
 }
 
-bool ribi::braw::Cluster::Empty() const
+bool ribi::braw::Cluster::Empty() const noexcept
 {
   return m_v.empty();
 }
@@ -116,13 +116,16 @@ bool ribi::braw::operator!=(const ribi::braw::Cluster& lhs, const ribi::braw::Cl
   return !(lhs == rhs);
 }
 
-std::ostream& ribi::braw::operator<<(std::ostream& os, const ribi::braw::Cluster& c) noexcept
+std::ostream& ribi::braw::operator<<(std::ostream& os, const Cluster& c) noexcept
 {
   const auto v = c.Get();
   std::stringstream s;
-  std::copy(std::begin(v), std::end(v), std::ostream_iterator<ribi::cmap::Concept>(s,", "));
-  std::string t;
-  s << t;
+  std::copy(
+    std::begin(v),
+    std::end(v),
+    std::ostream_iterator<ribi::cmap::Concept>(s,", ")
+  );
+  std::string t = s.str();
   if (!t.empty())
   {
     t.pop_back();

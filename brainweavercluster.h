@@ -18,10 +18,11 @@ class Cluster
   Cluster(const std::vector<ribi::cmap::Concept>& v = {});
 
   ///Add a Concept to the Cluster
+  [[deprecated]]
   void Add(const ribi::cmap::Concept& concept);
 
   ///See if the cluster is empty
-  bool Empty() const;
+  bool Empty() const noexcept;
 
   ///Obtain the list of Concepts
   const std::vector<ribi::cmap::Concept>& Get() const noexcept{ return m_v; }
