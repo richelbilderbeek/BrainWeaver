@@ -88,3 +88,6 @@ QMAKE_CXXFLAGS += -Werror
 
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
+
+# QTest
+QT += testlib
