@@ -158,16 +158,17 @@ void ribi::braw::QtClusterDialog::on_button_add_clicked()
 
 void ribi::braw::QtClusterDialog::on_button_next_clicked()
 {
+  File new_file = m_file;
   if (GetWidget() && GetWidget()->isEnabled()) //Save concept map, when user is all
   {
     const Cluster cluster = GetWidget()->GetCluster();
-    m_file.SetCluster(cluster);
+    new_file.SetCluster(cluster);
 
     //File's cluster and widget's cluster should be the same
-    assert(m_file.GetCluster() == GetWidget()->GetCluster());
+    assert(new_file.GetCluster() == GetWidget()->GetCluster());
   }
 
-  auto * const d = new QtConceptMapDialog(m_file, this);
+  auto * const d = new QtConceptMapDialog(new_file, this);
   d->exec();
 
   //By now, the concept map must have been (1) created (2) already present
@@ -177,6 +178,12 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
     close();
     return;
   }
+
+  //TODO: Discard the changes to new_file
+  //if (!d->ClickedOk()) return;
+
+  //Keep the changes
+  m_file = new_file;
 
   //Extract the freshly created concept map back
   m_file.SetConceptMap(d->GetQtConceptMap()->ToConceptMap());
@@ -212,11 +219,25 @@ void ribi::braw::QtClusterDialog::Save(const QString& filename)
   if (this->GetWidget())
   {
     assert(this->GetWidget());
-    const Cluster cluster = this->GetWidget()->GetCluster();
-    m_file.SetCluster(cluster);
+    m_file = this->ToFile();
+    //const Cluster cluster = this->GetWidget()->GetCluster();
+    //m_file.SetCluster(cluster);
     assert(m_file.GetCluster() == GetWidget()->GetCluster());
   }
   m_file.Save(filename.toStdString());
+}
+
+ribi::braw::File ribi::braw::QtClusterDialog::ToFile() const
+{
+  File file = m_file;
+  if (this->GetWidget())
+  {
+    assert(this->GetWidget());
+    const Cluster cluster = this->GetWidget()->GetCluster();
+    file.SetCluster(cluster);
+    assert(file.GetCluster() == GetWidget()->GetCluster());
+  }
+  return file;
 }
 
 void ribi::braw::QtClusterDialog::on_button_save_clicked()

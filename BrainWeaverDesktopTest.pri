@@ -1,4 +1,5 @@
 HEADERS  += \
+    $$PWD/qtbrainweaver_test.h \
     $$PWD/qtbrainweaveraboutdialog_test.h \
     $$PWD/qtbrainweaverassessormenudialog_test.h \
     $$PWD/qtbrainweaverclusterdialog_test.h \
@@ -19,6 +20,7 @@ HEADERS  += \
     $$PWD/qtbrainweavercreateassessmentdialog_test.h
 
 SOURCES += \
+    $$PWD/qtbrainweaver_test.cpp \
     $$PWD/qtbrainweaveraboutdialog_test.cpp \
     $$PWD/qtbrainweaverassessormenudialog_test.cpp \
     $$PWD/qtbrainweaverclusterdialog_test.cpp \

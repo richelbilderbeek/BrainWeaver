@@ -38,6 +38,8 @@ public:
   //Save to disk
   void Save(const QString& filename);
 
+  ///Create a new file from the dialog
+  File ToFile() const;
 
 protected:
   ///Respond to the following keys:
@@ -58,7 +60,7 @@ private:
   ///Does the dialog want to go back to the student menu?
   bool m_back_to_menu;
 
-  ///The file
+  ///The initial file
   File m_file;
 
   ///The cluster widget

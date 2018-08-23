@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 
+#include "qtbrainweaver_test.h"
 #include "qtbrainweaveraboutdialog_test.h"
 #include "qtbrainweaverassessormenudialog_test.h"
 #include "qtbrainweaverclusterdialog_test.h"
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtRatingDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); }
 
   if (error == 0) { std::cout << "Pass\n"; }
   if (error != 0) { std::cout << "Fail\n"; }

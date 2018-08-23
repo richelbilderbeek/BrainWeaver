@@ -43,9 +43,21 @@ void ribi::braw::QtAssessorMenuDialog::Assess(const std::string& filename)
 
 void ribi::braw::QtAssessorMenuDialog::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape || (e->key() == Qt::Key_F4 && (e->modifiers() & Qt::AltModifier)))
+  if (e->key() == Qt::Key_Escape)
   {
     close();
+    return;
+  }
+  //QuickSave
+  if ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_S)
+  {
+    if (QtFileDialog::m_last_file.isEmpty())
+    {
+      Save();
+      return;
+    }
+    assert(!QtFileDialog::m_last_file.isEmpty());
+    Save(QtFileDialog::m_last_file);
     return;
   }
 }
@@ -56,6 +68,8 @@ void ribi::braw::QtAssessorMenuDialog::on_button_create_assessment_clicked()
     new QtCreateAssessmentDialog(this)
   };
   d->exec();
+
+  //TODO: m_file = d->ToFile();
 }
 
 
@@ -81,4 +95,24 @@ void ribi::braw::QtAssessorMenuDialog::on_button_assess_result_clicked()
     const std::string filename = v[0].toStdString();
     Assess(filename);
   }
+
+  //TODO: m_file = d->ToFile();
+}
+
+void ribi::braw::QtAssessorMenuDialog::Save() const
+{
+  const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
+  d->setWindowTitle("Sla de voortgang op");
+  const int status = d->exec();
+  if (status == QDialog::Rejected) return;
+  assert(d->selectedFiles().size() == 1);
+  const QString filename = d->selectedFiles()[0];
+  QtFileDialog::m_last_file = filename;
+  Save(filename);
+}
+
+
+void ribi::braw::QtAssessorMenuDialog::Save(const QString& filename) const
+{
+  m_file.Save(filename.toStdString());
 }

@@ -88,6 +88,8 @@ void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
     new QtClusterDialog(m_file, this)
   };
   d->exec();
+
+  m_file = d->ToFile();
 }
 
 void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()

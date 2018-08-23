@@ -11,7 +11,7 @@ class QtAboutDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void default_construction();
+  void Construction();
 };
 
 } //~namespace braw
