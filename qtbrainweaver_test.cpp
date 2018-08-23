@@ -15,8 +15,8 @@ void ribi::braw::QtTest::ModifiedFileAfterEditConceptMapOk() const noexcept
   d.show();
 
   QtConceptMapDialogCloser c;
-  QTimer::singleShot(100, &c, SLOT(Modify()));
-  QTimer::singleShot(200, &c, SLOT(PressOk()));
+  QTimer::singleShot(200, &c, SLOT(Modify()));
+  QTimer::singleShot(400, &c, SLOT(PressOk()));
   d.on_button_next_clicked();
 
   assert("Closed the ConceptMapDialog (would freeze otherwise)");
@@ -34,8 +34,8 @@ void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
   d.show();
 
   QtConceptMapDialogCloser c;
-  QTimer::singleShot(100, &c, SLOT(Modify()));
-  QTimer::singleShot(200, &c, SLOT(PressCancel()));
+  QTimer::singleShot(200, &c, SLOT(Modify()));
+  QTimer::singleShot(400, &c, SLOT(PressCancel()));
   d.on_button_next_clicked();
 
   assert("Closed the ConceptMapDialog (would freeze otherwise)");
