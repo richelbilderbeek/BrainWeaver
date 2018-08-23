@@ -244,3 +244,14 @@ void ribi::braw::QtClusterDialog::on_button_save_clicked()
 {
   Save();
 }
+
+void ribi::braw::QtClusterDialog::on_button_cancel_clicked()
+{
+  close();
+}
+
+void ribi::braw::QtClusterDialog::on_button_ok_clicked()
+{
+  m_ok_clicked = true;
+  close();
+}

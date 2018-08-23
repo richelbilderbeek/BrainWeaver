@@ -10,7 +10,8 @@ namespace Ui { class QtClusterDialog; }
 namespace ribi {
 namespace braw {
 
-struct QtClusterDialogTest;
+class QtClusterDialogCloser;
+class QtClusterDialogTest;
 
 ///The Dialog in which the user clusters concepts and examples
 ///If the file supplied has no cluster, this dialog creates a cluster
@@ -35,6 +36,9 @@ public:
   ///Does the dialog want to go back to the student menu?
   bool GoBackToMenu() const { return m_back_to_menu; }
 
+  ///Has the user closed the dialog by clicking OK?
+  bool HasClickedOk() const noexcept { return m_ok_clicked; }
+
   //Save to disk
   void Save(const QString& filename);
 
@@ -54,6 +58,11 @@ public slots:
 
   void on_button_save_clicked();
 
+private slots:
+  void on_button_cancel_clicked();
+
+  void on_button_ok_clicked();
+
 private:
   Ui::QtClusterDialog *ui;
 
@@ -63,6 +72,9 @@ private:
   ///The initial file
   File m_file;
 
+  ///Has the user clicked OK?
+  bool m_ok_clicked{false};
+
   ///The cluster widget
   QtClusterWidget * const m_widget;
 
@@ -70,6 +82,7 @@ private:
   //Start saving procedure, with request of filename
   void Save();
 
+  friend class QtClusterDialogCloser;
   friend class QtClusterDialogTest;
 };
 

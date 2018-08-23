@@ -61,6 +61,9 @@
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QPushButton" name="button_cancel">
+        <property name="toolTip">
+         <string>Dit scherm sluiten met verlies van gedane wijzigingen</string>
+        </property>
         <property name="text">
          <string>&amp;Afbreken</string>
         </property>
@@ -68,10 +71,26 @@
       </item>
       <item>
        <widget class="QPushButton" name="button_ok">
+        <property name="toolTip">
+         <string>Dit scherm sluiten met behoud van gedane wijzigingen</string>
+        </property>
         <property name="text">
          <string>&amp;OK</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>

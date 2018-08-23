@@ -1,36 +1,36 @@
-#include "qtbrainweaverconceptmapdialogcloser_test.h"
+#include "qtbrainweaverclusterdialogcloser_test.h"
 
 #include "conceptmapfactory.h"
 #include "conceptmaphelper.h"
-#include "qtbrainweaverconceptmapdialogcloser.h"
-#include "qtbrainweaverconceptmapdialog.h"
+#include "qtbrainweaverclusterdialogcloser.h"
+#include "qtbrainweaverclusterdialog.h"
 #include "brainweaverfilefactory.h"
 
 using namespace ribi::braw;
 using namespace ribi::cmap;
 
-void ribi::braw::QtConceptMapDialogCloserTest::PressCancel() const noexcept
+void ribi::braw::QtClusterDialogCloserTest::PressCancel() const noexcept
 {
-  QtConceptMapDialogCloser c;
+  QtClusterDialogCloser c;
 
   if (OnTravis()) return;
 
   QTimer::singleShot(100, &c, SLOT(PressCancel()));
-  ribi::braw::QtConceptMapDialog d(
+  ribi::braw::QtClusterDialog d(
     FileFactory().GetUnrated()
   );
   d.exec();
   QVERIFY(!d.HasClickedOk());
 }
 
-void ribi::braw::QtConceptMapDialogCloserTest::PressOk() const noexcept
+void ribi::braw::QtClusterDialogCloserTest::PressOk() const noexcept
 {
-  QtConceptMapDialogCloser c;
+  QtClusterDialogCloser c;
 
   if (OnTravis()) return;
 
   QTimer::singleShot(100, &c, SLOT(PressOk()));
-  ribi::braw::QtConceptMapDialog d(
+  ribi::braw::QtClusterDialog d(
     FileFactory().GetUnrated()
   );
   d.exec();

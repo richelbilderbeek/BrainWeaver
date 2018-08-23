@@ -5,6 +5,7 @@
 #include "qtbrainweaveraboutdialog_test.h"
 #include "qtbrainweaverassessormenudialog_test.h"
 #include "qtbrainweaverclusterdialog_test.h"
+#include "qtbrainweaverclusterdialogcloser_test.h"
 #include "qtbrainweaverclustertreewidgetitem_test.h"
 #include "qtbrainweaverclusterwidget_test.h"
 #include "qtbrainweaverconceptmapdialog_test.h"
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtAssessorMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtClusterDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtClusterDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtClusterTreeWidgetItemTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtClusterWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtConceptMapDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
