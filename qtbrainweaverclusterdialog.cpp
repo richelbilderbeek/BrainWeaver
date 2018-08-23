@@ -179,8 +179,8 @@ void ribi::braw::QtClusterDialog::on_button_next_clicked()
     return;
   }
 
-  //TODO: Discard the changes to new_file
-  //if (!d->ClickedOk()) return;
+  //Discard the changes to new_file if cancel is clicked
+  if (!d->HasClickedOk()) return;
 
   //Keep the changes
   m_file = new_file;

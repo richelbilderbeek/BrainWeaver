@@ -15,7 +15,16 @@ class QtConceptMapDialogCloser : public QObject
   QtConceptMapDialogCloser();
   virtual ~QtConceptMapDialogCloser();
   public slots:
-  void Close();
+
+  ///Modify the concept map randomly
+  void Modify();
+
+  ///Press cancel
+  void PressCancel();
+
+  ///Press OK
+  void PressOk();
+
 };
 
 } //~namespace braw

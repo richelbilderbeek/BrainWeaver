@@ -11,7 +11,8 @@ class QtConceptMapDialogCloserTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void Close() const noexcept;
+  void PressCancel() const noexcept;
+  void PressOk() const noexcept;
 };
 
 } //~namespace cmap
