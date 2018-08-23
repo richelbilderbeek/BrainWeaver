@@ -28,6 +28,8 @@ class QtConceptMapDialog final : public QDialog
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept;
 
+  bool HasClickedOk() const noexcept { return m_clicked_ok; }
+
   ///Update concept map into file
   void UpdateFileWithConceptMapFromWidget();
 
@@ -44,11 +46,19 @@ class QtConceptMapDialog final : public QDialog
   void on_button_save_clicked();
   void on_button_print_clicked();
 
+  void on_button_ok_clicked();
+
+  void on_button_cancel_clicked();
+
 private:
   Ui::QtConceptMapDialog *ui;
 
   ///Must we go back to the student menu?
-  bool m_back_to_menu;
+  bool m_back_to_menu{false};
+
+  ///Has the user closed the dialog using OK?
+  ///Is false if the dialog is closed by Cancel or Escape
+  bool m_clicked_ok{false};
 
   ///The file
   File m_file;

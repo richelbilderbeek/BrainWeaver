@@ -23,7 +23,6 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   QWidget *parent)
   : QDialog(parent),
     ui(new Ui::QtConceptMapDialog),
-    m_back_to_menu(false),
     m_file(file),
     m_widget{new ribi::cmap::QtConceptMap(file.GetRating(), this)}
 {
@@ -52,7 +51,8 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   assert(this->layout());
-  this->layout()->addWidget(m_widget);
+  assert(qobject_cast<QVBoxLayout*>(this->layout()));
+  qobject_cast<QVBoxLayout*>(this->layout())->insertWidget(1, m_widget);
   #ifndef NDEBUG
   {
     QUndoView * undo_view{new QUndoView(&m_widget->GetUndo())};
@@ -262,4 +262,15 @@ void ribi::braw::QtConceptMapDialog::Save(const QString& filename) const
     const_cast<QtConceptMapDialog*>(this)->UpdateFileWithConceptMapFromWidget();
   }
   m_file.Save(filename.toStdString());
+}
+
+void ribi::braw::QtConceptMapDialog::on_button_ok_clicked()
+{
+  m_clicked_ok = true;
+  close();
+}
+
+void ribi::braw::QtConceptMapDialog::on_button_cancel_clicked()
+{
+  close();
 }
