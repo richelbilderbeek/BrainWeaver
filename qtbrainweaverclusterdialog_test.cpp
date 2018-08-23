@@ -34,8 +34,10 @@
 #include "qtbrainweaverfiledialog.h"
 #include "ui_qtbrainweaverclusterdialog.h"
 
+using namespace ribi::cmap;
+
 void ribi::braw::QtClusterDialogTest
-  ::button_add_clicked_nothing_to_add()
+  ::ButtonAddClickedNothingToAdd() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -46,7 +48,7 @@ void ribi::braw::QtClusterDialogTest
 }
 
 void ribi::braw::QtClusterDialogTest
-  ::button_add_clicked_something_to_add()
+  ::ButtonAddClickedSomethingToAdd() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -58,7 +60,7 @@ void ribi::braw::QtClusterDialogTest
 }
 
 void ribi::braw::QtClusterDialogTest
-  ::button_next_clicked_no_concept_map()
+  ::ButtonNextClickedNoConceptMap() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -70,7 +72,7 @@ void ribi::braw::QtClusterDialogTest
 }
 
 void ribi::braw::QtClusterDialogTest
-  ::button_next_clicked_with_concept_map()
+  ::ButtonNextClickedWithConceptMap() const noexcept
 {
   File file = FileFactory().Get5();
   assert(boost::num_vertices(file.GetConceptMap()));
@@ -82,9 +84,8 @@ void ribi::braw::QtClusterDialogTest
 
 
 void ribi::braw::QtClusterDialogTest
-  ::cluster_dialog_must_be_enabled_if_there_is_no_concept_map()
+  ::ClusterDialogEnabledIfNoConceptMap() const noexcept
 {
-  using namespace ribi::cmap;
   File file = FileFactory().Get0();
 
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -99,9 +100,8 @@ void ribi::braw::QtClusterDialogTest
 }
 
 void ribi::braw::QtClusterDialogTest::
-  cluster_dialog_must_be_disabled_if_there_are_nodes_in_the_concept_map()
+  ClusterDialogDisabledIfNodesInConceptMap() const noexcept
 {
-  using namespace ribi::cmap;
   const std::string question = "question with spaces";
   File file;
   file.SetQuestion(question);
@@ -122,7 +122,7 @@ void ribi::braw::QtClusterDialogTest::
   QVERIFY(!d.GetWidget()->isEnabled());
 }
 
-void ribi::braw::QtClusterDialogTest::default_construct()
+void ribi::braw::QtClusterDialogTest::DefaultConstruct() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -132,7 +132,7 @@ void ribi::braw::QtClusterDialogTest::default_construct()
 }
 
 void ribi::braw::QtClusterDialogTest
-  ::enable_button_depending_on_file()
+  ::EnableButtonDependingOnFile() const noexcept
 {
   const auto v = File::GetTests();
   std::for_each(v.begin(),v.end(),
@@ -162,7 +162,7 @@ void ribi::braw::QtClusterDialogTest
   );
 }
 
-void ribi::braw::QtClusterDialogTest::get_widget()
+void ribi::braw::QtClusterDialogTest::GetWidget() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -172,7 +172,7 @@ void ribi::braw::QtClusterDialogTest::get_widget()
   QVERIFY(d.GetWidget());
 }
 
-void ribi::braw::QtClusterDialogTest::press_escape()
+void ribi::braw::QtClusterDialogTest::PressEscape() const noexcept
 {
   File file = FileFactory().Get0();
   const Cluster cluster = ClusterFactory().GetTest( {0,1,2} );
@@ -182,7 +182,7 @@ void ribi::braw::QtClusterDialogTest::press_escape()
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::QtClusterDialogTest::press_something()
+void ribi::braw::QtClusterDialogTest::PressSomething() const noexcept
 {
   //Pressing something that has to be passed to child
   File file = FileFactory().Get0();
@@ -193,7 +193,7 @@ void ribi::braw::QtClusterDialogTest::press_something()
   QTest::keyClick(&d, Qt::Key_0);
 }
 
-void ribi::braw::QtClusterDialogTest::save()
+void ribi::braw::QtClusterDialogTest::Save() const noexcept
 {
   File file = FileFactory().Get5();
   QtClusterDialog d(file);

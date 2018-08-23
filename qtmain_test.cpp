@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   int error = 0;
 
+  //{ ribi::braw::QtClusterDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   //assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::QtAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtRatingDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); } //Big tests
 
   if (error == 0) { std::cout << "Pass\n"; }
   if (error != 0) { std::cout << "Fail\n"; }
