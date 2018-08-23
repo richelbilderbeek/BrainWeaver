@@ -8,6 +8,7 @@
 #include "qtbrainweaverclustertreewidgetitem_test.h"
 #include "qtbrainweaverclusterwidget_test.h"
 #include "qtbrainweaverconceptmapdialog_test.h"
+#include "qtbrainweaverconceptmapdialogcloser_test.h"
 #include "qtbrainweavercreateassessmentdialog_test.h"
 #include "qtbrainweaverdisplay_test.h"
 #include "qtbrainweaverfiledialog_test.h"
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   int error = 0;
 
-  //{ ribi::braw::QtClusterDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  //{ ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); } //Big tests
   //assert(!"Do not forget to comment this out on Travis");
 
   { ribi::braw::QtAboutDialogTest t; error |= QTest::qExec(&t, argc, argv); }
@@ -36,6 +37,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtClusterDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtClusterTreeWidgetItemTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtClusterWidgetTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtConceptMapDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtCreateAssessmentDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtDisplayTest t; error |= QTest::qExec(&t, argc, argv); }

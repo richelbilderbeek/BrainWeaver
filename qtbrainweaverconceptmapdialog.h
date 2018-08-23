@@ -11,6 +11,8 @@ namespace Ui { class QtConceptMapDialog; }
 namespace ribi {
 namespace braw {
 
+class QtConceptMapDialogCloser;
+
 class QtConceptMapDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
@@ -65,6 +67,8 @@ private:
 
   ///The concept map widget
   ribi::cmap::QtConceptMap * const m_widget;
+
+  friend class QtConceptMapDialogCloser;
 };
 
 ///Create a concept map from a cluster

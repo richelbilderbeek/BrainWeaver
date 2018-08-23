@@ -6,6 +6,7 @@ HEADERS  += \
     $$PWD/qtbrainweaverclustertreewidgetitem_test.h \
     $$PWD/qtbrainweaverclusterwidget_test.h \
     $$PWD/qtbrainweaverconceptmapdialog_test.h \
+    $$PWD/qtbrainweaverconceptmapdialogcloser_test.h \
     $$PWD/qtbrainweaverdisplay_test.h \
     $$PWD/qtbrainweaverfiledialog_test.h \
     $$PWD/qtbrainweavermenudialog_test.h \
@@ -27,6 +28,7 @@ SOURCES += \
     $$PWD/qtbrainweaverclustertreewidgetitem_test.cpp \
     $$PWD/qtbrainweaverclusterwidget_test.cpp \
     $$PWD/qtbrainweaverconceptmapdialog_test.cpp \
+    $$PWD/qtbrainweaverconceptmapdialogcloser_test.cpp \
     $$PWD/qtbrainweaverdisplay_test.cpp \
     $$PWD/qtbrainweaverfiledialog_test.cpp \
     $$PWD/qtbrainweavermenudialog_test.cpp \
