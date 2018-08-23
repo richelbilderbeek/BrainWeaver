@@ -160,10 +160,11 @@ void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 
 void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {
-  auto * const d{
-    new QtPrintRatingDialog(m_file, this)
+  std::unique_ptr<QtPrintRatingDialog> d{
+    new QtPrintRatingDialog(m_file)
   };
-  d->exec();
+  d->show();
+  d->Print();
 }
 
 void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)

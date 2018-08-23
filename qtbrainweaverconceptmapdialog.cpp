@@ -185,8 +185,11 @@ void ribi::braw::QtConceptMapDialog::on_button_print_clicked()
   UpdateFileWithConceptMapFromWidget();
   this->m_widget->setEnabled(false); //Prevents #101
   m_widget->StopTimer();
-  auto * const d = new QtPrintConceptMapDialog(m_file, this);
-  d->exec();
+  std::unique_ptr<QtPrintConceptMapDialog> d{
+    new QtPrintConceptMapDialog(m_file)
+  };
+  d->show();
+  d->Print();
   this->m_widget->setEnabled(true); //Prevents #249
   m_widget->StartTimer();
 }
