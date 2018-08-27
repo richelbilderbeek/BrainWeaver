@@ -72,7 +72,9 @@ ribi::braw::QtPrintConceptMapDialog::QtPrintConceptMapDialog(
     assert(m_widget);
     if (boost::num_vertices(m_widget->ToConceptMap()) == 0)
     {
+      #ifndef NDEBUG
       qDebug() << "Warning: Zero nodes in QtConceptMap, should not have that as a user";
+      #endif // NDEBUG
     }
     m_widget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_widget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
