@@ -21,7 +21,8 @@
 #include "qtbrainweaverrateconceptmapdialog_test.h"
 #include "qtbrainweaverratingdialog_test.h"
 #include "qtbrainweaverstudentmenudialog_test.h"
-#include "qtbrainweaverstudentstartcompletedialog_test.h"
+#include "qtbrainweaverstudentstartdialog_test.h"
+#include "qtbrainweaverstudentstartdialogcloser_test.h"
 
 #include <QtTest/QtTest>
 
@@ -52,7 +53,8 @@ int main(int argc, char *argv[])
   { ribi::braw::QtRateConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtRatingDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtStudentMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
-  { ribi::braw::QtStudentStartCompleteDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtStudentStartDialogTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtStudentStartDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); } //Big tests
 
   if (error == 0) { std::cout << "Pass\n"; }

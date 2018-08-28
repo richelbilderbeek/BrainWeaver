@@ -4,7 +4,8 @@
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverconceptmapdialogcloser.h"
 #include "brainweaverfilefactory.h"
-
+#include "qtbrainweaverstudentmenudialog.h"
+#include "ui_qtbrainweaverstudentmenudialog.h"
 
 void ribi::braw::QtTest::ModifiedFileAfterEditConceptMapOk() const noexcept
 {
@@ -45,7 +46,28 @@ void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
   QVERIFY(file_before == file_after);
 }
 
-void ribi::braw::QtTest::Issue308() const noexcept
+void ribi::braw::QtTest::Issue308Cluster() const noexcept
 {
-  //
+  // Create a file for a student, using Developer
+  File f = FileFactory().GetFocalQuestionOnly();
+
+  // Load the empty file, fill in name, cluster, save
+  QtStudentMenuDialog menu(f);
+  menu.SetName("John Doe");
+  /*
+  QtStudentStartDialogCloser start_closer;
+  QtClusterDialogCloser cluster_closer;
+
+  QTimer::singleShot(200, &start_closer, SLOT(PressAssociate()));
+
+  QTimer::singleShot(400, &start_closer, SLOT(Close()));
+  */
+  // Navigate backwards to menu using OK
+  // Navigate forward again
+
+}
+
+void ribi::braw::QtTest::Issue308ConceptMap() const noexcept
+{
+
 }

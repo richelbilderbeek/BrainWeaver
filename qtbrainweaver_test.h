@@ -22,7 +22,8 @@ private slots:
   void SameFileAfterEditConceptMapCancelled() const noexcept;
 
 
-  void Issue308() const noexcept;
+  void Issue308Cluster() const noexcept;
+  void Issue308ConceptMap() const noexcept;
 };
 
 } //~namespace braw

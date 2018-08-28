@@ -23,7 +23,7 @@ ribi::braw::QtClusterDialogCloser::~QtClusterDialogCloser()
 
 }
 
-void ribi::braw::QtClusterDialogCloser::Modify()
+void ribi::braw::QtClusterDialogCloser::Modify() const
 {
   ribi::braw::QtClusterDialog* const pop_up
     = qobject_cast<ribi::braw::QtClusterDialog*>(
@@ -37,7 +37,7 @@ void ribi::braw::QtClusterDialogCloser::Modify()
   assert(before != after);
 }
 
-void ribi::braw::QtClusterDialogCloser::PressCancel()
+void ribi::braw::QtClusterDialogCloser::PressCancel() const
 {
   ribi::braw::QtClusterDialog* const pop_up
     = qobject_cast<ribi::braw::QtClusterDialog*>(
@@ -48,7 +48,7 @@ void ribi::braw::QtClusterDialogCloser::PressCancel()
   assert(pop_up->isHidden());
 }
 
-void ribi::braw::QtClusterDialogCloser::PressOk()
+void ribi::braw::QtClusterDialogCloser::PressOk() const
 {
   ribi::braw::QtClusterDialog* const pop_up
     = qobject_cast<ribi::braw::QtClusterDialog*>(

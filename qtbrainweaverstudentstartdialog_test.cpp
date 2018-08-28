@@ -1,57 +1,57 @@
-#include "qtbrainweaverstudentstartcompletedialog_test.h"
+#include "qtbrainweaverstudentstartdialog_test.h"
 
 #include "brainweaverfile.h"
 #include "brainweaverfilefactory.h"
-#include "qtbrainweaverstudentstartcompletedialog.h"
+#include "qtbrainweaverstudentstartdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "fileio.h"
 
-void ribi::braw::QtStudentStartCompleteDialogTest
+void ribi::braw::QtStudentStartDialogTest
   ::DefaultConstruction() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   d.show();
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest
+void ribi::braw::QtStudentStartDialogTest
   ::GoBackToMenuIsFalseAtConstruction() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   QVERIFY(!d.GoBackToMenu());
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest::PressEscape() const noexcept
+void ribi::braw::QtStudentStartDialogTest::PressEscape() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   d.show();
   QTest::keyClick(&d, Qt::Key_Escape);
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest::PressNonsense() const noexcept
+void ribi::braw::QtStudentStartDialogTest::PressNonsense() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   d.show();
   QTest::keyClick(&d, Qt::Key_X);
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
+void ribi::braw::QtStudentStartDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
 {
   const File file = FileFactory().GetUnrated();
-  QtStudentStartCompleteDialog d(file);
+  QtStudentStartDialog d(file);
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 
 
-void ribi::braw::QtStudentStartCompleteDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
+void ribi::braw::QtStudentStartDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
 {
   const File file = FileFactory().GetUnrated();
-  QtStudentStartCompleteDialog d(file);
+  QtStudentStartDialog d(file);
   const QString filename{"tmp.cmp"};
   QtFileDialog::m_last_file = filename;
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
@@ -59,10 +59,10 @@ void ribi::braw::QtStudentStartCompleteDialogTest::QuickSaveSecondTimeSavesFast(
   QFile::remove(filename);
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest::Save() const noexcept
+void ribi::braw::QtStudentStartDialogTest::Save() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   const QString filename{
     QString("test_save.") + GetFilenameExtension().c_str()
   };
@@ -75,20 +75,20 @@ void ribi::braw::QtStudentStartCompleteDialogTest::Save() const noexcept
 
 
 
-void ribi::braw::QtStudentStartCompleteDialogTest
+void ribi::braw::QtStudentStartDialogTest
   ::StartAssociate() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_start_associate_clicked();
 }
 
-void ribi::braw::QtStudentStartCompleteDialogTest::StartConstruct() const noexcept
+void ribi::braw::QtStudentStartDialogTest::StartConstruct() const noexcept
 {
   File f;
-  QtStudentStartCompleteDialog d(f);
+  QtStudentStartDialog d(f);
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
   d.on_button_start_construct_clicked();

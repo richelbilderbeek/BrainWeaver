@@ -6,7 +6,7 @@
 namespace ribi {
 namespace braw {
 
-class QtStudentStartCompleteDialogTest : public QObject
+class QtStudentStartDialogTest : public QObject
 {
     Q_OBJECT //!OCLINT
 

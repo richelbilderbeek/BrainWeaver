@@ -5,25 +5,26 @@
 #include "brainweaverfile.h"
 #include "brainweaverfwd.h"
 
-namespace Ui { class QtStudentStartCompleteDialog; }
+namespace Ui { class QtStudentStartDialog; }
 
 namespace ribi {
 namespace braw {
 
-class QtStudentStartCompleteDialogTest;
+class QtStudentStartDialogCloser;
+class QtStudentStartDialogTest;
 
-class QtStudentStartCompleteDialog final : public QDialog
+class QtStudentStartDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
     
   public:
-  explicit QtStudentStartCompleteDialog(
+  explicit QtStudentStartDialog(
     const File file,
     QWidget* parent = nullptr
   );
-  QtStudentStartCompleteDialog(const QtStudentStartCompleteDialog&) = delete;
-  QtStudentStartCompleteDialog& operator=(const QtStudentStartCompleteDialog&) = delete;
-  ~QtStudentStartCompleteDialog() noexcept;
+  QtStudentStartDialog(const QtStudentStartDialog&) = delete;
+  QtStudentStartDialog& operator=(const QtStudentStartDialog&) = delete;
+  ~QtStudentStartDialog() noexcept;
 
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept;
@@ -40,7 +41,7 @@ class QtStudentStartCompleteDialog final : public QDialog
   void on_button_start_construct_clicked();
 
   private:
-  Ui::QtStudentStartCompleteDialog *ui;
+  Ui::QtStudentStartDialog *ui;
 
   ///Does the dialog want to go back to the student menu?
   bool m_back_to_menu;
@@ -50,7 +51,8 @@ class QtStudentStartCompleteDialog final : public QDialog
   ///Save to file
   void Save();
 
-  friend class QtStudentStartCompleteDialogTest;
+  friend class QtStudentStartDialogTest;
+  friend class QtStudentStartDialogCloser;
 };
 
 } //~namespace braw

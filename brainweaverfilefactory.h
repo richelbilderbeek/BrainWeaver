@@ -19,7 +19,6 @@ struct FileFactory
   ///Empty file
   File Get0() const noexcept;
 
-  ///File with focal question
   File Get1() const noexcept;
 
   ///File with complex concept map
@@ -33,6 +32,9 @@ struct FileFactory
 
   ///File with partially rated complex concept map and complex cluster, all multiple lines
   File Get5() const noexcept;
+
+  ///File with only a focus question
+  File GetFocalQuestionOnly() const noexcept;
 
   ///File with completely rated simple readable concept map
   File GetWithExamplesWithCompetencies(

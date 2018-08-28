@@ -17,13 +17,13 @@ class QtClusterDialogCloser : public QObject
   public slots:
 
   ///Modify the concept map randomly
-  void Modify();
+  void Modify() const;
 
   ///Press cancel
-  void PressCancel();
+  void PressCancel() const;
 
   ///Press OK
-  void PressOk();
+  void PressOk() const;
 
 };
 

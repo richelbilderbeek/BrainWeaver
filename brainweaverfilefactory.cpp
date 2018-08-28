@@ -18,9 +18,7 @@ ribi::braw::FileFactory::FileFactory()
 
 ribi::braw::File ribi::braw::FileFactory::Get0() const noexcept
 {
-  File f;
-  f.SetQuestion("File::Test[0]");
-  return f;
+  return GetFocalQuestionOnly();
 }
 
 ribi::braw::File ribi::braw::FileFactory::Get1() const noexcept
@@ -91,6 +89,13 @@ ribi::braw::File ribi::braw::FileFactory::Get5() const noexcept
   const Cluster cluster = ClusterFactory().GetTests().at(3);
   f.SetCluster(cluster);
   assert(IsCenterNode(ribi::cmap::GetFirstNode(f.GetConceptMap())));
+  return f;
+}
+
+ribi::braw::File ribi::braw::FileFactory::GetFocalQuestionOnly() const noexcept
+{
+  File f;
+  f.SetQuestion("A focal question is ...");
   return f;
 }
 

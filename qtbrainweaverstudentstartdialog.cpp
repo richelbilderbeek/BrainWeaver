@@ -1,4 +1,4 @@
-#include "qtbrainweaverstudentstartcompletedialog.h"
+#include "qtbrainweaverstudentstartdialog.h"
 
 #include <QFileDialog>
 #include <QKeyEvent>
@@ -6,13 +6,13 @@
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverfiledialog.h"
-#include "ui_qtbrainweaverstudentstartcompletedialog.h"
+#include "ui_qtbrainweaverstudentstartdialog.h"
 
-ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
+ribi::braw::QtStudentStartDialog::QtStudentStartDialog(
   const File file,
   QWidget* parent)
   : QDialog(parent),
-    ui(new Ui::QtStudentStartCompleteDialog),
+    ui(new Ui::QtStudentStartDialog),
     m_back_to_menu(false),
     m_file(file)
 {
@@ -20,17 +20,17 @@ ribi::braw::QtStudentStartCompleteDialog::QtStudentStartCompleteDialog(
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 }
 
-ribi::braw::QtStudentStartCompleteDialog::~QtStudentStartCompleteDialog() noexcept
+ribi::braw::QtStudentStartDialog::~QtStudentStartDialog() noexcept
 {
   delete ui;
 }
 
-bool ribi::braw::QtStudentStartCompleteDialog::GoBackToMenu() const noexcept
+bool ribi::braw::QtStudentStartDialog::GoBackToMenu() const noexcept
 {
   return m_back_to_menu;
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
+void ribi::braw::QtStudentStartDialog::keyPressEvent(QKeyEvent* e)
 {
   if (e->key()  == Qt::Key_Escape)
   {
@@ -51,17 +51,17 @@ void ribi::braw::QtStudentStartCompleteDialog::keyPressEvent(QKeyEvent* e)
   QDialog::keyPressEvent(e);
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::on_button_start_associate_clicked()
+void ribi::braw::QtStudentStartDialog::on_button_start_associate_clicked()
 {
   StartAssociate();
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::on_button_start_construct_clicked()
+void ribi::braw::QtStudentStartDialog::on_button_start_construct_clicked()
 {
   StartConstruct();
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::Save()
+void ribi::braw::QtStudentStartDialog::Save()
 {
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla de concept map op");
@@ -77,12 +77,12 @@ void ribi::braw::QtStudentStartCompleteDialog::Save()
   Save(filename);
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::Save(const QString& filename)
+void ribi::braw::QtStudentStartDialog::Save(const QString& filename)
 {
   m_file.Save(filename.toStdString());
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
+void ribi::braw::QtStudentStartDialog::StartAssociate()
 {
   auto * const d{
     new QtClusterDialog(m_file, this)
@@ -92,7 +92,7 @@ void ribi::braw::QtStudentStartCompleteDialog::StartAssociate()
   m_file = d->ToFile();
 }
 
-void ribi::braw::QtStudentStartCompleteDialog::StartConstruct()
+void ribi::braw::QtStudentStartDialog::StartConstruct()
 {
   auto * const d{
     new QtConceptMapDialog(m_file, this)
