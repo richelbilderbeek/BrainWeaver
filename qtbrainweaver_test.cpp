@@ -10,46 +10,12 @@
 #include "qtbrainweaverstudentstartdialogcloser.h"
 #include "ui_qtbrainweaverstudentmenudialog.h"
 
-void ribi::braw::QtTest::ModifiedFileAfterEditConceptMapOk() const noexcept
+void ribi::braw::QtTest::Issue308() const noexcept
 {
-  const File file_before = FileFactory().GetUnrated();
-  QtClusterDialog d(file_before);
-  assert(file_before == d.ToFile());
-
-  d.show();
-
-  QtConceptMapDialogCloser c;
-  QSKIP("TODO: Does not work on Travis", "WIP");
-  QTimer::singleShot(200, &c, SLOT(Modify()));
-  QTimer::singleShot(400, &c, SLOT(PressOk()));
-  d.on_button_next_clicked();
-
-  assert("Closed the ConceptMapDialog (would freeze otherwise)");
-
-  const File file_after = d.ToFile();
-  QVERIFY(file_before != file_after);
+  //TODO
 }
 
-void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
-{
-  const File file_before = FileFactory().GetUnrated();
-  QtClusterDialog d(file_before);
-  assert(file_before == d.ToFile());
-
-  d.show();
-
-  QtConceptMapDialogCloser c;
-  QTimer::singleShot(200, &c, SLOT(Modify()));
-  QTimer::singleShot(400, &c, SLOT(PressCancel()));
-  d.on_button_next_clicked();
-
-  assert("Closed the ConceptMapDialog (would freeze otherwise)");
-
-  const File file_after = d.ToFile();
-  QVERIFY(file_before == file_after);
-}
-
-void ribi::braw::QtTest::AcceptedClusterDialogChangesAreStored() const noexcept
+void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
 {
   // Create a file for a student, using Developer
   const File f = FileFactory().GetFocalQuestionOnly();
@@ -70,7 +36,27 @@ void ribi::braw::QtTest::AcceptedClusterDialogChangesAreStored() const noexcept
   QVERIFY(f != menu.GetFile());
 }
 
-void ribi::braw::QtTest::AcceptedConceptMapChangesAreStored() const noexcept
+void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromCluster() const noexcept
+{
+  const File file_before = FileFactory().GetUnrated();
+  QtClusterDialog d(file_before);
+  assert(file_before == d.ToFile());
+
+  d.show();
+
+  QtConceptMapDialogCloser c;
+  QSKIP("TODO: Does not work on Travis", "WIP");
+  QTimer::singleShot(200, &c, SLOT(Modify()));
+  QTimer::singleShot(400, &c, SLOT(PressOk()));
+  d.on_button_next_clicked();
+
+  assert("Closed the ConceptMapDialog (would freeze otherwise)");
+
+  const File file_after = d.ToFile();
+  QVERIFY(file_before != file_after);
+}
+
+void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromStart() const noexcept
 {
   // Create a file for a student, using Developer
   const File f = FileFactory().GetFocalQuestionOnly();
@@ -90,3 +76,24 @@ void ribi::braw::QtTest::AcceptedConceptMapChangesAreStored() const noexcept
 
   QVERIFY(f != menu.GetFile());
 }
+
+
+void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
+{
+  const File file_before = FileFactory().GetUnrated();
+  QtClusterDialog d(file_before);
+  assert(file_before == d.ToFile());
+
+  d.show();
+
+  QtConceptMapDialogCloser c;
+  QTimer::singleShot(200, &c, SLOT(Modify()));
+  QTimer::singleShot(400, &c, SLOT(PressCancel()));
+  d.on_button_next_clicked();
+
+  assert("Closed the ConceptMapDialog (would freeze otherwise)");
+
+  const File file_after = d.ToFile();
+  QVERIFY(file_before == file_after);
+}
+

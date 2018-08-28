@@ -13,9 +13,15 @@ class QtTest : public QObject
 
 private slots:
 
+  void ModifiedFileAfterClusterOkFromMenu() const noexcept;
+
   /// From a QtClusterDialog, pressing Next, an edit concept map dialog starts.
   /// Click OK there results in the QtClusterDialog having a modified file.
-  void ModifiedFileAfterEditConceptMapOk() const noexcept;
+  void ModifiedFileAfterConceptMapOkFromCluster() const noexcept;
+
+  /// From a StudentStartDialog, read edit concept map dialog starts.
+  /// Click OK there results in the QtClusterDialog having a modified file.
+  void ModifiedFileAfterConceptMapOkFromStart() const noexcept;
 
   /// From a QtClusterDialog, pressing Next, an edit concept map dialog starts.
   /// Cancelling it results in the QtClusterDialog having the same file as before.
@@ -23,8 +29,6 @@ private slots:
 
   void Issue308() const noexcept;
 
-  void AcceptedClusterDialogChangesAreStored() const noexcept;
-  void AcceptedConceptMapChangesAreStored() const noexcept;
 };
 
 } //~namespace braw

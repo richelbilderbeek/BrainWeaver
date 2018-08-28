@@ -261,7 +261,7 @@ void ribi::braw::QtConceptMapDialog::Save(const QString& filename) const
 {
   if (m_file.GetConceptMap() != GetQtConceptMap()->ToConceptMap())
   {
-    #ifdef NDEBUG
+    #ifndef NDEBUG
     std::clog << __func__ << ": warning: you should have called "
       << "'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n"
     ;
