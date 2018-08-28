@@ -17,7 +17,7 @@ void ribi::braw::QtStudentStartDialogCloserTest::Close() const noexcept
     FileFactory().GetFocalQuestionOnly()
   );
   QtStudentStartDialogCloser c;
-  QTimer::singleShot(200, &c, SLOT(Close()));
+  QTimer::singleShot(100, &c, SLOT(Close()));
   d.exec();
   QVERIFY(d.isHidden());
 

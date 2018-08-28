@@ -28,12 +28,13 @@ void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
   QtClusterDialogCloser cluster_closer;
 
   // Navigate backwards to menu using OK
-  QTimer::singleShot(100, &start_closer, SLOT(PressStartAssociate()));
+  QTimer::singleShot(100, &start_closer, SLOT(PressStartCluster()));
   QTimer::singleShot(200, &cluster_closer, SLOT(Modify()));
   QTimer::singleShot(300, &cluster_closer, SLOT(PressOk())); //Saves and closes
   QTimer::singleShot(400, &start_closer, SLOT(Close()));
 
   QVERIFY(f != menu.GetFile());
+  assert(!"FIXED");
 }
 
 void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromCluster() const noexcept

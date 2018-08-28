@@ -31,8 +31,6 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   int error = 0;
 
-  { ribi::braw::QtStudentStartDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
-  assert(!"Do not forget to comment this out on Travis");
   { ribi::braw::QtTest t; error |= QTest::qExec(&t, argc, argv); } //Big tests
   assert(!"Do not forget to comment this out on Travis");
 
