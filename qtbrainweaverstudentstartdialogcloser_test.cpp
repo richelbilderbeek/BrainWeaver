@@ -11,14 +11,13 @@ using namespace ribi::cmap;
 
 void ribi::braw::QtStudentStartDialogCloserTest::Close() const noexcept
 {
-  QtStudentStartDialogCloser c;
-
   if (OnTravis()) return;
 
-  QTimer::singleShot(100, &c, SLOT(Close()));
   ribi::braw::QtStudentStartDialog d(
     FileFactory().GetFocalQuestionOnly()
   );
+  QtStudentStartDialogCloser c;
+  QTimer::singleShot(200, &c, SLOT(Close()));
   d.exec();
   QVERIFY(d.isHidden());
 
@@ -26,14 +25,13 @@ void ribi::braw::QtStudentStartDialogCloserTest::Close() const noexcept
 
 void ribi::braw::QtStudentStartDialogCloserTest::PressStartCluster() const noexcept
 {
-  QtStudentStartDialogCloser c;
-
   if (OnTravis()) return;
 
-  QTimer::singleShot(100, &c, SLOT(PressStartCluster()));
   ribi::braw::QtStudentStartDialog d(
     FileFactory().GetFocalQuestionOnly()
   );
+  QtStudentStartDialogCloser c;
+  QTimer::singleShot(100, &c, SLOT(PressStartCluster()));
   d.exec();
   qApp->closeAllWindows();
   QVERIFY("Should get here (else the tests froze)");
@@ -41,14 +39,13 @@ void ribi::braw::QtStudentStartDialogCloserTest::PressStartCluster() const noexc
 
 void ribi::braw::QtStudentStartDialogCloserTest::PressStartConceptMap() const noexcept
 {
-  QtStudentStartDialogCloser c;
-
   if (OnTravis()) return;
 
-  QTimer::singleShot(100, &c, SLOT(PressStartConceptMap()));
   ribi::braw::QtStudentStartDialog d(
     FileFactory().GetFocalQuestionOnly()
   );
+  QtStudentStartDialogCloser c;
+  QTimer::singleShot(100, &c, SLOT(PressStartConceptMap()));
   d.exec();
   qApp->closeAllWindows();
   QVERIFY("Should get here (else the tests froze)");
