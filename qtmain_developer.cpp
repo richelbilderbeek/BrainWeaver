@@ -126,8 +126,6 @@ int main(int argc, char *argv[])
     MyApplication a(argc, argv);
     #ifndef NDEBUG
     std::clog << "DEBUG mode\n";
-    #else
-    std::clog << "RELEASE mode\n";
     #endif
     a.setStyleSheet(CreateStyleSheet().c_str());
     a.setWindowIcon(QIcon(":/images/R.png"));
