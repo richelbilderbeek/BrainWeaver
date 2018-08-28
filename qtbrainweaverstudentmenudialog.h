@@ -23,6 +23,8 @@ class QtStudentMenuDialog final : public QDialog
   QtStudentMenuDialog& operator=(const QtStudentMenuDialog&) = delete;
   ~QtStudentMenuDialog() noexcept;
 
+  File GetFile() const noexcept { return m_file; }
+
   ///Get the student his/her name
   QString GetName() const noexcept;
 

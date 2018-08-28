@@ -1,10 +1,13 @@
 #include "qtbrainweaver_test.h"
 
 #include "qtbrainweaverclusterdialog.h"
+#include "qtbrainweaverclusterdialogcloser.h"
 #include "qtbrainweaverconceptmapdialog.h"
 #include "qtbrainweaverconceptmapdialogcloser.h"
 #include "brainweaverfilefactory.h"
 #include "qtbrainweaverstudentmenudialog.h"
+#include "qtbrainweaverstudentstartdialog.h"
+#include "qtbrainweaverstudentstartdialogcloser.h"
 #include "ui_qtbrainweaverstudentmenudialog.h"
 
 void ribi::braw::QtTest::ModifiedFileAfterEditConceptMapOk() const noexcept
@@ -46,28 +49,44 @@ void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
   QVERIFY(file_before == file_after);
 }
 
-void ribi::braw::QtTest::Issue308Cluster() const noexcept
+void ribi::braw::QtTest::AcceptedClusterDialogChangesAreStored() const noexcept
 {
   // Create a file for a student, using Developer
-  File f = FileFactory().GetFocalQuestionOnly();
+  const File f = FileFactory().GetFocalQuestionOnly();
 
   // Load the empty file, fill in name, cluster, save
   QtStudentMenuDialog menu(f);
   menu.SetName("John Doe");
-  /*
+
   QtStudentStartDialogCloser start_closer;
   QtClusterDialogCloser cluster_closer;
 
-  QTimer::singleShot(200, &start_closer, SLOT(PressAssociate()));
-
-  QTimer::singleShot(400, &start_closer, SLOT(Close()));
-  */
   // Navigate backwards to menu using OK
-  // Navigate forward again
+  QTimer::singleShot(100, &start_closer, SLOT(PressStartAssociate()));
+  QTimer::singleShot(200, &cluster_closer, SLOT(Modify()));
+  QTimer::singleShot(300, &cluster_closer, SLOT(PressOk())); //Saves and closes
+  QTimer::singleShot(400, &start_closer, SLOT(Close()));
 
+  QVERIFY(f != menu.GetFile());
 }
 
-void ribi::braw::QtTest::Issue308ConceptMap() const noexcept
+void ribi::braw::QtTest::AcceptedConceptMapChangesAreStored() const noexcept
 {
+  // Create a file for a student, using Developer
+  const File f = FileFactory().GetFocalQuestionOnly();
 
+  // Load the empty file, fill in name, cluster, save
+  QtStudentMenuDialog menu(f);
+  menu.SetName("John Doe");
+
+  QtStudentStartDialogCloser start_closer;
+  QtConceptMapDialogCloser concept_map_dialog_closer;
+
+  // Navigate backwards to menu using OK
+  QTimer::singleShot(100, &start_closer, SLOT(PressStartConceptMap()));
+  QTimer::singleShot(200, &concept_map_dialog_closer, SLOT(Modify()));
+  QTimer::singleShot(300, &concept_map_dialog_closer, SLOT(PressOk())); //Saves and closes
+  QTimer::singleShot(400, &start_closer, SLOT(Close()));
+
+  QVERIFY(f != menu.GetFile());
 }

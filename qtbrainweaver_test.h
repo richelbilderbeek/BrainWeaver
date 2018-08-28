@@ -21,9 +21,10 @@ private slots:
   /// Cancelling it results in the QtClusterDialog having the same file as before.
   void SameFileAfterEditConceptMapCancelled() const noexcept;
 
+  void Issue308() const noexcept;
 
-  void Issue308Cluster() const noexcept;
-  void Issue308ConceptMap() const noexcept;
+  void AcceptedClusterDialogChangesAreStored() const noexcept;
+  void AcceptedConceptMapChangesAreStored() const noexcept;
 };
 
 } //~namespace braw
