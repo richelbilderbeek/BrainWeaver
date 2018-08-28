@@ -201,7 +201,7 @@ void ribi::braw::QtConceptMapDialog::OnAutosave()
   {
     UpdateFileWithConceptMapFromWidget();
     m_file.AutoSave();
-    #ifdef NDEBUG
+    #ifndef NDEBUG
     qDebug() << __func__ << ": successfull autosave";
     #endif // NDEBUG
   }
