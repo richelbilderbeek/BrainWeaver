@@ -119,7 +119,8 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   return table;
 }
 
-std::array<std::string, 7> ribi::braw::QtDisplay::CreateTalliedCompetenciesTexts(const File& file) const
+std::array<std::string, 7> ribi::braw::QtDisplay
+  ::CreateTalliedCompetenciesTexts(const File& file) const
 {
   const std::map<cmap::Competency, int> cnts = TallyCompetencies(file);
   const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
