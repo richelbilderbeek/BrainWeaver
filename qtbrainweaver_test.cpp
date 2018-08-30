@@ -7,13 +7,37 @@
 #include "qtbrainweaverconceptmapdialogcloser.h"
 #include "brainweaverfilefactory.h"
 #include "qtbrainweaverstudentmenudialog.h"
+#include "qtbrainweaverstudentmenudialogcloser.h"
 #include "qtbrainweaverstudentstartdialog.h"
 #include "qtbrainweaverstudentstartdialogcloser.h"
 #include "ui_qtbrainweaverstudentmenudialog.h"
 
-void ribi::braw::QtTest::Issue308() const noexcept
+void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
 {
-  //TODO
+  if (ribi::cmap::OnTravis()) return;
+
+  // Create a file for a student, using Developer
+  const File f = FileFactory().GetFocalQuestionOnly();
+
+  // Load the empty file, fill in name, cluster, save
+  QtStudentMenuDialog menu(f);
+
+  QtStudentMenuDialogCloser menu_closer;
+  QtStudentStartDialogCloser start_closer;
+  QtClusterDialogCloser cluster_closer;
+
+  // Navigate backwards to menu using OK
+  const int t{1000};
+  QTimer::singleShot(1 * t, &menu_closer, SLOT(EnterName()));
+  QTimer::singleShot(2 * t, &menu_closer, SLOT(PressStart()));
+  QTimer::singleShot(3 * t, &start_closer, SLOT(PressStartCluster()));
+  QTimer::singleShot(4 * t, &cluster_closer, SLOT(Modify()));
+  QTimer::singleShot(5 * t, &cluster_closer, SLOT(PressOk())); //Saves and closes
+  QTimer::singleShot(6 * t, &start_closer, SLOT(Close()));
+  QTimer::singleShot(7 * t, &menu_closer, SLOT(Close()));
+  menu.exec();
+
+  QVERIFY(f != menu.GetFile());
 }
 
 void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromStart() const noexcept

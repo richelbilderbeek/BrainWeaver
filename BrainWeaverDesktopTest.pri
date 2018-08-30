@@ -18,6 +18,7 @@ HEADERS  += \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.h \
     $$PWD/qtbrainweaverratingdialog_test.h \
     $$PWD/qtbrainweaverstudentmenudialog_test.h \
+    $$PWD/qtbrainweaverstudentmenudialogcloser_test.h \
     $$PWD/qtbrainweaverstudentstartdialog_test.h \
     $$PWD/qtbrainweaverstudentstartdialogcloser_test.h \
     $$PWD/qtbrainweavercreateassessmentdialog_test.h
@@ -42,6 +43,7 @@ SOURCES += \
     $$PWD/qtbrainweaverrateconceptmapdialog_test.cpp \
     $$PWD/qtbrainweaverratingdialog_test.cpp \
     $$PWD/qtbrainweaverstudentmenudialog_test.cpp \
+    $$PWD/qtbrainweaverstudentmenudialogcloser_test.cpp \
     $$PWD/qtbrainweaverstudentstartdialogcloser_test.cpp \
     $$PWD/qtbrainweaverstudentstartdialog_test.cpp \
     $$PWD/qtbrainweavercreateassessmentdialog_test.cpp

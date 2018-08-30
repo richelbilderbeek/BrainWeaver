@@ -77,9 +77,10 @@ void ribi::braw::QtStudentMenuDialog::on_button_start_clicked()
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
   auto * const d{
-    new QtStudentMenuDialog(m_file, this)
+    new QtStudentStartDialog(m_file, this)
   };
   d->exec();
+  m_file = d->GetFile();
 }
 
 void ribi::braw::QtStudentMenuDialog::on_edit_name_textChanged(const QString &arg1)

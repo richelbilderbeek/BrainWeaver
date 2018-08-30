@@ -147,7 +147,7 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
     QtFileDialog::m_last_file = filename;
     const File file = LoadFile(filename.toStdString());
     auto * const menu{
-      new QtStudentStartDialog(file, this)
+      new QtStudentMenuDialog(file, this)
     };
     menu->exec();
   }

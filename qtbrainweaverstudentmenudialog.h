@@ -10,6 +10,8 @@ namespace Ui { class QtStudentMenuDialog; }
 namespace ribi {
 namespace braw {
 
+class QtStudentMenuDialogCloser;
+
 class QtStudentMenuDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
@@ -45,6 +47,7 @@ private:
   Ui::QtStudentMenuDialog *ui;
   File m_file;
 
+  friend class QtStudentMenuDialogCloser;
 };
 
 } //~namespace braw
