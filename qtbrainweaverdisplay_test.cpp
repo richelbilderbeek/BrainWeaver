@@ -19,3 +19,23 @@ void ribi::braw::QtDisplayTest::CreateRatedConceptsWidgetOnEmptyGraphThrows() co
     QVERIFY("Should get here");
   }
 }
+
+
+void ribi::braw::QtDisplayTest::CreateTalliedExamplesWidgetIsReadOnly() const noexcept
+{
+  const File file = FileFactory().GetRated();
+  std::unique_ptr<QTableWidget> w{QtDisplay().CreateTalliedExamplesWidget(file)};
+  assert(w);
+  const int n_rows{w->rowCount()};
+  assert(n_rows == 7);
+  assert(w->columnCount() == 1);
+  for (int row = 0; row != n_rows; ++row)
+  {
+    assert(w->item(row, 0));
+    const bool is_editable{
+      w->item(row, 0)->flags() & Qt::ItemIsEditable
+    };
+    assert(!is_editable);
+    QVERIFY(!is_editable);
+  }
+}

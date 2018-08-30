@@ -36,13 +36,16 @@ struct FileFactory
   ///File with only a focus question
   File GetFocalQuestionOnly() const noexcept;
 
+  ///File with rated and human-friendly concept map
+  File GetRated() const noexcept;
+
+  ///File with unrated and human-friendly concept map
+  File GetUnrated() const noexcept;
+
   ///File with completely rated simple readable concept map
   File GetWithExamplesWithCompetencies(
     const std::vector<ribi::cmap::Competency>& competencies
   ) const noexcept;
-
-  ///File with unrated and human-friendly concept map
-  File GetUnrated() const noexcept;
 
   ///Get all the tests
   std::vector<File> GetTests() const noexcept;

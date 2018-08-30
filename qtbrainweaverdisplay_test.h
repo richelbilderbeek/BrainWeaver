@@ -12,6 +12,7 @@ class QtDisplayTest : public QObject
 
 private slots:
   void CreateRatedConceptsWidgetOnEmptyGraphThrows() const noexcept;
+  void CreateTalliedExamplesWidgetIsReadOnly() const noexcept; // #313
 };
 
 } //~namespace braw

@@ -1,15 +1,14 @@
-
-
 #include "brainweaverfilefactory.h"
 
 #include <cassert>
-#include "conceptmapfactory.h"
 #include "brainweaverclusterfactory.h"
-#include "conceptmap.h"
+#include "brainweaverclusterfactory.h"
 #include "brainweavercluster.h"
-#include "brainweaverclusterfactory.h"
 #include "brainweaverfile.h"
+#include "conceptmapfactory.h"
+#include "conceptmap.h"
 
+using namespace ribi::cmap;
 
 ribi::braw::FileFactory::FileFactory()
 {
@@ -23,8 +22,6 @@ ribi::braw::File ribi::braw::FileFactory::Get0() const noexcept
 
 ribi::braw::File ribi::braw::FileFactory::Get1() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
   File f;
   const ConceptMap concept_map = ConceptMapFactory().Get1();
   assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
@@ -35,8 +32,6 @@ ribi::braw::File ribi::braw::FileFactory::Get1() const noexcept
 
 ribi::braw::File ribi::braw::FileFactory::Get2() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
   File f;
   const ConceptMap concept_map = ConceptMapFactory().Get6();
   assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
@@ -47,8 +42,6 @@ ribi::braw::File ribi::braw::FileFactory::Get2() const noexcept
 
 ribi::braw::File ribi::braw::FileFactory::Get3() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
   File f;
   f.SetStudentName("Heath Gossman");
   const ConceptMap concept_map = ConceptMapFactory().Get6();
@@ -62,8 +55,6 @@ ribi::braw::File ribi::braw::FileFactory::Get3() const noexcept
 
 ribi::braw::File ribi::braw::FileFactory::Get4() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
   File f;
   f.SetStudentName("Wan Tarlton");
   const ConceptMap concept_map = ConceptMapFactory().Get6();
@@ -77,9 +68,6 @@ ribi::braw::File ribi::braw::FileFactory::Get4() const noexcept
 
 ribi::braw::File ribi::braw::FileFactory::Get5() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
-  using ribi::cmap::GetCenterNode;
   File f;
   f.SetStudentName("Lynetta Easler");
   const ConceptMap concept_map = ConceptMapFactory().Get6();
@@ -99,10 +87,18 @@ ribi::braw::File ribi::braw::FileFactory::GetFocalQuestionOnly() const noexcept
   return f;
 }
 
+ribi::braw::File ribi::braw::FileFactory::GetRated() const noexcept
+{
+  File f;
+  const ConceptMap concept_map = ConceptMapFactory().GetRated();
+  assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
+  f.SetQuestion(GetFirstNode(concept_map).GetName());
+  f.SetConceptMap(concept_map);
+  return f;
+}
+
 ribi::braw::File ribi::braw::FileFactory::GetUnrated() const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
   File f;
   const ConceptMap concept_map = ConceptMapFactory().GetUnrated();
   assert(boost::num_vertices(concept_map)); //Cannot set empty concept map
@@ -115,9 +111,6 @@ ribi::braw::File ribi::braw::FileFactory::GetWithExamplesWithCompetencies(
   const std::vector<ribi::cmap::Competency>& competencies
 ) const noexcept
 {
-  using ribi::cmap::ConceptMap;
-  using ribi::cmap::ConceptMapFactory;
-  using ribi::cmap::GetCenterNode;
   File f;
   f.SetStudentName("Roxanna Reigle");
   const ConceptMap concept_map{
@@ -132,7 +125,6 @@ ribi::braw::File ribi::braw::FileFactory::GetWithExamplesWithCompetencies(
 
 std::vector<ribi::braw::File> ribi::braw::FileFactory::GetTests() const noexcept
 {
-  using ribi::cmap::Competency;
   std::vector<File > v;
   v.reserve(7);
   v.push_back(Get0());

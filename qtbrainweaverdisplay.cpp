@@ -365,9 +365,10 @@ void ribi::braw::QtDisplay::DisplayExamplesItems(
   const File& file,
   QTableWidget * const table) const
 {
-  assert(table->rowCount() == 7);
+  const int n_rows{7};
+  assert(table->rowCount() == n_rows);
   assert(table->columnCount() == 1);
-  std::map<cmap::Competency,int> cnts = TallyCompetencies(file);
+  std::map<cmap::Competency, int> cnts = TallyCompetencies(file);
 
   const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
     [](int& init, const std::pair<cmap::Competency, int>& p)
@@ -376,26 +377,38 @@ void ribi::braw::QtDisplay::DisplayExamplesItems(
       return init;
     }
   );
-  if (sum != 0)
+
+  for (int row = 0; row != n_rows; ++row)
   {
-    for (const std::pair<cmap::Competency, int>& p: cnts)
+    const int col = 0;
+    QTableWidgetItem * const item  = new QTableWidgetItem;
+    QString text;
+    if (sum != 0)
     {
-      const int col = 0;
-      const int row = static_cast<int>(p.first) - 1;
-      if (row == -1) continue; //0 == uninitialized
-      QTableWidgetItem * const item  = new QTableWidgetItem;
-      const double f{
-        static_cast<double>(p.second)
-        / static_cast<double>(sum)
-      };
-      const int percentage = static_cast<int>(std::round(100.0 * f));
-      item->setText(QString::number(percentage));
-      item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-      item->setTextAlignment(Qt::AlignCenter);
-      assert(row >= 0);
-      assert(row < table->rowCount());
-      assert(col < table->columnCount());
-      table->setItem(row, col, item);
+      const cmap::Competency competency = static_cast<cmap::Competency>(row + 1);
+      assert(competency != cmap::Competency::uninitialized);
+      assert(competency != cmap::Competency::n_competencies);
+      if (cnts.find(competency) != std::end(cnts))
+      {
+        text = QString::number(0);
+      }
+      else
+      {
+        const int n = cnts[competency];
+        const double f{
+          static_cast<double>(n)
+          / static_cast<double>(sum)
+        };
+        const int percentage = static_cast<int>(std::round(100.0 * f));
+        text = QString::number(percentage);
+      }
     }
+    item->setText(text);
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    item->setTextAlignment(Qt::AlignCenter);
+    assert(row >= 0);
+    assert(row < table->rowCount());
+    assert(col < table->columnCount());
+    table->setItem(row, col, item);
   }
 }
