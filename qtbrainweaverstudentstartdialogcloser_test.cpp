@@ -32,9 +32,8 @@ void ribi::braw::QtStudentStartDialogCloserTest::PressStartCluster() const noexc
   );
   QtStudentStartDialogCloser c;
   QTimer::singleShot(100, &c, SLOT(PressStartCluster()));
+  QTimer::singleShot(200, qApp, SLOT(closeAllWindows()));
   d.exec();
-  QTest::qWait(100);
-  qApp->closeAllWindows();
   QVERIFY("Should get here (else the tests froze)");
 }
 
@@ -47,8 +46,7 @@ void ribi::braw::QtStudentStartDialogCloserTest::PressStartConceptMap() const no
   );
   QtStudentStartDialogCloser c;
   QTimer::singleShot(100, &c, SLOT(PressStartConceptMap()));
+  QTimer::singleShot(200, qApp, SLOT(closeAllWindows()));
   d.exec();
-  QTest::qWait(100);
-  qApp->closeAllWindows();
   QVERIFY("Should get here (else the tests froze)");
 }
