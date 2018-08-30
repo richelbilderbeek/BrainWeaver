@@ -109,6 +109,8 @@ void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromStart() const noexcept
 
 void ribi::braw::QtTest::SameFileAfterEditConceptMapCancelled() const noexcept
 {
+  if (ribi::cmap::OnTravis()) return;
+
   const File file_before = FileFactory().GetUnrated();
   QtClusterDialog d(file_before);
   assert(file_before == d.ToFile());
