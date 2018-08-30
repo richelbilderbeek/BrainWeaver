@@ -36,6 +36,7 @@
 #include "qtbrainweaverrateconceptmapdialog.h"
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
+#include "qtbrainweaverstudentstartdialog.h"
 #include "qtconceptmapconcepteditdialog.h"
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtconceptmaprateconcepttallydialog.h"
@@ -146,7 +147,7 @@ void ribi::braw::QtMenuDialog::on_button_student_clicked() noexcept
     QtFileDialog::m_last_file = filename;
     const File file = LoadFile(filename.toStdString());
     auto * const menu{
-      new QtStudentMenuDialog(file, this)
+      new QtStudentStartDialog(file, this)
     };
     menu->exec();
   }

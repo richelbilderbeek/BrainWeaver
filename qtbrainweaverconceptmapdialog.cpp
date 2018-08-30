@@ -273,6 +273,12 @@ void ribi::braw::QtConceptMapDialog::Save(const QString& filename) const
   m_file.Save(filename.toStdString());
 }
 
+ribi::braw::File ribi::braw::QtConceptMapDialog::ToFile()
+{
+  UpdateFileWithConceptMapFromWidget();
+  return m_file;
+}
+
 void ribi::braw::QtConceptMapDialog::on_button_ok_clicked()
 {
   m_clicked_ok = true;

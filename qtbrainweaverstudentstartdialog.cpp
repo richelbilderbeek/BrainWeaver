@@ -88,8 +88,10 @@ void ribi::braw::QtStudentStartDialog::StartAssociate()
     new QtClusterDialog(m_file, this)
   };
   d->exec();
-
-  m_file = d->ToFile();
+  if (d->HasClickedOk())
+  {
+    m_file = d->ToFile();
+  }
 }
 
 void ribi::braw::QtStudentStartDialog::StartConstruct()
@@ -98,4 +100,9 @@ void ribi::braw::QtStudentStartDialog::StartConstruct()
     new QtConceptMapDialog(m_file, this)
   };
   d->exec();
+  if (d->HasClickedOk())
+  {
+    d->UpdateFileWithConceptMapFromWidget();
+    m_file = d->ToFile();
+  }
 }

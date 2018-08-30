@@ -1,5 +1,3 @@
-
-
 #include "qtbrainweaveroverviewdialog.h"
 
 #include <QDialog>
@@ -31,8 +29,6 @@
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtconceptmaprateconcepttallydialog.h"
 #include "qtconceptmaprateexamplesdialog.h"
-
-
 
 ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
   : QGraphicsView(new QGraphicsScene, parent),
@@ -114,7 +110,7 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
     )
   );
   //v.push_back(new QtRatingDialog(FileFactory().GetTests().at(4), parent));
-  v.push_back(new QtStudentMenuDialog(FileFactory().GetTests().at(2), parent));
+  v.push_back(new QtStudentStartDialog(FileFactory().GetTests().at(2), parent));
   v.push_back(new QtStudentStartDialog(FileFactory().GetTests().at(2), parent));
   assert(std::count_if(v.begin(),v.end(),[](QDialog* p) { return !p; } ) == 0);
   return v;

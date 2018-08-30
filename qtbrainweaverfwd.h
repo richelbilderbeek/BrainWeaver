@@ -14,7 +14,7 @@ struct QtArrow;
 struct QtClusterDialog;
 struct QtClusterWidget;
 struct QtConceptMapDialog;
-struct QtStudentMenuDialog;
+struct QtStudentStartDialog;
 
 } //~namespace braw
 

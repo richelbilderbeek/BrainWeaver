@@ -16,16 +16,15 @@ void ribi::braw::QtTest::Issue308() const noexcept
   //TODO
 }
 
-void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
+void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromStart() const noexcept
 {
-  QSKIP("#308", "WIP");
+  if (ribi::cmap::OnTravis()) return;
 
   // Create a file for a student, using Developer
   const File f = FileFactory().GetFocalQuestionOnly();
 
   // Load the empty file, fill in name, cluster, save
-  QtStudentMenuDialog menu(f);
-  menu.SetName("John Doe");
+  QtStudentStartDialog start(f);
 
   QtStudentStartDialogCloser start_closer;
   QtClusterDialogCloser cluster_closer;
@@ -35,9 +34,9 @@ void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
   QTimer::singleShot(200, &cluster_closer, SLOT(Modify()));
   QTimer::singleShot(300, &cluster_closer, SLOT(PressOk())); //Saves and closes
   QTimer::singleShot(400, &start_closer, SLOT(Close()));
+  start.exec();
 
-  QVERIFY(f != menu.GetFile());
-  assert(!"FIXED");
+  QVERIFY(f != start.GetFile());
 }
 
 void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromCluster() const noexcept
@@ -63,14 +62,11 @@ void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromCluster() const noexce
 
 void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromStart() const noexcept
 {
-  QSKIP("#308", "WIP");
-
   // Create a file for a student, using Developer
   const File f = FileFactory().GetFocalQuestionOnly();
 
   // Load the empty file, fill in name, cluster, save
-  QtStudentMenuDialog menu(f);
-  menu.SetName("John Doe");
+  QtStudentStartDialog start(f);
 
   QtStudentStartDialogCloser start_closer;
   QtConceptMapDialogCloser concept_map_dialog_closer;
@@ -80,8 +76,9 @@ void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromStart() const noexcept
   QTimer::singleShot(200, &concept_map_dialog_closer, SLOT(Modify()));
   QTimer::singleShot(300, &concept_map_dialog_closer, SLOT(PressOk())); //Saves and closes
   QTimer::singleShot(400, &start_closer, SLOT(Close()));
+  start.exec();
 
-  QVERIFY(f != menu.GetFile());
+  QVERIFY(f != start.GetFile());
 }
 
 

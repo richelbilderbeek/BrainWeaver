@@ -13,7 +13,7 @@ class QtTest : public QObject
 
 private slots:
 
-  void ModifiedFileAfterClusterOkFromMenu() const noexcept;
+  void ModifiedFileAfterClusterOkFromStart() const noexcept;
 
   /// From a QtClusterDialog, pressing Next, an edit concept map dialog starts.
   /// Click OK there results in the QtClusterDialog having a modified file.

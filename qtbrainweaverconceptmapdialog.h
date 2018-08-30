@@ -16,7 +16,7 @@ class QtConceptMapDialogCloser;
 class QtConceptMapDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
-    
+
   public:
   explicit QtConceptMapDialog(const File& file, QWidget* parent = nullptr);
   QtConceptMapDialog(const QtConceptMapDialog&) = delete;
@@ -35,8 +35,12 @@ class QtConceptMapDialog final : public QDialog
   ///Update concept map into file
   void UpdateFileWithConceptMapFromWidget();
 
+
   ///Save to disk
   void Save(const QString& filename) const;
+
+  ///Get an updated File that uses the concept map from the widget
+  File ToFile();
 
   private slots:
 

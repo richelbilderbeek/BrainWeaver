@@ -8,7 +8,6 @@
 #include "qtbrainweaveraboutdialog.h"
 #include "qtbrainweaverfiledialog.h"
 #include "qtbrainweaverstudentstartdialog.h"
-
 #include "ui_qtbrainweaverstudentmenudialog.h"
 
 ribi::braw::QtStudentMenuDialog::QtStudentMenuDialog(
@@ -78,7 +77,7 @@ void ribi::braw::QtStudentMenuDialog::on_button_start_clicked()
 {
   m_file.SetStudentName(ui->edit_name->text().toStdString());
   auto * const d{
-    new QtStudentStartDialog(m_file, this)
+    new QtStudentMenuDialog(m_file, this)
   };
   d->exec();
 }

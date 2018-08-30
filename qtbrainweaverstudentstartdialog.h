@@ -1,5 +1,5 @@
-#ifndef QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
-#define QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
+#ifndef QTBRAINWEAVERSTUDENTSTARTDIALOG_H
+#define QTBRAINWEAVERSTUDENTSTARTDIALOG_H
 
 #include <QDialog>
 #include "brainweaverfile.h"
@@ -16,7 +16,7 @@ class QtStudentStartDialogTest;
 class QtStudentStartDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
-    
+
   public:
   explicit QtStudentStartDialog(
     const File file,
@@ -25,6 +25,8 @@ class QtStudentStartDialog final : public QDialog
   QtStudentStartDialog(const QtStudentStartDialog&) = delete;
   QtStudentStartDialog& operator=(const QtStudentStartDialog&) = delete;
   ~QtStudentStartDialog() noexcept;
+
+  const File& GetFile() const noexcept { return m_file; }
 
   ///Does the user need to go back to the student menu?
   bool GoBackToMenu() const noexcept;
@@ -59,4 +61,4 @@ class QtStudentStartDialog final : public QDialog
 
 } //~namespace ribi
 
-#endif // QTBRAINWEAVERSTUDENTSTARTCOMPLETEDIALOG_H
+#endif // QTBRAINWEAVERSTUDENTSTARTDIALOG_H

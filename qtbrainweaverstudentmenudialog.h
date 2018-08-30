@@ -13,7 +13,7 @@ namespace braw {
 class QtStudentMenuDialog final : public QDialog
 {
   Q_OBJECT //!OCLINT
-    
+
   public:
   explicit QtStudentMenuDialog(
     const File file,
