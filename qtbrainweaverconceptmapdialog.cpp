@@ -169,6 +169,7 @@ void ribi::braw::QtConceptMapDialog::keyPressEvent(QKeyEvent* e)
     }
     else
     {
+      UpdateFileWithConceptMapFromWidget();
       Save(QtFileDialog::m_last_file);
       return;
     }
@@ -261,15 +262,8 @@ void ribi::braw::QtConceptMapDialog::UpdateFileWithConceptMapFromWidget()
 
 void ribi::braw::QtConceptMapDialog::Save(const QString& filename) const
 {
-  if (m_file.GetConceptMap() != GetQtConceptMap()->ToConceptMap())
-  {
-    #ifndef NDEBUG
-    std::clog << __func__ << ": warning: you should have called "
-      << "'UpdateFileWithConceptMapFromWidget' before saving, doing so now\n"
-    ;
-    const_cast<QtConceptMapDialog*>(this)->UpdateFileWithConceptMapFromWidget();
-    #endif // NDEBUG
-  }
+  // Do not forget to call UpdateFileWithConceptMapFromWidget before saving
+  assert(m_file.GetConceptMap() == GetQtConceptMap()->ToConceptMap());
   m_file.Save(filename.toStdString());
 }
 
