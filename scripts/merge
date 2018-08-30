@@ -11,11 +11,17 @@ do
   echo "git folder: "$folder
   git checkout master
   git pull
-  git merge develop
-  git push
   git checkout develop
   git pull
-  git merge master
+  git checkout richel
+  git pull
+
+  git checkout master
+  git merge develop
+  git push
+
+  git checkout develop
+  git merge richel
   git push
   cd ..
 done
