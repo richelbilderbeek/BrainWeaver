@@ -62,6 +62,8 @@ void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromCluster() const noexce
 
 void ribi::braw::QtTest::ModifiedFileAfterConceptMapOkFromStart() const noexcept
 {
+  if (ribi::cmap::OnTravis()) return;
+
   // Create a file for a student, using Developer
   const File f = FileFactory().GetFocalQuestionOnly();
 
