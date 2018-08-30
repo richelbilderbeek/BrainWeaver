@@ -44,6 +44,7 @@ void ribi::braw::QtStudentStartDialogTest::QuickSaveFirstTimeOpensDialog() const
   QtStudentStartDialog d(file);
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QtFileDialog::m_last_file = "";
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 

@@ -74,6 +74,7 @@ void ribi::braw::QtRateConceptMapDialogTest::QuickSaveFirstTimeOpensDialog() con
   QtRateConceptMapDialog d(file);
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QtFileDialog::m_last_file = "";
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 

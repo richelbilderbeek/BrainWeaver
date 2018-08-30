@@ -37,6 +37,7 @@ void ribi::braw::QtCreateAssessmentDialogTest::QuickSaveFirstTimeOpensDialog() c
   QtCreateAssessmentDialog d;
   d.show();
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QtFileDialog::m_last_file = "";
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 

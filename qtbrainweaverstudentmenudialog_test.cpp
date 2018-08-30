@@ -41,6 +41,7 @@ void ribi::braw::QtStudentMenuDialogTest::QuickSaveFirstTimeOpensDialog()
   d.show();
   d.SetName("Jane Doe");
   QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QtFileDialog::m_last_file = "";
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
 }
 
