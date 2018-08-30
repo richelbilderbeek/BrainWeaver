@@ -205,9 +205,11 @@ void ribi::braw::QtConceptMapDialog::OnAutosave()
     qDebug() << __func__ << ": successfull autosave";
     #endif // NDEBUG
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
+    #ifndef NDEBUG
     qCritical() << __func__ << ": exception thrown with description " << e.what();
+    #endif // NDEBUG
   }
 }
 

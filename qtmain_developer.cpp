@@ -108,11 +108,15 @@ public:
     }
     catch(std::exception& e)
     {
+      #ifndef NDEBUG
       qCritical() << "Exception thrown:" << e.what();
+      #endif // NDEBUG
     }
     catch(...)
     {
+      #ifndef NDEBUG
       qCritical() << "Unknown exception thrown";
+      #endif // NDEBUG
     }
     return false;
   }

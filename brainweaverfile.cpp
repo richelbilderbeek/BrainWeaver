@@ -358,9 +358,11 @@ void ribi::braw::File::Save(const std::string &filename) const
     std::ofstream f(filename.c_str());
     f << s;
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
+    #ifndef NDEBUG
     qCritical() << __func__ << ": failed with exception " << e.what();
+    #endif // NDEBUG
   }
 }
 
