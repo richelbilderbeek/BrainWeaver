@@ -1,5 +1,6 @@
 #include "qtbrainweaver_test.h"
 
+#include "conceptmaphelper.h"
 #include "qtbrainweaverclusterdialog.h"
 #include "qtbrainweaverclusterdialogcloser.h"
 #include "qtbrainweaverconceptmapdialog.h"
