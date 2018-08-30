@@ -24,7 +24,7 @@ struct QtDisplay
     const File& file, QWidget * const parent = nullptr
   ) const;
 
-  QTableWidget * CreateTalliedExamplesWidget(
+  QTableWidget * CreateTalliedCompetenciesWidget(
     const File& file, QWidget * const parent = nullptr
   ) const;
 
@@ -33,10 +33,12 @@ struct QtDisplay
   void DisplayDiagnosticsHeader(QTableWidget * const table) const;
   void DisplayDiagnosticsItems(const File& file, QTableWidget * const table) const;
 
-  void DisplayExamples(const File& file, QTableWidget * const table) const;
+  void DisplayTalliedCompetencies(const File& file, QTableWidget * const table) const;
 
-  void DisplayExamplesHeader(QTableWidget * const table) const;
-  void DisplayExamplesItems(const File& file, QTableWidget * const table) const;
+  void DisplayTalliedCompetenciesHeader(QTableWidget * const table) const;
+  void DisplayTalliedCompetenciesItems(const File& file, QTableWidget * const table) const;
+
+  std::array<std::string, 7> CreateTalliedCompetenciesTexts(const File& file) const;
 
   void DisplayRatedConceptName(
     const ribi::cmap::Concept& concept,

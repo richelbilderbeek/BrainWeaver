@@ -26,8 +26,7 @@ void ribi::braw::QtTest::ModifiedFileAfterClusterOkFromMenu() const noexcept
   QtStudentStartDialogCloser start_closer;
   QtClusterDialogCloser cluster_closer;
 
-  // Navigate backwards to menu using OK
-  const int t{1000};
+  const int t{100};
   QTimer::singleShot(1 * t, &menu_closer, SLOT(EnterName()));
   QTimer::singleShot(2 * t, &menu_closer, SLOT(PressStart()));
   QTimer::singleShot(3 * t, &start_closer, SLOT(PressStartCluster()));

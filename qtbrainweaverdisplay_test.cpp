@@ -24,7 +24,7 @@ void ribi::braw::QtDisplayTest::CreateRatedConceptsWidgetOnEmptyGraphThrows() co
 void ribi::braw::QtDisplayTest::CreateTalliedExamplesWidgetIsReadOnly() const noexcept
 {
   const File file = FileFactory().GetRated();
-  std::unique_ptr<QTableWidget> w{QtDisplay().CreateTalliedExamplesWidget(file)};
+  std::unique_ptr<QTableWidget> w{QtDisplay().CreateTalliedCompetenciesWidget(file)};
   assert(w);
   const int n_rows{w->rowCount()};
   assert(n_rows == 7);

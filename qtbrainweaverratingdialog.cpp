@@ -82,7 +82,7 @@ ribi::braw::QtRatingDialog::QtRatingDialog(
       )
     );
     ui->scrollAreaWidgetContents->layout()->addWidget(
-      QtDisplay().CreateTalliedExamplesWidget(file, this)
+      QtDisplay().CreateTalliedCompetenciesWidget(file, this)
     );
   }
 

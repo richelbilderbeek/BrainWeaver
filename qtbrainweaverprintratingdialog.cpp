@@ -44,7 +44,7 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     },
     m_table_rated_concepts{QtDisplay().CreateRatedConceptsWidget(file, this)},
     m_table_tallied_examples{
-      QtDisplay().CreateTalliedExamplesWidget(file, this)
+      QtDisplay().CreateTalliedCompetenciesWidget(file, this)
     },
     m_widget(new cmap::QtConceptMap)
 {

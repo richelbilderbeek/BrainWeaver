@@ -8,6 +8,7 @@
 #include "conceptmapcompetencies.h"
 #include "qtconceptmapcompetency.h"
 
+
 QVector<QString> GetDisplayDiagnosticsTooltips() //!OCLINT indeed this is a long function
 {
   return {
@@ -95,6 +96,7 @@ ribi::braw::QtDisplay::QtDisplay()
 
 }
 
+
 QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   const File& file,
   QWidget * const parent
@@ -115,6 +117,44 @@ QTableWidget * ribi::braw::QtDisplay::CreateDiagnosticsWidget(
   table->resizeColumnsToContents();
   table->resizeRowsToContents();
   return table;
+}
+
+std::array<std::string, 7> ribi::braw::QtDisplay::CreateTalliedCompetenciesTexts(const File& file) const
+{
+  const std::map<cmap::Competency, int> cnts = TallyCompetencies(file);
+  const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
+    [](int& init, const std::pair<cmap::Competency, int>& p)
+    {
+      init += p.second;
+      return init;
+    }
+  );
+  if (sum == 0) return {};
+
+  std::array<std::string, 7> texts;
+  for (int i = 0; i != 7; ++i)
+  {
+    // +1 as the first Competency is Competency::uninitialized
+    const cmap::Competency competency = static_cast<cmap::Competency>(i + 1);
+    assert(competency != cmap::Competency::uninitialized);
+    assert(competency != cmap::Competency::n_competencies);
+    if (cnts.find(competency) == std::end(cnts))
+    {
+      texts[i] = std::to_string(0);
+    }
+    else
+    {
+      assert(cnts.find(competency) != std::end(cnts));
+      const int n = cnts.find(competency)->second;
+      const double f{
+        static_cast<double>(n)
+        / static_cast<double>(sum)
+      };
+      const int percentage = static_cast<int>(std::round(100.0 * f));
+      texts[i] = std::to_string(percentage);
+    }
+  }
+  return texts;
 }
 
 void ribi::braw::QtDisplay::DisplayDiagnosticsHeader(QTableWidget * const table) const
@@ -241,13 +281,13 @@ QTableWidget * ribi::braw::QtDisplay::CreateRatedConceptsWidget(
   return table;
 }
 
-QTableWidget * ribi::braw::QtDisplay::CreateTalliedExamplesWidget(
+QTableWidget * ribi::braw::QtDisplay::CreateTalliedCompetenciesWidget(
   const File& file,
   QWidget * const parent
 ) const
 {
   auto * const table = new QTableWidget(7, 1, parent);
-  DisplayExamples(file, table);
+  DisplayTalliedCompetencies(file, table);
   assert(table->rowCount() == 7);
   assert(table->columnCount() == 1);
   table->setHorizontalHeaderLabels( { "%" } );
@@ -327,17 +367,17 @@ void ribi::braw::QtDisplay::DisplayRatedConceptRatingSpecificity(
   table->setItem(row,col,item);
 }
 
-void ribi::braw::QtDisplay::DisplayExamples(
+void ribi::braw::QtDisplay::DisplayTalliedCompetencies(
   const File& file,
   QTableWidget * const table) const
 {
   assert(table->rowCount() == 7);
   assert(table->columnCount() == 1);
-  DisplayExamplesHeader(table);
-  DisplayExamplesItems(file, table);
+  DisplayTalliedCompetenciesHeader(table);
+  DisplayTalliedCompetenciesItems(file, table);
 }
 
-void ribi::braw::QtDisplay::DisplayExamplesHeader(
+void ribi::braw::QtDisplay::DisplayTalliedCompetenciesHeader(
   QTableWidget * const table) const
 {
   assert(table->rowCount() == 7);
@@ -361,49 +401,20 @@ void ribi::braw::QtDisplay::DisplayExamplesHeader(
   }
 }
 
-void ribi::braw::QtDisplay::DisplayExamplesItems(
+void ribi::braw::QtDisplay::DisplayTalliedCompetenciesItems(
   const File& file,
   QTableWidget * const table) const
 {
   const int n_rows{7};
   assert(table->rowCount() == n_rows);
   assert(table->columnCount() == 1);
-  std::map<cmap::Competency, int> cnts = TallyCompetencies(file);
-
-  const int sum = std::accumulate(cnts.begin(), cnts.end(), 0,
-    [](int& init, const std::pair<cmap::Competency, int>& p)
-    {
-      init += p.second;
-      return init;
-    }
-  );
+  const std::array<std::string, 7> texts = CreateTalliedCompetenciesTexts(file);
 
   for (int row = 0; row != n_rows; ++row)
   {
     const int col = 0;
     QTableWidgetItem * const item  = new QTableWidgetItem;
-    QString text;
-    if (sum != 0)
-    {
-      const cmap::Competency competency = static_cast<cmap::Competency>(row + 1);
-      assert(competency != cmap::Competency::uninitialized);
-      assert(competency != cmap::Competency::n_competencies);
-      if (cnts.find(competency) != std::end(cnts))
-      {
-        text = QString::number(0);
-      }
-      else
-      {
-        const int n = cnts[competency];
-        const double f{
-          static_cast<double>(n)
-          / static_cast<double>(sum)
-        };
-        const int percentage = static_cast<int>(std::round(100.0 * f));
-        text = QString::number(percentage);
-      }
-    }
-    item->setText(text);
+    item->setText(QString::fromStdString(texts[row]));
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     item->setTextAlignment(Qt::AlignCenter);
     assert(row >= 0);
