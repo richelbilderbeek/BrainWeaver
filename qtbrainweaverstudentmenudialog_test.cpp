@@ -28,9 +28,10 @@ void ribi::braw::QtStudentMenuDialogTest::ClickStartButton()
 
 void ribi::braw::QtStudentMenuDialogTest::DefaultConstruction()
 {
-  File f;
+  const File f;
   QtStudentMenuDialog d(f);
   d.show();
+  QVERIFY(f == d.GetFile());
 }
 
 void ribi::braw::QtStudentMenuDialogTest::QuickSaveFirstTimeOpensDialog()

@@ -1,3 +1,5 @@
 ignore:
   - qtmain_*.cpp # Will not be run
   - *_test.cpp # Do not care about tests, they run incomplete on Travis
+  - *closer.cpp # Code that cannot have Codecov tested on Travis, as these need popups
+  - *_no_codecov.cpp # Code that cannot have Codecov tested on Travis, caused by popups
