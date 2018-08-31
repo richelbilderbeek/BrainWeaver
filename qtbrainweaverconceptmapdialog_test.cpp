@@ -18,7 +18,7 @@
 #include "conceptmapnode.h"
 #include "is_custom_vertices_isomorphic.h"
 #include "qtbrainweaverconceptmapdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmapeditconceptdialog.h"
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
 #include "qtconceptmapqtedge.h"

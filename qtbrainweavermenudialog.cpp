@@ -37,10 +37,10 @@
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
 #include "qtbrainweaverstudentstartdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmapeditconceptdialog.h"
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtconceptmaprateconcepttallydialog.h"
-#include "qtconceptmaprateexamplesdialog.h"
+#include "qtconceptmapclassifyexamplesdialog.h"
 #include "qtstylesheetsettermaindialog.h"
 #include "ribi_regex.h"
 #include "ui_qtbrainweavermenudialog.h"
@@ -116,7 +116,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_examples_clicked() noexcept
 {
   const auto concept = ribi::cmap::ConceptFactory().Get2();
   auto d{
-    new ribi::cmap::QtRateExamplesDialog(concept, this)
+    new ribi::cmap::QtClassifyExamplesDialog(concept, this)
   };
   d->exec();
 }
@@ -227,9 +227,9 @@ void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
 void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
 {
   const auto concept = ribi::cmap::ConceptFactory().Get2();
-  ribi::cmap::QtConceptMapConceptEditDialog d(
+  ribi::cmap::QtEditConceptDialog d(
     concept,
-    ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept
+    ribi::cmap::QtEditConceptDialog::EditType::concept
   );
   d.exec();
 }
