@@ -25,10 +25,10 @@
 #include "qtbrainweaverratingdialog.h"
 #include "qtbrainweaverstudentmenudialog.h"
 #include "qtbrainweaverstudentstartdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmapeditconceptdialog.h"
 #include "qtconceptmaprateconceptdialog.h"
 #include "qtconceptmaprateconcepttallydialog.h"
-#include "qtconceptmaprateexamplesdialog.h"
+#include "qtconceptmapclassifyexamplesdialog.h"
 
 ribi::braw::QtOverviewWidget::QtOverviewWidget(QWidget* parent)
   : QGraphicsView(new QGraphicsScene, parent),
@@ -74,9 +74,9 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
   v.push_back(new QtAssessorMenuDialog(parent));
   v.push_back(new QtClusterDialog(FileFactory().Get3(), parent));
   v.push_back(
-    new ribi::cmap::QtConceptMapConceptEditDialog(
+    new ribi::cmap::QtEditConceptDialog(
       ribi::cmap::ConceptFactory().GetTest(2),
-      ribi::cmap::QtConceptMapConceptEditDialog::EditType::concept,
+      ribi::cmap::QtEditConceptDialog::EditType::concept,
       parent
     )
   );
@@ -104,7 +104,7 @@ std::vector<QDialog* > ribi::braw::GetAllDialogs(QWidget* parent)
   );
   //v.push_back(new QtRateConceptMapDialog(FileFactory().GetTests().at(2), parent));
   v.push_back(
-    new ribi::cmap::QtRateExamplesDialog(
+    new ribi::cmap::QtClassifyExamplesDialog(
       ribi::cmap::ConceptFactory().GetTests().at(2),
       parent
     )
