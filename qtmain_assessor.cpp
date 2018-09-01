@@ -12,7 +12,7 @@
 #include "qtconceptmapcompetency.h"
 #include "qtbrainweaverclusterwidget.h"
 #include "qtbrainweaverconceptmapdialog.h"
-#include "qtconceptmapconcepteditdialog.h"
+#include "qtconceptmapeditconceptdialog.h"
 #include "qtbrainweaverassessormenudialog.h"
 
 std::string CreateStyleSheet() noexcept
