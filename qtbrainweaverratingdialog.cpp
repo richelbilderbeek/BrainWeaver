@@ -136,12 +136,12 @@ void ribi::braw::QtRatingDialog::keyPressEvent(QKeyEvent* e)
 void ribi::braw::QtRatingDialog::on_button_save_clicked()
 {
   //Temporarily disable to widget, otherwise saving cannot succeed
-  this->hide();
+  this->setEnabled(false);
 
   const auto d = QtFileDialog().GetSaveFileDialog(QtFileDialog::FileType::cmp);
   d->setWindowTitle("Sla het assessment invoer-bestand op");
   const int status = d->exec();
-  this->show();
+  this->setEnabled(true);
   if (status == QDialog::Rejected)
   {
     return;
@@ -160,11 +160,13 @@ void ribi::braw::QtRatingDialog::Save(const std::string& filename) const
 
 void ribi::braw::QtRatingDialog::on_button_print_clicked()
 {
+  this->setEnabled(false);
   std::unique_ptr<QtPrintRatingDialog> d{
     new QtPrintRatingDialog(m_file)
   };
   d->show();
   d->Print();
+  this->setEnabled(true);
 }
 
 void ribi::braw::QtRatingDialog::on_edit_name_textEdited(const QString &arg1)
