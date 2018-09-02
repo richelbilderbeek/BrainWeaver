@@ -204,7 +204,7 @@ void ribi::braw::QtClusterDialogTest::QuickSaveFirstTimeOpensDialog() const noex
 
 void ribi::braw::QtClusterDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
 {
-  QtClusterDialog d(FileFactory().GetUnrated());
+  QtClusterDialog d(FileFactory().Get5());
   const QString filename{"tmp.cmp"};
   QtFileDialog::m_last_file = filename;
   QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
