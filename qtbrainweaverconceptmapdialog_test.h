@@ -11,12 +11,11 @@ class QtConceptMapDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void FileHasConceptMapWithOneCenterNode() const noexcept;
 
-  ///If this dialog is fed with a file with a cluster and without a concept map
-  /// (that is, one node (the focal question) only)
-  ///it will create a concept map from the cluster
-  void FileWithOnlyClusterCreatesConceptMap() const noexcept;
+  //To review
+  void ExportToPdfCreatesFile() const noexcept;
+
+  //Done
 
   ///Create a concept map of two nodes and one edge with an arrow head
   ///The concept map should have saved that the arrow head is there
@@ -34,6 +33,14 @@ private slots:
   ///If this dialog is fed with a file without a cluster, but with concept map
   ///it will read the concept map
   void DialogPrefersExistingConceptMapOverCreatingOne() const noexcept;
+
+
+  void FileHasConceptMapWithOneCenterNode() const noexcept;
+
+  ///If this dialog is fed with a file with a cluster and without a concept map
+  /// (that is, one node (the focal question) only)
+  ///it will create a concept map from the cluster
+  void FileWithOnlyClusterCreatesConceptMap() const noexcept;
 
   void PressAltF4() const noexcept;
   void PressEscapeClosesDialog() const noexcept;

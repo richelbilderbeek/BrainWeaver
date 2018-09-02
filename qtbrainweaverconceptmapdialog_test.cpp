@@ -27,6 +27,7 @@
 #include "qtbrainweaverfiledialog.h"
 
 using namespace ribi::braw;
+using namespace ribi::cmap;
 
 void ribi::braw::QtConceptMapDialogTest::FileHasConceptMapWithOneCenterNode() const noexcept
 {
@@ -132,11 +133,8 @@ void ribi::braw::QtConceptMapDialogTest::DialogPrefersReadingConceptMapOverReadi
 
 void ribi::braw::QtConceptMapDialogTest::DialogPrefersExistingConceptMapOverCreatingOne() const noexcept
 {
-  using namespace cmap;
-  ribi::braw::File file;
-  const ribi::cmap::ConceptMap concept_map(
-    ConceptMapFactory().Get6()
-  );
+  File file;
+  const ConceptMap concept_map(ConceptMapFactory().Get6());
   const auto question = ribi::cmap::GetCenterNode(concept_map).GetConcept().GetName();
   file.SetQuestion(question);
   file.SetConceptMap(concept_map);
@@ -148,11 +146,20 @@ void ribi::braw::QtConceptMapDialogTest::DialogPrefersExistingConceptMapOverCrea
   //QVERIFY(HasSimilarData(GetSortedEdges(concept_map), GetSortedEdges(created), 0.001));
 }
 
+void ribi::braw::QtConceptMapDialogTest::ExportToPdfCreatesFile() const noexcept
+{
+  QSKIP("WIP", "TODO");
+  QtConceptMapDialog d(FileFactory().GetUnrated());
+  d.show();
+  d.on_button_print_clicked();
+  assert(1==2);
+}
+
+
 void ribi::braw::QtConceptMapDialogTest::CreateEdgeWithArrowHead() const noexcept
 {
   //Added this for https://github.com/richelbilderbeek/BrainWeaver/issues/88
   //just to be sure that a QtConceptMap gets saved correctly
-  using namespace cmap;
   File file = FileFactory().Get1();
   QtConceptMapDialog d(file);
   d.show();

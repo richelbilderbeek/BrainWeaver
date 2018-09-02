@@ -23,12 +23,22 @@ ribi::braw::QtClusterDialogCloser::~QtClusterDialogCloser()
 
 }
 
-void ribi::braw::QtClusterDialogCloser::Modify() const
+ribi::braw::QtClusterDialog * ribi::braw::QtClusterDialogCloser::GetDialog() const noexcept
 {
-  ribi::braw::QtClusterDialog* const pop_up
-    = qobject_cast<ribi::braw::QtClusterDialog*>(
+  QtClusterDialog * pop_up = nullptr;
+  while (!pop_up)
+  {
+    pop_up = qobject_cast<ribi::braw::QtClusterDialog*>(
       qApp->activeWindow()
     );
+    qApp->processEvents();
+  }
+  return pop_up;
+}
+
+void ribi::braw::QtClusterDialogCloser::Modify() const
+{
+  auto * const pop_up = GetDialog();
   assert(pop_up);
   const File before = pop_up->ToFile();
   pop_up->ui->edit->setText("New");
@@ -39,10 +49,7 @@ void ribi::braw::QtClusterDialogCloser::Modify() const
 
 void ribi::braw::QtClusterDialogCloser::PressCancel() const
 {
-  ribi::braw::QtClusterDialog* const pop_up
-    = qobject_cast<ribi::braw::QtClusterDialog*>(
-      qApp->activeWindow()
-    );
+  auto * const pop_up = GetDialog();
   assert(pop_up);
   pop_up->ui->button_cancel->click();
   assert(pop_up->isHidden());
@@ -50,10 +57,7 @@ void ribi::braw::QtClusterDialogCloser::PressCancel() const
 
 void ribi::braw::QtClusterDialogCloser::PressOk() const
 {
-  ribi::braw::QtClusterDialog* const pop_up
-    = qobject_cast<ribi::braw::QtClusterDialog*>(
-      qApp->activeWindow()
-    );
+  auto * const pop_up = GetDialog();
   assert(pop_up);
   pop_up->ui->button_ok->click();
   assert(pop_up->isHidden());

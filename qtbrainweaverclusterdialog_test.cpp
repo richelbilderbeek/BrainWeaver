@@ -193,6 +193,25 @@ void ribi::braw::QtClusterDialogTest::PressSomething() const noexcept
   QTest::keyClick(&d, Qt::Key_0);
 }
 
+void ribi::braw::QtClusterDialogTest::QuickSaveFirstTimeOpensDialog() const noexcept
+{
+  QtClusterDialog d(FileFactory().GetUnrated());
+  d.show();
+  QTimer::singleShot(100, qApp, SLOT(closeAllWindows()));
+  QtFileDialog::m_last_file = "";
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+}
+
+void ribi::braw::QtClusterDialogTest::QuickSaveSecondTimeSavesFast() const noexcept
+{
+  QtClusterDialog d(FileFactory().GetUnrated());
+  const QString filename{"tmp.cmp"};
+  QtFileDialog::m_last_file = filename;
+  QTest::keyPress(&d, Qt::Key_S, Qt::ControlModifier);
+  QVERIFY(QFile::exists(filename));
+  QFile::remove(filename);
+}
+
 void ribi::braw::QtClusterDialogTest::Save() const noexcept
 {
   File file = FileFactory().Get5();

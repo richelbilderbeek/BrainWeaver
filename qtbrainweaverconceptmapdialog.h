@@ -12,6 +12,7 @@ namespace ribi {
 namespace braw {
 
 class QtConceptMapDialogCloser;
+class QtConceptMapDialogTest;
 
 class QtConceptMapDialog final : public QDialog
 {
@@ -73,6 +74,7 @@ private:
   ribi::cmap::QtConceptMap * const m_widget;
 
   friend class QtConceptMapDialogCloser;
+  friend class QtConceptMapDialogTest;
 };
 
 ///Create a concept map from a cluster

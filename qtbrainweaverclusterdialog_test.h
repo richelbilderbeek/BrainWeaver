@@ -22,6 +22,8 @@ private slots:
   void GetWidget() const noexcept;
   void PressEscape() const noexcept;
   void PressSomething() const noexcept;
+  void QuickSaveFirstTimeOpensDialog() const noexcept;
+  void QuickSaveSecondTimeSavesFast() const noexcept;
   void Save() const noexcept;
 };
 

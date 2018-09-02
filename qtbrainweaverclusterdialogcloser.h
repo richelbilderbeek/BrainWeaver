@@ -6,6 +6,8 @@
 namespace ribi {
 namespace braw {
 
+class QtClusterDialog;
+
 ///Object to close a popped-up QtClusterDialog
 class QtClusterDialogCloser : public QObject
 {
@@ -16,15 +18,14 @@ class QtClusterDialogCloser : public QObject
   virtual ~QtClusterDialogCloser();
   public slots:
 
-  ///Modify the concept map randomly
   void Modify() const;
-
-  ///Press cancel
   void PressCancel() const;
-
-  ///Press OK
   void PressOk() const;
 
+  private:
+  ///Returns non-nullptr
+  ///Will freeze if dialog is absent
+  QtClusterDialog * GetDialog() const noexcept;
 };
 
 } //~namespace braw
