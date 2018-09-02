@@ -10,10 +10,12 @@ namespace Ui { class QtMenuDialog; }
 namespace ribi {
 namespace braw {
 
+class QtMenuDialogTest;
+
 class QtMenuDialog final : public QDialog //!OCLINT Indeed a lot of methods: one per button
 {
   Q_OBJECT //!OCLINT
-    
+
   public:
   explicit QtMenuDialog(QWidget* parent = nullptr);
   QtMenuDialog(const QtMenuDialog&) = delete;
@@ -49,7 +51,7 @@ private slots:
 private:
   Ui::QtMenuDialog *ui;
 
-  friend class qtbrainweavermenudialog_test;
+  friend class QtMenuDialogTest;
 };
 
 } //~namespace braw

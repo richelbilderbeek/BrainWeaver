@@ -3,14 +3,7 @@
 #include <QDebug>
 #include "qtbrainweavermenudialog.h"
 
-void ribi::braw::QtMenuDialogTest::Construction()
-{
-  auto menu{std::make_unique<ribi::braw::QtMenuDialog>()};
-  menu->show();
-  //QTest::keyClick(&d,Qt::Key_Escape, Qt::NoModifier);
-}
-
-void ribi::braw::QtMenuDialogTest::PressAllKeys()
+void ribi::braw::QtMenuDialogTest::PressAllKeys() const noexcept
 {
 
   //Press digit
@@ -31,4 +24,32 @@ void ribi::braw::QtMenuDialogTest::PressAllKeys()
     QTest::keyClick(d.get(), static_cast<Qt::Key>(k), Qt::AltModifier, 100);
   }
 
+}
+
+void ribi::braw::QtMenuDialogTest::PressAllKeysFromMemberFunctions() const noexcept
+{
+  QtMenuDialog d;
+  const auto v = {
+    &QtMenuDialog::on_button_about_clicked,
+    &QtMenuDialog::on_button_assessor_clicked,
+    &QtMenuDialog::on_button_create_assessment_clicked,
+    &QtMenuDialog::on_button_edit_concept_clicked,
+    &QtMenuDialog::on_button_edit_conceptmap_clicked,
+    &QtMenuDialog::on_button_modify_stylesheet_clicked,
+    &QtMenuDialog::on_button_overview_clicked,
+    &QtMenuDialog::on_button_print_concept_map_clicked,
+    &QtMenuDialog::on_button_print_rating_clicked,
+    &QtMenuDialog::on_button_rate_concept_auto_clicked,
+    &QtMenuDialog::on_button_rate_concept_clicked,
+    &QtMenuDialog::on_button_rate_concept_map_clicked,
+    &QtMenuDialog::on_button_rate_examples_clicked,
+    &QtMenuDialog::on_button_rating_clicked,
+    &QtMenuDialog::on_button_student_clicked,
+    &QtMenuDialog::on_button_test_cluster_clicked
+  };
+  for (const auto f: v)
+  {
+    QTimer::singleShot(1000, qApp, SLOT(closeAllWindows()));
+    (d.*f)();
+  }
 }

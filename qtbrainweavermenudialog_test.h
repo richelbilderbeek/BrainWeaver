@@ -11,8 +11,8 @@ class QtMenuDialogTest : public QObject
     Q_OBJECT //!OCLINT
 
 private slots:
-  void Construction();
-  void PressAllKeys();
+  void PressAllKeys() const noexcept;
+  void PressAllKeysFromMemberFunctions() const noexcept;
 
 };
 
