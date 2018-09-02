@@ -12,6 +12,7 @@
 #include "qtbrainweaverconceptmapdialogcloser_test.h"
 #include "qtbrainweavercreateassessmentdialog_test.h"
 #include "qtbrainweaverdisplay_test.h"
+#include "qtbrainweaverfiledialogcloser_test.h"
 #include "qtbrainweaverfiledialog_test.h"
 #include "qtbrainweavermenudialog_test.h"
 #include "qtbrainweaverstudentmenudialogcloser_test.h"
@@ -32,6 +33,8 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   int error = 0;
 
+  //{ ribi::braw::QtFileDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
+  //assert(!"Do not forget to comment this out on Travis");
   //{ ribi::braw::QtConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   //assert(!"Do not forget to comment this out on Travis");
 
@@ -45,6 +48,7 @@ int main(int argc, char *argv[])
   { ribi::braw::QtConceptMapDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtCreateAssessmentDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtDisplayTest t; error |= QTest::qExec(&t, argc, argv); }
+  { ribi::braw::QtFileDialogCloserTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtFileDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtMenuDialogTest t; error |= QTest::qExec(&t, argc, argv); }
   { ribi::braw::QtOverviewDialogTest t; error |= QTest::qExec(&t, argc, argv); }

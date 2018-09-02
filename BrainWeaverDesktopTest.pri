@@ -10,6 +10,7 @@ HEADERS  += \
     $$PWD/qtbrainweaverconceptmapdialogcloser_test.h \
     $$PWD/qtbrainweaverdisplay_test.h \
     $$PWD/qtbrainweaverfiledialog_test.h \
+    $$PWD/qtbrainweaverfiledialogcloser_test.h \
     $$PWD/qtbrainweavermenudialog_test.h \
     $$PWD/qtbrainweaveroverviewdialog_test.h \
     $$PWD/qtbrainweaveroverviewwidget_test.h \
@@ -35,6 +36,7 @@ SOURCES += \
     $$PWD/qtbrainweaverconceptmapdialogcloser_test.cpp \
     $$PWD/qtbrainweaverdisplay_test.cpp \
     $$PWD/qtbrainweaverfiledialog_test.cpp \
+    $$PWD/qtbrainweaverfiledialogcloser_test.cpp \
     $$PWD/qtbrainweavermenudialog_test.cpp \
     $$PWD/qtbrainweaveroverviewdialog_test.cpp \
     $$PWD/qtbrainweaveroverviewwidget_test.cpp \

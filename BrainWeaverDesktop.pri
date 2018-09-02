@@ -12,6 +12,7 @@ HEADERS  += \
     $$PWD/qtbrainweavercreateassessmentdialog.h \
     $$PWD/qtbrainweaverdisplay.h \
     $$PWD/qtbrainweaverfiledialog.h \
+    $$PWD/qtbrainweaverfiledialogcloser.h \
     $$PWD/qtbrainweaverfwd.h \
     $$PWD/qtbrainweavermenudialog.h \
     $$PWD/qtbrainweaveroverviewdialog.h \
@@ -38,6 +39,7 @@ SOURCES += \
     $$PWD/qtbrainweavercreateassessmentdialog.cpp \
     $$PWD/qtbrainweaverdisplay.cpp \
     $$PWD/qtbrainweaverfiledialog.cpp \
+    $$PWD/qtbrainweaverfiledialogcloser.cpp \
     $$PWD/qtbrainweavermenudialog.cpp \
     $$PWD/qtbrainweaveroverviewdialog.cpp \
     $$PWD/qtbrainweaveroverviewwidget.cpp \

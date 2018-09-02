@@ -22,6 +22,7 @@
 #include "qtconceptmap.h"
 #include "qtconceptmaphelper.h"
 #include "qtconceptmapqtedge.h"
+#include "qtbrainweaverfiledialogcloser.h"
 #include "qtconceptmapqtnode.h"
 #include "qtquadbezierarrowitem.h"
 #include "qtbrainweaverfiledialog.h"
@@ -149,9 +150,15 @@ void ribi::braw::QtConceptMapDialogTest::DialogPrefersExistingConceptMapOverCrea
 void ribi::braw::QtConceptMapDialogTest::ExportToPdfCreatesFile() const noexcept
 {
   QSKIP("WIP", "TODO");
+  const QString filename{"ExportToPdfCreatesFile.cmp"};
+  QtFileDialogCloser c(filename);
+  if (QFile::exists(filename)) QFile::remove(filename);
+  assert(!QFile::exists(filename));
   QtConceptMapDialog d(FileFactory().GetUnrated());
   d.show();
+  QTimer::singleShot(1000, &c, SLOT(PressOk()));
   d.on_button_print_clicked();
+  assert(QFile::exists(filename));
   assert(1==2);
 }
 
