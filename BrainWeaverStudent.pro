@@ -90,8 +90,8 @@ QMAKE_CXXFLAGS += -Werror
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
 
-# QTest
-QT += testlib
+# QTest, causes terminal window to pop
+# QT += testlib
 
 # Fixes
 #/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'

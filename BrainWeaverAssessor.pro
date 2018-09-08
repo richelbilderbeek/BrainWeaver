@@ -85,5 +85,5 @@ QMAKE_CXXFLAGS += -Werror
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
 
-# QTest
-QT += testlib
+# QTest, causes terminal to pop up
+# QT += testlib
