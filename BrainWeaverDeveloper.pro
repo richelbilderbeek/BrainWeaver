@@ -75,8 +75,10 @@ unix:!macx {
 # Qt5
 QT += core gui widgets concurrent opengl printsupport svg
 
-# QTest, causes terminal window
-# QT += testlib
+# QTest (for processEvents), but no terminal window
+QT += testlib
+QT.testlib.CONFIG -= console
+CONFIG -= console
 
 # Fixes
 #/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'
