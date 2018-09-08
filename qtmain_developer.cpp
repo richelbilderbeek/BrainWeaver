@@ -95,16 +95,18 @@ int main(int argc, char *argv[])
     std::clog << "DEBUG mode\n";
     #endif
     a.setStyleSheet(CreateStyleSheet().c_str());
-    a.setWindowIcon(QIcon(":/images/R.png"));
+    a.setWindowIcon(QIcon(":/BrainWeaver/pics/R.png"));
     ribi::braw::QtMenuDialog d;
     d.show();
-    //Put d in screen center at 80% of fullscreen size
     {
-      d.setGeometry(QRect(64,51,1152,922));
+      //Put d in screen center at 80% of fullscreen size
+      const int w{QDesktopWidget().screen()->width()};
+      const int h{QDesktopWidget().screen()->height()};
+      d.setGeometry(QRect(w / 10, h / 10, 8 * w / 10, 8 * h / 10));
     }
     return a.exec();
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
     std::cout << e.what() << '\n';
     return 1;
