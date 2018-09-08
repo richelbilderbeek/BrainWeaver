@@ -95,7 +95,11 @@ int main(int argc, char *argv[])
     std::clog << "DEBUG mode\n";
     #endif
     a.setStyleSheet(CreateStyleSheet().c_str());
-    a.setWindowIcon(QIcon(":/BrainWeaver/pics/R.png"));
+    {
+      const QIcon icon(":/BrainWeaver/pics/R.png");
+      assert(!icon.isNull());
+      a.setWindowIcon(icon);
+    }
     ribi::braw::QtMenuDialog d;
     d.show();
     {
