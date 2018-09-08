@@ -86,48 +86,11 @@ std::string CreateStyleSheet() //!OCLINT indeed a long stylesheet
   ;
 }
 
-
-
-
-//From https://rohieb.wordpress.com/2010/07/08/qt-throw-exceptions-from-signals-and-slots/
-//which is adapted from http://stackoverflow.com/a/1578433/3364162
-class MyApplication : public QApplication
-{
-public:
-  MyApplication(int& argc, char ** argv)
-    : QApplication(argc, argv)
-  {
-
-  }
-
-  // reimplemented from QApplication so we can throw exceptions in slots
-  bool notify(QObject * receiver, QEvent * event) {
-    try
-    {
-      return QApplication::notify(receiver, event);
-    }
-    catch(std::exception& e)
-    {
-      #ifndef NDEBUG
-      qCritical() << "Exception thrown:" << e.what();
-      #endif // NDEBUG
-    }
-    catch(...)
-    {
-      #ifndef NDEBUG
-      qCritical() << "Unknown exception thrown";
-      #endif // NDEBUG
-    }
-    return false;
-  }
-};
-
-
 int main(int argc, char *argv[])
 {
   try
   {
-    MyApplication a(argc, argv);
+    QApplication a(argc, argv);
     #ifndef NDEBUG
     std::clog << "DEBUG mode\n";
     #endif
