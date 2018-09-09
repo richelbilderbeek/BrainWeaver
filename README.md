@@ -28,6 +28,8 @@ master|develop|project
 ---|---|---
 [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
 
+Note that [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) *should fail*! See [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) why.
+
 ## Building
 
 Building `BrainWeaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
