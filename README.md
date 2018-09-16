@@ -7,7 +7,7 @@ Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)|[![Codecov 
 
 BrainWeaver, tool for teacher education, as described in [1].
 
-BrainWeaver is in active development.
+You can download BrainWeaver [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip).
 
 ## Build status of builds that BrainWeaver relies on
 

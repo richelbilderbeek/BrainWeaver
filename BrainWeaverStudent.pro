@@ -55,8 +55,8 @@ CONFIG(release, debug|release) {
   DEFINES += NDEBUG
 
   # gprof
-  QMAKE_CXXFLAGS += -pg
-  QMAKE_LFLAGS += -pg
+  # QMAKE_CXXFLAGS += -pg
+  # QMAKE_LFLAGS += -pg
 }
 
 CONFIG(debug, debug|release) {
