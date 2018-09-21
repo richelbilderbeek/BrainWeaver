@@ -92,6 +92,8 @@ script:
   # Get my folder
   - my_github=${PWD##*/}  
   # SLOCcount
+  #   remove OCLint otherwise it will be counted as well
+  - rm -rf oclint-0.10.3
   - cd ..; sloccount --overhead 1 --personcost 22614 BrainWeaver boost_graph_cookbook_1 ConceptMap plane QtConceptMap QtKeyboardFriendlyGraphicsView RibiClasses RibiLibraries StyleSheetSetter; cd $my_github
 
 
