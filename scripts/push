@@ -10,7 +10,7 @@ do
 
   echo "git folder: "$folder
   git add --all :/
-  git commit -m "BrainWeaver update"
+  git commit -m "Brainweaver update"
   git pull
   git push
 
