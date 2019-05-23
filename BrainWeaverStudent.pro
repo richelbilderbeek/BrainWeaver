@@ -80,7 +80,7 @@ CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
 
 # Fix error: unrecognized option '--push-state--no-as-needed'
-QMAKE_LFLAGS += -fuse-ld=gold
+# QMAKE_LFLAGS += -fuse-ld=gold
 
 # High warning level, warnings are errors
 # -Weffc++ #Qt goes bad with -Weffc++
@@ -88,7 +88,8 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 QMAKE_CXXFLAGS += -Werror
 
 # Qt5
-QT += core gui widgets concurrent opengl printsupport svg
+QT += core gui widgets printsupport
+# QT += core gui widgets concurrent opengl printsupport svg
 
 # QTest (for processEvents), but no terminal window
 QT += testlib

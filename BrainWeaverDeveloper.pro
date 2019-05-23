@@ -58,7 +58,7 @@ CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
 
 # Fix error: unrecognized option '--push-state--no-as-needed'
-QMAKE_LFLAGS += -fuse-ld=gold
+# QMAKE_LFLAGS += -fuse-ld=gold
 
 # Develop on GNU/Linux
 unix:!macx {
@@ -69,7 +69,8 @@ unix:!macx {
 }
 
 # Qt5
-QT += core gui widgets concurrent opengl printsupport svg
+QT += core gui widgets printsupport
+# QT += core gui widgets concurrent opengl printsupport svg
 
 # QTest (for processEvents), but no terminal window
 QT += testlib
