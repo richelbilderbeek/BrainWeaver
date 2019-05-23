@@ -7,24 +7,14 @@ addons:
   apt: 
     packages: libboost-all-dev
 
-before_install:
-  # C++14
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
-
 install: 
-  # C++14
-  - sudo apt-get install -qq g++-6
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   # Qt5
-  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
-  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  - sudo apt-get install -qq qt5-qmake qt5-default
   # Qt5 SVG
   - sudo apt-get install libqt5svg5-dev
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Codecov
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 90
   - sudo pip install codecov
   # OCLint
   - ./install_oclint
@@ -51,16 +41,8 @@ install:
   - cd $my_github
   #- ./download_other_githubs
 
-# Xenial
 services:
  - xvfb
-
-# Trusty
-# Start virtual X server
-# before_script:
-#  - "export DISPLAY=:99.0"
-#  - "sh -e /etc/init.d/xvfb start"
-#  - sleep 3 # give xvfb some time to start
 
 script: 
   - ./build_other_githubs
