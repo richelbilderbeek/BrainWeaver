@@ -122,7 +122,7 @@ int CountEdges(const File& file) noexcept;
 ///Count the average number of connections per non-center node
 double CountEdgesPerNormalNode(
   const File& file,
-  const int n_digits_behind_comma = 2
+  const int n_digits_behind_comma = 2 //!OCLINT accept long variable name for now
 );
 
 ///Count the total number of examples
