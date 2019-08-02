@@ -53,9 +53,9 @@ CONFIG(debug, debug|release) {
   LIBS += -lubsan
 }
 
-# C++14
-CONFIG += c++14
-QMAKE_CXXFLAGS += -std=c++14
+# C++17
+CONFIG += c++17
+QMAKE_CXXFLAGS += -std=c++17
 
 # Develop on GNU/Linux
 unix:!macx {
