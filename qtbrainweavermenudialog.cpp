@@ -214,7 +214,7 @@ void ribi::braw::QtMenuDialog::on_button_rate_concept_auto_clicked() noexcept
   d->exec();
 }
 
-void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked()
+void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked() noexcept
 {
   const File file = FileFactory().GetUnrated();
   auto * const d{
