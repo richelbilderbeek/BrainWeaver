@@ -29,7 +29,7 @@ void ribi::braw::QtMenuDialogTest::PressAllKeys() const noexcept
 void ribi::braw::QtMenuDialogTest::PressAllKeysFromMemberFunctions() const noexcept
 {
   QtMenuDialog d;
-  const auto v = {
+  const std::vector<> v = {
     &QtMenuDialog::on_button_about_clicked,
     &QtMenuDialog::on_button_assessor_clicked,
     &QtMenuDialog::on_button_create_assessment_clicked,
