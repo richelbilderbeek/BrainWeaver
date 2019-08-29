@@ -46,11 +46,11 @@ script:
   - ./build_other_githubs
   # Build console test
   - qmake -qt=qt5 BrainWeaverConsoleTest.pro
-  - make -s debug
+  - travis_wait 60 make debug --silent
   - ./BrainWeaverConsoleTest
   # Build and run desktop test
   - qmake -qt=qt5 BrainWeaverDesktopTest.pro
-  - make -s debug
+  - travis_wait 60 make debug --silent
   - ./BrainWeaverDesktopTest
   # helgrind
   #- valgrind --tool=helgrind --log-file=helgrind.log -v ./BrainWeaverDesktopTest
@@ -60,11 +60,11 @@ script:
   #- cat memcheck.log
   # Build 'true' executables
   - qmake -qt=qt5 BrainWeaverDeveloper.pro
-  - make -s debug
+  - travis_wait 60 make debug --silent
   - qmake -qt=qt5 BrainWeaverAssessor.pro
-  - make -s debug
+  - make debug --silent
   - qmake -qt=qt5 BrainWeaverStudent.pro
-  - make -s debug
+  - make debug --silent
   # shunit2 tests, must be run locally only
   #- cd test_scipts; ./test; cd ..
   # cppcheck, be mild
