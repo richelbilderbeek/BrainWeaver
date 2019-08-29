@@ -44,9 +44,9 @@ public slots:
 private slots:
   void keyPressEvent(QKeyEvent* e) noexcept;
 
-  void on_button_edit_concept_clicked();
+  void on_button_edit_concept_clicked() noexcept;
 
-  void on_button_create_assessment_clicked();
+  void on_button_create_assessment_clicked() noexcept;
 
 private:
   Ui::QtMenuDialog *ui;

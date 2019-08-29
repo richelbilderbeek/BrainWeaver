@@ -224,7 +224,7 @@ void ribi::braw::QtMenuDialog::on_button_edit_conceptmap_clicked() noexcept
 }
 
 
-void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
+void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked() noexcept
 {
   const auto concept = ribi::cmap::ConceptFactory().Get2();
   ribi::cmap::QtEditConceptDialog d(
@@ -234,7 +234,7 @@ void ribi::braw::QtMenuDialog::on_button_edit_concept_clicked()
   d.exec();
 }
 
-void ribi::braw::QtMenuDialog::on_button_create_assessment_clicked()
+void ribi::braw::QtMenuDialog::on_button_create_assessment_clicked() noexcept
 {
   auto * const d{
     new ribi::braw::QtCreateAssessmentDialog()
