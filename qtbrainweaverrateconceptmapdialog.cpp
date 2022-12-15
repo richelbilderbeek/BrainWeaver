@@ -42,7 +42,9 @@ ribi::braw::QtRateConceptMapDialog::QtRateConceptMapDialog(
 
   //Center the dialog
   {
-    const QRect screen = QApplication::desktop()->screenGeometry();
+
+    // const QRect screen = QApplication::desktop()->screenGeometry();
+    const QRect screen{QApplication::desktop()->geometry()};
     this->setGeometry(screen.adjusted(64,64,-64,-64));
     this->move( screen.center() - this->rect().center() );
   }

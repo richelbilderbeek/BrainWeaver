@@ -63,7 +63,8 @@ ribi::braw::QtConceptMapDialog::QtConceptMapDialog(
 
   //Center the dialog
   {
-    const QRect screen = QApplication::desktop()->screenGeometry();
+    // const QRect screen = QApplication::desktop()->screenGeometry(); // Deprecated
+    const QRect screen{QApplication::desktop()->geometry()};
     this->setGeometry(screen.adjusted(64, 64, -64, -64));
     this->move(screen.center() - this->rect().center());
   }
@@ -90,7 +91,10 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
   ribi::cmap::ConceptMap p;
 
   //Add center node
-  const auto vd_center = add_bundled_vertex(
+  #ifdef NO_EDGES_ISSUE_217
+  const auto vd_center =
+  #endif
+  add_bundled_vertex(
     ribi::cmap::Node{
       ribi::cmap::Concept(question),
       ribi::cmap::NodeType::center,
@@ -99,7 +103,6 @@ ribi::cmap::ConceptMap ribi::braw::CreateFromCluster(
     },
     p
   );
-
 
   const std::vector<ribi::cmap::Concept> v = cluster.Get();
   const int n = boost::numeric_cast<int>(v.size());

@@ -55,7 +55,7 @@ ribi::braw::QtPrintRatingDialog::QtPrintRatingDialog(
     throw std::invalid_argument(msg.str());
   }
 
-  ui->setupUi(this);    
+  ui->setupUi(this);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint); //Remove help
 
   m_widget->SetConceptMap(file.GetConceptMap());
@@ -214,8 +214,10 @@ void ribi::braw::QtPrintRatingDialog::Print()
 void ribi::braw::QtPrintRatingDialog::Print(const std::string& filename)
 {
   QPrinter printer;
-  printer.setOrientation(QPrinter::Portrait);
-  printer.setPaperSize(QPrinter::A4);
+  //printer.setOrientation(QPrinter::Portrait); // Deprecated
+  printer.setPageOrientation(QPageLayout::Orientation::Portrait);
+  //printer.setPaperSize(QPrinter::A4); // Deprecated
+  printer.setPageSize(QPageSize::A4);
   printer.setFullPage(false);
   printer.setOutputFileName(filename.c_str());
 

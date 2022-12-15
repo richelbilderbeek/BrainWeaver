@@ -271,9 +271,9 @@ std::string ribi::braw::GetTestFileName() noexcept
 std::vector<ribi::braw::File> ribi::braw::File::GetTests() noexcept
 {
   std::vector<File> v;
-  for (const auto cluster: ClusterFactory().GetTests())
+  for (const auto& cluster: ClusterFactory().GetTests())
   {
-    for (const auto concept_map: cmap::ConceptMapFactory().GetAllTests())
+    for (const auto& concept_map: cmap::ConceptMapFactory().GetAllTests())
     {
       const std::string about = "about";
       const std::string assessor_name = "assessor_name";
