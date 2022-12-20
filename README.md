@@ -1,10 +1,5 @@
 # BrainWeaver
 
-Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)|[![Codecov logo](pics/Codecov.png)](https://www.codecov.io)
----|---|---
-`master`|[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaver.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaver/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaver?branch=master)
-`develop`|[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaver.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaver) | [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaver/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/BrainWeaver?branch=develop)
-
 BrainWeaver, tool for teacher education, as described in [1].
 
 You can download BrainWeaver :
@@ -13,22 +8,6 @@ You can download BrainWeaver :
  * (stable) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip)
 
 ## Build status of builds that BrainWeaver relies on
-
-master|develop|project
----|---|---
-[![Build Status](https://travis-ci.org/richelbilderbeek/boost_graph_cookbook_1.svg?branch=master)](https://travis-ci.org/richelbilderbeek/boost_graph_cookbook_1) [![codecov.io](https://codecov.io/github/richelbilderbeek/boost_graph_cookbook_1/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/boost_graph_cookbook_1?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/boost_graph_cookbook_1.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/boost_graph_cookbook_1) [![codecov.io](https://codecov.io/github/richelbilderbeek/boost_graph_cookbook_1/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/boost_graph_cookbook_1?branch=master) | [boost_graph_cookbook_1](https://github.com/richelbilderbeek/boost_graph_cookbook_1)
-[![Build Status](https://travis-ci.org/richelbilderbeek/RibiClasses.svg?branch=master)](https://travis-ci.org/richelbilderbeek/RibiClasses) [![codecov.io](https://codecov.io/github/richelbilderbeek/RibiClasses/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/RibiClasses?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/RibiClasses.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/RibiClasses) [![codecov.io](https://codecov.io/github/richelbilderbeek/RibiClasses/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/RibiClasses?branch=develop) | [RibiClasses](https://github.com/richelbilderbeek/RibiClasses)
-[![Build Status](https://travis-ci.org/richelbilderbeek/StyleSheetSetter.svg?branch=master)](https://travis-ci.org/richelbilderbeek/StyleSheetSetter) [![codecov.io](https://codecov.io/github/richelbilderbeek/StyleSheetSetter/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/StyleSheetSetter?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/StyleSheetSetter.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/StyleSheetSetter) [![codecov.io](https://codecov.io/github/richelbilderbeek/StyleSheetSetter/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/StyleSheetSetter?branch=develop) | [StyleSheetSetter](https://github.com/richelbilderbeek/StyleSheetSetter)
-[![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/ConceptMap/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/ConceptMap?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/ConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/ConceptMap/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/ConceptMap?branch=develop) | [ConceptMap](https://github.com/richelbilderbeek/ConceptMap)
-[![Build Status](https://travis-ci.org/richelbilderbeek/QtConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/QtConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtConceptMap/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/QtConceptMap?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/QtConceptMap.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/QtConceptMap) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtConceptMap/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/QtConceptMap?branch=develop) | [QtConceptMap](https://github.com/richelbilderbeek/QtConceptMap)
-[![Build Status](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView.svg?branch=master)](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/QtKeyboardFriendlyGraphicsView) [![codecov.io](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/QtKeyboardFriendlyGraphicsView?branch=develop) | [QtKeyboardFriendlyGraphicsView](https://github.com/richelbilderbeek/QtKeyboardFriendlyGraphicsView)
-[![Build Status](https://travis-ci.org/richelbilderbeek/plane.svg?branch=master)](https://travis-ci.org/richelbilderbeek/plane) [![codecov.io](https://codecov.io/github/richelbilderbeek/plane/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/plane?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/plane.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/plane) [![codecov.io](https://codecov.io/github/richelbilderbeek/plane/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/plane?branch=develop) | [plane](https://github.com/richelbilderbeek/plane)
-
-Projects relying on BrainWeaver:
-
-master|develop|project
----|---|---
-[![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
 
 Note that [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) *should fail*! See [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) why.
 
@@ -109,7 +88,7 @@ Please let me know, by, for example, adding an Issue.
 
 ## SLOCcount
 
-From [a Travis build log](https://travis-ci.org/richelbilderbeek/BrainWeaver/builds/400737135#L2590):
+
 
 ```
 Total Physical Source Lines of Code (SLOC)                = 445,425
