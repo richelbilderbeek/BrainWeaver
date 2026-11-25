@@ -72,8 +72,10 @@ can be created with the same lack of errors.
 ### Complexity (estimated, that is, using the graph information only)
 
 * `n_n`: Number of nodes, excluding the focal question node
-* `n_r`: Number of relations, excluding the relations connected to the focal question node
-* `x`: complexity (estimated): `100.0 * (((n_r * 2) / (n_n * (n_n - 1))) ^ 0.25)`
+* `n_r`: Number of relations, excluding the relations connected to the focal
+  question node
+* `x`: complexity (estimated): `100.0 * (((n_r * 2) / (n_n * (n_n - 1))) ^
+  0.25)`
 
 
 Assumes `n_n` at least being `2`.
@@ -88,7 +90,8 @@ Assumes `n_n` at least being `2`.
 
 ### Complexity (experimental, that is, working on input from humans)
 
-* `k_i`: sum of all nodes' complexity, as rated by a human, excluding the focal question node
+* `k_i`: sum of all nodes' complexity, as rated by a human, excluding the focal
+  question node
 * `n_n`: number of all nodes , excluding the focal question node
 * `x`: complexity: `x = 50 * k_i / n_n`
 
@@ -102,15 +105,18 @@ Richness is calculated as the equation below (from [1], page 617):
 where
 
 * `a`: the number of domains of knowledge, excluding 'misc'
-* `b`: the number of domains (excluding 'misc') with a relative frequency between 12% and 25%
+* `b`: the number of domains (excluding 'misc') with a relative frequency
+  between 12% and 25%
 
-In BrainWeaver, there are seven domains, of which 'misc' is excluded from the calculation:
+In BrainWeaver, there are seven domains, of which 'misc' is excluded from the
+calculation:
 
 * `profession`: 'Beroepsdomein'
 * `organisations`: 'Organisaties'
 * `social_surroundings`: 'Sociale omgeving'
 * `target_audience`: 'Doelgroep'
-* `ti_knowledge`: 'Technical Instrumental knowledge', NL: 'Technische instrumentele kennis'
+* `ti_knowledge`: 'Technical Instrumental knowledge', NL: 'Technische
+  instrumentele kennis'
 * `prof_growth`: Professionele groei
 * `misc`: 'Overig'
 

@@ -1,6 +1,7 @@
 # BrainWeaver
 
-[Go to the nicely rendered website](https://richelbilderbeek.github.io/Brainweaver/).
+[Go to the nicely rendered
+website](https://richelbilderbeek.github.io/Brainweaver/).
 
 Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)|[![Codecov logo](pics/Codecov.png)](https://www.codecov.io)
 ---|---|---
@@ -11,8 +12,8 @@ BrainWeaver, tool for teacher education, as described in [1].
 
 You can download BrainWeaver :
 
-* (new) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20190301.zip)
-* (stable) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip)
+* (new) [Download BrainWeaver 2019-03-01](http://richelbilderbeek.nl/ProjectBrainWeaverExe20190301.zip)
+* (stable) [Download BrainWeaver 2018-09-16](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip)
 
 ## Build status of builds that BrainWeaver relies on
 
@@ -32,12 +33,18 @@ master|develop|project
 ---|---|---
 [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=master)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [![Build Status](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/BrainWeaverRuffian) [![codecov.io](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/BrainWeaverRuffian?branch=master) | [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
 
-Note that [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) *should fail*! See [BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian) why.
+Note that
+[BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
+*should fail*! See
+[BrainWeaverRuffian](https://github.com/richelbilderbeek/BrainWeaverRuffian)
+why.
 
 ## Building
 
-Building `BrainWeaver` should be easy on Debian or *ubuntu or other GNU/Linux distro's that use Debian as a package manager. If you have another
-operating system or package manager, feel invited to add building instructions for those platforms.
+Building `BrainWeaver` should be easy on Debian or *ubuntu or other GNU/Linux
+distro's that use Debian as a package manager. If you have another
+operating system or package manager, feel invited to add building instructions
+for those platforms.
 
 To build `BrainWeaver` you will need to:
 
@@ -48,26 +55,29 @@ To build `BrainWeaver` you will need to:
 
 ### Install packages
 
-In the `BrainWeaver` folder, run the `install_packages.sh` script with root rights:
+In the `BrainWeaver` folder, run the `install_packages.sh` script with root
+rights:
 
-```
+```bash
 sudo ./install_packages.sh
 ```
 
 
 ### Download other GitHubs
 
-In the `BrainWeaver` folder, run the `download_other_githubs.sh` script (without root access):
+In the `BrainWeaver` folder, run the `download_other_githubs.sh` script (without
+root access):
 
-```
+```bash
 ./download_other_githubs
 ```
 
 ### Build other GitHubs
 
-In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without root access):
+In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without
+root access):
 
-```
+```bash
 ./build_other_githubs
 ```
 
@@ -75,13 +85,17 @@ In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without ro
 
 Within the `BrainWeaver` folder,
 
-* Developer: Open the Qt Creator project file `BrainWeaverDeveloper.pro` in Qt Creator and build
-* Student module: Open the Qt Creator project file `BrainWeaverStudent.pro` in Qt Creator and build
-* Assessor module: Open the Qt Creator project file `BrainWeaverAssessor.pro` in Qt Creator and build
+* Developer: Open the Qt Creator project file `BrainWeaverDeveloper.pro` in Qt
+  Creator and build
+* Student module: Open the Qt Creator project file `BrainWeaverStudent.pro` in
+  Qt Creator and build
+* Assessor module: Open the Qt Creator project file `BrainWeaverAssessor.pro` in
+  Qt Creator and build
 
-If you do not use Qt Creator, you can build the project using `qmake` and `make` like this:
+If you do not use Qt Creator, you can build the project using `qmake` and `make`
+like this:
 
-```
+```bash
 qmake BrainWeaverDeveloper.pro -qt=qt5
 make 
 ```
@@ -96,14 +110,17 @@ Testing is done by:
 
 * BrainWeaverConsoleTest.pro (run by Travis CI)
 * BrainWeaverDeveloperTest.pro (run by Travis CI)
-* the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, BrainWeaver must be running)
-* the file `test_scripts/scenario2.sh` for a more complex run (started by hand, BrainWeaver must be running)
+* the file `test_scripts/scenario1.sh` for a minimal run ([zipped
+  video](demos/scenario1.zip)) (started by hand, BrainWeaver must be running)
+* the file `test_scripts/scenario2.sh` for a more complex run (started by hand,
+  BrainWeaver must be running)
 
 ## Help
 
 ### Building fails
 
-I personally hate building problems, so I will be most happy to help you out. Please let me know, by, for example, adding an Issue.
+I personally hate building problems, so I will be most happy to help you out.
+Please let me know, by, for example, adding an Issue.
 
 ### Other problems
 
@@ -111,9 +128,10 @@ Please let me know, by, for example, adding an Issue.
 
 ## SLOCcount
 
-From [a Travis build log](https://travis-ci.org/richelbilderbeek/BrainWeaver/builds/400737135#L2590):
+From [a Travis build
+log](https://travis-ci.org/richelbilderbeek/BrainWeaver/builds/400737135#L2590):
 
-```
+```cpp
 Total Physical Source Lines of Code (SLOC)                = 445,425
 Development Effort Estimate, Person-Years (Person-Months) = 120.85 (1,450.19)
  (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
@@ -136,4 +154,7 @@ Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
 
 ## References
 
-* [1] van den Bogaart, A. C., Bilderbeek, R. J. C., Schaap, H., Hummel, H. G., & Kirschner, P. A. (2016). A computer-supported method to reveal and assess Personal Professional Theories in vocational education. Technology, Pedagogy and Education, 1-17.
+* [1] van den Bogaart, A. C., Bilderbeek, R. J. C., Schaap, H., Hummel, H. G., &
+  Kirschner, P. A. (2016). A computer-supported method to reveal and assess
+  Personal Professional Theories in vocational education. Technology, Pedagogy
+  and Education, 1-17.

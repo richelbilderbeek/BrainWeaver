@@ -3,6 +3,12 @@
   // Default state for all rules
   "default": true,
 
+  // Do not check the line length of code blocks and tables
+  "MD013": { "code_blocks": false, "tables": false },
+
+  // Allow the same heading under different parent headings
+  "MD024": { "siblings_only": true },
+
   // MkDocs assumes 4 spaces for indentation.
   // Markdown assumes 4 spaces for indentation.
   // That markdownlint has a different default is the error of markdownlint
