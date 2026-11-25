@@ -40,6 +40,8 @@ if [ -d ../RibiLibraries ]; then
   do
     grep -q "#include <QPainterPath>" "${qwt_file}" || sed -i '1i #include <QPainterPath>' "${qwt_file}"
   done
+  # Recent compilers do not allow a template-id for a destructor, e.g. '~QwtSeriesStore<T>()'
+  sed -i -E 's/~([A-Za-z]+)<T>\(\)/~\1()/' ../RibiLibraries/qwt-6*/src/*.h 2>/dev/null || true
 fi
 
 # Extra settings, appended after the .pro file is read:
@@ -80,7 +82,12 @@ do
 
   echo "Building ${pro_file}"
   rm -f Makefile Makefile.Debug Makefile.Release .qmake.stash
-  qmake "${pro_file}" "${qmake_extra_args[@]}"
+  # Each project gets its own build folder, so object files are never shared
+  # between projects that use different compiler settings
+  build_folder="build_$(basename "${pro_file}" .pro)"
+  qmake "${pro_file}" "${qmake_extra_args[@]}" \
+    "OBJECTS_DIR = ${build_folder}" "MOC_DIR = ${build_folder}" \
+    "RCC_DIR = ${build_folder}" "UI_DIR = ${build_folder}"
   make -j"$(nproc)"
   n_built=$((n_built + 1))
 

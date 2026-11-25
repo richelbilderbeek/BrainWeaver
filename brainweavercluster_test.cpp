@@ -15,7 +15,6 @@
 #include "conceptmapexample.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmaphelper.h"
-#include "testtimer.h"
 #include "trace.h"
 
 using namespace ribi::cmap;

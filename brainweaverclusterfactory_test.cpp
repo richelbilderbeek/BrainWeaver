@@ -7,7 +7,6 @@
 #include "brainweavercluster.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
-#include "testtimer.h"
 #include "trace.h"
 
 BOOST_AUTO_TEST_CASE(ribi_pvdb_cluster_factory_test)
