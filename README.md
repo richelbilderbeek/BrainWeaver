@@ -11,8 +11,8 @@ BrainWeaver, tool for teacher education, as described in [1].
 
 You can download BrainWeaver :
 
- * (new) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20190301.zip)
- * (stable) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip)
+* (new) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20190301.zip)
+* (stable) [here](http://richelbilderbeek.nl/ProjectBrainWeaverExe20180916.zip)
 
 ## Build status of builds that BrainWeaver relies on
 
@@ -41,10 +41,10 @@ operating system or package manager, feel invited to add building instructions f
 
 To build `BrainWeaver` you will need to:
 
- * Install some packages
- * Download some other GitHubs
- * Build some other GitHubs
- * Build `BrainWeaver`
+* Install some packages
+* Download some other GitHubs
+* Build some other GitHubs
+* Build `BrainWeaver`
 
 ### Install packages
 
@@ -73,11 +73,11 @@ In the `BrainWeaver` folder, run the `build_other_githubs.sh` script (without ro
 
 ### Build `BrainWeaver`
 
-Within the `BrainWeaver` folder, 
+Within the `BrainWeaver` folder,
 
- * Developer: Open the Qt Creator project file `BrainWeaverDeveloper.pro` in Qt Creator and build
- * Student module: Open the Qt Creator project file `BrainWeaverStudent.pro` in Qt Creator and build
- * Assessor module: Open the Qt Creator project file `BrainWeaverAssessor.pro` in Qt Creator and build
+* Developer: Open the Qt Creator project file `BrainWeaverDeveloper.pro` in Qt Creator and build
+* Student module: Open the Qt Creator project file `BrainWeaverStudent.pro` in Qt Creator and build
+* Assessor module: Open the Qt Creator project file `BrainWeaverAssessor.pro` in Qt Creator and build
 
 If you do not use Qt Creator, you can build the project using `qmake` and `make` like this:
 
@@ -94,14 +94,14 @@ See [the BrainWeaver documentation](doc/README.md).
 
 Testing is done by:
 
- * BrainWeaverConsoleTest.pro (run by Travis CI)
- * BrainWeaverDeveloperTest.pro (run by Travis CI)
- * the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, BrainWeaver must be running)
- * the file `test_scripts/scenario2.sh` for a more complex run (started by hand, BrainWeaver must be running)
+* BrainWeaverConsoleTest.pro (run by Travis CI)
+* BrainWeaverDeveloperTest.pro (run by Travis CI)
+* the file `test_scripts/scenario1.sh` for a minimal run ([zipped video](demos/scenario1.zip)) (started by hand, BrainWeaver must be running)
+* the file `test_scripts/scenario2.sh` for a more complex run (started by hand, BrainWeaver must be running)
 
 ## Help
 
-### Building fails!
+### Building fails
 
 I personally hate building problems, so I will be most happy to help you out. Please let me know, by, for example, adding an Issue.
 
@@ -132,8 +132,8 @@ Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
 
 ## Licenses
 
- * [Montserrat font license](LICENSE_Montserrat.txt), font by Julieta Ulanovsky 
+* [Montserrat font license](LICENSE_Montserrat.txt), font by Julieta Ulanovsky
 
 ## References
 
- * [1] van den Bogaart, A. C., Bilderbeek, R. J. C., Schaap, H., Hummel, H. G., & Kirschner, P. A. (2016). A computer-supported method to reveal and assess Personal Professional Theories in vocational education. Technology, Pedagogy and Education, 1-17.
+* [1] van den Bogaart, A. C., Bilderbeek, R. J. C., Schaap, H., Hummel, H. G., & Kirschner, P. A. (2016). A computer-supported method to reveal and assess Personal Professional Theories in vocational education. Technology, Pedagogy and Education, 1-17.

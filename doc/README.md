@@ -1,7 +1,7 @@
 # BrainWeaver documentation
 
- * [BrainWeaver YouTube channel](https://www.youtube.com/playlist?list=PLu8_ZyzXyRDE8WJAsUIPLkHztEyKvYc2C)
- * [BrainWeaver manual](Manual.md).
+* [BrainWeaver YouTube channel](https://www.youtube.com/playlist?list=PLu8_ZyzXyRDE8WJAsUIPLkHztEyKvYc2C)
+* [BrainWeaver manual](Manual.md).
 
 The text material is not made for self-study, but it is used as supportive material on BrainWeaver training sessions.
 

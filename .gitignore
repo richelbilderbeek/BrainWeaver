@@ -61,3 +61,7 @@ BrainWeaverDeveloper.zip
 autosave*.cmp
 
 site/
+
+wordlist.dic
+
+coverage/

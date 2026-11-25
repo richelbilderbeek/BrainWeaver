@@ -1,0 +1,47 @@
+# Check that the program can be built and measure its code coverage
+name: Check build
+
+on:
+  push:
+    paths:
+      - .github/workflows/check_build.yaml
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
+      - "**.ui"
+      - "**.qrc"
+      - download_other_githubs
+      - scripts/check_build.sh
+  pull_request:
+    paths:
+      - .github/workflows/check_build.yaml
+      - "**.cpp"
+      - "**.h"
+      - "**.pro"
+      - "**.pri"
+      - "**.ui"
+      - "**.qrc"
+      - download_other_githubs
+      - scripts/check_build.sh
+
+jobs:
+  check_build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Qt, Qwt and Boost
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qtbase5-dev qt5-qmake libqt5svg5-dev libqwt-qt5-dev libboost-all-dev
+
+      - name: Build all projects and measure code coverage
+        run: QT_QPA_PLATFORM=offscreen ./scripts/check_build.sh
+
+      - name: Upload code coverage
+        uses: codecov/codecov-action@v5
+        with:
+          directory: coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
