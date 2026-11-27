@@ -2,6 +2,7 @@
 name: Check build
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/check_build.yaml

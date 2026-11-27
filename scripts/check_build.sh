@@ -117,4 +117,8 @@ do
   (cd coverage && gcov -p -o "../$(dirname "${gcda_file}")" "../${gcda_file}" > /dev/null 2>&1) || true
 done
 
+# Only keep the code coverage of this repository's own code,
+# not of system headers (e.g. Boost, Qt) or other repositories
+rm -f coverage/#* coverage/^*
+
 echo "Success: all projects built"
