@@ -64,6 +64,21 @@ qmake_extra_args=(
 
 mkdir -p coverage
 
+# A helper that writes the code coverage data when a program is stopped by a signal,
+# so that also programs that do not end by themselves (e.g. GUIs) give code coverage
+gcov_helper="$(pwd)/coverage/gcov_on_signal.cpp"
+cat > "${gcov_helper}" << 'HELPER'
+#include <csignal>
+#include <cstdlib>
+extern "C" void __gcov_dump(void);
+namespace {
+  void dump_and_exit(int) { __gcov_dump(); std::_Exit(0); }
+  struct GcovOnSignal {
+    GcovOnSignal() { std::signal(SIGTERM, dump_and_exit); std::signal(SIGINT, dump_and_exit); }
+  } gcov_on_signal;
+}
+HELPER
+
 # The .pro files are in the root folder, or else in subfolders
 pro_files=$(ls -- *.pro 2>/dev/null || find . -mindepth 2 -maxdepth 2 -name "*.pro" | sort)
 
@@ -87,22 +102,19 @@ do
   build_folder="build_$(basename "${pro_file}" .pro)"
   qmake "${pro_file}" "${qmake_extra_args[@]}" \
     "OBJECTS_DIR = ${build_folder}" "MOC_DIR = ${build_folder}" \
-    "RCC_DIR = ${build_folder}" "UI_DIR = ${build_folder}"
+    "RCC_DIR = ${build_folder}" "UI_DIR = ${build_folder}" \
+    "SOURCES += ${gcov_helper}"
   make -j"$(nproc)"
   n_built=$((n_built + 1))
 
-  # Run console applications, to collect code coverage.
-  # These are not allowed to take long and may fail
-  case "${pro_file}" in
-    *Desktop*|*Gui*) ;;
-    *)
-      executable=$(basename "${pro_file}" .pro)
-      if [ -x "${executable}" ]; then
-        echo "Running ${executable}"
-        timeout 60 "./${executable}" < /dev/null > /dev/null 2>&1 || echo "Running ${executable} failed, ignoring this"
-      fi
-      ;;
-  esac
+  # Run the program for a short while, to collect code coverage.
+  # Programs that do not end by themselves (e.g. GUIs) are stopped after 10 seconds.
+  # Running may fail
+  executable=$(basename "${pro_file}" .pro)
+  if [ -x "${executable}" ]; then
+    echo "Running ${executable}"
+    timeout 10 "./${executable}" < /dev/null > /dev/null 2>&1 || true
+  fi
 done
 
 cd "${root_folder}"
@@ -118,7 +130,7 @@ do
 done
 
 # Only keep the code coverage of this repository's own code,
-# not of system headers (e.g. Boost, Qt) or other repositories
-rm -f coverage/#* coverage/^*
+# not of system headers (e.g. Boost, Qt), other repositories or generated code
+rm -f coverage/#* coverage/*^* coverage/build_* coverage/coverage#* coverage/gcov_on_signal.cpp coverage/moc_* coverage/qrc_* coverage/ui_*
 
 echo "Success: all projects built"
