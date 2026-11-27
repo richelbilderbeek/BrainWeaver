@@ -128,13 +128,27 @@ if [ "${n_built}" -eq 0 ]; then
 fi
 
 echo "Collecting code coverage"
-for gcda_file in $(find . -name "*.gcda")
+# gcov is run from the folder the code was compiled in, so it can find the source files
+for gcda_file in $(find . -name "*.gcda" -not -path "./coverage/*")
 do
-  (cd coverage && gcov -p -o "../$(dirname "${gcda_file}")" "../${gcda_file}" > /dev/null 2>&1) || true
+  object_folder=$(dirname "${gcda_file}")
+  compile_folder=$(dirname "${object_folder}")
+  (cd "${compile_folder}" && gcov -p -o "$(basename "${object_folder}")" "$(basename "${object_folder}")/$(basename "${gcda_file}")" > /dev/null 2>&1) || true
+  mv "${compile_folder}"/*.gcov coverage/ 2>/dev/null || true
 done
 
 # Only keep the code coverage of this repository's own code,
 # not of system headers (e.g. Boost, Qt), other repositories or generated code
 rm -f coverage/#* coverage/*^* coverage/build_* coverage/coverage#* coverage/gcov_on_signal.cpp coverage/moc_* coverage/qrc_* coverage/ui_*
+
+# Show the percentage of executable lines that were run
+lines_run=$(cat coverage/*.gcov 2>/dev/null | grep -cE '^ *[0-9]+\*?:' || true)
+lines_not_run=$(cat coverage/*.gcov 2>/dev/null | grep -cE '^ *#####:' || true)
+lines_total=$((lines_run + lines_not_run))
+if [ "${lines_total}" -gt 0 ]; then
+  echo "Code coverage: $((100 * lines_run / lines_total))% (${lines_run} of ${lines_total} lines)"
+else
+  echo "Code coverage: no executable lines measured"
+fi
 
 echo "Success: all projects built"
