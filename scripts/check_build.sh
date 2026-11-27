@@ -59,22 +59,26 @@ qmake_extra_args=(
   "DEFINES += BOOST_TIMER_ENABLE_DEPRECATED"
   "LIBS += -lboost_timer -lboost_chrono"
   "QMAKE_CXXFLAGS += -Wno-error --coverage"
+  "QMAKE_CFLAGS += --coverage"
   "QMAKE_LFLAGS += --coverage"
 )
 
 mkdir -p coverage
 
-# A helper that writes the code coverage data when a program is stopped by a signal,
+# A helper that writes the code coverage data when a program is stopped or crashes,
 # so that also programs that do not end by themselves (e.g. GUIs) give code coverage
 gcov_helper="$(pwd)/coverage/gcov_on_signal.cpp"
 cat > "${gcov_helper}" << 'HELPER'
 #include <csignal>
 #include <cstdlib>
+#include <initializer_list>
 extern "C" void __gcov_dump(void);
 namespace {
   void dump_and_exit(int) { __gcov_dump(); std::_Exit(0); }
   struct GcovOnSignal {
-    GcovOnSignal() { std::signal(SIGTERM, dump_and_exit); std::signal(SIGINT, dump_and_exit); }
+    GcovOnSignal() {
+      for (const int s: {SIGTERM, SIGINT, SIGABRT, SIGSEGV}) std::signal(s, dump_and_exit);
+    }
   } gcov_on_signal;
 }
 HELPER
